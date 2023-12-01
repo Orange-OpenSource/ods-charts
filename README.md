@@ -13,7 +13,6 @@
 
 - [Quick start](#quick-start)
 - [Bugs and feature requests](#bugs-and-feature-requests)
-- [Build the library](#build-the-library)
 - [Contributing](#contributing)
 - [Versioning](#versioning)
 - [Copyright and license](#copyright-and-license)
@@ -29,32 +28,11 @@ Several quick start options are available:
 
 Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/Orange-OpenSource/ods-charts/blob/main/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/Orange-OpenSource/ods-charts/issues/new/choose).
 
-## Build the library
-
-Build the library:
-
-```bash
-npm i
-npm run build
-```
-
-Build the documentation:
-
-```bash
-npm run typedoc
-```
-
-Then launch a local server:
-
-```bash
-npm run serve
-```
-
-And go directly to http://localhost:3000/docs/
-
 ## Contributing
 
 Please read through our [contributing guidelines](https://github.com/Orange-OpenSource/ods-charts/blob/main/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+
+Please refer to the [Developer guide](https://github.com/Orange-OpenSource/ods-charts/blob/main/DEVELOP.md) for information how to build.
 
 ## Versioning
 
