@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bar Charts - Examples - ODS Charts</title>
+    <link
+      href="https://cdn.jsdelivr.net"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="../images/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="ODS Charts - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Bar Charts example</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Vertical bar chart</h5>
+          <p class="card-text">Used to compare related data sets.</p>
+          <div id="barChart"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChart');
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Horizontal bar chart</h5>
+          <p class="card-text">Used to compare related data sets.</p>
+          <div id="barChartH"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChartH', true);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Vertical grouped bar chart</h5>
+          <p class="card-text">
+            A grouped bar chart is used to compare values across multiple
+            categories.
+          </p>
+          <div id="barChartGV"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChartGV', false, true);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Horizontal grouped bar chart</h5>
+          <p class="card-text">
+            A grouped bar chart is used to compare values across multiple
+            categories.
+          </p>
+          <div id="barChartGH"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChartGH', true, true);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Grouped bar chart with dataset</h5>
+          <p class="card-text">
+            A grouped bar chart is used to compare values across multiple
+            categories.
+          </p>
+          <div id="barChartdataset"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateDatasetBarChart('barChartdataset');
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

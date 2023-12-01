@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="../../../dist/ods-charts.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
+  </head>
+  <body>
+    <div>
+      <!----------------------------------------------------------- 
+         Copy / Paste here the code provided by the Example page
+      ------------------------------------------------------------->
+      <div class="border border-light position-relative">
+        <div class="chart_title">
+          <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+          <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+        </div>
+        <div id="barLine_holder">
+          <div
+            id="barLine_chart"
+            style="width: 100%; height: 50vh"
+            class="position-relative"
+          ></div>
+        </div>
+        <div id="barLine_legend"></div>
+      </div>
+
+      <script>
+        ///////////////////////////////////////////////////
+        // Used data
+        ///////////////////////////////////////////////////
+
+        // this is the data to be displayed
+        var dataOptions = {
+          xAxis: {
+            type: 'category',
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          },
+          yAxis: {},
+          series: [
+            {
+              data: [10, 22, 28.8956454657, 23, 19, 15],
+              type: 'bar',
+              name: 'serie_Name_0',
+            },
+            {
+              data: [12, 28.8956454657, 23, 15, 15, 18],
+              type: 'line',
+              name: 'serie_Name_1',
+            },
+          ],
+          legend: {
+            data: ['label 0', 'label 1'],
+          },
+        };
+
+        ///////////////////////////////////////////////////
+        // ODSCharts
+        ///////////////////////////////////////////////////
+        // Build the theme
+        var themeManager = ODSCharts.getThemeManager({
+          mode: ODSCharts.ODSChartsMode.LIGHT,
+          categoricalColors: [
+            {
+              colorPalette:
+                ODSCharts.ODSCHartsCategoricalColorsSet
+                  .DEFAULT_SUPPORTING_COLORS,
+              colorIndex: 2,
+            },
+            {
+              colorPalette:
+                ODSCharts.ODSCHartsCategoricalColorsSet.SEQUENTIAL_GREEN,
+              colorIndex: 0,
+            },
+          ],
+          visualMapColor:
+            ODSCharts.ODSCHartsSequentialColorsSet.SEQUENTIAL_BLUE,
+          lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+          cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
+        });
+
+        // register this theme to echarts
+        echarts.registerTheme(themeManager.name, themeManager.theme);
+
+        // get the chart holder and initiate it with the generated theme
+        var div = document.getElementById('barLine_chart');
+        var myChart = echarts.init(div, themeManager.name, {
+          renderer: 'svg',
+        });
+
+        // Set the data to be displayed.
+        themeManager.setDataOptions(dataOptions);
+        // Register the externalization of the legend.
+        themeManager.externalizeLegends(myChart, '#barLine_legend');
+        // Manage window size changed
+        themeManager.manageChartResize(myChart, 'barLine_chart');
+        // Register the externalization of the tooltip/popup
+        themeManager.externalizePopover(
+          {
+            enabled: true,
+            shared: false,
+            tooltip: true,
+            axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
+          },
+          ODSCharts.ODSChartsPopoverManagers.NONE
+        );
+        // Display the chart using the configured theme and data.
+        myChart.setOption(themeManager.getChartOptions());
+      </script>
+
+      <!----------------------------------------------------------- 
+        END Copy / Paste
+      ------------------------------------------------------------->
+    </div>
+  </body>
+</html>

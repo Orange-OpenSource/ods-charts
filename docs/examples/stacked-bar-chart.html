@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stacked bar Charts - Examples - ODS Charts</title>
+    <link
+      href="https://cdn.jsdelivr.net"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="../images/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="ODS Charts - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Stacked bar Charts example</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Vertical stacked bar chart</h5>
+          <p class="card-text">
+            Compare proportional contributions within a category.
+          </p>
+          <div id="barChartSV"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChartSV', false, true, true);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Horizontal stacked bar chart</h5>
+          <p class="card-text">
+            Compare proportional contributions within a category.
+          </p>
+          <div id="barChartSH"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarChart('barChartSH', true, true, true);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

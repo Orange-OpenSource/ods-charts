@@ -1,0 +1,15 @@
+The following parts are proprietary information of Orange.
+You shall not use or display any trade names, trademarks, service marks, products names, illustrations or designs used within the software
+or displayed on this website and owned by Orange SA and its subsidiaries,
+in whole or part of, in any medium, except as required for reasonable and customary use in describing the origin of the software
+and reproducing the content of the NOTICE and DOCUMENTATION files.
+Any use or displaying shall constitute an infringement under intellectual property laws of France and international conventions.
+
+docs/images/ods-bar-charts.png
+docs/images/ods-double-line-charts.png
+docs/images/ods-line-charts.png
+docs/images/ods-mixed-charts.png
+docs/images/ods-stacked-bar-charts.png
+docs/images/orange-logo.svg
+
+End of the parts list under Orange SA Copyright
