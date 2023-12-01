@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bar + line Charts - Examples - ODS Charts</title>
+    <link
+      href="https://cdn.jsdelivr.net"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <!-- Orange brand logo -->
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="https://boosted.orange.com/docs/5.2/assets/brand/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="Boosted - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Bar + line Charts example</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Bar chart and line chart</h5>
+          <p class="card-text">
+            Two metric values showing quantity alongside changes in trends over
+            time.
+          </p>
+          <div id="barLine"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarLineChart('barLine', false, false, false);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Grouped bar and line chart</h5>
+          <p class="card-text">
+            Two metric values showing quantity alongside changes in trends over
+            time.
+          </p>
+          <div id="barLineGroup"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateBarLineChart('barLineGroup', false, true, false);
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

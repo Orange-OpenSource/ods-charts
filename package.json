@@ -1,0 +1,32 @@
+{
+  "name": "ods-charts",
+  "description": "ODS Charts is based on Apache ECharts and provides Orange charts components.",
+  "version": "0.0.1-alpha.1.0",
+  "author": "",
+  "contributors": [],
+  "license": "MIT",
+  "files": [
+    "./dist/**/*"
+  ],
+  "main": "./dist/ods-charts.js",
+  "types": "./dist/ods-charts.d.js",
+  "scripts": {
+    "build": "webpack",
+    "serve": "serve .",
+    "serve:vue": "serve test/vue/dist/",
+    "serve:angular": "serve test/angular/dist/angular/",
+    "serve:angular-tour-of-heroes": "serve test/angular-tour-of-heroes/dist/angular-tour-of-heroes/",
+    "serve:react": "serve test/react/build/",
+    "serve:any": "serve",
+    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected  --readme docs/README.md"
+  },
+  "devDependencies": {
+    "echarts": "^5.4.3",
+    "serve": "^14.2.1",
+    "ts-loader": "^9.4.4",
+    "typedoc": "^0.25.3",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
+}

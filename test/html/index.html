@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
+  </head>
+  <body>
+    <div id="chart1" style="width: 800px; height: 400px"></div>
+    <div id="chart2" style="width: 800px; height: 400px"></div>
+    <div id="chart3" style="max-width: 800px; height: 400px"></div>
+    <div id="chart4" style="max-width: 800px; height: 400px"></div>
+    <div id="chart5" style="max-width: 800px; height: 400px"></div>
+    <div id="chart5_legends"></div>
+    <script>
+      var lineChartODSTheme = ODSCharts.getThemeManager({
+        mode: ODSCharts.ODSChartsMode.LIGHT,
+        categoricalColors:
+          ODSCharts.ODSCHartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+        visualMapColor: ODSCharts.ODSCHartsSequentialColorsSet.SEQUENTIAL_BLUE,
+        lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      });
+      echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
+
+      const chart1 = echarts.init(
+        document.getElementById('chart1'),
+        lineChartODSTheme.name,
+        {
+          renderer: 'svg',
+        }
+      );
+      chart1.setOption({
+        title: {
+          text: 'ECharts Getting Started Example',
+        },
+        tooltip: {},
+        xAxis: {
+          data: ['shirt', 'cardigan', 'chiffon', 'pants', 'heels', 'socks'],
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'sales',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20],
+          },
+        ],
+      });
+
+      const chart2 = echarts.init(
+        document.getElementById('chart2'),
+        lineChartODSTheme.name
+      );
+      chart2.setOption({
+        xAxis: {
+          data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        },
+        yAxis: {},
+        series: [
+          {
+            data: [10, 22, 28, 23, 19, 15],
+            type: 'line',
+          },
+        ],
+      });
+
+      const chart3 = echarts.init(
+        document.getElementById('chart3'),
+        lineChartODSTheme.name
+      );
+      chart3.setOption(
+        lineChartODSTheme
+          .setDataOptions({
+            title: {
+              text: 'ECharts Getting Started Example with theme manager',
+            },
+            tooltip: {},
+            xAxis: {
+              data: ['shirt', 'cardigan', 'chiffon', 'pants', 'heels', 'socks'],
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'sales',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20],
+              },
+            ],
+          })
+          .manageChartResize(chart3, 'chart3')
+          .externalizePopover()
+          .getChartOptions()
+      );
+
+      const chart4 = echarts.init(
+        document.getElementById('chart4'),
+        lineChartODSTheme.name
+      );
+      chart4.setOption(
+        lineChartODSTheme
+          .setDataOptions({
+            xAxis: {
+              data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            },
+            yAxis: {},
+            series: [
+              {
+                data: [10, 22, 28, 23, 19, 15],
+                type: 'line',
+              },
+            ],
+          })
+          .manageChartResize(chart4, 'chart4')
+          .externalizePopover()
+          .getChartOptions()
+      );
+
+      const NB_POINTS = 1000;
+
+      const generateDate = () => {
+        const date = [new Date(1993, 9, 3)];
+        let base = date[0].getTime();
+        const oneDay = 24 * 3600 * 1000;
+        for (var i = 1; i < NB_POINTS; i++) {
+          const now = new Date((base += oneDay * 2 * Math.random()));
+          date.push(now);
+        }
+        return date;
+      };
+      const dates = generateDate();
+
+      const generateData = () => {
+        const dataDates = dates;
+        const data = [{ time: dataDates[0], value: Math.random() * 300 }];
+        let lastValue = data[0].value;
+        for (var i = 1; i < NB_POINTS; i++) {
+          data.push({
+            time: dataDates[i],
+            value:
+              Math.random() < 0.3
+                ? undefined
+                : Math.round((Math.random() - 0.5) * 20 + lastValue),
+          });
+          lastValue =
+            undefined !== data[data.length - 1].value
+              ? data[data.length - 1].value
+              : lastValue;
+        }
+        return data;
+      };
+      const chart5 = echarts.init(
+        document.getElementById('chart5'),
+        lineChartODSTheme.name
+      );
+      let lastYear = 0;
+      chart5.setOption(
+        lineChartODSTheme
+          .setDataOptions({
+            xAxis: {
+              type: 'time',
+              boundaryGap: false,
+
+              axisLabel: {
+                formatter: (value) => {
+                  // Formatted to be month/day; display year only in the first label
+                  var date = new Date(value);
+                  var texts = [date.getDate(), date.getMonth() + 1];
+                  if (date.getFullYear() !== lastYear) {
+                    texts.push(date.getFullYear());
+                    lastYear = date.getFullYear();
+                  }
+                  return texts.join('/');
+                },
+              },
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'Serie 1',
+                data: generateData()
+                  .filter((oneData) => undefined !== oneData.value)
+                  .map((oneData) => [oneData.time, oneData.value]),
+                sampling: 'average',
+                type: 'line',
+              },
+              {
+                name: 'Serie 2',
+                data: generateData()
+                  .filter((oneData) => undefined !== oneData.value)
+                  .map((oneData) => [oneData.time, oneData.value]),
+                type: 'line',
+              },
+              {
+                name: 'Serie 3',
+                data: generateData()
+                  .filter((oneData) => undefined !== oneData.value)
+                  .map((oneData) => [oneData.time, oneData.value]),
+                type: 'line',
+              },
+            ],
+          })
+          .manageChartResize(chart5, 'chart5')
+          .externalizePopover(
+            {
+              tooltip: false,
+            },
+            {
+              getPopupTitle: (value) => {
+                const date = new Date(value);
+                return (
+                  date.getDate() +
+                  '/' +
+                  (date.getMonth() + 1) +
+                  '/' +
+                  date.getFullYear()
+                );
+              },
+            }
+          )
+          .externalizeLegends(chart5, '#chart5_legends')
+          .getChartOptions()
+      );
+    </script>
+  </body>
+</html>

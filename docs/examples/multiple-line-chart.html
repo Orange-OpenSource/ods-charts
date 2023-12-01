@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multiple Line Charts - Examples - ODS Charts</title>
+    <link
+      href="https://cdn.jsdelivr.net"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <!-- Orange brand logo -->
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="https://boosted.orange.com/docs/5.2/assets/brand/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="Boosted - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Multiple Line Charts example</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container d-flex flex-nowrap pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Multiple line chart example</h5>
+          <p class="card-text">
+            Compare the relationship between several values over time.
+          </p>
+          <div id="multipleLineChart"></div>
+          <script>
+            window.addEventListener('DOMContentLoaded', () => {
+              window.generateMultipleLineChart('multipleLineChart');
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
