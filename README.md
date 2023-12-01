@@ -32,7 +32,7 @@ Have a bug or a feature request? Please first read the [issue guidelines](https:
 
 Please read through our [contributing guidelines](https://github.com/Orange-OpenSource/ods-charts/blob/main/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
-Please refer to the [Developer guide](https://github.com/Orange-OpenSource/ods-charts/blob/main/DEVELOP.md) for information how to build.
+Please refer to the [developer guide](https://github.com/Orange-OpenSource/ods-charts/blob/main/DEVELOP.md) for information on how to build the library.
 
 ## Versioning
 

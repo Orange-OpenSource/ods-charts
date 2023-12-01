@@ -1,4 +1,4 @@
-<h1 align="center">Developer guide</h1>
+# Developer guide
 
 ## Build the library
 
