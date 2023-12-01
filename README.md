@@ -58,7 +58,7 @@ Please read through our [contributing guidelines](https://github.com/Orange-Open
 
 ## Versioning
 
-For transparency into our release cycle and in striving to maintain backward compatibility, Boosted is maintained under [the Semantic Versioning guidelines](https://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
+For transparency into our release cycle and in striving to maintain backward compatibility, ODS Charts is maintained under [the Semantic Versioning guidelines](https://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
 
 See [the Releases section of our GitHub project](https://github.com/Orange-OpenSource/ods-charts/releases) for changelogs for each release version of ODS Charts.
 
