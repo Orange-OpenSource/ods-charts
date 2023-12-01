@@ -27,7 +27,7 @@ _Note: Please transform `- [ ]` into `- (NA)` in the description when things are
 Please check that the following tests projects are still working:
 
 - [ ] `docs/examples`
-- [ ] `test/angular`
+- [ ] `test/angular-ngx-echarts`
 - [ ] `test/angular-tour-of-heroes`
 - [ ] `test/html`
 - [ ] `test/react`
