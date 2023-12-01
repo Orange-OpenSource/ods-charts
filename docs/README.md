@@ -68,7 +68,7 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 
 ```
 
-<a href="/docs/examples/">See more online dynamic examples</a>
+<a href="../examples/">See more online dynamic examples</a>
 
 ## Copyright and license
 

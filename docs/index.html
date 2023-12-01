@@ -10,6 +10,11 @@
       integrity="sha384-zYFw+mxKy6r9zpAc1NoGiYBfQmxfvg7ONEMr81WeU+WLPPaLC9QTrNGFJTBi3EIn"
       crossorigin="anonymous"
     />
+    <script>
+      if (document.location.href.endsWith('/docs')) {
+        document.location.href = document.location.href + '/';
+      }
+    </script>
   </head>
   <body>
     <header>
@@ -59,9 +64,7 @@
             </div>
 
             <div class="card-footer">
-              <a href="api/" class="btn btn-primary mt-3"
-                >See documentation</a
-              >
+              <a href="api/" class="btn btn-primary mt-3">See documentation</a>
             </div>
           </div>
         </div>
@@ -81,9 +84,7 @@
             </div>
 
             <div class="card-footer">
-              <a href="examples/" class="btn btn-primary mt-3"
-                >Examples</a
-              >
+              <a href="examples/" class="btn btn-primary mt-3">Examples</a>
             </div>
           </div>
         </div>

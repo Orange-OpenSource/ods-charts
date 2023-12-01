@@ -10,6 +10,11 @@
       integrity="sha384-zYFw+mxKy6r9zpAc1NoGiYBfQmxfvg7ONEMr81WeU+WLPPaLC9QTrNGFJTBi3EIn"
       crossorigin="anonymous"
     />
+    <script>
+      if (document.location.href.endsWith('/examples')) {
+        document.location.href = document.location.href + '/';
+      }
+    </script>
   </head>
   <body>
     <header>
