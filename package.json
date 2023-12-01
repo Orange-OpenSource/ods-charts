@@ -24,7 +24,7 @@
   "devDependencies": {
     "echarts": "^5.4.3",
     "serve": "^14.2.1",
-    "ts-loader": "^9.4.4",
+    "ts-loader": "^9.5.1",
     "typedoc": "^0.25.4",
     "typescript": "^5.3.2",
     "webpack": "^5.89.0",
