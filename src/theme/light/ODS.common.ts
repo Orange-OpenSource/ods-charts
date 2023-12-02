@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_COMON = {
+export const LIGHT_COMMON = {
   backgroundColor: 'rgba(255, 255, 255, 1)',
 };
