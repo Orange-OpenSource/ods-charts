@@ -68,7 +68,7 @@ export enum ODSChartsPopoverAxisPointer {
   cross = 'cross',
 }
 
-export enum ODSChartsPopoverToolipTrigger {
+export enum ODSChartsPopoverTooltipTrigger {
   xAxis = 'xAxis',
   yAxis = 'yAxis',
   grid = 'grid',
@@ -116,15 +116,15 @@ export class ODSChartsPopoverConfig {
    */
   axisPointer?: ODSChartsPopoverAxisPointer;
   /**
-   * define how the tooltip should be triggered {@link ODSChartsPopoverToolipTrigger}
+   * define how the tooltip should be triggered {@link ODSChartsPopoverTooltipTrigger}
    *
-   * In case of axisPointer {@link ODSChartsPopoverAxisPointer.cross}, tooltipTrigger must be {@link ODSChartsPopoverToolipTrigger.grid}
+   * In case of axisPointer {@link ODSChartsPopoverAxisPointer.cross}, tooltipTrigger must be {@link ODSChartsPopoverTooltipTrigger.grid}
    *
    * Otherwise, the default value of tooltipTrigger will be
-   * - {@link ODSChartsPopoverToolipTrigger.xAxis} for a vertical graph
-   * - {@link ODSChartsPopoverToolipTrigger.yAxis} for an horizontal graph
+   * - {@link ODSChartsPopoverTooltipTrigger.xAxis} for a vertical graph
+   * - {@link ODSChartsPopoverTooltipTrigger.yAxis} for an horizontal graph
    */
-  tooltipTrigger?: ODSChartsPopoverToolipTrigger;
+  tooltipTrigger?: ODSChartsPopoverTooltipTrigger;
 }
 
 class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
