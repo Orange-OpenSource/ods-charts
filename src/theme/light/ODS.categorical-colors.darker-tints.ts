@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_CATEGORICAL_COLORS_DAKER_TINTS = {
+export const LIGHT_CATEGORICAL_COLORS_DARKER_TINTS = {
   color: ['#085EBD', '#0A6E31', '#FF8AD4', '#492191', '#FFB400'],
 };
