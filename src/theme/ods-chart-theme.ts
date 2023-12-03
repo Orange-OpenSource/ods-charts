@@ -9,7 +9,7 @@
 import { LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './light/ODS.categorical-colors.supporting-colors';
 import { LIGHT_COMMON } from './light/ODS.common';
 import { LIGHT_LINES_AXIS } from './light/ODS.lines.axis';
-import { LIGHT_CATEGORICAL_COLORS_DAKER_TINTS } from './light/ODS.categorical-colors.darker-tints';
+import { LIGHT_CATEGORICAL_COLORS_DARKER_TINTS } from './light/ODS.categorical-colors.darker-tints';
 import { LIGHT_CATEGORICAL_COLORS_LIGHTER_TINTS } from './light/ODS.categorical-colors.lighter-tints';
 import { LIGHT_CATEGORICAL_COLORS_BLUE } from './light/ODS.categorical-colors.blue';
 import { LIGHT_CATEGORICAL_COLORS_GREEN } from './light/ODS.categorical-colors.green';
@@ -23,7 +23,7 @@ import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
 import { DARK_COMMON } from './dark/ODS.common';
 import { DARK_LINES_AXIS } from './dark/ODS.lines.axis';
 import { DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './dark/ODS.categorical-colors.supporting-colors';
-import { DARK_CATEGORICAL_COLORS_DAKER_TINTS } from './dark/ODS.categorical-colors.darker-tints';
+import { DARK_CATEGORICAL_COLORS_DARKER_TINTS } from './dark/ODS.categorical-colors.darker-tints';
 import { DARK_CATEGORICAL_COLORS_LIGHTER_TINTS } from './dark/ODS.categorical-colors.lighter-tints';
 import { DARK_CATEGORICAL_COLORS_BLUE } from './dark/ODS.categorical-colors.blue';
 import { DARK_CATEGORICAL_COLORS_GREEN } from './dark/ODS.categorical-colors.green';
@@ -190,7 +190,7 @@ const THEMES: {
     linesAxis: LIGHT_LINES_AXIS,
     categoricalColors: {
       supportingColors: LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS,
-      darkerTints: LIGHT_CATEGORICAL_COLORS_DAKER_TINTS,
+      darkerTints: LIGHT_CATEGORICAL_COLORS_DARKER_TINTS,
       lighterTints: LIGHT_CATEGORICAL_COLORS_LIGHTER_TINTS,
       blue: LIGHT_CATEGORICAL_COLORS_BLUE,
       green: LIGHT_CATEGORICAL_COLORS_GREEN,
@@ -212,7 +212,7 @@ const THEMES: {
     linesAxis: DARK_LINES_AXIS,
     categoricalColors: {
       supportingColors: DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS,
-      darkerTints: DARK_CATEGORICAL_COLORS_DAKER_TINTS,
+      darkerTints: DARK_CATEGORICAL_COLORS_DARKER_TINTS,
       lighterTints: DARK_CATEGORICAL_COLORS_LIGHTER_TINTS,
       blue: DARK_CATEGORICAL_COLORS_BLUE,
       green: DARK_CATEGORICAL_COLORS_GREEN,
