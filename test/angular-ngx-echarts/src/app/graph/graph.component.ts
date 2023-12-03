@@ -48,8 +48,8 @@ export class GraphComponent {
   constructor() {
     this.myTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.LIGHT,
-      categoricalColors: ODSCharts.ODSCHartsCategoricalColorsSet.DARKER_TINTS,
-      visualMapColor: ODSCharts.ODSCHartsSequentialColorsSet.SEQUENTIAL_BLUE,
+      categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+      visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });
   }
