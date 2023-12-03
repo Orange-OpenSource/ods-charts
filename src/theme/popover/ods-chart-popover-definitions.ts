@@ -94,7 +94,7 @@ export class ODSChartsPopoverConfig {
   shared?: boolean;
   /**
    * - true: to display tooltip
-   * - false : to display popover
+   * - false: to display popover
    */
   tooltip?: boolean;
   /**
@@ -104,7 +104,7 @@ export class ODSChartsPopoverConfig {
    */
   tooltipTimeout?: number;
   /**
-   * tooltipDelay is used to add a delay before moving tooltip wiith the mouse movement.
+   * tooltipDelay is used to add a delay before moving tooltip with the mouse movement.
    *
    * The default value is retrieved from {@link ODSChartsPopoverDefinition} if set and otherwise is 0
    */
