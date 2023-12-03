@@ -148,13 +148,13 @@ export interface ODSChartsThemeOptions {
     | ODSChartsCategoricalColorsSet
     | ODSChartsCustomCategoricalColor[];
   /**
-   * visualMapColor is the set of colours to be used if map graphs (like Heatmap)
+   * visualMapColor is the set of colors to be used if map graphs (like Heatmap)
    *
    * Default visualMapColor is {@link ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE}
    */
   visualMapColor?: ODSChartsSequentialColorsSet;
   /**
-   * lineStyle soecifies the style of line in lineCharts.
+   * lineStyle specifies the style of line in lineCharts.
    *
    * It can be {@link ODSChartsLineStyle.BROKEN}, {@link ODSChartsLineStyle.SMOOTH} of {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
    *
@@ -162,7 +162,7 @@ export interface ODSChartsThemeOptions {
    */
   lineStyle?: ODSChartsLineStyle;
   /**
-   * cssTheme is the css styles to be used for designing legends and popover elements.
+   * cssTheme is the CSS styles to be used for designing legends and popover elements.
    *
    * - It is possible to use one of the delivered value of {@link ODSChartsCSSThemes}
    * - It is also possible to defined a cssTheme for any other framework with a {@link ODSChartsCSSThemeDefinition}
@@ -282,10 +282,10 @@ export class ODSChartsTheme {
   /**
    * Entry point of the library. It returns the generated theme manager.
    *
-   * This manager is used to retrieve the Echarts theme and manage the chart options in accordance with the Orange Design System.
+   * This manager is used to retrieve the Apache ECharts theme and manage the chart options in accordance with the Orange Design System.
    *
    * The method takes the theme configuration as a parameter {@link ODSChartsThemeOptions}.
-   * @param options: default option used to genarate the theme
+   * @param options: default option used to generate the theme
    * @returns the theme manager
    */
   public static getThemeManager(
@@ -481,10 +481,10 @@ export class ODSChartsTheme {
    * - will be link with the graph.
    *
    * externalizeLegends() needs:
-   * - echart: the initialzed eCharts object
-   * - legendHolderSelector: the css selector of the legends container
+   * - echart: the initialized eCharts object
+   * - legendHolderSelector: the CSS selector of the legends container
    *
-   * optionnaly you can use this call to set dataOptions
+   * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
   public externalizeLegends(
@@ -513,9 +513,9 @@ export class ODSChartsTheme {
    *
    *   {@link ODSChartsPopoverManagers} gives preconfigured renderer
    *
-   *   default value is  {@link ODSChartsPopoverManagers.NONE}: uses default ECharts templating to externalize tooltip/popover HTML element, implemting Orange Design system
+   *   default value is  {@link ODSChartsPopoverManagers.NONE}: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
    *
-   * optionnaly you can use this call to set dataOptions
+   * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
   public externalizePopover(
@@ -540,10 +540,10 @@ export class ODSChartsTheme {
    * manageChartResize() ensures that the graph resizes correctly when the window is resized
    *
    * manageChartResize() needs:
-   * - echart: the initialzed eCharts object
+   * - echart: the initialized eCharts object
    * - chartId: an unique id to identify the chart
    *
-   * optionnaly you can use this call to set dataOptions
+   * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
   public manageChartResize(
@@ -569,8 +569,8 @@ export class ODSChartsTheme {
    * - optionally options implementing {@link manageChartResize},
    * - data from {@link setDataOptions}
    *
-   * optionnaly you can use this call to set dataOptions
-   * @returns the Echarts options
+   * optionally you can use this call to set dataOptions
+   * @returns the Apache Echarts options
    */
   public getChartOptions(dataOptions?: any): any {
     if (dataOptions) {

@@ -153,7 +153,7 @@ export class ODSChartsPopover {
     }
     if (!popoverConfig.shared && 'none' !== popoverConfig.axisPointer) {
       console.warn(
-        `If you choose a specific axisPointer like ${popoverConfig.axisPointer}, the popup/tooltip content will be shared betwwen series values (shared option forced to true)`
+        `If you choose a specific axisPointer like ${popoverConfig.axisPointer}, the popup/tooltip content will be shared between series values (shared option forced to true)`
       );
       popoverConfig.shared = true;
     }
