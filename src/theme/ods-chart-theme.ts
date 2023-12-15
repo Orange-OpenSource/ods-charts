@@ -436,6 +436,8 @@ export class ODSChartsTheme {
     for (const axis of ['xAxis', 'yAxis']) {
       if (
         (!this.dataOptions[axis] || !this.dataOptions[axis].data) &&
+        'time' !== this.dataOptions[axis].type &&
+        'category' !== this.dataOptions[axis].type &&
         !this.dataOptions[axis].axisLine
       ) {
         themeOptions[axis].axisLine = { show: false };

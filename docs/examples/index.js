@@ -831,6 +831,81 @@ window.generateMultipleLineChart = async (id) => {
   );
 };
 
+window.generateTimeseriesLineChart = async (id) => {
+  // Specify the configuration items and data for the chart
+  const NB_POINTS = 1000;
+  const generateDate = () => {
+    const date = [new Date(1993, 9, 3)];
+    let base = date[0].getTime();
+    const oneDay = 24 * 3600 * 1000;
+    for (var i = 1; i < NB_POINTS; i++) {
+      const now = new Date((base += oneDay * 2 * Math.random()));
+      date.push(now);
+    }
+    return date;
+  };
+  const dates = generateDate();
+  const generateData = () => {
+    const dataDates = dates;
+    const data = [{ time: dataDates[0], value: Math.random() * 300 }];
+    let lastValue = data[0].value;
+    for (var i = 1; i < NB_POINTS; i++) {
+      data.push({
+        time: dataDates[i],
+        value:
+          Math.random() < 0.3
+            ? undefined
+            : Math.round((Math.random() - 0.5) * 20 + lastValue),
+      });
+      lastValue =
+        undefined !== data[data.length - 1].value
+          ? data[data.length - 1].value
+          : lastValue;
+    }
+    return data;
+  };
+
+  var option = {
+    xAxis: {
+      type: 'time',
+      boundaryGap: false,
+    },
+    yAxis: {},
+    series: [
+      {
+        name: 'Serie 1',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        sampling: 'average',
+        type: 'line',
+      },
+      {
+        name: 'Serie 2',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+      {
+        name: 'Serie 3',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+    ],
+  };
+  displayChart(
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+    undefined,
+    ODSCharts.ODSChartsLineStyle.BROKEN
+  );
+};
+
 window.generateBarChart = async (
   id,
   horizontal = false,

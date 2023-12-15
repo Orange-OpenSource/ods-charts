@@ -34,4 +34,4 @@ Please check that the following tests projects are still working:
 - [ ] `test/vue`
 - [ ] `test/examples/bar-line-chart`
 - [ ] `test/examples/single-line-chart`
-
+- [ ] `test/examples/timeseries-chart`
