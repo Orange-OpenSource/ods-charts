@@ -18,14 +18,14 @@
           <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
           <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
         </div>
-        <div id="timeseriesChart_holder">
+        <div id="timeSeriesChart_holder">
           <div
-            id="timeseriesChart_chart"
+            id="timeSeriesChart_chart"
             style="width: 100%; height: 50vh"
             class="position-relative"
           ></div>
         </div>
-        <div id="timeseriesChart_legend"></div>
+        <div id="timeSeriesChart_legend"></div>
       </div>
       <script>
         ///////////////////////////////////////////////////
@@ -2180,7 +2180,7 @@
         echarts.registerTheme(themeManager.name, themeManager.theme);
 
         // get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('timeseriesChart_chart');
+        var div = document.getElementById('timeSeriesChart_chart');
         var myChart = echarts.init(div, themeManager.name, {
           renderer: 'svg',
         });
@@ -2188,9 +2188,9 @@
         // Set the data to be displayed.
         themeManager.setDataOptions(dataOptions);
         // Register the externalization of the legend.
-        themeManager.externalizeLegends(myChart, '#timeseriesChart_legend');
+        themeManager.externalizeLegends(myChart, '#timeSeriesChart_legend');
         // Manage window size changed
-        themeManager.manageChartResize(myChart, 'timeseriesChart_chart');
+        themeManager.manageChartResize(myChart, 'timeSeriesChart_chart');
         // Register the externalization of the tooltip/popup
         themeManager.externalizePopover(
           {

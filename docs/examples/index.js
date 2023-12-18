@@ -831,7 +831,7 @@ window.generateMultipleLineChart = async (id) => {
   );
 };
 
-window.generateTimeseriesLineChart = async (id) => {
+window.generateTimeSeriesLineChart = async (id) => {
   // Specify the configuration items and data for the chart
   const NB_POINTS = 1000;
   const generateDate = () => {
