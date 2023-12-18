@@ -48,6 +48,7 @@ import {
   ODSChartsPopoverDefinition,
   ODSChartsPopoverManagers,
 } from './popover/ods-chart-popover-definitions';
+import { isMainAxis } from './const/main-axis-type.const';
 
 export enum ODSChartsCategoricalColorsSet {
   DEFAULT_SUPPORTING_COLORS = 'supportingColors',
@@ -435,8 +436,8 @@ export class ODSChartsTheme {
     };
     for (const axis of ['xAxis', 'yAxis']) {
       if (
-        (!this.dataOptions[axis] || !this.dataOptions[axis].data) &&
-        !this.dataOptions[axis].axisLine
+        !isMainAxis(this.dataOptions[axis]) &&
+        !(this.dataOptions[axis] && this.dataOptions[axis].axisLine)
       ) {
         themeOptions[axis].axisLine = { show: false };
         themeOptions[axis].splitLine = { show: false };

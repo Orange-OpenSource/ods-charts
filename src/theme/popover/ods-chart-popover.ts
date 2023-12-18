@@ -25,6 +25,7 @@ import {
 } from '../legends/ods-chart-legends';
 import { cloneDeepObject } from '../../tools/clone-deep-object';
 import { ODSChartsMode } from '../ods-chart-theme';
+import { isMainAxis } from '../const/main-axis-type.const';
 
 const DEFAULT_TEMPLATE_CSS = `
 .ods-charts-popover {
@@ -171,18 +172,7 @@ export class ODSChartsPopover {
 
     if (undefined == tooltipTrigger) {
       for (const axis of ['xAxis', 'yAxis'] as ['xAxis', 'yAxis']) {
-        if (dataOptions[axis] && dataOptions[axis].data) {
-          tooltipTrigger = tooltipTrigger ? (undefined as any) : axis;
-        }
-      }
-    }
-    if (undefined == tooltipTrigger) {
-      for (const axis of ['xAxis', 'yAxis'] as ['xAxis', 'yAxis']) {
-        if (
-          dataOptions[axis] &&
-          ('category' === dataOptions[axis].type ||
-            'time' === dataOptions[axis].type)
-        ) {
+        if (isMainAxis(dataOptions[axis])) {
           tooltipTrigger = tooltipTrigger ? (undefined as any) : axis;
         }
       }

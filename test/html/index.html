@@ -166,13 +166,17 @@
               axisLabel: {
                 formatter: (value) => {
                   // Formatted to be month/day; display year only in the first label
-                  var date = new Date(value);
-                  var texts = [date.getDate(), date.getMonth() + 1];
+                  let date = new Date(value);
+                  let result;
                   if (date.getFullYear() !== lastYear) {
-                    texts.push(date.getFullYear());
-                    lastYear = date.getFullYear();
+                    result = '' + date.getFullYear();
+                  } else {
+                    result = date.toLocaleDateString(undefined, {
+                      month: 'short',
+                    });
                   }
-                  return texts.join('/');
+                  lastYear = date.getFullYear();
+                  return result;
                 },
               },
             },
