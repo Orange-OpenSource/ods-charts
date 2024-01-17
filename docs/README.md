@@ -14,7 +14,7 @@
 
 Once the library integrated, via
 
-- script &lt;script src="...ods-charts.js"&gt;
+- script &lt;script src="...ods-charts.min.js"&gt;
 - or an import \* as ODSCharts from 'ods-charts'
 
 use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
@@ -26,7 +26,7 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 ```
 <html lang="en">
   <head>
-    <script type="text/javascript" src="<...>ods-charts.js"></script>
+    <script type="text/javascript" src="<...>ods-charts.min.js"></script>
     <script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
   </head>
   <body>

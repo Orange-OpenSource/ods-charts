@@ -1,14 +1,14 @@
 const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
   entry: {
     main: './index.ts',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'ods-charts.js',
+    filename: 'ods-charts.min.js',
     libraryTarget: 'umd',
     library: 'ODSCharts',
   },
@@ -23,4 +23,26 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+            preamble: `/*!
+ * Software Name: Orange Design System Charts
+ * SPDX-FileCopyrightText: Copyright (c) 2023 - 2024 Orange SA
+ * SPDX-License-Identifier: MIT
+ * 
+ * This software is distributed under the MIT license.
+ */
+`,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
+  },
+  devtool: false,
 };
