@@ -11,5 +11,6 @@ docs/images/ods-line-charts.png
 docs/images/ods-mixed-charts.png
 docs/images/ods-stacked-bar-charts.png
 docs/images/orange-logo.svg
+favicon.ico
 
 End of the parts list under Orange SA Copyright
