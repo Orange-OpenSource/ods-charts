@@ -8,7 +8,7 @@
   "files": [
     "./dist/**/*"
   ],
-  "main": "./dist/ods-charts.min.js",
+  "main": "./dist/ods-charts.js",
   "types": "./dist/ods-charts.d.js",
   "scripts": {
     "build": "webpack",

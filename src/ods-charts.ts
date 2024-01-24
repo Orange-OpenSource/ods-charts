@@ -10,7 +10,7 @@
  * @packageDocumentation
  *
  * Once the library integrated, via
- * - script &lt;script src="...ods-charts.min.js"&gt;
+ * - script &lt;script src="...ods-charts.js"&gt;
  * - or an import * as ODSCharts from 'ods-charts'
  *
  * use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
