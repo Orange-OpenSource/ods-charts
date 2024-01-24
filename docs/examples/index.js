@@ -1102,3 +1102,61 @@ window.generateBarLineChart = async (
     ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
   );
 };
+
+window.generatePieChart = async (
+  id,
+  donut = false
+) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    legend: {
+      orient: 'vertical',
+      right: '10',
+      top: '10',
+      textStyle: {
+        fontWeight: 'bold',
+        fontSize: 14
+      },
+      icon: 'rect',
+      itemWidth: 10,
+      itemHeight: 10,
+      itemStyle: {
+        borderColor: 'black',
+        borderWidth: 1,
+      }
+    },
+    series: [{
+      type: 'pie',
+      label: {show: false},
+      labelLine: {show: false},
+      data: [
+        {name: 'Label 1', value: 25},
+        {name: 'Label 2', value: 50},
+        {name: 'Label 3', value: 75},
+        {name: 'Label 4', value: 10},
+        {name: 'Label 5', value: 100},
+        {name: 'Label 6', value: 30},
+        {name: 'Label 7', value: 5},
+      ],
+      label: {
+        show: false,
+        position: donut ? 'center' : 'outside'
+      },
+      emphasis: {
+        label: {
+          show: donut,
+          fontSize: 35,
+          fontWeight: 700,
+          formatter: '{d}%'
+        },
+      },
+      radius: donut ? ['85%', '100%'] : ['0%', '100%']
+    }]
+  };
+  displayChart(
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS
+  );
+};
