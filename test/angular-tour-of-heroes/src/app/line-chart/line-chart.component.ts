@@ -1,38 +1,15 @@
-import { Component, ElementRef, AfterViewInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import * as ODSCharts from 'ods-charts';
 import * as echarts from 'echarts';
 
-import * as ODSCharts from 'ods-charts';
-
 @Component({
-  selector: 'line-chart',
-  template: `<div class="mGraph-wrapper">
-      <div class="mGraph" id="lineChartCanvas"></div>
-    </div>
-    <hr />
-    <div class="mGraph-wrapper">
-      <div class="mGraph" id="lineChartCanvasODS"></div>
-    </div>
-    <div class="mGraph" id="lineChartLegendODS"></div>`,
-  styles: [
-    `
-      .mGraph-wrapper {
-        width: 100%;
-        height: 239px;
-        background: #fff;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .mGraph-wrapper .mGraph {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-    `,
-  ],
+  selector: 'app-line-chart',
+  standalone: true,
+  imports: [],
+  templateUrl: './line-chart.component.html',
+  styleUrl: './line-chart.component.scss'
 })
-export class LinechartComponent implements AfterViewInit {
+export class LineChartComponent implements AfterViewInit {
   base = +new Date(1968, 9, 3);
   oneDay = 24 * 3600 * 1000;
   date: Array<String> = [];
