@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { ECharts, EChartsOption } from 'echarts';
 import * as ODSCharts from 'ods-charts';
+import {NgxEchartsDirective, provideEcharts} from 'ngx-echarts';
 
 @Component({
   selector: 'app-graph',
+  standalone: true,
+  imports: [NgxEchartsDirective],
+  providers: [provideEcharts()],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
