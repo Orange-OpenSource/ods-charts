@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import * as ODSCharts from 'ods-charts';
 import * as echarts from 'echarts';
 
