@@ -33,7 +33,7 @@ updates:
       development-dependencies:
         dependency-type: "development"
   - package-ecosystem: npm
-    directory: "/test/angular-tour-of-heroes"
+    directory: "/test/angular-echarts"
     labels:
       - dependencies
     schedule:
