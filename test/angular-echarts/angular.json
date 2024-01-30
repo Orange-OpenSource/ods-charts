@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-tour-of-heroes": {
+    "angular-echarts": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-tour-of-heroes",
+            "outputPath": "dist/angular-echarts",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -58,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-tour-of-heroes:build:production"
+              "buildTarget": "angular-echarts:build:production"
             },
             "development": {
-              "buildTarget": "angular-tour-of-heroes:build:development"
+              "buildTarget": "angular-echarts:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -69,7 +69,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-tour-of-heroes:build"
+            "buildTarget": "angular-echarts:build"
           }
         },
         "test": {

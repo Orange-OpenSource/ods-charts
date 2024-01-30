@@ -11,5 +11,5 @@ import { GraphComponent } from './graph/graph.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-tour-of-heroes';
+  title = 'angular-echarts';
 }
