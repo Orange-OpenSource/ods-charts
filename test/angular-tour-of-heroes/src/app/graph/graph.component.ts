@@ -48,7 +48,7 @@ export class GraphComponent implements AfterViewInit {
       ],
     },
   };
-  private myGraph: ECharts;
+  private echartsGraph: ECharts;
 
   ngAfterViewInit(): void {
     // ODS Charts
@@ -61,15 +61,15 @@ export class GraphComponent implements AfterViewInit {
 
     echarts.registerTheme(this.myTheme.name, this.myTheme.theme);
 
-    this.myGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
+    this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
 
     this.options = this.myTheme
       .setDataOptions(this.options)
-      .externalizeLegends(this.graph, '#legend')
+      .externalizeLegends(this.echartsGraph, '#legend')
       .externalizePopover()
       .getChartOptions();
 
-    this.myGraph.setOption(this.options);
+    this.echartsGraph.setOption(this.options);
   }
 
   public generateRandomDataset() {
@@ -86,7 +86,7 @@ export class GraphComponent implements AfterViewInit {
       },
     };
     this.options.dataset = this.mergeOptions.dataset;
-    this.myGraph.setOption(this.options);
+    this.echartsGraph.setOption(this.options);
   }
 
   private getRandomValues() {
