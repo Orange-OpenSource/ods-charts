@@ -170,11 +170,17 @@ function generateConfigurator(id, cssThemeName) {
                   ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS
                 }">Darker tints</option>
                 <option value="${
+                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_DEFAULT
+                }">Default colors</option>
+                <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE
                 }">Blue</option>
                 <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN
                 }">Green</option>
+                <option value="${
+                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PINK
+                }">Pink</option>
                 <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
                 }">Purple</option>
@@ -184,8 +190,10 @@ function generateConfigurator(id, cssThemeName) {
             <div class="col-md-4">
                 <label for="visualMapColorInput" class="form-label">visual Map Color</label>
                 <select class="form-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
+                    <option value="categorical" >Default</option>
                     <option value="blue" >Blue</option>
                     <option value="green" >Green</option>
+                    <option value="pink" >Pink</option>
                     <option value="purple" >Purple</option>
                 </select>
             </div>
@@ -727,7 +735,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    6 ===
+    8 ===
       document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(
           document.querySelector(`#accordion_${id} #colorSetInput`).value
@@ -745,7 +753,7 @@ async function changeTheme(id) {
   );
   if (document.querySelector('#view_custom_color_' + id)) {
     if (
-      6 ===
+      8 ===
       document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
     ) {
       document
