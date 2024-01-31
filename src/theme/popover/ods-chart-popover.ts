@@ -34,6 +34,7 @@ const DEFAULT_TEMPLATE_CSS = `
   border: none !important;
   box-shadow: none !important;
   background: none !important;
+  pointer-events: none !important;
 }
 
 .ods-charts-popover .ods-charts-popover-holder {

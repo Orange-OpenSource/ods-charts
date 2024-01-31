@@ -28,7 +28,7 @@ Please check that the following tests projects are still working:
 
 - [ ] `docs/examples`
 - [ ] `test/angular-ngx-echarts`
-- [ ] `test/angular-tour-of-heroes`
+- [ ] `test/angular-echarts`
 - [ ] `test/html`
 - [ ] `test/react`
 - [ ] `test/vue`

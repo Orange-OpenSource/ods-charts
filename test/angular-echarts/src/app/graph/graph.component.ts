@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { ECharts, EChartsOption } from 'echarts';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import * as ODSCharts from 'ods-charts';
-import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import * as echarts from 'echarts';
+import { ECharts, EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [NgxEchartsDirective],
-  providers: [provideEcharts()],
+  imports: [],
   templateUrl: './graph.component.html',
-  styleUrl: './graph.component.scss',
+  styleUrl: './graph.component.scss'
 })
-export class GraphComponent {
+export class GraphComponent implements AfterViewInit {
+  @ViewChild('graph') graph: ElementRef;
   public options: EChartsOption = {
     legend: {},
     tooltip: {},
@@ -48,22 +48,28 @@ export class GraphComponent {
       ],
     },
   };
+  private echartsGraph: ECharts;
 
-  constructor() {
+  ngAfterViewInit(): void {
+    // ODS Charts
     this.myTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.LIGHT,
       categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
       visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });
-  }
 
-  public onChartInit(ec: ECharts) {
+    echarts.registerTheme(this.myTheme.name, this.myTheme.theme);
+
+    this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
+
     this.options = this.myTheme
       .setDataOptions(this.options)
-      .externalizeLegends(ec, '#legend')
+      .externalizeLegends(this.echartsGraph, '#legend')
       .externalizePopover()
       .getChartOptions();
+
+    this.echartsGraph.setOption(this.options);
   }
 
   public generateRandomDataset() {
@@ -79,6 +85,8 @@ export class GraphComponent {
         ],
       },
     };
+    this.options.dataset = this.mergeOptions.dataset;
+    this.echartsGraph.setOption(this.options);
   }
 
   private getRandomValues() {
