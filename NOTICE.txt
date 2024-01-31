@@ -1,3 +1,5 @@
+Copyright (C) 2023 - 2024 Orange SA All rights reserved
+
 The following parts are proprietary information of Orange.
 You shall not use or display any trade names, trademarks, service marks, products names, illustrations or designs used within the software
 or displayed on this website and owned by Orange SA and its subsidiaries,
@@ -11,5 +13,17 @@ docs/images/ods-line-charts.png
 docs/images/ods-mixed-charts.png
 docs/images/ods-stacked-bar-charts.png
 docs/images/orange-logo.svg
-
-End of the parts list under Orange SA Copyright
+docs/images/favicons/android-chrome-192x192.png
+docs/images/favicons/android-chrome-512x512.png
+docs/images/favicons/apple-touch-icon.png
+docs/images/favicons/browserconfig.xml
+docs/images/favicons/favicon-16x16.png
+docs/images/favicons/favicon-32x32.png
+docs/images/favicons/favicon.ico
+docs/images/favicons/manifest.json
+docs/images/favicons/mstile-144x144.png
+docs/images/favicons/mstile-150x150.png
+docs/images/favicons/mstile-310x150.png
+docs/images/favicons/mstile-310x310.png
+docs/images/favicons/mstile-70x70.png
+docs/images/favicons/safari-pinned-tab.svg
