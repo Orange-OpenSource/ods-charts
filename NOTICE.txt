@@ -1,3 +1,5 @@
+Copyright (C) 2023 - 2024 Orange SA All rights reserved
+
 The following parts are proprietary information of Orange.
 You shall not use or display any trade names, trademarks, service marks, products names, illustrations or designs used within the software
 or displayed on this website and owned by Orange SA and its subsidiaries,
@@ -25,5 +27,3 @@ docs/images/favicons/mstile-150x150.png
 docs/images/favicons/mstile-310x150.png
 docs/images/favicons/mstile-310x310.png
 docs/images/favicons/safari-pinned-tab.svg
-
-End of the parts list under Orange SA Copyright
