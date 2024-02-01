@@ -6,6 +6,8 @@
 // This software is distributed under the MIT license.
 //
 
+var toto = 1;
+
 import {
   ODSChartsCSSThemeDefinition,
   ODSChartsCSSThemesNames,
@@ -37,21 +39,12 @@ const DEFAULT_TEMPLATE_CSS = `
   pointer-events: none !important;
 }
 
-.ods-charts-popover .ods-charts-popover-holder {
-  display: inline-block;
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-}
-
 .ods-charts-popover .ods-charts-popover-inner  {
-  margin-left: -50%;
   display: inline-block;
   background-color: white;
   border: 2px solid rgb(204, 204, 204);
   padding: 20px 18px 20px 18px;
 }
-
 
 .ods-charts-popover .ods-charts-popover-header {
   color: black;
@@ -65,7 +58,7 @@ const DEFAULT_TEMPLATE_CSS = `
   bottom: -8px;
   width: 20px;
   height: 10px;
-  left: -10px;
+  /* left: calc(50% - 10px); */
 }
 
 
@@ -322,6 +315,7 @@ export class ODSChartsPopover {
         tooltip: {
           appendToBody: true,
           enterable: true,
+          confine: true,
         },
         [tooltipTrigger]: {
           axisPointer: {
@@ -344,13 +338,68 @@ export class ODSChartsPopover {
       if (!this.popoverDefinition.getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
-            position: function (pt: [number, number]) {
-              return [pt[0], pt[1]];
+            // position: function (pt: [number, number]) {
+            //   return ['50%', '50%'];
+            // },
+            position: function (pos: any, params: any, dom: any, rect: any, size: any) {
+              // tooltip will be fixed on the right if mouse hovering on the left,
+              // and on the left if hovering on the right.
+              var obj: any = {
+                top: pos[1] - size.contentSize[1] - 10,
+                left: pos[0] - size.contentSize[0] / 2,
+              };
+
+              console.log('position', pos, obj, size, rect, dom, params);
+
+              console.log('------', document.querySelector('.ods-charts-popover-arrow'))
+
+              /*if (document.querySelector('.ods-charts-popover-arrow')) {
+                (document.querySelector('.ods-charts-popover-arrow') as HTMLElement).style.left = '80px';
+              }*/
+
+              
+
+              const x = pos[0];
+              const arrowSize = 10;
+
+              if (x > size.viewSize[0] - size.contentSize[0] / 2) {
+                toto = pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize;
+              } else if (x < size.contentSize[0] / 2) {
+                toto = pos[0] - arrowSize;
+              } else {
+                toto = size.contentSize[0] / 2 - arrowSize;
+              }
+
+
+
+              // toto = pos[0];
+
+              /*let style = document.createElement('style');
+              style.innerHTML = '.ods-charts-popover-arrow { left: ' + pos[0] + 'px; background-color: purple; }';
+              document.head.appendChild(style);*/
+
+
+              // console.log(obj);
+              // console.log(typeof(dom));
+
+              // const x = pos[0];
+
+              
+              // dom.querySelector('.ods-charts-popover-arrow').style.backgroundColor = 'purple';
+              // dom.querySelector('.ods-charts-popover-arrow').style.left = x + 'px';
+
+              // dom.querySelector('.ods-charts-popover-arrow').style.left = '40px';
+
+              // dom.style.backgroundColor = 'purple';
+
+              return obj;
             },
 
             formatter: (
               params: ODSChartsPopoverItem[] | ODSChartsPopoverItem
             ) => {
+              console.log('formatter', params, legends);
+
               if (!isVarArray(params)) {
                 params = [params as ODSChartsPopoverItem];
               }
@@ -548,6 +597,8 @@ export class ODSChartsPopover {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode
   ): string {
+    // console.log('getPopupTemplate', elements, cssTheme, mode);
+
     if (!document.querySelector('#ods-chart-tooltip-default-template')) {
       let style = document.createElement('style');
       style.id = 'ods-chart-tooltip-default-template';
@@ -556,7 +607,7 @@ export class ODSChartsPopover {
     }
 
     return `
-  <div class="ods-charts-popover-holder class="ods-charts-mode-${mode}" ${ODSChartsItemCSSDefinition.getClasses(
+  <div class="ods-charts-popover-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverHolder
     )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverHolder
@@ -575,7 +626,7 @@ export class ODSChartsPopover {
           cssTheme.popover?.odsChartsPopoverArrow
         )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverArrow
-    )}" ></div>
+    )}; left: ${toto}px" ></div>
           <div class="ods-charts-popover-header ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverHeader
           )}" style="${ODSChartsItemCSSDefinition.getStyles(
@@ -609,6 +660,7 @@ export class ODSChartsPopover {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode
   ) {
+
     if (0 !== this.popoverConfig.tooltipDelay) {
       if (this.tooltipDelay) {
         return;
