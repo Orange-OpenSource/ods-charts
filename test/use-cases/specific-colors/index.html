@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Hello, world!</title>
+
+    <!-- Preconnect to CDNs: remove if not needed -->
+    <link
+      rel="preconnect"
+      href="https://code.jquery.com"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preconnect"
+      href="https://cdn.jsdelivr.net"
+      crossorigin="anonymous"
+    />
+
+    <!--
+      Neue Helvetica is a trademark of Monotype Imaging Inc. registered in the U.S.
+      Patent and Trademark Office and may be registered in certain other jurisdictions.
+      Copyright © 2014 Monotype Imaging Inc. All rights reserved.
+      Orange has purchased the right to use Helvetica in its websites and mobile applications.
+      If you are not authorized to used it, don't include the orangeHelvetica.css.
+      See NOTICE.txt for more information.
+    -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/fonts/HelvNeue55_W1G.woff2"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      integrity="sha384-R6e0PFLMMV6HBvkQK22ecNfjOzyh89wSndiTC71MuvoaOnhIYgOAGVC0gW0kVN16"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/fonts/HelvNeue75_W1G.woff2"
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      integrity="sha384-ylOkwNNvSwXpWNbpEhI45ruJTXyfQbIb42IxMvSGGcndZBpZ9iAmOFSUl4/Goeqz"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/orangeHelvetica.min.css"
+      integrity="sha384-6rPwIH6o8roADEALG0VtZOLfj0bDJ8KUOX7N+cjS+7NkwAaBQOZwRPOIiKWJa0aL"
+      crossorigin="anonymous"
+    />
+
+    <!--
+      Orange Icons
+      Copyright (C) 2016 - 2022 Orange SA All rights reserved
+      See NOTICE.txt for more information.
+    -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/orangeIcons.min.css"
+      integrity="sha384-XQ+QuxWl/eBTAPcvP8xjhUXg+GB+kArKZpnDyXUz1pLOe6yAfZzxkSygkYxNfKHT"
+      crossorigin="anonymous"
+    />
+
+    <!-- Boosted CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/boosted.min.css"
+      integrity="sha384-gf+Y5XR9AaDz8jxrG8h6a3BYpN7fOpxA97a0i8QHgwnRKNOuahm7ZQfqzxaNW+aJ"
+      crossorigin="anonymous"
+    />
+
+    <script type="text/javascript" src="../../../dist/ods-charts.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
+  </head>
+  <body>
+    <h1>Sandbox for ORA!</h1>
+
+    <main id="content">
+      <div class="chart_title">
+        <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+        <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+      </div>
+      <div id="barLine_holder">
+        <div
+          id="barLine_chart"
+          style="width: 100%; height: 50vh"
+          class="position-relative"
+        ></div>
+      </div>
+      <div id="barLine_legend" class="mx-5"></div>
+    </main>
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/js/boosted.bundle.min.js"
+      integrity="sha384-HkgWGiFvphHyETaofVWXX2SP64Dbtv237puflDWHKGBrQg9mSRWItJIt2JkJrPlL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      ///////////////////////////////////////////////////
+      // Used data
+      ///////////////////////////////////////////////////
+
+      var goals = new Array(...new Array(12).keys()).map((i) => {
+        return 50 + Math.random() * 50;
+      });
+
+      var results = new Array(...new Array(12).keys()).map((i) => {
+        return 50 + Math.random() * 50;
+      });
+
+      var resultsOK = results.map((res, i) =>
+        res >= goals[i] ? results[i] : 0
+      );
+      var resultsNOK = results.map((res, i) =>
+        res < goals[i] ? results[i] : 0
+      );
+      var dates = new Array(...new Array(12).keys()).map((i) => {
+        var d = new Date();
+        d.setMonth(d.getMonth() - i);
+        return d.toLocaleDateString(undefined, {
+          month: 'short',
+          year: 'numeric',
+        });
+      });
+
+      // this is the data to be displayed
+      var dataOptions = {
+        xAxis: {
+          type: 'category',
+          data: dates,
+        },
+        yAxis: {},
+        series: [
+          {
+            data: resultsOK,
+            type: 'bar',
+            stack: 'result',
+          },
+          {
+            data: resultsNOK,
+            type: 'bar',
+            stack: 'result',
+          },
+          {
+            data: goals,
+            type: 'line',
+          },
+        ],
+        legend: {
+          data: ['Results OK', 'Results NOK', 'Goal'],
+        },
+      };
+
+      ///////////////////////////////////////////////////
+      // ODSCharts
+      ///////////////////////////////////////////////////
+      // Build the theme
+      var themeManager = ODSCharts.getThemeManager({
+        mode: ODSCharts.ODSChartsMode.LIGHT,
+        // Possibility to specify a Color out of ODS recommandations by given its value
+        // Cf https://ods-charts.netlify.app/api/interfaces/odschartsthemeoptions
+        // https://ods-charts.netlify.app/api/types/odschartscustomcategoricalcolor
+        // It can be the string value of the color
+        categoricalColors: ['#32C832', '#CD3C14', '#ff7900'],
+        visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
+        lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+        cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED4,
+      });
+
+      // register this theme to echarts
+      echarts.registerTheme(themeManager.name, themeManager.theme);
+
+      // get the chart holder and initiate it with the generated theme
+      var div = document.getElementById('barLine_chart');
+      var myChart = echarts.init(div, themeManager.name, {
+        renderer: 'svg',
+      });
+
+      // Set the data to be displayed.
+      themeManager.setDataOptions(dataOptions);
+      // Register the externalization of the legend.
+      themeManager.externalizeLegends(myChart, '#barLine_legend');
+      // Manage window size changed
+      themeManager.manageChartResize(myChart, 'barLine_chart');
+      // Register the externalization of the tooltip/popup
+      // Availibility to specify the Popover content :
+      // CF https://ods-charts.netlify.app/api/classes/odschartstheme#externalizePopover
+      // and the second parameter that can be specialized according to the specification  https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition
+      // and then you can give :
+      // - getPopupTitle : give the text of the title of the popup/tooltip
+      // - getPopupTemplate : give the html template of the popup/tooltip
+      // - getPopupContent : if getPopupTemplate is not defined, give the content of the body of the popup/tooltip
+      // - getPopupContentLine : if getPopupContent is not defined, give the content of the line for a serie
+      // - getPopupContentValue : if getPopupContentLine is note defined, give the display of a value of a serie
+      // By instance, you could change the Popup title with https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition#getPopupTitle
+      themeManager.externalizePopover(
+        {
+          enabled: true,
+          shared: false,
+          tooltip: false,
+          axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
+        },
+        Object.assign(
+          { ...ODSCharts.ODSChartsPopoverManagers.NONE },
+          {
+            getPopupTitle: (axisValue, axisValueLabel, name) =>
+              `We can customize the title from the name "${name}"`,
+          }
+        )
+      );
+      // Display the chart using the configured theme and data.
+      myChart.setOption(themeManager.getChartOptions());
+    </script>
+  </body>
+</html>

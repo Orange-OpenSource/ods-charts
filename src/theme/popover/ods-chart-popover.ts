@@ -52,6 +52,14 @@ const DEFAULT_TEMPLATE_CSS = `
   padding: 20px 18px 20px 18px;
 }
 
+.ods-charts-popover .ods-charts-popover-inner.ods-charts-popover-inner-right {
+  margin-left: -23px;
+}
+.ods-charts-popover .ods-charts-popover-inner.ods-charts-popover-inner-left {
+  margin-right: -23px;
+  margin-left: -100%;
+}
+
 
 .ods-charts-popover .ods-charts-popover-header {
   color: black;
@@ -322,6 +330,7 @@ export class ODSChartsPopover {
         tooltip: {
           appendToBody: true,
           enterable: true,
+          confine: true,
         },
         [tooltipTrigger]: {
           axisPointer: {
@@ -555,13 +564,31 @@ export class ODSChartsPopover {
       document.head.appendChild(style);
     }
 
+    const templateId =
+      'ods-charts-popover-inner-' + Math.ceil(Math.random() * 1000000000);
+    window.setTimeout(() => {
+      const innerTemplate: HTMLElement = document.getElementById(
+        templateId
+      ) as HTMLElement;
+      if (innerTemplate && innerTemplate.getBoundingClientRect) {
+        const rect = innerTemplate.getBoundingClientRect();
+        if (rect) {
+          if (rect.left < 0) {
+            innerTemplate.classList.add('ods-charts-popover-inner-right');
+          } else if (rect.right > window.innerWidth) {
+            innerTemplate.classList.add('ods-charts-popover-inner-left');
+          }
+        }
+      }
+    }, 50);
+
     return `
   <div class="ods-charts-popover-holder class="ods-charts-mode-${mode}" ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverHolder
     )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverHolder
     )}">
-    <div class="ods-charts-popover-inner ${ODSChartsItemCSSDefinition.getClasses(
+    <div id=${templateId} class="ods-charts-popover-inner ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverInner
     )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverInner
