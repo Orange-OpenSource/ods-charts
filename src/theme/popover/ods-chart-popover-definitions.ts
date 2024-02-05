@@ -98,6 +98,11 @@ export class ODSChartsPopoverConfig {
    */
   tooltip?: boolean;
   /**
+   * - true: to display tooltip inside the chart at any cost
+   * - false: to display tooltip normally
+   */
+  tooltipConfine?: boolean;
+  /**
    * tooltipTimeout is used to set the timeout in milliseconds of the tooltip display.
    *
    * default value is 3000

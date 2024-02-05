@@ -160,6 +160,9 @@
         legend: {
           data: ['Results OK', 'Results NOK', 'Goal'],
         },
+        // tooltip: {
+        //   confine: true,
+        // } Work almost fine.
       };
 
       ///////////////////////////////////////////////////
@@ -209,6 +212,7 @@
           enabled: true,
           shared: false,
           tooltip: true,
+          tooltipConfine: true,
           axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
         },
         Object.assign(

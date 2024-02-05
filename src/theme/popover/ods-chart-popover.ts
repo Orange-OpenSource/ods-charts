@@ -6,8 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-var tooltipStyle = '';
-
 import {
   ODSChartsCSSThemeDefinition,
   ODSChartsCSSThemesNames,
@@ -112,6 +110,7 @@ const DEFAULT_NONE_CSS = `
 export class ODSChartsPopover {
   private tooltipTimeOut: any;
   private tooltipDelay: any;
+  private tooltipStyle: string = '';
   private constructor(
     private popoverDefinition: ODSChartsPopoverDefinition,
     private popoverConfig: ODSChartsPopoverConfig
@@ -139,6 +138,9 @@ export class ODSChartsPopover {
     }
     if (undefined === popoverConfig.tooltip) {
       popoverConfig.tooltip = true;
+    }
+    if (undefined === popoverConfig.tooltipConfine) {
+      popoverConfig.tooltipConfine = true; // TODO: Define if this could be replaced at some point by `ODSChartsTheme.getThemeManager().getChartOptions().tooltip.confine` or whatever that does the trick by binding confine from apache echarts and ods-charts aka see how to bind global to this or below
     }
     if (undefined === popoverConfig.tooltipDelay) {
       popoverConfig.tooltipDelay =
@@ -315,7 +317,7 @@ export class ODSChartsPopover {
         tooltip: {
           appendToBody: true,
           enterable: true,
-          confine: true,
+          confine: this.popoverConfig.tooltipConfine,
         },
         [tooltipTrigger]: {
           axisPointer: {
@@ -338,35 +340,37 @@ export class ODSChartsPopover {
       if (!this.popoverDefinition.getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
-            position: function (pos: any, params: any, dom: any, rect: any, size: any) {
+            position: (pos: any, params: any, dom: any, rect: any, size: any) => {
               let obj: any = {
                 left: pos[0] - size.contentSize[0] / 2,
               };
 
               // console.log('position', pos, obj, size, rect, dom, params);
-              // TODO: remove arrow placement on `confine: false`
               // TODO: define if the tooltip placement is an option or defined by the user
-              // TODO: should we have meaningful variable ?
 
-              const x = pos[0];
-              const arrowSize = 10;
-              const bottom = pos[1] > size.viewSize[1] / 2; // pos[1] > size.viewSize[1] / 2 or pos[1] > size.contentSize[1] or pos[1] > size.viewSize[1] - size.contentSize[1]
-              let tmp;
+              if (this.popoverConfig.tooltipConfine) {
+                const x = pos[0];
+                const arrowSize = 10;
+                const bottom = pos[1] > size.contentSize[1]; // pos[1] > size.viewSize[1] / 2 or pos[1] > size.contentSize[1] or pos[1] > size.viewSize[1] - size.contentSize[1]
+                let tmp;
 
-              obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
+                obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
 
-              if (x > size.viewSize[0] - size.contentSize[0] / 2) {
-                tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
-              } else if (x < size.contentSize[0] / 2) {
-                tmp = Math.max(pos[0] - arrowSize, 5);
+                if (x > size.viewSize[0] - size.contentSize[0] / 2) {
+                  tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
+                } else if (x < size.contentSize[0] / 2) {
+                  tmp = Math.max(pos[0] - arrowSize, 5);
+                } else {
+                  tmp = size.contentSize[0] / 2 - arrowSize;
+                }
+
+                this.tooltipStyle = `${tmp}px;`;
+
+                if (!bottom) {
+                  this.tooltipStyle += ' top: -8px; transform: scaleY(-1);';
+                }
               } else {
-                tmp = size.contentSize[0] / 2 - arrowSize;
-              }
-
-              tooltipStyle = `${tmp}px;`;
-
-              if (!bottom) {
-                tooltipStyle += ' top: -8px; transform: scaleY(-1);';
+                obj['top'] = pos[1] - size.contentSize[1] - 10;
               }
 
               return obj;
@@ -601,7 +605,7 @@ export class ODSChartsPopover {
           cssTheme.popover?.odsChartsPopoverArrow
         )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverArrow
-    )}; left: ${tooltipStyle}" ></div>
+    )}; left: ${this.tooltipStyle}" ></div>
           <div class="ods-charts-popover-header ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverHeader
           )}" style="${ODSChartsItemCSSDefinition.getStyles(
