@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-var toto = 1;
+var tooltipStyle = '';
 
 import {
   ODSChartsCSSThemeDefinition,
@@ -58,7 +58,7 @@ const DEFAULT_TEMPLATE_CSS = `
   bottom: -8px;
   width: 20px;
   height: 10px;
-  /* left: calc(50% - 10px); */
+  left: calc(50% - 10px);
 }
 
 
@@ -338,59 +338,36 @@ export class ODSChartsPopover {
       if (!this.popoverDefinition.getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
-            // position: function (pt: [number, number]) {
-            //   return ['50%', '50%'];
-            // },
             position: function (pos: any, params: any, dom: any, rect: any, size: any) {
-              // tooltip will be fixed on the right if mouse hovering on the left,
-              // and on the left if hovering on the right.
-              var obj: any = {
-                top: pos[1] - size.contentSize[1] - 10,
+              let obj: any = {
                 left: pos[0] - size.contentSize[0] / 2,
               };
 
-              console.log('position', pos, obj, size, rect, dom, params);
-
-              console.log('------', document.querySelector('.ods-charts-popover-arrow'))
-
-              /*if (document.querySelector('.ods-charts-popover-arrow')) {
-                (document.querySelector('.ods-charts-popover-arrow') as HTMLElement).style.left = '80px';
-              }*/
-
-              
+              // console.log('position', pos, obj, size, rect, dom, params);
+              // TODO: remove arrow placement on `confine: false`
+              // TODO: define if the tooltip placement is an option or defined by the user
+              // TODO: should we have meaningful variable ?
 
               const x = pos[0];
               const arrowSize = 10;
+              const bottom = pos[1] > size.viewSize[1] / 2; // pos[1] > size.viewSize[1] / 2 or pos[1] > size.contentSize[1] or pos[1] > size.viewSize[1] - size.contentSize[1]
+              let tmp;
+
+              obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
 
               if (x > size.viewSize[0] - size.contentSize[0] / 2) {
-                toto = pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize;
+                tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
               } else if (x < size.contentSize[0] / 2) {
-                toto = pos[0] - arrowSize;
+                tmp = Math.max(pos[0] - arrowSize, 5);
               } else {
-                toto = size.contentSize[0] / 2 - arrowSize;
+                tmp = size.contentSize[0] / 2 - arrowSize;
               }
 
+              tooltipStyle = `${tmp}px;`;
 
-
-              // toto = pos[0];
-
-              /*let style = document.createElement('style');
-              style.innerHTML = '.ods-charts-popover-arrow { left: ' + pos[0] + 'px; background-color: purple; }';
-              document.head.appendChild(style);*/
-
-
-              // console.log(obj);
-              // console.log(typeof(dom));
-
-              // const x = pos[0];
-
-              
-              // dom.querySelector('.ods-charts-popover-arrow').style.backgroundColor = 'purple';
-              // dom.querySelector('.ods-charts-popover-arrow').style.left = x + 'px';
-
-              // dom.querySelector('.ods-charts-popover-arrow').style.left = '40px';
-
-              // dom.style.backgroundColor = 'purple';
+              if (!bottom) {
+                tooltipStyle += ' top: -8px; transform: scaleY(-1);';
+              }
 
               return obj;
             },
@@ -398,8 +375,6 @@ export class ODSChartsPopover {
             formatter: (
               params: ODSChartsPopoverItem[] | ODSChartsPopoverItem
             ) => {
-              console.log('formatter', params, legends);
-
               if (!isVarArray(params)) {
                 params = [params as ODSChartsPopoverItem];
               }
@@ -626,7 +601,7 @@ export class ODSChartsPopover {
           cssTheme.popover?.odsChartsPopoverArrow
         )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverArrow
-    )}; left: ${toto}px" ></div>
+    )}; left: ${tooltipStyle}" ></div>
           <div class="ods-charts-popover-header ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverHeader
           )}" style="${ODSChartsItemCSSDefinition.getStyles(
@@ -660,7 +635,6 @@ export class ODSChartsPopover {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode
   ) {
-
     if (0 !== this.popoverConfig.tooltipDelay) {
       if (this.tooltipDelay) {
         return;
