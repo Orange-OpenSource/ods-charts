@@ -576,8 +576,6 @@ export class ODSChartsPopover {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode
   ): string {
-    // console.log('getPopupTemplate', elements, cssTheme, mode);
-
     if (!document.querySelector('#ods-chart-tooltip-default-template')) {
       let style = document.createElement('style');
       style.id = 'ods-chart-tooltip-default-template';
