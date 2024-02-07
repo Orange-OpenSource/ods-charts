@@ -8,7 +8,7 @@ import { ECharts, EChartsOption } from 'echarts';
   standalone: true,
   imports: [],
   templateUrl: './graph.component.html',
-  styleUrl: './graph.component.scss'
+  styleUrl: './graph.component.scss',
 })
 export class GraphComponent implements AfterViewInit {
   @ViewChild('graph') graph: ElementRef;
@@ -35,19 +35,6 @@ export class GraphComponent implements AfterViewInit {
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   };
   public myTheme: ODSCharts.ODSChartsTheme;
-  public mergeOptions: EChartsOption = {
-    series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-    dataset: {
-      // Provide a set of data.
-      source: [
-        ['product', '2015', '2016', '2017'],
-        ['Matcha Latte', 43.3, 85.8, 93.7],
-        ['Milk Tea', 83.1, 73.4, 55.1],
-        ['Cheese Cocoa', 86.4, 65.2, 82.5],
-        ['Walnut Brownie', 72.4, 53.9, 39.1],
-      ],
-    },
-  };
   private echartsGraph: ECharts;
 
   ngAfterViewInit(): void {
@@ -61,7 +48,10 @@ export class GraphComponent implements AfterViewInit {
 
     echarts.registerTheme(this.myTheme.name, this.myTheme.theme);
 
-    this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
+    this.echartsGraph = echarts.init(
+      this.graph.nativeElement,
+      this.myTheme.name
+    );
 
     this.options = this.myTheme
       .setDataOptions(this.options)
@@ -73,19 +63,15 @@ export class GraphComponent implements AfterViewInit {
   }
 
   public generateRandomDataset() {
-    this.mergeOptions = {
-      series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-      dataset: {
-        source: [
-          ['product', '2015', '2016', '2017'],
-          ['Matcha Latte', ...this.getRandomValues()],
-          ['Milk Tea', ...this.getRandomValues()],
-          ['Cheese Cocoa', ...this.getRandomValues()],
-          ['Walnut Brownie', ...this.getRandomValues()],
-        ],
-      },
+    this.options.dataset = {
+      source: [
+        ['product', '2015', '2016', '2017'],
+        ['Matcha Latte', ...this.getRandomValues()],
+        ['Milk Tea', ...this.getRandomValues()],
+        ['Cheese Cocoa', ...this.getRandomValues()],
+        ['Walnut Brownie', ...this.getRandomValues()],
+      ],
     };
-    this.options.dataset = this.mergeOptions.dataset;
     this.echartsGraph.setOption(this.options);
   }
 
