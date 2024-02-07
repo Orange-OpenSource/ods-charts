@@ -8,7 +8,7 @@ import { ECharts, EChartsOption } from 'echarts';
   standalone: true,
   imports: [],
   templateUrl: './graph.component.html',
-  styleUrl: './graph.component.scss'
+  styleUrl: './graph.component.scss',
 })
 export class GraphComponent implements AfterViewInit {
   @ViewChild('graph') graph: ElementRef;
@@ -48,7 +48,10 @@ export class GraphComponent implements AfterViewInit {
 
     echarts.registerTheme(this.myTheme.name, this.myTheme.theme);
 
-    this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
+    this.echartsGraph = echarts.init(
+      this.graph.nativeElement,
+      this.myTheme.name
+    );
 
     this.options = this.myTheme
       .setDataOptions(this.options)
@@ -60,15 +63,15 @@ export class GraphComponent implements AfterViewInit {
   }
 
   public generateRandomDataset() {
-    this.options.dataset= {
-        source: [
-          ['product', '2015', '2016', '2017'],
-          ['Matcha Latte', ...this.getRandomValues()],
-          ['Milk Tea', ...this.getRandomValues()],
-          ['Cheese Cocoa', ...this.getRandomValues()],
-          ['Walnut Brownie', ...this.getRandomValues()],
-        ],
-      };
+    this.options.dataset = {
+      source: [
+        ['product', '2015', '2016', '2017'],
+        ['Matcha Latte', ...this.getRandomValues()],
+        ['Milk Tea', ...this.getRandomValues()],
+        ['Cheese Cocoa', ...this.getRandomValues()],
+        ['Walnut Brownie', ...this.getRandomValues()],
+      ],
+    };
     this.echartsGraph.setOption(this.options);
   }
 
