@@ -12,14 +12,14 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "webpack",
-    "netlify": "npm run build ; cp -R dist docs/ ; npm run typedoc",
+    "netlify": "npm run build && cp -R dist docs/ && npm run typedoc",
     "serve": "serve .",
     "serve:vue": "serve test/vue/dist/",
     "serve:angular": "serve test/angular-ngx-echarts/dist/angular/",
     "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
     "serve:react": "serve test/react/build/",
     "serve:any": "serve",
-    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected  --readme docs/README.md"
+    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_cookies.mjs"
   },
   "devDependencies": {
     "echarts": "^5.4.3",
