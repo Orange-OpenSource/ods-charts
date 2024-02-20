@@ -19,7 +19,7 @@
     "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
     "serve:react": "serve test/react/build/",
     "serve:any": "serve",
-    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_cookies.mjs"
+    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_head.mjs"
   },
   "devDependencies": {
     "echarts": "^5.4.3",
