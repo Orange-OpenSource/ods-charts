@@ -22,7 +22,7 @@
     "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected  --readme docs/README.md"
   },
   "devDependencies": {
-    "echarts": "^5.4.3",
+    "echarts": "^5.5.0",
     "serve": "^14.2.1",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.8",
