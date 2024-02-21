@@ -23,12 +23,12 @@
     "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected  --readme docs/README.md"
   },
   "devDependencies": {
-    "echarts": "^5.4.3",
+    "echarts": "^5.5.0",
     "serve": "^14.2.1",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.8",
     "typescript": "^5.3.3",
-    "webpack": "^5.90.1",
+    "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4"
   }
 }
