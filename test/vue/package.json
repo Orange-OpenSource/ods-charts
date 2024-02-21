@@ -12,7 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "echarts": "^5.4.3",
+    "echarts": "^5.5.0",
     "ods-charts": "file:../..",
     "vue": "^3.3.4"
   },
