@@ -12,8 +12,11 @@ const favicon = `<!-- Favicons -->
 <meta name="theme-color" content="#000">`;
 const boosted_CSS = `<!-- Boosted CSS -->
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-fyenpx19UpfUhZ+SD9o9IdxeIJKE6upKx0B54OcXy1TqnO660Qw9xw6rOASP+eir" crossorigin="anonymous">`;
-const cookies = fs.readFileSync('build/tarteaucitron.html')
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-fyenpx19UpfUhZ+SD9o9IdxeIJKE6upKx0B54OcXy1TqnO660Qw9xw6rOASP+eir" crossorigin="anonymous">
+<link href="/docs/assets/tarteaucitron.min.css" rel="stylesheet">`;
+const cookies = `<!-- Cookies -->
+<script crossorigin="anonymous" integrity="sha384-AcN5kJiCfqbrk/SICuAawqTeUR7KQrKpXMeDFL5XZh7x+IBWERL5to8nwE0gapz6" src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.16.1/tarteaucitron.min.js"></script>
+<script src="/docs/assets/tarteaucitron.min.js"></script>`;
 
 function fromDir(startPath, filter) {
   var files = fs.readdirSync(startPath);
