@@ -10,7 +10,7 @@ function fromDir(startPath, filter) {
       fromDir(filename, filter);
     } else if (filename.endsWith(filter)) {
       console.log(`Bump copyright year in ${filename}`);
-      fs.writeFileSync(filename, fs.readFileSync(filename).toString().replaceAll(/(\d{4,} - )\d{4,}/, `$1${new Date().getFullYear()}`));
+      fs.writeFileSync(filename, fs.readFileSync(filename).toString().replaceAll(/(\d{4,} - )\d{4,}/g, `$1${new Date().getFullYear()}`));
     };
   };
 };
