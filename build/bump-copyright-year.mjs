@@ -18,3 +18,4 @@ function fromDir(startPath, filter) {
 console.log(`Bump copyright year\n`);
 fromDir('./src', '');
 fromDir('.', 'LICENSE');
+fromDir('.', 'NOTICE.txt');

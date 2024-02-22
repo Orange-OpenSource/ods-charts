@@ -12,7 +12,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "webpack",
-    "copyright": "node build/bump-copyright.mjs",
+    "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build ; cp -R dist docs/ ; npm run typedoc",
     "serve": "serve .",
     "serve:vue": "serve test/vue/dist/",
