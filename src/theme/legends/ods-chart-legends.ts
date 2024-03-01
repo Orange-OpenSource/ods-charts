@@ -75,8 +75,19 @@ export class ODSChartsLegends {
     return new ODSChartsLegends(echart, legendHolderSelector);
   }
 
-  public static getLegendData(dataOptions: any, updateDataOption: boolean = true): ODSChartsLegendData {
-    let legendData: string[] = dataOptions.legend && dataOptions.legend.data ? dataOptions.legend.data : [];
+  public static getLegendData(
+    dataOptions: any,
+    updateDataOption: boolean = true
+  ): ODSChartsLegendData {
+    let legendData: string[] =
+      dataOptions.legend && dataOptions.legend.data
+        ? dataOptions.legend.data
+        : [];
+    let serieNames: string[];
+    const monoSerieGraphe =
+      1 === dataOptions.series.length &&
+      dataOptions.series[0].data &&
+      ['pie'].includes(dataOptions.series[0].type);
 
     if (!dataOptions.legend || !dataOptions.legend.data) {
       if (dataOptions.dataset && dataOptions.dataset.source) {
@@ -102,26 +113,51 @@ export class ODSChartsLegends {
         if (updateDataOption && !dataOptions.legend) {
           dataOptions.legend = {};
         }
-        legendData = dataOptions.series.map((serie: any, index: number) => {
-          if (!serie.name) {
-            throw new Error(`Missing data array of legends in legend chart option`);
-          }
-          return serie.name;
-        });
+        if (monoSerieGraphe) {
+          legendData = dataOptions.series[0].data.map(
+            (serie: any, index: number) => {
+              if (!serie.name) {
+                throw new Error(
+                  `Missing data array of legends in legend chart option`
+                );
+              }
+              return serie.name;
+            }
+          );
+        } else {
+          legendData = dataOptions.series.map((serie: any, index: number) => {
+            if (!serie.name) {
+              throw new Error(
+                `Missing data array of legends in legend chart option`
+              );
+            }
+            return serie.name;
+          });
+        }
         if (updateDataOption) {
           dataOptions.legend.data = legendData;
         }
       }
     }
 
-    if (updateDataOption && !dataOptions.series) {
-      dataOptions.series = legendData.map((serie: any, index: number) => ({
-        name: 'serie_Name_' + index,
-      }));
-    }
-    return {
-      labels: legendData,
-      names: dataOptions.series.map((serie: any, index: number) => {
+    if (monoSerieGraphe) {
+      serieNames = dataOptions.series[0].data.map(
+        (serie: any, index: number) => {
+          if (!serie.name) {
+            throw new Error(
+              `Missing data array of legends in legend chart option`
+            );
+          }
+          return serie.name;
+        }
+      );
+    } else {
+      if (updateDataOption && !dataOptions.series) {
+        dataOptions.series = legendData.map((serie: any, index: number) => ({
+          name: 'serie_Name_' + index,
+        }));
+      }
+      serieNames = dataOptions.series.map((serie: any, index: number) => {
         if (!serie.name) {
           if (!updateDataOption) {
             throw new Error(`Missing series names in chart option`);
@@ -129,7 +165,11 @@ export class ODSChartsLegends {
           serie.name = 'serie_Name_' + index;
         }
         return serie.name;
-      }),
+      });
+    }
+    return {
+      labels: legendData,
+      names: serieNames,
     };
   }
 
@@ -164,24 +204,39 @@ export class ODSChartsLegends {
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainer)}"
     >
     ${(legends ? legends.labels : []).map(
-      (legendLabel: string, index: number) => `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(
+      (legendLabel: string, index: number) => {
+        let colorIndex = index % colors.length;
+        return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(
+          cssTheme.legends?.odsChartsLegendLink
+        )}" 
+      style="${ODSChartsItemCSSDefinition.getStyles(
         cssTheme.legends?.odsChartsLegendLink
-      )}" 
-      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
-      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(this.legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
-        legends.names[index]
-      ).replace(/"/g, '&quot;')})">
-      <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
-      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
-      <span style="background-color:${colors[index]}; ${ODSChartsItemCSSDefinition.getStyles(
-        cssTheme.legends?.odsChartsLegendColor
-      )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
+      )}"
+      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(
+        this.legendHolderSelector
+      ).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
+          legends.names[index]
+        ).replace(/"/g, '&quot;')})">
+      <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(
+        cssTheme.legends?.odsChartsLegendColorHolder
+      )}"
+      style="${ODSChartsItemCSSDefinition.getStyles(
+        cssTheme.legends?.odsChartsLegendColorHolder
+      )}">  
+      <span style="background-color:${
+        colors[colorIndex]
+      }; ${ODSChartsItemCSSDefinition.getStyles(
+          cssTheme.legends?.odsChartsLegendColor
+        )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(
+          cssTheme.legends?.odsChartsLegendColor
+        )}"></span>
       </span>
   
     <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
     role="button">${legendLabel}</label>
-  </a>`
+  </a>`;
+      }
     ).join(`
     `)}
     </div>
