@@ -419,7 +419,7 @@ export class ODSChartsTheme {
       lineStyle: {
         width: 2,
         color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#CCCCCC',
+          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const splitLine = {
@@ -427,19 +427,22 @@ export class ODSChartsTheme {
       lineStyle: {
         width: 1,
         color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#CCCCCC',
+          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const legend = {
       textStyle: {
         fontWeight: 'bold',
         fontSize: 14,
+        color:
+          ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
       },
       icon: 'rect',
       itemWidth: 10,
       itemHeight: 10,
       itemStyle: {
-        borderColor: 'black',
+        borderColor:
+          ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
         borderWidth: 1,
       },
     };
