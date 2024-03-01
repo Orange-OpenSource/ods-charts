@@ -430,10 +430,26 @@ export class ODSChartsTheme {
           ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#CCCCCC',
       },
     };
+    const legend = {
+      textStyle: {
+        fontWeight: 'bold',
+        fontSize: 14,
+      },
+      icon: 'rect',
+      itemWidth: 10,
+      itemHeight: 10,
+      itemStyle: {
+        borderColor: 'black',
+        borderWidth: 1,
+      },
+    };
+
     const themeOptions: any = {
       xAxis: { axisLabel: cloneDeepObject(axisLabel) },
       yAxis: { axisLabel: cloneDeepObject(axisLabel) },
+      legend: cloneDeepObject(legend),
     };
+
     for (const axis of ['xAxis', 'yAxis']) {
       if (
         !isMainAxis(this.dataOptions[axis]) &&
