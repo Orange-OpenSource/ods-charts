@@ -140,7 +140,7 @@ export class ODSChartsPopover {
       popoverConfig.tooltip = true;
     }
     if (undefined === popoverConfig.tooltipConfine) {
-      popoverConfig.tooltipConfine = true; // TODO: Define if this could be replaced at some point by `ODSChartsTheme.getThemeManager().getChartOptions().tooltip.confine` or whatever that does the trick by binding confine from apache echarts and ods-charts aka see how to bind global to this or below
+      popoverConfig.tooltipConfine = false;
     }
     if (undefined === popoverConfig.tooltipDelay) {
       popoverConfig.tooltipDelay =

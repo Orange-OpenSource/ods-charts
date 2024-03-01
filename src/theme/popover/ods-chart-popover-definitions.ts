@@ -98,8 +98,16 @@ export class ODSChartsPopoverConfig {
    */
   tooltip?: boolean;
   /**
+   * @experimental
+   * Whether confine popover content in the view rect of chart instance by rendering the arrow close to the mouse position.
+   *
    * - true: to display tooltip inside the chart at any cost
    * - false: to display tooltip normally
+   *
+   * @remarks
+   * Right now, this experimental option is not linked to the default behavior of Apache ECharts `tooltip.confine` option.
+   *
+   * So `tooltipConfine` can't be used at the same time as Apache ECharts `tooltip.confine` option. They are mutually exclusive.
    */
   tooltipConfine?: boolean;
   /**
