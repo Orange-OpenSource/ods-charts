@@ -345,13 +345,10 @@ export class ODSChartsPopover {
                 left: pos[0] - size.contentSize[0] / 2,
               };
 
-              // console.log('position', pos, obj, size, rect, dom, params);
-              // TODO: define if the tooltip placement is an option or defined by the user
-
               if (this.popoverConfig.tooltipConfine) {
                 const x = pos[0];
                 const arrowSize = 10;
-                const bottom = pos[1] > size.contentSize[1]; // pos[1] > size.viewSize[1] / 2 or pos[1] > size.contentSize[1] or pos[1] > size.viewSize[1] - size.contentSize[1]
+                const bottom = pos[1] > size.contentSize[1];
                 let tmp;
 
                 obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
