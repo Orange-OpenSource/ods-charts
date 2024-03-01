@@ -315,7 +315,7 @@ export class ODSChartsPopover {
     if (this.popoverConfig.enabled) {
       mergeObjects(popoverOptions, {
         tooltip: {
-          appendToBody: true,
+          appendTo: 'body',
           enterable: true,
           confine: this.popoverConfig.tooltipConfine,
         },
@@ -399,7 +399,7 @@ export class ODSChartsPopover {
             },
             showDelay: 0,
             hideDelay: 0,
-            appendToBody: true,
+            appendTo: 'body',
             renderMode: 'html',
             className: `ods-charts-popover ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
               cssTheme.popover?.odsChartsPopover
@@ -452,7 +452,7 @@ export class ODSChartsPopover {
               }
               return ' ';
             },
-            appendToBody: true,
+            appendTo: 'body',
             className: 'd-none',
             axisPointer: {
               type: this.popoverConfig.axisPointer,
