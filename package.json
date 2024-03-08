@@ -1,7 +1,7 @@
 {
   "name": "ods-charts",
   "description": "ODS Charts is based on Apache ECharts and provides Orange charts components.",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "author": "",
   "contributors": [],
   "license": "MIT",
@@ -14,6 +14,7 @@
     "build": "webpack",
     "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build ; cp -R dist docs/ ; npm run typedoc",
+    "release": "npm pack && npm publish",
     "serve": "serve .",
     "serve:angular": "serve test/angular-ngx-echarts/dist/angular/",
     "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
