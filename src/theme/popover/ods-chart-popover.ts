@@ -139,9 +139,6 @@ export class ODSChartsPopover {
     if (undefined === popoverConfig.tooltip) {
       popoverConfig.tooltip = true;
     }
-    if (undefined === popoverConfig.tooltipConfine) {
-      popoverConfig.tooltipConfine = false;
-    }
     if (undefined === popoverConfig.tooltipDelay) {
       popoverConfig.tooltipDelay =
         undefined === popoverDefinition.tooltipDelay
@@ -317,7 +314,6 @@ export class ODSChartsPopover {
         tooltip: {
           appendTo: 'body',
           enterable: true,
-          confine: this.popoverConfig.tooltipConfine,
         },
         [tooltipTrigger]: {
           axisPointer: {
@@ -345,7 +341,7 @@ export class ODSChartsPopover {
                 left: pos[0] - size.contentSize[0] / 2,
               };
 
-              if (this.popoverConfig.tooltipConfine) {
+              if (dataOptions?.tooltip?.confine) {
                 const x = pos[0];
                 const arrowSize = 10;
                 const bottom = pos[1] > size.contentSize[1];
