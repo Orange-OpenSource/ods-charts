@@ -34,23 +34,15 @@ const DEFAULT_TEMPLATE_CSS = `
   border: none !important;
   box-shadow: none !important;
   background: none !important;
-}
-
-.ods-charts-popover .ods-charts-popover-holder {
-  display: inline-block;
-  position: absolute;
-  bottom: 12px;
-  left: 0;
+  pointer-events: none !important;
 }
 
 .ods-charts-popover .ods-charts-popover-inner  {
-  margin-left: -50%;
   display: inline-block;
   background-color: white;
   border: 2px solid rgb(204, 204, 204);
   padding: 20px 18px 20px 18px;
 }
-
 
 .ods-charts-popover .ods-charts-popover-header {
   color: black;
@@ -64,7 +56,7 @@ const DEFAULT_TEMPLATE_CSS = `
   bottom: -8px;
   width: 20px;
   height: 10px;
-  left: -10px;
+  left: calc(50% - 10px);
 }
 
 
@@ -118,6 +110,7 @@ const DEFAULT_NONE_CSS = `
 export class ODSChartsPopover {
   private tooltipTimeOut: any;
   private tooltipDelay: any;
+  private tooltipStyle: string = '';
   private constructor(
     private popoverDefinition: ODSChartsPopoverDefinition,
     private popoverConfig: ODSChartsPopoverConfig
@@ -319,7 +312,7 @@ export class ODSChartsPopover {
     if (this.popoverConfig.enabled) {
       mergeObjects(popoverOptions, {
         tooltip: {
-          appendToBody: true,
+          appendTo: 'body',
           enterable: true,
         },
         [tooltipTrigger]: {
@@ -343,8 +336,37 @@ export class ODSChartsPopover {
       if (!this.popoverDefinition.getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
-            position: function (pt: [number, number]) {
-              return [pt[0], pt[1]];
+            position: (pos: any, params: any, dom: any, rect: any, size: any) => {
+              let obj: any = {
+                left: pos[0] - size.contentSize[0] / 2,
+              };
+
+              if (dataOptions?.tooltip?.confine) {
+                const x = pos[0];
+                const arrowSize = 10;
+                const bottom = pos[1] > size.contentSize[1];
+                let tmp;
+
+                obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
+
+                if (x > size.viewSize[0] - size.contentSize[0] / 2) {
+                  tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
+                } else if (x < size.contentSize[0] / 2) {
+                  tmp = Math.max(pos[0] - arrowSize, 5);
+                } else {
+                  tmp = size.contentSize[0] / 2 - arrowSize;
+                }
+
+                this.tooltipStyle = `${tmp}px;`;
+
+                if (!bottom) {
+                  this.tooltipStyle += ' top: -8px; transform: scaleY(-1);';
+                }
+              } else {
+                obj['top'] = pos[1] - size.contentSize[1] - 10;
+              }
+
+              return obj;
             },
 
             formatter: (
@@ -370,7 +392,7 @@ export class ODSChartsPopover {
             },
             showDelay: 0,
             hideDelay: 0,
-            appendToBody: true,
+            appendTo: 'body',
             renderMode: 'html',
             className: `ods-charts-popover ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
               cssTheme.popover?.odsChartsPopover
@@ -423,7 +445,7 @@ export class ODSChartsPopover {
               }
               return ' ';
             },
-            appendToBody: true,
+            appendTo: 'body',
             className: 'd-none',
             axisPointer: {
               type: this.popoverConfig.axisPointer,
@@ -555,7 +577,7 @@ export class ODSChartsPopover {
     }
 
     return `
-  <div class="ods-charts-popover-holder class="ods-charts-mode-${mode}" ${ODSChartsItemCSSDefinition.getClasses(
+  <div class="ods-charts-popover-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverHolder
     )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverHolder
@@ -574,7 +596,7 @@ export class ODSChartsPopover {
           cssTheme.popover?.odsChartsPopoverArrow
         )}" style="${ODSChartsItemCSSDefinition.getStyles(
       cssTheme.popover?.odsChartsPopoverArrow
-    )}" ></div>
+    )}; left: ${this.tooltipStyle}" ></div>
           <div class="ods-charts-popover-header ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverHeader
           )}" style="${ODSChartsItemCSSDefinition.getStyles(
