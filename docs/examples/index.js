@@ -400,6 +400,13 @@ async function displayChart(
     }
   }
   await wait(50);
+  if (cssThemeName === 'BOOSTED4' && actualTheme && cssThemeName !== actualTheme.getAttribute('data-css-theme')) { // Small tweak to avoid having issue changing the Boosted version.
+    const scriptElt = document.createElement('script');
+    scriptElt.src = themeElements[cssThemeName].script[1];
+    scriptElt.setAttribute('crossorigin', 'anonymous');
+    scriptElt.setAttribute('data-css-theme', cssThemeName);
+    document.head.appendChild(scriptElt);
+  }
 
   var theme = themeManager.theme;
 
