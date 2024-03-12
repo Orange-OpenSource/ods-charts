@@ -198,7 +198,6 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
       container: 'body',
       title: title,
       content: htmlContent,
-      customClass: 'pe-none',
     });
     elt.chart = popover;
 
