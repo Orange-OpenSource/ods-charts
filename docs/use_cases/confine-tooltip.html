@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Examples - Specific use cases</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/boosted@5.2.3/dist/css/boosted.min.css"
+      rel="stylesheet"
+      integrity="sha384-zYFw+mxKy6r9zpAc1NoGiYBfQmxfvg7ONEMr81WeU+WLPPaLC9QTrNGFJTBi3EIn"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../images/favicons/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    <link
+      rel="icon"
+      href="../images/favicons/favicon-32x32.png"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="../images/favicons/favicon-16x16.png"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link rel="manifest" href="../images/favicons/manifest.json" />
+    <link
+      rel="mask-icon"
+      href="../images/favicons/safari-pinned-tab.svg"
+      color="#000"
+    />
+    <link rel="icon" href="../images/favicons/favicon.ico" />
+    <meta
+      name="msapplication-config"
+      content="../images/favicons/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#000" />
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="../images/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="ODS Charts - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Confine tooltip</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Confine tooltip example</h5>
+          <p class="card-text">
+            The ods-charts library uses the tooltip containment feature of the
+            Apache ECharts library to ensure that the tooltip or popover is
+            displayed on the graph and does not spill outside the display
+            window.
+          </p>
+          <p class="card-text">
+            The ods-charts library uses the tooltip containment feature of the
+            Apache ECharts library to ensure that the tooltip or popover is
+            displayed on the graph and does not spill outside the display
+            window.
+          </p>
+          <p class="card-text">
+            This function is activated by configuring the graph options as
+            follows:
+            <code>
+              <pre>
+    tooltip: {
+        confine: true,
+    }
+</pre
+              >
+            </code>
+          </p>
+
+          <div id="htmlId">
+            <div class="border border-light position-relative">
+              <div class="chart_title">
+                <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+              </div>
+              <div id="barLine_holder">
+                <div
+                  id="barLine_chart"
+                  style="width: 100%; height: 50vh"
+                  class="position-relative"
+                ></div>
+              </div>
+              <div id="barLine_legend"></div>
+            </div>
+          </div>
+
+          <script>
+            addViewCode();
+          </script>
+        </div>
+      </div>
+      <script id="codeId">
+        ///////////////////////////////////////////////////
+        // Used data
+        ///////////////////////////////////////////////////
+
+        // this is the data to be displayed
+        var dataOptions = {
+          grid: {
+            left: '0%',
+            right: '0%',
+          },
+          xAxis: {
+            type: 'category',
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          },
+          yAxis: {},
+          series: [
+            {
+              data: [10, 22, 28.8956454657, 23, 19, 15],
+              type: 'bar',
+            },
+            {
+              data: [12, 28.8956454657, 23, 15, 15, 18],
+              type: 'line',
+            },
+          ],
+          legend: {
+            data: ['label 0', 'label 1'],
+          },
+          tooltip: {
+            confine: true,
+          },
+        };
+
+        ///////////////////////////////////////////////////
+        // ODSCharts
+        ///////////////////////////////////////////////////
+        // Build the theme
+        var themeManager = ODSCharts.getThemeManager();
+
+        // register this theme to echarts
+        echarts.registerTheme(themeManager.name, themeManager.theme);
+
+        // get the chart holder and initiate it with the generated theme
+        var div = document.getElementById('barLine_chart');
+        var myChart = echarts.init(div, themeManager.name, {
+          renderer: 'svg',
+        });
+
+        // Set the data to be displayed.
+        themeManager.setDataOptions(dataOptions);
+        // Register the externalization of the legend.
+        themeManager.externalizeLegends(myChart, '#barLine_legend');
+        // Manage window size changed
+        themeManager.manageChartResize(myChart, 'barLine_chart');
+        // Register the externalization of the tooltip/popup
+        themeManager.externalizePopover();
+        // Display the chart using the configured theme and data.
+        myChart.setOption(themeManager.getChartOptions());
+      </script>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/boosted@5.1.3/dist/js/boosted.bundle.min.js"
+      integrity="sha384-5thbp4uNEqKgkl5m+rMBhqR+ZCs+3iAaLIghPWAgOv0VKvzGlYKR408MMbmCjmZF"
+      crossorigin="anonymous"
+    ></script>
+    <script></script>
+  </body>
+</html>
