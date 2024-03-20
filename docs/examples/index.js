@@ -238,8 +238,16 @@ function generateConfigurator(id, cssThemeName) {
             <div class="col-md-4 popover-renderer">
                 <label for="popoverTemplateInput" class="form-label">Popover renderer</label>
                 <select class="form-select" aria-label="Line style" id="popoverTemplateInput" onchange="changeTheme('${id}')">
-                    <option value="internal" >Chartjs renderer</option>
+                    <option value="internal" >Apache ECharts renderer</option>
                     <option value="external" >Boosted renderer</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 popover-renderer">
+                <label for="usedLegends" class="form-label">Legends</label>
+                <select class="form-select" aria-label="Line style" id="usedLegends" onchange="changeTheme('${id}')">
+                    <option value="echarts" >Not managed by ods-charts</option>
+                    <option value="odscharts" >ods-charts legends</option>
                 </select>
             </div>
 
@@ -330,9 +338,16 @@ async function displayChart(
   popoverSharedInput,
   popoverAxisInput,
   popoverTemplateInput,
+  usedLegends,
   cssThemeName,
   refresh = false
 ) {
+  if (document.getElementById(id).dataset.initialOptions) {
+    options = JSON.parse(document.getElementById(id).dataset.initialOptions);
+  } else {
+    document.getElementById(id).dataset.initialOptions =
+      JSON.stringify(options);
+  }
   if (!cssThemeName) {
     cssThemeName = ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
   }
@@ -358,10 +373,10 @@ async function displayChart(
     _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
   );
   if (!popoverTemplateInput) {
-    popoverTemplateInput =
-      ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName
-        ? 'internal'
-        : 'external';
+    popoverTemplateInput = 'internal';
+  }
+  if (!usedLegends) {
+    usedLegends = 'echarts';
   }
 
   const actualTheme = document.querySelector('[data-css-theme]');
@@ -405,22 +420,37 @@ async function displayChart(
 
   var legends = false;
 
-  if (
-    !(options.dataset && options.dataset.source) &&
-    !(options.legend && options.legend.data) &&
-    options.series.length > 1
-  ) {
-    options.legend = {
-      data:
-        options.series.length > 1
-          ? options.series.map((serie, i) => 'label ' + i)
-          : undefined,
-    };
+  if ('odscharts' === usedLegends) {
+    if (
+      !(options.dataset && options.dataset.source) &&
+      !(options.legend && options.legend.data) &&
+      options.series.length > 1
+    ) {
+      options.legend = {
+        data:
+          options.series.length > 1
+            ? options.series.map((serie, i) => 'label ' + i)
+            : undefined,
+      };
+    }
+  } else {
+    if (!options.legend) {
+      options.legend = {};
+    }
+    if (options.series && 1 < options.series.length) {
+      options.series.forEach((serie, index) => {
+        if (!serie.name) serie.name = 'label ' + index;
+      });
+    }
   }
 
   legends =
-    (options.legend && options.legend.data && !options.legend.show) ||
-    (options.dataset && options.dataset.source);
+    usedLegends === 'odscharts' &&
+    ((options.legend && options.legend.data && !options.legend.show) ||
+      (options.dataset && options.dataset.source) ||
+      (options.series &&
+        1 === options.series.length &&
+        'pie' === options.series[0].type));
 
   var dataOptions = _.cloneDeep(options);
 
@@ -649,6 +679,11 @@ myChart.setOption(themeManager.getChartOptions());
         `#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`
       )
       .setAttribute('selected', 'selected');
+    document
+      .querySelector(
+        `#accordion_${id} #usedLegends option[value="${usedLegends}"]`
+      )
+      .setAttribute('selected', 'selected');
 
     document
       .querySelector(
@@ -679,6 +714,8 @@ myChart.setOption(themeManager.getChartOptions());
   themeManager.setDataOptions(options);
   if (legends) {
     themeManager.externalizeLegends(myChart, '#' + id + '_legend');
+  } else {
+    document.getElementById(id + '_legend').innerHTML = '';
   }
   themeManager.manageChartResize(myChart, chartId);
   if ('none' !== popoverInput) {
@@ -739,6 +776,7 @@ async function changeTheme(id) {
     document.querySelector(`#accordion_${id} #popoverSharedInput`).value,
     document.querySelector(`#accordion_${id} #popoverAxisInput`).value,
     document.querySelector(`#accordion_${id} #popoverTemplateInput`).value,
+    document.querySelector(`#accordion_${id} #usedLegends`).value,
 
     document.querySelector(`#accordion_${id} #cssTheme`).value,
     true
@@ -1100,5 +1138,89 @@ window.generateBarLineChart = async (
         ],
     undefined,
     ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
+  );
+};
+
+window.generatePieChart = async (id) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    legend: {
+      orient: 'vertical',
+      right: '10',
+      top: '10',
+    },
+    series: [
+      {
+        type: 'pie',
+        label: { show: false },
+        labelLine: { show: false },
+        data: [
+          { name: 'Label 1', value: 25 },
+          { name: 'Label 2', value: 50 },
+          { name: 'Label 3', value: 75 },
+          { name: 'Label 4', value: 10 },
+          { name: 'Label 5', value: 100 },
+          { name: 'Label 6', value: 30 },
+          { name: 'Label 7', value: 5 },
+        ],
+        label: {
+          show: false,
+          position: 'outside',
+        },
+        radius: ['0%', '95%'],
+      },
+    ],
+  };
+  displayChart(
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS
+  );
+};
+
+window.generateDonutChart = async (id) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    legend: {
+      orient: 'vertical',
+      right: '10',
+      top: '10',
+    },
+    series: [
+      {
+        type: 'pie',
+        label: { show: false },
+        labelLine: { show: false },
+        data: [
+          { name: 'Label 1', value: 25 },
+          { name: 'Label 2', value: 50 },
+          { name: 'Label 3', value: 75 },
+          { name: 'Label 4', value: 10 },
+          { name: 'Label 5', value: 100 },
+          { name: 'Label 6', value: 30 },
+          { name: 'Label 7', value: 5 },
+        ],
+        label: {
+          show: false,
+          position: 'center',
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 35,
+            fontWeight: 700,
+            formatter: '{d}%',
+          },
+        },
+        radius: ['80%', '95%'],
+      },
+    ],
+  };
+  displayChart(
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS
   );
 };

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pie Charts - Examples - ODS Charts</title>
+    <link
+      href="https://cdn.jsdelivr.net"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+    <link rel="apple-touch-icon" href="../images/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="../images/favicons/manifest.json">
+    <link rel="mask-icon" href="../images/favicons/safari-pinned-tab.svg" color="#000">
+    <link rel="icon" href="../images/favicons/favicon.ico">
+    <meta name="msapplication-config" content="../images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000">
+
+    <!--------------------------------------------------
+       Echarts 
+      -------------------------------------------------->
+    <script src="
+    https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js
+    "></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        aria-label="Global navigation - With one line title example"
+      >
+        <div class="container-xxl">
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img
+                src="../images/orange-logo.svg"
+                width="50"
+                height="50"
+                alt="ODS Charts - Back to Home"
+                loading="lazy"
+              />
+            </a>
+            <h1 class="title">Pie Charts example</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Donut chart</h5>
+            <p class="card-text">Used to show proportions rather than absolute values.</p>
+            <div id="donutChart"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateDonutChart('donutChart');
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
