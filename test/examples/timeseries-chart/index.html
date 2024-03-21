@@ -9,10 +9,6 @@
   </head>
   <body>
     <div>
-      <!----------------------------------------------------------- 
-         Copy / Paste here the code provided by the Example page
-      ------------------------------------------------------------->
-
       <div class="border border-light position-relative">
         <div class="chart_title">
           <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
@@ -32,7 +28,7 @@
         // Used data
         ///////////////////////////////////////////////////
 
-        // this is the data to be displayed
+        // Data to be displayed
         var dataOptions = {
           xAxis: {
             type: 'time',
@@ -2163,7 +2159,7 @@
         };
 
         ///////////////////////////////////////////////////
-        // ODSCharts
+        // ODS Charts
         ///////////////////////////////////////////////////
         // Build the theme
         var themeManager = ODSCharts.getThemeManager({
@@ -2176,10 +2172,9 @@
           cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
         });
 
-        // register this theme to echarts
         echarts.registerTheme(themeManager.name, themeManager.theme);
 
-        // get the chart holder and initiate it with the generated theme
+        // Get the chart holder and initiate it with the generated theme
         var div = document.getElementById('timeSeriesChart_chart');
         var myChart = echarts.init(div, themeManager.name, {
           renderer: 'svg',
@@ -2204,10 +2199,6 @@
         // Display the chart using the configured theme and data.
         myChart.setOption(themeManager.getChartOptions());
       </script>
-
-      <!----------------------------------------------------------- 
-         END Copy / Paste
-      ------------------------------------------------------------->
     </div>
   </body>
 </html>

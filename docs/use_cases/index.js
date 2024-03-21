@@ -30,7 +30,7 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
             </code>
           </div>
           <div class="border border-light position-relative mt-2 p-2">
-            <div class="display-5">Javascript / ODSCharts</div>
+            <div class="display-5">JavaScript / ODS Charts</div>
             <code>
               <pre id="${prefixId}codeCopyId"></pre>
             </code>
@@ -43,7 +43,6 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
 
   window.setTimeout(() => {
     document.getElementById(prefixId + 'htmlCopyId').innerText = innitHtmlDoc;
-    document.getElementById(prefixId + 'codeCopyId').innerText =
-      document.getElementById(prefixId + codeId).text;
+    document.getElementById(prefixId + 'codeCopyId').innerText = document.getElementById(prefixId + codeId).text;
   });
 };

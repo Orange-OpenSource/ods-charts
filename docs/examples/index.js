@@ -292,7 +292,7 @@ function generateConfigurator(id, cssThemeName) {
           </code>
         </div>
         <div class="border border-light position-relative mt-2 p-2">
-          <div class="display-5"> Javascript / ODSCharts
+          <div class="display-5"> JavaScript / ODS Charts
           </div>
           <code >
             <pre id=${id + '_code'}>

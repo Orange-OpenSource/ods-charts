@@ -115,7 +115,7 @@ themeManager.externalizePopover(undefined, {
           });
         });
 
-        // this is the data to be displayed
+        // Data to be displayed
         var dataOptions = {
           xAxis: {
             type: 'category',
@@ -144,15 +144,13 @@ themeManager.externalizePopover(undefined, {
         };
 
         ///////////////////////////////////////////////////
-        // ODSCharts
+        // ODS Charts
         ///////////////////////////////////////////////////
         // Build the theme
         var themeManager = ODSCharts.getThemeManager();
-
-        // register this theme to echarts
         echarts.registerTheme(themeManager.name, themeManager.theme);
 
-        // get the chart holder and initiate it with the generated theme
+        // Get the chart holder and initiate it with the generated theme
         var div = document.getElementById('barLine_chart');
         var myChart = echarts.init(div, themeManager.name, {
           renderer: 'svg',
@@ -164,9 +162,7 @@ themeManager.externalizePopover(undefined, {
         themeManager.externalizeLegends(myChart, '#barLine_legend');
         // Manage window size changed
         themeManager.manageChartResize(myChart, 'barLine_chart');
-        // Register the externalization of the tooltip/popup
-        // and use the second parameter as specified in https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition
-        // to change the popup value (cf https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition#getPopupContentValue)
+        // Register the externalization of the tooltip/popup and use the second parameter as specified in https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition to change the popup value (cf https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition#getPopupContentValue)
         themeManager.externalizePopover(undefined, {
           ...ODSCharts.ODSChartsPopoverManagers.NONE,
           getPopupContentValue: ({ seriesName, itemValue }) =>
