@@ -50,7 +50,7 @@
           </p>
           <ul>
             <li>both colours in the legend</li>
-            <li>the colour associated with the current value in the tooltop or popover.</li>
+            <li>the colour associated with the current value in the tooltip or popover</li>
           </ul>
           <p class="card-text">
             For this example, we have chosen to put the data in two series depending on whether or not the objective has been achieved. In this way, the two colours are clearly visible both on the graph and in the legend.
@@ -59,7 +59,7 @@
             On the other hand, this requires us to filter the values displayed in the tooltip so as not to display the series of a target that has not been reached when it has been reached and vice versa.
           </p>
           <p class="card-text">
-            This filter is created using getPopupContentValue() callback of the externalizePopover() feature that allow us to change the displayed value, and to send back undefined if we don't want the value to be displayed :
+            This filter is created using <code>getPopupContentValue()</code> callback of the <code>externalizePopover()</code> feature that allow us to change the displayed value, and to send back <code>undefined</code> if we don't want the value to be displayed:
             <code>
               <pre>
 themeManager.externalizePopover(undefined, {
@@ -147,13 +147,7 @@ themeManager.externalizePopover(undefined, {
         // ODSCharts
         ///////////////////////////////////////////////////
         // Build the theme
-        var themeManager = ODSCharts.getThemeManager({
-          // Possibility to specify a Color out of ODS recommandations by given its value
-          // Cf https://ods-charts.netlify.app/api/interfaces/odschartsthemeoptions
-          // https://ods-charts.netlify.app/api/types/odschartscustomcategoricalcolor
-          // It can be the string value of the color
-          categoricalColors: ['#32C832', '#CD3C14', '#ff7900'],
-        });
+        var themeManager = ODSCharts.getThemeManager();
 
         // register this theme to echarts
         echarts.registerTheme(themeManager.name, themeManager.theme);
