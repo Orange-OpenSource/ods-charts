@@ -3,15 +3,17 @@ import 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
 var themeElements = {
   BOOSTED5: {
     css: [
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/css/boosted.min.css',
+      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
+      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css',
     ],
     script: [
       'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js',
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.2/dist/js/boosted.min.js',
+      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.min.js',
     ],
   },
   BOOSTED4: {
     css: [
+      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
       'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/boosted.min.css',
     ],
     script: [
@@ -88,7 +90,7 @@ function generateConfigurator(id, cssThemeName) {
         end: (id) => `</div>`,
       },
       item: {
-        begin: (id, itemId) => `<div class="card multi">`,
+        begin: (id, itemId) => `<div class="card">`,
         end: (id, itemId) => `</div>`,
       },
       header: {
@@ -97,7 +99,7 @@ function generateConfigurator(id, cssThemeName) {
           itemId
         ) => `<div class="card-header" role="tab" id="${itemId}">
       <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" data-parent="#${id}" href="#collapse_${itemId}" role="button" 
+        <a class="collapsed" data-toggle="collapse" href="#collapse_${itemId}" role="button" 
         aria-expanded="false" aria-controls="collapse_${itemId}">
 `,
         end: (id, itemId) => `</a>
@@ -108,7 +110,7 @@ function generateConfigurator(id, cssThemeName) {
         begin: (
           id,
           itemId
-        ) => `<div id="collapse_${itemId}" class="collapse" role="tabpanel" aria-labelledby="${itemId}">
+        ) => `<div id="collapse_${itemId}" class="collapse" role="tabpanel" data-parent="#${id}" aria-labelledby="${itemId}">
       <div class="card-body" id="body_${itemId}">`,
         end: (id, itemId) => `</div>
         </div>`,
@@ -151,14 +153,14 @@ function generateConfigurator(id, cssThemeName) {
           <form class="row g-3">
             <div class="col-md-4">
               <label for="darkModeInput" class="form-label">Dark mode</label>
-              <select class="form-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
+              <select class="form-select custom-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
                 <option value="light" >White mode</option>
                 <option value="dark">Dark mode</option>
               </select>
             </div>
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
-              <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
+              <select class="form-select custom-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
                 <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet
                     .DEFAULT_SUPPORTING_COLORS
@@ -183,7 +185,7 @@ function generateConfigurator(id, cssThemeName) {
 
             <div class="col-md-4">
                 <label for="visualMapColorInput" class="form-label">visual Map Color</label>
-                <select class="form-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
                     <option value="blue" >Blue</option>
                     <option value="green" >Green</option>
                     <option value="purple" >Purple</option>
@@ -193,7 +195,7 @@ function generateConfigurator(id, cssThemeName) {
             
             <div class="col-md-4">
                 <label for="lineStyleInput" class="form-label">Line style</label>
-                <select class="form-select" aria-label="Line style" id="lineStyleInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="Line style" id="lineStyleInput" onchange="changeTheme('${id}')">
                     <option value="smooth" >Smooth</option>
                     <option value="broken" >Broken</option>
                     <option value="withPoints" >Broken with points</option>
@@ -210,7 +212,7 @@ function generateConfigurator(id, cssThemeName) {
 
             <div class="col-md-4">
                 <label for="popoverInput" class="form-label">Popover or Tooltip</label>
-                <select class="form-select" aria-label="Line style" id="popoverInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="Line style" id="popoverInput" onchange="changeTheme('${id}')">
                     <option value="none" >None</option>
                     <option value="popover" >Popover</option>
                     <option value="tooltip" >Tooltip</option>
@@ -219,7 +221,7 @@ function generateConfigurator(id, cssThemeName) {
 
             <div class="col-md-4 popover-config">
                 <label for="popoverSharedInput" class="form-label">Tooltip/Popover content</label>
-                <select class="form-select" aria-label="Line style" id="popoverSharedInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="Line style" id="popoverSharedInput" onchange="changeTheme('${id}')">
                     <option value="none" >Not shared</option>
                     <option value="shared" >Shared</option>
                 </select>
@@ -227,7 +229,7 @@ function generateConfigurator(id, cssThemeName) {
 
             <div class="col-md-4 popover-config">
                 <label for="popoverAxisInput" class="form-label">Tooltip/Popover axis pointer</label>
-                <select class="form-select" aria-label="Line style" id="popoverAxisInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="Line style" id="popoverAxisInput" onchange="changeTheme('${id}')">
                     <option value="none" >None</option>
                     <option value="shadow" >Shadow</option>
                     <option value="line" >Line</option>
@@ -237,7 +239,7 @@ function generateConfigurator(id, cssThemeName) {
 
             <div class="col-md-4 popover-renderer">
                 <label for="popoverTemplateInput" class="form-label">Popover renderer</label>
-                <select class="form-select" aria-label="Line style" id="popoverTemplateInput" onchange="changeTheme('${id}')">
+                <select class="form-select custom-select" aria-label="Line style" id="popoverTemplateInput" onchange="changeTheme('${id}')">
                     <option value="internal" >Chartjs renderer</option>
                     <option value="external" >Boosted renderer</option>
                 </select>
@@ -248,7 +250,7 @@ function generateConfigurator(id, cssThemeName) {
             </div>
             <div class="col-md-4">
                 <label for="cssTheme" class="form-label">Used CSS</label>
-                <select class="form-select" aria-label="Line style" id="cssTheme" onchange="changeCssTheme(this.value)">
+                <select class="form-select custom-select" aria-label="Line style" id="cssTheme" onchange="changeCssTheme(this.value)">
                     <option value="NONE" >NONE</option>
                     <option value="BOOSTED4" >Boosted 4</option>
                     <option value="BOOSTED5" >Boosted 5</option>
@@ -290,7 +292,7 @@ function generateConfigurator(id, cssThemeName) {
           </code>
         </div>
         <div class="border border-light position-relative mt-2 p-2">
-          <div class="display-5"> Javascript / ODSCharts
+          <div class="display-5"> JavaScript / ODS Charts
           </div>
           <code >
             <pre id=${id + '_code'}>
