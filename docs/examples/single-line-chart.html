@@ -25,9 +25,7 @@
     <!--------------------------------------------------
        Echarts 
       -------------------------------------------------->
-    <script src="
-    https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js
-    "></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <script type="text/javascript" src="../../dist/ods-charts.js"></script>
     <script type="module" src="./index.js"></script>
   </head>
@@ -77,51 +75,5 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>
-
-    <script>
-      class ChartExample extends HTMLElement {
-        boostedVersion = '5.3.3';
-        static get observedAttributes() { return ['data-css-theme-name']; }
-    
-        constructor () {
-          super()
-          this.attachShadow({mode: 'open'});
-
-          this.shadowRoot.innerHTML = this.innerHTML;
-
-          this.cssImport = document.createElement('link');
-          this.cssImport.setAttribute('rel', 'stylesheet');
-          this.cssImport.href = `https://cdn.jsdelivr.net/npm/boosted@${this.boostedVersion}/dist/css/boosted.min.css`;
-          this.shadowRoot.prepend(this.cssImport);
-
-          this.fontImport = document.createElement('link');
-          this.fontImport.setAttribute('rel', 'stylesheet');
-          this.fontImport.href = `https://cdn.jsdelivr.net/npm/boosted@${this.boostedVersion}/dist/css/orange-helvetica.min.css`;
-          this.shadowRoot.prepend(this.fontImport);
-
-          // this.jQueryImport = document.createElement('script');
-          // this.jQueryImport.src = ``;
-          // this.shadowRoot.appendChild(this.jQueryImport);
-
-          // this.jsImport = document.createElement('script');
-          // this.jsImport.src = `https://cdn.jsdelivr.net/npm/boosted@${this.boostedVersion}/dist/js/boosted.bundle.min.js`;
-          // this.shadowRoot.appendChild(this.jsImport);
-        }
-
-        attributeChangedCallback (name, oldValue, newValue) {
-          if (name === 'data-css-theme-name' && oldValue !== newValue && newValue === "BOOSTED4") {
-            this.cssImport.href = `https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/boosted.min.css`;
-            // this.jQueryImport.src = `https://code.jquery.com/jquery-3.5.1.slim.min.js`;
-            // this.jsImport.src = `https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/js/boosted.bundle.min.js`;
-          }
-          if (name === 'data-css-theme-name' && oldValue !== newValue && newValue === "BOOSTED5") {
-            this.cssImport.href = `https://cdn.jsdelivr.net/npm/boosted@${this.boostedVersion}/dist/css/boosted.min.css`;
-            // this.jQueryImport.src = ``;
-            // this.jsImport.src = `https://cdn.jsdelivr.net/npm/boosted@${this.boostedVersion}/dist/js/boosted.bundle.min.js`;
-          }
-        }
-      }
-      customElements.define('chart-example', ChartExample);
-    </script>
   </body>
 </html>

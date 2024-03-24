@@ -1,7 +1,7 @@
 import 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
 
 function buildChartDiv(id) {
-  return `<div id="${id}_chart" style="width:100%; height:50vh; position: relative;"></div>`;
+  return `<div id="${id}_chart" style="width:100%; height:100%; position: relative;"></div>`;
 }
 
 async function wait(timer = 0) {
@@ -12,20 +12,20 @@ async function wait(timer = 0) {
   });
 }
 
-function generateChartDiv(id, cssTheme = undefined) {
+function generateChartDiv(id) {
   return `
-  <chart-example class="border border-light position-relative"${cssTheme? ` data-css-theme-name="${cssTheme}"` : ""}>
-    <button class="btn btn-secondary">Test</button>
+  <div class="border border-light" style="display: flex; flex-direction: column; height: 100%;">
+    <!--button class="btn btn-secondary">Test</button-->
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
     </div>
-    <div id="${id}_holder">
+    <div id="${id}_holder" style="flex-grow: 10;">
       ${buildChartDiv(id)}
     </div>
     <div id="${id}_legend">
     </div>
-  </chart-example>`;
+  </div>`;
 }
 
 function generateConfigurator(id) {
@@ -205,11 +205,18 @@ function generateConfigurator(id) {
 function generateExampleDiv(id, cssThemeName) {
   var div = document.getElementById(id);
 
-  div.innerHTML = `${generateChartDiv(id, cssThemeName)}
+  div.innerHTML = `<iframe style="width: 100%; height: 50vh;"></iframe>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
 `;
+  let iframe = div.querySelector('iframe').contentDocument;
+
+  iframe.head.innerHTML = `
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js"></script>`;
+  iframe.body.innerHTML = generateChartDiv(id);
 }
 
 async function displayChart(
@@ -290,22 +297,22 @@ async function displayChart(
   } else {
     newCSSTheme =
       document
-        .getElementById(id).querySelector('chart-example')
+        .getElementById(id).querySelector('iframe')
         .getAttribute('data-css-theme-name') !== cssThemeName;
     if (newCSSTheme) {
       document
-        .getElementById(id).querySelector('chart-example')
+        .getElementById(id).querySelector('iframe')
         .setAttribute('data-css-theme-name', cssThemeName);
     }
   }
 
-  var div = document.getElementById(id).querySelector('chart-example').shadowRoot.getElementById(chartId);
+  var div = document.getElementById(id).querySelector('iframe').contentDocument.getElementById(chartId);
 
   if (refresh) {
     echarts.dispose(div);
-    document.getElementById(id).querySelector('chart-example').shadowRoot.getElementById(id + '_holder').innerHTML = buildChartDiv(id);
+    document.getElementById(id).querySelector('iframe').contentDocument.getElementById(id + '_holder').innerHTML = buildChartDiv(id);
     await wait();
-    div = document.getElementById(id).querySelector('chart-example').shadowRoot.getElementById(chartId);
+    div = document.getElementById(id).querySelector('iframe').contentDocument.getElementById(chartId);
   }
 
   document.getElementById(id + '_html').innerText = generateChartDiv(id);
@@ -627,7 +634,7 @@ function downloadTheme(id) {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename);
   } else {
-    const elem = window.document.createElement('a');
+    const elem = document.createElement('a');
     elem.href = window.URL.createObjectURL(blob);
     elem.download = filename;
     document.body.appendChild(elem);
