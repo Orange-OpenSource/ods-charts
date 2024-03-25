@@ -15,7 +15,7 @@ async function wait(timer = 0) {
 function generateChartDiv(id) {
   return `
   <div class="border border-light" style="display: flex; flex-direction: column; height: 100%;">
-    <!--button class="btn btn-secondary">Test</button-->
+    <button class="btn btn-secondary">Test</button>
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
@@ -212,11 +212,12 @@ function generateExampleDiv(id, cssThemeName) {
 `;
   let iframe = div.querySelector('iframe').contentDocument;
 
-  iframe.head.innerHTML = `
+  iframe.write(`
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js"></script>`;
-  iframe.body.innerHTML = generateChartDiv(id);
+<link href="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/css/boosted.min.css" rel="stylesheet">
+${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>' : ''}
+<script src="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/js/boosted.bundle.min.js"></script>`);
+  iframe.write(generateChartDiv(id));
 }
 
 async function displayChart(
@@ -303,8 +304,17 @@ async function displayChart(
       document
         .getElementById(id).querySelector('iframe')
         .setAttribute('data-css-theme-name', cssThemeName);
+        let iframe = document.getElementById(id).querySelector('iframe').contentDocument;
+      
+        iframe.head.innerHTML = `
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/css/boosted.min.css" rel="stylesheet">
+${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>' : ''}
+<script src="https://cdn.jsdelivr.net/npm/boosted${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/js/boosted.bundle.min.js"></script>`;
     }
   }
+
+  await wait(500);
 
   var div = document.getElementById(id).querySelector('iframe').contentDocument.getElementById(chartId);
 
