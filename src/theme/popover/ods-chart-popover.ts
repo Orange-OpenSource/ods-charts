@@ -643,18 +643,18 @@ export class ODSChartsPopover {
     }
     let id = '' + Math.ceil(Math.random() * 100000);
 
-    let tooltipAnchor: HTMLElement = document.querySelector(
+    let tooltipAnchor: HTMLElement = (event.target as HTMLElement).closest('body')?.querySelector(
       '.libPopupTooltipAnchor'
     ) as HTMLElement;
     if (!tooltipAnchor) {
-      document.body.appendChild(
+      (event.target as HTMLElement).closest('body')?.appendChild(
         new DOMParser().parseFromString(
           `<div class="libPopupTooltipAnchor" ></div>`,
           'text/html'
         ).body.firstChild as ChildNode
       );
     }
-    tooltipAnchor = document.querySelector(
+    tooltipAnchor = (event.target as HTMLElement).closest('body')?.querySelector(
       '.libPopupTooltipAnchor'
     ) as HTMLElement;
     tooltipAnchor.setAttribute('data-id', id);
