@@ -141,7 +141,7 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
   ): ODSChartsPopoverManager {
     try {
       let previousPopover: ODSChartsPopoverManager =
-        boosted.Popover.getInstance(document.querySelector(selector));
+        boosted.Popover.getInstance(document.querySelector(selector) || document.querySelector('iframe')?.contentDocument?.querySelector(selector)); // TODO: change way to select it everywhere it's called
       if (previousPopover) {
         previousPopover.dispose();
       }
@@ -153,13 +153,13 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
     allowList.label = ['class'];
 
     return boosted.Popover.getOrCreateInstance(
-      document.querySelector(selector),
+      document.querySelector(selector) || document.querySelector('iframe')?.contentDocument?.querySelector(selector),
       {
         allowList: allowList,
         html: true,
         trigger: 'click',
         placement: 'top',
-        container: 'body',
+        container: document.querySelector(selector)?.closest('body') || document.querySelector('iframe')?.contentDocument?.querySelector(selector)?.closest('body'),
         title: title,
         content: htmlContent,
         customClass: 'pe-none',
@@ -180,7 +180,7 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
     title: string,
     htmlContent: string
   ) {
-    const elt: any = document.querySelector(selector);
+    const elt: any = document.querySelector(selector) || document.querySelector('iframe')?.contentDocument?.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];
     whiteList.div = ['class'];
@@ -195,7 +195,7 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
       html: true,
       trigger: 'click',
       placement: 'top',
-      container: 'body',
+      container: document.querySelector(selector)?.closest('body') || document.querySelector('iframe')?.contentDocument?.querySelector(selector)?.closest('body'),
       title: title,
       content: htmlContent,
     });
