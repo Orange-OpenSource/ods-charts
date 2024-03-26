@@ -1,34 +1,5 @@
-import 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
-
-var themeElements = {
-  BOOSTED5: {
-    css: [
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css',
-    ],
-    script: [
-      'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js',
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.min.js',
-    ],
-  },
-  BOOSTED4: {
-    css: [
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
-      'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/boosted.min.css',
-    ],
-    script: [
-      'https://code.jquery.com/jquery-3.5.1.slim.min.js',
-      'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/js/boosted.bundle.min.js',
-    ],
-  },
-  NONE: {
-    css: [],
-    script: [],
-  },
-};
-
 function buildChartDiv(id) {
-  return `<div id="${id}_chart" style="width:100%; height:50vh"  class=" position-relative "></div>`;
+  return `<div id="${id}_chart" style="width:100%; height:100%; position: relative;"></div>`;
 }
 
 async function wait(timer = 0) {
@@ -41,126 +12,68 @@ async function wait(timer = 0) {
 
 function generateChartDiv(id) {
   return `
-  <div class="border border-light position-relative">
+  <div class="border border-light" style="display: flex; flex-direction: column; height: 100%;">
+    <button class="btn btn-secondary">Test</button>
     <div class="chart_title">
-        <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
-        <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+      <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+      <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
     </div>
-    <div id="${id}_holder">
-        ${buildChartDiv(id)}
+    <div id="${id}_holder" style="flex-grow: 10;">
+      ${buildChartDiv(id)}
     </div>
-    <div  id="${id}_legend">
+    <div id="${id}_legend">
     </div>
   </div>`;
 }
 
-function generateConfigurator(id, cssThemeName) {
+function generateConfigurator(id) {
   const accordionThemes = {
-    [ODSCharts.ODSChartsCSSThemesNames.BOOSTED5]: {
-      accordion: {
-        begin: (id) => `<div class="accordion" id="${id}">`,
-        end: (id) => `</div>`,
-      },
-      item: {
-        begin: (id, itemId) => `<div class="accordion-item">`,
-        end: (id, itemId) => `</div>`,
-      },
-      header: {
-        begin: (id, itemId) => `<h2 class="accordion-header" id="${itemId}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-      data-bs-target="#collapse_${itemId}" aria-expanded="false" aria-controls="collapse_${itemId}">
+    accordion: {
+      begin: (id) => `<div class="accordion" id="${id}">`,
+      end: (id) => `</div>`,
+    },
+    item: {
+      begin: (id, itemId) => `<div class="accordion-item">`,
+      end: (id, itemId) => `</div>`,
+    },
+    header: {
+      begin: (id, itemId) => `<h2 class="accordion-header" id="${itemId}">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+    data-bs-target="#collapse_${itemId}" aria-expanded="false" aria-controls="collapse_${itemId}">
 `,
-        end: (id, itemId) => `</button>
+      end: (id, itemId) => `</button>
 </h2>`,
-      },
-      content: {
-        begin: (
-          id,
-          itemId
-        ) => `<div id="collapse_${itemId}" class="accordion-collapse collapse" 
-      aria-labelledby="${itemId}" data-bs-parent="#${id}">
-      <div class="accordion-body" id="body_${itemId}">`,
-        end: (id, itemId) => ` </div>
-      </div>`,
-      },
     },
-    [ODSCharts.ODSChartsCSSThemesNames.BOOSTED4]: {
-      accordion: {
-        begin: (id) => `<div id="${id}" role="tablist" class="accordion">`,
-        end: (id) => `</div>`,
-      },
-      item: {
-        begin: (id, itemId) => `<div class="card">`,
-        end: (id, itemId) => `</div>`,
-      },
-      header: {
-        begin: (
-          id,
-          itemId
-        ) => `<div class="card-header" role="tab" id="${itemId}">
-      <h5 class="mb-0">
-        <a class="collapsed" data-toggle="collapse" href="#collapse_${itemId}" role="button" 
-        aria-expanded="false" aria-controls="collapse_${itemId}">
-`,
-        end: (id, itemId) => `</a>
-        </h5>
-      </div>`,
-      },
-      content: {
-        begin: (
-          id,
-          itemId
-        ) => `<div id="collapse_${itemId}" class="collapse" role="tabpanel" data-parent="#${id}" aria-labelledby="${itemId}">
-      <div class="card-body" id="body_${itemId}">`,
-        end: (id, itemId) => `</div>
-        </div>`,
-      },
-    },
-    [ODSCharts.ODSChartsCSSThemesNames.NONE]: {
-      accordion: { begin: (id) => `<div id="${id}">`, end: (id) => `</div>` },
-      item: { begin: (id, itemId) => `<div>`, end: (id, itemId) => `</div>` },
-      header: {
-        begin: (id, itemId) => `<div id="${itemId}"><h5>`,
-        end: (id, itemId) => `</h5></div>`,
-      },
-      content: {
-        begin: (id, itemId) =>
-          `<div id="collapse_${itemId}"> <div id="body_${itemId}">`,
-        end: (id, itemId) => `</div></div>`,
-      },
+    content: {
+      begin: (
+        id,
+        itemId
+      ) => `<div id="collapse_${itemId}" class="accordion-collapse collapse" 
+    aria-labelledby="${itemId}" data-bs-parent="#${id}">
+    <div class="accordion-body" id="body_${itemId}">`,
+      end: (id, itemId) => ` </div>
+    </div>`,
     },
   };
   return `
-  ${accordionThemes[cssThemeName].accordion.begin('accordion_' + id)}
-    ${accordionThemes[cssThemeName].item.begin(
-      'accordion_' + id,
-      'content_1_' + id
-    )}
-      ${accordionThemes[cssThemeName].header.begin(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
+  ${accordionThemes.accordion.begin('accordion_' + id)}
+    ${accordionThemes.item.begin('accordion_' + id, 'content_1_' + id)}
+      ${accordionThemes.header.begin('accordion_' + id, 'content_1_' + id)}
         Theme configuration
-      ${accordionThemes[cssThemeName].header.end(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
-      ${accordionThemes[cssThemeName].content.begin(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
+      ${accordionThemes.header.end('accordion_' + id, 'content_1_' + id)}
+      ${accordionThemes.content.begin('accordion_' + id, 'content_1_' + id)}
         <div class="one-chart-configurator" data-chart-id="${id}">                
           <form class="row g-3">
             <div class="col-md-4">
               <label for="darkModeInput" class="form-label">Dark mode</label>
-              <select class="form-select custom-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
+              <select class="form-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
                 <option value="light" >White mode</option>
                 <option value="dark">Dark mode</option>
               </select>
             </div>
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
-              <select class="form-select custom-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
+              <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
                 <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet
                     .DEFAULT_SUPPORTING_COLORS
@@ -253,36 +166,18 @@ function generateConfigurator(id, cssThemeName) {
                 <select class="form-select custom-select" aria-label="Line style" id="cssTheme" onchange="changeCssTheme(this.value)">
                     <option value="NONE" >NONE</option>
                     <option value="BOOSTED4" >Boosted 4</option>
-                    <option value="BOOSTED5" >Boosted 5</option>
+                    <option value="BOOSTED5" selected >Boosted 5</option>
                 </select>
             </div>
           </form>
         </div>
-      ${accordionThemes[cssThemeName].content.end(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
-    ${accordionThemes[cssThemeName].item.end(
-      'accordion_' + id,
-      'content_1_' + id
-    )}
-    ${accordionThemes[cssThemeName].item.begin(
-      'accordion_' + id,
-      'content_2_' + id
-    )}
-      ${accordionThemes[cssThemeName].header.begin(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
+      ${accordionThemes.content.end('accordion_' + id, 'content_1_' + id)}
+    ${accordionThemes.item.end('accordion_' + id, 'content_1_' + id)}
+    ${accordionThemes.item.begin('accordion_' + id, 'content_2_' + id)}
+      ${accordionThemes.header.begin('accordion_' + id, 'content_2_' + id)}
         View code
-      ${accordionThemes[cssThemeName].header.end(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
-      ${accordionThemes[cssThemeName].content.begin(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
+      ${accordionThemes.header.end('accordion_' + id, 'content_2_' + id)}
+      ${accordionThemes.content.begin('accordion_' + id, 'content_2_' + id)}
         <div class="border border-light position-relative mt-2 p-2">
           <div class="display-5"> HTML
           </div>
@@ -299,26 +194,31 @@ function generateConfigurator(id, cssThemeName) {
             </pre>
           </code>
         </div>
-      ${accordionThemes[cssThemeName].content.end(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
-    ${accordionThemes[cssThemeName].item.end(
-      'accordion_' + id,
-      'content_2_' + id
-    )}
-  ${accordionThemes[cssThemeName].accordion.end('accordion_' + id)}
+      ${accordionThemes.content.end('accordion_' + id, 'content_2_' + id)}
+    ${accordionThemes.item.end('accordion_' + id, 'content_2_' + id)}
+  ${accordionThemes.accordion.end('accordion_' + id)}
 `;
 }
 
-function generateExampleDiv(id, cssThemeName) {
+function generateExampleDiv(id, options) {
   var div = document.getElementById(id);
 
-  div.innerHTML = `${generateChartDiv(id)}
-  <div id="configurator_${id}" data-css-theme-name="${cssThemeName}">
-    ${generateConfigurator(id, cssThemeName)}
+  div.innerHTML = `<iframe style="width: 100%; height: 50vh;"></iframe>
+  <div id="configurator_${id}">
+    ${generateConfigurator(id)}
   </div>
 `;
+  let iframe = div.querySelector('iframe').contentDocument;
+
+  iframe.write(`
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script type="text/javascript" src="../../dist/ods-charts.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js"></script>
+<script>${options}</script>`);
+  iframe.write(generateChartDiv(id));
 }
 
 async function displayChart(
@@ -357,7 +257,7 @@ async function displayChart(
     cssTheme,
   });
   cssThemeName = Object.keys(ODSCharts.ODSChartsCSSThemes).find((name) =>
-    _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
+    ODSCharts.ODSChartsCSSThemes[name] === themeManager.options.cssTheme
   );
   if (!popoverTemplateInput) {
     popoverTemplateInput =
@@ -365,41 +265,6 @@ async function displayChart(
         ? 'internal'
         : 'external';
   }
-
-  const actualTheme = document.querySelector('[data-css-theme]');
-  if (
-    (!actualTheme && 'NONE' !== cssThemeName) ||
-    (actualTheme && cssThemeName !== actualTheme.getAttribute('data-css-theme'))
-  ) {
-    for (const elt of document.querySelectorAll('[data-css-theme]')) {
-      elt.remove();
-    }
-    for (const css of themeElements[cssThemeName].css) {
-      const linkElt = document.createElement('link');
-      linkElt.href = css;
-      linkElt.rel = 'stylesheet';
-      linkElt.setAttribute('crossorigin', 'anonymous');
-      linkElt.setAttribute('data-css-theme', cssThemeName);
-      document.head.appendChild(linkElt);
-    }
-    for (const script of themeElements[cssThemeName].script) {
-      const scriptElt = document.createElement('script');
-      scriptElt.src = script;
-      scriptElt.setAttribute('crossorigin', 'anonymous');
-      scriptElt.setAttribute('data-css-theme', cssThemeName);
-      document.head.appendChild(scriptElt);
-    }
-  }
-  await wait(50);
-  if (cssThemeName !== 'NONE') {
-    while (!window.boosted) {
-      await wait(500);
-    }
-    while ('BOOSTED4' === cssThemeName && typeof $ === 'undefined') {
-      await wait(500);
-    }
-  }
-  await wait(50);
 
   var theme = themeManager.theme;
 
@@ -424,42 +289,46 @@ async function displayChart(
     (options.legend && options.legend.data && !options.legend.show) ||
     (options.dataset && options.dataset.source);
 
-  var dataOptions = _.cloneDeep(options);
+  // var dataOptions = _.cloneDeep(options);
 
   var chartId = id + '_chart';
   let newCSSTheme = !refresh;
   let customColorOption = undefined;
-  if (!refresh) {
-    generateExampleDiv(id, cssThemeName);
-  } else {
+  if (refresh) {
     newCSSTheme =
       document
-        .getElementById('configurator_' + id)
+        .getElementById(id).querySelector('iframe')
         .getAttribute('data-css-theme-name') !== cssThemeName;
     if (newCSSTheme) {
-      customColorOption = document.querySelector(
-        `#configurator_${id} [data-custom-categorical-color]`
-      );
-
       document
-        .getElementById('configurator_' + id)
+        .getElementById(id).querySelector('iframe')
         .setAttribute('data-css-theme-name', cssThemeName);
-      document.getElementById('configurator_' + id).innerHTML =
-        generateConfigurator(id, cssThemeName);
+        let iframe = document;
+      
+        iframe.head.innerHTML = `
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/css/boosted.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script type="text/javascript" src="../../dist/ods-charts.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>' : ''}
+<script src="https://cdn.jsdelivr.net/npm/boosted${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/js/boosted.bundle.min.js"></script>`;
     }
   }
 
-  var div = document.getElementById(chartId);
+  await wait(500);
+
+  var div = document.querySelector(`#${chartId}`);
 
   if (refresh) {
     echarts.dispose(div);
-    document.getElementById(id + '_holder').innerHTML = buildChartDiv(id);
+    document.querySelector(`#${id}_holder`).innerHTML = buildChartDiv(id);
     await wait();
     div = document.getElementById(chartId);
   }
 
-  document.getElementById(id + '_html').innerText = generateChartDiv(id);
-  document.getElementById(
+  // document.querySelector(`#${id}_html`).innerText = generateChartDiv(id);
+  /*document.getElementById(
     id + '_code'
   ).innerText = `///////////////////////////////////////////////////
 // Used data
@@ -559,14 +428,14 @@ themeManager.externalizePopover({
   }
 // Display the chart using the configured theme and data.
 myChart.setOption(themeManager.getChartOptions());
-  `;
+  `;*/
 
-  document.getElementById(id).dataset.odsExample = JSON.stringify({
-    option: dataOptions,
-    themeManager,
-  });
+  // document.querySelector(`#${id}`).dataset.odsExample = JSON.stringify({
+  //   option: options,
+  //   themeManager,
+  // });
 
-  if (newCSSTheme || !refresh) {
+  /*if (newCSSTheme || !refresh) {
     if ('string' === typeof themeManager.options.categoricalColors) {
       document
         .querySelector(
@@ -672,7 +541,7 @@ myChart.setOption(themeManager.getChartOptions());
     .querySelectorAll(`#accordion_${id} .popover-config`)
     .forEach((elt) => {
       elt.style.display = 'none' === popoverInput ? 'none' : 'block';
-    });
+    });*/
 
   var myChart = echarts.init(div, themeManager.name, {
     renderer: 'svg',
@@ -777,7 +646,7 @@ function downloadTheme(id) {
   if (window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename);
   } else {
-    const elem = window.document.createElement('a');
+    const elem = document.createElement('a');
     elem.href = window.URL.createObjectURL(blob);
     elem.download = filename;
     document.body.appendChild(elem);
@@ -788,25 +657,27 @@ function downloadTheme(id) {
 window.downloadTheme = downloadTheme;
 
 window.generateSingleLineChart = async (id) => {
-  // Specify the configuration items and data for the chart
-  var option = {
-    xAxis: {
-      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  generateExampleDiv(id, `
+// Specify the configuration items and data for the chart
+var option = {
+  xAxis: {
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  yAxis: {},
+  series: [
+    {
+      data: [10, 22, 28.8956454657, 23, 19, 15],
+      type: 'line',
     },
-    yAxis: {},
-    series: [
-      {
-        data: [10, 22, 28.8956454657, 23, 19, 15],
-        type: 'line',
-      },
-    ],
-  };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
-  );
+  ],
+};
+displayChart(
+  '${id}',
+  option,
+  undefined,
+  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
+);
+`);
 };
 
 window.generateMultipleLineChart = async (id) => {
