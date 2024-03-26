@@ -1,5 +1,3 @@
-import 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
-
 function buildChartDiv(id) {
   return `<div id="${id}_chart" style="width:100%; height:100%; position: relative;"></div>`;
 }
@@ -168,7 +166,7 @@ function generateConfigurator(id) {
                 <select class="form-select custom-select" aria-label="Line style" id="cssTheme" onchange="changeCssTheme(this.value)">
                     <option value="NONE" >NONE</option>
                     <option value="BOOSTED4" >Boosted 4</option>
-                    <option value="BOOSTED5" >Boosted 5</option>
+                    <option value="BOOSTED5" selected >Boosted 5</option>
                 </select>
             </div>
           </form>
@@ -202,7 +200,7 @@ function generateConfigurator(id) {
 `;
 }
 
-function generateExampleDiv(id, cssThemeName) {
+function generateExampleDiv(id, options) {
   var div = document.getElementById(id);
 
   div.innerHTML = `<iframe style="width: 100%; height: 50vh;"></iframe>
@@ -214,9 +212,12 @@ function generateExampleDiv(id, cssThemeName) {
 
   iframe.write(`
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/css/boosted.min.css" rel="stylesheet">
-${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>' : ''}
-<script src="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/js/boosted.bundle.min.js"></script>`);
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script type="text/javascript" src="../../dist/ods-charts.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js"></script>
+<script>${options}</script>`);
   iframe.write(generateChartDiv(id));
 }
 
@@ -256,7 +257,7 @@ async function displayChart(
     cssTheme,
   });
   cssThemeName = Object.keys(ODSCharts.ODSChartsCSSThemes).find((name) =>
-    _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
+    ODSCharts.ODSChartsCSSThemes[name] === themeManager.options.cssTheme
   );
   if (!popoverTemplateInput) {
     popoverTemplateInput =
@@ -288,14 +289,12 @@ async function displayChart(
     (options.legend && options.legend.data && !options.legend.show) ||
     (options.dataset && options.dataset.source);
 
-  var dataOptions = _.cloneDeep(options);
+  // var dataOptions = _.cloneDeep(options);
 
   var chartId = id + '_chart';
   let newCSSTheme = !refresh;
   let customColorOption = undefined;
-  if (!refresh) {
-    generateExampleDiv(id, cssThemeName);
-  } else {
+  if (refresh) {
     newCSSTheme =
       document
         .getElementById(id).querySelector('iframe')
@@ -304,11 +303,14 @@ async function displayChart(
       document
         .getElementById(id).querySelector('iframe')
         .setAttribute('data-css-theme-name', cssThemeName);
-        let iframe = document.getElementById(id).querySelector('iframe').contentDocument;
+        let iframe = document;
       
         iframe.head.innerHTML = `
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/boosted@${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/css/boosted.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script type="text/javascript" src="../../dist/ods-charts.js"></script>
+<script type="text/javascript" src="./index.js"></script>
 ${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>' : ''}
 <script src="https://cdn.jsdelivr.net/npm/boosted${cssThemeName === 'BOOSTED4' ? '4.6.2' : '5.3.3'}/dist/js/boosted.bundle.min.js"></script>`;
     }
@@ -316,17 +318,17 @@ ${cssThemeName === 'BOOSTED4' ? '<script src="https://code.jquery.com/jquery-3.5
 
   await wait(500);
 
-  var div = document.getElementById(id).querySelector('iframe').contentDocument.getElementById(chartId);
+  var div = document.querySelector(`#${chartId}`);
 
   if (refresh) {
     echarts.dispose(div);
-    document.getElementById(id).querySelector('iframe').contentDocument.getElementById(id + '_holder').innerHTML = buildChartDiv(id);
+    document.querySelector(`#${id}_holder`).innerHTML = buildChartDiv(id);
     await wait();
-    div = document.getElementById(id).querySelector('iframe').contentDocument.getElementById(chartId);
+    div = document.getElementById(chartId);
   }
 
-  document.getElementById(id + '_html').innerText = generateChartDiv(id);
-  document.getElementById(
+  // document.querySelector(`#${id}_html`).innerText = generateChartDiv(id);
+  /*document.getElementById(
     id + '_code'
   ).innerText = `///////////////////////////////////////////////////
 // Used data
@@ -426,14 +428,14 @@ themeManager.externalizePopover({
   }
 // Display the chart using the configured theme and data.
 myChart.setOption(themeManager.getChartOptions());
-  `;
+  `;*/
 
-  document.getElementById(id).dataset.odsExample = JSON.stringify({
-    option: dataOptions,
-    themeManager,
-  });
+  // document.querySelector(`#${id}`).dataset.odsExample = JSON.stringify({
+  //   option: options,
+  //   themeManager,
+  // });
 
-  if (newCSSTheme || !refresh) {
+  /*if (newCSSTheme || !refresh) {
     if ('string' === typeof themeManager.options.categoricalColors) {
       document
         .querySelector(
@@ -539,7 +541,7 @@ myChart.setOption(themeManager.getChartOptions());
     .querySelectorAll(`#accordion_${id} .popover-config`)
     .forEach((elt) => {
       elt.style.display = 'none' === popoverInput ? 'none' : 'block';
-    });
+    });*/
 
   var myChart = echarts.init(div, themeManager.name, {
     renderer: 'svg',
@@ -655,25 +657,27 @@ function downloadTheme(id) {
 window.downloadTheme = downloadTheme;
 
 window.generateSingleLineChart = async (id) => {
-  // Specify the configuration items and data for the chart
-  var option = {
-    xAxis: {
-      data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  generateExampleDiv(id, `
+// Specify the configuration items and data for the chart
+var option = {
+  xAxis: {
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  yAxis: {},
+  series: [
+    {
+      data: [10, 22, 28.8956454657, 23, 19, 15],
+      type: 'line',
     },
-    yAxis: {},
-    series: [
-      {
-        data: [10, 22, 28.8956454657, 23, 19, 15],
-        type: 'line',
-      },
-    ],
-  };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
-  );
+  ],
+};
+displayChart(
+  '${id}',
+  option,
+  undefined,
+  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
+);
+`);
 };
 
 window.generateMultipleLineChart = async (id) => {
