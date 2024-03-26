@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const favicon = `<!-- Favicons -->
+const favicon = `
 <link rel="apple-touch-icon" href="/docs/images/favicons/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/docs/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
 <link rel="icon" href="/docs/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -10,12 +10,12 @@ const favicon = `<!-- Favicons -->
 <link rel="icon" href="/docs/images/favicons/favicon.ico">
 <meta name="msapplication-config" content="/docs/images/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000">`;
-const boosted_CSS = `<!-- Boosted CSS -->
+const boosted_CSS = `
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous">
 <link href="/docs/assets/tarteaucitron-config.css" rel="stylesheet">`;
-const cookies = `<!-- Cookies -->
-<script crossorigin="anonymous" integrity="sha384-AcN5kJiCfqbrk/SICuAawqTeUR7KQrKpXMeDFL5XZh7x+IBWERL5to8nwE0gapz6" src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.16.1/tarteaucitron.min.js"></script>
+const cookies = `
+<script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
 <script src="/docs/assets/tarteaucitron-config.js"></script>`;
 
 function fromDir(startPath, filter) {
@@ -31,5 +31,5 @@ function fromDir(startPath, filter) {
   };
 };
 
-console.log(`\n\nAdding cookies to api files\n`)
+console.log(`\n\nAdding cookies to API files\n`)
 fromDir('./docs/api', '.html');
