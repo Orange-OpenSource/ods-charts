@@ -85,7 +85,7 @@ if (typeof tarteaucitron !== 'undefined') {
   tarteaucitron.user.googletagmanagerId = 'GTM-P6H78BQ';
   (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager')
   dataLayer = [{
-    site_name: 'ODS-Android',
+    site_name: 'ODS-Charts',
     phase: 'prod',
     page_type: 'doc',
     page_title: document.title
