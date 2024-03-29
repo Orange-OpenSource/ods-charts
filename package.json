@@ -13,15 +13,15 @@
   "scripts": {
     "build": "webpack",
     "copyright-year": "node build/bump-copyright-year.mjs",
-    "netlify": "npm run build ; cp -R dist docs/ ; npm run typedoc",
+    "netlify": "npm run build && cp -R dist docs/ && npm run typedoc",
     "release": "npm pack && npm publish",
-    "serve": "serve .",
+    "serve": "npm run typedoc && serve .",
     "serve:angular": "serve test/angular-ngx-echarts/dist/angular/",
     "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
     "serve:any": "serve",
     "serve:react": "serve test/react/build/",
     "serve:vue": "serve test/vue/dist/",
-    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected  --readme docs/README.md",
+    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_head.mjs",
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
