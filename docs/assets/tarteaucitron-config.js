@@ -1,3 +1,7 @@
+/*
+ * This file is the tarteaucitron configuration file used in Boosted v5.3.3.
+ * See https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/blob/main/site/assets/js/tac.js.
+ */
 (function () {
   'use strict'
 
