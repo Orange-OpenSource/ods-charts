@@ -175,6 +175,9 @@ function generateConfigurator(id, cssThemeName) {
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_DEFAULT
                 }">Default colors</option>
                 <option value="${
+                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_EMPHASIS
+                }">Emphasis</option>
+                <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE
                 }">Blue</option>
                 <option value="${
@@ -186,6 +189,9 @@ function generateConfigurator(id, cssThemeName) {
                 <option value="${
                   ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
                 }">Purple</option>
+                <option value="${
+                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_YELLOW
+                }">Yellow</option>
               </select>
             </div>
 
@@ -193,10 +199,12 @@ function generateConfigurator(id, cssThemeName) {
                 <label for="visualMapColorInput" class="form-label">visual Map Color</label>
                 <select class="form-select custom-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
                     <option value="categorical" >Default</option>
+                    <option value="emphasis" >Emphasis</option>
                     <option value="blue" >Blue</option>
                     <option value="green" >Green</option>
                     <option value="pink" >Pink</option>
                     <option value="purple" >Purple</option>
+                    <option value="yellow" >Yellow</option>
                 </select>
             </div>
             
@@ -737,7 +745,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    8 ===
+    10 ===
       document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(
           document.querySelector(`#accordion_${id} #colorSetInput`).value
@@ -755,7 +763,7 @@ async function changeTheme(id) {
   );
   if (document.querySelector('#view_custom_color_' + id)) {
     if (
-      8 ===
+      10 ===
       document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
     ) {
       document

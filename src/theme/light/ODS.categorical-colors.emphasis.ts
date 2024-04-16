@@ -1,0 +1,11 @@
+//
+// Software Name: Orange Design System Charts
+// SPDX-FileCopyrightText: Copyright (c) 2023 - 2024 Orange SA
+// SPDX-License-Identifier: MIT
+//
+// This software is distributed under the MIT license.
+//
+
+export const LIGHT_CATEGORICAL_COLORS_EMPHASIS = {
+  color: ['#FF4D4D', '#66CC66', '#6666', '#FF7900'],
+};
