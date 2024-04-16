@@ -439,7 +439,7 @@ export class ODSChartsTheme {
       lineStyle: {
         width: 2,
         color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#CCCCCC',
+          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const splitLine = {
@@ -447,7 +447,7 @@ export class ODSChartsTheme {
       lineStyle: {
         width: 1,
         color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#CCCCCC',
+          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const themeOptions: any = {

@@ -28,10 +28,9 @@ updates:
       interval: weekly
     versioning-strategy: increase
     groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
+      angular-ngx-echarts-all-deps:
+        patterns:
+        - "*"
   - package-ecosystem: npm
     directory: "/test/angular-echarts"
     labels:
@@ -40,10 +39,9 @@ updates:
       interval: weekly
     versioning-strategy: increase
     groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
+      angular-echarts-all-deps:
+        patterns:
+        - "*"
   - package-ecosystem: npm
     directory: "/test/react"
     labels:
@@ -52,10 +50,9 @@ updates:
       interval: weekly
     versioning-strategy: increase
     groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
+      react-all-deps:
+        patterns:
+        - "*"
   - package-ecosystem: npm
     directory: "/test/vue"
     labels:
@@ -64,7 +61,6 @@ updates:
       interval: weekly
     versioning-strategy: increase
     groups:
-      production-dependencies:
-        dependency-type: "production"
-      development-dependencies:
-        dependency-type: "development"
+      vue-all-deps:
+        patterns:
+        - "*"

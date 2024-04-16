@@ -4,12 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ODS Charts</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/boosted@5.2.3/dist/css/boosted.min.css"
-      rel="stylesheet"
-      integrity="sha384-zYFw+mxKy6r9zpAc1NoGiYBfQmxfvg7ONEMr81WeU+WLPPaLC9QTrNGFJTBi3EIn"
-      crossorigin="anonymous"
-    />
+    
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous">
+    <link href="assets/tarteaucitron-config.css" rel="stylesheet"/>
+
     <link rel="apple-touch-icon" href="images/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
@@ -18,6 +17,7 @@
     <link rel="icon" href="images/favicons/favicon.ico">
     <meta name="msapplication-config" content="images/favicons/browserconfig.xml">
     <meta name="theme-color" content="#000">
+
     <script>
       if (document.location.href.endsWith('/docs')) {
         document.location.href = document.location.href + '/';
@@ -25,9 +25,9 @@
     </script>
   </head>
   <body>
-    <header>
+    <header data-bs-theme="dark">
       <nav
-        class="navbar navbar-dark bg-dark navbar-expand-lg"
+        class="navbar navbar-expand-lg"
         aria-label="Global navigation - With one line title example"
       >
         <div class="container-xxl">
@@ -82,7 +82,7 @@
               <h5 class="card-title">ODS Charts</h5>
               <h6 class="card-subtitle">Example</h6>
               <p class="card-text">
-                Examples of use of Apache Echarts with ODS data display theme.
+                Examples of use of Apache ECharts with ODS data display theme.
               </p>
               <a
                 href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6"
@@ -96,7 +96,24 @@
             </div>
           </div>
         </div>
+        <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Specific use cases</h5>
+              <h6 class="card-subtitle">Example</h6>
+              <p class="card-text">
+                Examples of specific features illustrated using Apache ECharts and ODS Charts.
+              </p>
+            </div>
+
+            <div class="card-footer">
+              <a href="use_cases/" class="btn btn-primary mt-3">Examples</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
+    <script src="assets/tarteaucitron-config.js"></script>
   </body>
 </html>

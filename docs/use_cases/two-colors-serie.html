@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Examples - Specific use cases - Two colours for one series</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous">
+    <link href="../assets/tarteaucitron-config.css" rel="stylesheet"/>
+
+    <link rel="apple-touch-icon" href="../images/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="../images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="../images/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="../images/favicons/manifest.json">
+    <link rel="mask-icon" href="../images/favicons/safari-pinned-tab.svg" color="#000">
+    <link rel="icon" href="../images/favicons/favicon.ico">
+    <meta name="msapplication-config" content="../images/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="../../dist/ods-charts.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+  </head>
+  <body>
+    <header data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg" aria-label="Global navigation - With one line title example">
+        <div class="container-xxl">
+          <div class="navbar-brand me-auto me-lg-4">
+            <a class="stretched-link" href="./">
+              <img src="../images/orange-logo.svg" width="50" height="50" alt="ODS Charts - Back to Home" loading="lazy"/>
+            </a>
+            <h1 class="title">Orange Design System Charts</h1>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="title-bar">
+      <div class="container-xxl">
+        <h1 class="display-1">Two colours for one series</h1>
+      </div>
+    </div>
+    <div class="container pt-3">
+      <div class="card w-100">
+        <div class="card-body">
+          <h5 class="card-title">Two colours for one series example</h5>
+          <p class="card-text">
+            When representing data on a bar chart, it is possible to want to represent this data with a different colour depending on a condition on the value. For example, green for a target achieved, red otherwise.
+          </p>
+          <p class="card-text">
+            You would then need to be able to have:
+          </p>
+          <ul>
+            <li>both colours in the legend</li>
+            <li>the colour associated with the current value in the tooltip or popover</li>
+          </ul>
+          <p class="card-text">
+            For this example, we have chosen to put the data in two series depending on whether or not the objective has been achieved. In this way, the two colours are clearly visible both on the graph and in the legend.
+          </p>
+          <p class="card-text">
+            On the other hand, this requires us to filter the values displayed in the tooltip so as not to display the series of a target that has not been reached when it has been reached and vice versa.
+          </p>
+          <p class="card-text">
+            This filter is created using <code>getPopupContentValue()</code> callback of the <code>externalizePopover()</code> feature that allow us to change the displayed value, and to send back <code>undefined</code> if we don't want the value to be displayed:
+            <code>
+              <pre>
+themeManager.externalizePopover(undefined, {
+  ...ODSCharts.ODSChartsPopoverManagers.NONE,
+  getPopupContentValue: ({ seriesName, itemValue }) =>
+    itemValue ? Math.round(itemValue * 100) / 100 + '$' : undefined,
+});            
+              </pre>
+            </code>
+          </p>
+          <div id="htmlId">
+            <div class="border border-light position-relative">
+              <div class="chart_title">
+                <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+              </div>
+              <div id="barLine_holder">
+                <div id="barLine_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+              </div>
+              <div id="barLine_legend"></div>
+            </div>
+          </div>
+          <script>
+            addViewCode();
+          </script>
+        </div>
+      </div>
+      <script id="codeId">
+        ///////////////////////////////////////////////////
+        // Used data
+        ///////////////////////////////////////////////////
+
+        var goals = new Array(...new Array(12).keys()).map((i) => {
+          return 50 + Math.random() * 50;
+        });
+
+        var results = new Array(...new Array(12).keys()).map((i) => {
+          return 50 + Math.random() * 50;
+        });
+
+        var resultsOK = results.map((res, i) =>
+          res >= goals[i] ? results[i] : 0
+        );
+        var resultsNOK = results.map((res, i) =>
+          res < goals[i] ? results[i] : 0
+        );
+        var dates = new Array(...new Array(12).keys()).map((i) => {
+          var d = new Date();
+          d.setMonth(d.getMonth() - i);
+          return d.toLocaleDateString(undefined, {
+            month: 'short',
+            year: 'numeric',
+          });
+        });
+
+        // Data to be displayed
+        var dataOptions = {
+          xAxis: {
+            type: 'category',
+            data: dates,
+          },
+          yAxis: {},
+          series: [
+            {
+              data: resultsOK,
+              type: 'bar',
+              stack: 'result',
+            },
+            {
+              data: resultsNOK,
+              type: 'bar',
+              stack: 'result',
+            },
+            {
+              data: goals,
+              type: 'line',
+            },
+          ],
+          legend: {
+            data: ['Results OK', 'Results NOK', 'Goal'],
+          },
+        };
+
+        ///////////////////////////////////////////////////
+        // ODS Charts
+        ///////////////////////////////////////////////////
+        // Build the theme
+        var themeManager = ODSCharts.getThemeManager();
+        echarts.registerTheme(themeManager.name, themeManager.theme);
+
+        // Get the chart holder and initiate it with the generated theme
+        var div = document.getElementById('barLine_chart');
+        var myChart = echarts.init(div, themeManager.name, {
+          renderer: 'svg',
+        });
+
+        // Set the data to be displayed.
+        themeManager.setDataOptions(dataOptions);
+        // Register the externalization of the legend.
+        themeManager.externalizeLegends(myChart, '#barLine_legend');
+        // Manage window size changed
+        themeManager.manageChartResize(myChart, 'barLine_chart');
+        // Register the externalization of the tooltip/popup and use the second parameter as specified in https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition to change the popup value (cf https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition#getPopupContentValue)
+        themeManager.externalizePopover(undefined, {
+          ...ODSCharts.ODSChartsPopoverManagers.NONE,
+          getPopupContentValue: ({ seriesName, itemValue }) =>
+            itemValue ? Math.round(itemValue * 100) / 100 + '$' : undefined,
+        });
+        // Display the chart using the configured theme and data.
+        myChart.setOption(themeManager.getChartOptions());
+      </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
+    <script src="../assets/tarteaucitron-config.js"></script>
+  </body>
+</html>

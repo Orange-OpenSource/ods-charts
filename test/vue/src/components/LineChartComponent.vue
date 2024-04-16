@@ -56,7 +56,6 @@ onMounted(() => {
   })
 
   console.log('>>', ODSCharts)
-  console.log('>>', ODSCharts.theme)
   console.log(lineChartODSTheme)
 
   echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme)
