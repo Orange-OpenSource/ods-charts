@@ -56,7 +56,7 @@
     <header data-bs-theme="dark">
       <nav
         class="navbar navbar-expand-lg"
-        aria-label="Global navigation - With one line title example"
+        aria-label="Global navigation"
       >
         <div class="container-xxl">
           <div class="navbar-brand me-auto me-lg-4">
@@ -124,23 +124,26 @@ tooltip: {
               </pre>
             </code>
           </p>
-          <p class="card-text ms-5 text-body-secondary">
-            <small>
-              NB: This formater could also be provided through
-              <code>getPopupContentValue()</code> callback of the
-              <code>externalizePopover()</code> feature:
-              <code>
-                <pre>
-            themeManager.externalizePopover(undefined, {
-              ...ODSCharts.ODSChartsPopoverManagers.NONE,
-              getPopupContentValue: ({ seriesName, itemValue }) =>
-                itemValue ? Math.round(itemValue * 100) / 100 + '$' : undefined,
-            });            
-              </pre
-                >
-              </code>
-            </small>
-          </p>
+          <div class="ms-5 mb-2 p-2  text-body-secondary border-start border-dark bg-light">
+            <p class="card-text text-body-secondary">
+              <small >
+                NB: This formater could also be provided through
+                <code class="text-body-secondary">getPopupContentValue()</code> callback of the
+                <code class="text-body-secondary">externalizePopover()</code> feature:
+                <code class="text-body-secondary">
+                  <pre>
+themeManager.externalizePopover(undefined, {
+  ...ODSCharts.ODSChartsPopoverManagers.NONE,
+  getPopupContentValue: ({ seriesName, itemValue }) =>
+    itemValue ? Math.round(itemValue * 100) / 100 + '$' : undefined,
+});            
+                </pre
+                  >
+                </code>
+              </small>
+            </p>
+
+          </div>
           <p>
             In the example below, we prefer the Apache Echarts
             <code>tooltip.formatter</code> method.
