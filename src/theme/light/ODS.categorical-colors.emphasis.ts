@@ -7,5 +7,5 @@
 //
 
 export const LIGHT_CATEGORICAL_COLORS_EMPHASIS = {
-  color: ['#FF4D4D', '#66CC66', '#6666', '#FF7900'],
+  color: ['#F16E00', '#EEEEEE', '#228722', '#FFCC00', '#CD3C14', '#4170D8'],
 };

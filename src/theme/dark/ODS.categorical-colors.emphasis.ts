@@ -7,5 +7,5 @@
 //
 
 export const DARK_CATEGORICAL_COLORS_EMPHASIS = {
-  color: ['#FF7900', '#666666', '#66CC66', '#FF4D4D'],
+  color: ['#FF7900', '#666666', '#66CC66', '#FFCC00', '#FF4D4D', '#6699FF'],
 };
