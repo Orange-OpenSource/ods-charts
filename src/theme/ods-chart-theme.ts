@@ -31,7 +31,7 @@ import { DARK_CATEGORICAL_COLORS_PURPLE } from './dark/ODS.categorical-colors.pu
 import { DARK_SEQUENTIAL_COLORS_BLUE } from './dark/ODS.sequential-colors.blue';
 import { DARK_SEQUENTIAL_COLORS_GREEN } from './dark/ODS.sequential-colors.green';
 import { DARK_SEQUENTIAL_COLORS_PURPLE } from './dark/ODS.sequential-colors.purple';
-import { ODS_PROJECT } from './ODS.project';
+import { EChartsProjet, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
@@ -269,7 +269,7 @@ export class ODSChartsTheme {
 
   private constructor(
     public name: string,
-    public theme: any,
+    public theme: EChartsProjet,
     public options: ODSChartsThemeOptions
   ) {
     this.cssThemeName =
@@ -318,7 +318,7 @@ export class ODSChartsTheme {
       options.lineStyle
     )}`;
 
-    const theme = cloneDeepObject(ODS_PROJECT);
+    const theme: EChartsProjet = cloneDeepObject(ODS_PROJECT);
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].common));
 
@@ -386,6 +386,31 @@ export class ODSChartsTheme {
     return this;
   }
 
+  private getDisplayedColors(themeColors: string[]) {
+    const colors: string[] = cloneDeepObject(themeColors);
+    if (this.dataOptions && this.dataOptions.series) {
+      for (
+        let serieIndex = 0;
+        serieIndex < this.dataOptions.series.length;
+        serieIndex++
+      ) {
+        const serie = this.dataOptions.series[serieIndex];
+        if (
+          serie.itemStyle &&
+          serie.itemStyle.color &&
+          serie.itemStyle.color !== colors[serieIndex]
+        ) {
+          const previousColorIndex = colors.indexOf(serie.itemStyle.color);
+          if (previousColorIndex > -1) {
+            colors.splice(previousColorIndex, 1);
+          }
+          colors.splice(serieIndex, 0, serie.itemStyle.color);
+        }
+      }
+    }
+    return colors;
+  }
+
   /**
    * getThemeOptions() can be used to get the options that should be added to charts options to implement the Orange Design System.
    *
@@ -451,10 +476,12 @@ export class ODSChartsTheme {
       }
     }
 
+    const displayedColors = this.getDisplayedColors(this.theme.color);
+
     if (this.chartLegendManager) {
       this.chartLegendManager.addLegend(
         this.dataOptions,
-        this.theme.color,
+        displayedColors,
         this.options.cssTheme as ODSChartsCSSThemeDefinition,
         this.cssThemeName,
         this.options.mode as ODSChartsMode
