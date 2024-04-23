@@ -6,7 +6,356 @@
 // This software is distributed under the MIT license.
 //
 
-export const ODS_PROJECT = {
+export interface EChartsProject {
+  color: string[];
+  backgroundColor: string;
+  textStyle: {};
+  title: {
+    textStyle: {
+      color: string;
+    };
+    subtextStyle: {
+      color: string;
+    };
+  };
+  line: {
+    itemStyle: {
+      borderWidth: number;
+    };
+    lineStyle: {
+      width: number
+    };
+    symbolSize: number;
+    symbol: string;
+    smooth: true;
+  };
+  radar: {
+    itemStyle: {
+      borderWidth: number;
+    };
+    lineStyle: {
+      width: number
+    };
+    symbolSize: number;
+    symbol: string;
+    smooth: false;
+  };
+  bar: {
+    itemStyle: {
+      barBorderWidth: string;
+      barBorderColor: string;
+    };
+  };
+  pie: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  scatter: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  boxplot: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  parallel: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  sankey: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  funnel: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  gauge: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+  };
+  candlestick: {
+    itemStyle: {
+      color: string;
+      color0: string;
+      borderColor: string;
+      borderColor0: string;
+      borderWidth: number;
+    };
+  };
+  graph: {
+    itemStyle: {
+      borderWidth: string;
+      borderColor: string;
+    };
+    lineStyle: {
+      width: number;
+      color: string;
+    };
+    symbolSize: number;
+    symbol: string;
+    smooth: false;
+    color: string[];
+    label: {
+      color: string;
+    };
+  };
+  map: {
+    itemStyle: {
+      areaColor: string;
+      borderColor: string;
+      borderWidth: number;
+    };
+    label: {
+      color: string;
+    };
+    emphasis: {
+      itemStyle: {
+        areaColor: string;
+        borderColor: string;
+        borderWidth: number;
+      };
+      label: {
+        color: string;
+      };
+    };
+  };
+  geo: {
+    itemStyle: {
+      areaColor: string;
+      borderColor: string;
+      borderWidth: number;
+    };
+    label: {
+      color: string;
+    };
+    emphasis: {
+      itemStyle: {
+        areaColor: string;
+        borderColor: string;
+        borderWidth: number;
+      };
+      label: {
+        color: string;
+      };
+    };
+  };
+  categoryAxis: {
+    axisLine: {
+      show: true;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisTick: {
+      show: false;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisLabel: {
+      show: true;
+      color: string;
+    };
+    splitLine: {
+      show: false;
+      lineStyle: {
+        color: string[];
+      };
+    };
+    splitArea: {
+      show: false;
+      areaStyle: {
+        color: string[];
+      };
+    };
+  };
+  valueAxis: {
+    axisLine: {
+      show: true;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisTick: {
+      show: false;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisLabel: {
+      show: true;
+      color: string;
+    };
+    splitLine: {
+      show: false;
+      lineStyle: {
+        color: string[];
+      };
+    };
+    splitArea: {
+      show: false;
+      areaStyle: {
+        color: string[];
+      };
+    };
+  };
+  logAxis: {
+    axisLine: {
+      show: false;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisTick: {
+      show: false;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisLabel: {
+      show: true;
+      color: string;
+    };
+    splitLine: {
+      show: false;
+      lineStyle: {
+        color: string[];
+      };
+    };
+    splitArea: {
+      show: false;
+      areaStyle: {
+        color: string[];
+      };
+    };
+  };
+  timeAxis: {
+    axisLine: {
+      show: true;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisTick: {
+      show: false;
+      lineStyle: {
+        color: string;
+      };
+    };
+    axisLabel: {
+      show: true;
+      color: string;
+    };
+    splitLine: {
+      show: false;
+      lineStyle: {
+        color: string[];
+      };
+    };
+    splitArea: {
+      show: false;
+      areaStyle: {
+        color: string[];
+      };
+    };
+  };
+  toolbox: {
+    iconStyle: {
+      borderColor: string;
+    };
+    emphasis: {
+      iconStyle: {
+        borderColor: string;
+      };
+    };
+  };
+  legend: {
+    textStyle: {
+      color: string;
+    };
+  };
+  tooltip: {
+    axisPointer: {
+      lineStyle: {
+        color: string;
+        width: number;
+      };
+      crossStyle: {
+        color: string;
+        width: number;
+      };
+    };
+  };
+  timeline: {
+    lineStyle: {
+      color: string;
+      width: number
+    };
+    itemStyle: {
+      color: string;
+      borderWidth: number;
+    };
+    controlStyle: {
+      color: string;
+      borderColor: string;
+      borderWidth: number;
+    };
+    checkpointStyle: {
+      color: string;
+      borderColor: string;
+    };
+    label: {
+      color: string;
+    };
+    emphasis: {
+      itemStyle: {
+        color: string;
+      };
+      controlStyle: {
+        color: string;
+        borderColor: string;
+        borderWidth: number;
+      };
+      label: {
+        color: string;
+      };
+    };
+  };
+  visualMap: {
+    color: string[];
+  };
+  dataZoom: {
+    handleSize: string;
+    textStyle: {};
+  };
+  markPoint: {
+    label: {
+      color: string;
+    };
+    emphasis: {
+      label: {
+        color: string;
+      };
+    };
+  };
+}
+
+export const ODS_PROJECT: EChartsProject = {
   color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
   backgroundColor: 'transparent',
   textStyle: {},

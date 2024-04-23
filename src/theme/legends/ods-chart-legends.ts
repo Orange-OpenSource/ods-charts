@@ -155,7 +155,7 @@ export class ODSChartsLegends {
 
   public addLegend(
     dataOptions: any,
-    colors: any,
+    colors: string[],
     cssTheme: ODSChartsCSSThemeDefinition,
     cssThemeName: ODSChartsCSSThemesNames,
     mode: ODSChartsMode
@@ -192,7 +192,7 @@ export class ODSChartsLegends {
   }
 
   private generateLegend(
-    colors: any[],
+    colors: string[],
     legends: { labels: string[]; names: string[] },
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode
