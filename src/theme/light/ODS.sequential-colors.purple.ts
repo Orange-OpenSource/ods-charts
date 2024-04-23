@@ -7,12 +7,5 @@
 //
 
 export const LIGHT_SEQUENTIAL_COLORS_PURPLE = {
-  visualMapColor: [
-    '#492191',
-    '#6746A3',
-    '#866BB6',
-    '#A490C8',
-    '#C2B5DA',
-    '#E1DAED',
-  ],
+  visualMapColor: ['#492191', '#6746A3', '#866BB6', '#A490C8', '#C2B5DA', '#E1DAED'],
 };

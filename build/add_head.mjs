@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'node:fs';
+import path from 'node:path';
 
 function fromDir(startPath, filter, prefix = '../') {
   const favicon = `
@@ -26,10 +26,13 @@ function fromDir(startPath, filter, prefix = '../') {
     if (stat.isDirectory()) {
       fromDir(filename, filter, `${prefix}../`);
     } else if (filename.endsWith(filter)) {
-      fs.writeFileSync(filename, fs.readFileSync(filename).toString().replace("<head>", `<head>${boosted_CSS}${favicon}`).replace("</body>", `\n${cookies}\n</body>`));
-    };
-  };
-};
+      fs.writeFileSync(
+        filename,
+        fs.readFileSync(filename).toString().replace('<head>', `<head>${boosted_CSS}${favicon}`).replace('</body>', `\n${cookies}\n</body>`)
+      );
+    }
+  }
+}
 
-console.log(`\n\nAdding cookies to API files\n`)
+console.log(`\n\nAdding cookies to API files\n`);
 fromDir('./docs/api', '.html');

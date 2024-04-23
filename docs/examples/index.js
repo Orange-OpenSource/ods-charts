@@ -6,20 +6,14 @@ var themeElements = {
       'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
       'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css',
     ],
-    script: [
-      'https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js',
-      'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.min.js',
-    ],
+    script: ['https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js', 'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.min.js'],
   },
   BOOSTED4: {
     css: [
       'https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css',
       'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/css/boosted.min.css',
     ],
-    script: [
-      'https://code.jquery.com/jquery-3.5.1.slim.min.js',
-      'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/js/boosted.bundle.min.js',
-    ],
+    script: ['https://code.jquery.com/jquery-3.5.1.slim.min.js', 'https://cdn.jsdelivr.net/npm/boosted@4.6.2/dist/js/boosted.bundle.min.js'],
   },
   NONE: {
     css: [],
@@ -74,10 +68,7 @@ function generateConfigurator(id, cssThemeName) {
 </h2>`,
       },
       content: {
-        begin: (
-          id,
-          itemId
-        ) => `<div id="collapse_${itemId}" class="accordion-collapse collapse" 
+        begin: (id, itemId) => `<div id="collapse_${itemId}" class="accordion-collapse collapse" 
       aria-labelledby="${itemId}" data-bs-parent="#${id}">
       <div class="accordion-body" id="body_${itemId}">`,
         end: (id, itemId) => ` </div>
@@ -94,10 +85,7 @@ function generateConfigurator(id, cssThemeName) {
         end: (id, itemId) => `</div>`,
       },
       header: {
-        begin: (
-          id,
-          itemId
-        ) => `<div class="card-header" role="tab" id="${itemId}">
+        begin: (id, itemId) => `<div class="card-header" role="tab" id="${itemId}">
       <h5 class="mb-0">
         <a class="collapsed" data-toggle="collapse" href="#collapse_${itemId}" role="button" 
         aria-expanded="false" aria-controls="collapse_${itemId}">
@@ -107,10 +95,7 @@ function generateConfigurator(id, cssThemeName) {
       </div>`,
       },
       content: {
-        begin: (
-          id,
-          itemId
-        ) => `<div id="collapse_${itemId}" class="collapse" role="tabpanel" data-parent="#${id}" aria-labelledby="${itemId}">
+        begin: (id, itemId) => `<div id="collapse_${itemId}" class="collapse" role="tabpanel" data-parent="#${id}" aria-labelledby="${itemId}">
       <div class="card-body" id="body_${itemId}">`,
         end: (id, itemId) => `</div>
         </div>`,
@@ -124,31 +109,18 @@ function generateConfigurator(id, cssThemeName) {
         end: (id, itemId) => `</h5></div>`,
       },
       content: {
-        begin: (id, itemId) =>
-          `<div id="collapse_${itemId}"> <div id="body_${itemId}">`,
+        begin: (id, itemId) => `<div id="collapse_${itemId}"> <div id="body_${itemId}">`,
         end: (id, itemId) => `</div></div>`,
       },
     },
   };
   return `
   ${accordionThemes[cssThemeName].accordion.begin('accordion_' + id)}
-    ${accordionThemes[cssThemeName].item.begin(
-      'accordion_' + id,
-      'content_1_' + id
-    )}
-      ${accordionThemes[cssThemeName].header.begin(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
+    ${accordionThemes[cssThemeName].item.begin('accordion_' + id, 'content_1_' + id)}
+      ${accordionThemes[cssThemeName].header.begin('accordion_' + id, 'content_1_' + id)}
         Theme configuration
-      ${accordionThemes[cssThemeName].header.end(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
-      ${accordionThemes[cssThemeName].content.begin(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
+      ${accordionThemes[cssThemeName].header.end('accordion_' + id, 'content_1_' + id)}
+      ${accordionThemes[cssThemeName].content.begin('accordion_' + id, 'content_1_' + id)}
         <div class="one-chart-configurator" data-chart-id="${id}">                
           <form class="row g-3">
             <div class="col-md-4">
@@ -161,25 +133,12 @@ function generateConfigurator(id, cssThemeName) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
               <select class="form-select custom-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet
-                    .DEFAULT_SUPPORTING_COLORS
-                }" >Default supporting colours</option>
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS
-                }" >Lighter tints</option>
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS
-                }">Darker tints</option>
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE
-                }">Blue</option>
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN
-                }">Green</option>
-                <option value="${
-                  ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
-                }">Purple</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS}" >Default supporting colours</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}" >Lighter tints</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple</option>
               </select>
             </div>
 
@@ -258,31 +217,13 @@ function generateConfigurator(id, cssThemeName) {
             </div>
           </form>
         </div>
-      ${accordionThemes[cssThemeName].content.end(
-        'accordion_' + id,
-        'content_1_' + id
-      )}
-    ${accordionThemes[cssThemeName].item.end(
-      'accordion_' + id,
-      'content_1_' + id
-    )}
-    ${accordionThemes[cssThemeName].item.begin(
-      'accordion_' + id,
-      'content_2_' + id
-    )}
-      ${accordionThemes[cssThemeName].header.begin(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
+      ${accordionThemes[cssThemeName].content.end('accordion_' + id, 'content_1_' + id)}
+    ${accordionThemes[cssThemeName].item.end('accordion_' + id, 'content_1_' + id)}
+    ${accordionThemes[cssThemeName].item.begin('accordion_' + id, 'content_2_' + id)}
+      ${accordionThemes[cssThemeName].header.begin('accordion_' + id, 'content_2_' + id)}
         View code
-      ${accordionThemes[cssThemeName].header.end(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
-      ${accordionThemes[cssThemeName].content.begin(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
+      ${accordionThemes[cssThemeName].header.end('accordion_' + id, 'content_2_' + id)}
+      ${accordionThemes[cssThemeName].content.begin('accordion_' + id, 'content_2_' + id)}
         <div class="border border-light position-relative mt-2 p-2">
           <div class="display-5"> HTML
           </div>
@@ -299,14 +240,8 @@ function generateConfigurator(id, cssThemeName) {
             </pre>
           </code>
         </div>
-      ${accordionThemes[cssThemeName].content.end(
-        'accordion_' + id,
-        'content_2_' + id
-      )}
-    ${accordionThemes[cssThemeName].item.end(
-      'accordion_' + id,
-      'content_2_' + id
-    )}
+      ${accordionThemes[cssThemeName].content.end('accordion_' + id, 'content_2_' + id)}
+    ${accordionThemes[cssThemeName].item.end('accordion_' + id, 'content_2_' + id)}
   ${accordionThemes[cssThemeName].accordion.end('accordion_' + id)}
 `;
 }
@@ -356,21 +291,13 @@ async function displayChart(
     lineStyle,
     cssTheme,
   });
-  cssThemeName = Object.keys(ODSCharts.ODSChartsCSSThemes).find((name) =>
-    _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
-  );
+  cssThemeName = Object.keys(ODSCharts.ODSChartsCSSThemes).find((name) => _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme));
   if (!popoverTemplateInput) {
-    popoverTemplateInput =
-      ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName
-        ? 'internal'
-        : 'external';
+    popoverTemplateInput = ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ? 'internal' : 'external';
   }
 
   const actualTheme = document.querySelector('[data-css-theme]');
-  if (
-    (!actualTheme && 'NONE' !== cssThemeName) ||
-    (actualTheme && cssThemeName !== actualTheme.getAttribute('data-css-theme'))
-  ) {
+  if ((!actualTheme && 'NONE' !== cssThemeName) || (actualTheme && cssThemeName !== actualTheme.getAttribute('data-css-theme'))) {
     for (const elt of document.querySelectorAll('[data-css-theme]')) {
       elt.remove();
     }
@@ -407,22 +334,13 @@ async function displayChart(
 
   var legends = false;
 
-  if (
-    !(options.dataset && options.dataset.source) &&
-    !(options.legend && options.legend.data) &&
-    options.series.length > 1
-  ) {
+  if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
     options.legend = {
-      data:
-        options.series.length > 1
-          ? options.series.map((serie, i) => 'label ' + i)
-          : undefined,
+      data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
     };
   }
 
-  legends =
-    (options.legend && options.legend.data && !options.legend.show) ||
-    (options.dataset && options.dataset.source);
+  legends = (options.legend && options.legend.data && !options.legend.show) || (options.dataset && options.dataset.source);
 
   var dataOptions = _.cloneDeep(options);
 
@@ -432,20 +350,12 @@ async function displayChart(
   if (!refresh) {
     generateExampleDiv(id, cssThemeName);
   } else {
-    newCSSTheme =
-      document
-        .getElementById('configurator_' + id)
-        .getAttribute('data-css-theme-name') !== cssThemeName;
+    newCSSTheme = document.getElementById('configurator_' + id).getAttribute('data-css-theme-name') !== cssThemeName;
     if (newCSSTheme) {
-      customColorOption = document.querySelector(
-        `#configurator_${id} [data-custom-categorical-color]`
-      );
+      customColorOption = document.querySelector(`#configurator_${id} [data-custom-categorical-color]`);
 
-      document
-        .getElementById('configurator_' + id)
-        .setAttribute('data-css-theme-name', cssThemeName);
-      document.getElementById('configurator_' + id).innerHTML =
-        generateConfigurator(id, cssThemeName);
+      document.getElementById('configurator_' + id).setAttribute('data-css-theme-name', cssThemeName);
+      document.getElementById('configurator_' + id).innerHTML = generateConfigurator(id, cssThemeName);
     }
   }
 
@@ -459,9 +369,7 @@ async function displayChart(
   }
 
   document.getElementById(id + '_html').innerText = generateChartDiv(id);
-  document.getElementById(
-    id + '_code'
-  ).innerText = `///////////////////////////////////////////////////
+  document.getElementById(id + '_code').innerText = `///////////////////////////////////////////////////
 // Used data
 ///////////////////////////////////////////////////
 
@@ -473,19 +381,12 @@ var dataOptions = ${JSON.stringify(options, undefined, 2)};
 ///////////////////////////////////////////////////
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
-  mode: ${
-    'ODSCharts.ODSChartsMode.' +
-    Object.keys(ODSCharts.ODSChartsMode).find(
-      (key) => ODSCharts.ODSChartsMode[key] === themeManager.options.mode
-    )
-  },
+  mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(ODSCharts.ODSChartsMode).find((key) => ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
   categoricalColors: ${
     'string' === typeof themeManager.options.categoricalColors
       ? 'ODSCharts.ODSChartsCategoricalColorsSet.' +
         Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find(
-          (key) =>
-            ODSCharts.ODSChartsCategoricalColorsSet[key] ===
-            themeManager.options.categoricalColors
+          (key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === themeManager.options.categoricalColors
         )
       : `[
       ${themeManager.options.categoricalColors.map((color) =>
@@ -493,11 +394,7 @@ var themeManager = ODSCharts.getThemeManager({
           ? JSON.stringify(color)
           : `{"colorPalette": ${
               'ODSCharts.ODSChartsCategoricalColorsSet.' +
-              Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find(
-                (key) =>
-                  ODSCharts.ODSChartsCategoricalColorsSet[key] ===
-                  color.colorPalette
-              )
+              Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find((key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette)
             }, "colorIndex": ${color.colorIndex}}`
       ).join(`,
       `)}
@@ -505,22 +402,13 @@ var themeManager = ODSCharts.getThemeManager({
   },
   visualMapColor:  ${
     'ODSCharts.ODSChartsSequentialColorsSet.' +
-    Object.keys(ODSCharts.ODSChartsSequentialColorsSet).find(
-      (key) =>
-        ODSCharts.ODSChartsSequentialColorsSet[key] ===
-        themeManager.options.visualMapColor
-    )
+    Object.keys(ODSCharts.ODSChartsSequentialColorsSet).find((key) => ODSCharts.ODSChartsSequentialColorsSet[key] === themeManager.options.visualMapColor)
   },
   lineStyle: ${
     'ODSCharts.ODSChartsLineStyle.' +
-    Object.keys(ODSCharts.ODSChartsLineStyle).find(
-      (key) =>
-        ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle
-    )
+    Object.keys(ODSCharts.ODSChartsLineStyle).find((key) => ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle)
   },
-  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(
-    ODSCharts.ODSChartsCSSThemes
-  ).find((key) => key === cssThemeName)}
+  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)}
 });
 
 // register this theme to echarts
@@ -551,9 +439,7 @@ themeManager.externalizePopover({
     tooltip: ${'tooltip' === popoverInput ? 'true' : 'false'},
     axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.${popoverAxisInput},
   }, 
-  ODSCharts.ODSChartsPopoverManagers.${
-    'external' === popoverTemplateInput ? cssThemeName : 'NONE'
-  }
+  ODSCharts.ODSChartsPopoverManagers.${'external' === popoverTemplateInput ? cssThemeName : 'NONE'}
 );`
       : ''
   }
@@ -568,17 +454,11 @@ myChart.setOption(themeManager.getChartOptions());
 
   if (newCSSTheme || !refresh) {
     if ('string' === typeof themeManager.options.categoricalColors) {
-      document
-        .querySelector(
-          `#accordion_${id} #colorSetInput option[value="${themeManager.options.categoricalColors}"]`
-        )
-        .setAttribute('selected', 'selected');
+      document.querySelector(`#accordion_${id} #colorSetInput option[value="${themeManager.options.categoricalColors}"]`).setAttribute('selected', 'selected');
     } else {
       if (!customColorOption) {
         customColorOption = document.createElement('option');
-        customColorOption.value = JSON.stringify(
-          themeManager.options.categoricalColors
-        );
+        customColorOption.value = JSON.stringify(themeManager.options.categoricalColors);
         customColorOption.selected = true;
         customColorOption.setAttribute('selected', 'selected');
         customColorOption.setAttribute('data-custom-categorical-color', true);
@@ -586,9 +466,7 @@ myChart.setOption(themeManager.getChartOptions());
       }
     }
     if (customColorOption) {
-      document
-        .querySelector(`#accordion_${id} #colorSetInput`)
-        .append(customColorOption);
+      document.querySelector(`#accordion_${id} #colorSetInput`).append(customColorOption);
       let custumColorDiv = document.createElement('div');
       custumColorDiv.id = 'view_custom_color_' + id;
       custumColorDiv.innerHTML = `
@@ -601,11 +479,7 @@ myChart.setOption(themeManager.getChartOptions());
             ? JSON.stringify(color)
             : `{"colorPalette": ${
                 'ODSCharts.ODSChartsCategoricalColorsSet.' +
-                Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find(
-                  (key) =>
-                    ODSCharts.ODSChartsCategoricalColorsSet[key] ===
-                    color.colorPalette
-                )
+                Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find((key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette)
               }, "colorIndex": ${color.colorIndex}}`
         ).join(`,
         `)}
@@ -616,63 +490,23 @@ myChart.setOption(themeManager.getChartOptions());
       document.querySelector(`#body_content_1_${id}`).append(custumColorDiv);
     }
 
-    document
-      .querySelector(
-        `#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverInput option[value="${popoverInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`
-      )
-      .setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`).setAttribute('selected', 'selected');
 
-    document
-      .querySelector(
-        `#accordion_${id} #cssTheme option[value="${cssThemeName}"]`
-      )
-      .setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #cssTheme option[value="${cssThemeName}"]`).setAttribute('selected', 'selected');
   }
 
-  document
-    .querySelectorAll(`#accordion_${id} .popover-renderer`)
-    .forEach((elt) => {
-      elt.style.display =
-        ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ||
-        'none' === popoverInput
-          ? 'none'
-          : 'block';
-    });
-  document
-    .querySelectorAll(`#accordion_${id} .popover-config`)
-    .forEach((elt) => {
-      elt.style.display = 'none' === popoverInput ? 'none' : 'block';
-    });
+  document.querySelectorAll(`#accordion_${id} .popover-renderer`).forEach((elt) => {
+    elt.style.display = ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName || 'none' === popoverInput ? 'none' : 'block';
+  });
+  document.querySelectorAll(`#accordion_${id} .popover-config`).forEach((elt) => {
+    elt.style.display = 'none' === popoverInput ? 'none' : 'block';
+  });
 
   var myChart = echarts.init(div, themeManager.name, {
     renderer: 'svg',
@@ -691,11 +525,7 @@ myChart.setOption(themeManager.getChartOptions());
         tooltip: 'tooltip' === popoverInput,
         axisPointer: popoverAxisInput,
       },
-      ODSCharts.ODSChartsPopoverManagers[
-        'external' === popoverTemplateInput
-          ? cssThemeName
-          : ODSCharts.ODSChartsCSSThemesNames.NONE
-      ]
+      ODSCharts.ODSChartsPopoverManagers['external' === popoverTemplateInput ? cssThemeName : ODSCharts.ODSChartsCSSThemesNames.NONE]
     );
   }
 
@@ -709,14 +539,8 @@ async function changeCssTheme(newCss) {
   document.querySelectorAll('.one-chart-configurator').forEach((elt) => {
     const chartId = elt.getAttribute('data-chart-id');
     chartIds.push(chartId);
-    document
-      .querySelector(
-        `#accordion_${chartId} #cssTheme option[value="${newCss}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document.querySelector(
-      `#accordion_${chartId} #cssTheme option[value="${newCss}"]`
-    ).value = newCss;
+    document.querySelector(`#accordion_${chartId} #cssTheme option[value="${newCss}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${chartId} #cssTheme option[value="${newCss}"]`).value = newCss;
   });
   for (const chartId of chartIds) {
     await changeTheme(chartId);
@@ -729,11 +553,8 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    6 ===
-      document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
-      ? JSON.parse(
-          document.querySelector(`#accordion_${id} #colorSetInput`).value
-        )
+    6 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
+      ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #visualMapColorInput`).value,
     document.querySelector(`#accordion_${id} #lineStyleInput`).value,
@@ -746,17 +567,10 @@ async function changeTheme(id) {
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
-    if (
-      6 ===
-      document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
-    ) {
-      document
-        .querySelector('#view_custom_color_' + id)
-        .classList.remove('d-none');
+    if (6 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
+      document.querySelector('#view_custom_color_' + id).classList.remove('d-none');
     } else {
-      document
-        .querySelector('#view_custom_color_' + id)
-        .classList.add('d-none');
+      document.querySelector('#view_custom_color_' + id).classList.add('d-none');
     }
   }
 }
@@ -764,9 +578,7 @@ window.changeTheme = changeTheme;
 window.changeCssTheme = changeCssTheme;
 
 function downloadTheme(id) {
-  var { themeManager } = JSON.parse(
-    document.getElementById(id).dataset.odsExample
-  );
+  var { themeManager } = JSON.parse(document.getElementById(id).dataset.odsExample);
 
   const filename = `${themeManager.name}.json`;
 
@@ -801,12 +613,7 @@ window.generateSingleLineChart = async (id) => {
       },
     ],
   };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE
-  );
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE);
 };
 
 window.generateMultipleLineChart = async (id) => {
@@ -823,14 +630,7 @@ window.generateMultipleLineChart = async (id) => {
       { data: [12, 28.8956454657, 23, 15, 15, 18], type: 'line' },
     ],
   };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
-    undefined,
-    ODSCharts.ODSChartsLineStyle.BROKEN
-  );
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -854,15 +654,9 @@ window.generateTimeSeriesLineChart = async (id) => {
     for (var i = 1; i < NB_POINTS; i++) {
       data.push({
         time: dataDates[i],
-        value:
-          Math.random() < 0.3
-            ? undefined
-            : Math.round((Math.random() - 0.5) * 20 + lastValue),
+        value: Math.random() < 0.3 ? undefined : Math.round((Math.random() - 0.5) * 20 + lastValue),
       });
-      lastValue =
-        undefined !== data[data.length - 1].value
-          ? data[data.length - 1].value
-          : lastValue;
+      lastValue = undefined !== data[data.length - 1].value ? data[data.length - 1].value : lastValue;
     }
     return data;
   };
@@ -898,22 +692,10 @@ window.generateTimeSeriesLineChart = async (id) => {
       },
     ],
   };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
-    undefined,
-    ODSCharts.ODSChartsLineStyle.BROKEN
-  );
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
-window.generateBarChart = async (
-  id,
-  horizontal = false,
-  grouped = false,
-  stacked = false
-) => {
+window.generateBarChart = async (id, horizontal = false, grouped = false, stacked = false) => {
   // Specify the configuration items and data for the chart
   var option = {
     [horizontal ? 'yAxis' : 'xAxis']: {
@@ -962,8 +744,7 @@ window.generateBarChart = async (
             colorIndex: 0,
           },
           {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
             colorIndex: 0,
           },
           {
@@ -972,32 +753,29 @@ window.generateBarChart = async (
           },
         ]
       : grouped
-      ? [
-          {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
-            colorIndex: 0,
-          },
-          {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
-            colorIndex: 0,
-          },
-        ]
-      : horizontal
-      ? [
-          {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
-            colorIndex: 1,
-          },
-        ]
-      : [
-          {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
-            colorIndex: 3,
-          },
-        ]
+        ? [
+            {
+              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+              colorIndex: 0,
+            },
+            {
+              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+              colorIndex: 0,
+            },
+          ]
+        : horizontal
+          ? [
+              {
+                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+                colorIndex: 1,
+              },
+            ]
+          : [
+              {
+                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+                colorIndex: 3,
+              },
+            ]
   );
 };
 
@@ -1025,20 +803,10 @@ window.generateDatasetBarChart = async (id) => {
     // every series will auto-map to each column by default.
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   };
-  displayChart(
-    id,
-    option,
-    undefined,
-    ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS
-  );
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS);
 };
 
-window.generateBarLineChart = async (
-  id,
-  horizontal = false,
-  grouped = false,
-  stacked = true
-) => {
+window.generateBarLineChart = async (id, horizontal = false, grouped = false, stacked = true) => {
   // Specify the configuration items and data for the chart
   var option = {
     [horizontal ? 'yAxis' : 'xAxis']: {
@@ -1074,8 +842,7 @@ window.generateBarLineChart = async (
     grouped
       ? [
           {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
             colorIndex: 1,
           },
           {
@@ -1083,20 +850,17 @@ window.generateBarLineChart = async (
             colorIndex: 1,
           },
           {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE,
             colorIndex: 0,
           },
         ]
       : [
           {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
             colorIndex: 2,
           },
           {
-            colorPalette:
-              ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN,
             colorIndex: 0,
           },
         ],

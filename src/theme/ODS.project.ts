@@ -23,7 +23,7 @@ export interface EChartsProject {
       borderWidth: number;
     };
     lineStyle: {
-      width: number
+      width: number;
     };
     symbolSize: number;
     symbol: string;
@@ -34,7 +34,7 @@ export interface EChartsProject {
       borderWidth: number;
     };
     lineStyle: {
-      width: number
+      width: number;
     };
     symbolSize: number;
     symbol: string;
@@ -304,7 +304,7 @@ export interface EChartsProject {
   timeline: {
     lineStyle: {
       color: string;
-      width: number
+      width: number;
     };
     itemStyle: {
       color: string;

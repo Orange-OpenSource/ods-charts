@@ -8,10 +8,9 @@ describe('GraphComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GraphComponent]
-    })
-    .compileComponents();
-    
+      imports: [GraphComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

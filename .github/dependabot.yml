@@ -30,7 +30,7 @@ updates:
     groups:
       angular-ngx-echarts-all-deps:
         patterns:
-        - "*"
+          - "*"
   - package-ecosystem: npm
     directory: "/test/angular-echarts"
     labels:
@@ -41,7 +41,7 @@ updates:
     groups:
       angular-echarts-all-deps:
         patterns:
-        - "*"
+          - "*"
   - package-ecosystem: npm
     directory: "/test/react"
     labels:
@@ -52,7 +52,7 @@ updates:
     groups:
       react-all-deps:
         patterns:
-        - "*"
+          - "*"
   - package-ecosystem: npm
     directory: "/test/vue"
     labels:
@@ -63,4 +63,4 @@ updates:
     groups:
       vue-all-deps:
         patterns:
-        - "*"
+          - "*"
