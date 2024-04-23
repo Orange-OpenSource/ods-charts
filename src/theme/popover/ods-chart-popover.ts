@@ -472,6 +472,20 @@ export class ODSChartsPopover {
         });
       }
 
+      // We have to delete any default formatter as it is incompatible with externalizePopover feature
+      if (dataOptions?.tooltip?.formatter) {
+        dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
+        // But if no formatter has been provided through the popoverDefinition,
+        // we will use the Apache Echart config
+        if (!this.popoverDefinition.getPopupContentValue) {
+          const formater = dataOptions.tooltip.formatter;
+          this.popoverDefinition.getPopupContentValue = (
+            tooltipElement: ODSChartsPopoverItem
+          ) => formater([tooltipElement]);
+        }
+        delete dataOptions.tooltip.formatter;
+      }
+
       if (
         !this.popoverConfig.shared &&
         'none' === this.popoverConfig.axisPointer

@@ -403,6 +403,10 @@ export class ODSChartsTheme {
         'the chart basic options must be set to get the theme completion'
       );
     }
+    // need to copy dataOptions as theme feature may change the original dataOptions
+    // only make an asign at the first level in order to avoid deep copy of all data
+    // each feature is responsible to deep copy the changed part according to their changes
+    this.dataOptions = { ...this.dataOptions };
 
     const axisLabel = {
       fontStyle: 'normal',
