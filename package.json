@@ -14,6 +14,8 @@
     "build": "webpack",
     "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build && cp -R dist docs/ && npm run typedoc",
+    "prettier:check": "prettier --check .",
+    "prettier:update": "prettier --write .",
     "release": "npm pack && npm publish",
     "serve": "npm run typedoc && serve .",
     "serve:angular": "serve test/angular-ngx-echarts/dist/angular/",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "echarts": "^5.5.0",
+    "prettier": "^3.2.5",
     "serve": "^14.2.2",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.13",
