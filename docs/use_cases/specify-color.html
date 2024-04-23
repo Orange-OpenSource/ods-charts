@@ -157,14 +157,9 @@ series: [
             type: 'category',
             data: dates,
           },
-          yAxis: {
-            axisLabel: {
-              formatter: '{value} °C',
-            },
-          },
           tooltip: {
             formatter: function (params) {
-              return Math.round(params[0].value * 100) / 100 + ' °C';
+              return Math.round(params[0].value);
             },
           },
           series: [
