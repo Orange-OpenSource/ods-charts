@@ -31,7 +31,7 @@ import { DARK_CATEGORICAL_COLORS_PURPLE } from './dark/ODS.categorical-colors.pu
 import { DARK_SEQUENTIAL_COLORS_BLUE } from './dark/ODS.sequential-colors.blue';
 import { DARK_SEQUENTIAL_COLORS_GREEN } from './dark/ODS.sequential-colors.green';
 import { DARK_SEQUENTIAL_COLORS_PURPLE } from './dark/ODS.sequential-colors.purple';
-import { EChartsProjet, ODS_PROJECT } from './ODS.project';
+import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
@@ -269,7 +269,7 @@ export class ODSChartsTheme {
 
   private constructor(
     public name: string,
-    public theme: EChartsProjet,
+    public theme: EChartsProject,
     public options: ODSChartsThemeOptions
   ) {
     this.cssThemeName =
@@ -318,7 +318,7 @@ export class ODSChartsTheme {
       options.lineStyle
     )}`;
 
-    const theme: EChartsProjet = cloneDeepObject(ODS_PROJECT);
+    const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].common));
 

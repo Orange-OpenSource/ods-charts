@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-export interface EChartsProjet {
+export interface EChartsProject {
   color: string[];
   backgroundColor: string;
   textStyle: {};
@@ -355,7 +355,7 @@ export interface EChartsProjet {
   };
 }
 
-export const ODS_PROJECT: EChartsProjet = {
+export const ODS_PROJECT: EChartsProject = {
   color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
   backgroundColor: 'transparent',
   textStyle: {},
