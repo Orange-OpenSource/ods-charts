@@ -14,13 +14,9 @@ class LineChartComponent extends Component {
   componentDidMount() {
     for (var i = 1; i < 50; i++) {
       var now = new Date((this.base += this.oneDay));
-      this.date.push(
-        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')
-      );
+      this.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
       this.data.push(Math.round((Math.random() - 0.5) * 20 + this.data[i - 1]));
-      this.data2.push(
-        Math.round((Math.random() - 0.5) * 20 + this.data2[i - 1])
-      );
+      this.data2.push(Math.round((Math.random() - 0.5) * 20 + this.data2[i - 1]));
     }
     let dataOptions = {
       title: {
@@ -67,13 +63,9 @@ class LineChartComponent extends Component {
 
     console.log(document.querySelector('#lineChartCanvasODS'));
 
-    let lineChartODS = echarts.init(
-      document.querySelector('#lineChartCanvasODS'),
-      lineChartODSTheme.name,
-      {
-        renderer: 'svg',
-      }
-    );
+    let lineChartODS = echarts.init(document.querySelector('#lineChartCanvasODS'), lineChartODSTheme.name, {
+      renderer: 'svg',
+    });
 
     lineChartODS.setOption(
       lineChartODSTheme

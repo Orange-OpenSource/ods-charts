@@ -39,26 +39,13 @@ export class ODSChartsPopoverItem {
 }
 
 export class ODSChartsPopoverDefinition {
-  public getOrCreatePopupInstance?: (
-    selector: string,
-    title: string,
-    htmlContent: string
-  ) => ODSChartsPopoverManager;
+  public getOrCreatePopupInstance?: (selector: string, title: string, htmlContent: string) => ODSChartsPopoverManager;
   public tooltipDelay?: number;
-  public getPopupTitle?: (
-    axisValue: string,
-    axisValueLabel?: string,
-    name?: string
-  ) => string;
+  public getPopupTitle?: (axisValue: string, axisValueLabel?: string, name?: string) => string;
   public getPopupContent?: (tooltipElements: ODSChartsPopoverItem[]) => string;
   public getPopupContentLine?: (tooltipElement: ODSChartsPopoverItem) => string;
-  public getPopupContentValue?: (
-    tooltipElement: ODSChartsPopoverItem
-  ) => string;
-  public getPopupTemplate?: (
-    categoryLabel: string,
-    tooltipElements: ODSChartsPopoverItem[]
-  ) => string;
+  public getPopupContentValue?: (tooltipElement: ODSChartsPopoverItem) => string;
+  public getPopupTemplate?: (categoryLabel: string, tooltipElements: ODSChartsPopoverItem[]) => string;
 }
 
 export enum ODSChartsPopoverAxisPointer {
@@ -134,14 +121,9 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
     this.tooltipDelay = 0;
   }
 
-  private _getOrCreatePopupInstance(
-    selector: string,
-    title: string,
-    htmlContent: string
-  ): ODSChartsPopoverManager {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string): ODSChartsPopoverManager {
     try {
-      let previousPopover: ODSChartsPopoverManager =
-        boosted.Popover.getInstance(document.querySelector(selector));
+      let previousPopover: ODSChartsPopoverManager = boosted.Popover.getInstance(document.querySelector(selector));
       if (previousPopover) {
         previousPopover.dispose();
       }
@@ -152,19 +134,16 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
     allowList.div = ['class'];
     allowList.label = ['class'];
 
-    return boosted.Popover.getOrCreateInstance(
-      document.querySelector(selector),
-      {
-        allowList: allowList,
-        html: true,
-        trigger: 'click',
-        placement: 'top',
-        container: 'body',
-        title: title,
-        content: htmlContent,
-        customClass: 'pe-none',
-      }
-    );
+    return boosted.Popover.getOrCreateInstance(document.querySelector(selector), {
+      allowList: allowList,
+      html: true,
+      trigger: 'click',
+      placement: 'top',
+      container: 'body',
+      title: title,
+      content: htmlContent,
+      customClass: 'pe-none',
+    });
   }
 }
 
@@ -175,11 +154,7 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
     this.tooltipDelay = 200;
   }
 
-  private _getOrCreatePopupInstance(
-    selector: string,
-    title: string,
-    htmlContent: string
-  ) {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string) {
     const elt: any = document.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];

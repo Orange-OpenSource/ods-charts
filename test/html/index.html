@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,20 +17,15 @@
     <script>
       var lineChartODSTheme = ODSCharts.getThemeManager({
         mode: ODSCharts.ODSChartsMode.LIGHT,
-        categoricalColors:
-          ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+        categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
         visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
         lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
       });
       echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
 
-      const chart1 = echarts.init(
-        document.getElementById('chart1'),
-        lineChartODSTheme.name,
-        {
-          renderer: 'svg',
-        }
-      );
+      const chart1 = echarts.init(document.getElementById('chart1'), lineChartODSTheme.name, {
+        renderer: 'svg',
+      });
       chart1.setOption({
         title: {
           text: 'ECharts Getting Started Example',
@@ -49,10 +44,7 @@
         ],
       });
 
-      const chart2 = echarts.init(
-        document.getElementById('chart2'),
-        lineChartODSTheme.name
-      );
+      const chart2 = echarts.init(document.getElementById('chart2'), lineChartODSTheme.name);
       chart2.setOption({
         xAxis: {
           data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -66,10 +58,7 @@
         ],
       });
 
-      const chart3 = echarts.init(
-        document.getElementById('chart3'),
-        lineChartODSTheme.name
-      );
+      const chart3 = echarts.init(document.getElementById('chart3'), lineChartODSTheme.name);
       chart3.setOption(
         lineChartODSTheme
           .setDataOptions({
@@ -95,10 +84,7 @@
           .getChartOptions()
       );
 
-      const chart4 = echarts.init(
-        document.getElementById('chart4'),
-        lineChartODSTheme.name
-      );
+      const chart4 = echarts.init(document.getElementById('chart4'), lineChartODSTheme.name);
       chart4.setOption(
         lineChartODSTheme
           .setDataOptions({
@@ -139,22 +125,13 @@
         for (var i = 1; i < NB_POINTS; i++) {
           data.push({
             time: dataDates[i],
-            value:
-              Math.random() < 0.3
-                ? undefined
-                : Math.round((Math.random() - 0.5) * 20 + lastValue),
+            value: Math.random() < 0.3 ? undefined : Math.round((Math.random() - 0.5) * 20 + lastValue),
           });
-          lastValue =
-            undefined !== data[data.length - 1].value
-              ? data[data.length - 1].value
-              : lastValue;
+          lastValue = undefined !== data[data.length - 1].value ? data[data.length - 1].value : lastValue;
         }
         return data;
       };
-      const chart5 = echarts.init(
-        document.getElementById('chart5'),
-        lineChartODSTheme.name
-      );
+      const chart5 = echarts.init(document.getElementById('chart5'), lineChartODSTheme.name);
       let lastYear = 0;
       chart5.setOption(
         lineChartODSTheme
@@ -214,13 +191,7 @@
             {
               getPopupTitle: (value) => {
                 const date = new Date(value);
-                return (
-                  date.getDate() +
-                  '/' +
-                  (date.getMonth() + 1) +
-                  '/' +
-                  date.getFullYear()
-                );
+                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
               },
             }
           )

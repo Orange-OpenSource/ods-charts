@@ -9,12 +9,12 @@
 import { type ECharts } from 'echarts';
 export class ODSChartsResize {
   private static sizeListeners: any = {};
-  private constructor(private echart: ECharts, private chartId: string) {}
+  private constructor(
+    private echart: ECharts,
+    private chartId: string
+  ) {}
 
-  public static addResizeManagement(
-    echart: ECharts,
-    chartId: string
-  ): ODSChartsResize {
+  public static addResizeManagement(echart: ECharts, chartId: string): ODSChartsResize {
     return new ODSChartsResize(echart, chartId);
   }
 
@@ -22,18 +22,12 @@ export class ODSChartsResize {
     this.removeListener();
 
     ODSChartsResize.sizeListeners[this.chartId] = this.resizeChart.bind(this);
-    window.addEventListener(
-      'resize',
-      ODSChartsResize.sizeListeners[this.chartId]
-    );
+    window.addEventListener('resize', ODSChartsResize.sizeListeners[this.chartId]);
   }
 
   private removeListener() {
     if (ODSChartsResize.sizeListeners[this.chartId]) {
-      window.removeEventListener(
-        'resize',
-        ODSChartsResize.sizeListeners[this.chartId]
-      );
+      window.removeEventListener('resize', ODSChartsResize.sizeListeners[this.chartId]);
       delete ODSChartsResize.sizeListeners[this.chartId];
     }
   }

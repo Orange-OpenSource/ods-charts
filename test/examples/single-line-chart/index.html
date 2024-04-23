@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,11 +15,7 @@
           <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
         </div>
         <div id="singleLineChart_holder">
-          <div
-            id="singleLineChart_chart"
-            style="width: 100%; height: 50vh"
-            class="position-relative"
-          ></div>
+          <div id="singleLineChart_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
         </div>
         <div id="singleLineChart_legend"></div>
       </div>
@@ -48,10 +44,8 @@
         // Build the theme
         var themeManager = ODSCharts.getThemeManager({
           mode: ODSCharts.ODSChartsMode.LIGHT,
-          categoricalColors:
-            ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE,
-          visualMapColor:
-            ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
+          categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE,
+          visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
           lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
           cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
         });
