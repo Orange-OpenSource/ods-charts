@@ -95,7 +95,7 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS}">Default supporting colours</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS}">Default supporting colors</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue</option>

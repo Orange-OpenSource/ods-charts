@@ -526,7 +526,7 @@ export class ODSChartsTheme {
    * - data from {@link setDataOptions}
    *
    * optionally you can use this call to set dataOptions
-   * @returns the Apache Echarts options
+   * @returns the Apache ECharts options
    */
   public getChartOptions(dataOptions?: any): any {
     if (dataOptions) {
