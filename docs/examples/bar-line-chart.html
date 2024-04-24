@@ -16,7 +16,9 @@
     <link rel="icon" href="../images/favicons/favicon.ico" />
     <meta name="msapplication-config" content="../images/favicons/browserconfig.xml" />
     <meta name="theme-color" content="#000" />
-    <!-- Here for access to maps, no logic behind -->
+    <!--
+      `ods-charts.js` is already imported by the iframe. However, it is imported here too to access the enums that are used in `index.js`.
+    -->
     <script type="text/javascript" src="../../dist/ods-charts.js"></script>
     <script type="module" src="./index.js"></script>
   </head>
