@@ -403,10 +403,10 @@ export class ODSChartsPopover {
       if (dataOptions?.tooltip?.formatter) {
         dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
         // But if no formatter has been provided through the popoverDefinition,
-        // we will use the Apache Echart config
+        // we will use the Apache ECharts config
         if (!this.popoverDefinition.getPopupContentValue) {
-          const formater = dataOptions.tooltip.formatter;
-          this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formater([tooltipElement]);
+          const formatter = dataOptions.tooltip.formatter;
+          this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formatter([tooltipElement]);
         }
         delete dataOptions.tooltip.formatter;
       }
