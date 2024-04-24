@@ -250,7 +250,7 @@ async function displayChart(
   let iframe = document.querySelector(`#${id} iframe`);
 
   if (!cssThemeName) {
-    cssThemeName = ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
+    cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
   }
   if (!popoverInput) {
     popoverInput = 'tooltip';
@@ -259,9 +259,9 @@ async function displayChart(
     popoverSharedInput = 'none';
   }
   if (!popoverAxisInput) {
-    popoverAxisInput = ODSCharts.ODSChartsPopoverAxisPointer.none;
+    popoverAxisInput = iframe.contentWindow.ODSCharts.ODSChartsPopoverAxisPointer.none;
   }
-  let cssTheme = ODSCharts.ODSChartsCSSThemes[cssThemeName];
+  let cssTheme = iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[cssThemeName];
 
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
     mode,
@@ -270,9 +270,11 @@ async function displayChart(
     lineStyle,
     cssTheme,
   });
-  cssThemeName = Object.keys(ODSCharts.ODSChartsCSSThemes).find((name) => _.isEqual(ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme));
+  cssThemeName = Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((name) =>
+    _.isEqual(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
+  );
   if (!popoverTemplateInput) {
-    popoverTemplateInput = ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ? 'internal' : 'external';
+    popoverTemplateInput = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ? 'internal' : 'external';
   }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
@@ -347,12 +349,12 @@ var dataOptions = ${JSON.stringify(options, undefined, 2)};
 ///////////////////////////////////////////////////
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
-  mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(ODSCharts.ODSChartsMode).find((key) => ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
+  mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(iframe.contentWindow.ODSCharts.ODSChartsMode).find((key) => iframe.contentWindow.ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
   categoricalColors: ${
     'string' === typeof themeManager.options.categoricalColors
       ? 'ODSCharts.ODSChartsCategoricalColorsSet.' +
-        Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find(
-          (key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === themeManager.options.categoricalColors
+        Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
+          (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === themeManager.options.categoricalColors
         )
       : `[
       ${themeManager.options.categoricalColors.map((color) =>
@@ -360,7 +362,9 @@ var themeManager = ODSCharts.getThemeManager({
           ? JSON.stringify(color)
           : `{"colorPalette": ${
               'ODSCharts.ODSChartsCategoricalColorsSet.' +
-              Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find((key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette)
+              Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
+                (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette
+              )
             }, "colorIndex": ${color.colorIndex}}`
       ).join(`,
       `)}
@@ -368,13 +372,17 @@ var themeManager = ODSCharts.getThemeManager({
   },
   visualMapColor:  ${
     'ODSCharts.ODSChartsSequentialColorsSet.' +
-    Object.keys(ODSCharts.ODSChartsSequentialColorsSet).find((key) => ODSCharts.ODSChartsSequentialColorsSet[key] === themeManager.options.visualMapColor)
+    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsSequentialColorsSet).find(
+      (key) => iframe.contentWindow.ODSCharts.ODSChartsSequentialColorsSet[key] === themeManager.options.visualMapColor
+    )
   },
   lineStyle: ${
     'ODSCharts.ODSChartsLineStyle.' +
-    Object.keys(ODSCharts.ODSChartsLineStyle).find((key) => ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle)
+    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsLineStyle).find(
+      (key) => iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle
+    )
   },
-  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)}
+  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)}
 });
 
 // register this theme to echarts
@@ -445,7 +453,9 @@ myChart.setOption(themeManager.getChartOptions());
             ? JSON.stringify(color)
             : `{"colorPalette": ${
                 'ODSCharts.ODSChartsCategoricalColorsSet.' +
-                Object.keys(ODSCharts.ODSChartsCategoricalColorsSet).find((key) => ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette)
+                Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
+                  (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette
+                )
               }, "colorIndex": ${color.colorIndex}}`
         ).join(`,
         `)}
@@ -468,7 +478,7 @@ myChart.setOption(themeManager.getChartOptions());
   }
 
   document.querySelectorAll(`#accordion_${id} .popover-renderer`).forEach((elt) => {
-    elt.style.display = ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName || 'none' === popoverInput ? 'none' : 'block';
+    elt.style.display = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName || 'none' === popoverInput ? 'none' : 'block';
   });
   document.querySelectorAll(`#accordion_${id} .popover-config`).forEach((elt) => {
     elt.style.display = 'none' === popoverInput ? 'none' : 'block';
@@ -492,7 +502,9 @@ myChart.setOption(themeManager.getChartOptions());
         tooltip: 'tooltip' === popoverInput,
         axisPointer: popoverAxisInput,
       },
-      iframe.contentWindow.ODSCharts.ODSChartsPopoverManagers['external' === popoverTemplateInput ? cssThemeName : ODSCharts.ODSChartsCSSThemesNames.NONE]
+      iframe.contentWindow.ODSCharts.ODSChartsPopoverManagers[
+        'external' === popoverTemplateInput ? cssThemeName : iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE
+      ]
     );
   }
 
