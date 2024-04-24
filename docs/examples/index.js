@@ -159,7 +159,7 @@ function generateConfigurator(id) {
             <div class="col-md-4 popover-renderer">
               <label for="popoverTemplateInput" class="form-label">Popover renderer</label>
               <select class="form-select" aria-label="Line style" id="popoverTemplateInput" onchange="changeTheme('${id}')">
-                <option value="internal">Chartjs renderer</option>
+                <option value="internal">Apache ECharts renderer</option>
                 <option value="external">Boosted renderer</option>
               </select>
             </div>
