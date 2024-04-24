@@ -6,10 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-
-
-
-
 export const COMMON_LINE_STYLE_BROKEN = {
   line: {
     itemStyle: {
