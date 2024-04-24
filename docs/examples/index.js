@@ -491,7 +491,7 @@ myChart.setOption(themeManager.getChartOptions());
   themeManager.setDataOptions(options);
   if (legends) {
     themeManager.externalizeLegends(myChart, `#${id}_legend`);
-    iframe.style.height = `calc(60vh + 2.375rem)`; // Quick fix but there is maybe other ways to fix scrollbars inside iframe
+    iframe.style.height = `calc(60vh + 2.375rem)`; // Fix to avoid having a vertical scrollbar within the iframe for the first rendering
   }
   themeManager.manageChartResize(myChart, chartId);
   if ('none' !== popoverInput) {
