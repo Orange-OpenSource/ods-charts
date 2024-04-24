@@ -117,7 +117,7 @@ Adhering to the following process is the best way to get your work included in t
 
 ### Checking Coding Style
 
-Format your code before committing to ensure your changes follow our coding standards.
+Format your code before committing to ensure your changes follow our coding standards. Please check the [Developer Guide > Formatting](DEVELOP.md#formatting) section for more information.
 
 ## License
 
