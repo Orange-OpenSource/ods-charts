@@ -1,5 +1,3 @@
-import 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js';
-
 const BOOSTED4_VERSION = '4.6.2';
 const BOOSTED5_VERSION = '5.3.3';
 
@@ -271,7 +269,7 @@ async function displayChart(
     cssTheme,
   });
   cssThemeName = Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((name) =>
-    _.isEqual(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name], themeManager.options.cssTheme)
+    JSON.stringify(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name]) === JSON.stringify(themeManager.options.cssTheme)
   );
   if (!popoverTemplateInput) {
     popoverTemplateInput = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ? 'internal' : 'external';
@@ -323,7 +321,7 @@ async function displayChart(
 
   legends = (options.legend && options.legend.data && !options.legend.show) || (options.dataset && options.dataset.source);
 
-  var dataOptions = _.cloneDeep(options);
+  var dataOptions = JSON.parse(JSON.stringify(options));
 
   var chartId = id + '_chart';
   let customColorOption = undefined;
