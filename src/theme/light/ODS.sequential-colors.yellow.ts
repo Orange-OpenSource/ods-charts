@@ -7,12 +7,5 @@
 //
 
 export const LIGHT_SEQUENTIAL_COLORS_YELLOW = {
-  visualMapColor: [
-    '#9D6E06',
-    '#B98F11',
-    '#FFB400',
-    '#FFD200',
-    '#FFE45B',
-    '#FFF6B6',
-  ],
+  visualMapColor: ['#9D6E06', '#B98F11', '#FFB400', '#FFD200', '#FFE45B', '#FFF6B6'],
 };

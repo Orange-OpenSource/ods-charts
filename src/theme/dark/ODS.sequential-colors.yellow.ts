@@ -7,12 +7,5 @@
 //
 
 export const DARK_SEQUENTIAL_COLORS_YELLOW = {
-  visualMapColor: [
-    '#FFF6B6',
-    '#FFE45B',
-    '#FFD200',
-    '#FFB400',
-    '#B98F11',
-    '#9D6E06',
-  ],
+  visualMapColor: ['#FFF6B6', '#FFE45B', '#FFD200', '#FFB400', '#B98F11', '#9D6E06'],
 };

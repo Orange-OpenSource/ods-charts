@@ -7,12 +7,5 @@
 //
 
 export const DARK_SEQUENTIAL_COLORS_PINK = {
-  visualMapColor: [
-    '#FFE8F7',
-    '#FFCEEF',
-    '#FFB4E6',
-    '#FF8AD4',
-    '#D573BB',
-    '#BC4D9A',
-  ],
+  visualMapColor: ['#FFE8F7', '#FFCEEF', '#FFB4E6', '#FF8AD4', '#D573BB', '#BC4D9A'],
 };
