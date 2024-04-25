@@ -277,37 +277,47 @@ export class ODSChartsPopover {
       if (!this.popoverDefinition.getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
-            position: (pos: any, params: any, dom: any, rect: any, size: any) => {
-              let obj: any = {
-                left: pos[0] - size.contentSize[0] / 2,
+            position: (
+              mousePosition: number[],
+              params: any,
+              dom: HTMLElement,
+              rect: { [position: string]: number },
+              containerSize: { [size: string]: number[] }
+            ) => {
+              let tooltipPosition: { [position: string]: number | string } = {
+                left: mousePosition[0] - containerSize.contentSize[0] / 2,
               };
 
               if (dataOptions?.tooltip?.confine) {
-                const x = pos[0];
-                const arrowSize = 10;
-                const bottom = pos[1] > size.contentSize[1];
-                let tmp;
+                const arrowSize: number = 10;
+                const displayTooltipOnTop: boolean = mousePosition[1] > containerSize.contentSize[1];
+                let tooltipLeftPosition: number;
 
-                obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;
+                tooltipPosition[['top', 'bottom'][+displayTooltipOnTop]] = displayTooltipOnTop
+                  ? containerSize.viewSize[1] - mousePosition[1] + 10
+                  : mousePosition[1] + 10;
 
-                if (x > size.viewSize[0] - size.contentSize[0] / 2) {
-                  tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
-                } else if (x < size.contentSize[0] / 2) {
-                  tmp = Math.max(pos[0] - arrowSize, 5);
+                if (mousePosition[0] > containerSize.viewSize[0] - containerSize.contentSize[0] / 2) {
+                  tooltipLeftPosition = Math.min(
+                    mousePosition[0] - containerSize.viewSize[0] + containerSize.contentSize[0] - arrowSize,
+                    containerSize.contentSize[0] - arrowSize * 2 - 5
+                  );
+                } else if (mousePosition[0] < containerSize.contentSize[0] / 2) {
+                  tooltipLeftPosition = Math.max(mousePosition[0] - arrowSize, 5);
                 } else {
-                  tmp = size.contentSize[0] / 2 - arrowSize;
+                  tooltipLeftPosition = containerSize.contentSize[0] / 2 - arrowSize;
                 }
 
-                this.tooltipStyle = `${tmp}px;`;
+                this.tooltipStyle = `${tooltipLeftPosition}px;`;
 
-                if (!bottom) {
+                if (!displayTooltipOnTop) {
                   this.tooltipStyle += ' top: -8px; transform: scaleY(-1);';
                 }
               } else {
-                obj['top'] = pos[1] - size.contentSize[1] - 10;
+                tooltipPosition['top'] = mousePosition[1] - containerSize.contentSize[1] - 10;
               }
 
-              return obj;
+              return tooltipPosition;
             },
 
             formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
