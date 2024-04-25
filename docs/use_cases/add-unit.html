@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Examples - Specific use cases - Confine tooltip example</title>
+    <title>Examples - Specific use cases - Add unit</title>
 
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous" />
@@ -36,21 +36,30 @@
     </header>
     <div class="title-bar">
       <div class="container-xxl">
-        <h1 class="display-1">Confine tooltip example</h1>
+        <h1 class="display-1">Add unit</h1>
       </div>
     </div>
     <div class="container pt-3">
       <div class="card w-100">
         <div class="card-body">
-          <h5 class="card-title">Confine tooltip example</h5>
-          <p class="card-text">ODS Charts library uses the tooltip containment feature of the Apache ECharts library to ensure that the tooltip or popover is displayed within the confines of the graph, avoiding overflow beyond the display window.</p>
+          <h5 class="card-title">Add unit in both Y axis and tooltip display</h5>
+          <p class="card-text">Apache ECharts offer the availability to add a unit formatter.</p>
           <p class="card-text">
-            This function is activated by configuring the graph options as follows:
+            There are two functions to provide. One for Y axis and one for the tooltip:
             <code>
               <pre>
-tooltip: {
-    confine: true,
-}
+                yAxis: {
+                  axisLabel: {
+                    formatter: "{value} °C" 
+                  }
+                },
+                tooltip: {
+                  formatter: function (params) {
+                    return (
+                      Math.round(params[0].value * 100) / 100 + " °C"
+                    );
+                  }
+                },  
               </pre>
             </code>
           </p>
@@ -76,32 +85,58 @@ tooltip: {
         // Used data
         ///////////////////////////////////////////////////
 
+        var goals = new Array(...new Array(12).keys()).map((i) => {
+          return 50 + Math.random() * 50;
+        });
+
+        var resultsOK = new Array(...new Array(12).keys()).map((i) => {
+          return 50 + Math.random() * 50;
+        });
+
+        var resultsNOK = new Array(...new Array(12).keys()).map((i) => {
+          return 50 + Math.random() * 50;
+        });
+        var dates = new Array(...new Array(12).keys()).map((i) => {
+          var d = new Date();
+          d.setMonth(d.getMonth() - i);
+          return d.toLocaleDateString(undefined, {
+            month: 'short',
+            year: 'numeric',
+          });
+        });
+
         // Data to be displayed
         var dataOptions = {
-          grid: {
-            left: '0%',
-            right: '0%',
-          },
           xAxis: {
             type: 'category',
-            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            data: dates,
           },
-          yAxis: {},
+          yAxis: {
+            axisLabel: {
+              formatter: '{value} °C',
+            },
+          },
+          tooltip: {
+            formatter: function (params) {
+              return Math.round(params[0].value * 100) / 100 + ' °C';
+            },
+          },
           series: [
             {
-              data: [10, 22, 28.8956454657, 23, 19, 15],
+              data: resultsOK,
               type: 'bar',
             },
             {
-              data: [12, 28.8956454657, 23, 15, 15, 18],
+              data: resultsNOK,
+              type: 'bar',
+            },
+            {
+              data: goals,
               type: 'line',
             },
           ],
           legend: {
-            data: ['label 0', 'label 1'],
-          },
-          tooltip: {
-            confine: true,
+            data: ['Results OK', 'Results NOK', 'Goal'],
           },
         };
 

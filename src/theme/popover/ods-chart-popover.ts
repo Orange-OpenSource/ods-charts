@@ -6,11 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-import {
-  ODSChartsCSSThemeDefinition,
-  ODSChartsCSSThemesNames,
-  ODSChartsItemCSSDefinition,
-} from '../css-themes/css-themes';
+import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
 import { mergeObjects, isVarArray } from '../../tools/merge-objects';
 import {
   ODSChartsPopoverAxisPointer,
@@ -19,10 +15,7 @@ import {
   ODSChartsPopoverItem,
   ODSChartsPopoverManagers,
 } from './ods-chart-popover-definitions';
-import {
-  ODSChartsLegendData,
-  ODSChartsLegends,
-} from '../legends/ods-chart-legends';
+import { ODSChartsLegendData, ODSChartsLegends } from '../legends/ods-chart-legends';
 import { cloneDeepObject } from '../../tools/clone-deep-object';
 import { ODSChartsMode } from '../ods-chart-theme';
 import { isMainAxis } from '../const/main-axis-type.const';
@@ -116,13 +109,9 @@ export class ODSChartsPopover {
     private popoverConfig: ODSChartsPopoverConfig
   ) {}
 
-  public static addPopoverManagement(
-    popoverDefinition: ODSChartsPopoverDefinition,
-    popoverConfig: ODSChartsPopoverConfig
-  ): ODSChartsPopover {
+  public static addPopoverManagement(popoverDefinition: ODSChartsPopoverDefinition, popoverConfig: ODSChartsPopoverConfig): ODSChartsPopover {
     if (undefined === popoverDefinition) {
-      popoverDefinition =
-        ODSChartsPopoverManagers.NONE as ODSChartsPopoverDefinition;
+      popoverDefinition = ODSChartsPopoverManagers.NONE as ODSChartsPopoverDefinition;
     }
     if (undefined === popoverConfig) {
       popoverConfig = {};
@@ -140,10 +129,7 @@ export class ODSChartsPopover {
       popoverConfig.tooltip = true;
     }
     if (undefined === popoverConfig.tooltipDelay) {
-      popoverConfig.tooltipDelay =
-        undefined === popoverDefinition.tooltipDelay
-          ? 0
-          : popoverDefinition.tooltipDelay;
+      popoverConfig.tooltipDelay = undefined === popoverDefinition.tooltipDelay ? 0 : popoverDefinition.tooltipDelay;
     }
     if (!popoverConfig.shared && 'none' !== popoverConfig.axisPointer) {
       console.warn(
@@ -154,14 +140,8 @@ export class ODSChartsPopover {
     return new ODSChartsPopover(popoverDefinition, popoverConfig);
   }
 
-  private getTooltipTrigger(
-    dataOptions: any,
-    themeOptions: any
-  ): 'xAxis' | 'yAxis' | 'grid' {
-    let tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' =
-      this.popoverConfig.axisPointer === 'cross'
-        ? 'grid'
-        : (this.popoverConfig.tooltipTrigger as any);
+  private getTooltipTrigger(dataOptions: any, themeOptions: any): 'xAxis' | 'yAxis' | 'grid' {
+    let tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' = this.popoverConfig.axisPointer === 'cross' ? 'grid' : (this.popoverConfig.tooltipTrigger as any);
 
     if (undefined == tooltipTrigger) {
       for (const axis of ['xAxis', 'yAxis'] as ['xAxis', 'yAxis']) {
@@ -172,22 +152,14 @@ export class ODSChartsPopover {
     }
     if (undefined == tooltipTrigger) {
       for (const axis of ['xAxis', 'yAxis'] as ['xAxis', 'yAxis']) {
-        if (
-          themeOptions[axis] &&
-          themeOptions[axis].splitLine &&
-          themeOptions[axis].splitLine.show
-        ) {
+        if (themeOptions[axis] && themeOptions[axis].splitLine && themeOptions[axis].splitLine.show) {
           tooltipTrigger = tooltipTrigger ? (undefined as any) : axis;
         }
       }
     }
     if (undefined == tooltipTrigger) {
       for (const axis of ['xAxis', 'yAxis'] as ['xAxis', 'yAxis']) {
-        if (
-          themeOptions[axis] &&
-          themeOptions[axis].axisLine &&
-          themeOptions[axis].axisLine.show
-        ) {
+        if (themeOptions[axis] && themeOptions[axis].axisLine && themeOptions[axis].axisLine.show) {
           tooltipTrigger = tooltipTrigger ? (undefined as any) : axis;
         }
       }
@@ -215,11 +187,7 @@ export class ODSChartsPopover {
     return {
       categoryLabel:
         this.popoverDefinition && this.popoverDefinition.getPopupTitle
-          ? this.popoverDefinition.getPopupTitle(
-              params[0].axisValue,
-              params[0].axisValueLabel,
-              params[0].name
-            )
+          ? this.popoverDefinition.getPopupTitle(params[0].axisValue, params[0].axisValueLabel, params[0].name)
           : params[0].axisValueLabel || params[0].axisValue || params[0].name,
       tooltipElements: params
         .map(
@@ -228,11 +196,7 @@ export class ODSChartsPopover {
             color?: string;
             value?: any;
             seriesIndex?: number;
-            axisType?:
-              | 'xAxis.time'
-              | 'xAxis.category'
-              | 'yAxis.time'
-              | 'yAxis.category';
+            axisType?: 'xAxis.time' | 'xAxis.category' | 'yAxis.time' | 'yAxis.category';
           }) => {
             const legendLabel =
               legends &&
@@ -242,32 +206,21 @@ export class ODSChartsPopover {
                 return legends.names[index] === param.seriesName;
               });
             const itemValue =
-              isVarArray(param.value) &&
-              2 == param.value.length &&
-              (!param.axisType || param.axisType.endsWith('.time'))
+              isVarArray(param.value) && 2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))
                 ? param.value[1]
-                : isVarArray(param.value) &&
-                  (param.seriesIndex as number) + 1 < param.value.length
-                ? param.value[(param.seriesIndex as number) + 1]
-                : isVarArray(param.value)
-                ? undefined
-                : param.value;
-            const element: ODSChartsPopoverItem = mergeObjects(
-              cloneDeepObject(param),
-              {
-                markerColor: param.color,
-                itemValue: itemValue,
-                label: legendLabel || '',
-              }
-            );
+                : isVarArray(param.value) && (param.seriesIndex as number) + 1 < param.value.length
+                  ? param.value[(param.seriesIndex as number) + 1]
+                  : isVarArray(param.value)
+                    ? undefined
+                    : param.value;
+            const element: ODSChartsPopoverItem = mergeObjects(cloneDeepObject(param), {
+              markerColor: param.color,
+              itemValue: itemValue,
+              label: legendLabel || '',
+            });
 
-            if (
-              undefined !== element.itemValue &&
-              this.popoverDefinition &&
-              this.popoverDefinition.getPopupContentValue
-            ) {
-              element.itemValue =
-                this.popoverDefinition.getPopupContentValue(element);
+            if (undefined !== element.itemValue && this.popoverDefinition && this.popoverDefinition.getPopupContentValue) {
+              element.itemValue = this.popoverDefinition.getPopupContentValue(element);
             }
 
             return element;
@@ -282,27 +235,15 @@ export class ODSChartsPopover {
     };
   }
 
-  public addPopoverManagement(
-    dataOptions: any,
-    themeOptions: any,
-    cssTheme: ODSChartsCSSThemeDefinition,
-    cssThemeName: string,
-    mode: ODSChartsMode
-  ) {
-    if (
-      ODSChartsCSSThemesNames.NONE === cssThemeName &&
-      !document.querySelector('#ods-chart-popover-none-css')
-    ) {
+  public addPopoverManagement(dataOptions: any, themeOptions: any, cssTheme: ODSChartsCSSThemeDefinition, cssThemeName: string, mode: ODSChartsMode) {
+    if (ODSChartsCSSThemesNames.NONE === cssThemeName && !document.querySelector('#ods-chart-popover-none-css')) {
       let style = document.createElement('style');
       style.id = 'ods-chart-popover-none-css';
       style.textContent = DEFAULT_NONE_CSS;
       document.head.appendChild(style);
     }
     const popoverOptions = {};
-    const tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' = this.getTooltipTrigger(
-      dataOptions,
-      themeOptions
-    );
+    const tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' = this.getTooltipTrigger(dataOptions, themeOptions);
 
     let legends: ODSChartsLegendData = undefined as any;
     try {
@@ -347,7 +288,7 @@ export class ODSChartsPopover {
                 const bottom = pos[1] > size.contentSize[1];
                 let tmp;
 
-                obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;              
+                obj[['top', 'bottom'][+bottom]] = bottom ? size.viewSize[1] - pos[1] + 10 : pos[1] + 10;
 
                 if (x > size.viewSize[0] - size.contentSize[0] / 2) {
                   tmp = Math.min(pos[0] - size.viewSize[0] + size.contentSize[0] - arrowSize, size.contentSize[0] - arrowSize * 2 - 5);
@@ -369,9 +310,7 @@ export class ODSChartsPopover {
               return obj;
             },
 
-            formatter: (
-              params: ODSChartsPopoverItem[] | ODSChartsPopoverItem
-            ) => {
+            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
                 params = [params as ODSChartsPopoverItem];
               }
@@ -381,10 +320,7 @@ export class ODSChartsPopover {
               return elements && elements.tooltipElements.length > 0
                 ? new DOMParser().parseFromString(
                     this.popoverDefinition.getPopupTemplate
-                      ? this.popoverDefinition.getPopupTemplate(
-                          elements.categoryLabel,
-                          elements.tooltipElements
-                        )
+                      ? this.popoverDefinition.getPopupTemplate(elements.categoryLabel, elements.tooltipElements)
                       : this.getPopupTemplate(elements, cssTheme, mode),
                     'text/html'
                   ).body.firstChild
@@ -394,9 +330,7 @@ export class ODSChartsPopover {
             hideDelay: 0,
             appendTo: 'body',
             renderMode: 'html',
-            className: `ods-charts-popover ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
-              cssTheme.popover?.odsChartsPopover
-            )}`,
+            className: `ods-charts-popover ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
             enterable: true,
             axisPointer: {
               type: this.popoverConfig.axisPointer,
@@ -423,9 +357,7 @@ export class ODSChartsPopover {
       } else {
         mergeObjects(popoverOptions, {
           tooltip: {
-            formatter: (
-              params: ODSChartsPopoverItem[] | ODSChartsPopoverItem
-            ) => {
+            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
                 params = [params as ODSChartsPopoverItem];
               }
@@ -436,12 +368,7 @@ export class ODSChartsPopover {
                 tooltipElements: ODSChartsPopoverItem[];
               } = this.getTooltipElements(params, legends);
               if (elements && elements.tooltipElements.length > 0) {
-                this.displayPopup(
-                  window.event as MouseEvent,
-                  elements,
-                  cssTheme,
-                  mode
-                );
+                this.displayPopup(window.event as MouseEvent, elements, cssTheme, mode);
               }
               return ' ';
             },
@@ -472,10 +399,19 @@ export class ODSChartsPopover {
         });
       }
 
-      if (
-        !this.popoverConfig.shared &&
-        'none' === this.popoverConfig.axisPointer
-      ) {
+      // We have to delete any default formatter as it is incompatible with externalizePopover feature
+      if (dataOptions?.tooltip?.formatter) {
+        dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
+        // But if no formatter has been provided through the popoverDefinition,
+        // we will use the Apache ECharts config
+        if (!this.popoverDefinition.getPopupContentValue) {
+          const formatter = dataOptions.tooltip.formatter;
+          this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formatter([tooltipElement]);
+        }
+        delete dataOptions.tooltip.formatter;
+      }
+
+      if (!this.popoverConfig.shared && 'none' === this.popoverConfig.axisPointer) {
         mergeObjects(popoverOptions, { tooltip: { trigger: 'item' } });
       } else {
         mergeObjects(popoverOptions, { tooltip: { trigger: 'axis' } });
@@ -490,71 +426,43 @@ export class ODSChartsPopover {
     mergeObjects(themeOptions, popoverOptions);
   }
 
-  private getPopupContentLine(
-    element: ODSChartsPopoverItem,
-    cssTheme: ODSChartsCSSThemeDefinition,
-    mode: ODSChartsMode
-  ): string {
+  private getPopupContentLine(element: ODSChartsPopoverItem, cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode): string {
     return `<div 
-    class="ods-charts-popover-line ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
-      cssTheme.popover?.odsChartsPopoverLine
-    )}"
-    style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverLine
-    )}"    
+    class="ods-charts-popover-line ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverLine)}"
+    style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverLine)}"    
     >
       <span class="ods-charts-popover-color-holder ${ODSChartsItemCSSDefinition.getClasses(
         cssTheme.popover?.odsChartsPopoverColorHolder
-      )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverColorHolder
-    )}" >  
+      )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColorHolder)}" >  
         <span 
-          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(
-            cssTheme.popover?.odsChartsPopoverColor
-          )}"  style="background-color:${
-      element.markerColor
-    };  ${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverColor
-    )};">
+          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
+            element.markerColor
+          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
         </span> 
       </span>
     
       <label class="ods-charts-popover-text ${ODSChartsItemCSSDefinition.getClasses(
         cssTheme.popover?.odsChartsPopoverText
-      )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverText
-    )}" >
+      )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverText)}" >
         <span class="ods-charts-popover-label ${ODSChartsItemCSSDefinition.getClasses(
           cssTheme.popover?.odsChartsPopoverLabel
-        )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverLabel
-    )}" >${element.label ? element.label + ': ' : ''}</span>
+        )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverLabel)}" >${element.label ? element.label + ': ' : ''}</span>
         <span class="ods-charts-popover-value ${ODSChartsItemCSSDefinition.getClasses(
           cssTheme.popover?.odsChartsPopoverValue
-        )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverValue
-    )}">${element.itemValue}</span>
+        )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverValue)}">${element.itemValue}</span>
       </label>
     </div>
         `;
   }
 
-  private getPopupContent(
-    tooltipElements: ODSChartsPopoverItem[],
-    cssTheme: ODSChartsCSSThemeDefinition,
-    mode: ODSChartsMode
-  ): string {
+  private getPopupContent(tooltipElements: ODSChartsPopoverItem[], cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode): string {
     return `
     <div  class="ods-charts-popover-body-content ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverBodyContent
-    )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverBodyContent
-    )}" >
+    )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverBodyContent)}" >
         ${tooltipElements
           .map((element) =>
-            this.popoverDefinition.getPopupContentLine
-              ? this.popoverDefinition.getPopupContentLine(element)
-              : this.getPopupContentLine(element, cssTheme, mode)
+            this.popoverDefinition.getPopupContentLine ? this.popoverDefinition.getPopupContentLine(element) : this.getPopupContentLine(element, cssTheme, mode)
           )
           .join('')}
     </div>
@@ -578,40 +486,26 @@ export class ODSChartsPopover {
 
     return `
   <div class="ods-charts-popover-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
-      cssTheme.popover?.odsChartsPopoverHolder
-    )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverHolder
-    )}">
+    cssTheme.popover?.odsChartsPopoverHolder
+  )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverHolder)}">
     <div class="ods-charts-popover-inner ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverInner
-    )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverInner
-    )}">
+    )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverInner)}">
       <div class="ods-charts-popover-content ${ODSChartsItemCSSDefinition.getClasses(
         cssTheme.popover?.odsChartsPopoverContent
-      )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverContent
-    )}" >
+      )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverContent)}" >
         <div class="ods-charts-popover-arrow ${ODSChartsItemCSSDefinition.getClasses(
           cssTheme.popover?.odsChartsPopoverArrow
-        )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverArrow
-    )}; left: ${this.tooltipStyle}" ></div>
+        )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>
           <div class="ods-charts-popover-header ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverHeader
-          )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverHeader
-    )}">${elements.categoryLabel}</div>
+          )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverHeader)}">${elements.categoryLabel}</div>
           <div class="ods-charts-popover-body ${ODSChartsItemCSSDefinition.getClasses(
             cssTheme.popover?.odsChartsPopoverBody
-          )}" style="${ODSChartsItemCSSDefinition.getStyles(
-      cssTheme.popover?.odsChartsPopoverBody
-    )}">
+          )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverBody)}">
             ${
               this.popoverDefinition.getPopupContent
-                ? this.popoverDefinition.getPopupContent(
-                    elements.tooltipElements
-                  )
+                ? this.popoverDefinition.getPopupContent(elements.tooltipElements)
                 : this.getPopupContent(elements.tooltipElements, cssTheme, mode)
             }
           </div>
@@ -643,20 +537,11 @@ export class ODSChartsPopover {
     }
     let id = '' + Math.ceil(Math.random() * 100000);
 
-    let tooltipAnchor: HTMLElement = document.querySelector(
-      '.libPopupTooltipAnchor'
-    ) as HTMLElement;
+    let tooltipAnchor: HTMLElement = document.querySelector('.libPopupTooltipAnchor') as HTMLElement;
     if (!tooltipAnchor) {
-      document.body.appendChild(
-        new DOMParser().parseFromString(
-          `<div class="libPopupTooltipAnchor" ></div>`,
-          'text/html'
-        ).body.firstChild as ChildNode
-      );
+      document.body.appendChild(new DOMParser().parseFromString(`<div class="libPopupTooltipAnchor" ></div>`, 'text/html').body.firstChild as ChildNode);
     }
-    tooltipAnchor = document.querySelector(
-      '.libPopupTooltipAnchor'
-    ) as HTMLElement;
+    tooltipAnchor = document.querySelector('.libPopupTooltipAnchor') as HTMLElement;
     tooltipAnchor.setAttribute('data-id', id);
     tooltipAnchor.setAttribute(
       'style',
@@ -689,9 +574,7 @@ export class ODSChartsPopover {
               popover.dispose();
             } catch (error) {}
           },
-          this.popoverConfig.tooltipTimeout
-            ? this.popoverConfig.tooltipTimeout
-            : 3000
+          this.popoverConfig.tooltipTimeout ? this.popoverConfig.tooltipTimeout : 3000
         );
       }
 

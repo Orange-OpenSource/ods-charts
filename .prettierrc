@@ -1,0 +1,24 @@
+{
+  "bracketSameLine": true,
+  "printWidth": 160,
+  "quoteProps": "consistent",
+  "semi": true,
+  "singleAttributePerLine": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": ["*.css", "*.yml"],
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": ["*.css", "*.html"],
+      "options": {
+        "printWidth": 500
+      }
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 /node_modules
 /dist
 ods-charts*.tgz
-/.vscode
 /docs/api

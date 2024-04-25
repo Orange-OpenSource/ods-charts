@@ -48,16 +48,9 @@ export class GraphComponent implements AfterViewInit {
 
     echarts.registerTheme(this.myTheme.name, this.myTheme.theme);
 
-    this.echartsGraph = echarts.init(
-      this.graph.nativeElement,
-      this.myTheme.name
-    );
+    this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
 
-    this.options = this.myTheme
-      .setDataOptions(this.options)
-      .externalizeLegends(this.echartsGraph, '#legend')
-      .externalizePopover()
-      .getChartOptions();
+    this.options = this.myTheme.setDataOptions(this.options).externalizeLegends(this.echartsGraph, '#legend').externalizePopover().getChartOptions();
 
     this.echartsGraph.setOption(this.options);
   }

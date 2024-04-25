@@ -43,23 +43,15 @@ import { DARK_SEQUENTIAL_COLORS_GREEN } from './dark/ODS.sequential-colors.green
 import { DARK_SEQUENTIAL_COLORS_PINK } from './dark/ODS.sequential-colors.pink';
 import { DARK_SEQUENTIAL_COLORS_PURPLE } from './dark/ODS.sequential-colors.purple';
 import { DARK_SEQUENTIAL_COLORS_YELLOW } from './dark/ODS.sequential-colors.yellow';
-import { ODS_PROJECT } from './ODS.project';
+import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
-import {
-  ODSChartsCSSThemeDefinition,
-  ODSChartsCSSThemes,
-  ODSChartsCSSThemesNames,
-} from './css-themes/css-themes';
+import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemes, ODSChartsCSSThemesNames } from './css-themes/css-themes';
 import { getStringValue } from '../tools/hash';
 import { cloneDeepObject } from '../tools/clone-deep-object';
 import { ODSChartsPopover } from './popover/ods-chart-popover';
-import {
-  ODSChartsPopoverConfig,
-  ODSChartsPopoverDefinition,
-  ODSChartsPopoverManagers,
-} from './popover/ods-chart-popover-definitions';
+import { ODSChartsPopoverConfig, ODSChartsPopoverDefinition, ODSChartsPopoverManagers } from './popover/ods-chart-popover-definitions';
 import { isMainAxis } from './const/main-axis-type.const';
 
 export enum ODSChartsCategoricalColorsSet {
@@ -90,9 +82,7 @@ export enum ODSChartsCategoricalColorsSet {
  * }
  * ```
  */
-export type ODSChartsCustomCategoricalColor =
-  | ODSChartsCategoricalColor
-  | string;
+export type ODSChartsCustomCategoricalColor = ODSChartsCategoricalColor | string;
 
 /**
  * ODSChartsCategoricalColor is a color extract from one set of color of Orange Design System.
@@ -163,9 +153,7 @@ export interface ODSChartsThemeOptions {
    * ```
    * Default categoricalColors is {@link ODSChartsCategoricalColorsSet.DEFAULT}
    */
-  categoricalColors?:
-    | ODSChartsCategoricalColorsSet
-    | ODSChartsCustomCategoricalColor[];
+  categoricalColors?: ODSChartsCategoricalColorsSet | ODSChartsCustomCategoricalColor[];
   /**
    * visualMapColor is the set of colors to be used if map graphs (like Heatmap)
    *
@@ -289,24 +277,19 @@ const THEMES: {
  */
 export class ODSChartsTheme {
   private dataOptions: any;
-  private chartLegendManager: ODSChartsLegends =
-    undefined as unknown as ODSChartsLegends;
-  private chartResizeManager: ODSChartsResize =
-    undefined as unknown as ODSChartsResize;
-  private chartPopoverManager: ODSChartsPopover =
-    undefined as unknown as ODSChartsPopover;
+  private chartLegendManager: ODSChartsLegends = undefined as unknown as ODSChartsLegends;
+  private chartResizeManager: ODSChartsResize = undefined as unknown as ODSChartsResize;
+  private chartPopoverManager: ODSChartsPopover = undefined as unknown as ODSChartsPopover;
   public cssThemeName: ODSChartsCSSThemesNames;
 
   private constructor(
     public name: string,
-    public theme: any,
+    public theme: EChartsProject,
     public options: ODSChartsThemeOptions
   ) {
     this.cssThemeName =
       (Object.keys(ODSChartsCSSThemes).find(
-        (oneTheme) =>
-          ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] ===
-          options.cssTheme
+        (oneTheme) => ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] === options.cssTheme
       ) as ODSChartsCSSThemesNames) || ODSChartsCSSThemesNames.CUSTOM;
   }
 
@@ -319,9 +302,7 @@ export class ODSChartsTheme {
    * @param options: default option used to generate the theme
    * @returns the theme manager
    */
-  public static getThemeManager(
-    options?: ODSChartsThemeOptions
-  ): ODSChartsTheme {
+  public static getThemeManager(options?: ODSChartsThemeOptions): ODSChartsTheme {
     if (!options) {
       options = {};
     }
@@ -330,8 +311,7 @@ export class ODSChartsTheme {
     }
     const mode: ODSChartsMode = options.mode;
     if (!options.categoricalColors) {
-      options.categoricalColors =
-        ODSChartsCategoricalColorsSet.DEFAULT;
+      options.categoricalColors = ODSChartsCategoricalColorsSet.DEFAULT;
     }
     if (!options.visualMapColor) {
       options.visualMapColor = ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE;
@@ -342,49 +322,32 @@ export class ODSChartsTheme {
     if (!options.cssTheme) {
       options.cssTheme = ODSChartsCSSThemes.NONE;
     }
-    var themeName = `ods.${getStringValue(mode)}.${getStringValue(
-      options.categoricalColors
-    )}.${getStringValue(options.visualMapColor)}.${getStringValue(
+    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.categoricalColors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
       options.lineStyle
     )}`;
 
-    const theme = cloneDeepObject(ODS_PROJECT);
+    const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].common));
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].linesAxis));
 
     if (typeof options.categoricalColors === 'string') {
-      mergeObjects(
-        theme,
-        cloneDeepObject(
-          THEMES[mode].categoricalColors[options.categoricalColors]
-        )
-      );
+      mergeObjects(theme, cloneDeepObject(THEMES[mode].categoricalColors[options.categoricalColors]));
     } else {
       mergeObjects(
         theme,
         cloneDeepObject({
           color: options.categoricalColors.map((color) =>
-            'string' === typeof color
-              ? color
-              : THEMES[mode].categoricalColors[color.colorPalette].color[
-                  color.colorIndex
-                ]
+            'string' === typeof color ? color : THEMES[mode].categoricalColors[color.colorPalette].color[color.colorIndex]
           ),
         })
       );
     }
 
-    mergeObjects(
-      theme,
-      cloneDeepObject(THEMES[mode].sequentialColors[options.visualMapColor])
-    );
+    mergeObjects(theme, cloneDeepObject(THEMES[mode].sequentialColors[options.visualMapColor]));
 
-    mergeObjects(
-      theme,
-      cloneDeepObject(THEMES[mode].linesStyle[options.lineStyle])
-    );
+    mergeObjects(theme, cloneDeepObject(THEMES[mode].linesStyle[options.lineStyle]));
 
     return new ODSChartsTheme(themeName, theme, options);
   }
@@ -416,6 +379,23 @@ export class ODSChartsTheme {
     return this;
   }
 
+  private getDisplayedColors(themeColors: string[]) {
+    const colors: string[] = cloneDeepObject(themeColors);
+    if (this.dataOptions && this.dataOptions.series) {
+      for (let serieIndex = 0; serieIndex < this.dataOptions.series.length; serieIndex++) {
+        const serie = this.dataOptions.series[serieIndex];
+        if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[serieIndex]) {
+          const previousColorIndex = colors.indexOf(serie.itemStyle.color);
+          if (previousColorIndex > -1) {
+            colors.splice(previousColorIndex, 1);
+          }
+          colors.splice(serieIndex, 0, serie.itemStyle.color);
+        }
+      }
+    }
+    return colors;
+  }
+
   /**
    * getThemeOptions() can be used to get the options that should be added to charts options to implement the Orange Design System.
    *
@@ -429,35 +409,32 @@ export class ODSChartsTheme {
       this.dataOptions = dataOptions;
     }
     if (!this.dataOptions) {
-      throw new Error(
-        'the chart basic options must be set to get the theme completion'
-      );
+      throw new Error('the chart basic options must be set to get the theme completion');
     }
+    // need to copy dataOptions as theme feature may change the original dataOptions
+    // only make an asign at the first level in order to avoid deep copy of all data
+    // each feature is responsible to deep copy the changed part according to their changes
+    this.dataOptions = { ...this.dataOptions };
 
     const axisLabel = {
       fontStyle: 'normal',
       fontWeight: '700',
       fontSize: 14,
       fontFamily: 'Helvetica Neue, sans-serif',
-      color:
-        ODSChartsMode.LIGHT === this.options.mode
-          ? 'rgba(0, 0, 0, 1)'
-          : '#FFFFFF',
+      color: ODSChartsMode.LIGHT === this.options.mode ? 'rgba(0, 0, 0, 1)' : '#FFFFFF',
     };
     const axisLine = {
       show: true,
       lineStyle: {
         width: 2,
-        color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const splitLine = {
       show: true,
       lineStyle: {
         width: 1,
-        color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
     const themeOptions: any = {
@@ -465,10 +442,7 @@ export class ODSChartsTheme {
       yAxis: { axisLabel: cloneDeepObject(axisLabel) },
     };
     for (const axis of ['xAxis', 'yAxis']) {
-      if (
-        !isMainAxis(this.dataOptions[axis]) &&
-        !(this.dataOptions[axis] && this.dataOptions[axis].axisLine)
-      ) {
+      if (!isMainAxis(this.dataOptions[axis]) && !(this.dataOptions[axis] && this.dataOptions[axis].axisLine)) {
         themeOptions[axis].axisLine = { show: false };
         themeOptions[axis].splitLine = { show: false };
       } else {
@@ -477,10 +451,12 @@ export class ODSChartsTheme {
       }
     }
 
+    const displayedColors = this.getDisplayedColors(this.theme.color);
+
     if (this.chartLegendManager) {
       this.chartLegendManager.addLegend(
         this.dataOptions,
-        this.theme.color,
+        displayedColors,
         this.options.cssTheme as ODSChartsCSSThemeDefinition,
         this.cssThemeName,
         this.options.mode as ODSChartsMode
@@ -518,18 +494,11 @@ export class ODSChartsTheme {
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
-  public externalizeLegends(
-    echart: any,
-    legendHolderSelector: string,
-    dataOptions?: any
-  ): ODSChartsTheme {
+  public externalizeLegends(echart: any, legendHolderSelector: string, dataOptions?: any): ODSChartsTheme {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
-    this.chartLegendManager = ODSChartsLegends.addLegend(
-      echart,
-      legendHolderSelector
-    );
+    this.chartLegendManager = ODSChartsLegends.addLegend(echart, legendHolderSelector);
     return this;
   }
 
@@ -549,21 +518,14 @@ export class ODSChartsTheme {
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
-  public externalizePopover(
-    popoverConfig: ODSChartsPopoverConfig = {},
-    popoverDefinition?: ODSChartsPopoverDefinition,
-    dataOptions?: any
-  ): ODSChartsTheme {
+  public externalizePopover(popoverConfig: ODSChartsPopoverConfig = {}, popoverDefinition?: ODSChartsPopoverDefinition, dataOptions?: any): ODSChartsTheme {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
     if (!popoverDefinition) {
       popoverDefinition = ODSChartsPopoverManagers.NONE;
     }
-    this.chartPopoverManager = ODSChartsPopover.addPopoverManagement(
-      popoverDefinition as ODSChartsPopoverDefinition,
-      popoverConfig
-    );
+    this.chartPopoverManager = ODSChartsPopover.addPopoverManagement(popoverDefinition as ODSChartsPopoverDefinition, popoverConfig);
     return this;
   }
 
@@ -577,18 +539,11 @@ export class ODSChartsTheme {
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
-  public manageChartResize(
-    echart: any,
-    chartId: string,
-    dataOptions?: any
-  ): ODSChartsTheme {
+  public manageChartResize(echart: any, chartId: string, dataOptions?: any): ODSChartsTheme {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
-    this.chartResizeManager = ODSChartsResize.addResizeManagement(
-      echart,
-      chartId
-    );
+    this.chartResizeManager = ODSChartsResize.addResizeManagement(echart, chartId);
     return this;
   }
 
@@ -601,16 +556,14 @@ export class ODSChartsTheme {
    * - data from {@link setDataOptions}
    *
    * optionally you can use this call to set dataOptions
-   * @returns the Apache Echarts options
+   * @returns the Apache ECharts options
    */
   public getChartOptions(dataOptions?: any): any {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
     if (!this.dataOptions) {
-      throw new Error(
-        'the chart basic options must be set to get the theme completion'
-      );
+      throw new Error('the chart basic options must be set to get the theme completion');
     }
     const result = mergeObjects(this.getThemeOptions(), this.dataOptions);
     return result;

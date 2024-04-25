@@ -7,7 +7,7 @@ import * as echarts from 'echarts';
   standalone: true,
   imports: [],
   templateUrl: './line-chart.component.html',
-  styleUrl: './line-chart.component.scss'
+  styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent implements AfterViewInit {
   base = +new Date(1968, 9, 3);
@@ -21,13 +21,9 @@ export class LineChartComponent implements AfterViewInit {
     // Data
     for (var i = 1; i < 50; i++) {
       var now = new Date((this.base += this.oneDay));
-      this.date.push(
-        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')
-      );
+      this.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
       this.data.push(Math.round((Math.random() - 0.5) * 20 + this.data[i - 1]));
-      this.data2.push(
-        Math.round((Math.random() - 0.5) * 20 + this.data2[i - 1])
-      );
+      this.data2.push(Math.round((Math.random() - 0.5) * 20 + this.data2[i - 1]));
     }
     let dataOptions = {
       title: {
@@ -72,13 +68,9 @@ export class LineChartComponent implements AfterViewInit {
 
     echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
 
-    let lineChartODS = echarts.init(
-      this.elm.nativeElement.querySelector('#lineChartCanvasODS'),
-      lineChartODSTheme.name,
-      {
-        renderer: 'svg',
-      }
-    );
+    let lineChartODS = echarts.init(this.elm.nativeElement.querySelector('#lineChartCanvasODS'), lineChartODSTheme.name, {
+      renderer: 'svg',
+    });
 
     lineChartODS.setOption(
       lineChartODSTheme
@@ -90,9 +82,7 @@ export class LineChartComponent implements AfterViewInit {
     );
 
     // echarts initialization
-    let lineChart = echarts.init(
-      this.elm.nativeElement.querySelector('#lineChartCanvas')
-    );
+    let lineChart = echarts.init(this.elm.nativeElement.querySelector('#lineChartCanvas'));
 
     lineChart.setOption({
       tooltip: {

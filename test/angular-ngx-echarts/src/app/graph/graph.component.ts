@@ -59,11 +59,7 @@ export class GraphComponent {
   }
 
   public onChartInit(ec: ECharts) {
-    this.options = this.myTheme
-      .setDataOptions(this.options)
-      .externalizeLegends(ec, '#legend')
-      .externalizePopover()
-      .getChartOptions();
+    this.options = this.myTheme.setDataOptions(this.options).externalizeLegends(ec, '#legend').externalizePopover().getChartOptions();
   }
 
   public generateRandomDataset() {
