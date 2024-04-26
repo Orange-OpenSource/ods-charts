@@ -7,5 +7,5 @@
 //
 
 export const DARK_CATEGORICAL_COLORS_GREEN = {
-  color: ['#D6E7DD', '#85B798', '#85B798', '#5C9E76', '#338653', '#0A6E31'],
+  color: ['#B8EBD6', '#84D5AF', '#50BE87', '#27A971', '#198C51', '#0A6E31'],
 };

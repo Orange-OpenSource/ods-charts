@@ -7,5 +7,5 @@
 //
 
 export const DARK_CATEGORICAL_COLORS_PURPLE = {
-  color: ['#E1DAED', '#C2B5DA', '#A490C8', '#866BB6', '#6746A3', '#492191'],
+  color: ['#D9C2F0', '#C1A4E4', '#A885D8', '#9373BD', '#6E4AA7', '#492191'],
 };
