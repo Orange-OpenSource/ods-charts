@@ -7,5 +7,5 @@
 //
 
 export const DARK_CATEGORICAL_COLORS_DARKER_TINTS = {
-  color: ['#085EBD', '#0A6E31', '#FF8AD4', '#492191', '#FFB400'],
+  color: ['#B5E8F7', '#B8EBD6', '#FFE8F7', '#D9C2F0', '#FFF6B6'],
 };
