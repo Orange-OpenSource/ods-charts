@@ -55,6 +55,7 @@ import { cloneDeepObject } from '../tools/clone-deep-object';
 import { ODSChartsPopover } from './popover/ods-chart-popover';
 import { ODSChartsPopoverConfig, ODSChartsPopoverDefinition, ODSChartsPopoverManagers } from './popover/ods-chart-popover-definitions';
 import { isMainAxis } from './const/main-axis-type.const';
+import { ODSChartsLegendHolderDefinition } from './legends/ods-chart-legends-definitions';
 
 /**
  * ODSChartsCategoricalColorsSet is used for predefined color sets.
@@ -530,12 +531,16 @@ export class ODSChartsTheme {
    *
    * externalizeLegends() needs:
    * - echart: the initialized eCharts object
-   * - legendHolderSelector: the CSS selector of the legends container
+   * - legendHolderSelector: the CSS selector of the legends container if it a string. But it can also be a {@link ODSChartsLegendHolderDefinition} or an array of {@link ODSChartsLegendHolderDefinition}
    *
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
-  public externalizeLegends(echart: any, legendHolderSelector: string, dataOptions?: any): ODSChartsTheme {
+  public externalizeLegends(
+    echart: any,
+    legendHolderSelector: string | ODSChartsLegendHolderDefinition | ODSChartsLegendHolderDefinition[],
+    dataOptions?: any
+  ): ODSChartsTheme {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }

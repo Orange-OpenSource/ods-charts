@@ -24,5 +24,6 @@ export * from './theme/ods-chart-theme';
 export * from './theme/ODS.project';
 export * from './theme/css-themes/css-themes';
 export * from './theme/popover/ods-chart-popover-definitions';
+export * from './theme/legends/ods-chart-legends-definitions';
 
 export const getThemeManager = ODSChartsTheme.getThemeManager;
