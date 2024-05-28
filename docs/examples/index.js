@@ -260,8 +260,7 @@ async function displayChart(
   if (document.getElementById(id).dataset.initialOptions) {
     options = JSON.parse(document.getElementById(id).dataset.initialOptions);
   } else {
-    document.getElementById(id).dataset.initialOptions =
-      JSON.stringify(options);
+    document.getElementById(id).dataset.initialOptions = JSON.stringify(options);
   }
   if (!cssThemeName) {
     cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
@@ -333,16 +332,9 @@ async function displayChart(
   var legends = false;
 
   if ('odscharts' === usedLegends) {
-    if (
-      !(options.dataset && options.dataset.source) &&
-      !(options.legend && options.legend.data) &&
-      options.series.length > 1
-    ) {
+    if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
       options.legend = {
-        data:
-          options.series.length > 1
-            ? options.series.map((serie, i) => 'label ' + i)
-            : undefined,
+        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
       };
     }
   } else {
@@ -360,9 +352,7 @@ async function displayChart(
     usedLegends === 'odscharts' &&
     ((options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
-      (options.series &&
-        1 === options.series.length &&
-        'pie' === options.series[0].type));
+      (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
 
   if ('enterable' === popoverInput) {
     if (!options.tooltip) {
@@ -516,46 +506,14 @@ myChart.setOption(themeManager.getChartOptions());
       document.querySelector(`#body_content_1_${id}`).append(custumColorDiv);
     }
 
-    document
-      .querySelector(
-        `#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverInput option[value="${popoverInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`
-      )
-      .setAttribute('selected', 'selected');
-    document
-      .querySelector(
-        `#accordion_${id} #usedLegends option[value="${usedLegends}"]`
-      )
-      .setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #usedLegends option[value="${usedLegends}"]`).setAttribute('selected', 'selected');
 
     document.querySelector(`#accordion_${id} #cssTheme option[value="${cssThemeName}"]`).setAttribute('selected', 'selected');
   }

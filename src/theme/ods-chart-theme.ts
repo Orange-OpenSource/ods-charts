@@ -411,15 +411,13 @@ export class ODSChartsTheme {
       textStyle: {
         fontWeight: 'bold',
         fontSize: 14,
-        color:
-          ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        color: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
       },
       icon: 'rect',
       itemWidth: 10,
       itemHeight: 10,
       itemStyle: {
-        borderColor:
-          ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        borderColor: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
         borderWidth: 1,
       },
     };

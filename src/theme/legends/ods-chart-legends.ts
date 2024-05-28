@@ -75,19 +75,10 @@ export class ODSChartsLegends {
     return new ODSChartsLegends(echart, legendHolderSelector);
   }
 
-  public static getLegendData(
-    dataOptions: any,
-    updateDataOption: boolean = true
-  ): ODSChartsLegendData {
-    let legendData: string[] =
-      dataOptions.legend && dataOptions.legend.data
-        ? dataOptions.legend.data
-        : [];
+  public static getLegendData(dataOptions: any, updateDataOption: boolean = true): ODSChartsLegendData {
+    let legendData: string[] = dataOptions.legend && dataOptions.legend.data ? dataOptions.legend.data : [];
     let serieNames: string[];
-    const monoSerieGraphe =
-      1 === dataOptions.series.length &&
-      dataOptions.series[0].data &&
-      ['pie'].includes(dataOptions.series[0].type);
+    const monoSerieGraphe = 1 === dataOptions.series.length && dataOptions.series[0].data && ['pie'].includes(dataOptions.series[0].type);
 
     if (!dataOptions.legend || !dataOptions.legend.data) {
       if (dataOptions.dataset && dataOptions.dataset.source) {
@@ -114,22 +105,16 @@ export class ODSChartsLegends {
           dataOptions.legend = {};
         }
         if (monoSerieGraphe) {
-          legendData = dataOptions.series[0].data.map(
-            (serie: any, index: number) => {
-              if (!serie.name) {
-                throw new Error(
-                  `Missing data array of legends in legend chart option`
-                );
-              }
-              return serie.name;
+          legendData = dataOptions.series[0].data.map((serie: any, index: number) => {
+            if (!serie.name) {
+              throw new Error(`Missing data array of legends in legend chart option`);
             }
-          );
+            return serie.name;
+          });
         } else {
           legendData = dataOptions.series.map((serie: any, index: number) => {
             if (!serie.name) {
-              throw new Error(
-                `Missing data array of legends in legend chart option`
-              );
+              throw new Error(`Missing data array of legends in legend chart option`);
             }
             return serie.name;
           });
@@ -141,16 +126,12 @@ export class ODSChartsLegends {
     }
 
     if (monoSerieGraphe) {
-      serieNames = dataOptions.series[0].data.map(
-        (serie: any, index: number) => {
-          if (!serie.name) {
-            throw new Error(
-              `Missing data array of legends in legend chart option`
-            );
-          }
-          return serie.name;
+      serieNames = dataOptions.series[0].data.map((serie: any, index: number) => {
+        if (!serie.name) {
+          throw new Error(`Missing data array of legends in legend chart option`);
         }
-      );
+        return serie.name;
+      });
     } else {
       if (updateDataOption && !dataOptions.series) {
         dataOptions.series = legendData.map((serie: any, index: number) => ({
@@ -203,41 +184,25 @@ export class ODSChartsLegends {
     <div class="ods-charts-legend-container ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendContainer)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainer)}"
     >
-    ${(legends ? legends.labels : []).map(
-      (legendLabel: string, index: number) => {
-        let colorIndex = index % colors.length;
-        return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(
-          cssTheme.legends?.odsChartsLegendLink
-        )}" 
-      style="${ODSChartsItemCSSDefinition.getStyles(
-        cssTheme.legends?.odsChartsLegendLink
-      )}"
-      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(
-        this.legendHolderSelector
-      ).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
-          legends.names[index]
-        ).replace(/"/g, '&quot;')})">
-      <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(
-        cssTheme.legends?.odsChartsLegendColorHolder
-      )}"
-      style="${ODSChartsItemCSSDefinition.getStyles(
-        cssTheme.legends?.odsChartsLegendColorHolder
-      )}">  
-      <span style="background-color:${
-        colors[colorIndex]
-      }; ${ODSChartsItemCSSDefinition.getStyles(
-          cssTheme.legends?.odsChartsLegendColor
-        )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(
-          cssTheme.legends?.odsChartsLegendColor
-        )}"></span>
+    ${(legends ? legends.labels : []).map((legendLabel: string, index: number) => {
+      let colorIndex = index % colors.length;
+      return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
+      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
+      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(this.legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
+        legends.names[index]
+      ).replace(/"/g, '&quot;')})">
+      <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
+      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
+      <span style="background-color:${colors[colorIndex]}; ${ODSChartsItemCSSDefinition.getStyles(
+        cssTheme.legends?.odsChartsLegendColor
+      )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
       </span>
   
     <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
     role="button">${legendLabel}</label>
   </a>`;
-      }
-    ).join(`
+    }).join(`
     `)}
     </div>
     </div>`;
