@@ -240,7 +240,7 @@ async function displayChart(
   if (!refresh) {
     generateExampleDiv(id);
     let iframe = document.querySelector(`#${id} iframe`);
-    while (!iframe.contentWindow.boosted && !iframe.contentWindow.ODSCharts && !iframe.contentWindow.echarts) {
+    while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
   }
