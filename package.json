@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "echarts": "^5.5.0",
-    "prettier": "^3.2.5",
-    "serve": "^14.2.2",
+    "prettier": "^3.3.0",
+    "serve": "^14.2.3",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.13",
     "typescript": "^5.4.5",
