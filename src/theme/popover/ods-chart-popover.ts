@@ -12,6 +12,7 @@ import {
   ODSChartsPopoverAxisPointer,
   ODSChartsPopoverConfig,
   ODSChartsPopoverDefinition,
+  ODSChartsPopoverDefinitionWithRenderer,
   ODSChartsPopoverItem,
   ODSChartsPopoverManagers,
 } from './ods-chart-popover-definitions';
@@ -27,6 +28,10 @@ const DEFAULT_TEMPLATE_CSS = `
   border: none !important;
   box-shadow: none !important;
   background: none !important;
+}
+  
+.ods-charts-popover.ods-charts-enterable-false {
+  pointer-events: none !important;
 }
 
 .ods-charts-popover .ods-charts-popover-inner  {
@@ -103,6 +108,7 @@ export class ODSChartsPopover {
   private tooltipTimeOut: any;
   private tooltipDelay: any;
   private tooltipStyle: string = '';
+  private enterable: boolean = false;
   private constructor(
     private popoverDefinition: ODSChartsPopoverDefinition,
     private popoverConfig: ODSChartsPopoverConfig
@@ -128,7 +134,10 @@ export class ODSChartsPopover {
       popoverConfig.tooltip = true;
     }
     if (undefined === popoverConfig.tooltipDelay) {
-      popoverConfig.tooltipDelay = undefined === popoverDefinition.tooltipDelay ? 0 : popoverDefinition.tooltipDelay;
+      popoverConfig.tooltipDelay =
+        undefined === (popoverDefinition as ODSChartsPopoverDefinitionWithRenderer).tooltipDelay
+          ? 0
+          : (popoverDefinition as ODSChartsPopoverDefinitionWithRenderer).tooltipDelay;
     }
     if (!popoverConfig.shared && 'none' !== popoverConfig.axisPointer) {
       console.warn(
@@ -243,6 +252,7 @@ export class ODSChartsPopover {
     }
     const popoverOptions = {};
     const tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' = this.getTooltipTrigger(dataOptions, themeOptions);
+    this.enterable = !!dataOptions && !!dataOptions.tooltip && !!dataOptions.tooltip.enterable;
 
     let legends: ODSChartsLegendData = undefined as any;
     try {
@@ -253,7 +263,6 @@ export class ODSChartsPopover {
       mergeObjects(popoverOptions, {
         tooltip: {
           appendTo: 'body',
-          enterable: true,
         },
         [tooltipTrigger]: {
           axisPointer: {
@@ -273,7 +282,7 @@ export class ODSChartsPopover {
         });
       }
 
-      if (!this.popoverDefinition.getOrCreatePopupInstance) {
+      if (!(this.popoverDefinition as ODSChartsPopoverDefinitionWithRenderer).getOrCreatePopupInstance) {
         mergeObjects(popoverOptions, {
           tooltip: {
             position: (
@@ -339,8 +348,7 @@ export class ODSChartsPopover {
             hideDelay: 0,
             appendTo: 'body',
             renderMode: 'html',
-            className: `ods-charts-popover ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
-            enterable: true,
+            className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
             axisPointer: {
               type: this.popoverConfig.axisPointer,
             },
@@ -415,6 +423,7 @@ export class ODSChartsPopover {
         // we will use the Apache ECharts config
         if (!this.popoverDefinition.getPopupContentValue) {
           const formatter = dataOptions.tooltip.formatter;
+          this.popoverDefinition = cloneDeepObject(this.popoverDefinition);
           this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formatter([tooltipElement]);
         }
         delete dataOptions.tooltip.formatter;
@@ -562,13 +571,17 @@ export class ODSChartsPopover {
     );
 
     try {
-      let popover = (this.popoverDefinition.getOrCreatePopupInstance as any)(
+      let popover = (this.popoverDefinition as ODSChartsPopoverDefinitionWithRenderer).getOrCreatePopupInstance(
         '.libPopupTooltipAnchor',
         item.categoryLabel,
         this.popoverDefinition.getPopupContent
           ? this.popoverDefinition.getPopupContent(item.tooltipElements)
-          : this.getPopupContent(item.tooltipElements, cssTheme, mode)
+          : this.getPopupContent(item.tooltipElements, cssTheme, mode),
+        this.enterable
       );
+      if (!popover) {
+        return;
+      }
 
       popover.show();
 
