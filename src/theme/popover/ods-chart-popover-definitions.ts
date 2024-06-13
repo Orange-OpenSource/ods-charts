@@ -175,7 +175,7 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
         if (enterable) {
           // We test if the mouse is over the previous tooltip to cancel the creation
           // of a new one and allow the mouse to enter over this previous one
-          const tooltipMarging = 20;
+          const tooltipMarging = 15;
           const mousePosition: { top: number; left: number } = { top: (window.event as MouseEvent).clientY, left: (window.event as MouseEvent).clientX };
           const tooltipRect: { bottom: number; height: number; left: number; right: number; top: number; width: number } = (
             previousPopover as any
