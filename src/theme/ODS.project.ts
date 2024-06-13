@@ -6,6 +6,9 @@
 // This software is distributed under the MIT license.
 //
 
+/**
+ * Echarts theme options
+ */
 export interface EChartsProject {
   color: string[];
   backgroundColor: string;
