@@ -269,7 +269,7 @@ export class ODSChartsTheme {
    * This manager is used to retrieve the Apache ECharts theme and manage the chart options in accordance with the Orange Design System.
    *
    * The method takes the theme configuration as a parameter {@link ODSChartsThemeOptions}.
-   * @param options: default option used to generate the theme
+   * @param options default option used to generate the theme
    * @returns the theme manager
    */
   public static getThemeManager(options?: ODSChartsThemeOptions): ODSChartsTheme {
