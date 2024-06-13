@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const DARK_CATEGORICAL_COLORS_EMPHASIS = {
-  color: ['#FF7900', '#666666', '#66CC66', '#FFCC00', '#FF4D4D', '#6699FF'],
+export const DARK_CATEGORICAL_COLORS_LONG = {
+  color: ['#ffb4e6', '#d573bb', '#c1a4e4', '#9373bd', '#80ceef', '#3e9dd6', '#84d5af', '#27a971', '#ffd200', '#b98f11'],
 };

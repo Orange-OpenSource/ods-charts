@@ -93,8 +93,9 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.EMPHASIS}">Emphasis</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors (5 colors)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_LONG}">Default colors (10 colors by group of 2)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.FUNCTIONAL}">Functional</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS}">Supporting colors</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints</option>
                 <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints</option>
@@ -522,7 +523,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    10 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
+    11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #visualMapColorInput`).value,
@@ -536,7 +537,7 @@ async function changeTheme(id) {
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
-    if (10 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
+    if (11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
       document.querySelector('#view_custom_color_' + id).classList.remove('d-none');
     } else {
       document.querySelector('#view_custom_color_' + id).classList.add('d-none');
@@ -602,11 +603,11 @@ window.generateMultipleLineChart = async (id) => {
       { data: [24, 19, 17, 26, 20, 30], type: 'line' },
       { data: [19, 17, 26, 20, 30, 24], type: 'line' },
       { data: [26, 26, 12, 14, 10, 20], type: 'line' },
-      { data: [26, 12, 14, 10, 20, 26], type: 'line' },
-      { data: [12, 14, 10, 20, 26, 26], type: 'line' },
+      // { data: [19, 17, 26, 20, 30, 24], type: 'line' },
+      // { data: [26, 26, 12, 14, 10, 20], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_LONG, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -666,6 +667,55 @@ window.generateTimeSeriesLineChart = async (id) => {
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
+      {
+        name: 'Serie 4',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+      {
+        name: 'Serie 5',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+      // {
+      //   name: 'Serie 6',
+      //   data: generateData()
+      //     .filter((oneData) => undefined !== oneData.value)
+      //     .map((oneData) => [oneData.time, oneData.value]),
+      //   type: 'line',
+      // },
+      // {
+      //   name: 'Serie 7',
+      //   data: generateData()
+      //     .filter((oneData) => undefined !== oneData.value)
+      //     .map((oneData) => [oneData.time, oneData.value]),
+      //   type: 'line',
+      // },
+      // {
+      //   name: 'Serie 8',
+      //   data: generateData()
+      //     .filter((oneData) => undefined !== oneData.value)
+      //     .map((oneData) => [oneData.time, oneData.value]),
+      //   type: 'line',
+      // },
+      // {
+      //   name: 'Serie 9',
+      //   data: generateData()
+      //     .filter((oneData) => undefined !== oneData.value)
+      //     .map((oneData) => [oneData.time, oneData.value]),
+      //   type: 'line',
+      // },
+      // {
+      //   name: 'Serie 10',
+      //   data: generateData()
+      //     .filter((oneData) => undefined !== oneData.value)
+      //     .map((oneData) => [oneData.time, oneData.value]),
+      //   type: 'line',
+      // },
     ],
   };
   displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);

@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_CATEGORICAL_COLORS_EMPHASIS = {
+export const LIGHT_CATEGORICAL_COLORS_FUNCTIONAL = {
   color: ['#F16E00', '#EEEEEE', '#228722', '#FFCC00', '#CD3C14', '#4170D8'],
 };
