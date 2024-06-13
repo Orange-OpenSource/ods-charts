@@ -94,7 +94,29 @@ export class ODSChartsPopoverDefinition {
 
 export abstract class ODSChartsPopoverDefinitionWithRenderer extends ODSChartsPopoverDefinition {
   public abstract tooltipDelay: number;
+  public abstract tooltipMarging: number;
   public abstract getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined;
+
+  protected testIfMouseIsOverTooltip(previousPopover: ODSChartsPopoverManager) {
+    try {
+      // We test if the mouse is over the previous tooltip to cancel the creation
+      // of a new one and allow the mouse to enter over this previous one
+      const mousePosition: { top: number; left: number } = { top: (window.event as MouseEvent).clientY, left: (window.event as MouseEvent).clientX };
+      const tooltipRect: { bottom: number; height: number; left: number; right: number; top: number; width: number } = (
+        previousPopover as any
+      ).tip?.getBoundingClientRect();
+      if (
+        tooltipRect &&
+        mousePosition.top > tooltipRect.top - this.tooltipMarging &&
+        mousePosition.top < tooltipRect.top + tooltipRect.height + this.tooltipMarging &&
+        mousePosition.left > tooltipRect.left - this.tooltipMarging &&
+        mousePosition.left < tooltipRect.left + tooltipRect.width + this.tooltipMarging
+      ) {
+        return true;
+      }
+    } catch (error) {}
+    return false;
+  }
 }
 
 export enum ODSChartsPopoverAxisPointer {
@@ -167,29 +189,14 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
+  public tooltipMarging = 15;
 
   private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean): ODSChartsPopoverManager | undefined {
     try {
       let previousPopover: ODSChartsPopoverManager = boosted.Popover.getInstance(document.querySelector(selector));
       if (previousPopover) {
-        if (enterable) {
-          // We test if the mouse is over the previous tooltip to cancel the creation
-          // of a new one and allow the mouse to enter over this previous one
-          const tooltipMarging = 15;
-          const mousePosition: { top: number; left: number } = { top: (window.event as MouseEvent).clientY, left: (window.event as MouseEvent).clientX };
-          const tooltipRect: { bottom: number; height: number; left: number; right: number; top: number; width: number } = (
-            previousPopover as any
-          ).tip?.getBoundingClientRect();
-          if (
-            enterable &&
-            tooltipRect &&
-            mousePosition.top > tooltipRect.top - tooltipMarging &&
-            mousePosition.top < tooltipRect.top + tooltipRect.height + tooltipMarging &&
-            mousePosition.left > tooltipRect.left - tooltipMarging &&
-            mousePosition.left < tooltipRect.left + tooltipRect.width + tooltipMarging
-          ) {
-            return undefined;
-          }
+        if (enterable && this.testIfMouseIsOverTooltip(previousPopover)) {
+          return undefined;
         }
         previousPopover.dispose();
       }
@@ -216,7 +223,8 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
-  public tooltipDelay = 200;
+  public tooltipDelay = 0;
+  public tooltipMarging = 10;
 
   private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean) {
     const elt: any = document.querySelector(selector);
@@ -224,9 +232,16 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
     whiteList.span = ['style', 'class'];
     whiteList.div = ['class'];
     whiteList.label = ['class'];
-    if (elt && elt.chart) {
+    if (elt && elt.chartPopover) {
       try {
-        elt.chart.dispose();
+        if (enterable && this.testIfMouseIsOverTooltip(elt.chartPopover)) {
+          return undefined;
+        }
+        if (elt.chartPopover.config.title === title && elt.chartPopover.config.content === htmlContent) {
+          elt.chartPopover.update();
+          return undefined;
+        }
+        elt.chartPopover.dispose();
       } catch (error) {}
     }
     const popover = new boosted.Popover(elt, {
@@ -237,9 +252,17 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
       container: 'body',
       title: title,
       content: htmlContent,
+      customClass: '',
     });
-    elt.chart = popover;
+    elt.chartPopover = popover;
 
+    if (!enterable) {
+      window.setTimeout(() => {
+        try {
+          elt.chartPopover.tip.style.pointerEvents = 'none';
+        } catch (error) {}
+      });
+    }
     return popover;
   }
 }

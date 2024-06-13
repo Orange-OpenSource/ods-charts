@@ -133,6 +133,7 @@ function generateConfigurator(id) {
                 <option value="none">None</option>
                 <option value="popover">Popover</option>
                 <option value="tooltip">Tooltip</option>
+                <option value="enterable">Enterable tooltip</option>
               </select>
             </div>
 
@@ -321,6 +322,15 @@ async function displayChart(
 
   legends = (options.legend && options.legend.data && !options.legend.show) || (options.dataset && options.dataset.source);
 
+  if ('enterable' === popoverInput) {
+    if (!options.tooltip) {
+      options.tooltip = {};
+    }
+    options.tooltip.enterable = true;
+  } else if (options.tooltip) {
+    delete options.tooltip.enterable;
+  }
+
   var dataOptions = JSON.parse(JSON.stringify(options));
 
   var chartId = id + '_chart';
@@ -408,7 +418,7 @@ themeManager.manageChartResize(myChart, '${chartId}');${
 themeManager.externalizePopover({
     enabled: ${'none' !== popoverInput ? 'true' : 'false'},
     shared: ${'shared' === popoverSharedInput ? 'true' : 'false'},
-    tooltip: ${'tooltip' === popoverInput ? 'true' : 'false'},
+    tooltip: ${'tooltip' === popoverInput || 'enterable' === popoverInput ? 'true' : 'false'},
     axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.${popoverAxisInput},
   }, 
   ODSCharts.ODSChartsPopoverManagers.${'external' === popoverTemplateInput ? cssThemeName : 'NONE'}
@@ -497,7 +507,7 @@ myChart.setOption(themeManager.getChartOptions());
       {
         enabled: 'none' !== popoverInput,
         shared: 'shared' === popoverSharedInput,
-        tooltip: 'tooltip' === popoverInput,
+        tooltip: 'tooltip' === popoverInput || 'enterable' === popoverInput,
         axisPointer: popoverAxisInput,
       },
       iframe.contentWindow.ODSCharts.ODSChartsPopoverManagers[
