@@ -43,13 +43,13 @@
       <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">Collapsed graph example</h5>
-          <p class="card-text">The size of the graph may change because of window resize or just because of the DOM structure or content change, by instance if the graph is displayed in a collapsed panel.</p>
-          <p class="card-text">Apache ECharts has a <code>resize</code> method to manage that. But you can ask to the <code>ODSChartsTheme</code> to manage it for you calling the <cdoe>externalizeLegends</cdoe> method.</p>
+          <p class="card-text">The size of the graph may change due to window resizing or modifications in the DOM structure or content. For instance, the graph's size can be affected if it is displayed within a collapsed panel.</p>
+          <p class="card-text">Apache ECharts has a <code>resize</code> method to manage that. But you can ask to the <code>ODSChartsTheme</code> to manage it for you calling the <code>externalizeLegends</code> method.</p>
           <p class="card-text">
-            In the following collapsed div, we manage the resize of the div by the code:
+            In the following collapsed div, the resize is managed by the following code:
             <code>
               <pre>
-                themeManager.manageChartResize(myChart, 'barLine_chart');
+themeManager.manageChartResize(myChart, 'barLine_chart');
               </pre>
             </code>
           </p>
