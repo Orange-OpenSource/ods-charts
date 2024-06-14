@@ -62,7 +62,7 @@ echarts.registerTheme(themeManager.name, themeManager.theme);
 var div = document.getElementById('barLine_chart');
 var myChart = echarts.init(
   div,
-  themeManager.name, // initialized the chart with the generated theme
+  themeManager.name, // initialize the chart with the generated theme
   {
     renderer: 'svg', // SVG rendered is recommended
   }
