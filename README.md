@@ -23,14 +23,16 @@
 ## Quick start
 
 Start by installing ODS Charts library:
-  - Install with [npm](https://www.npmjs.com/): `npm install ods-charts`, and use it in your JavaScript files: `import * as ODSCharts from 'ods-charts';`
-  - Or use the CDN version of the library: `https://cdn.jsdelivr.net/npm/ods-charts@latest` (not recommended for eco-design reasons, useful for prototyping).
+
+- Install with [npm](https://www.npmjs.com/): `npm install ods-charts`, and use it in your JavaScript files: `import * as ODSCharts from 'ods-charts';`
+- Or use the CDN version of the library: `https://cdn.jsdelivr.net/npm/ods-charts@latest` (not recommended for eco-design reasons, useful for prototyping).
 
 The ODS Charts library is to be used with Apache ECharts to create charts that adhere to the Orange Design System guidelines.
 
 So, install Apache ECharts library:
-  - Install with [npm](https://www.npmjs.com/): `npm install echarts`, and use it in your JavaScript files: `import * as echarts from 'echarts';`
-  - Or use the CDN version of the library: `https://cdn.jsdelivr.net/npm/echarts@latest` (not recommended for eco-design reasons, useful for prototyping).
+
+- Install with [npm](https://www.npmjs.com/): `npm install echarts`, and use it in your JavaScript files: `import * as echarts from 'echarts';`
+- Or use the CDN version of the library: `https://cdn.jsdelivr.net/npm/echarts@latest` (not recommended for eco-design reasons, useful for prototyping).
 
 It has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The Apache ECharts documentation remains the reference for configuring charts.
 
