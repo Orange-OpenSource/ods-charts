@@ -30,7 +30,7 @@ For example, an Apache Echarts user will initialize a graph with code like this:
 ```
 var div = document.getElementById('barLine_chart');
 var myChart = echarts.init(div, undefined, {
-  renderer: 'svg', // we prefer svg renderer
+  renderer: 'svg', // SVG is recommended
 });
 // Display the chart.
 myChart.setOption(dataOptions);
