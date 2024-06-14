@@ -38,14 +38,85 @@ export class ODSChartsPopoverItem {
   seriesType?: string;
 }
 
+/**
+ * {@link ODSChartsPopoverDefinition} defines the interface of the manager of externalized
+ * popover or tooltip.
+ *
+ * {@link ODSChartsPopoverManagers} gives 3 default {@link ODSChartsPopoverDefinition}
+ * managers.
+ *
+ * You probably need to use one of those.
+ *
+ * But even if you use one of those, you may specialize it with specific(s)
+ * implementation(s) with one of the {@link ODSChartsPopoverDefinition} method(s).
+ *
+ * For example, you may specify the content of the tooltip:
+ * ```
+ *                 themeManager.externalizePopover(undefined, {
+ *                  ...ODSCharts.ODSChartsPopoverManagers.NONE,
+ *                  getPopupContent: (tooltipElements) => {
+ *                    return 'This is my HTML code that may content <a href="https://github.com/Orange-OpenSource/ods-charts">a link</a>';
+ *                  },
+ *                });
+ * ```
+ * or if you want to use Boosted 5 tooltip renderer:
+ * ```
+ *                 themeManager.externalizePopover(undefined, {
+ *                  ...ODSCharts.ODSChartsPopoverManagers.BOOSTED5,
+ *                  getPopupContent: (tooltipElements) => {
+ *                    return 'This is my HTML code that may content <a href="https://github.com/Orange-OpenSource/ods-charts">a link</a>';
+ *                  },
+ *                });
+ * ```
+ */
 export class ODSChartsPopoverDefinition {
-  public getOrCreatePopupInstance?: (selector: string, title: string, htmlContent: string) => ODSChartsPopoverManager;
-  public tooltipDelay?: number;
+  /**
+   * getPopupTitle() may be specify to change the html code of the popup/tooltip title
+   */
   public getPopupTitle?: (axisValue: string, axisValueLabel?: string, name?: string) => string;
+  /**
+   * getPopupTitle() may be specify to change the html code of all the popup/tooltip content
+   */
   public getPopupContent?: (tooltipElements: ODSChartsPopoverItem[]) => string;
+  /**
+   * getPopupContentLine() may be specify to change the html code of one line of the popup/tooltip
+   */
   public getPopupContentLine?: (tooltipElement: ODSChartsPopoverItem) => string;
+  /**
+   * getPopupContentValue() may be specify to change the html code of value displayed in the popup/tooltip
+   */
   public getPopupContentValue?: (tooltipElement: ODSChartsPopoverItem) => string;
+  /**
+   * getPopupTemplate() may be specify to replace a specific template for the  popup/tooltip to replace the default one
+   */
   public getPopupTemplate?: (categoryLabel: string, tooltipElements: ODSChartsPopoverItem[]) => string;
+}
+
+export abstract class ODSChartsPopoverDefinitionWithRenderer extends ODSChartsPopoverDefinition {
+  public abstract tooltipDelay: number;
+  public abstract tooltipMarging: number;
+  public abstract getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined;
+
+  protected testIfMouseIsOverTooltip(previousPopover: ODSChartsPopoverManager) {
+    try {
+      // We test if the mouse is over the previous tooltip to cancel the creation
+      // of a new one and allow the mouse to enter over this previous one
+      const mousePosition: { top: number; left: number } = { top: (window.event as MouseEvent).clientY, left: (window.event as MouseEvent).clientX };
+      const tooltipRect: { bottom: number; height: number; left: number; right: number; top: number; width: number } = (
+        previousPopover as any
+      ).tip?.getBoundingClientRect();
+      if (
+        tooltipRect &&
+        mousePosition.top > tooltipRect.top - this.tooltipMarging &&
+        mousePosition.top < tooltipRect.top + tooltipRect.height + this.tooltipMarging &&
+        mousePosition.left > tooltipRect.left - this.tooltipMarging &&
+        mousePosition.left < tooltipRect.left + tooltipRect.width + this.tooltipMarging
+      ) {
+        return true;
+      }
+    } catch (error) {}
+    return false;
+  }
 }
 
 export enum ODSChartsPopoverAxisPointer {
@@ -114,17 +185,19 @@ export class ODSChartsPopoverConfig {
   tooltipTrigger?: ODSChartsPopoverTooltipTrigger;
 }
 
-class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
-  constructor() {
-    super();
-    this.getOrCreatePopupInstance = this._getOrCreatePopupInstance.bind(this);
-    this.tooltipDelay = 0;
-  }
+class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
+    this._getOrCreatePopupInstance.bind(this);
+  public tooltipDelay = 0;
+  public tooltipMarging = 15;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string): ODSChartsPopoverManager {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean): ODSChartsPopoverManager | undefined {
     try {
       let previousPopover: ODSChartsPopoverManager = boosted.Popover.getInstance(document.querySelector(selector));
       if (previousPopover) {
+        if (enterable && this.testIfMouseIsOverTooltip(previousPopover)) {
+          return undefined;
+        }
         previousPopover.dispose();
       }
     } catch (error) {}
@@ -142,27 +215,33 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinition {
       container: 'body',
       title: title,
       content: htmlContent,
-      customClass: 'pe-none',
+      customClass: enterable ? '' : 'pe-none',
     });
   }
 }
 
-class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
-  constructor() {
-    super();
-    this.getOrCreatePopupInstance = this._getOrCreatePopupInstance.bind(this);
-    this.tooltipDelay = 200;
-  }
+class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
+    this._getOrCreatePopupInstance.bind(this);
+  public tooltipDelay = 0;
+  public tooltipMarging = 10;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string) {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean) {
     const elt: any = document.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];
     whiteList.div = ['class'];
     whiteList.label = ['class'];
-    if (elt && elt.chart) {
+    if (elt && elt.chartPopover) {
       try {
-        elt.chart.dispose();
+        if (enterable && this.testIfMouseIsOverTooltip(elt.chartPopover)) {
+          return undefined;
+        }
+        if (elt.chartPopover.config.title === title && elt.chartPopover.config.content === htmlContent) {
+          elt.chartPopover.update();
+          return undefined;
+        }
+        elt.chartPopover.dispose();
       } catch (error) {}
     }
     const popover = new boosted.Popover(elt, {
@@ -173,9 +252,17 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinition {
       container: 'body',
       title: title,
       content: htmlContent,
+      customClass: '',
     });
-    elt.chart = popover;
+    elt.chartPopover = popover;
 
+    if (!enterable) {
+      window.setTimeout(() => {
+        try {
+          elt.chartPopover.tip.style.pointerEvents = 'none';
+        } catch (error) {}
+      });
+    }
     return popover;
   }
 }

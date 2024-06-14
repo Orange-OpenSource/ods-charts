@@ -119,8 +119,8 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '10px',
-        height: '10px',
+        width: '8px',
+        height: '8px',
       },
     },
     odsChartsLegendLabel: {},
@@ -133,8 +133,8 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsPopoverColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '10px',
-        height: '10px',
+        width: '8px',
+        height: '8px',
       },
     },
   },
@@ -169,8 +169,8 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '10px',
-        height: '10px',
+        width: '8px',
+        height: '8px',
       },
     },
     odsChartsLegendLabel: {},
@@ -185,8 +185,8 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsPopoverColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '10px',
-        height: '10px',
+        width: '8px',
+        height: '8px',
       },
     },
   },
