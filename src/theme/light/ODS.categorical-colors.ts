@@ -7,5 +7,5 @@
 //
 
 export const LIGHT_CATEGORICAL_COLORS = {
-  color: ['#bc4d9a', '#492191', '#085edb', '#0a6e31', '#b98f11'],
+  color: ['#bc4d9a', '#492191', '#085edb', '#0a6e31', '#b98f11', '#666666', '#d573bb', '#9373bd', '#3e9dd6', '#27a971', '#9d6e06', '#333333'],
 };

@@ -9,7 +9,7 @@
 import { LIGHT_COMMON } from './light/ODS.common';
 import { LIGHT_LINES_AXIS } from './light/ODS.lines.axis';
 import { LIGHT_CATEGORICAL_COLORS } from './light/ODS.categorical-colors';
-import { LIGHT_CATEGORICAL_COLORS_LONG } from './light/ODS.categorical-colors.long';
+import { LIGHT_CATEGORICAL_COLORS_CATEGORICAL } from './light/ODS.categorical-colors.categorical';
 import { LIGHT_CATEGORICAL_COLORS_FUNCTIONAL } from './light/ODS.categorical-colors.functional';
 import { LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './light/ODS.categorical-colors.supporting-colors';
 import { LIGHT_CATEGORICAL_COLORS_DARKER_TINTS } from './light/ODS.categorical-colors.darker-tints';
@@ -30,7 +30,7 @@ import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
 import { DARK_COMMON } from './dark/ODS.common';
 import { DARK_LINES_AXIS } from './dark/ODS.lines.axis';
 import { DARK_CATEGORICAL_COLORS } from './dark/ODS.categorical-colors';
-import { DARK_CATEGORICAL_COLORS_LONG } from './dark/ODS.categorical-colors.long';
+import { DARK_CATEGORICAL_COLORS_CATEGORICAL } from './dark/ODS.categorical-colors.categorical';
 import { DARK_CATEGORICAL_COLORS_FUNCTIONAL } from './dark/ODS.categorical-colors.functional';
 import { DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './dark/ODS.categorical-colors.supporting-colors';
 import { DARK_CATEGORICAL_COLORS_DARKER_TINTS } from './dark/ODS.categorical-colors.darker-tints';
@@ -59,12 +59,12 @@ import { isMainAxis } from './const/main-axis-type.const';
 /**
  * ODSChartsCategoricalColorsSet is used for predefined color sets.
  *
- * Default color sets are defined so all the colors are `accessible` against white/dark background and distinguishable for most color-blind people. These sets are not accessible from a monochromacy point of view.
+ * Default and Categorical color sets are defined so all the colors are `accessible` against white/dark background and distinguishable for most color-blind people. These sets are not accessible from a monochromacy point of view.
  *
  * If you use our `sequential` sets, please consider using one color out of two if possible for a greater contrast (for example 0-2-4).
  *
- * - {@link DEFAULT} is the default color set for up to 5 different colors meaning 5 different series.
- * - {@link DEFAULT_LONG} is the default color set for up to 10 different colors grouped by 2. You shouldn't need more in your charts.
+ * - {@link DEFAULT} is the default color set for up to 12 different colors.
+ * - {@link CATEGORICAL} is the default design color set for up to 12 different colors.
  * - {@link FUNCTIONAL} is the color set embedding the orange that should be used a functional gray and all the functional colors.
  * - {@link SUPPORTING_COLORS} is the color set embedding all the supporting colors. Colors don't change between light and dark mode.
  * - {@link DARKER_TINTS} is the color set embedding all the darker tints of the supporting colors in light mode (lighter in dark mode).
@@ -77,7 +77,7 @@ import { isMainAxis } from './const/main-axis-type.const';
  */
 export enum ODSChartsCategoricalColorsSet {
   DEFAULT = 'default',
-  DEFAULT_LONG = 'defaultLong',
+  CATEGORICAL = 'categorical',
   FUNCTIONAL = 'functional',
   SUPPORTING_COLORS = 'supportingColors',
   DARKER_TINTS = 'darkerTints',
@@ -219,7 +219,7 @@ const THEMES: {
     linesAxis: LIGHT_LINES_AXIS,
     categoricalColors: {
       default: LIGHT_CATEGORICAL_COLORS,
-      defaultLong: LIGHT_CATEGORICAL_COLORS_LONG,
+      categorical: LIGHT_CATEGORICAL_COLORS_CATEGORICAL,
       functional: LIGHT_CATEGORICAL_COLORS_FUNCTIONAL,
       supportingColors: LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS,
       darkerTints: LIGHT_CATEGORICAL_COLORS_DARKER_TINTS,
@@ -248,7 +248,7 @@ const THEMES: {
     linesAxis: DARK_LINES_AXIS,
     categoricalColors: {
       default: DARK_CATEGORICAL_COLORS,
-      defaultLong: DARK_CATEGORICAL_COLORS_LONG,
+      categorical: DARK_CATEGORICAL_COLORS_CATEGORICAL,
       functional: DARK_CATEGORICAL_COLORS_FUNCTIONAL,
       supportingColors: DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS,
       darkerTints: DARK_CATEGORICAL_COLORS_DARKER_TINTS,

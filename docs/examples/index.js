@@ -93,17 +93,17 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors (5 colors)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_LONG}">Default colors (10 colors by group of 2)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.FUNCTIONAL}">Functional</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS}">Supporting colors</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PINK}">Pink</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_YELLOW}">Yellow</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.CATEGORICAL}">Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.FUNCTIONAL}">Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
               </select>
             </div>
 
@@ -603,11 +603,11 @@ window.generateMultipleLineChart = async (id) => {
       { data: [24, 19, 17, 26, 20, 30], type: 'line' },
       { data: [19, 17, 26, 20, 30, 24], type: 'line' },
       { data: [26, 26, 12, 14, 10, 20], type: 'line' },
-      // { data: [19, 17, 26, 20, 30, 24], type: 'line' },
-      // { data: [26, 26, 12, 14, 10, 20], type: 'line' },
+      { data: [19, 26, 20, 30, 24, 17], type: 'line' },
+      { data: [26, 12, 14, 10, 20, 26], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_LONG, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -681,41 +681,13 @@ window.generateTimeSeriesLineChart = async (id) => {
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
-      // {
-      //   name: 'Serie 6',
-      //   data: generateData()
-      //     .filter((oneData) => undefined !== oneData.value)
-      //     .map((oneData) => [oneData.time, oneData.value]),
-      //   type: 'line',
-      // },
-      // {
-      //   name: 'Serie 7',
-      //   data: generateData()
-      //     .filter((oneData) => undefined !== oneData.value)
-      //     .map((oneData) => [oneData.time, oneData.value]),
-      //   type: 'line',
-      // },
-      // {
-      //   name: 'Serie 8',
-      //   data: generateData()
-      //     .filter((oneData) => undefined !== oneData.value)
-      //     .map((oneData) => [oneData.time, oneData.value]),
-      //   type: 'line',
-      // },
-      // {
-      //   name: 'Serie 9',
-      //   data: generateData()
-      //     .filter((oneData) => undefined !== oneData.value)
-      //     .map((oneData) => [oneData.time, oneData.value]),
-      //   type: 'line',
-      // },
-      // {
-      //   name: 'Serie 10',
-      //   data: generateData()
-      //     .filter((oneData) => undefined !== oneData.value)
-      //     .map((oneData) => [oneData.time, oneData.value]),
-      //   type: 'line',
-      // },
+      {
+        name: 'Serie 6',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
     ],
   };
   displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
