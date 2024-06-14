@@ -51,7 +51,7 @@ myChart.setOption(dataOptions);
 Adding the theme managed by ODS Charts will then consist of doing:
 
 ```javascript
-// Build the theme
+// build the theme
 var themeManager = ODSCharts.getThemeManager({
   // you can configure here some optional options
 });
