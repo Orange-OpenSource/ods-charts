@@ -44,7 +44,7 @@ var div = document.getElementById('barLine_chart');
 var myChart = echarts.init(div, undefined, {
   renderer: 'svg', // SVG is recommended
 });
-// Display the chart.
+// display the chart.
 myChart.setOption(dataOptions);
 ```
 
@@ -53,7 +53,7 @@ Adding the theme managed by ODS Charts will then consist of doing:
 ```javascript
 // build the theme
 var themeManager = ODSCharts.getThemeManager({
-  // you can configure here some optional options
+  // options can be used for configuration
 });
 
 // register this theme to echarts
@@ -68,7 +68,7 @@ var myChart = echarts.init(
   }
 );
 
-// Enriched dataOptions to complete implementation of the Orange Design System.
+// enrich data options to complete implementation of the Orange Design System.
 myChart.setOption(themeManager.getChartOptions(dataOptions));
 ```
 
