@@ -50,7 +50,7 @@ var div = document.getElementById('barLine_chart');
 var myChart = echarts.init(div, 
   themeManager.name,  // initialized the chart with the generated theme 
   {
-    renderer: 'svg', // we still prefer svg renderer
+    renderer: 'svg', // SVG rendered is recommended
   }
 );
 
