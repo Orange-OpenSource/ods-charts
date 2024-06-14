@@ -20,7 +20,47 @@
 - [Versioning](#versioning)
 - [Copyright and license](#copyright-and-license)
 
-## Quick start
+
+## Quick start for users
+The ODS Chart library is to be used with Apache ECharts to produce charts in line with the Orange Design System.
+
+It has been designed to be minimally intrusive and not to interfere with the use of the Apchae Echarts library. The Apache Echarts documentation remains the reference for configuring graphics.
+
+For example, an Apache Echarts user will initialize a graph with code like this:
+```
+var div = document.getElementById('barLine_chart');
+var myChart = echarts.init(div, undefined, {
+  renderer: 'svg', // we prefer svg renderer
+});
+// Display the chart.
+myChart.setOption(dataOptions);
+```
+
+Adding the theme managed by ODS Charts will then consist of doing :
+```
+// Build the theme
+var themeManager = ODSCharts.getThemeManager({
+  // you can configure here some optional options
+});
+
+// register this theme to echarts
+echarts.registerTheme(themeManager.name , themeManager.theme);
+
+var div = document.getElementById('barLine_chart');
+var myChart = echarts.init(div, 
+  themeManager.name,  // initialized the chart with the generated theme 
+  {
+    renderer: 'svg', // we still prefer svg renderer
+  }
+);
+
+// Enriched dataOptions to complete implementation of the Orange Design System.
+myChart.setOption(themeManager.getChartOptions(dataOptions));  
+
+```
+The themeManager returned by getThemeManager() can be used to add other features supported by the ODS Charts library. Please refer to [the online documentation for more details](https://ods-charts.netlify.app/). 
+
+## Quick start for contributors
 
 Several quick start options are available:
 
