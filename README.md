@@ -24,7 +24,7 @@
 ## Quick start for users
 The ODS Charts library is to be used with Apache ECharts to create charts that adhere to the Orange Design System guidelines..
 
-It has been designed to be minimally intrusive and not to interfere with the use of the Apchae Echarts library. The Apache Echarts documentation remains the reference for configuring graphics.
+It has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The Apache ECharts documentation remains the reference for configuring charts.
 
 For example, an Apache Echarts user will initialize a graph with code like this:
 ```
