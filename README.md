@@ -20,14 +20,26 @@
 - [Versioning](#versioning)
 - [Copyright and license](#copyright-and-license)
 
+## Quick start
 
-## Quick start for users
-The ODS Charts library is to be used with Apache ECharts to create charts that adhere to the Orange Design System guidelines..
+Several quick start options are available:
+
+- npm installation:
+  - Install with [npm](https://www.npmjs.com/): `npm install ods-charts`
+  - Use in your js files : `import * as ODSCharts from 'ods-charts';`
+- Add javascript tag in your HTML page:
+
+```html
+<script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
+```
+
+The ODS Charts library is to be used with Apache ECharts to create charts that adhere to the Orange Design System guidelines.
 
 It has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The Apache ECharts documentation remains the reference for configuring charts.
 
 For example, an Apache Echarts user will initialize a graph with code like this:
-```
+
+```javascript
 var div = document.getElementById('barLine_chart');
 var myChart = echarts.init(div, undefined, {
   renderer: 'svg', // SVG is recommended
@@ -37,35 +49,30 @@ myChart.setOption(dataOptions);
 ```
 
 Adding the theme managed by ODS Charts will then consist of doing:
-```
+
+```javascript
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
   // you can configure here some optional options
 });
 
 // register this theme to echarts
-echarts.registerTheme(themeManager.name , themeManager.theme);
+echarts.registerTheme(themeManager.name, themeManager.theme);
 
 var div = document.getElementById('barLine_chart');
-var myChart = echarts.init(div, 
-  themeManager.name,  // initialized the chart with the generated theme 
+var myChart = echarts.init(
+  div,
+  themeManager.name, // initialized the chart with the generated theme
   {
     renderer: 'svg', // SVG rendered is recommended
   }
 );
 
 // Enriched dataOptions to complete implementation of the Orange Design System.
-myChart.setOption(themeManager.getChartOptions(dataOptions));  
-
+myChart.setOption(themeManager.getChartOptions(dataOptions));
 ```
-The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library. Please refer to [the online documentation for more details](https://ods-charts.netlify.app/). 
 
-## Quick start for contributors
-
-Several quick start options are available:
-
-- Clone the repo: `git clone https://github.com/Orange-OpenSource/ods-charts.git`
-- Install with [npm](https://www.npmjs.com/): `npm install ods-charts`
+The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library.
 
 Read the [documentation](https://ods-charts.netlify.app/) for information on the library content and examples.
 
