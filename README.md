@@ -58,7 +58,7 @@ var myChart = echarts.init(div,
 myChart.setOption(themeManager.getChartOptions(dataOptions));  
 
 ```
-The themeManager returned by getThemeManager() can be used to add other features supported by the ODS Charts library. Please refer to [the online documentation for more details](https://ods-charts.netlify.app/). 
+The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library. Please refer to [the online documentation for more details](https://ods-charts.netlify.app/). 
 
 ## Quick start for contributors
 
