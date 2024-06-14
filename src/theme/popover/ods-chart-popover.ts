@@ -90,8 +90,8 @@ const DEFAULT_NONE_CSS = `
 }
 
 .ods-charts-no-css-lib .ods-charts-popover-color {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   position: relative;
   display: block;
 }

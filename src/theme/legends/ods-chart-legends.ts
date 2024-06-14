@@ -39,8 +39,8 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
 }
 
 .ods-charts-no-css-lib .ods-charts-legend-color {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   position: relative;
   display: block;
 }
