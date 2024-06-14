@@ -36,7 +36,7 @@ var myChart = echarts.init(div, undefined, {
 myChart.setOption(dataOptions);
 ```
 
-Adding the theme managed by ODS Charts will then consist of doing :
+Adding the theme managed by ODS Charts will then consist of doing:
 ```
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
