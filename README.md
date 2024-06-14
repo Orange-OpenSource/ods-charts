@@ -37,7 +37,7 @@ The ODS Charts library is to be used with Apache ECharts to create charts that a
 
 It has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The Apache ECharts documentation remains the reference for configuring charts.
 
-For example, an Apache Echarts user will initialize a graph with code like this:
+For instance, an Apache ECharts user can initialize a chart using code like this:
 
 ```javascript
 var div = document.getElementById('barLine_chart');
