@@ -113,7 +113,7 @@ function generateConfigurator(id) {
 
             <div class="col-md-4">
               <label for="lineStyleInput" class="form-label">Line style</label>
-              <select class="form-select" aria-label="Line style" id="lineStyleInput" onchange="changeTheme('${id}')">
+              <select class="form-select" id="lineStyleInput" onchange="changeTheme('${id}')">
                 <option value="smooth">Smooth</option>
                 <option value="broken">Broken</option>
                 <option value="withPoints">Broken with points</option>
@@ -129,7 +129,7 @@ function generateConfigurator(id) {
 
             <div class="col-md-4">
               <label for="popoverInput" class="form-label">Popover or Tooltip</label>
-              <select class="form-select" aria-label="Line style" id="popoverInput" onchange="changeTheme('${id}')">
+              <select class="form-select" id="popoverInput" onchange="changeTheme('${id}')">
                 <option value="none">None</option>
                 <option value="popover">Popover</option>
                 <option value="tooltip">Tooltip</option>
@@ -139,7 +139,7 @@ function generateConfigurator(id) {
 
             <div class="col-md-4 popover-config">
               <label for="popoverSharedInput" class="form-label">Tooltip/Popover content</label>
-              <select class="form-select" aria-label="Line style" id="popoverSharedInput" onchange="changeTheme('${id}')">
+              <select class="form-select" id="popoverSharedInput" onchange="changeTheme('${id}')">
                 <option value="none">Not shared</option>
                 <option value="shared">Shared</option>
               </select>
@@ -147,7 +147,7 @@ function generateConfigurator(id) {
 
             <div class="col-md-4 popover-config">
               <label for="popoverAxisInput" class="form-label">Tooltip/Popover axis pointer</label>
-              <select class="form-select" aria-label="Line style" id="popoverAxisInput" onchange="changeTheme('${id}')">
+              <select class="form-select" id="popoverAxisInput" onchange="changeTheme('${id}')">
                 <option value="none">None</option>
                 <option value="shadow">Shadow</option>
                 <option value="line">Line</option>
@@ -157,10 +157,18 @@ function generateConfigurator(id) {
 
             <div class="col-md-4 popover-renderer">
               <label for="popoverTemplateInput" class="form-label">Popover renderer</label>
-              <select class="form-select" aria-label="Line style" id="popoverTemplateInput" onchange="changeTheme('${id}')">
+              <select class="form-select" id="popoverTemplateInput" onchange="changeTheme('${id}')">
                 <option value="internal">Apache ECharts renderer</option>
                 <option value="external">Boosted renderer</option>
               </select>
+            </div>
+
+            <div class="col-md-4 popover-renderer">
+                <label for="usedLegends" class="form-label">Legends</label>
+                <select class="form-select" id="usedLegends" onchange="changeTheme('${id}')">
+                    <option value="echarts">Apache ECharts legend</option>
+                    <option value="odscharts">ODS Charts legend</option>
+                </select>
             </div>
 
             <div class="col-12">
@@ -168,7 +176,7 @@ function generateConfigurator(id) {
             </div>
             <div class="col-md-4">
               <label for="cssTheme" class="form-label">Used CSS</label>
-              <select class="form-select" aria-label="Line style" id="cssTheme" onchange="changeTheme('${id}')">
+              <select class="form-select" id="cssTheme" onchange="changeTheme('${id}')">
                 <option value="NONE">NONE</option>
                 <option value="BOOSTED4">Boosted 4</option>
                 <option value="BOOSTED5">Boosted 5</option>
@@ -235,6 +243,7 @@ async function displayChart(
   popoverSharedInput,
   popoverAxisInput,
   popoverTemplateInput,
+  usedLegends,
   cssThemeName,
   refresh = false
 ) {
@@ -248,6 +257,11 @@ async function displayChart(
 
   let iframe = document.querySelector(`#${id} iframe`);
 
+  if (document.getElementById(id).dataset.initialOptions) {
+    options = JSON.parse(document.getElementById(id).dataset.initialOptions);
+  } else {
+    document.getElementById(id).dataset.initialOptions = JSON.stringify(options);
+  }
   if (!cssThemeName) {
     cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
   }
@@ -274,6 +288,9 @@ async function displayChart(
   );
   if (!popoverTemplateInput) {
     popoverTemplateInput = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName ? 'internal' : 'external';
+  }
+  if (!usedLegends) {
+    usedLegends = 'odscharts';
   }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
@@ -314,13 +331,28 @@ async function displayChart(
 
   var legends = false;
 
-  if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
-    options.legend = {
-      data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
-    };
+  if ('odscharts' === usedLegends) {
+    if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
+      options.legend = {
+        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
+      };
+    }
+  } else {
+    if (!options.legend) {
+      options.legend = {};
+    }
+    if (options.series && 1 < options.series.length) {
+      options.series.forEach((serie, index) => {
+        if (!serie.name) serie.name = 'label ' + index;
+      });
+    }
   }
 
-  legends = (options.legend && options.legend.data && !options.legend.show) || (options.dataset && options.dataset.source);
+  legends =
+    usedLegends === 'odscharts' &&
+    ((options.legend && options.legend.data && !options.legend.show) ||
+      (options.dataset && options.dataset.source) ||
+      (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
 
   if ('enterable' === popoverInput) {
     if (!options.tooltip) {
@@ -481,6 +513,7 @@ myChart.setOption(themeManager.getChartOptions());
     document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #usedLegends option[value="${usedLegends}"]`).setAttribute('selected', 'selected');
 
     document.querySelector(`#accordion_${id} #cssTheme option[value="${cssThemeName}"]`).setAttribute('selected', 'selected');
   }
@@ -500,6 +533,8 @@ myChart.setOption(themeManager.getChartOptions());
   if (legends) {
     themeManager.externalizeLegends(myChart, `#${id}_legend`);
     iframe.style.height = `calc(60vh + 2.375rem)`; // Fix to avoid having a vertical scrollbar within the iframe for the first rendering
+  } else {
+    iframe.contentDocument.getElementById(id + '_legend').innerHTML = '';
   }
   themeManager.manageChartResize(myChart, chartId);
   if ('none' !== popoverInput) {
@@ -535,6 +570,7 @@ async function changeTheme(id) {
     document.querySelector(`#accordion_${id} #popoverSharedInput`).value,
     document.querySelector(`#accordion_${id} #popoverAxisInput`).value,
     document.querySelector(`#accordion_${id} #popoverTemplateInput`).value,
+    document.querySelector(`#accordion_${id} #usedLegends`).value,
 
     document.querySelector(`#accordion_${id} #cssTheme`).value,
     true
