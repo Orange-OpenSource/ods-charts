@@ -63,8 +63,8 @@ import { isMainAxis } from './const/main-axis-type.const';
  *
  * If you use our `sequential` sets, please consider using one color out of two if possible for a greater contrast (for example 0-2-4).
  *
- * - {@link DEFAULT} is the default color set for up to 12 different colors.
- * - {@link CATEGORICAL} is the default design color set for up to 12 different colors.
+ * - {@link DEFAULT} is the default color set for up to 12 different colors, selected to favor contrasts.
+ * - {@link CATEGORICAL} is a color set, build for up to 12 different colors, defined by the Orange Design System to display data visualization categories.
  * - {@link FUNCTIONAL} is the color set embedding the orange that should be used a functional gray and all the functional colors.
  * - {@link SUPPORTING_COLORS} is the color set embedding all the supporting colors. Colors don't change between light and dark mode.
  * - {@link DARKER_TINTS} is the color set embedding all the darker tints of the supporting colors in light mode (lighter in dark mode).
