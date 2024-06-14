@@ -27,7 +27,7 @@ Several quick start options are available:
 - npm installation:
   - Install with [npm](https://www.npmjs.com/): `npm install ods-charts`
   - Use in your JavaScript files: `import * as ODSCharts from 'ods-charts';`
-- Add javascript tag in your HTML page:
+- CDN via jsDelivr (not recommended, useful for prototyping):
 
 ```html
 <script src=" https://cdn.jsdelivr.net/npm/echarts@latest/dist/echarts.min.js "></script>
