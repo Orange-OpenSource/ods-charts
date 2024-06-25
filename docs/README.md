@@ -31,18 +31,14 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
   </head>
   <body>
     <div id="chart1" style="width: 800px; height: 400px"></div>
-    <div id="chart1_legends" ></div>
+    <div id="chart1_legends"></div>
     <script>
       var lineChartODSTheme = ODSCharts.getThemeManager();
       echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
 
-      const chart1 = echarts.init(
-        document.getElementById('chart1'),
-        lineChartODSTheme.name,
-        {
-          renderer: 'svg',
-        }
-      );
+      const chart1 = echarts.init(document.getElementById('chart1'), lineChartODSTheme.name, {
+        renderer: 'svg',
+      });
       chart1.setOption(
         lineChartODSTheme
           .setDataOptions({
@@ -65,7 +61,6 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
     </script>
   </body>
 </html>
-
 ```
 
 <a href="/examples/">See more online dynamic examples</a>
