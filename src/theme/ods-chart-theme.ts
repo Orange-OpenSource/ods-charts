@@ -323,7 +323,7 @@ export class ODSChartsTheme {
    * This manager is used to retrieve the Apache ECharts theme and manage the chart options in accordance with the Orange Design System.
    *
    * The method takes the theme configuration as a parameter {@link ODSChartsThemeOptions}.
-   * @param options: default option used to generate the theme
+   * @param options default option used to generate the theme
    * @returns the theme manager
    */
   public static getThemeManager(options?: ODSChartsThemeOptions): ODSChartsTheme {
@@ -461,10 +461,27 @@ export class ODSChartsTheme {
         color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
       },
     };
+    const legend = {
+      textStyle: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+      },
+      icon: 'rect',
+      itemWidth: 10,
+      itemHeight: 10,
+      itemStyle: {
+        borderColor: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        borderWidth: 1,
+      },
+    };
+
     const themeOptions: any = {
       xAxis: { axisLabel: cloneDeepObject(axisLabel) },
       yAxis: { axisLabel: cloneDeepObject(axisLabel) },
+      legend: cloneDeepObject(legend),
     };
+
     for (const axis of ['xAxis', 'yAxis']) {
       if (!isMainAxis(this.dataOptions[axis]) && !(this.dataOptions[axis] && this.dataOptions[axis].axisLine)) {
         themeOptions[axis].axisLine = { show: false };

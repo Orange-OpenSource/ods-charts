@@ -1,7 +1,7 @@
 {
   "name": "ods-charts",
   "description": "ODS Charts is based on Apache ECharts and provides Orange charts components.",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "author": "",
   "contributors": [],
   "license": "MIT",
@@ -28,12 +28,12 @@
   },
   "devDependencies": {
     "echarts": "^5.5.0",
-    "prettier": "^3.3.0",
+    "prettier": "^3.3.2",
     "serve": "^14.2.3",
     "ts-loader": "^9.5.1",
-    "typedoc": "^0.25.13",
-    "typescript": "^5.4.5",
-    "webpack": "^5.91.0",
+    "typedoc": "^0.26.2",
+    "typescript": "^5.5.2",
+    "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4"
   }
 }

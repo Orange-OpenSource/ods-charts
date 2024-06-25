@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Examples - Specific use cases - Confine tooltip example</title>
+    <title>Examples - Specific use cases - Size management</title>
 
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous" />
@@ -36,34 +36,42 @@
     </header>
     <div class="title-bar">
       <div class="container-xxl">
-        <h1 class="display-1">Confine tooltip example</h1>
+        <h1 class="display-1">Size management</h1>
       </div>
     </div>
     <div class="container pt-3">
       <div class="card w-100">
         <div class="card-body">
-          <h5 class="card-title">Confine tooltip example</h5>
-          <p class="card-text">ODS Charts library uses the tooltip containment feature of the Apache ECharts library to ensure that the tooltip or popover is displayed within the confines of the graph, avoiding overflow beyond the display window.</p>
+          <h5 class="card-title">Collapsed graph example</h5>
+          <p class="card-text">The size of the graph may change due to window resizing or modifications in the DOM structure or content. For instance, the graph's size can be affected if it is displayed within a collapsed panel.</p>
+          <p class="card-text">Apache ECharts has a <code>resize</code> method to manage that. But you can ask to the <code>ODSChartsTheme</code> to manage it for you calling the <code>externalizeLegends</code> method.</p>
           <p class="card-text">
-            This function is activated by configuring the graph options as follows:
+            In the following collapsed div, the resize is managed by the following code:
             <code>
               <pre>
-tooltip: {
-    confine: true,
-}
+themeManager.manageChartResize(myChart, 'barLine_chart');
               </pre>
             </code>
           </p>
           <div id="htmlId">
-            <div class="border border-light position-relative">
-              <div class="chart_title">
-                <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
-                <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+            <p class="d-inline-flex gap-1">
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart">Click here to see the graph</button>
+            </p>
+            <div class="collapse" id="collapseChart">
+              <div class="card card-body">
+                <div>
+                  <div class="border border-light position-relative">
+                    <div class="chart_title">
+                      <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                      <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+                    </div>
+                    <div id="barLine_holder">
+                      <div id="barLine_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+                    </div>
+                    <div id="barLine_legend"></div>
+                  </div>
+                </div>
               </div>
-              <div id="barLine_holder">
-                <div id="barLine_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
-              </div>
-              <div id="barLine_legend"></div>
             </div>
           </div>
           <script>
@@ -99,9 +107,6 @@ tooltip: {
           ],
           legend: {
             data: ['label 0', 'label 1'],
-          },
-          tooltip: {
-            confine: true,
           },
         };
 
