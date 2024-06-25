@@ -23,7 +23,7 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 
 ## Examples
 
-```
+```html
 <html lang="en">
   <head>
     <script type="text/javascript" src="<...>ods-charts.js"></script>
@@ -68,7 +68,7 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 
 ```
 
-<a href="../examples/">See more online dynamic examples</a>
+<a href="/examples/">See more online dynamic examples</a>
 
 ## Copyright and license
 
