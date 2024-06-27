@@ -93,12 +93,17 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Categorical Color</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS}">Default supporting colors</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.CATEGORICAL}">Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.FUNCTIONAL}">Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
               </select>
             </div>
 
@@ -107,7 +112,9 @@ function generateConfigurator(id) {
               <select class="form-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
                 <option value="blue">Blue</option>
                 <option value="green">Green</option>
+                <option value="pink">Pink</option>
                 <option value="purple">Purple</option>
+                <option value="yellow">Yellow</option>
               </select>
             </div>
 
@@ -561,7 +568,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    6 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
+    11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #visualMapColorInput`).value,
@@ -576,7 +583,7 @@ async function changeTheme(id) {
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
-    if (6 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
+    if (11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
       document.querySelector('#view_custom_color_' + id).classList.remove('d-none');
     } else {
       document.querySelector('#view_custom_color_' + id).classList.add('d-none');
@@ -636,9 +643,17 @@ window.generateMultipleLineChart = async (id) => {
       { data: [28.8956454657, 23, 19, 15, 18, 12], type: 'line' },
       { data: [19, 15, 18, 12, 28.8956454657, 23], type: 'line' },
       { data: [12, 28.8956454657, 23, 15, 15, 18], type: 'line' },
+      { data: [10, 13, 23, 22, 21, 15], type: 'line' },
+      { data: [15, 14, 23, 21, 22, 10], type: 'line' },
+      { data: [23, 22, 10, 23, 21, 15], type: 'line' },
+      { data: [24, 19, 17, 26, 20, 30], type: 'line' },
+      { data: [19, 17, 26, 20, 30, 24], type: 'line' },
+      { data: [26, 26, 12, 14, 10, 20], type: 'line' },
+      { data: [19, 26, 20, 30, 24, 17], type: 'line' },
+      { data: [26, 12, 14, 10, 20, 26], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -698,9 +713,30 @@ window.generateTimeSeriesLineChart = async (id) => {
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
+      {
+        name: 'Serie 4',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+      {
+        name: 'Serie 5',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
+      {
+        name: 'Serie 6',
+        data: generateData()
+          .filter((oneData) => undefined !== oneData.value)
+          .map((oneData) => [oneData.time, oneData.value]),
+        type: 'line',
+      },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateBarChart = async (id, horizontal = false, grouped = false, stacked = false) => {
@@ -752,7 +788,7 @@ window.generateBarChart = async (id, horizontal = false, grouped = false, stacke
             colorIndex: 0,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
             colorIndex: 0,
           },
           {
@@ -767,20 +803,20 @@ window.generateBarChart = async (id, horizontal = false, grouped = false, stacke
               colorIndex: 0,
             },
             {
-              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
               colorIndex: 0,
             },
           ]
         : horizontal
           ? [
               {
-                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
                 colorIndex: 1,
               },
             ]
           : [
               {
-                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
                 colorIndex: 3,
               },
             ]
@@ -846,11 +882,11 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
     id,
     option,
     undefined,
-    //ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS
+    //ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT
     grouped
       ? [
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
             colorIndex: 1,
           },
           {
@@ -864,7 +900,7 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
         ]
       : [
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
             colorIndex: 2,
           },
           {

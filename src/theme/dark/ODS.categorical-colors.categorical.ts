@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_CATEGORICAL_COLORS_GREEN = {
-  color: ['#0A6E31', '#27A971', '#84D5AF', '#198C51', '#50BE87', '#B8EBD6'],
+export const DARK_CATEGORICAL_COLORS_CATEGORICAL = {
+  color: ['#ffb4e6', '#d573bb', '#c1a4e4', '#9373bd', '#80ceef', '#3e9dd6', '#84d5af', '#27a971', '#ffd200', '#b98f11'],
 };

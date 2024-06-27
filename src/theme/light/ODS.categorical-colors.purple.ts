@@ -7,5 +7,5 @@
 //
 
 export const LIGHT_CATEGORICAL_COLORS_PURPLE = {
-  color: ['#492191', '#6746A3', '#866BB6', '#A490C8', '#C2B5DA', '#E1DAED'],
+  color: ['#492191', '#6E4AA7', '#9373BD', '#A885D8', '#C1A4E4', '#D9C2F0'],
 };

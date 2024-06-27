@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_CATEGORICAL_COLORS_GREEN = {
-  color: ['#0A6E31', '#27A971', '#84D5AF', '#198C51', '#50BE87', '#B8EBD6'],
+export const LIGHT_SEQUENTIAL_COLORS_YELLOW = {
+  visualMapColor: ['#9D6E06', '#B98F11', '#FFB400', '#FFD200', '#FFE45B', '#FFF6B6'],
 };

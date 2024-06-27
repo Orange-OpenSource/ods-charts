@@ -7,5 +7,5 @@
 //
 
 export const DARK_SEQUENTIAL_COLORS_BLUE = {
-  visualMapColor: ['#d6e4f4', '#adc9e9', '#84afde', '#5a94d3', '#3179c8', '#085ebd'],
+  visualMapColor: ['#B5E8F7', '#80CEEF', '#4BB4E6', '#3E9DD6', '#237ECA', '#085EBD'],
 };
