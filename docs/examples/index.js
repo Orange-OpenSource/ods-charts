@@ -912,3 +912,77 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
     ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
   );
 };
+
+window.generatePieChart = async (id) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    legend: {
+      orient: 'vertical',
+      right: '10',
+      top: '10',
+    },
+    series: [
+      {
+        type: 'pie',
+        label: { show: false },
+        labelLine: { show: false },
+        data: [
+          { name: 'Label 1', value: 25 },
+          { name: 'Label 2', value: 50 },
+          { name: 'Label 3', value: 75 },
+          { name: 'Label 4', value: 10 },
+          { name: 'Label 5', value: 100 },
+          { name: 'Label 6', value: 30 },
+          { name: 'Label 7', value: 5 },
+        ],
+        label: {
+          show: false,
+          position: 'outside',
+        },
+        radius: ['0%', '95%'],
+      },
+    ],
+  };
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS);
+};
+
+window.generateDonutChart = async (id) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    legend: {
+      orient: 'vertical',
+      right: '10',
+      top: '10',
+    },
+    series: [
+      {
+        type: 'pie',
+        label: { show: false },
+        labelLine: { show: false },
+        data: [
+          { name: 'Label 1', value: 25 },
+          { name: 'Label 2', value: 50 },
+          { name: 'Label 3', value: 75 },
+          { name: 'Label 4', value: 10 },
+          { name: 'Label 5', value: 100 },
+          { name: 'Label 6', value: 30 },
+          { name: 'Label 7', value: 5 },
+        ],
+        label: {
+          show: false,
+          position: 'center',
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 35,
+            fontWeight: 700,
+            formatter: '{d}%',
+          },
+        },
+        radius: ['80%', '95%'],
+      },
+    ],
+  };
+  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS);
+};
