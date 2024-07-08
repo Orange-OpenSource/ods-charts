@@ -35,81 +35,83 @@
         </div>
       </nav>
     </header>
-    <div class="title-bar">
-      <div class="container-xxl">
-        <h1 class="display-1">Bar charts example</h1>
-      </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Vertical bar chart</h5>
-          <p class="card-text">Used to compare related data sets.</p>
-          <div id="barChart"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarChart('barChart');
-            });
-          </script>
+    <main>
+      <div class="title-bar">
+        <div class="container-xxl">
+          <h1 class="display-1">Bar charts example</h1>
         </div>
       </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Horizontal bar chart</h5>
-          <p class="card-text">Used to compare related data sets.</p>
-          <div id="barChartH"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarChart('barChartH', true);
-            });
-          </script>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Vertical bar chart</h5>
+            <p class="card-text">Used to compare related data sets.</p>
+            <div id="barChart"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarChart('barChart');
+              });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Vertical grouped bar chart</h5>
-          <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
-          <div id="barChartGV"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarChart('barChartGV', false, true);
-            });
-          </script>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Horizontal bar chart</h5>
+            <p class="card-text">Used to compare related data sets.</p>
+            <div id="barChartH"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarChart('barChartH', true);
+              });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Horizontal grouped bar chart</h5>
-          <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
-          <div id="barChartGH"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarChart('barChartGH', true, true);
-            });
-          </script>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Vertical grouped bar chart</h5>
+            <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
+            <div id="barChartGV"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarChart('barChartGV', false, true);
+              });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Grouped bar chart with dataset</h5>
-          <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
-          <div id="barChartdataset"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateDatasetBarChart('barChartdataset');
-            });
-          </script>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Horizontal grouped bar chart</h5>
+            <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
+            <div id="barChartGH"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarChart('barChartGH', true, true);
+              });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Grouped bar chart with dataset</h5>
+            <p class="card-text">A grouped bar chart is used to compare values across multiple categories.</p>
+            <div id="barChartdataset"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateDatasetBarChart('barChartdataset');
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
     <script src="../assets/tarteaucitron-config.js"></script>

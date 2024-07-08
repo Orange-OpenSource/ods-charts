@@ -35,39 +35,41 @@
         </div>
       </nav>
     </header>
-    <div class="title-bar">
-      <div class="container-xxl">
-        <h1 class="display-1">Bar + line charts example</h1>
-      </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Bar chart and line chart</h5>
-          <p class="card-text">Two metric values showing quantity alongside changes in trends over time.</p>
-          <div id="barLine"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarLineChart('barLine', false, false, false);
-            });
-          </script>
+    <main>
+      <div class="title-bar">
+        <div class="container-xxl">
+          <h1 class="display-1">Bar + line charts example</h1>
         </div>
       </div>
-    </div>
-    <div class="container d-flex flex-nowrap pt-3">
-      <div class="card w-100">
-        <div class="card-body">
-          <h5 class="card-title">Grouped bar and line chart</h5>
-          <p class="card-text">Two metric values showing quantity alongside changes in trends over time.</p>
-          <div id="barLineGroup"></div>
-          <script>
-            window.addEventListener('DOMContentLoaded', () => {
-              window.generateBarLineChart('barLineGroup', false, true, false);
-            });
-          </script>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Bar chart and line chart</h5>
+            <p class="card-text">Two metric values showing quantity alongside changes in trends over time.</p>
+            <div id="barLine"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarLineChart('barLine', false, false, false);
+              });
+            </script>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Grouped bar and line chart</h5>
+            <p class="card-text">Two metric values showing quantity alongside changes in trends over time.</p>
+            <div id="barLineGroup"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateBarLineChart('barLineGroup', false, true, false);
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
     <script src="../assets/tarteaucitron-config.js"></script>
