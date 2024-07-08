@@ -231,7 +231,7 @@ function generateExampleDiv(id) {
   iframeDocument.write(`
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" integrity="sha384-o5uz97et3bErHvpKfD4Jz4n0JfhJDWABFuF4NP+iEEDxE1VwMWJ19QGR0lqFZnr6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" integrity="sha384-Mx5lkUEQPM1pOJCwFtUICyX45KNojXbkWdYhkKUKsbv391mavbfoAmONbzkgYPzR" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../dist/ods-charts.js"></script>
 <script type="module" src="./index.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>

@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^18.0.5",
     "@angular/platform-browser-dynamic": "^18.0.5",
     "@angular/router": "^18.0.5",
-    "echarts": "^5.5.0",
+    "echarts": "^5.5.1",
     "ods-charts": "file:../..",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.3",
