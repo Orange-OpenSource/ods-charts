@@ -1,4 +1,5 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const commonDef = {
   mode: 'production',
@@ -15,6 +16,27 @@ const commonDef = {
         test: /\.tsx?$/,
         loader: 'ts-loader',
       },
+    ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+            preamble: `/*!
+  * Software Name: Orange Design System Charts
+  * SPDX-FileCopyrightText: Copyright (c) 2023 - 2024 Orange SA
+  * SPDX-License-Identifier: MIT
+  * 
+  * This software is distributed under the MIT license.
+  */
+  `,
+          },
+        },
+        extractComments: false,
+      }),
     ],
   },
 };
