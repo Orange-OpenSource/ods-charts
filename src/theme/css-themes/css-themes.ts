@@ -106,7 +106,7 @@ export class ODSChartsCSSThemeDefinition {
 const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
   legends: {
     odsChartsLegendHolder: {
-      classes: ['ps-3', 'pt-2'],
+      classes: ['pt-2'],
     },
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
@@ -143,7 +143,7 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
 const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
   legends: {
     odsChartsLegendHolder: {
-      classes: ['pl-3', 'pt-2'],
+      classes: ['pt-2'],
     },
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
