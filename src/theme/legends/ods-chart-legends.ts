@@ -235,7 +235,7 @@ export class ODSChartsLegends {
         legendHolders[legendHolderSelector].legends,
         cssTheme,
         mode,
-        legendHolders[legendHolderSelector].orientation ? (legendHolders[legendHolderSelector].orientation as 'vertical' | 'horizontal') : 'horizontal'
+        legendHolders[legendHolderSelector].orientation
       );
     }
   }
@@ -246,7 +246,7 @@ export class ODSChartsLegends {
     legends: { labels: string[]; names: string[]; index: number[] },
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode,
-    orientation: 'vertical' | 'horizontal'
+    orientation: 'vertical' | 'horizontal' = 'horizontal'
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
