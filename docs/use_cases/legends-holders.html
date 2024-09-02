@@ -164,7 +164,7 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
           <p class="card-text">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
           <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a css selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; serieRef?: string[]}</code> object.</p>
           <ul>
-            <li><code>legendHolderSelector</code> is the css selector of the legend holder</li>
+            <li><code>legendHolderSelector</code> is the css selector of the legend holder.</li>
             <li><code>orientation</code> optionally indicates whether captions are displayed horizontally or vertically. By default, the value of the <code>legend.orient</code> option in Apache Echarts will be used if it exists, otherwise it will be <code>'horizontal'</code>.</li>
             <li>
               <code>serieRef</code> is an array referencing the series whose legends are to be displayed in this legend container. The reference can be the series name, the series label or simply the stack name in the case of stacked bars.<br />
