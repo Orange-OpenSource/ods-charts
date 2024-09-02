@@ -31,7 +31,7 @@ export class ODSChartsLegendHolderDefinition {
      */
     public orientation?: 'vertical' | 'horizontal',
     /**
-     * array referencing the series whose legends are to be displayed in this legend container.
+     * Array referencing the series whose legends are to be displayed in this legend container.
      * The reference can be the series name, the series label or simply the stack name in the case of stacked bars.
      * If serieRef is absent, this container will be the default container for non-referenced legends.
      */
