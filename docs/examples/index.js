@@ -355,9 +355,13 @@ async function displayChart(
   var legends = false;
 
   if ('odscharts' === usedLegends) {
-    if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
+    if (
+      !(options.dataset && options.dataset.source) &&
+      !(options.legend && options.legend.data) &&
+      (options.series.length > 1 || (1 === options.series.length && 0 < options.series[0].data.length && options.series[0].data[0].name))
+    ) {
       options.legend = {
-        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
+        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : options.series[0].data.map((val) => val.name),
       };
       if ('vertical' === legendsOrientation) {
         options.legend.orient = legendsOrientation;
@@ -951,11 +955,6 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
 window.generatePieChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    legend: {
-      orient: 'vertical',
-      right: '10',
-      top: '10',
-    },
     series: [
       {
         type: 'pie',
@@ -984,11 +983,6 @@ window.generatePieChart = async (id) => {
 window.generateDonutChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    legend: {
-      orient: 'vertical',
-      right: '10',
-      top: '10',
-    },
     series: [
       {
         type: 'pie',
