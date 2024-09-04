@@ -48,7 +48,6 @@ function generateChartDiv(id, direction) {
         ${buildChartDiv(id)}
       </div>
       <div id="${id}_legend" style="min-width: 150px;"></div>
-
     </div>    
   </div>`;
 }
@@ -183,11 +182,11 @@ function generateConfigurator(id) {
             </div>
 
             <div class="col-md-4 popover-renderer">
-                <label for="legendsOrientation" class="form-label">Legends orientation</label>
-                <select class="form-select" id="legendsOrientation" onchange="changeTheme('${id}')">
-                    <option value="horizontal">Horizontal</option>
-                    <option value="vertical">Vertical</option>
-                </select>
+              <label for="legendsOrientation" class="form-label">Legends orientation</label>
+              <select class="form-select" id="legendsOrientation" onchange="changeTheme('${id}')">
+                <option value="horizontal">Horizontal</option>
+                <option value="vertical">Vertical</option>
+              </select>
             </div>
 
             <div class="col-12">
