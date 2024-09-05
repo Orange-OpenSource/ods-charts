@@ -173,7 +173,7 @@ function generateConfigurator(id) {
               </select>
             </div>
 
-            <div class="col-md-4 popover-renderer">
+            <div class="col-md-4 legends-style">
                 <label for="usedLegends" class="form-label">Legends</label>
                 <select class="form-select" id="usedLegends" onchange="changeTheme('${id}')">
                     <option value="echarts">Apache ECharts legend</option>
@@ -181,7 +181,7 @@ function generateConfigurator(id) {
                 </select>
             </div>
 
-            <div class="col-md-4 popover-renderer">
+            <div class="col-md-4 legends-style">
               <label for="legendsOrientation" class="form-label">Legends orientation</label>
               <select class="form-select" id="legendsOrientation" onchange="changeTheme('${id}')">
                 <option value="horizontal">Horizontal</option>
@@ -387,17 +387,23 @@ async function displayChart(
     }
   }
 
-  if (usedLegends === 'odscharts' && 'vertical' === legendsOrientation) {
-    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'row';
-  } else {
-    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
-  }
-
   legends =
     usedLegends === 'odscharts' &&
     ((options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
       (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
+
+  if (legends && usedLegends === 'odscharts' && 'vertical' === legendsOrientation) {
+    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'row';
+  } else {
+    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
+  }
+
+  if (!legends && usedLegends === 'odscharts') {
+    document.querySelectorAll('.legends-style').forEach((elt) => {
+      elt.style.display = 'none';
+    });
+  }
 
   if ('enterable' === popoverInput) {
     if (!options.tooltip) {
