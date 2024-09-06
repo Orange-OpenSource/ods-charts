@@ -400,7 +400,7 @@ async function displayChart(
   }
 
   if (!legends && usedLegends === 'odscharts') {
-    document.querySelectorAll('.legends-style').forEach((elt) => {
+    document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
       elt.style.display = 'none';
     });
   }
