@@ -9,25 +9,26 @@
 /**
  * Definition of a container used to display legends.
  *
- * Exemple of use:
+ * Example of use:
  * ```
- *                 themeManager.externalizeLegends(
- *                  myChart,
- *                  [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' },
- *                   { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' },
- *                   { legendHolderSelector: '#line_legend' }]);
+ * themeManager.externalizeLegends(
+ *   myChart,
+ *   [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' },
+ *    { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' },
+ *    { legendHolderSelector: '#line_legend' }]
+ * );
  * ```
  */
 export class ODSChartsLegendHolderDefinition {
   constructor(
     /**
-     * Legends container css selector
+     * Legends container CSS selector
      */
     public legendHolderSelector: string,
     /**
      * Optionally indicates whether captions are displayed horizontally or vertically.
-     * By default, the value of the legend.orient option in Apache Echarts will be used.
-     * If legend.orient does not exist, the default value will be 'horizontal'.
+     * By default, the value of the `legend.orient` option in Apache ECharts will be used.
+     * If `legend.orient` does not exist, the default value will be `'horizontal'`.
      */
     public orientation?: 'vertical' | 'horizontal',
     /**
