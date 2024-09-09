@@ -173,7 +173,7 @@ export class ODSChartsLegends {
       document.head.appendChild(style);
     }
 
-    // keep Apache Echarts default configuration for legend orientation
+    // keep Apache ECharts default configuration for legend orientation
     if (dataOptions && dataOptions.legend && dataOptions.legend.orient) {
       for (const legendHolder of this.legendHolders) {
         if (!legendHolder.orientation) {
@@ -202,10 +202,10 @@ export class ODSChartsLegends {
             legendHolders[legendHolderKey].seriesRef?.includes(allLegends.labels[index]))
       );
       if (!legendHolderSelector) {
-        const serie = dataOptions.series && dataOptions.series.find((serie: { name?: string }) => serie.name === allLegends.names[index]);
-        if (serie && serie.stack) {
+        const series = dataOptions.series && dataOptions.series.find((series: { name?: string }) => series.name === allLegends.names[index]);
+        if (series && series.stack) {
           legendHolderSelector = Object.keys(legendHolders).find(
-            (legendHolderKey) => !!legendHolders[legendHolderKey].seriesRef && legendHolders[legendHolderKey].seriesRef?.includes(serie.stack)
+            (legendHolderKey) => !!legendHolders[legendHolderKey].seriesRef && legendHolders[legendHolderKey].seriesRef?.includes(series.stack)
           );
         }
       }
