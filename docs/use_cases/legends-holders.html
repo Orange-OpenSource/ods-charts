@@ -34,27 +34,24 @@
         </div>
       </nav>
     </header>
-
     <div class="title-bar">
       <div class="container-xxl">
         <h1 class="display-1">Specific legend holders</h1>
       </div>
     </div>
-
-    <div class="container">
-      <div class="card w-100 mt-3">
+    <div class="container pt-3">
+      <div class="card w-100">
         <div class="card-body">
           <h5 class="card-title">Vertical legend holder example</h5>
           <p class="card-text">You may wish to display the legends vertically, for example to the right of the graph.</p>
           <p class="card-text">
-            To do this, you can use the Apache Echarts <code>legend.orient</code> option :
-
+            To do this, you can use the Apache ECharts <code>legend.orient</code> option:
             <code>
               <pre>
-                legend: {
-                  data: ['label 0', 'label 1', 'label 2'],
-                  orient: 'vertical',
-                }
+legend: {
+  data: ['label 0', 'label 1', 'label 2'],
+  orient: 'vertical',
+}
               </pre>
             </code>
           </p>
@@ -62,7 +59,7 @@
             <p class="card-text text-body-secondary">
               <small>
                 NB: This orientation could also be provided through
-                <code class="text-body-secondary">externalizeLegends()</code> method providing in place of the css selector for the caption container an object including the selector and the orientation <code class="text-body-secondary">{ legendHolderSelector: string; orientation: 'vertical' | 'horizontal';}</code> :
+                <code class="text-body-secondary">externalizeLegends()</code> method providing in place of the CSS selector for the caption container an object including the selector and the orientation <code class="text-body-secondary">{ legendHolderSelector: string; orientation: 'vertical' | 'horizontal';}</code> :
                 <code class="text-body-secondary">
                   <pre>
 themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_legend', orientation: 'vertical'});        
@@ -162,9 +159,9 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
         <div class="card-body">
           <h5 class="card-title">Legends holders for stacked bars example</h5>
           <p class="card-text">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
-          <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a css selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; serieRef?: string[]}</code> object.</p>
+          <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; serieRef?: string[]}</code> object.</p>
           <ul>
-            <li><code>legendHolderSelector</code> is the css selector of the legend holder.</li>
+            <li><code>legendHolderSelector</code> is the CSS selector of the legend holder.</li>
             <li><code>orientation</code> optionally indicates whether captions are displayed horizontally or vertically. By default, the value of the <code>legend.orient</code> option in Apache Echarts will be used if it exists, otherwise it will be <code>'horizontal'</code>.</li>
             <li>
               <code>serieRef</code> is an array referencing the series whose legends are to be displayed in this legend container. The reference can be the series name, the series label or simply the stack name in the case of stacked bars.<br />
@@ -172,14 +169,16 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
             </li>
           </ul>
           <p class="card-text">
-            We'll then have the following code to externalise our three types of legend into three different containers:
+            We'll then have the following code to externalize our three types of legend into three different containers:
             <code>
               <pre>
-                themeManager.externalizeLegends(
-                  myChart, 
-                  [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' }, 
-                   { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' }, 
-                   { legendHolderSelector: '#line_legend' }]); 
+themeManager.externalizeLegends(
+  myChart,
+  [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' },
+    { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' },
+    { legendHolderSelector: '#line_legend'
+  }]
+);
               </pre>
             </code>
           </p>
