@@ -159,13 +159,13 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
         <div class="card-body">
           <h5 class="card-title">Legends holders for stacked bars example</h5>
           <p class="card-text">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
-          <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; serieRef?: string[]}</code> object.</p>
+          <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; seriesRef?: string[]}</code> object.</p>
           <ul>
             <li><code>legendHolderSelector</code> is the CSS selector of the legend holder.</li>
             <li><code>orientation</code> optionally indicates whether captions are displayed horizontally or vertically. By default, the value of the <code>legend.orient</code> option in Apache Echarts will be used if it exists, otherwise it will be <code>'horizontal'</code>.</li>
             <li>
-              <code>serieRef</code> is an array referencing the series whose legends are to be displayed in this legend container. The reference can be the series name, the series label or simply the stack name in the case of stacked bars.<br />
-              If <code>serieRef</code> is absent, this container will be the default container for non-referenced legends.
+              <code>seriesRef</code> is an array referencing the series whose legends are to be displayed in this legend container. The reference can be the series name, the series label or simply the stack name in the case of stacked bars.<br />
+              If <code>seriesRef</code> is absent, this container will be the default container for non-referenced legends.
             </li>
           </ul>
           <p class="card-text">
@@ -174,8 +174,8 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
               <pre>
 themeManager.externalizeLegends(
   myChart,
-  [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' },
-    { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' },
+  [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' },
+    { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' },
     { legendHolderSelector: '#line_legend'
   }]
 );
@@ -306,7 +306,7 @@ themeManager.externalizeLegends(
         // Set the data to be displayed.
         themeManager.setDataOptions(dataOptions);
         // Register the externalization of the legend.
-        themeManager.externalizeLegends(myChart, [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' }, { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' }, { legendHolderSelector: '#line_legend' }]);
+        themeManager.externalizeLegends(myChart, [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' }, { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' }, { legendHolderSelector: '#line_legend' }]);
         // Manage window size changed
         themeManager.manageChartResize(myChart, 'barLine_chart');
         // Register the externalization of the tooltip/popup

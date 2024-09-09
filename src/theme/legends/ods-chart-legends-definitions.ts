@@ -13,8 +13,8 @@
  * ```
  * themeManager.externalizeLegends(
  *   myChart,
- *   [{ legendHolderSelector: '#results_stack_legend', serieRef: ['result'], orientation: 'vertical' },
- *    { legendHolderSelector: '#goals_stack_legend', serieRef: ['goals'], orientation: 'vertical' },
+ *   [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' },
+ *    { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' },
  *    { legendHolderSelector: '#line_legend' }]
  * );
  * ```
@@ -34,8 +34,8 @@ export class ODSChartsLegendHolderDefinition {
     /**
      * Array referencing the series whose legends are to be displayed in this legend container.
      * The reference can be the series name, the series label or simply the stack name in the case of stacked bars.
-     * If serieRef is absent, this container will be the default container for non-referenced legends.
+     * If `seriesRef` is absent, this container will be the default container for non-referenced legends.
      */
-    public serieRef?: string[]
+    public seriesRef?: string[]
   ) {}
 }

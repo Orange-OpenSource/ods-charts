@@ -190,22 +190,22 @@ export class ODSChartsLegends {
         throw new Error(`No legend holder found with selector ${legendHolder.legendHolderSelector}`);
       }
       legendHolders[legendHolder.legendHolderSelector] = { ...legendHolder, legends: { labels: [], names: [], index: [] } };
-      if (!legendHolder.serieRef) {
+      if (!legendHolder.seriesRef) {
         defaultLegendHolder = legendHolders[legendHolder.legendHolderSelector];
       }
     }
     for (let index = 0; index < allLegends.names.length && index < allLegends.labels.length; index++) {
       let legendHolderSelector = Object.keys(legendHolders).find(
         (legendHolderKey) =>
-          !!legendHolders[legendHolderKey].serieRef &&
-          (legendHolders[legendHolderKey].serieRef?.includes(allLegends.names[index]) ||
-            legendHolders[legendHolderKey].serieRef?.includes(allLegends.labels[index]))
+          !!legendHolders[legendHolderKey].seriesRef &&
+          (legendHolders[legendHolderKey].seriesRef?.includes(allLegends.names[index]) ||
+            legendHolders[legendHolderKey].seriesRef?.includes(allLegends.labels[index]))
       );
       if (!legendHolderSelector) {
         const serie = dataOptions.series && dataOptions.series.find((serie: { name?: string }) => serie.name === allLegends.names[index]);
         if (serie && serie.stack) {
           legendHolderSelector = Object.keys(legendHolders).find(
-            (legendHolderKey) => !!legendHolders[legendHolderKey].serieRef && legendHolders[legendHolderKey].serieRef?.includes(serie.stack)
+            (legendHolderKey) => !!legendHolders[legendHolderKey].seriesRef && legendHolders[legendHolderKey].seriesRef?.includes(serie.stack)
           );
         }
       }
