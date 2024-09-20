@@ -35,17 +35,20 @@ async function wait(timer = 0) {
   });
 }
 
-function generateChartDiv(id) {
+function generateChartDiv(id, direction) {
   return `
   <div class="border border-light" style="display: flex; flex-direction: column; height: 100%;">
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
     </div>
-    <div id="${id}_holder" style="flex-grow: 1; flex-shrink: 1;">
-      ${buildChartDiv(id)}
-    </div>
-    <div id="${id}_legend"></div>
+
+    <div id="${id}_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: ${direction}; ">
+      <div id="${id}_holder" style="flex-grow: 1; flex-shrink: 1;">
+        ${buildChartDiv(id)}
+      </div>
+      <div id="${id}_legend" style="min-width: 150px;"></div>
+    </div>    
   </div>`;
 }
 
@@ -170,12 +173,20 @@ function generateConfigurator(id) {
               </select>
             </div>
 
-            <div class="col-md-4 popover-renderer">
+            <div class="col-md-4 legends-style">
                 <label for="usedLegends" class="form-label">Legends</label>
                 <select class="form-select" id="usedLegends" onchange="changeTheme('${id}')">
                     <option value="echarts">Apache ECharts legend</option>
                     <option value="odscharts">ODS Charts legend</option>
                 </select>
+            </div>
+
+            <div class="col-md-4 legends-style">
+              <label for="legendsOrientation" class="form-label">Legends orientation</label>
+              <select class="form-select" id="legendsOrientation" onchange="changeTheme('${id}')">
+                <option value="horizontal">Horizontal</option>
+                <option value="vertical">Vertical</option>
+              </select>
             </div>
 
             <div class="col-12">
@@ -216,7 +227,7 @@ function generateConfigurator(id) {
 `;
 }
 
-function generateExampleDiv(id) {
+function generateExampleDiv(id, direction) {
   var div = document.getElementById(id);
 
   div.innerHTML = `<iframe style="width: 100%; min-height: 60vh;"></iframe>
@@ -235,7 +246,7 @@ function generateExampleDiv(id) {
 <script type="text/javascript" src="../../dist/ods-charts.js"></script>
 <script type="module" src="./index.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
-${generateChartDiv(id)}`);
+${generateChartDiv(id, direction)}`);
   iframeDocument.close();
 }
 
@@ -252,10 +263,11 @@ async function displayChart(
   popoverTemplateInput,
   usedLegends,
   cssThemeName,
+  legendsOrientation,
   refresh = false
 ) {
   if (!refresh) {
-    generateExampleDiv(id);
+    generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column');
     let iframe = document.querySelector(`#${id} iframe`);
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
@@ -299,6 +311,9 @@ async function displayChart(
   if (!usedLegends) {
     usedLegends = 'odscharts';
   }
+  if (!legendsOrientation) {
+    legendsOrientation = 'horizontal';
+  }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
 
@@ -339,10 +354,17 @@ async function displayChart(
   var legends = false;
 
   if ('odscharts' === usedLegends) {
-    if (!(options.dataset && options.dataset.source) && !(options.legend && options.legend.data) && options.series.length > 1) {
+    if (
+      !(options.dataset && options.dataset.source) &&
+      !(options.legend && options.legend.data) &&
+      (options.series.length > 1 || (1 === options.series.length && 0 < options.series[0].data.length && options.series[0].data[0].name))
+    ) {
       options.legend = {
-        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : undefined,
+        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : options.series[0].data.map((val) => val.name),
       };
+      if ('vertical' === legendsOrientation) {
+        options.legend.orient = legendsOrientation;
+      }
     }
   } else {
     if (!options.legend) {
@@ -353,6 +375,16 @@ async function displayChart(
         if (!serie.name) serie.name = 'label ' + index;
       });
     }
+    if ('horizontal' === legendsOrientation) {
+      options.legend.orient = 'horizontal';
+      options.legend.bottom = 10;
+      options.legend.left = 'left';
+      options.legend.padding = [0, 0, 0, 40];
+    } else {
+      options.legend.orient = 'vertical';
+      options.legend.right = 10;
+      options.legend.top = 'top';
+    }
   }
 
   legends =
@@ -360,6 +392,18 @@ async function displayChart(
     ((options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
       (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
+
+  if (legends && usedLegends === 'odscharts' && 'vertical' === legendsOrientation) {
+    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'row';
+  } else {
+    iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
+  }
+
+  if (!legends && usedLegends === 'odscharts') {
+    document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
+      elt.style.display = 'none';
+    });
+  }
 
   if ('enterable' === popoverInput) {
     if (!options.tooltip) {
@@ -383,7 +427,7 @@ async function displayChart(
     div = iframe.contentDocument.getElementById(chartId);
   }
 
-  document.getElementById(id + '_html').innerText = generateChartDiv(id);
+  document.getElementById(id + '_html').innerText = generateChartDiv(id, usedLegends === 'odscharts' && 'vertical' === legendsOrientation ? 'row' : 'column');
   document.getElementById(id + '_code').innerText = `///////////////////////////////////////////////////
 // Used data
 ///////////////////////////////////////////////////
@@ -539,7 +583,6 @@ myChart.setOption(themeManager.getChartOptions());
   themeManager.setDataOptions(options);
   if (legends) {
     themeManager.externalizeLegends(myChart, `#${id}_legend`);
-    iframe.style.height = `calc(60vh + 2.375rem)`; // Fix to avoid having a vertical scrollbar within the iframe for the first rendering
   } else {
     iframe.contentDocument.getElementById(id + '_legend').innerHTML = '';
   }
@@ -580,6 +623,7 @@ async function changeTheme(id) {
     document.querySelector(`#accordion_${id} #usedLegends`).value,
 
     document.querySelector(`#accordion_${id} #cssTheme`).value,
+    document.querySelector(`#accordion_${id} #legendsOrientation`).value,
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
@@ -916,11 +960,6 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
 window.generatePieChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    legend: {
-      orient: 'vertical',
-      right: '10',
-      top: '10',
-    },
     series: [
       {
         type: 'pie',
@@ -949,11 +988,6 @@ window.generatePieChart = async (id) => {
 window.generateDonutChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    legend: {
-      orient: 'vertical',
-      right: '10',
-      top: '10',
-    },
     series: [
       {
         type: 'pie',

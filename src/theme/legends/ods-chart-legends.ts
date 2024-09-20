@@ -9,6 +9,8 @@
 import { type ECharts } from 'echarts';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
 import { ODSChartsMode } from '../ods-chart-theme';
+import { isVarArray, isVarObject } from '../../tools/merge-objects';
+import { ODSChartsLegendHolderDefinition } from './ods-chart-legends-definitions';
 
 const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   padding-left: 20px;
@@ -20,6 +22,10 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+}
+
+.ods-charts-no-css-lib .ods-charts-legend-container-vertical {
+  flex-direction: column;
 }
 
 .ods-charts-no-css-lib .ods-charts-legend-link {
@@ -68,11 +74,16 @@ export class ODSChartsLegendData {
 export class ODSChartsLegends {
   private constructor(
     private echart: ECharts,
-    private legendHolderSelector: string
+    private legendHolders: ODSChartsLegendHolderDefinition[]
   ) {}
 
-  public static addLegend(echart: ECharts, legendHolderSelector: string): ODSChartsLegends {
-    return new ODSChartsLegends(echart, legendHolderSelector);
+  public static addLegend(echart: ECharts, legendHolders: string | ODSChartsLegendHolderDefinition | ODSChartsLegendHolderDefinition[]): ODSChartsLegends {
+    const legendHoldersArray: ODSChartsLegendHolderDefinition[] = isVarArray(legendHolders)
+      ? (legendHolders as ODSChartsLegendHolderDefinition[])
+      : isVarObject(legendHolders)
+        ? [legendHolders as ODSChartsLegendHolderDefinition]
+        : [{ legendHolderSelector: legendHolders as string }];
+    return new ODSChartsLegends(echart, legendHoldersArray);
   }
 
   public static getLegendData(dataOptions: any, updateDataOption: boolean = true): ODSChartsLegendData {
@@ -161,35 +172,94 @@ export class ODSChartsLegends {
       style.textContent = DEFAULT_CSS;
       document.head.appendChild(style);
     }
-    if (!document.querySelector(this.legendHolderSelector)) {
-      throw new Error(`No legend holder found with selector ${this.legendHolderSelector}`);
+
+    // keep Apache ECharts default configuration for legend orientation
+    if (dataOptions && dataOptions.legend && dataOptions.legend.orient) {
+      for (const legendHolder of this.legendHolders) {
+        if (!legendHolder.orientation) {
+          legendHolder.orientation = dataOptions.legend.orient;
+        }
+      }
     }
 
-    const legends: ODSChartsLegendData = ODSChartsLegends.getLegendData(dataOptions);
+    const allLegends: ODSChartsLegendData = ODSChartsLegends.getLegendData(dataOptions);
+    const legendHolders: { [legendHolderSelector: string]: ODSChartsLegendHolderDefinition & { legends: ODSChartsLegendData & { index: number[] } } } = {};
+    let defaultLegendHolder: (ODSChartsLegendHolderDefinition & { legends: ODSChartsLegendData & { index: number[] } }) | undefined = undefined;
+    for (const legendHolder of this.legendHolders) {
+      if (!document.querySelector(legendHolder.legendHolderSelector)) {
+        throw new Error(`No legend holder found with selector ${legendHolder.legendHolderSelector}`);
+      }
+      legendHolders[legendHolder.legendHolderSelector] = { ...legendHolder, legends: { labels: [], names: [], index: [] } };
+      if (!legendHolder.seriesRef) {
+        defaultLegendHolder = legendHolders[legendHolder.legendHolderSelector];
+      }
+    }
+    for (let index = 0; index < allLegends.names.length && index < allLegends.labels.length; index++) {
+      let legendHolderSelector = Object.keys(legendHolders).find(
+        (legendHolderKey) =>
+          !!legendHolders[legendHolderKey].seriesRef &&
+          (legendHolders[legendHolderKey].seriesRef?.includes(allLegends.names[index]) ||
+            legendHolders[legendHolderKey].seriesRef?.includes(allLegends.labels[index]))
+      );
+      if (!legendHolderSelector) {
+        const series = dataOptions.series && dataOptions.series.find((series: { name?: string }) => series.name === allLegends.names[index]);
+        if (series && series.stack) {
+          legendHolderSelector = Object.keys(legendHolders).find(
+            (legendHolderKey) => !!legendHolders[legendHolderKey].seriesRef && legendHolders[legendHolderKey].seriesRef?.includes(series.stack)
+          );
+        }
+      }
+      if (legendHolderSelector) {
+        legendHolders[legendHolderSelector].legends.labels.push(allLegends.labels[index]);
+        legendHolders[legendHolderSelector].legends.names.push(allLegends.names[index]);
+        legendHolders[legendHolderSelector].legends.index.push(index);
+      } else if (!!defaultLegendHolder) {
+        defaultLegendHolder.legends.labels.push(allLegends.labels[index]);
+        defaultLegendHolder.legends.names.push(allLegends.names[index]);
+        defaultLegendHolder.legends.index.push(index);
+      }
+    }
+
     dataOptions.legend.show = false;
 
-    this.generateHandler(cssTheme);
-    const legendHolder = document.querySelector(this.legendHolderSelector);
-    if (!legendHolder) {
-      throw new Error(`Can't find legend holder using the selector ${this.legendHolderSelector}`);
-    }
+    for (const legendHolderSelector of Object.keys(legendHolders)) {
+      this.generateHandler(legendHolderSelector, cssTheme);
+      const legendHolder = document.querySelector(legendHolderSelector);
+      if (!legendHolder) {
+        throw new Error(`Can't find legend holder using the selector ${legendHolderSelector}`);
+      }
 
-    (document.querySelector(this.legendHolderSelector) as Element).innerHTML = this.generateLegend(colors, legends, cssTheme, mode);
+      (document.querySelector(legendHolderSelector) as Element).innerHTML = this.generateLegend(
+        legendHolderSelector,
+        colors,
+        legendHolders[legendHolderSelector].legends,
+        cssTheme,
+        mode,
+        legendHolders[legendHolderSelector].orientation
+      );
+    }
   }
 
-  private generateLegend(colors: string[], legends: { labels: string[]; names: string[] }, cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode) {
+  private generateLegend(
+    legendHolderSelector: string,
+    colors: string[],
+    legends: { labels: string[]; names: string[]; index: number[] },
+    cssTheme: ODSChartsCSSThemeDefinition,
+    mode: ODSChartsMode,
+    orientation: 'vertical' | 'horizontal' = 'horizontal'
+  ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
     >
-    <div class="ods-charts-legend-container ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendContainer)}"
-    style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainer)}"
+    <div class="ods-charts-legend-container ods-charts-legend-container-${orientation} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendContainer)} ${'vertical' === orientation ? ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendContainerVertical) : ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendContainerHorizontal)}"
+    style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainer)} ${'vertical' === orientation ? ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainerVertical) : ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendContainerHorizontal)}"
     >
-    ${(legends ? legends.labels : []).map((legendLabel: string, index: number) => {
-      let colorIndex = index % colors.length;
+    ${(legends ? legends.labels : []).map((legendLabel: string, indexInHolder: number) => {
+      let colorIndex = legends.index[indexInHolder] % colors.length;
       return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
       style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
-      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(this.legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
-        legends.names[index]
+      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
+        legends.names[indexInHolder]
       ).replace(/"/g, '&quot;')})">
       <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
       style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
@@ -208,11 +278,11 @@ export class ODSChartsLegends {
     </div>`;
   }
 
-  private generateHandler(cssTheme: ODSChartsCSSThemeDefinition) {
+  private generateHandler(legendHolderSelector: string, cssTheme: ODSChartsCSSThemeDefinition) {
     if (!(window as any).ods_chart_legend_switchLegend) {
       (window as any).ods_chart_legend_switchLegend = {};
     }
-    (window as any).ods_chart_legend_switchLegend[this.legendHolderSelector] = (elt: HTMLElement, legendName: string) => {
+    (window as any).ods_chart_legend_switchLegend[legendHolderSelector] = (elt: HTMLElement, legendName: string) => {
       const visible = !elt.classList.contains('ods-charts-legend-link-opacity');
       const themeClasses =
         cssTheme.legends && cssTheme.legends.odsChartsLegendLinkOpacity && cssTheme.legends.odsChartsLegendLinkOpacity.classes

@@ -65,6 +65,8 @@ export class ODSChartsItemGroupCSSDefinition {
 export class ODSChartsCSSLegendsDefinition extends ODSChartsItemGroupCSSDefinition {
   odsChartsLegendHolder?: ODSChartsItemCSSDefinition;
   odsChartsLegendContainer?: ODSChartsItemCSSDefinition;
+  odsChartsLegendContainerVertical?: ODSChartsItemCSSDefinition;
+  odsChartsLegendContainerHorizontal?: ODSChartsItemCSSDefinition;
   odsChartsLegendLink?: ODSChartsItemCSSDefinition;
   odsChartsLegendLinkOpacity?: ODSChartsItemCSSDefinition;
   odsChartsLegendColorHolder?: ODSChartsItemCSSDefinition;
@@ -111,6 +113,9 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
     },
+    odsChartsLegendContainerVertical: {
+      classes: ['flex-column'],
+    },
     odsChartsLegendLink: { classes: ['mx-3', 'pb-2', 'text-decoration-none'] },
     odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
     odsChartsLegendColorHolder: {
@@ -147,6 +152,9 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     },
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
+    },
+    odsChartsLegendContainerVertical: {
+      classes: ['flex-column'],
     },
     odsChartsLegendLink: {
       classes: ['mx-3', 'pb-2', 'text-decoration-none'],
