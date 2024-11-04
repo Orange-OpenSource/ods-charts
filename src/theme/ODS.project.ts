@@ -342,9 +342,50 @@ export interface EChartsProject {
   visualMap: {
     color: string[];
   };
-  dataZoom: {
-    handleSize: string;
-    textStyle: {};
+  dataZoom?: {
+    borderColor?: string;
+    textStyle?: {
+      color: string;
+    };
+    brushStyle?: {
+      color: string;
+    };
+    handleStyle?: {
+      color?: string;
+      borderColor?: string;
+    };
+    moveHandleStyle?: {
+      color?: string;
+      opacity?: number;
+    };
+    fillerColor?: string;
+    emphasis?: {
+      handleStyle?: {
+        borderColor?: string;
+        color?: string;
+      };
+      moveHandleStyle: {
+        color?: string;
+        opacity?: number;
+      };
+    };
+    dataBackground?: {
+      lineStyle?: {
+        color?: string;
+        width?: number;
+      };
+      areaStyle?: {
+        color?: string;
+      };
+    };
+    selectedDataBackground?: {
+      lineStyle?: {
+        color?: string;
+      };
+      areaStyle?: {
+        color?: string;
+      };
+    };
   };
   markPoint: {
     label: {
@@ -690,10 +731,6 @@ export const ODS_PROJECT: EChartsProject = {
   },
   visualMap: {
     color: ['#085ebd', '#3179c8', '#5a94d3', '#84afde', '#adc9e9', '#d6e4f4'],
-  },
-  dataZoom: {
-    handleSize: 'undefined%',
-    textStyle: {},
   },
   markPoint: {
     label: {
