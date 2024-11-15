@@ -90,6 +90,11 @@ export class ODSChartsPopoverDefinition {
    * getPopupTemplate() may be specify to replace a specific template for the  popup/tooltip to replace the default one
    */
   public getPopupTemplate?: (categoryLabel: string, tooltipElements: ODSChartsPopoverItem[]) => string;
+  /**
+   * if provided, the `testAvailibility()` will be called to check if this renderer is available.
+   * If not, the fall back is en empty `ODSChartsPopoverDefinition`, ie `ODSChartsPopoverManagers.NONE`
+   */
+  public testAvailibility?: () => boolean;
 }
 
 export abstract class ODSChartsPopoverDefinitionWithRenderer extends ODSChartsPopoverDefinition {
@@ -186,6 +191,21 @@ export class ODSChartsPopoverConfig {
 }
 
 class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public testAvailibility = (): boolean => {
+    let availbility = true;
+    try {
+      if (undefined === boosted) {
+        availbility = false;
+      }
+    } catch (error) {
+      availbility = false;
+    }
+    if (!availbility) {
+      console.warn('BOOSTED 5 popover/tooltip rendering is not avalable: boosted variable is not accessible!');
+    }
+    return availbility;
+  };
+
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
@@ -221,6 +241,21 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 }
 
 class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public testAvailibility = (): boolean => {
+    let availbility = true;
+    try {
+      if (undefined === boosted) {
+        availbility = false;
+      }
+    } catch (error) {
+      availbility = false;
+    }
+    if (!availbility) {
+      console.warn('BOOSTED 4 popover/tooltip rendering is not avalable: boosted variable is not accessible!');
+    }
+    return availbility;
+  };
+
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;

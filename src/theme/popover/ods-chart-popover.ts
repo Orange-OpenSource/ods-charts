@@ -115,7 +115,7 @@ export class ODSChartsPopover {
   ) {}
 
   public static addPopoverManagement(popoverDefinition: ODSChartsPopoverDefinition, popoverConfig: ODSChartsPopoverConfig): ODSChartsPopover {
-    if (undefined === popoverDefinition) {
+    if (undefined === popoverDefinition || (popoverDefinition.testAvailibility && !popoverDefinition.testAvailibility())) {
       popoverDefinition = ODSChartsPopoverManagers.NONE as ODSChartsPopoverDefinition;
     }
     if (undefined === popoverConfig) {
