@@ -40,10 +40,11 @@ export class ODSChartsPopoverItem {
 
 /**
  * {@link ODSChartsPopoverDefinition} defines the interface of the manager of externalized
- * popover or tooltip.
+ * popover or tooltip {@link ODSChartsTheme.externalizePopover}.
  *
+ * {@link ODSChartsPopoverDefinition} is not used directly. Instead, we use the variable **{@link ODSChartsPopoverDefinition}.
  * {@link ODSChartsPopoverManagers} gives 3 default {@link ODSChartsPopoverDefinition}
- * managers.
+ * managers for Apache ECharts, Boosted 5 and Boosted 4.
  *
  * You probably need to use one of those.
  *
@@ -138,7 +139,7 @@ export enum ODSChartsPopoverTooltipTrigger {
 }
 
 /**
- * Configuration of the externalizePopover feature.
+ * Configuration of the externalizePopover feature {@link ODSChartsTheme.externalizePopover}.
  *
  */
 export class ODSChartsPopoverConfig {
@@ -303,10 +304,12 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 }
 
 /**
+ * `ODSChartsPopoverManagers` is used to specify popoverDefinition parameter (popup/tooltip renderer) of {@link ODSChartsTheme.externalizePopover}.
+ *
  * Available popover/tooltip renderer:
- * - ODSChartsPopoverManagers.NONE: to use default ECharts template to externalize tooltip/popover HTML element, implementing Orange Design System
- * - ODSChartsPopoverManagers.BOOSTED5: to use Boosted 5 tooltip/popover
- * - ODSChartsPopoverManagers.BOOSTED4: to use Boosted 4 tooltip/popover
+ * - `ODSChartsPopoverManagers.NONE`: to use default ECharts template to externalize tooltip/popover HTML element, implementing Orange Design System
+ * - `ODSChartsPopoverManagers.BOOSTED5`: to use Boosted 5 tooltip/popover
+ * - `ODSChartsPopoverManagers.BOOSTED4`: to use Boosted 4 tooltip/popover
  */
 export const ODSChartsPopoverManagers: {
   [name in ODSChartsCSSThemesNames]?: ODSChartsPopoverDefinition;

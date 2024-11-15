@@ -7,7 +7,7 @@
 //
 
 /**
- * Definition of a container used to display legends.
+ * Definition of a container used to display legends, refer to {@link ODSChartsTheme.externalizeLegends}.
  *
  * Example of use:
  * ```
