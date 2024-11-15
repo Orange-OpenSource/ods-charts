@@ -10,7 +10,8 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     reviewers:
-      - julien-deramond
+      - louismaximepiton
+      - jacques-lebourgeois
     labels:
       - dependencies
     schedule:
