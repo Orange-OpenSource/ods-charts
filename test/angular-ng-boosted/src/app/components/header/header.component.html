@@ -1,0 +1,85 @@
+<header class="sticky-top" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-xl" aria-label="Main menu">
+    <div class="container-xxl">
+      <!-- Orange brand logo -->
+      <div class="navbar-brand me-auto me-xl-4">
+        <a class="stretched-link" href="#">
+          <img src="assets/images/orange-logo.svg" width="50" height="50" alt="Boosted - Back to Home" loading="lazy" />
+        </a>
+        <div class="h1 title">Angular Boosted starter</div>
+      </div>
+
+      <!-- Burger menu (visible on small screens) -->
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target=".global-header" aria-controls="global-header-1.1 global-header-1.2" aria-expanded="false" aria-label="Toggle main menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar with links -->
+      <div id="global-header-1.1" class="navbar-collapse collapse global-header">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: router.url.indexOf('home') > -1 }" routerLink="/home" [attr.aria-current]="router.url.indexOf('home') > -1 ? 'page' : null"> Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: router.url.indexOf('charts') > -1 }" routerLink="/charts" [attr.aria-current]="router.url.indexOf('charts') > -1 ? 'page' : null"> ODS charts </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: router.url.indexOf('ng-bootstrap-components') > -1 }" routerLink="/ng-bootstrap-components" [attr.aria-current]="router.url.indexOf('ng-bootstrap-components') > -1 ? 'page' : null"> ng-bootstrap components </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: router.url.indexOf('icons') > -1 }" routerLink="/icons" [attr.aria-current]="router.url.indexOf('icons') > -1 ? 'page' : null"> Icons </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Navbar with mode selector -->
+      <div id="global-header-1.2" class="navbar-collapse global-header collapse ms-md-auto">
+        <ul class="navbar-nav flex-row">
+          <li class="nav-item dropdown">
+            <button class="nav-link nav-icon dropdown-toggle" id="bd-theme" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle mode (auto)">
+              <svg class="theme-icon-active">
+                <use [attr.href]="'assets/images/svg-sprite.svg#' + (selectedMode === 'light' ? 'ui-light-mode' : selectedMode === 'dark' ? 'ui-dark-mode' : 'ui-auto-mode')"></use>
+              </svg>
+              <span class="d-xl-none ms-2" id="bd-theme-text">Toggle mode</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end mb-2" aria-labelledby="bd-theme-text">
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" #light data-bs-theme-value="light" [attr.aria-pressed]="selectedMode === 'light'" (click)="toggleColorMode('light')" [ngClass]="{ active: selectedMode === 'light' }">
+                  <svg class="me-2">
+                    <use href="assets/images/svg-sprite.svg#ui-light-mode"></use>
+                  </svg>
+                  Light
+                  <svg class="ms-auto" [ngClass]="{ 'd-none': selectedMode !== 'light' }">
+                    <use href="assets/images/svg-sprite.svg#check2"></use>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" #dark data-bs-theme-value="dark" [attr.aria-pressed]="selectedMode === 'dark'" (click)="toggleColorMode('dark')" [ngClass]="{ active: selectedMode === 'dark' }">
+                  <svg class="me-2">
+                    <use href="assets/images/svg-sprite.svg#ui-dark-mode"></use>
+                  </svg>
+                  Dark
+                  <svg class="ms-auto" [ngClass]="{ 'd-none': selectedMode !== 'dark' }">
+                    <use href="assets/images/svg-sprite.svg#check2"></use>
+                  </svg>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" #auto data-bs-theme-value="auto" [attr.aria-pressed]="selectedMode === 'auto'" (click)="toggleColorMode('auto')" [ngClass]="{ active: selectedMode === 'auto' }">
+                  <svg class="me-2">
+                    <use href="assets/images/svg-sprite.svg#ui-auto-mode"></use>
+                  </svg>
+                  Auto
+                  <svg class="ms-auto" [ngClass]="{ 'd-none': selectedMode !== 'auto' }">
+                    <use href="assets/images/svg-sprite.svg#check2"></use>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
