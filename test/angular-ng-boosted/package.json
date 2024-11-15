@@ -1,0 +1,51 @@
+{
+  "name": "angular-ng-boosted",
+  "version": "0.2.2",
+  "scripts": {
+    "ng": "ng",
+    "start": "npm run copy-readme && ng serve",
+    "build": "npm run copy-readme && ng build",
+    "watch": "npm run copy-readme && ng build --watch --configuration development",
+    "test": "npm run copy-readme && ng test",
+    "copy-readme": "shx cp README.md src/assets/README-copy.md"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^17.3.4",
+    "@angular/common": "^17.3.4",
+    "@angular/compiler": "^17.3.4",
+    "@angular/core": "^17.3.4",
+    "@angular/forms": "^17.3.4",
+    "@angular/platform-browser": "^17.3.4",
+    "@angular/platform-browser-dynamic": "^17.3.4",
+    "@angular/router": "^17.3.4",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@popperjs/core": "^2.11.8",
+    "boosted": "^5.3.3",
+    "echarts": "^5.4.3",
+    "focus-visible": "^5.2.0",
+    "marked": "^9.0.0",
+    "ngx-echarts": "^17.1.0",
+    "ngx-markdown": "^17.2.0",
+    "ods-charts": "file:../..",
+    "rxjs": "~7.8.1",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.3.4",
+    "@angular/cli": "^17.3.4",
+    "@angular/compiler-cli": "^17.3.4",
+    "@angular/localize": "^17.3.4",
+    "@types/jasmine": "~5.1.4",
+    "jasmine-core": "~5.1.2",
+    "karma": "~6.4.3",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "prismjs": "^1.29.0",
+    "shx": "^0.3.4",
+    "typescript": "~5.2.2"
+  }
+}

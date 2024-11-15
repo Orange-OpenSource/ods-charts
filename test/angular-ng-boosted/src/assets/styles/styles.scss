@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  min-height: 100vh;
+}
+
+// Avoid collisions between the CSS of Boosted and prismjs (specific CSS for the starter's home page documentation)
+.token.tag {
+  display: initial;
+  padding: initial;
+  font-weight: initial;
+  line-height: initial;
+  background-color: initial;
+  border: initial;
+}

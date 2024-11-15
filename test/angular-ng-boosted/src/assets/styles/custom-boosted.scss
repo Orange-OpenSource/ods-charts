@@ -1,0 +1,64 @@
+// *** Include optimized Boosted ***
+
+// Include Boosted copyright and version
+@import 'boosted/scss/mixins/banner';
+@include bsBanner('');
+
+// Configuration
+@import 'boosted/scss/functions';
+@import 'boosted/scss/variables';
+@import 'boosted/scss/variables-dark';
+@import 'boosted/scss/maps';
+@import 'boosted/scss/mixins';
+@import 'boosted/scss/utilities';
+
+// Layout
+@import 'boosted/scss/root';
+@import 'boosted/scss/reboot';
+@import 'boosted/scss/type';
+@import 'boosted/scss/images';
+@import 'boosted/scss/containers';
+@import 'boosted/scss/grid';
+
+// Components from Bootstrap: remove unused ones!
+@import 'boosted/scss/tables';
+@import 'boosted/scss/forms';
+@import 'boosted/scss/buttons';
+@import 'boosted/scss/transitions';
+@import 'boosted/scss/dropdown';
+@import 'boosted/scss/button-group';
+@import 'boosted/scss/nav';
+@import 'boosted/scss/navbar';
+@import 'boosted/scss/card';
+@import 'boosted/scss/accordion';
+@import 'boosted/scss/breadcrumb';
+@import 'boosted/scss/pagination';
+@import 'boosted/scss/badge';
+@import 'boosted/scss/tags';
+@import 'boosted/scss/alert';
+@import 'boosted/scss/progress';
+@import 'boosted/scss/list-group';
+@import 'boosted/scss/close';
+@import 'boosted/scss/toasts';
+@import 'boosted/scss/modal';
+@import 'boosted/scss/tooltip';
+@import 'boosted/scss/popover';
+@import 'boosted/scss/carousel';
+@import 'boosted/scss/spinners';
+@import 'boosted/scss/offcanvas';
+@import 'boosted/scss/placeholders';
+
+// Boosted specific components: remove unused ones!
+@import 'boosted/scss/back-to-top';
+@import 'boosted/scss/footer';
+@import 'boosted/scss/local-navigation';
+@import 'boosted/scss/orange-navbar';
+@import 'boosted/scss/stepped-process';
+@import 'boosted/scss/sticker';
+@import 'boosted/scss/title-bars';
+
+// Helpers
+@import 'boosted/scss/helpers';
+
+// Utilities
+@import 'boosted/scss/utilities/api';
