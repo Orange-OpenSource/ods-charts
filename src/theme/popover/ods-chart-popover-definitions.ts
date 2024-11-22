@@ -310,6 +310,8 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
  * - `ODSChartsPopoverManagers.NONE`: to use default ECharts template to externalize tooltip/popover HTML element, implementing Orange Design System
  * - `ODSChartsPopoverManagers.BOOSTED5`: to use Boosted 5 tooltip/popover
  * - `ODSChartsPopoverManagers.BOOSTED4`: to use Boosted 4 tooltip/popover
+ *
+ * **WARNING**: Boosted 4 or Boosted 5 rendering requires dependency on the boosted library and access to the boosted global variable.
  */
 export const ODSChartsPopoverManagers: {
   [name in ODSChartsCSSThemesNames]?: ODSChartsPopoverDefinition;
