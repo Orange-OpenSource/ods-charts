@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_SEQUENTIAL_COLORS_PINK = {
-  visualMapColor: ['#BC4D9A', '#D573BB', '#FF8AD4', '#FFB4E6', '#FFCEEF', '#FFE8F7'],
+export const LIGHT_COLORS_BLUE = {
+  color: ['#085EBD', '#237ECA', '#3E9DD6', '#4BB4E6', '#80CEEF', '#B5E8F7'],
 };

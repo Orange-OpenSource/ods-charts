@@ -493,7 +493,7 @@ tooltip: {
             // ODS Charts
             ///////////////////////////////////////////////////
             // Build the theme
-            var div4_themeManager = ODSCharts.getThemeManager({ categoricalColors: [{ colorIndex: 4, colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS }] });
+            var div4_themeManager = ODSCharts.getThemeManager({ colors: [{ colorIndex: 4, colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS }] });
             echarts.registerTheme(div4_themeManager.name, div4_themeManager.theme);
 
             // Get the chart holder and initiate it with the generated theme
@@ -576,10 +576,10 @@ tooltip: {
             ///////////////////////////////////////////////////
             // Build the theme
             var div5_themeManager = ODSCharts.getThemeManager({
-              categoricalColors: [
+              colors: [
                 {
                   colorIndex: 4,
-                  colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+                  colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
                   cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
                 },
               ],

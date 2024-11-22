@@ -41,8 +41,8 @@ export class GraphComponent implements AfterViewInit {
     // ODS Charts
     this.myTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.LIGHT,
-      categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
-      visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
+      colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
+      visualMapColor: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });
 
