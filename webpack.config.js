@@ -1,16 +1,10 @@
 const path = require('path');
 
-module.exports = {
+const defaultConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
     main: './index.ts',
-  },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'ods-charts.js',
-    libraryTarget: 'umd',
-    library: 'ODSCharts',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -24,3 +18,30 @@ module.exports = {
     ],
   },
 };
+
+module.exports = [
+  {
+    ...defaultConfig,
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: 'ods-charts.js',
+      library: {
+        type: 'umd',
+        name: 'ODSCharts',
+      },
+    },
+  },
+  {
+    ...defaultConfig,
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: 'ods-charts.esm.js',
+      library: {
+        type: 'module',
+      },
+    },
+    experiments: {
+      outputModule: true,
+    },
+  },
+];
