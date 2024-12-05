@@ -93,7 +93,7 @@ export class ODSChartsPopoverDefinition {
   public getPopupTemplate?: (categoryLabel: string, tooltipElements: ODSChartsPopoverItem[]) => string;
   /**
    * if provided, the `testAvailibility()` will be called to check if this renderer is available.
-   * If not, the fall back is en empty `ODSChartsPopoverDefinition`, ie `ODSChartsPopoverManagers.NONE`
+   * If not, the fall back is an empty `ODSChartsPopoverDefinition`, ie `ODSChartsPopoverManagers.NONE`
    */
   public testAvailibility?: () => boolean;
 }
