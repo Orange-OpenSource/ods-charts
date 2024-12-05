@@ -37,7 +37,7 @@ async function wait(timer = 0) {
 
 function generateChartDiv(id, direction) {
   return `
-  <div class="border border-light" style="display: flex; flex-direction: column; height: 100%;">
+  <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%;">
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
@@ -209,13 +209,13 @@ function generateConfigurator(id) {
         View code
       ${accordionThemes.header.end('accordion_' + id, 'content_2_' + id)}
       ${accordionThemes.content.begin('accordion_' + id, 'content_2_' + id)}
-        <div class="border border-light position-relative mt-2 p-2">
+        <div class="border border-subtle position-relative mt-2 p-2">
           <div class="display-5">HTML</div>
           <code>
             <pre id=${id + '_html'}></pre>
           </code>
         </div>
-        <div class="border border-light position-relative mt-2 p-2">
+        <div class="border border-subtle position-relative mt-2 p-2">
           <div class="display-5">JavaScript / ODS Charts</div>
           <code>
             <pre id=${id + '_code'}></pre>
@@ -661,6 +661,9 @@ window.downloadTheme = downloadTheme;
 window.generateSingleLineChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
+    title: {
+      text: 'test',
+    },
     xAxis: {
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     },
