@@ -328,7 +328,7 @@ export class ODSChartsTheme {
    * Entry point of the library.
    *
    * Once the library integrated, via
-   * - script &lt;script src="...ods-charts.js"&gt;
+   * - script `<script src="...ods-charts.js">`
    * - or an `import \* as ODSCharts from 'ods-charts'`
    *
    * use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
