@@ -38,10 +38,6 @@ export class GraphComponent implements AfterViewInit {
   private echartsGraph: ECharts;
 
   ngAfterViewInit(): void {
-    window.setTimeout(this.init.bind(this), 50);
-  }
-
-  private init() {
     // ODS Charts
     this.myTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.LIGHT,
@@ -54,7 +50,14 @@ export class GraphComponent implements AfterViewInit {
 
     this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
 
-    this.options = this.myTheme.setDataOptions(this.options).externalizeLegends(this.echartsGraph, '#legend').externalizePopover().getChartOptions();
+    this.graph.nativeElement.id = 'graph_' + Math.ceil(Math.random() * 1000000);
+
+    this.options = this.myTheme
+      .setDataOptions(this.options)
+      .externalizeLegends(this.echartsGraph, '#legend')
+      .externalizePopover()
+      .manageChartResize(this.echartsGraph, this.graph.nativeElement.id)
+      .getChartOptions();
 
     this.echartsGraph.setOption(this.options);
   }
