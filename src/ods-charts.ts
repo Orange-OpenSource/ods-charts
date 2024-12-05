@@ -9,7 +9,7 @@
 /**
  * @packageDocumentation
  *
- * This page is an index of the module's classes, interfaces and enumeration.
+ * This page is an index of the module's classes, interfaces and enumerations.
  *
  * Their use is introduced on the [home page](./#md:documentation).
  *
