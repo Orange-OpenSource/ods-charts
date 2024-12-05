@@ -551,7 +551,7 @@ export class ODSChartsTheme {
    *
    *   {@link ODSChartsPopoverManagers} gives preconfigured renderer
    *
-   *   The default value of is `ODSChartsPopoverManagers.NONE`: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
+   *   The default value of this parameter is `ODSChartsPopoverManagers.NONE`: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
    *
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
