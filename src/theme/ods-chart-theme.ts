@@ -553,7 +553,7 @@ export class ODSChartsTheme {
    *
    * @param echart the initialized eCharts object
    * @param legendHolderSelector
-   * legendHolderSelectorcan be
+   * legendHolderSelector can be:
    * - a string, and then is interprated as the CSS selector of the legends container
    * - a {@link ODSChartsLegendHolderDefinition} if you want to sepcify the orientation of the legends holder or specify the series to be displayed in the legends holder
    * - an array of {@link ODSChartsLegendHolderDefinition} if you want to group legends in several legends holders
