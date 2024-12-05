@@ -38,6 +38,10 @@ export class GraphComponent implements AfterViewInit {
   private echartsGraph: ECharts;
 
   ngAfterViewInit(): void {
+    window.setTimeout(this.init.bind(this), 50);
+  }
+
+  private init() {
     // ODS Charts
     this.myTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.LIGHT,

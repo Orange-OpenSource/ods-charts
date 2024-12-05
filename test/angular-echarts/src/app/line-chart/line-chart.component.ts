@@ -18,6 +18,10 @@ export class LineChartComponent implements AfterViewInit {
 
   constructor(private elm: ElementRef) {}
   ngAfterViewInit() {
+    window.setTimeout(this.init.bind(this), 50);
+  }
+
+  private init() {
     // Data
     for (var i = 1; i < 50; i++) {
       var now = new Date((this.base += this.oneDay));
