@@ -623,7 +623,7 @@ export class ODSChartsTheme {
    * - data from {@link setDataOptions}
    *
    * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
-   * @returns the Apache ECharts options to use in [Apache Echarts setOption()](https://echarts.apache.org/en/option.html) call.
+   * @returns the Apache ECharts options to use in [Apache Echarts `setOption()`](https://echarts.apache.org/en/option.html) call.
    */
   public getChartOptions(dataOptions?: any): any {
     if (dataOptions) {
