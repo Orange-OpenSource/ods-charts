@@ -51,7 +51,7 @@ updates:
       interval: weekly
     versioning-strategy: increase
     groups:
-      angular-echarts-all-deps:
+      angular-ng-boosted-all-deps:
         patterns:
           - "*"
   - package-ecosystem: npm
