@@ -23,7 +23,7 @@
     "serve:any": "serve",
     "serve:react": "serve test/react/build/",
     "serve:vue": "serve test/vue/dist/",
-    "typedoc": "typedoc --out docs/api src/ods-charts.ts --skipErrorChecking --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_head.mjs",
+    "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_head.mjs",
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
