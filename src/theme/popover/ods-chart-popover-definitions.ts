@@ -193,7 +193,7 @@ export class ODSChartsPopoverConfig {
 
 class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
   public testAvailibility = (): boolean => {
-    let availbility = true;
+    let availability = true;
     try {
       if (undefined === boosted) {
         availbility = false;
