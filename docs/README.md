@@ -37,7 +37,7 @@ The theme is configured with {@link ODSChartsThemeOptions}:
 
 ### Graph features
 
-And additional features can be added calling methods on {@link ODSChartsTheme}:
+Additional features can be added calling methods on {@link ODSChartsTheme}:
 
 - {@link ODSChartsTheme.externalizeLegends}: to add Orange Design System theme to legends.
 - {@link ODSChartsTheme.externalizePopover}: to add Orange Design System theme to popover or tooltip.
