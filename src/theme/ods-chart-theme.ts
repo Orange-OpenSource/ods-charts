@@ -579,7 +579,7 @@ export class ODSChartsTheme {
    *
    * @param popoverConfig the configuration of the externalizePopover feature {@link ODSChartsPopoverConfig}
    * @param popoverDefinition renderer {@link ODSChartsPopoverDefinition} of the popover/tooltip. **{@link ODSChartsPopoverManagers}** is used to
-   * specify preconfigured renderer for Apache ECharts, Boosted 5 or Boosted 4 renderer.
+   * specify preconfigured renderer for Apache ECharts, Boosted 5 or Boosted 4.
    *
    * Default value is  {@link ODSChartsPopoverManagers.NONE}, that means it uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system.
    *
