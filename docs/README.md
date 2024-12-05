@@ -31,7 +31,7 @@ The ODS Charts library is configured
 The theme is configured with {@link ODSChartsThemeOptions}:
 
 - {@link ODSChartsThemeOptions.categoricalColors}: colors to be used to graph the chart.
-- {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
+- {@link ODSChartsThemeOptions.cssTheme}: optionally indicates an external theme to be used like boosted.
 - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
 - {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
 
