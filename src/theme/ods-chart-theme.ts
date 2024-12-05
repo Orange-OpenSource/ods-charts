@@ -200,7 +200,7 @@ export interface ODSChartsThemeOptions {
    * - It is possible to use one of the delivered value of {@link ODSChartsCSSThemes}
    * - It is also possible to defined a cssTheme for any other framework with a {@link ODSChartsCSSThemeDefinition}
    *
-   * Default cssTheme is {@link ODSChartsCSSThemes.NONE}
+   * Default cssTheme is {@link ODSChartsCSSThemes}.NONE
    */
   cssTheme?: ODSChartsCSSThemeDefinition;
 }
