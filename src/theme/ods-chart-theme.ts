@@ -8,43 +8,33 @@
 
 import { LIGHT_COMMON } from './light/ODS.common';
 import { LIGHT_LINES_AXIS } from './light/ODS.lines.axis';
-import { LIGHT_CATEGORICAL_COLORS } from './light/ODS.categorical-colors';
-import { LIGHT_CATEGORICAL_COLORS_CATEGORICAL } from './light/ODS.categorical-colors.categorical';
-import { LIGHT_CATEGORICAL_COLORS_FUNCTIONAL } from './light/ODS.categorical-colors.functional';
-import { LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './light/ODS.categorical-colors.supporting-colors';
-import { LIGHT_CATEGORICAL_COLORS_DARKER_TINTS } from './light/ODS.categorical-colors.darker-tints';
-import { LIGHT_CATEGORICAL_COLORS_LIGHTER_TINTS } from './light/ODS.categorical-colors.lighter-tints';
-import { LIGHT_CATEGORICAL_COLORS_BLUE } from './light/ODS.categorical-colors.blue';
-import { LIGHT_CATEGORICAL_COLORS_GREEN } from './light/ODS.categorical-colors.green';
-import { LIGHT_CATEGORICAL_COLORS_PINK } from './light/ODS.categorical-colors.pink';
-import { LIGHT_CATEGORICAL_COLORS_PURPLE } from './light/ODS.categorical-colors.purple';
-import { LIGHT_CATEGORICAL_COLORS_YELLOW } from './light/ODS.categorical-colors.yellow';
-import { LIGHT_SEQUENTIAL_COLORS_BLUE } from './light/ODS.sequential-colors.blue';
-import { LIGHT_SEQUENTIAL_COLORS_GREEN } from './light/ODS.sequential-colors.green';
-import { LIGHT_SEQUENTIAL_COLORS_PINK } from './light/ODS.sequential-colors.pink';
-import { LIGHT_SEQUENTIAL_COLORS_PURPLE } from './light/ODS.sequential-colors.purple';
-import { LIGHT_SEQUENTIAL_COLORS_YELLOW } from './light/ODS.sequential-colors.yellow';
+import { LIGHT_COLORS } from './light/ODS.colors';
+import { LIGHT_COLORS_CATEGORICAL } from './light/ODS.colors.categorical';
+import { LIGHT_COLORS_FUNCTIONAL } from './light/ODS.colors.functional';
+import { LIGHT_COLORS_SUPPORTING_COLORS } from './light/ODS.colors.supporting-colors';
+import { LIGHT_COLORS_DARKER_TINTS } from './light/ODS.colors.darker-tints';
+import { LIGHT_COLORS_LIGHTER_TINTS } from './light/ODS.colors.lighter-tints';
+import { LIGHT_COLORS_BLUE } from './light/ODS.colors.blue';
+import { LIGHT_COLORS_GREEN } from './light/ODS.colors.green';
+import { LIGHT_COLORS_PINK } from './light/ODS.colors.pink';
+import { LIGHT_COLORS_PURPLE } from './light/ODS.colors.purple';
+import { LIGHT_COLORS_YELLOW } from './light/ODS.colors.yellow';
 import { COMMON_LINE_STYLE_BROKEN } from './common/ODS.line-style.broken';
 import { COMMON_LINE_STYLE_POINTS } from './common/ODS.line-style.with-points';
 import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
 import { DARK_COMMON } from './dark/ODS.common';
 import { DARK_LINES_AXIS } from './dark/ODS.lines.axis';
-import { DARK_CATEGORICAL_COLORS } from './dark/ODS.categorical-colors';
-import { DARK_CATEGORICAL_COLORS_CATEGORICAL } from './dark/ODS.categorical-colors.categorical';
-import { DARK_CATEGORICAL_COLORS_FUNCTIONAL } from './dark/ODS.categorical-colors.functional';
-import { DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS } from './dark/ODS.categorical-colors.supporting-colors';
-import { DARK_CATEGORICAL_COLORS_DARKER_TINTS } from './dark/ODS.categorical-colors.darker-tints';
-import { DARK_CATEGORICAL_COLORS_LIGHTER_TINTS } from './dark/ODS.categorical-colors.lighter-tints';
-import { DARK_CATEGORICAL_COLORS_BLUE } from './dark/ODS.categorical-colors.blue';
-import { DARK_CATEGORICAL_COLORS_GREEN } from './dark/ODS.categorical-colors.green';
-import { DARK_CATEGORICAL_COLORS_PINK } from './dark/ODS.categorical-colors.pink';
-import { DARK_CATEGORICAL_COLORS_PURPLE } from './dark/ODS.categorical-colors.purple';
-import { DARK_CATEGORICAL_COLORS_YELLOW } from './dark/ODS.categorical-colors.yellow';
-import { DARK_SEQUENTIAL_COLORS_BLUE } from './dark/ODS.sequential-colors.blue';
-import { DARK_SEQUENTIAL_COLORS_GREEN } from './dark/ODS.sequential-colors.green';
-import { DARK_SEQUENTIAL_COLORS_PINK } from './dark/ODS.sequential-colors.pink';
-import { DARK_SEQUENTIAL_COLORS_PURPLE } from './dark/ODS.sequential-colors.purple';
-import { DARK_SEQUENTIAL_COLORS_YELLOW } from './dark/ODS.sequential-colors.yellow';
+import { DARK_COLORS } from './dark/ODS.colors';
+import { DARK_COLORS_CATEGORICAL } from './dark/ODS.colors.categorical';
+import { DARK_COLORS_FUNCTIONAL } from './dark/ODS.colors.functional';
+import { DARK_COLORS_SUPPORTING_COLORS } from './dark/ODS.colors.supporting-colors';
+import { DARK_COLORS_DARKER_TINTS } from './dark/ODS.colors.darker-tints';
+import { DARK_COLORS_LIGHTER_TINTS } from './dark/ODS.colors.lighter-tints';
+import { DARK_COLORS_BLUE } from './dark/ODS.colors.blue';
+import { DARK_COLORS_GREEN } from './dark/ODS.colors.green';
+import { DARK_COLORS_PINK } from './dark/ODS.colors.pink';
+import { DARK_COLORS_PURPLE } from './dark/ODS.colors.purple';
+import { DARK_COLORS_YELLOW } from './dark/ODS.colors.yellow';
 import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { mergeObjects } from '../tools/merge-objects';
@@ -58,7 +48,7 @@ import { isMainAxis } from './const/main-axis-type.const';
 import { ODSChartsLegendHolderDefinition } from './legends/ods-chart-legends-definitions';
 
 /**
- * ODSChartsCategoricalColorsSet is used for predefined color sets.
+ * ODSChartsColorsSet is used for predefined color sets.
  *
  * Default and Categorical color sets are defined so all the colors are `accessible` against white/dark background and distinguishable for most color-blind people. These sets are not accessible from a monochromacy point of view.
  *
@@ -76,7 +66,7 @@ import { ODSChartsLegendHolderDefinition } from './legends/ods-chart-legends-def
  * - {@link SEQUENTIAL_PURPLE} is the color set embedding all the Orange Design System purple colors.
  * - {@link SEQUENTIAL_YELLOW} is the color set embedding all the Orange Design System yellow colors.
  */
-export enum ODSChartsCategoricalColorsSet {
+export enum ODSChartsColorsSet {
   DEFAULT = 'default',
   CATEGORICAL = 'categorical',
   FUNCTIONAL = 'functional',
@@ -91,43 +81,35 @@ export enum ODSChartsCategoricalColorsSet {
 }
 
 /**
- * ODSChartsCustomCategoricalColor is used to define a color.
+ * `ODSChartsCustomColor` is used to define a color.
  *
  * - It can be the string value of the color
  *
- * - Or it can be a {@link ODSChartsCategoricalColor} to reference a color of one predefined set of Orange Design System colors.
+ * - Or it can be a {@link ODSChartsColor} to reference a color of one predefined set of Orange Design System colors.
  *
  * example
  * ```
  * {
- *  colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+ *  colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
  *  colorIndex: 0,
  * }
  * ```
  */
-export type ODSChartsCustomCategoricalColor = ODSChartsCategoricalColor | string;
+export type ODSChartsCustomColor = ODSChartsColor | string;
 
 /**
- * ODSChartsCategoricalColor is a color extract from one set of color of Orange Design System.
+ * `ODSChartsColor` is a color extract from one set of color of Orange Design System.
  */
-export interface ODSChartsCategoricalColor {
+export interface ODSChartsColor {
   /**
-   * The {@link ODSChartsCategoricalColorsSet} to be used to extract a specific color.
-   * (example {@link ODSChartsCategoricalColorsSet.SUPPORTING_COLORS})
+   * The {@link ODSChartsColorsSet} to be used to extract a specific color.
+   * (example {@link ODSChartsColorsSet.SUPPORTING_COLORS})
    */
-  colorPalette: ODSChartsCategoricalColorsSet;
+  colorPalette: ODSChartsColorsSet;
   /**
-   * Index of the color in the {@link ODSChartsCategoricalColorsSet}
+   * Index of the color in the {@link ODSChartsColorsSet}
    */
   colorIndex: number;
-}
-
-export enum ODSChartsSequentialColorsSet {
-  SEQUENTIAL_BLUE = 'blue',
-  SEQUENTIAL_GREEN = 'green',
-  SEQUENTIAL_PINK = 'pink',
-  SEQUENTIAL_PURPLE = 'purple',
-  SEQUENTIAL_YELLOW = 'yellow',
 }
 
 export enum ODSChartsLineStyle {
@@ -149,40 +131,40 @@ export interface ODSChartsThemeOptions {
    */
   mode?: ODSChartsMode;
   /**
-   * categoricalColors is the set of colors to be used to graph the chart.
+   * colors is the set of colors to be used to graph the chart.
    *
    * It can be
-   * - one of the predefined {@link ODSChartsCategoricalColorsSet} defined in Orange Design System
+   * - one of the predefined {@link ODSChartsColorsSet} defined in Orange Design System
    *
-   * example: `ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS`.
+   * example: `ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS`.
    *
-   * - Or it can be an array of colors {@link ODSChartsCustomCategoricalColor}
+   * - Or it can be an array of colors {@link ODSChartsCustomColor}
    *
    * example:
    * ```
    *      [
    *        {
    *          colorPalette:
-   *            ODSCharts.ODSChartsCategoricalColorsSet
+   *            ODSCharts.ODSChartsColorsSet
    *              .SUPPORTING_COLORS,
    *          colorIndex: 2,
    *        },
    *        {
    *          colorPalette:
-   *            ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN,
+   *            ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN,
    *          colorIndex: 0,
    *        },
    *      ]
    * ```
-   * Default categoricalColors is {@link ODSChartsCategoricalColorsSet.DEFAULT}
+   * Default colors is {@link ODSChartsColorsSet.DEFAULT}
    */
-  categoricalColors?: ODSChartsCategoricalColorsSet | ODSChartsCustomCategoricalColor[];
+  colors?: ODSChartsColorsSet | ODSChartsCustomColor[];
   /**
    * visualMapColor is the set of colors to be used if map graphs (like Heatmap)
    *
-   * Default visualMapColor is {@link ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE}
+   * Default visualMapColor is {@link ODSChartsColorsSet.SEQUENTIAL_BLUE}
    */
-  visualMapColor?: ODSChartsSequentialColorsSet;
+  visualMapColor?: ODSChartsColorsSet;
   /**
    * lineStyle specifies the style of line in lineCharts.
    *
@@ -197,7 +179,7 @@ export interface ODSChartsThemeOptions {
    * - It is possible to use one of the delivered value of {@link ODSChartsCSSThemes}
    * - It is also possible to defined a cssTheme for any other framework with a {@link ODSChartsCSSThemeDefinition}
    *
-   * Default cssTheme is {@link ODSChartsCSSThemes.NONE}
+   * Default cssTheme in  {@link ODSChartsCSSThemes} is `ODSChartsCSSThemes.NONE`
    */
   cssTheme?: ODSChartsCSSThemeDefinition;
 }
@@ -206,11 +188,11 @@ const THEMES: {
   [mode in ODSChartsMode]: {
     common: any;
     linesAxis: any;
-    categoricalColors: {
-      [colorSet in ODSChartsCategoricalColorsSet]: { color: string[] };
+    colors: {
+      [colorSet in ODSChartsColorsSet]: { color: string[] };
     };
-    sequentialColors: {
-      [colorSet in ODSChartsSequentialColorsSet]: { visualMapColor: string[] };
+    visualMapColors: {
+      [colorSet in ODSChartsColorsSet]: { visualMapColor: string[] };
     };
     linesStyle: { [style in ODSChartsLineStyle]: any };
   };
@@ -218,25 +200,31 @@ const THEMES: {
   light: {
     common: LIGHT_COMMON,
     linesAxis: LIGHT_LINES_AXIS,
-    categoricalColors: {
-      default: LIGHT_CATEGORICAL_COLORS,
-      categorical: LIGHT_CATEGORICAL_COLORS_CATEGORICAL,
-      functional: LIGHT_CATEGORICAL_COLORS_FUNCTIONAL,
-      supportingColors: LIGHT_CATEGORICAL_COLORS_SUPPORTING_COLORS,
-      darkerTints: LIGHT_CATEGORICAL_COLORS_DARKER_TINTS,
-      lighterTints: LIGHT_CATEGORICAL_COLORS_LIGHTER_TINTS,
-      blue: LIGHT_CATEGORICAL_COLORS_BLUE,
-      green: LIGHT_CATEGORICAL_COLORS_GREEN,
-      pink: LIGHT_CATEGORICAL_COLORS_PINK,
-      purple: LIGHT_CATEGORICAL_COLORS_PURPLE,
-      yellow: LIGHT_CATEGORICAL_COLORS_YELLOW,
+    colors: {
+      default: LIGHT_COLORS,
+      categorical: LIGHT_COLORS_CATEGORICAL,
+      functional: LIGHT_COLORS_FUNCTIONAL,
+      supportingColors: LIGHT_COLORS_SUPPORTING_COLORS,
+      darkerTints: LIGHT_COLORS_DARKER_TINTS,
+      lighterTints: LIGHT_COLORS_LIGHTER_TINTS,
+      blue: LIGHT_COLORS_BLUE,
+      green: LIGHT_COLORS_GREEN,
+      pink: LIGHT_COLORS_PINK,
+      purple: LIGHT_COLORS_PURPLE,
+      yellow: LIGHT_COLORS_YELLOW,
     },
-    sequentialColors: {
-      blue: LIGHT_SEQUENTIAL_COLORS_BLUE,
-      green: LIGHT_SEQUENTIAL_COLORS_GREEN,
-      pink: LIGHT_SEQUENTIAL_COLORS_PINK,
-      purple: LIGHT_SEQUENTIAL_COLORS_PURPLE,
-      yellow: LIGHT_SEQUENTIAL_COLORS_YELLOW,
+    visualMapColors: {
+      default: { visualMapColor: LIGHT_COLORS.color },
+      categorical: { visualMapColor: LIGHT_COLORS_CATEGORICAL.color },
+      functional: { visualMapColor: LIGHT_COLORS_FUNCTIONAL.color },
+      supportingColors: { visualMapColor: LIGHT_COLORS_SUPPORTING_COLORS.color },
+      darkerTints: { visualMapColor: LIGHT_COLORS_DARKER_TINTS.color },
+      lighterTints: { visualMapColor: LIGHT_COLORS_LIGHTER_TINTS.color },
+      blue: { visualMapColor: LIGHT_COLORS_BLUE.color },
+      green: { visualMapColor: LIGHT_COLORS_GREEN.color },
+      pink: { visualMapColor: LIGHT_COLORS_PINK.color },
+      purple: { visualMapColor: LIGHT_COLORS_PURPLE.color },
+      yellow: { visualMapColor: LIGHT_COLORS_YELLOW.color },
     },
     linesStyle: {
       broken: COMMON_LINE_STYLE_BROKEN,
@@ -247,25 +235,31 @@ const THEMES: {
   dark: {
     common: DARK_COMMON,
     linesAxis: DARK_LINES_AXIS,
-    categoricalColors: {
-      default: DARK_CATEGORICAL_COLORS,
-      categorical: DARK_CATEGORICAL_COLORS_CATEGORICAL,
-      functional: DARK_CATEGORICAL_COLORS_FUNCTIONAL,
-      supportingColors: DARK_CATEGORICAL_COLORS_SUPPORTING_COLORS,
-      darkerTints: DARK_CATEGORICAL_COLORS_DARKER_TINTS,
-      lighterTints: DARK_CATEGORICAL_COLORS_LIGHTER_TINTS,
-      blue: DARK_CATEGORICAL_COLORS_BLUE,
-      green: DARK_CATEGORICAL_COLORS_GREEN,
-      pink: DARK_CATEGORICAL_COLORS_PINK,
-      purple: DARK_CATEGORICAL_COLORS_PURPLE,
-      yellow: DARK_CATEGORICAL_COLORS_YELLOW,
+    colors: {
+      default: DARK_COLORS,
+      categorical: DARK_COLORS_CATEGORICAL,
+      functional: DARK_COLORS_FUNCTIONAL,
+      supportingColors: DARK_COLORS_SUPPORTING_COLORS,
+      darkerTints: DARK_COLORS_DARKER_TINTS,
+      lighterTints: DARK_COLORS_LIGHTER_TINTS,
+      blue: DARK_COLORS_BLUE,
+      green: DARK_COLORS_GREEN,
+      pink: DARK_COLORS_PINK,
+      purple: DARK_COLORS_PURPLE,
+      yellow: DARK_COLORS_YELLOW,
     },
-    sequentialColors: {
-      blue: DARK_SEQUENTIAL_COLORS_BLUE,
-      green: DARK_SEQUENTIAL_COLORS_GREEN,
-      pink: DARK_SEQUENTIAL_COLORS_PINK,
-      purple: DARK_SEQUENTIAL_COLORS_PURPLE,
-      yellow: DARK_SEQUENTIAL_COLORS_YELLOW,
+    visualMapColors: {
+      default: { visualMapColor: DARK_COLORS.color },
+      categorical: { visualMapColor: DARK_COLORS_CATEGORICAL.color },
+      functional: { visualMapColor: DARK_COLORS_FUNCTIONAL.color },
+      supportingColors: { visualMapColor: DARK_COLORS_SUPPORTING_COLORS.color },
+      darkerTints: { visualMapColor: DARK_COLORS_DARKER_TINTS.color },
+      lighterTints: { visualMapColor: DARK_COLORS_LIGHTER_TINTS.color },
+      blue: { visualMapColor: DARK_COLORS_BLUE.color },
+      green: { visualMapColor: DARK_COLORS_GREEN.color },
+      pink: { visualMapColor: DARK_COLORS_PINK.color },
+      purple: { visualMapColor: DARK_COLORS_PURPLE.color },
+      yellow: { visualMapColor: DARK_COLORS_YELLOW.color },
     },
     linesStyle: {
       broken: COMMON_LINE_STYLE_BROKEN,
@@ -335,11 +329,11 @@ export class ODSChartsTheme {
       options.mode = ODSChartsMode.LIGHT;
     }
     const mode: ODSChartsMode = options.mode;
-    if (!options.categoricalColors) {
-      options.categoricalColors = ODSChartsCategoricalColorsSet.DEFAULT;
+    if (!options.colors) {
+      options.colors = ODSChartsColorsSet.DEFAULT;
     }
     if (!options.visualMapColor) {
-      options.visualMapColor = ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE;
+      options.visualMapColor = ODSChartsColorsSet.SEQUENTIAL_BLUE;
     }
     if (!options.lineStyle) {
       options.lineStyle = ODSChartsLineStyle.SMOOTH;
@@ -347,7 +341,7 @@ export class ODSChartsTheme {
     if (!options.cssTheme) {
       options.cssTheme = ODSChartsCSSThemes.NONE;
     }
-    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.categoricalColors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
+    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.colors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
       options.lineStyle
     )}`;
 
@@ -357,20 +351,18 @@ export class ODSChartsTheme {
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].linesAxis));
 
-    if (typeof options.categoricalColors === 'string') {
-      mergeObjects(theme, cloneDeepObject(THEMES[mode].categoricalColors[options.categoricalColors]));
+    if (typeof options.colors === 'string') {
+      mergeObjects(theme, cloneDeepObject(THEMES[mode].colors[options.colors]));
     } else {
       mergeObjects(
         theme,
         cloneDeepObject({
-          color: options.categoricalColors.map((color) =>
-            'string' === typeof color ? color : THEMES[mode].categoricalColors[color.colorPalette].color[color.colorIndex]
-          ),
+          color: options.colors.map((color) => ('string' === typeof color ? color : THEMES[mode].colors[color.colorPalette].color[color.colorIndex])),
         })
       );
     }
 
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].sequentialColors[options.visualMapColor]));
+    mergeObjects(theme, cloneDeepObject(THEMES[mode].visualMapColors[options.visualMapColor]));
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].linesStyle[options.lineStyle]));
 
@@ -559,7 +551,7 @@ export class ODSChartsTheme {
    *
    *   {@link ODSChartsPopoverManagers} gives preconfigured renderer
    *
-   *   default value is  {@link ODSChartsPopoverManagers.NONE}: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
+   *   The default value of this parameter is `ODSChartsPopoverManagers.NONE`: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
    *
    * optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
