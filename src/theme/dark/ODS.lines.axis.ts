@@ -11,17 +11,17 @@ export const DARK_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#FFFFFF',
+      color: 'var(--bs-white, #fff)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
   },
@@ -29,17 +29,17 @@ export const DARK_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#FFFFFF',
+      color: 'var(--bs-white, #fff)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
   },
@@ -47,17 +47,17 @@ export const DARK_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#FFFFFF',
+      color: 'var(--bs-white, #fff)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
   },
@@ -65,17 +65,17 @@ export const DARK_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#FFFFFF',
+      color: 'var(--bs-white, #fff)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#666666',
+        color: 'var(--bs-gray-700, #666)',
       },
     },
   },

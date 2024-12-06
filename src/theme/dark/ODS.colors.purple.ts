@@ -7,5 +7,12 @@
 //
 
 export const DARK_COLORS_PURPLE = {
-  color: ['#D9C2F0', '#C1A4E4', '#A885D8', '#9373BD', '#6E4AA7', '#492191'],
+  color: [
+    'var(--ods-purple-100, #D9C2F0)',
+    'var(--ods-purple-200, #C1A4E4)',
+    'var(--ods-purple-300, #A885D8)',
+    'var(--ods-purple-400, #9373BD)',
+    'var(--ods-purple-500, #6E4AA7)',
+    'var(--ods-purple-600, #492191)',
+  ],
 };
