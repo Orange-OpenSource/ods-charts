@@ -19,6 +19,30 @@ Once the library integrated, via
 
 use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
 
+The ODS Charts library is configured
+
+- by settings options on {@link ODSChartsThemeOptions}
+- by calling features on {@link ODSChartsTheme}
+
+{@link ODSChartsTheme.getThemeManager}
+
+### Theme options
+
+The theme is configured with {@link ODSChartsThemeOptions}:
+
+- {@link ODSChartsThemeOptions.categoricalColors}: colors to be used to graph the chart.
+- {@link ODSChartsThemeOptions.cssTheme}: optionally indicates an external theme to be used like boosted.
+- {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
+- {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
+
+### Graph features
+
+Additional features can be added calling methods on {@link ODSChartsTheme}:
+
+- {@link ODSChartsTheme.externalizeLegends}: to add Orange Design System theme to legends.
+- {@link ODSChartsTheme.externalizePopover}: to add Orange Design System theme to popover or tooltip.
+- {@link ODSChartsTheme.manageChartResize}`: to dynamically adapt graph size to its container.
+
 The {@link ODSChartsTheme} is used to build the ODS theme and the charts options.
 
 ## Examples

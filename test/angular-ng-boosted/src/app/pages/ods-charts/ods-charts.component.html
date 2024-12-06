@@ -1,0 +1,12 @@
+<h1 class="pt-3">ODS Charts implementation</h1>
+<p>This page shows some examples of charts made with <a href="https://ods-charts.netlify.app/" target="_blank" rel="noopener">ODS Charts library</a> inside an Angular environment. The charts aren't perfect but it's just to show how it can work.</p>
+<p>Please take a look at <a href="https://gitlab.tech.orange/ods/angular-boosted-starter/" target="_blank" rel="noopener">this project's sources and README.md</a> to know more about ODS Charts integration in an Angular project.</p>
+
+<div class="button-groups">
+  <button class="btn btn-primary" (click)="generateRandomDataset()">Random Dataset</button>
+</div>
+<div echarts [options]="options1" [merge]="updateOptions1" [theme]="myTheme1.theme" class="demo-chart" (chartInit)="onChart1Init($event)"></div>
+<div id="legend1"></div>
+
+<div echarts [options]="options2" [merge]="updateOptions2" [theme]="myTheme2.theme" class="demo-chart" (chartInit)="onChart2Init($event)"></div>
+<div id="legend2" class="mb-5"></div>

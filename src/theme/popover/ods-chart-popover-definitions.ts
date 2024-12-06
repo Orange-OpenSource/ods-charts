@@ -40,10 +40,11 @@ export class ODSChartsPopoverItem {
 
 /**
  * {@link ODSChartsPopoverDefinition} defines the interface of the manager of externalized
- * popover or tooltip.
+ * popover or tooltip {@link ODSChartsTheme.externalizePopover}.
  *
+ * {@link ODSChartsPopoverDefinition} is not used directly. Instead, we use the variable **{@link ODSChartsPopoverDefinition}.
  * {@link ODSChartsPopoverManagers} gives 3 default {@link ODSChartsPopoverDefinition}
- * managers.
+ * managers for Apache ECharts, Boosted 5 and Boosted 4.
  *
  * You probably need to use one of those.
  *
@@ -90,6 +91,11 @@ export class ODSChartsPopoverDefinition {
    * getPopupTemplate() may be specify to replace a specific template for the  popup/tooltip to replace the default one
    */
   public getPopupTemplate?: (categoryLabel: string, tooltipElements: ODSChartsPopoverItem[]) => string;
+  /**
+   * if provided, the `testAvailability()` will be called to check if this renderer is available.
+   * If not, the fall back is an empty `ODSChartsPopoverDefinition`, ie `ODSChartsPopoverManagers.NONE`
+   */
+  public testAvailability?: () => boolean;
 }
 
 export abstract class ODSChartsPopoverDefinitionWithRenderer extends ODSChartsPopoverDefinition {
@@ -133,7 +139,7 @@ export enum ODSChartsPopoverTooltipTrigger {
 }
 
 /**
- * Configuration of the externalizePopover feature.
+ * Configuration of the externalizePopover feature {@link ODSChartsTheme.externalizePopover}.
  *
  */
 export class ODSChartsPopoverConfig {
@@ -186,6 +192,21 @@ export class ODSChartsPopoverConfig {
 }
 
 class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public testAvailability = (): boolean => {
+    let availability = true;
+    try {
+      if (undefined === boosted) {
+        availability = false;
+      }
+    } catch (error) {
+      availability = false;
+    }
+    if (!availability) {
+      console.warn('BOOSTED 5 popover/tooltip rendering is not avalable: boosted variable is not accessible!');
+    }
+    return availability;
+  };
+
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
@@ -221,6 +242,21 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 }
 
 class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
+  public testAvailability = (): boolean => {
+    let availability = true;
+    try {
+      if (undefined === boosted) {
+        availability = false;
+      }
+    } catch (error) {
+      availability = false;
+    }
+    if (!availability) {
+      console.warn('BOOSTED 4 popover/tooltip rendering is not avalable: boosted variable is not accessible!');
+    }
+    return availability;
+  };
+
   public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
     this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
@@ -268,10 +304,14 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 }
 
 /**
+ * `ODSChartsPopoverManagers` is used to specify popoverDefinition parameter (popup/tooltip renderer) of {@link ODSChartsTheme.externalizePopover}.
+ *
  * Available popover/tooltip renderer:
- * - ODSChartsPopoverManagers.NONE: to use default ECharts template to externalize tooltip/popover HTML element, implementing Orange Design System
- * - ODSChartsPopoverManagers.BOOSTED5: to use Boosted 5 tooltip/popover
- * - ODSChartsPopoverManagers.BOOSTED4: to use Boosted 4 tooltip/popover
+ * - `ODSChartsPopoverManagers.NONE`: to use default ECharts template to externalize tooltip/popover HTML element, implementing Orange Design System
+ * - `ODSChartsPopoverManagers.BOOSTED5`: to use Boosted 5 tooltip/popover
+ * - `ODSChartsPopoverManagers.BOOSTED4`: to use Boosted 4 tooltip/popover
+ *
+ * **WARNING**: Boosted 4 or Boosted 5 rendering requires dependency on the boosted library and access to the boosted global variable.
  */
 export const ODSChartsPopoverManagers: {
   [name in ODSChartsCSSThemesNames]?: ODSChartsPopoverDefinition;
