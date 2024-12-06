@@ -33,14 +33,14 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   padding-bottom: 0.625rem;
   margin-right: 20px;
   margin-left: 20px;
-  color: #000;
+  color: var(--bs-body-color, #000000);
 }
 .ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {
   opacity: .25;
 }
 
 .ods-charts-no-css-lib .ods-charts-legend-color-holder {
-  border: 1px solid #000;
+  border: 1px solid var(--bs-border-color, #000000);
   display: inline-block;
 }
 

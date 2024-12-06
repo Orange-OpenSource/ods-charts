@@ -7,5 +7,5 @@
 //
 
 export const LIGHT_COMMON = {
-  backgroundColor: 'rgba(255, 255, 255, 1)',
+  backgroundColor: 'var(--bs-body-bg, rgba(255, 255, 255, 1))',
 };

@@ -11,17 +11,17 @@ export const LIGHT_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
   },
@@ -29,17 +29,17 @@ export const LIGHT_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
   },
@@ -47,17 +47,17 @@ export const LIGHT_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
   },
@@ -65,17 +65,17 @@ export const LIGHT_LINES_AXIS = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
   },

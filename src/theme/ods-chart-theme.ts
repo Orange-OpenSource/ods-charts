@@ -438,33 +438,33 @@ export class ODSChartsTheme {
       fontWeight: '700',
       fontSize: 14,
       fontFamily: 'Helvetica Neue, sans-serif',
-      color: ODSChartsMode.LIGHT === this.options.mode ? 'rgba(0, 0, 0, 1)' : '#FFFFFF',
+      color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
     };
     const axisLine = {
       show: true,
       lineStyle: {
         width: 2,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-border-color-subtle, #cccccc)' : '#666666',
       },
     };
     const splitLine = {
       show: true,
       lineStyle: {
         width: 1,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-border-color-subtle, #cccccc)' : '#666666',
       },
     };
     const legend = {
       textStyle: {
         fontWeight: 'bold',
         fontSize: 14,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
       },
       icon: 'rect',
       itemWidth: 10,
       itemHeight: 10,
       itemStyle: {
-        borderColor: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        borderColor: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
         borderWidth: 1,
       },
     };
