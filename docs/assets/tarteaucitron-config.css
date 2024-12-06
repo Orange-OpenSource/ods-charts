@@ -1,3 +1,7 @@
+@layer boosted, typedoc;
+
+@import url("https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css") layer(boosted);
+@import url("https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css") layer(boosted);
 /*
  * This file is the generated CSS file used in Boosted v5.3.3.
  * See https://github.com/Orange-OpenSource/Orange-Boosted-Bootstrap/blob/main/site/assets/scss/_tarteaucitron.scss

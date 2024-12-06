@@ -94,30 +94,36 @@ function generateConfigurator(id) {
               </select>
             </div>
             <div class="col-md-4">
-              <label for="colorSetInput" class="form-label">Categorical Color</label>
+              <label for="colorSetInput" class="form-label">Colors</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT}">Default colors (12)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.CATEGORICAL}">Categorical colors (12)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.FUNCTIONAL}">Functional (6)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS}">Darker tints (5)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
-                <option value="${ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
               </select>
             </div>
 
             <div class="col-md-4">
-              <label for="visualMapColorInput" class="form-label">visual Map Color</label>
-              <select class="form-select" aria-label="visual Map Color" id="visualMapColorInput" onchange="changeTheme('${id}')">
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-                <option value="pink">Pink</option>
-                <option value="purple">Purple</option>
-                <option value="yellow">Yellow</option>
+              <label for="visualMapColorInput" class="form-label">Visual Map Colors</label>
+              <select class="form-select" aria-label="Visual Map Colors" id="visualMapColorInput" onchange="changeTheme('${id}')">
+                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
               </select>
             </div>
 
@@ -254,7 +260,7 @@ async function displayChart(
   id,
   options,
   mode,
-  categoricalColors,
+  colors,
   visualMapColor,
   lineStyle,
   popoverInput,
@@ -297,7 +303,7 @@ async function displayChart(
 
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
     mode,
-    categoricalColors,
+    colors,
     visualMapColor,
     lineStyle,
     cssTheme,
@@ -441,20 +447,20 @@ var dataOptions = ${JSON.stringify(options, undefined, 2)};
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
   mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(iframe.contentWindow.ODSCharts.ODSChartsMode).find((key) => iframe.contentWindow.ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
-  categoricalColors: ${
-    'string' === typeof themeManager.options.categoricalColors
-      ? 'ODSCharts.ODSChartsCategoricalColorsSet.' +
-        Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
-          (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === themeManager.options.categoricalColors
+  colors: ${
+    'string' === typeof themeManager.options.colors
+      ? 'ODSCharts.ODSChartsColorsSet.' +
+        Object.keys(iframe.contentWindow.ODSCharts.ODSChartsColorsSet).find(
+          (key) => iframe.contentWindow.ODSCharts.ODSChartsColorsSet[key] === themeManager.options.colors
         )
       : `[
-      ${themeManager.options.categoricalColors.map((color) =>
+      ${themeManager.options.colors.map((color) =>
         'string' === typeof color
           ? JSON.stringify(color)
           : `{"colorPalette": ${
-              'ODSCharts.ODSChartsCategoricalColorsSet.' +
-              Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
-                (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette
+              'ODSCharts.ODSChartsColorsSet.' +
+              Object.keys(iframe.contentWindow.ODSCharts.ODSChartsColorsSet).find(
+                (key) => iframe.contentWindow.ODSCharts.ODSChartsColorsSet[key] === color.colorPalette
               )
             }, "colorIndex": ${color.colorIndex}}`
       ).join(`,
@@ -462,9 +468,9 @@ var themeManager = ODSCharts.getThemeManager({
     ]`
   },
   visualMapColor:  ${
-    'ODSCharts.ODSChartsSequentialColorsSet.' +
-    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsSequentialColorsSet).find(
-      (key) => iframe.contentWindow.ODSCharts.ODSChartsSequentialColorsSet[key] === themeManager.options.visualMapColor
+    'ODSCharts.ODSChartsColorsSet.' +
+    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsColorsSet).find(
+      (key) => iframe.contentWindow.ODSCharts.ODSChartsColorsSet[key] === themeManager.options.visualMapColor
     )
   },
   lineStyle: ${
@@ -518,12 +524,12 @@ myChart.setOption(themeManager.getChartOptions());
   });
 
   if (!refresh) {
-    if ('string' === typeof themeManager.options.categoricalColors) {
-      document.querySelector(`#accordion_${id} #colorSetInput option[value="${themeManager.options.categoricalColors}"]`).setAttribute('selected', 'selected');
+    if ('string' === typeof themeManager.options.colors) {
+      document.querySelector(`#accordion_${id} #colorSetInput option[value="${themeManager.options.colors}"]`).setAttribute('selected', 'selected');
     } else {
       if (!customColorOption) {
         customColorOption = document.createElement('option');
-        customColorOption.value = JSON.stringify(themeManager.options.categoricalColors);
+        customColorOption.value = JSON.stringify(themeManager.options.colors);
         customColorOption.selected = true;
         customColorOption.setAttribute('selected', 'selected');
         customColorOption.setAttribute('data-custom-categorical-color', true);
@@ -543,9 +549,9 @@ myChart.setOption(themeManager.getChartOptions());
           'string' === typeof color
             ? JSON.stringify(color)
             : `{"colorPalette": ${
-                'ODSCharts.ODSChartsCategoricalColorsSet.' +
-                Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet).find(
-                  (key) => iframe.contentWindow.ODSCharts.ODSChartsCategoricalColorsSet[key] === color.colorPalette
+                'ODSCharts.ODSChartsColorsSet.' +
+                Object.keys(iframe.contentWindow.ODSCharts.ODSChartsColorsSet).find(
+                  (key) => iframe.contentWindow.ODSCharts.ODSChartsColorsSet[key] === color.colorPalette
                 )
               }, "colorIndex": ${color.colorIndex}}`
         ).join(`,
@@ -675,7 +681,7 @@ window.generateSingleLineChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE);
 };
 
 window.generateMultipleLineChart = async (id) => {
@@ -700,7 +706,7 @@ window.generateMultipleLineChart = async (id) => {
       { data: [26, 12, 14, 10, 20, 26], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -783,7 +789,7 @@ window.generateTimeSeriesLineChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateBarChart = async (id, horizontal = false, grouped = false, stacked = false) => {
@@ -831,39 +837,39 @@ window.generateBarChart = async (id, horizontal = false, grouped = false, stacke
     stacked
       ? [
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
             colorIndex: 0,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
             colorIndex: 0,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS,
             colorIndex: 0,
           },
         ]
       : grouped
         ? [
             {
-              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
+              colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
               colorIndex: 0,
             },
             {
-              colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+              colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
               colorIndex: 0,
             },
           ]
         : horizontal
           ? [
               {
-                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+                colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
                 colorIndex: 1,
               },
             ]
           : [
               {
-                colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+                colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
                 colorIndex: 3,
               },
             ]
@@ -894,7 +900,7 @@ window.generateDatasetBarChart = async (id) => {
     // every series will auto-map to each column by default.
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DARKER_TINTS);
 };
 
 window.generateBarLineChart = async (id, horizontal = false, grouped = false, stacked = true) => {
@@ -929,29 +935,29 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
     id,
     option,
     undefined,
-    //ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT
+    //ODSCharts.ODSChartsColorsSet.DEFAULT
     grouped
       ? [
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
             colorIndex: 1,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.LIGHTER_TINTS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS,
             colorIndex: 1,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_PURPLE,
+            colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE,
             colorIndex: 0,
           },
         ]
       : [
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SUPPORTING_COLORS,
+            colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS,
             colorIndex: 2,
           },
           {
-            colorPalette: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_GREEN,
+            colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN,
             colorIndex: 0,
           },
         ],
@@ -985,7 +991,7 @@ window.generatePieChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
 };
 
 window.generateDonutChart = async (id) => {
@@ -1021,5 +1027,5 @@ window.generateDonutChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsCategoricalColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
 };

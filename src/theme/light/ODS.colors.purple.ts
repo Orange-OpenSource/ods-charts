@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_CATEGORICAL_COLORS = {
-  color: ['#085edb', '#0a6e31', '#bc4d9a', '#492191', '#b98f11', '#666666', '#3e9dd6', '#27a971', '#d573bb', '#9373bd', '#9d6e06', '#333333'],
+export const LIGHT_COLORS_PURPLE = {
+  color: ['#492191', '#6E4AA7', '#9373BD', '#A885D8', '#C1A4E4', '#D9C2F0'],
 };
