@@ -21,10 +21,12 @@
 
   const setTheme = (theme) => {
     if (theme === 'auto') {
-      document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } else {
-      document.documentElement.setAttribute('data-bs-theme', theme);
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.querySelectorAll('iframe').forEach((iframe) => {
+      iframe.contentDocument.body.setAttribute('data-bs-theme', theme);
+    });
   };
 
   setTheme(getPreferredTheme());

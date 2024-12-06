@@ -7,5 +7,12 @@
 //
 
 export const DARK_COLORS_PINK = {
-  color: ['#FFE8F7', '#FFCEEF', '#FFB4E6', '#FF8AD4', '#D573BB', '#BC4D9A'],
+  color: [
+    'var(--ods-pink-100, #FFE8F7)',
+    'var(--ods-pink-200, #FFCEEF)',
+    'var(--ods-pink-300, #FFB4E6)',
+    'var(--ods-pink-400, #FF8AD4)',
+    'var(--ods-pink-500, #D573BB)',
+    'var(--ods-pink-600, #BC4D9A)',
+  ],
 };
