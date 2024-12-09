@@ -37,18 +37,18 @@ async function wait(timer = 0) {
 
 function generateChartDiv(id, direction) {
   return `
-  <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%;">
+  <div class="border" style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);">
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
     </div>
 
-    <div id="${id}_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: ${direction}; ">
+    <div id="${id}_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: ${direction};">
       <div id="${id}_holder" style="flex-grow: 1; flex-shrink: 1;">
         ${buildChartDiv(id)}
       </div>
       <div id="${id}_legend" style="min-width: 150px;"></div>
-    </div>    
+    </div>
   </div>`;
 }
 
@@ -64,7 +64,7 @@ function generateConfigurator(id) {
     },
     header: {
       begin: (id, itemId) => `<h2 class="accordion-header" id="${itemId}">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
     data-bs-target="#collapse_${itemId}" aria-expanded="false" aria-controls="collapse_${itemId}">`,
       end: (id, itemId) => `</button>
 </h2>`,
