@@ -1,5 +1,7 @@
 var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
-  var innitHtmlDoc = document.getElementById(prefixId + htmlId).innerHTML;
+  var htmlElt = document.getElementById(prefixId + htmlId);
+  htmlElt.setAttribute('data-bs-theme', 'light');
+  var innitHtmlDoc = htmlElt.innerHTML;
   document.write(`
     
     <div class="accordion py-3" id="${prefixId}viewCodeAcc">
