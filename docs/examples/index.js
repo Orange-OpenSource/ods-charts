@@ -37,17 +37,19 @@ async function wait(timer = 0) {
 
 function generateChartDiv(id, direction, mode) {
   return `
-  <div class="graph-holder border" style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);"${['dark', 'light'].includes(mode) ? ' data-bs-theme="' + mode + '"' : ''}>
-    <div class="chart_title">
-      <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
-      <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
-    </div>
-
-    <div id="${id}_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: ${direction};">
-      <div id="${id}_holder" style="flex-grow: 1; flex-shrink: 1;">
-        ${buildChartDiv(id)}
+  <div class="graph-holder"${['dark', 'light'].includes(mode) ? ' data-bs-theme="' + mode + '"' : ''}>
+    <div class="border ods-charts-context" style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);">
+      <div class="chart_title">
+        <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+        <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
       </div>
-      <div id="${id}_legend" style="min-width: 150px;"></div>
+
+      <div id="${id}_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: ${direction};">
+        <div id="${id}_holder" style="flex-grow: 1; flex-shrink: 1;">
+          ${buildChartDiv(id)}
+        </div>
+        <div id="${id}_legend" style="min-width: 150px;"></div>
+      </div>
     </div>
   </div>`;
 }
@@ -279,6 +281,10 @@ async function displayChart(
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
+
+    if (document.querySelector('[data-bs-theme]')) {
+      iframe.contentDocument.body.setAttribute('data-bs-theme', document.querySelector('[data-bs-theme]').getAttribute('data-bs-theme'));
+    }
   }
 
   let iframe = document.querySelector(`#${id} iframe`);
@@ -325,7 +331,7 @@ async function displayChart(
   if (['light', 'dark'].includes(themeManager.options.mode)) {
     iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', themeManager.options.mode);
   } else {
-    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', null);
+    iframe.contentDocument.querySelector('.graph-holder').removeAttribute('data-bs-theme');
   }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');

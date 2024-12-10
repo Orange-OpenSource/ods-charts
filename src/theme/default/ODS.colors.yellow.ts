@@ -7,5 +7,12 @@
 //
 
 export const DEFAULT_COLORS_YELLOW = {
-  color: ['#9D6E06', '#B98F11', '#FFB400', '#FFD200', '#FFE45B', '#FFF6B6'],
+  color: [
+    'var(--ods-yellow-1, #9D6E06)',
+    'var(--ods-yellow-2, #B98F11)',
+    'var(--ods-yellow-3, #FFB400)',
+    'var(--ods-yellow-4, #FFD200)',
+    'var(--ods-yellow-5, #FFE45B)',
+    'var(--ods-yellow-6, #FFF6B6)',
+  ],
 };

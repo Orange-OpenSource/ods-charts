@@ -225,15 +225,18 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
     allowList.div = ['class'];
     allowList.label = ['class'];
 
-    let container: string | HTMLElement = 'body';
-    if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(mode)) {
-      container = document.getElementById('ods-chart-popover-container-' + mode) as HTMLElement;
-      if (!container) {
-        container = document.createElement('div');
-        container.setAttribute('data-bs-theme', mode);
-        container.id = 'ods-chart-popover-container-' + mode;
-        document.querySelector('body')?.append(container);
+    let container: HTMLElement = document.getElementById('ods-chart-popover-container-' + mode) as HTMLElement;
+    if (!container) {
+      let containerHolder = document.createElement('div');
+      if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(mode)) {
+        containerHolder.setAttribute('data-bs-theme', mode);
       }
+      let container = document.createElement('div');
+      container.id = 'ods-chart-popover-container-' + mode;
+      container.classList.add('ods-charts-context');
+      containerHolder.append(container);
+
+      document.querySelector('body')?.append(containerHolder);
     }
     return boosted.Popover.getOrCreateInstance(document.querySelector(selector), {
       allowList: allowList,

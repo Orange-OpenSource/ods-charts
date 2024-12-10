@@ -59,6 +59,7 @@ import { DEFAULT_COLORS_CATEGORICAL } from './default/ODS.colors.categorical';
 import { DEFAULT_COLORS } from './default/ODS.colors';
 import { DEFAULT_COMMON } from './default/ODS.common';
 import { DEFAULT_LINES_AXIS } from './default/ODS.lines.axis';
+import { ODS_CHARTS_CSS_VARIABLES } from './colors/colors';
 
 /**
  * ODSChartsColorsSet is used for predefined color sets.
@@ -562,6 +563,13 @@ export class ODSChartsTheme {
     }
 
     const displayedColors = this.getDisplayedColors(this.theme.color);
+
+    if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && ODS_CHARTS_CSS_VARIABLES[this.cssThemeName]) {
+      const style = document.createElement('style');
+      style.textContent = ODS_CHARTS_CSS_VARIABLES[this.cssThemeName];
+      style.id = 'ods-charts-style-' + this.cssThemeName;
+      document.querySelector('head')?.append(style);
+    }
 
     if (this.chartLegendManager) {
       this.chartLegendManager.addLegend(
