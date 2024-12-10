@@ -6,6 +6,6 @@
 // This software is distributed under the MIT license.
 //
 
-export const LIGHT_COMMON = {
-  backgroundColor: 'var(--bs-white, #fff)',
+export const DEFAULT_COLORS = {
+  color: ['#085edb', '#0a6e31', '#bc4d9a', '#492191', '#b98f11', '#666666', '#3e9dd6', '#27a971', '#d573bb', '#9373bd', '#9d6e06', '#333333'],
 };

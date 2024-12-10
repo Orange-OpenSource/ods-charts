@@ -59,10 +59,16 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
 }
 
 .ods-charts-no-css-lib.ods-charts-legend-holder.ods-charts-mode-dark {
-  background-color: #000;
+  background-color: var(--bs-gray-950, #141414);
 }
-.ods-charts-mode-dark .ods-charts-legend-link {
-  color: #fff;
+.ods-charts-no-css-lib.ods-charts-legend-holder.ods-charts-mode-dark .ods-charts-legend-link {
+  color: var(--bs-white, #fff);
+}
+.ods-charts-no-css-lib.ods-charts-legend-holder.ods-charts-mode-light {
+  background-color: var(--bs-white, #fff);
+}
+.ods-charts-no-css-lib.ods-charts-legend-holder.ods-charts-mode-light .ods-charts-legend-link {
+  color: var(--bs-black, #000);
 }
 `;
 

@@ -46,6 +46,19 @@ import { ODSChartsPopover } from './popover/ods-chart-popover';
 import { ODSChartsPopoverConfig, ODSChartsPopoverDefinition, ODSChartsPopoverManagers } from './popover/ods-chart-popover-definitions';
 import { isMainAxis } from './const/main-axis-type.const';
 import { ODSChartsLegendHolderDefinition } from './legends/ods-chart-legends-definitions';
+import { DEFAULT_COLORS_YELLOW } from './default/ODS.colors.yellow';
+import { DEFAULT_COLORS_PURPLE } from './default/ODS.colors.purple';
+import { DEFAULT_COLORS_PINK } from './default/ODS.colors.pink';
+import { DEFAULT_COLORS_GREEN } from './default/ODS.colors.green';
+import { DEFAULT_COLORS_BLUE } from './default/ODS.colors.blue';
+import { DEFAULT_COLORS_LIGHTER_TINTS } from './default/ODS.colors.lighter-tints';
+import { DEFAULT_COLORS_DARKER_TINTS } from './default/ODS.colors.darker-tints';
+import { DEFAULT_COLORS_SUPPORTING_COLORS } from './default/ODS.colors.supporting-colors';
+import { DEFAULT_COLORS_FUNCTIONAL } from './default/ODS.colors.functional';
+import { DEFAULT_COLORS_CATEGORICAL } from './default/ODS.colors.categorical';
+import { DEFAULT_COLORS } from './default/ODS.colors';
+import { DEFAULT_COMMON } from './default/ODS.common';
+import { DEFAULT_LINES_AXIS } from './default/ODS.lines.axis';
 
 /**
  * ODSChartsColorsSet is used for predefined color sets.
@@ -121,13 +134,16 @@ export enum ODSChartsLineStyle {
 export enum ODSChartsMode {
   LIGHT = 'light',
   DARK = 'dark',
+  DEFAULT = 'default',
 }
 
 export interface ODSChartsThemeOptions {
   /**
-   * The mode of the theme can be {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
+   * The mode of the theme can be {@link ODSChartsMode.DEFAULT},  {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
    *
-   * Default mode is {@link ODSChartsMode.LIGHT}
+   * Default mode is {@link ODSChartsMode.DEFAULT}.
+   * The {@link ODSChartsMode.DEFAULT} mode uses the `data-bs-theme` attribute to determine if mode is light or dark (cf https://boosted.orange.com/docs/5.3/customize/color-modes/#content).
+   *
    */
   mode?: ODSChartsMode;
   /**
@@ -267,6 +283,41 @@ const THEMES: {
       smooth: COMMON_LINE_STYLE_SMOOTH,
     },
   },
+  default: {
+    common: DEFAULT_COMMON,
+    linesAxis: DEFAULT_LINES_AXIS,
+    colors: {
+      default: DEFAULT_COLORS,
+      categorical: DEFAULT_COLORS_CATEGORICAL,
+      functional: DEFAULT_COLORS_FUNCTIONAL,
+      supportingColors: DEFAULT_COLORS_SUPPORTING_COLORS,
+      darkerTints: DEFAULT_COLORS_DARKER_TINTS,
+      lighterTints: DEFAULT_COLORS_LIGHTER_TINTS,
+      blue: DEFAULT_COLORS_BLUE,
+      green: DEFAULT_COLORS_GREEN,
+      pink: DEFAULT_COLORS_PINK,
+      purple: DEFAULT_COLORS_PURPLE,
+      yellow: DEFAULT_COLORS_YELLOW,
+    },
+    visualMapColors: {
+      default: { visualMapColor: DEFAULT_COLORS.color },
+      categorical: { visualMapColor: DEFAULT_COLORS_CATEGORICAL.color },
+      functional: { visualMapColor: DEFAULT_COLORS_FUNCTIONAL.color },
+      supportingColors: { visualMapColor: DEFAULT_COLORS_SUPPORTING_COLORS.color },
+      darkerTints: { visualMapColor: DEFAULT_COLORS_DARKER_TINTS.color },
+      lighterTints: { visualMapColor: DEFAULT_COLORS_LIGHTER_TINTS.color },
+      blue: { visualMapColor: DEFAULT_COLORS_BLUE.color },
+      green: { visualMapColor: DEFAULT_COLORS_GREEN.color },
+      pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
+      purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
+      yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
+    },
+    linesStyle: {
+      broken: COMMON_LINE_STYLE_BROKEN,
+      withPoints: COMMON_LINE_STYLE_POINTS,
+      smooth: COMMON_LINE_STYLE_SMOOTH,
+    },
+  },
 };
 
 /**
@@ -326,7 +377,7 @@ export class ODSChartsTheme {
       options = {};
     }
     if (!options.mode) {
-      options.mode = ODSChartsMode.LIGHT;
+      options.mode = ODSChartsMode.DEFAULT;
     }
     const mode: ODSChartsMode = options.mode;
     if (!options.colors) {
@@ -438,33 +489,58 @@ export class ODSChartsTheme {
       fontWeight: '700',
       fontSize: 14,
       fontFamily: 'Helvetica Neue, sans-serif',
-      color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
+      color:
+        ODSChartsMode.DEFAULT === this.options.mode
+          ? 'var(--bs-body-color, #000)'
+          : ODSChartsMode.LIGHT === this.options.mode
+            ? 'var(--bs-black, #000)'
+            : 'var(--bs-white, #fff)',
     };
     const axisLine = {
       show: true,
       lineStyle: {
         width: 2,
-        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-border-color-subtle, #cccccc)' : '#666666',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-border-color-subtle, #ccc)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--gray-500, #ccc)'
+              : 'var(--gray-700, #666)',
       },
     };
     const splitLine = {
       show: true,
       lineStyle: {
         width: 1,
-        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-border-color-subtle, #cccccc)' : '#666666',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-border-color-subtle, #ccc)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--gray-500, #ccc)'
+              : 'var(--gray-700, #666)',
       },
     };
     const legend = {
       textStyle: {
         fontWeight: 'bold',
         fontSize: 14,
-        color: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-body-color, #000)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-black, #000)'
+              : 'var(--bs-white, #fff)',
       },
       icon: 'rect',
       itemWidth: 10,
       itemHeight: 10,
       itemStyle: {
-        borderColor: ODSChartsMode.LIGHT === this.options.mode ? 'var(--bs-body-color, #000000)' : '#ffffff',
+        borderColor:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-body-color, #000)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-black, #000)'
+              : 'var(--bs-white, #fff)',
         borderWidth: 1,
       },
     };

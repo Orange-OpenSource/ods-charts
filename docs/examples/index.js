@@ -35,9 +35,9 @@ async function wait(timer = 0) {
   });
 }
 
-function generateChartDiv(id, direction) {
+function generateChartDiv(id, direction, mode) {
   return `
-  <div class="border" style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);">
+  <div class="graph-holder border" style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);"${['dark', 'light'].includes(mode) ? ' data-bs-theme="' + mode + '"' : ''}>
     <div class="chart_title">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
@@ -89,6 +89,7 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="darkModeInput" class="form-label">Dark mode</label>
               <select class="form-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
+                <option value="default">Default mode</option>
                 <option value="light">White mode</option>
                 <option value="dark">Dark mode</option>
               </select>
@@ -321,6 +322,12 @@ async function displayChart(
     legendsOrientation = 'horizontal';
   }
 
+  if (['light', 'dark'].includes(themeManager.options.mode)) {
+    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', themeManager.options.mode);
+  } else {
+    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', null);
+  }
+
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
 
   if (actualTheme !== cssThemeName) {
@@ -433,7 +440,11 @@ async function displayChart(
     div = iframe.contentDocument.getElementById(chartId);
   }
 
-  document.getElementById(id + '_html').innerText = generateChartDiv(id, usedLegends === 'odscharts' && 'vertical' === legendsOrientation ? 'row' : 'column');
+  document.getElementById(id + '_html').innerText = generateChartDiv(
+    id,
+    usedLegends === 'odscharts' && 'vertical' === legendsOrientation ? 'row' : 'column',
+    themeManager.options.mode
+  );
   document.getElementById(id + '_code').innerText = `///////////////////////////////////////////////////
 // Used data
 ///////////////////////////////////////////////////
@@ -667,9 +678,6 @@ window.downloadTheme = downloadTheme;
 window.generateSingleLineChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    title: {
-      text: 'test',
-    },
     xAxis: {
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     },
