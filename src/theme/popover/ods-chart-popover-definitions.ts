@@ -8,6 +8,7 @@
 
 import { cloneDeepObject } from '../../tools/clone-deep-object';
 import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
+import { ODSChartsMode } from '../ods-chart-theme';
 declare var boosted: any;
 
 export class ODSChartsPopoverManager {
@@ -95,7 +96,13 @@ export class ODSChartsPopoverDefinition {
 export abstract class ODSChartsPopoverDefinitionWithRenderer extends ODSChartsPopoverDefinition {
   public abstract tooltipDelay: number;
   public abstract tooltipMarging: number;
-  public abstract getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined;
+  public abstract getOrCreatePopupInstance: (
+    selector: string,
+    title: string,
+    htmlContent: string,
+    enterable: boolean,
+    mode: ODSChartsMode
+  ) => ODSChartsPopoverManager | undefined;
 
   protected testIfMouseIsOverTooltip(previousPopover: ODSChartsPopoverManager) {
     try {
@@ -186,12 +193,23 @@ export class ODSChartsPopoverConfig {
 }
 
 class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
-  public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
-    this._getOrCreatePopupInstance.bind(this);
+  public getOrCreatePopupInstance: (
+    selector: string,
+    title: string,
+    htmlContent: string,
+    enterable: boolean,
+    mode: ODSChartsMode
+  ) => ODSChartsPopoverManager | undefined = this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
   public tooltipMarging = 15;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean): ODSChartsPopoverManager | undefined {
+  private _getOrCreatePopupInstance(
+    selector: string,
+    title: string,
+    htmlContent: string,
+    enterable: boolean,
+    mode: ODSChartsMode
+  ): ODSChartsPopoverManager | undefined {
     try {
       let previousPopover: ODSChartsPopoverManager = boosted.Popover.getInstance(document.querySelector(selector));
       if (previousPopover) {
@@ -207,12 +225,25 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
     allowList.div = ['class'];
     allowList.label = ['class'];
 
+    let container: HTMLElement = document.getElementById('ods-chart-popover-container-' + mode) as HTMLElement;
+    if (!container) {
+      let containerHolder = document.createElement('div');
+      if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(mode)) {
+        containerHolder.setAttribute('data-bs-theme', mode);
+      }
+      let container = document.createElement('div');
+      container.id = 'ods-chart-popover-container-' + mode;
+      container.classList.add('ods-charts-context');
+      containerHolder.append(container);
+
+      document.querySelector('body')?.append(containerHolder);
+    }
     return boosted.Popover.getOrCreateInstance(document.querySelector(selector), {
       allowList: allowList,
       html: true,
       trigger: 'click',
       placement: 'top',
-      container: 'body',
+      container: container,
       title: title,
       content: htmlContent,
       customClass: enterable ? '' : 'pe-none',
@@ -221,12 +252,17 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
 }
 
 class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
-  public getOrCreatePopupInstance: (selector: string, title: string, htmlContent: string, enterable: boolean) => ODSChartsPopoverManager | undefined =
-    this._getOrCreatePopupInstance.bind(this);
+  public getOrCreatePopupInstance: (
+    selector: string,
+    title: string,
+    htmlContent: string,
+    enterable: boolean,
+    mode: ODSChartsMode
+  ) => ODSChartsPopoverManager | undefined = this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
   public tooltipMarging = 10;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean) {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean, mode: ODSChartsMode) {
     const elt: any = document.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];
