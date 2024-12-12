@@ -144,6 +144,14 @@ function generateConfigurator(id) {
             </div>
 
             <div class="col-md-4">
+              <label for="rendererInput" class="form-label">SVG or Canvas (<a href="https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/" target="apache_doc">See Apache ECharts documentation</a>)</label>
+              <select class="form-select" id="rendererInput" onchange="changeTheme('${id}')">
+                <option value="svg">SVG</option>
+                <option value="canvas">CANVAS</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
               <label for="popoverInput" class="form-label">Popover or Tooltip</label>
               <select class="form-select" id="popoverInput" onchange="changeTheme('${id}')">
                 <option value="none">None</option>
@@ -263,6 +271,7 @@ async function displayChart(
   colors,
   visualMapColor,
   lineStyle,
+  rendererInput,
   popoverInput,
   popoverSharedInput,
   popoverAxisInput,
@@ -289,6 +298,9 @@ async function displayChart(
   }
   if (!cssThemeName) {
     cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
+  }
+  if (!rendererInput) {
+    rendererInput = 'svg';
   }
   if (!popoverInput) {
     popoverInput = 'tooltip';
@@ -488,7 +500,7 @@ echarts.registerTheme(themeManager.name , themeManager.theme);
 // get the chart holder and initiate it with the generated theme
 var div = document.getElementById('${id}_chart');
 var myChart = echarts.init(div, themeManager.name, {
-  renderer: 'svg',
+  renderer: '${rendererInput}',
 });
 
 // Set the data to be displayed.
@@ -566,6 +578,7 @@ myChart.setOption(themeManager.getChartOptions());
     document.querySelector(`#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #rendererInput option[value="${rendererInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`).setAttribute('selected', 'selected');
@@ -583,7 +596,7 @@ myChart.setOption(themeManager.getChartOptions());
   });
 
   var myChart = iframe.contentWindow.echarts.init(div, themeManager.name, {
-    renderer: 'svg',
+    renderer: rendererInput,
   });
 
   themeManager.setDataOptions(options);
@@ -622,6 +635,7 @@ async function changeTheme(id) {
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #visualMapColorInput`).value,
     document.querySelector(`#accordion_${id} #lineStyleInput`).value,
+    document.querySelector(`#accordion_${id} #rendererInput`).value,
     document.querySelector(`#accordion_${id} #popoverInput`).value,
     document.querySelector(`#accordion_${id} #popoverSharedInput`).value,
     document.querySelector(`#accordion_${id} #popoverAxisInput`).value,
