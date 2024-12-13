@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous" />
     <link href="../assets/tarteaucitron-config.css" rel="stylesheet" />
+    <link href="../assets/style.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" href="../images/favicons/apple-touch-icon.png" sizes="180x180" />
     <link rel="icon" href="../images/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -20,16 +21,50 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" integrity="sha384-Mx5lkUEQPM1pOJCwFtUICyX45KNojXbkWdYhkKUKsbv391mavbfoAmONbzkgYPzR" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../../dist/ods-charts.js"></script>
     <script type="text/javascript" src="./index.js"></script>
+    <script type="text/javascript" src="../assets/color-mode.js"></script>
   </head>
   <body>
-    <header data-bs-theme="dark">
+    <header class="sticky-top" data-bs-theme="dark">
       <nav class="navbar navbar-expand-lg" aria-label="Global navigation">
         <div class="container-xxl">
-          <div class="navbar-brand me-auto me-lg-4">
+          <div class="navbar-brand me-auto">
             <a class="stretched-link" href="./">
               <img src="../images/orange-logo.svg" width="50" height="50" alt="ODS Charts - Back to Home" loading="lazy" />
             </a>
             <h1 class="title">Orange Design System Charts</h1>
+          </div>
+          <div id="global-header" class="navbar-collapse d-lg-flex collapse show">
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item dropdown">
+                <button class="nav-link nav-icon dropdown-toggle" id="bd-theme" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle mode (auto)">
+                  <svg class="theme-icon-active"><use href="../images/ods-charts-icons.svg#ui-auto-mode"></use></svg>
+                  <span class="d-lg-none ms-2" id="bd-theme-text">Toggle mode</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end mb-2" aria-labelledby="bd-theme-text">
+                  <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                      <svg class="me-2"><use href="../images/ods-charts-icons.svg#ui-light-mode"></use></svg>
+                      Light
+                      <svg class="ms-auto d-none"><use href="../images/ods-charts-icons.svg#check2"></use></svg>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                      <svg class="me-2"><use href="../images/ods-charts-icons.svg#ui-dark-mode"></use></svg>
+                      Dark
+                      <svg class="ms-auto d-none"><use href="../images/ods-charts-icons.svg#check2"></use></svg>
+                    </button>
+                  </li>
+                  <li>
+                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                      <svg class="me-2"><use href="../images/ods-charts-icons.svg#ui-auto-mode"></use></svg>
+                      Auto
+                      <svg class="ms-auto d-none"><use href="../images/ods-charts-icons.svg#check2"></use></svg>
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
@@ -60,7 +95,7 @@ themeManager.manageChartResize(myChart, 'barLine_chart');
             <div class="collapse" id="collapseChart">
               <div class="card card-body">
                 <div>
-                  <div class="border border-light position-relative">
+                  <div class="border border-subtle position-relative">
                     <div class="chart_title">
                       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
                       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
@@ -135,6 +170,18 @@ themeManager.manageChartResize(myChart, 'barLine_chart');
         myChart.setOption(themeManager.getChartOptions());
       </script>
     </div>
+
+    <footer class="footer navbar mt-5" data-bs-theme="dark">
+      <h2 class="visually-hidden">Sitemap & information</h2>
+      <div class="container-xxl footer-terms">
+        <ul class="navbar-nav gap-md-3">
+          <li class="fw-bold">© Orange 2024</li>
+          <li><a class="nav-link" href="javascript:tarteaucitron.userInterface.openPanel();">Cookies</a></li>
+          <li><a class="nav-link" href="https://github.com/Orange-OpenSource/ods-charts/blob/main/LICENSE" target="blank" rel="license noopener">License</a></li>
+        </ul>
+      </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
     <script src="../assets/tarteaucitron-config.js"></script>

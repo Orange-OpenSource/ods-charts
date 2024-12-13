@@ -11,6 +11,7 @@
   "main": "./dist/ods-charts.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "install-all": "rm -rf ./node_modules && rm -rf ./test/angular-echarts/node_modules && rm -rf ./test/angular-ng-boosted/node_modules && rm -rf ./test/angular-ngx-echarts/node_modules && rm -rf ./test/react/node_modules && rm -rf ./test/vue/node_modules && npm i && cd test/angular-echarts && npm i && cd ../angular-ng-boosted && npm i && cd ../angular-ngx-echarts && npm i && cd ../react && npm i && cd ../vue && npm i && cd ../..",
     "build": "webpack",
     "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build && cp -R dist docs/ && npm run typedoc",
@@ -31,9 +32,9 @@
     "prettier": "^3.4.2",
     "serve": "^14.2.3",
     "ts-loader": "^9.5.1",
-    "typedoc": "^0.27.2",
+    "typedoc": "^0.27.4",
     "typescript": "^5.7.2",
-    "webpack": "^5.96.1",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   }
 }
