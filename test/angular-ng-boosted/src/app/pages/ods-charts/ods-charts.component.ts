@@ -129,14 +129,14 @@ export class OdsChartsComponent {
   private generateThemes() {
     this.myTheme1 = ODSCharts.getThemeManager({
       mode: this.currentMode === 'light' ? ODSCharts.ODSChartsMode.LIGHT : ODSCharts.ODSChartsMode.DARK,
-      categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.SEQUENTIAL_BLUE,
-      visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
+      colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
+      visualMapColor: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });
     this.myTheme2 = ODSCharts.getThemeManager({
       mode: this.currentMode === 'light' ? ODSCharts.ODSChartsMode.LIGHT : ODSCharts.ODSChartsMode.DARK,
-      categoricalColors: ODSCharts.ODSChartsCategoricalColorsSet.DARKER_TINTS,
-      visualMapColor: ODSCharts.ODSChartsSequentialColorsSet.SEQUENTIAL_BLUE,
+      colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
+      visualMapColor: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });
   }
