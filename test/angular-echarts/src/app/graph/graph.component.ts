@@ -5,7 +5,6 @@ import { ECharts, EChartsOption } from 'echarts';
 
 @Component({
   selector: 'app-graph',
-  standalone: true,
   imports: [],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
@@ -50,7 +49,14 @@ export class GraphComponent implements AfterViewInit {
 
     this.echartsGraph = echarts.init(this.graph.nativeElement, this.myTheme.name);
 
-    this.options = this.myTheme.setDataOptions(this.options).externalizeLegends(this.echartsGraph, '#legend').externalizePopover().getChartOptions();
+    this.graph.nativeElement.id = 'graph_' + Math.ceil(Math.random() * 1000000);
+
+    this.options = this.myTheme
+      .setDataOptions(this.options)
+      .externalizeLegends(this.echartsGraph, '#legend')
+      .externalizePopover()
+      .manageChartResize(this.echartsGraph, this.graph.nativeElement.id)
+      .getChartOptions();
 
     this.echartsGraph.setOption(this.options);
   }
