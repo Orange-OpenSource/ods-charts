@@ -145,6 +145,7 @@ export class ODSChartsPopover {
   private tooltipDelay: any;
   private tooltipStyle: string = '';
   private enterable: boolean = false;
+  private mode: ODSChartsMode = ODSChartsMode.DEFAULT;
   private constructor(
     private popoverDefinition: ODSChartsPopoverDefinition,
     private popoverConfig: ODSChartsPopoverConfig
@@ -279,7 +280,8 @@ export class ODSChartsPopover {
     };
   }
 
-  public addPopoverManagement(dataOptions: any, themeOptions: any, cssTheme: ODSChartsCSSThemeDefinition, cssThemeName: string, mode: ODSChartsMode) {
+  public addPopoverManagement(dataOptions: any, themeOptions: any, cssTheme: ODSChartsCSSThemeDefinition, cssThemeName: string, currentMode: ODSChartsMode) {
+    this.mode = currentMode;
     if (ODSChartsCSSThemesNames.NONE === cssThemeName && !document.querySelector('#ods-chart-popover-none-css')) {
       let style = document.createElement('style');
       style.id = 'ods-chart-popover-none-css';
@@ -375,7 +377,7 @@ export class ODSChartsPopover {
                 ? new DOMParser().parseFromString(
                     this.popoverDefinition.getPopupTemplate
                       ? this.popoverDefinition.getPopupTemplate(elements.categoryLabel, elements.tooltipElements)
-                      : this.getPopupTemplate(elements, cssTheme, mode),
+                      : this.getPopupTemplate(elements, cssTheme, this.mode),
                     'text/html'
                   ).body.firstChild
                 : undefined;
@@ -384,7 +386,7 @@ export class ODSChartsPopover {
             hideDelay: 0,
             appendTo: 'body',
             renderMode: 'html',
-            className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
+            className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ods-charts-mode-${this.mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
             axisPointer: {
               type: this.popoverConfig.axisPointer,
             },
@@ -421,7 +423,7 @@ export class ODSChartsPopover {
                 tooltipElements: ODSChartsPopoverItem[];
               } = this.getTooltipElements(params, legends);
               if (elements && elements.tooltipElements.length > 0) {
-                this.displayPopup(window.event as MouseEvent, elements, cssTheme, mode);
+                this.displayPopup(window.event as MouseEvent, elements, cssTheme, this.mode);
               }
               return ' ';
             },
