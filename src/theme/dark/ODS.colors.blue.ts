@@ -7,5 +7,12 @@
 //
 
 export const DARK_COLORS_BLUE = {
-  color: ['#B5E8F7', '#80CEEF', '#4BB4E6', '#3E9DD6', '#237ECA', '#085EBD'],
+  color: [
+    'var(--ods-blue-100, #B5E8F7)',
+    'var(--ods-blue-200, #80CEEF)',
+    'var(--ods-blue-300, #4BB4E6)',
+    'var(--ods-blue-400, #3E9DD6)',
+    'var(--ods-blue-500, #237ECA)',
+    'var(--ods-blue-600, #085EBD)',
+  ],
 };

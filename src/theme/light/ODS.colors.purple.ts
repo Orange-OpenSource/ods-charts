@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_PURPLE = {
-  color: ['#492191', '#6E4AA7', '#9373BD', '#A885D8', '#C1A4E4', '#D9C2F0'],
+  color: [
+    'var(--ods-purple-600, #492191)',
+    'var(--ods-purple-500, #6E4AA7)',
+    'var(--ods-purple-400, #9373BD)',
+    'var(--ods-purple-300, #A885D8)',
+    'var(--ods-purple-200, #C1A4E4)',
+    'var(--ods-purple-100, #D9C2F0',
+  ],
 };

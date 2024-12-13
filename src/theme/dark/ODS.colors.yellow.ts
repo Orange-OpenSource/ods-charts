@@ -7,5 +7,12 @@
 //
 
 export const DARK_COLORS_YELLOW = {
-  color: ['#FFF6B6', '#FFE45B', '#FFD200', '#FFB400', '#B98F11', '#9D6E06'],
+  color: [
+    'var(--ods-yellow-100, #FFF6B6)',
+    'var(--ods-yellow-200, #FFE45B)',
+    'var(--ods-yellow-300, #FFD200)',
+    'var(--ods-yellow-400, #FFB400)',
+    'var(--ods-yellow-500, #B98F11)',
+    'var(--ods-yellow-600, #9D6E06)',
+  ],
 };

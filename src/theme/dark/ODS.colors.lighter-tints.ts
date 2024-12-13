@@ -7,5 +7,11 @@
 //
 
 export const DARK_COLORS_LIGHTER_TINTS = {
-  color: ['#085EBD', '#0A6E31', '#FF8AD4', '#492191', '#FFB400'],
+  color: [
+    'var(--ods-blue-600,#085EBD)',
+    'var(--ods-green-600, #0A6E31)',
+    'var(--ods-pink-400, #FF8AD4)',
+    'var(--ods-purple-600, #492191)',
+    'var(--ods-yellow-400, #FFB400',
+  ],
 };
