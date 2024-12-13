@@ -3,10 +3,10 @@ import * as ODSCharts from 'ods-charts';
 import * as echarts from 'echarts';
 
 @Component({
-    selector: 'app-line-chart',
-    imports: [],
-    templateUrl: './line-chart.component.html',
-    styleUrl: './line-chart.component.scss'
+  selector: 'app-line-chart',
+  imports: [],
+  templateUrl: './line-chart.component.html',
+  styleUrl: './line-chart.component.scss',
 })
 export class LineChartComponent implements AfterViewInit {
   base = +new Date(1968, 9, 3);
