@@ -2,3 +2,4 @@
 /dist
 ods-charts*.tgz
 /docs/api
+/test_local

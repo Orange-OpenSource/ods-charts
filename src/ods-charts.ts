@@ -9,13 +9,9 @@
 /**
  * @packageDocumentation
  *
- * Once the library integrated, via
- * - script &lt;script src="...ods-charts.js"&gt;
- * - or an import * as ODSCharts from 'ods-charts'
+ * This page is an index of the module's classes, interfaces and enumerations.
  *
- * use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
- *
- * The {@link ODSChartsTheme} is used to build the ODS theme and the charts options.
+ * Their use is introduced on the [home page](./#md:documentation).
  *
  */
 import { ODSChartsTheme } from './theme/ods-chart-theme';

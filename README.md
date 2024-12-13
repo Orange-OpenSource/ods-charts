@@ -73,6 +73,8 @@ myChart.setOption(themeManager.getChartOptions(dataOptions));
 
 The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library.
 
+Read the [API documentation](https://ods-charts.netlify.app/api/) for details on this legends, popover, tooltip... features.
+
 Read the [documentation](https://ods-charts.netlify.app/) for information on the library content and examples.
 
 ## Status

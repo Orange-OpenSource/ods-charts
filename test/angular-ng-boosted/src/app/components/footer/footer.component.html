@@ -1,0 +1,24 @@
+<footer class="footer navbar" data-bs-theme="dark">
+  <div class="container-xxl footer-terms fs-3" role="navigation" aria-label="sitemap">
+    <ul class="navbar-nav gap-md-3">
+      <li><h2 class="h3 accordion-header footer-heading mb-0 border-0">Sitemap</h2></li>
+      <li><a class="nav-link" [ngClass]="{ active: router.url.indexOf('home') > -1 }" [attr.aria-current]="router.url.indexOf('home') > -1 ? 'true' : null" href="/home" aria-describedby="headingGeneral">Home</a></li>
+      <li><a class="nav-link" [ngClass]="{ active: router.url.indexOf('ng-bootstrap-components') > -1 }" [attr.aria-current]="router.url.indexOf('ng-bootstrap-components') > -1 ? 'true' : null" href="/ng-bootstrap-components" aria-describedby="headingGeneral">ng-bootstrap components</a></li>
+      <li><a class="nav-link" [ngClass]="{ active: router.url.indexOf('charts') > -1 }" [attr.aria-current]="router.url.indexOf('charts') > -1 ? 'true' : null" href="/charts" aria-describedby="headingGeneral">ODS charts</a></li>
+      <li><a class="nav-link" [ngClass]="{ active: router.url.indexOf('icons') > -1 }" [attr.aria-current]="router.url.indexOf('icons') > -1 ? 'true' : null" href="/icons" aria-describedby="headingGeneral">Icons</a></li>
+    </ul>
+  </div>
+
+  <div class="border-bottom border-1 border-dark"></div>
+
+  <h2 class="visually-hidden">Legal mentions & information</h2>
+  <div class="container-xxl footer-terms">
+    <ul class="navbar-nav gap-md-3">
+      <li class="fw-bold">© Orange 2024</li>
+      <li><a class="nav-link" href="#">Terms and conditions</a></li>
+      <li><a class="nav-link" href="#">Privacy</a></li>
+      <li><a class="nav-link" href="#">Accessibility statement</a></li>
+      <li><a class="nav-link" href="#">Cookie policy</a></li>
+    </ul>
+  </div>
+</footer>

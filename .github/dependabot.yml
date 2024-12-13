@@ -44,6 +44,17 @@ updates:
         patterns:
           - "*"
   - package-ecosystem: npm
+    directory: "/test/angular-ng-boosted"
+    labels:
+      - dependencies
+    schedule:
+      interval: weekly
+    versioning-strategy: increase
+    groups:
+      angular-ng-boosted-all-deps:
+        patterns:
+          - "*"
+  - package-ecosystem: npm
     directory: "/test/react"
     labels:
       - dependencies
