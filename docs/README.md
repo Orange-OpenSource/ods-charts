@@ -80,6 +80,7 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
           .manageChartResize(chart1, 'chart1')
           .externalizePopover()
           .externalizeLegends(chart1, 'chart1_legends')
+          .manageThemeObserver(chart1)
           .getChartOptions()
       );
     </script>

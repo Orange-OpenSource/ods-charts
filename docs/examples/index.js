@@ -528,7 +528,10 @@ themeManager.externalizeLegends(myChart, '#${id}_legend');`
       : ''
   }
 // Manage window size changed
-themeManager.manageChartResize(myChart, '${chartId}');${
+themeManager.manageChartResize(myChart, '${chartId}');
+// Automatically manage data-bs-theme attribute change. Only needed if you want the 
+// chart to automatically react to the global light or dark theme change
+themeManager.manageThemeObserver(myChart);${
     'none' !== popoverInput
       ? `
 // Register the externalization of the tooltip/popup
@@ -622,6 +625,7 @@ myChart.setOption(themeManager.getChartOptions());
     iframe.contentDocument.getElementById(id + '_legend').innerHTML = '';
   }
   themeManager.manageChartResize(myChart, chartId);
+  themeManager.manageThemeObserver(myChart);
   if ('none' !== popoverInput) {
     themeManager.externalizePopover(
       {

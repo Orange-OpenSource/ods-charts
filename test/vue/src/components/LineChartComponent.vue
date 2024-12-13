@@ -75,6 +75,7 @@ onMounted(() => {
       .setDataOptions(dataOptions)
       .externalizeLegends(lineChartODS, '#lineChartLegendODS')
       .manageChartResize(lineChartODS, 'lineChartCanvasODS')
+      .manageThemeObserver(lineChartODS)
       .externalizePopover()
       .getChartOptions()
   )
