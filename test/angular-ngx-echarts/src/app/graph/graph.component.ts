@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
-import { ECharts, EChartsOption } from 'echarts';
+import { EChartsOption } from 'echarts';
 import * as ODSCharts from 'ods-charts';
-import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import * as echarts from 'echarts/core';
+import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
+// import necessary echarts components
+import { BarChart, LineChart } from 'echarts/charts';
+import { DatasetComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LegendComponent } from 'echarts/components';
+import { TooltipComponent } from 'echarts/components';
+echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
 
 @Component({
   selector: 'app-graph',
   standalone: true,
   imports: [NgxEchartsDirective],
-  providers: [provideEcharts()],
+  providers: [provideEchartsCore({ echarts })],
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss',
 })
@@ -58,7 +66,7 @@ export class GraphComponent {
     });
   }
 
-  public onChartInit(ec: ECharts) {
+  public onChartInit(ec: echarts.ECharts) {
     this.options = this.myTheme.setDataOptions(this.options).externalizeLegends(ec, '#legend').externalizePopover().getChartOptions();
   }
 
