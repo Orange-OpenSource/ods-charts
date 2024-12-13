@@ -113,23 +113,6 @@ function generateConfigurator(id) {
             </div>
 
             <div class="col-md-4">
-              <label for="visualMapColorInput" class="form-label">Visual Map Colors</label>
-              <select class="form-select" aria-label="Visual Map Colors" id="visualMapColorInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">Default colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">Categorical colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">Functional (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">Darker tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
-              </select>
-            </div>
-
-            <div class="col-md-4">
               <label for="lineStyleInput" class="form-label">Line style</label>
               <select class="form-select" id="lineStyleInput" onchange="changeTheme('${id}')">
                 <option value="smooth">Smooth</option>
@@ -271,7 +254,6 @@ async function displayChart(
   options,
   mode,
   colors,
-  visualMapColor,
   lineStyle,
   rendererInput,
   popoverInput,
@@ -319,10 +301,14 @@ async function displayChart(
   }
   let cssTheme = iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[cssThemeName];
 
+  if (['light', 'dark'].includes(mode)) {
+    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', mode);
+  } else {
+    iframe.contentDocument.querySelector('.graph-holder').removeAttribute('data-bs-theme');
+  }
+
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
-    mode,
     colors,
-    visualMapColor,
     lineStyle,
     cssTheme,
     cssSelector: `#${id}_chart`,
@@ -338,12 +324,6 @@ async function displayChart(
   }
   if (!legendsOrientation) {
     legendsOrientation = 'horizontal';
-  }
-
-  if (['light', 'dark'].includes(themeManager.options.mode)) {
-    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', themeManager.options.mode);
-  } else {
-    iframe.contentDocument.querySelector('.graph-holder').removeAttribute('data-bs-theme');
   }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
@@ -475,7 +455,6 @@ var dataOptions = ${JSON.stringify(options, undefined, 2)};
 ///////////////////////////////////////////////////
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
-  mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(iframe.contentWindow.ODSCharts.ODSChartsMode).find((key) => iframe.contentWindow.ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
   colors: ${
     'string' === typeof themeManager.options.colors
       ? 'ODSCharts.ODSChartsColorsSet.' +
@@ -495,12 +474,6 @@ var themeManager = ODSCharts.getThemeManager({
       ).join(`,
       `)}
     ]`
-  },
-  visualMapColor:  ${
-    'ODSCharts.ODSChartsColorsSet.' +
-    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsColorsSet).find(
-      (key) => iframe.contentWindow.ODSCharts.ODSChartsColorsSet[key] === themeManager.options.visualMapColor
-    )
   },
   lineStyle: ${
     'ODSCharts.ODSChartsLineStyle.' +
@@ -597,7 +570,6 @@ myChart.setOption(themeManager.getChartOptions());
     }
 
     document.querySelector(`#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`).setAttribute('selected', 'selected');
-    document.querySelector(`#accordion_${id} #visualMapColorInput option[value="${themeManager.options.visualMapColor}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #rendererInput option[value="${rendererInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
@@ -655,7 +627,6 @@ async function changeTheme(id) {
     11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
-    document.querySelector(`#accordion_${id} #visualMapColorInput`).value,
     document.querySelector(`#accordion_${id} #lineStyleInput`).value,
     document.querySelector(`#accordion_${id} #rendererInput`).value,
     document.querySelector(`#accordion_${id} #popoverInput`).value,
@@ -739,7 +710,7 @@ window.generateMultipleLineChart = async (id) => {
       { data: [26, 12, 14, 10, 20, 26], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -822,7 +793,7 @@ window.generateTimeSeriesLineChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, undefined, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateBarChart = async (id, horizontal = false, grouped = false, stacked = false) => {
@@ -994,7 +965,7 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
             colorIndex: 0,
           },
         ],
-    undefined,
+
     ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
   );
 };
