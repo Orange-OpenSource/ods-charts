@@ -4,11 +4,10 @@ import * as echarts from 'echarts';
 import { ECharts, EChartsOption } from 'echarts';
 
 @Component({
-  selector: 'app-graph',
-  standalone: true,
-  imports: [],
-  templateUrl: './graph.component.html',
-  styleUrl: './graph.component.scss',
+    selector: 'app-graph',
+    imports: [],
+    templateUrl: './graph.component.html',
+    styleUrl: './graph.component.scss'
 })
 export class GraphComponent implements AfterViewInit {
   @ViewChild('graph') graph: ElementRef;
