@@ -80,6 +80,10 @@ export class LineChartComponent implements AfterViewInit {
         .getChartOptions()
     );
 
+    window.setTimeout(this.initEChartsStandalone.bind(this), 50);
+  }
+
+  private initEChartsStandalone() {
     // echarts initialization
     let lineChart = echarts.init(this.elm.nativeElement.querySelector('#lineChartCanvas'));
 
