@@ -52,7 +52,6 @@ class LineChartComponent extends Component {
     const lineChartODSTheme = ODSCharts.getThemeManager({
       mode: ODSCharts.ODSChartsMode.DARK,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-      visualMapColor: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
     });
 
