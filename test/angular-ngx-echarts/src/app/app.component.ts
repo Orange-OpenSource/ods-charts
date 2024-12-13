@@ -5,7 +5,7 @@ import { GraphComponent } from './graph/graph.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [GraphComponent, RouterOutlet],
+  imports: [GraphComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
