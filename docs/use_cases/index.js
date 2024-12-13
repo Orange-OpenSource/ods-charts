@@ -1,5 +1,7 @@
 var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
-  var innitHtmlDoc = document.getElementById(prefixId + htmlId).innerHTML;
+  var htmlElt = document.getElementById(prefixId + htmlId);
+  htmlElt.setAttribute('data-bs-theme', 'light');
+  var innitHtmlDoc = htmlElt.innerHTML;
   document.write(`
     
     <div class="accordion py-3" id="${prefixId}viewCodeAcc">
@@ -23,13 +25,13 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
         data-bs-parent="#${prefixId}viewCodeAcc"
       >
         <div class="accordion-body w-100">
-          <div class="border border-light position-relative mt-2 p-2">
+          <div class="border border-subtle position-relative mt-2 p-2">
             <div class="display-5">HTML</div>
             <code>
               <pre id="${prefixId}htmlCopyId"></pre>
             </code>
           </div>
-          <div class="border border-light position-relative mt-2 p-2">
+          <div class="border border-subtle position-relative mt-2 p-2">
             <div class="display-5">JavaScript / ODS Charts</div>
             <code>
               <pre id="${prefixId}codeCopyId"></pre>
