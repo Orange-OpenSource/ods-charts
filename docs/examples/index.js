@@ -301,11 +301,17 @@ async function displayChart(
   }
   let cssTheme = iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[cssThemeName];
 
+  if (['light', 'dark'].includes(mode)) {
+    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', mode);
+  } else {
+    iframe.contentDocument.querySelector('.graph-holder').removeAttribute('data-bs-theme');
+  }
+
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
-    mode,
     colors,
     lineStyle,
     cssTheme,
+    ...(['light', 'dark'].includes(mode) ? { cssSelector: '.graph-holder' } : {}),
   });
   cssThemeName = Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find(
     (name) => JSON.stringify(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name]) === JSON.stringify(themeManager.options.cssTheme)
@@ -318,12 +324,6 @@ async function displayChart(
   }
   if (!legendsOrientation) {
     legendsOrientation = 'horizontal';
-  }
-
-  if (['light', 'dark'].includes(themeManager.options.mode)) {
-    iframe.contentDocument.querySelector('.graph-holder').setAttribute('data-bs-theme', themeManager.options.mode);
-  } else {
-    iframe.contentDocument.querySelector('.graph-holder').removeAttribute('data-bs-theme');
   }
 
   const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
@@ -455,7 +455,6 @@ var dataOptions = ${JSON.stringify(options, undefined, 2)};
 ///////////////////////////////////////////////////
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
-  mode: ${'ODSCharts.ODSChartsMode.' + Object.keys(iframe.contentWindow.ODSCharts.ODSChartsMode).find((key) => iframe.contentWindow.ODSCharts.ODSChartsMode[key] === themeManager.options.mode)},
   colors: ${
     'string' === typeof themeManager.options.colors
       ? 'ODSCharts.ODSChartsColorsSet.' +
