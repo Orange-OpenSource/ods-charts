@@ -72,6 +72,7 @@ class LineChartComponent extends Component {
         .setDataOptions(dataOptions)
         .externalizeLegends(lineChartODS, '#lineChartLegendODS')
         .manageChartResize(lineChartODS, 'lineChartCanvasODS')
+        .manageThemeObserver(lineChartODS)
         .externalizePopover()
         .getChartOptions()
     );

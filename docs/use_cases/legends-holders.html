@@ -186,6 +186,8 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
         themeManager.manageChartResize(myChart, 'barChartSH_chart');
         // Register the externalization of the tooltip/popup
         themeManager.externalizePopover();
+        // Observe dark / light mode changes
+        themeManager.manageThemeObserver(myChart);
         // Display the chart using the configured theme and data.
         myChart.setOption(themeManager.getChartOptions());
       </script>
@@ -346,6 +348,8 @@ themeManager.externalizeLegends(
         themeManager.manageChartResize(myChart, 'barLine_chart');
         // Register the externalization of the tooltip/popup
         themeManager.externalizePopover();
+        // Observe dark / light mode changes
+        themeManager.manageThemeObserver(myChart);
         // Display the chart using the configured theme and data.
         myChart.setOption(themeManager.getChartOptions());
       </script>

@@ -2180,6 +2180,8 @@
         themeManager.externalizeLegends(myChart, '#timeSeriesChart_legend');
         // Manage window size changed
         themeManager.manageChartResize(myChart, 'timeSeriesChart_chart');
+        // Observe dark / light mode changes
+        themeManager.manageThemeObserver(myChart);
         // Register the externalization of the tooltip/popup
         themeManager.externalizePopover(
           {

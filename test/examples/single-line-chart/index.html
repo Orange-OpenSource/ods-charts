@@ -62,6 +62,8 @@
         themeManager.setDataOptions(dataOptions);
         // Manage window size changed
         themeManager.manageChartResize(myChart, 'singleLineChart_chart');
+        // Observe dark / light mode changes
+        themeManager.manageThemeObserver(myChart);
         // Register the externalization of the tooltip/popup
         themeManager.externalizePopover(
           {

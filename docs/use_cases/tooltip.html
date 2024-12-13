@@ -159,6 +159,8 @@ tooltip: {
         div1_themeManager.externalizeLegends(myChart, '#div1_legend');
         // Manage window size changed
         div1_themeManager.manageChartResize(myChart, 'div1_chart');
+        // Observe dark / light mode changes
+        div1_themeManager.manageThemeObserver(myChart);
         // Register the externalization of the tooltip/popup
         div1_themeManager.externalizePopover();
         // Display the chart using the configured theme and data.
@@ -273,6 +275,8 @@ tooltip: {
             div6_themeManager.setDataOptions(div6_dataOptions);
             // Register the externalization of the legend.
             div6_themeManager.manageChartResize(myChart, 'div6_chart');
+            // Observe dark / light mode changes
+            div6_themeManager.manageThemeObserver(myChart);
             // Register the externalization of the tooltip/popup
             div6_themeManager.externalizePopover();
             // Display the chart using the configured theme and data.
@@ -358,6 +362,8 @@ tooltip: {
             div2_themeManager.setDataOptions(div2_dataOptions);
             // Register the externalization of the legend.
             div2_themeManager.manageChartResize(myChart, 'div2_chart');
+            // Observe dark / light mode changes
+            div2_themeManager.manageThemeObserver(myChart);
             // Register the externalization of the tooltip/popup
             div2_themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.NONE,
@@ -443,6 +449,8 @@ tooltip: {
             div3_themeManager.setDataOptions(div3_dataOptions);
             // Register the externalization of the legend.
             div3_themeManager.manageChartResize(myChart, 'div3_chart');
+            // Observe dark / light mode changes
+            div3_themeManager.manageThemeObserver(myChart);
             // Register the externalization of the tooltip/popup
             div3_themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.BOOSTED5,
@@ -541,6 +549,8 @@ tooltip: {
             div4_themeManager.setDataOptions(div4_dataOptions);
             // Register the externalization of the legend.
             div4_themeManager.manageChartResize(myChart, 'div4_chart');
+            // Observe dark / light mode changes
+            div4_themeManager.manageThemeObserver(myChart);
             // Register the externalization of the tooltip/popup
             div4_themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.NONE,
@@ -631,6 +641,8 @@ tooltip: {
             div5_themeManager.setDataOptions(div5_dataOptions);
             // Register the externalization of the legend.
             div5_themeManager.manageChartResize(myChart, 'div5_chart');
+            // Observe dark / light mode changes
+            div5_themeManager.manageThemeObserver(myChart);
             // Register the externalization of the tooltip/popup
             div5_themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.BOOSTED5,
