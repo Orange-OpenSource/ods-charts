@@ -667,9 +667,6 @@ window.downloadTheme = downloadTheme;
 window.generateSingleLineChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
-    title: {
-      text: 'test',
-    },
     xAxis: {
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     },
