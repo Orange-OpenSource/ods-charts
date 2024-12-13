@@ -11,6 +11,7 @@
   "main": "./dist/ods-charts.js",
   "types": "./dist/index.d.ts",
   "scripts": {
+    "install-all": "rm -rf ./node_modules && rm -rf ./test/angular-echarts/node_modules && rm -rf ./test/angular-ngx-echarts/node_modules && rm -rf ./test/react/node_modules && rm -rf ./test/vue/node_modules && npm i && cd test/angular-echarts && npm i && cd ../angular-ngx-echarts && npm i && cd ../react && npm i && cd ../vue && npm i && cd ../..",
     "build": "webpack",
     "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build && cp -R dist docs/ && npm run typedoc",
