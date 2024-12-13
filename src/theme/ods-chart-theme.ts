@@ -123,6 +123,9 @@ export enum ODSChartsMode {
   DARK = 'dark',
 }
 
+/**
+ * `ODSChartsThemeOptions` is used to set options of the theme [ODSCharts.getThemeManager( ODSChartsThemeOptions)](../#md:documentation).
+ */
 export interface ODSChartsThemeOptions {
   /**
    * The mode of the theme can be {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
@@ -270,7 +273,7 @@ const THEMES: {
 };
 
 /**
- * ODSChartsTheme is the object get by `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions})
+ * ODSChartsTheme is the object get by `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}), refer to {@link ODSChartsTheme.getThemeManager}
  *
  * This manager is used to
  * - get the ODS theme, register it, and use it
@@ -286,13 +289,16 @@ const THEMES: {
  * themeManager.setDataOptions(<dataOptions>);
  * // Register the externalization of the legend.
  * themeManager.externalizeLegends(...);
- * // Manage window size changed
+ * // Manage chart container size changed
  * themeManager.manageChartResize(...);
  * // Register the externalization of the tooltip/popup
  * themeManager.externalizePopover(...);
  * // Display the chart using the configured theme and data.
  * myChart.setOption(themeManager.getChartOptions());
  * ```
+ *
+ * See {@link ODSChartsTheme.getThemeManager} for details.
+ *
  */
 export class ODSChartsTheme {
   private dataOptions: any;
@@ -313,13 +319,27 @@ export class ODSChartsTheme {
   }
 
   /**
-   * Entry point of the library. It returns the generated theme manager.
+   * Entry point of the library.
    *
+   * Once the library integrated, via
+   * - script `<script src="...ods-charts.js">`
+   * - or an `import \* as ODSCharts from 'ods-charts'`
+   *
+   * use `ODSCharts.getThemeManager`({@link ODSChartsThemeOptions}) to get the {@link ODSChartsTheme}.
+   *
+   * It returns the generated theme manager.
+   *
+   * @param options options used to generate the theme.
+   * - {@link ODSChartsThemeOptions.categoricalColors}: colors to be used to graph the chart.
+   * - {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
+   * - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
+   * - {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
+   * @returns the theme manager.
    * This manager is used to retrieve the Apache ECharts theme and manage the chart options in accordance with the Orange Design System.
-   *
-   * The method takes the theme configuration as a parameter {@link ODSChartsThemeOptions}.
-   * @param options default option used to generate the theme
-   * @returns the theme manager
+   * It is used to add features:
+   * - {@link ODSChartsTheme.externalizeLegends}: to add Orange Design System theme to legends.
+   * - {@link ODSChartsTheme.externalizePopover}: to add Orange Design System theme to popover or tooltip.
+   * - {@link ODSChartsTheme.manageChartResize}`: to dynamically adapt graph size the its container.
    */
   public static getThemeManager(options?: ODSChartsThemeOptions): ODSChartsTheme {
     if (!options) {
@@ -370,7 +390,7 @@ export class ODSChartsTheme {
   }
 
   /**
-   * setDataOptions is used to set the graph data.
+   * Set the original [Apache Echarts data options](https://echarts.apache.org/en/option.html) of your graph.
    *
    * Example:
    * ```
@@ -388,8 +408,8 @@ export class ODSChartsTheme {
    *         ],
    *       })
    * ```
-   * @param options
-   * @returns returns back the theme manager object
+   * @param options the [Apache Echarts data options](https://echarts.apache.org/en/option.html) of your graph.
+   * @returns the theme manager object
    */
   public setDataOptions(options: any): ODSChartsTheme {
     this.dataOptions = options;
@@ -419,7 +439,9 @@ export class ODSChartsTheme {
    * getThemeOptions() does not need to be called if you use getChartOptions() as getChartOptions() internally already calls it.
    *
    * getThemeOptions() needs graph data, already set or given in the dataOptions parameter
-   * @returns  returns back the theme manager object
+   *
+   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @returns modifications to be made to the [Apache Echarts data options](https://echarts.apache.org/en/option.html) to implement the Orange Design System.
    */
   public getThemeOptions(dataOptions?: any): any {
     if (dataOptions) {
@@ -521,12 +543,14 @@ export class ODSChartsTheme {
    * - will implement the Orange Design System
    * - will be link with the graph.
    *
-   * externalizeLegends() needs:
-   * - echart: the initialized eCharts object
-   * - legendHolderSelector: the CSS selector of the legends container if it a string. But it can also be a {@link ODSChartsLegendHolderDefinition} or an array of {@link ODSChartsLegendHolderDefinition}
-   *
-   * optionally you can use this call to set dataOptions
-   * @returns returns back the theme manager object
+   * @param echart the initialized eCharts object
+   * @param legendHolderSelector
+   * legendHolderSelector can be:
+   * - a string, and then is interpreted as the CSS selector of the legends container
+   * - a {@link ODSChartsLegendHolderDefinition} if you want to sepcify the orientation of the legends holder or specify the series to be displayed in the legends holder
+   * - an array of {@link ODSChartsLegendHolderDefinition} if you want to group legends in several legends holders
+   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @returns the theme manager object itself to be able to chain calls.
    */
   public externalizeLegends(
     echart: any,
@@ -545,16 +569,15 @@ export class ODSChartsTheme {
    *
    * The generated tooltips or popover will implement the Orange Design System.
    *
-   * externalizePopover() needs:
-   * - popoverConfig: the configuration of the externalizePopover feature {@link ODSChartsPopoverConfig}
-   * - popoverDefinition: a renderer {@link ODSChartsPopoverDefinition} of the popover/tooltip
+   * @param popoverConfig the configuration of the externalizePopover feature {@link ODSChartsPopoverConfig}
+   * @param popoverDefinition renderer {@link ODSChartsPopoverDefinition} of the popover/tooltip. **{@link ODSChartsPopoverManagers}** is used to
+   * specify preconfigured renderer for Apache ECharts, Boosted 5 or Boosted 4.
    *
-   *   {@link ODSChartsPopoverManagers} gives preconfigured renderer
+   * Default value is {@link ODSChartsPopoverManagers}.NONE, that means it uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system.
    *
-   *   The default value of this parameter is `ODSChartsPopoverManagers.NONE`: uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system
-   *
-   * optionally you can use this call to set dataOptions
-   * @returns returns back the theme manager object
+   * **WARNING**: Boosted 4 or Boosted 5 rendering requires dependency on the boosted library and access to the boosted global variable.
+   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @returns the theme manager object itself to be able to chain calls.
    */
   public externalizePopover(popoverConfig: ODSChartsPopoverConfig = {}, popoverDefinition?: ODSChartsPopoverDefinition, dataOptions?: any): ODSChartsTheme {
     if (dataOptions) {
@@ -568,14 +591,12 @@ export class ODSChartsTheme {
   }
 
   /**
-   * manageChartResize() ensures that the graph resizes correctly when the window is resized
+   * manageChartResize() ensures that the graph resizes correctly when its container is resized
    *
-   * manageChartResize() needs:
-   * - echart: the initialized eCharts object
-   * - chartId: an unique id to identify the chart
-   *
-   * optionally you can use this call to set dataOptions
-   * @returns returns back the theme manager object
+   * @param echart the initialized eCharts object.
+   * @param chartId an unique id that identify the chart container in the DOM.
+   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @returns the theme manager object itself to be able to chain calls.
    */
   public manageChartResize(echart: any, chartId: string, dataOptions?: any): ODSChartsTheme {
     if (dataOptions) {
@@ -587,14 +608,14 @@ export class ODSChartsTheme {
 
   /**
    * getChartOptions() build the eCharts options merging
-   * - options implementing the Orange Design System
+   * - options implementing the Orange Design System {@link ODSChartsThemeOptions}
    * - optionally options implementing {@link externalizeLegends},
    * - optionally options implementing {@link externalizePopover},
    * - optionally options implementing {@link manageChartResize},
    * - data from {@link setDataOptions}
    *
-   * optionally you can use this call to set dataOptions
-   * @returns the Apache ECharts options
+   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @returns the Apache ECharts options to use in [Apache Echarts `setOption()`](https://echarts.apache.org/en/option.html) call.
    */
   public getChartOptions(dataOptions?: any): any {
     if (dataOptions) {
