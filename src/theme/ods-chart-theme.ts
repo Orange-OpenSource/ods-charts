@@ -181,12 +181,6 @@ export interface ODSChartsThemeOptions {
    */
   colors?: ODSChartsColorsSet | ODSChartsCustomColor[];
   /**
-   * visualMapColor is the set of colors to be used if map graphs (like Heatmap)
-   *
-   * Default visualMapColor is {@link ODSChartsColorsSet.SEQUENTIAL_BLUE}
-   */
-  visualMapColor?: ODSChartsColorsSet;
-  /**
    * lineStyle specifies the style of line in lineCharts.
    *
    * It can be {@link ODSChartsLineStyle.BROKEN}, {@link ODSChartsLineStyle.SMOOTH} of {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
@@ -553,9 +547,6 @@ export class ODSChartsTheme {
     if (!options.colors) {
       options.colors = ODSChartsColorsSet.DEFAULT;
     }
-    if (!options.visualMapColor) {
-      options.visualMapColor = ODSChartsColorsSet.SEQUENTIAL_BLUE;
-    }
     if (!options.lineStyle) {
       options.lineStyle = ODSChartsLineStyle.SMOOTH;
     }
@@ -565,9 +556,7 @@ export class ODSChartsTheme {
     if (!options.cssSelector) {
       options.cssSelector = 'body';
     }
-    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.colors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
-      options.lineStyle
-    )}`;
+    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
 
     const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
@@ -577,16 +566,18 @@ export class ODSChartsTheme {
 
     if (typeof options.colors === 'string') {
       mergeObjects(theme, cloneDeepObject(THEMES[mode].colors[options.colors]));
+      mergeObjects(theme, cloneDeepObject(THEMES[mode].visualMapColors[options.colors]));
     } else {
       mergeObjects(
         theme,
         cloneDeepObject({
           color: options.colors.map((color) => ('string' === typeof color ? color : THEMES[mode].colors[color.colorPalette].color[color.colorIndex])),
+          visualMapColor: options.colors.map((color) =>
+            'string' === typeof color ? color : THEMES[mode].visualMapColors[color.colorPalette].visualMapColor[color.colorIndex]
+          ),
         })
       );
     }
-
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].visualMapColors[options.visualMapColor]));
 
     mergeObjects(theme, cloneDeepObject(THEMES[mode].linesStyle[options.lineStyle]));
 
