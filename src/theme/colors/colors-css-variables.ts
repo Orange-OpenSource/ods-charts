@@ -12,7 +12,7 @@ import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
  * Added for None or Boosted 4 themes
  */
 const BOOSTED5_VARIABLE = `
-.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light] {
+.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light], [data-bs-theme] .ods-charts-context[data-bs-theme=light]  {
   color-scheme: light;
   --bs-blue: #4170d8;
   --bs-indigo: #a885d8;
@@ -63,7 +63,7 @@ const BOOSTED5_VARIABLE = `
   --bs-tertiary-bg: #fafafa;
 }
 
-[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark] {
+[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark], [data-bs-theme] .ods-charts-context[data-bs-theme=dark] {
   color-scheme: dark;
   --bs-body-color: #fff;
   --bs-body-color-rgb: 255, 255, 255;
