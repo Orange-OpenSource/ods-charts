@@ -31,7 +31,7 @@ export class ODSChartsThemeObserver {
     return div;
   }
 
-  public addThemeObserver() {
+  public addThemeObserver(): Element | undefined {
     this.removeListener();
 
     let div = this.divElement;
@@ -42,6 +42,7 @@ export class ODSChartsThemeObserver {
         this.observer.observe(div, { attributes: true, childList: false, subtree: false });
       }
     }
+    return div;
   }
 
   private removeListener() {
