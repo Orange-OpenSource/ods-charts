@@ -19,7 +19,7 @@
     "prettier:format": "prettier --write .",
     "release": "npm pack && npm publish",
     "serve": "npm run typedoc && serve .",
-    "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/",
+    "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/browser/",
     "serve:angular-ng-boosted": "serve test/angular-ng-boosted/dist/angular-boosted/browser/",
     "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/browser/",
     "serve:any": "serve",
