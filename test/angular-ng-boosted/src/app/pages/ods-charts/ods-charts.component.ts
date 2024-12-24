@@ -1,16 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ECharts, EChartsOption } from 'echarts';
+import { EChartsOption } from 'echarts';
 import * as ODSCharts from 'ods-charts';
-import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
+import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import { ColorModeService } from '@services/color-mode.service';
+import * as echarts from 'echarts/core';
+import { BarChart, LineChart } from 'echarts/charts';
+import { DatasetComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LegendComponent } from 'echarts/components';
+import { TooltipComponent } from 'echarts/components';
+echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
 
 @Component({
   selector: 'app-ods-charts',
   standalone: true,
   imports: [CommonModule, RouterModule, NgxEchartsDirective],
-  providers: [provideEcharts()],
+  providers: [provideEchartsCore({ echarts })],
   templateUrl: './ods-charts.component.html',
   styleUrl: './ods-charts.component.scss',
 })
@@ -77,7 +84,7 @@ export class OdsChartsComponent {
     this.generateThemes();
   }
 
-  public onChart1Init(ec: ECharts) {
+  public onChart1Init(ec: echarts.ECharts) {
     this.options1 = this.myTheme1
       .setDataOptions(this.options1)
       .externalizeLegends(ec, '#legend1')
@@ -85,7 +92,7 @@ export class OdsChartsComponent {
       .getChartOptions();
   }
 
-  public onChart2Init(ec: ECharts) {
+  public onChart2Init(ec: echarts.ECharts) {
     this.options2 = this.myTheme2
       .setDataOptions(this.options2)
       .externalizeLegends(ec, '#legend2')
