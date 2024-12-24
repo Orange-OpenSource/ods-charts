@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import {  EChartsOption } from 'echarts';
+import { EChartsOption } from 'echarts';
 import * as ODSCharts from 'ods-charts';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import { ColorModeService } from '@services/color-mode.service';
@@ -12,7 +12,6 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { LegendComponent } from 'echarts/components';
 import { TooltipComponent } from 'echarts/components';
 echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
-
 
 @Component({
   selector: 'app-ods-charts',
