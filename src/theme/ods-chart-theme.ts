@@ -330,7 +330,7 @@ export class ODSChartsTheme {
    * It returns the generated theme manager.
    *
    * @param options options used to generate the theme.
-   * - {@link ODSChartsThemeOptions.categoricalColors}: colors to be used to graph the chart.
+   * - {@link ODSChartsThemeOptions.colors}: colors to be used to graph the chart.
    * - {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
    * - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
    * - {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
