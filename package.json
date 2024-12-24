@@ -21,7 +21,7 @@
     "serve": "npm run typedoc && serve .",
     "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/",
     "serve:angular-ng-boosted": "serve test/angular-ng-boosted/dist/angular-boosted/browser/",
-    "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
+    "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/browser/",
     "serve:any": "serve",
     "serve:react": "serve test/react/build/",
     "serve:vue": "serve test/vue/dist/",
