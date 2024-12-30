@@ -7,5 +7,20 @@
 //
 
 export const DARK_COLORS = {
-  color: ['#80ceef', '#84d5af', '#ffb4e6', '#c1a4e4', '#ffd200', '#cccccc', '#3e9dd6', '#27a971', '#d573bb', '#9373bd', '#b98f11', '#999999'],
+  // TODO : check if the date to use are   color: ['#80ceef', '#84d5af', '#ffb4e6', '#c1a4e4', '#ffd200', '#cccccc', '#3e9dd6', '#27a971', '#d573bb', '#9373bd', '#b98f11', '#999999'],
+
+  color: [
+    'var(--ods-blue-500, #237eca)',
+    'var(--ods-green-500, #198C51)',
+    'var(--ods-pink-400, #ff8ad4)',
+    'var(--ods-purple-500, #6e4aa7)',
+    'var(--ods-yellow-300, #ffd200)',
+    'var(--bs-gray-500, #cccccc)',
+    'var(--ods-blue-300, #4bb4e6)',
+    'var(--ods-green-300, #50BE87)',
+    'var(--ods-pink-300, #ffb4e6)',
+    'var(--ods-purple-300, #a885d8)',
+    'var(--ods-yellow-400, #ffb400)',
+    'var(--bs-gray-600, #999999)',
+  ],
 };

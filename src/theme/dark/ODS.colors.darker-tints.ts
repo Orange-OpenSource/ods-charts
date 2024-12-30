@@ -7,5 +7,11 @@
 //
 
 export const DARK_COLORS_DARKER_TINTS = {
-  color: ['#B5E8F7', '#B8EBD6', '#FFE8F7', '#D9C2F0', '#FFF6B6'],
+  color: [
+    'var(--ods-blue-100,#B5E8F7)',
+    'var(--ods-green-100, #B8EBD6)',
+    'var(--ods-pink-100, #FFE8F7)',
+    'var(--ods-purple-100, #D9C2F0)',
+    'var(--ods-yellow-100, #FFF6B6',
+  ],
 };

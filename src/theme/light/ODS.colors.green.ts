@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_GREEN = {
-  color: ['#0A6E31', '#27A971', '#84D5AF', '#198C51', '#50BE87', '#B8EBD6'],
+  color: [
+    'var(--ods-green-600, #0A6E31)',
+    'var(--ods-green-500, #198C51)',
+    'var(--ods-green-400, #27A971)',
+    'var(--ods-green-300, #50BE87)',
+    'var(--ods-green-200, #84D5AF)',
+    'var(--ods-green-100, #B8EBD6)',
+  ],
 };

@@ -7,5 +7,5 @@
 //
 
 export const DARK_COMMON = {
-  backgroundColor: 'rgba(0, 0, 0, 1)',
+  backgroundColor: 'var(--bs-gray-950, #141414)',
 };

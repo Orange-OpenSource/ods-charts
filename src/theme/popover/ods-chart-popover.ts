@@ -36,16 +36,33 @@ const DEFAULT_TEMPLATE_CSS = `
 
 .ods-charts-popover .ods-charts-popover-inner  {
   display: inline-block;
-  background-color: white;
-  border: 2px solid rgb(204, 204, 204);
+  background-color: var(--bs-body-bg, #fff);
+  color: var(--bs-body-color, #000);
+  border: 2px solid var(--bs-border-color-subtle, #ccc);
   padding: 20px 18px 20px 18px;
 }
+.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-inner {
+  background-color: var(--bs-gray-950, #141414);
+  color: var(--bs-white, #fff);
+  border: 2px solid var(--bs-gray-700, #666);
+} 
+.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-inner {
+  background-color: var(--bs-white, #fff);
+  color: var(--bs-black, #000);
+  border: 2px solid var(--bs-gray-500, #ccc);
+} 
 
 .ods-charts-popover .ods-charts-popover-header {
-  color: black;
+  color: var(--bs-body-color, #000);
   font-size: 18px;
   font-weight: 700;
   padding-bottom:10px;
+}  
+.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-header {
+  color: var(--bs-white, #fff);
+}
+.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-header {
+  color: var(--bs-black, #000);
 }
 
 .ods-charts-popover .ods-charts-popover-arrow  { 
@@ -62,16 +79,23 @@ const DEFAULT_TEMPLATE_CSS = `
   display: block;
   content: "";
   border-color: transparent;
-  border-top-color: rgb(204, 204, 204);
+  border-top-color: var(--bs-border-color-subtle, #ccc);
   border-width: 10px;
   border-bottom-width: 0px;
   border-style: solid;
   top: 2px;
   left: 0;
 }
+.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {
+  border-top-color: var(--bs-gray-700, #666);
+}
+.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {
+  border-top-color: var(--bs-gray-500, #ccc);
+}
+
 .ods-charts-popover .ods-charts-popover-arrow::after {
   border-color: transparent;
-  border-top-color: white;
+  border-top-color: var(--bs-body-bg, #fff);
   border-width: 10px;
   border-bottom-width: 0px;
   position: absolute;
@@ -81,12 +105,21 @@ const DEFAULT_TEMPLATE_CSS = `
   top: 0;
   left: 0;
 }
+.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::after{
+  border-top-color: var(--bs-gray-950, #141414);
+}
+.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-arrow::after{
+  border-top-color: var(--bs-white, #fff);
+}
 `;
 
 const DEFAULT_NONE_CSS = `
 .ods-charts-no-css-lib .ods-charts-popover-color-holder {
-  border: 1px solid #000;
+  border: 1px solid var(--bs-popover-border-color, #ccc);
   display: inline-block;
+}
+.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {
+  border: 1px solid var(--bs-popover-border-color, #666);
 }
 
 .ods-charts-no-css-lib .ods-charts-popover-color {
@@ -100,7 +133,10 @@ const DEFAULT_NONE_CSS = `
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-  color: black;
+  color: var(--bs-body-color, #000000);
+}
+.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {
+  color: var(--bs-body-color, #fff);
 }
 `;
 
@@ -577,7 +613,8 @@ export class ODSChartsPopover {
         this.popoverDefinition.getPopupContent
           ? this.popoverDefinition.getPopupContent(item.tooltipElements)
           : this.getPopupContent(item.tooltipElements, cssTheme, mode),
-        this.enterable
+        this.enterable,
+        mode
       );
       if (!popover) {
         return;

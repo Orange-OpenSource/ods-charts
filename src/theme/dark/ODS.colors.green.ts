@@ -7,5 +7,12 @@
 //
 
 export const DARK_COLORS_GREEN = {
-  color: ['#B8EBD6', '#84D5AF', '#50BE87', '#27A971', '#198C51', '#0A6E31'],
+  color: [
+    'var(--ods-green-100, #B8EBD6)',
+    'var(--ods-green-200, #84D5AF)',
+    'var(--ods-green-300, #50BE87)',
+    'var(--ods-green-400, #27A971)',
+    'var(--ods-green-500, #198C51)',
+    'var(--ods-green-600, #0A6E31)',
+  ],
 };

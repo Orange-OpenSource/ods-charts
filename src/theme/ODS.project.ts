@@ -401,14 +401,14 @@ export interface EChartsProject {
 
 export const ODS_PROJECT: EChartsProject = {
   color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
-  backgroundColor: 'transparent',
+  backgroundColor: 'var(--bs-body-bg, transparent)',
   textStyle: {},
   title: {
     textStyle: {
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     subtextStyle: {
-      color: '#666666',
+      color: 'var(--bs-secondary-color, #666666)',
     },
   },
   line: {
@@ -436,114 +436,114 @@ export const ODS_PROJECT: EChartsProject = {
   bar: {
     itemStyle: {
       barBorderWidth: '2',
-      barBorderColor: '#ffffff',
+      barBorderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   pie: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   scatter: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   boxplot: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   parallel: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   sankey: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   funnel: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   gauge: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
   },
   candlestick: {
     itemStyle: {
-      color: '#32C832',
-      color0: '#CD3C14',
-      borderColor: '#32C832',
-      borderColor0: '#CD3C14',
+      color: 'var(--bs-success, #32c832)',
+      color0: 'var(--bs-danger, #cd3c14)',
+      borderColor: 'var(--bs-success, #228722)',
+      borderColor0: 'var(--bs-danger, #cd3c14)',
       borderWidth: 1,
     },
   },
   graph: {
     itemStyle: {
       borderWidth: '2',
-      borderColor: '#ffffff',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
     lineStyle: {
       width: 1,
-      color: '#aaa',
+      color: 'var(--bs-secondary-color, #666666)',
     },
     symbolSize: 4,
     symbol: 'emptyCircle',
     smooth: false,
     color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
     label: {
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
   },
   map: {
     itemStyle: {
-      areaColor: '#eee',
-      borderColor: '#444',
+      areaColor: 'var(--bs-secondary-bg, #eeeeee)',
+      borderColor: 'var(--bs-secondary-color, #444444)',
       borderWidth: 0.5,
     },
     label: {
-      color: '#000',
+      color: 'var(--bs-body-color, #000000)',
     },
     emphasis: {
       itemStyle: {
-        areaColor: 'rgba(255,215,0,0.8)',
-        borderColor: '#444',
+        areaColor: 'rgba(var(--bs-warning-rgb, 255,215,0),0.8)',
+        borderColor: 'var(--bs-secondary-color, #444444)',
         borderWidth: 1,
       },
       label: {
-        color: 'rgb(100,0,0)',
+        color: 'var(--bs-black, rgb(100,0,0))',
       },
     },
   },
   geo: {
     itemStyle: {
-      areaColor: '#eee',
-      borderColor: '#444',
+      areaColor: 'var(--bs-secondary-bg, #eeeeee)',
+      borderColor: 'var(--bs-secondary-color, #444444)',
       borderWidth: 0.5,
     },
     label: {
-      color: '#000',
+      color: 'var(--bs-body-color, #000000)',
     },
     emphasis: {
       itemStyle: {
-        areaColor: 'rgba(255,215,0,0.8)',
-        borderColor: '#444',
+        areaColor: 'rgba(var(--bs-warning-rgb, 255,215,0),0.8)',
+        borderColor: 'var(--bs-secondary-color, #444444)',
         borderWidth: 1,
       },
       label: {
-        color: 'rgb(100,0,0)',
+        color: 'var(--bs-black, rgb(100,0,0))',
       },
     },
   },
@@ -551,29 +551,29 @@ export const ODS_PROJECT: EChartsProject = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#eb0909',
+        color: 'var(--bs-danger, #eb0909)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     splitLine: {
       show: false,
       lineStyle: {
-        color: ['#cccccc'],
+        color: ['var(--bs-border-color-subtle, #cccccc)'],
       },
     },
     splitArea: {
       show: false,
       areaStyle: {
-        color: ['#ffffff'],
+        color: ['var(--bs-body-bg, #ffffff)'],
       },
     },
   },
@@ -581,29 +581,29 @@ export const ODS_PROJECT: EChartsProject = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#6E7079',
+        color: 'var(--secondary-color, #6E7079)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     splitLine: {
       show: false,
       lineStyle: {
-        color: ['#cccccc'],
+        color: ['var(--bs-border-color-subtle, #cccccc)'],
       },
     },
     splitArea: {
       show: false,
       areaStyle: {
-        color: ['rgba(250,250,250,0.2)', 'rgba(210,219,238,0.2)'],
+        color: ['rgba(var(--bs-body-bg-rgb, 250,250,250),0.2)', 'rgba(var(--bs-tertiary-color-rgb, 210,219,238),0.2)'],
       },
     },
   },
@@ -611,29 +611,29 @@ export const ODS_PROJECT: EChartsProject = {
     axisLine: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#6E7079',
+        color: 'var(--bs-secondary-color, #6E7079)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     splitLine: {
       show: false,
       lineStyle: {
-        color: ['#cccccc'],
+        color: ['var(--bs-border-color-subtle, #cccccc)'],
       },
     },
     splitArea: {
       show: false,
       areaStyle: {
-        color: ['rgba(250,250,250,0.2)', 'rgba(210,219,238,0.2)'],
+        color: ['rgba(var(--bs-body-bg-rgb, 250,250,250),0.2)', 'rgba(var(--bs-tertiary-color-rgb, 210,219,238),0.2)'],
       },
     },
   },
@@ -641,91 +641,91 @@ export const ODS_PROJECT: EChartsProject = {
     axisLine: {
       show: true,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisTick: {
       show: false,
       lineStyle: {
-        color: '#cccccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
       },
     },
     axisLabel: {
       show: true,
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     splitLine: {
       show: false,
       lineStyle: {
-        color: ['#cccccc'],
+        color: ['var(--bs-border-color-subtle, #cccccc)'],
       },
     },
     splitArea: {
       show: false,
       areaStyle: {
-        color: ['rgba(250,250,250,0.2)', 'rgba(210,219,238,0.2)'],
+        color: ['rgba(var(--bs-body-bg-rgb, 250,250,250),0.2)', 'rgba(var(--bs-tertiary-color-rgb, 210,219,238),0.2)'],
       },
     },
   },
   toolbox: {
     iconStyle: {
-      borderColor: '#999',
+      borderColor: 'var(--bs-secondary-color, #999999)',
     },
     emphasis: {
       iconStyle: {
-        borderColor: '#666',
+        borderColor: 'var(--bs-body-color, #666666)',
       },
     },
   },
   legend: {
     textStyle: {
-      color: '#333',
+      color: 'var(--bs-body-color, #333333)',
     },
   },
   tooltip: {
     axisPointer: {
       lineStyle: {
-        color: '#ccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
         width: 1,
       },
       crossStyle: {
-        color: '#ccc',
+        color: 'var(--bs-border-color-subtle, #cccccc)',
         width: 1,
       },
     },
   },
   timeline: {
     lineStyle: {
-      color: '#DAE1F5',
+      color: 'var(--bs-tertiary-bg, #dae1f5)',
       width: 2,
     },
     itemStyle: {
-      color: '#A4B1D7',
+      color: 'var(--bs-secondary-bg, #a4b1d7)',
       borderWidth: 1,
     },
     controlStyle: {
-      color: '#A4B1D7',
-      borderColor: '#A4B1D7',
+      color: 'var(--bs-secondary-bg, #a4b1d7)',
+      borderColor: 'var(--bs-secondary-bg, #a4b1d7)',
       borderWidth: 1,
     },
     checkpointStyle: {
-      color: '#316bf3',
-      borderColor: 'fff',
+      color: 'var(--bs-info, #316bf3)',
+      borderColor: 'var(--bs-body-bg, #ffffff)',
     },
     label: {
-      color: '#A4B1D7',
+      color: 'var(--bs-secondary-bg, #a4b1d7)',
     },
     emphasis: {
       itemStyle: {
-        color: '#FFF',
+        color: 'var(--bs-body-bg, #ffffff)',
       },
       controlStyle: {
-        color: '#A4B1D7',
-        borderColor: '#A4B1D7',
+        color: 'var(--bs-secondary-bg, #a4b1d7)',
+        borderColor: 'var(--bs-secondary-bg, #a4b1d7)',
         borderWidth: 1,
       },
       label: {
-        color: '#A4B1D7',
+        color: 'var(--bs-secondary-bg, #a4b1d7)',
       },
     },
   },
@@ -734,11 +734,11 @@ export const ODS_PROJECT: EChartsProject = {
   },
   markPoint: {
     label: {
-      color: '#000000',
+      color: 'var(--bs-body-color, #000000)',
     },
     emphasis: {
       label: {
-        color: '#000000',
+        color: 'var(--bs-body-color, #000000)',
       },
     },
   },
