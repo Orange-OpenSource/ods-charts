@@ -144,10 +144,10 @@ function generateConfigurator(id) {
             </div>
 
             <div class="col-md-4">
-              <label for="rendererInput" class="form-label">SVG or Canvas (<a href="https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/" target="apache_doc">See Apache ECharts documentation</a>)</label>
+              <label for="rendererInput" class="form-label">SVG (recommended) or Canvas (<a href="https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/" target="apache_doc">See Apache ECharts documentation</a>)</label>
               <select class="form-select" id="rendererInput" onchange="changeTheme('${id}')">
                 <option value="svg">SVG</option>
-                <option value="canvas">CANVAS</option>
+                <option value="canvas">Canvas</option>
               </select>
             </div>
 
