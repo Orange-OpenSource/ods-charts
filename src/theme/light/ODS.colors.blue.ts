@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_BLUE = {
-  color: ['#085EBD', '#237ECA', '#3E9DD6', '#4BB4E6', '#80CEEF', '#B5E8F7'],
+  color: [
+    'var(--ods-blue-600, #085EBD)',
+    'var(--ods-blue-500, #237ECA)',
+    'var(--ods-blue-400, #3E9DD6)',
+    'var(--ods-blue-300, #4BB4E6)',
+    'var(--ods-blue-200, #80CEEF)',
+    'var(--ods-blue-100, #B5E8F7)',
+  ],
 };

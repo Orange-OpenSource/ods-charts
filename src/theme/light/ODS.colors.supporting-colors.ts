@@ -7,5 +7,11 @@
 //
 
 export const LIGHT_COLORS_SUPPORTING_COLORS = {
-  color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
+  color: [
+    'var(--ods-blue-300, #4bb4e6)',
+    'var(--ods-green-300, #50be87)',
+    'var(--ods-pink-300, #ffb4e6)',
+    'var(--ods-purple-300, #a885d8)',
+    'var(--ods-yellow-300, #ffd200)',
+  ],
 };

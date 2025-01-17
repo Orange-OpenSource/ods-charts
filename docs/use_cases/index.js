@@ -1,6 +1,5 @@
 var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
   var htmlElt = document.getElementById(prefixId + htmlId);
-  htmlElt.setAttribute('data-bs-theme', 'light');
   var innitHtmlDoc = htmlElt.innerHTML;
   document.write(`
     

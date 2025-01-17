@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_YELLOW = {
-  color: ['#9D6E06', '#B98F11', '#FFB400', '#FFD200', '#FFE45B', '#FFF6B6'],
+  color: [
+    'var(--ods-yellow-600, #9D6E06)',
+    'var(--ods-yellow-500, #B98F11)',
+    'var(--ods-yellow-400, #FFB400)',
+    'var(--ods-yellow-300, #FFD200)',
+    'var(--ods-yellow-200, #FFE45B)',
+    'var(--ods-yellow-100, #FFF6B6)',
+  ],
 };

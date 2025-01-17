@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_FUNCTIONAL = {
-  color: ['#F16E00', '#EEEEEE', '#228722', '#FFCC00', '#CD3C14', '#4170D8'],
+  color: [
+    'var(--ods-functional-1, #F16E00)',
+    'var(--ods-functional-2, #EEEEEE)',
+    'var(--ods-functional-3, #228722)',
+    'var(--ods-functional-4, #FFCC00)',
+    'var(--ods-functional-5, #CD3C14)',
+    'var(--ods-functional-6, #4170D8)',
+  ],
 };
