@@ -420,12 +420,12 @@ export class ODSChartsTheme {
     let retunedValue = css;
     if (this.options.cssSelector && 'string' === typeof retunedValue && !!this.computedStyle) {
       try {
-        const regex = /var\(([^,]*),(.*)\)/g;
+        const regex = /var\(([^,]*),?(.*)\)/g;
         const matches = retunedValue.match(regex);
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
-              const varPartsRex = /var\(([^,]+), ?(.+)\)/;
+              const varPartsRex = /var\( ?([^, ]+) ?, ?([^ ]+) ?\)/;
               const varParts = foundVar.match(varPartsRex);
               if (varParts) {
                 const varValue = this.getPropertyValue(varParts[1]);
