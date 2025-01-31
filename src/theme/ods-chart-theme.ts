@@ -204,8 +204,8 @@ export interface ODSChartsThemeOptions {
    */
   cssTheme?: ODSChartsCSSThemeDefinition;
   /**
-   * cssSelector the selector of the DOM element where the grph will be built.
-   * It is used to get css variable values when using a third party theme genartor base on css variable like Boosted 5.
+   * cssSelector the selector of the DOM element where the graph will be built.
+   * It is used to get css variable values when using a third party theme generator base on css variable like Boosted 5.
    *
    * Default cssSelector is `'body'`
    */
