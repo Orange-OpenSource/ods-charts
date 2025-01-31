@@ -7,8 +7,6 @@
 //
 
 export const DARK_COLORS = {
-  // TODO : check if the date to use are   color: ['#80ceef', '#84d5af', '#ffb4e6', '#c1a4e4', '#ffd200', '#cccccc', '#3e9dd6', '#27a971', '#d573bb', '#9373bd', '#b98f11', '#999999'],
-
   color: [
     'var(--ods-blue-500, #237eca)',
     'var(--ods-green-500, #198C51)',

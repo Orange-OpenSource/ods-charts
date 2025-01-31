@@ -261,8 +261,6 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-purple-5: var(--ods-purple-500);
   --ods-purple-6: var(--ods-purple-600);
 
-  /* TODO : check the dark categorical colors (I put back colors from https://github.com/Orange-OpenSource/ods-charts/issues/103)
-  */
   --ods-categorical-1: var(--ods-blue-500);
   --ods-categorical-2: var(--ods-green-300);
   --ods-categorical-3: var(--ods-pink-400);
@@ -276,8 +274,6 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-categorical-11: var(--ods-yellow-300);
   --ods-categorical-12: var(--bs-gray-500);
 
-  /* TODO : check the dark default colors (I put back colors from https://github.com/Orange-OpenSource/ods-charts/issues/103)
-  */
   --ods-default-1: var(--ods-blue-500);
   --ods-default-2: var(--ods-green-500);
   --ods-default-3: var(--ods-pink-400);

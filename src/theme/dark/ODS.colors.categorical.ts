@@ -7,8 +7,6 @@
 //
 
 export const DARK_COLORS_CATEGORICAL = {
-  // TODO: vheck if the colors to use are   color: ['#ffb4e6', '#d573bb', '#c1a4e4', '#9373bd', '#80ceef', '#3e9dd6', '#84d5af', '#27a971', '#ffd200', '#b98f11'],
-
   color: [
     'var(--ods-blue-500, #237eca)',
     'var(--ods-green-300, #50BE87)',
