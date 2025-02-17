@@ -425,12 +425,12 @@ export class ODSChartsTheme {
     let retunedValue = css;
     if (this.options.cssSelector && 'string' === typeof retunedValue && !!this.computedStyle) {
       try {
-        const regex = /var\(([^,]*),(.*)\)/g;
+        const regex = /var\(([^,]*),?(.*)\)/g;
         const matches = retunedValue.match(regex);
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
-              const varPartsRex = /var\(([^,]+), ?(.+)\)/;
+              const varPartsRex = /var\( ?([^, ]+) ?, ?([^ ]+) ?\)/;
               const varParts = foundVar.match(varPartsRex);
               if (varParts) {
                 const varValue = this.getPropertyValue(varParts[1]);
@@ -531,7 +531,7 @@ export class ODSChartsTheme {
    * It returns the generated theme manager.
    *
    * @param options options used to generate the theme.
-   * - {@link ODSChartsThemeOptions.categoricalColors}: colors to be used to graph the chart.
+   * - {@link ODSChartsThemeOptions.colors}: colors to be used to graph the chart.
    * - {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
    * - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
    * - {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
@@ -838,6 +838,8 @@ export class ODSChartsTheme {
     }
 
     const displayedColors = this.getDisplayedColors(usedTheme.color);
+
+    themeOptions = this.replaceAllCssVars(themeOptions);
 
     themeOptions = this.replaceAllCssVars(themeOptions);
 

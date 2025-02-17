@@ -19,8 +19,9 @@
     "prettier:format": "prettier --write .",
     "release": "npm pack && npm publish",
     "serve": "npm run typedoc && serve .",
-    "serve:angular": "serve test/angular-ngx-echarts/dist/angular/",
-    "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/",
+    "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/browser/",
+    "serve:angular-ng-boosted": "serve test/angular-ng-boosted/dist/angular-boosted/browser/",
+    "serve:angular-echarts": "serve test/angular-echarts/dist/angular-echarts/browser/",
     "serve:any": "serve",
     "serve:react": "serve test/react/build/",
     "serve:vue": "serve test/vue/dist/",
@@ -28,13 +29,13 @@
     "watch": "webpack --watch --mode development"
   },
   "devDependencies": {
-    "echarts": "^5.5.1",
-    "prettier": "^3.4.2",
+    "echarts": "^5.6.0",
+    "prettier": "^3.5.0",
     "serve": "^14.2.3",
-    "ts-loader": "^9.5.1",
-    "typedoc": "^0.27.4",
+    "ts-loader": "^9.5.2",
+    "typedoc": "^0.27.7",
     "typescript": "^5.7.2",
     "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   }
 }

@@ -46,7 +46,7 @@ const BOOSTED5_VARIABLE = `
   --bs-border-width: 0.125rem;
   --bs-border-color: #000;
   --bs-border-color-subtle: #ccc;
-  
+
   --bs-secondary-color: #666;
   --bs-secondary-bg: #eee;
   --bs-primary: #f16e00;
@@ -57,7 +57,7 @@ const BOOSTED5_VARIABLE = `
   --bs-danger: #cd3c14;
   --bs-light: #ccc;
   --bs-dark: #000;
-  
+
   --bs-warning-rgb: 255, 204, 0;
   --bs-tertiary-color-rgb: 204, 204, 204;
   --bs-tertiary-bg: #fafafa;
@@ -72,7 +72,7 @@ const BOOSTED5_VARIABLE = `
   --bs-link-color: #fff;
   --bs-border-color: #fff;
   --bs-border-color-subtle: #666;
-  
+
   --bs-secondary-color: #999;
   --bs-secondary-bg: #333;
   --bs-primary: #ff7900;
@@ -83,7 +83,7 @@ const BOOSTED5_VARIABLE = `
   --bs-danger: #f66;
   --bs-light: #ccc;
   --bs-dark: #000;
-  
+
   --bs-warning-rgb: 255, 204, 0;
   --bs-tertiary-color-rgb: 102, 102, 102;
   --bs-tertiary-bg: #000;
@@ -148,7 +148,7 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-yellow-3: var(--ods-yellow-400);
   --ods-yellow-4: var(--ods-yellow-300);
   --ods-yellow-5: var(--ods-yellow-200);
-  --ods-yellow-6: var(--ods-yellow-100); 
+  --ods-yellow-6: var(--ods-yellow-100);
 
   --ods-blue-1: var(--ods-blue-600);
   --ods-blue-2: var(--ods-blue-500);
@@ -163,14 +163,14 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-green-4: var(--ods-green-300);
   --ods-green-5: var(--ods-green-200);
   --ods-green-6: var(--ods-green-100);
-  
+
   --ods-pink-1: var(--ods-pink-600);
   --ods-pink-2: var(--ods-pink-500);
   --ods-pink-3: var(--ods-pink-400);
   --ods-pink-4: var(--ods-pink-300);
   --ods-pink-5: var(--ods-pink-200);
   --ods-pink-6: var(--ods-pink-100);
-  
+
   --ods-purple-1: var(--ods-purple-600);
   --ods-purple-2: var(--ods-purple-500);
   --ods-purple-3: var(--ods-purple-400);
@@ -209,7 +209,7 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-pink-light: var(--ods-pink-600);
   --ods-indigo-light: var(--ods-purple-100);
   --ods-yellow-light: var(--ods-yellow-100);
-  
+
   --ods-cyan-dark: var(--ods-blue-600);
   --ods-teal-dark: var(--ods-green-600);
   --ods-pink-dark: var(--ods-pink-300);
@@ -224,7 +224,7 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-functional-6: var(--bs-info);
 
 }
-  
+
 [data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark] {
   --ods-yellow-1: var(--ods-yellow-100);
   --ods-yellow-2: var(--ods-yellow-200);
@@ -232,28 +232,28 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-yellow-4: var(--ods-yellow-400);
   --ods-yellow-5: var(--ods-yellow-500);
   --ods-yellow-6: var(--ods-yellow-600);
-  
+
   --ods-blue-1: var(--ods-blue-100);
   --ods-blue-1: var(--ods-blue-100);
   --ods-blue-3: var(--ods-blue-300);
   --ods-blue-4: var(--ods-blue-400);
   --ods-blue-5: var(--ods-blue-500);
   --ods-blue-6: var(--ods-blue-600);
-  
+
   --ods-green-1: var(--ods-green-100);
   --ods-green-1: var(--ods-green-100);
   --ods-green-3: var(--ods-green-300);
   --ods-green-4: var(--ods-green-400);
   --ods-green-5: var(--ods-green-500);
   --ods-green-6: var(--ods-green-600);
-  
+
   --ods-pink-1: var(--ods-pink-100);
   --ods-pink-1: var(--ods-pink-100);
   --ods-pink-3: var(--ods-pink-300);
   --ods-pink-4: var(--ods-pink-400);
   --ods-pink-5: var(--ods-pink-500);
   --ods-pink-6: var(--ods-pink-600);
-  
+
   --ods-purple-1: var(--ods-purple-100);
   --ods-purple-1: var(--ods-purple-100);
   --ods-purple-3: var(--ods-purple-300);
@@ -261,8 +261,6 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-purple-5: var(--ods-purple-500);
   --ods-purple-6: var(--ods-purple-600);
 
-  /* TODO : check the dark categorical colors (I put back colors from https://github.com/Orange-OpenSource/ods-charts/issues/103)
-  */
   --ods-categorical-1: var(--ods-blue-500);
   --ods-categorical-2: var(--ods-green-300);
   --ods-categorical-3: var(--ods-pink-400);
@@ -276,8 +274,6 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-categorical-11: var(--ods-yellow-300);
   --ods-categorical-12: var(--bs-gray-500);
 
-  /* TODO : check the dark default colors (I put back colors from https://github.com/Orange-OpenSource/ods-charts/issues/103)
-  */
   --ods-default-1: var(--ods-blue-500);
   --ods-default-2: var(--ods-green-500);
   --ods-default-3: var(--ods-pink-400);
@@ -296,7 +292,7 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-pink-light: var(--ods-pink-300);
   --ods-indigo-light: var(--ods-purple-600);
   --ods-yellow-light: var(--ods-yellow-400);
-  
+
   --ods-cyan-dark: var(--ods-blue-100);
   --ods-teal-dark: var(--ods-green-100);
   --ods-pink-dark: var(--ods-pink-600);
@@ -318,7 +314,7 @@ export const ODS_CHARTS_CSS_VARIABLES: { [theme in ODSChartsCSSThemesNames]: str
   ${NON_BOOSTED5_VARIABLE}
   `,
   BOOSTED5: `
-  ${NON_BOOSTED5_VARIABLE}  
+  ${NON_BOOSTED5_VARIABLE}
   `,
   CUSTOM: `
   ${BOOSTED5_VARIABLE}

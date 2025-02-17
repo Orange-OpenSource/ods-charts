@@ -146,10 +146,10 @@ function generateConfigurator(id) {
             </div>
 
             <div class="col-md-4">
-              <label for="rendererInput" class="form-label">SVG or Canvas (<a href="https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/" target="apache_doc">See Apache ECharts documentation</a>)</label>
+              <label for="rendererInput" class="form-label">SVG (recommended) or Canvas (<a href="https://echarts.apache.org/handbook/en/best-practices/canvas-vs-svg/" target="apache_doc">See Apache ECharts documentation</a>)</label>
               <select class="form-select" id="rendererInput" onchange="changeTheme('${id}')">
                 <option value="svg">SVG</option>
-                <option value="canvas">CANVAS</option>
+                <option value="canvas">Canvas</option>
               </select>
             </div>
 
@@ -258,7 +258,7 @@ function generateExampleDiv(id, direction) {
   iframeDocument.write(`
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" integrity="sha384-Mx5lkUEQPM1pOJCwFtUICyX45KNojXbkWdYhkKUKsbv391mavbfoAmONbzkgYPzR" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../dist/ods-charts.js"></script>
 <script type="module" src="./index.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
