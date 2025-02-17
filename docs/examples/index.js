@@ -71,7 +71,7 @@ function generateConfigurator(id) {
 </h2>`,
     },
     content: {
-      begin: (id, itemId) => `<div id="collapse_${itemId}" class="accordion-collapse collapse" 
+      begin: (id, itemId) => `<div id="collapse_${itemId}" class="accordion-collapse collapse"
     aria-labelledby="${itemId}" data-bs-parent="#${id}">
     <div class="accordion-body" id="body_${itemId}">`,
       end: (id, itemId) => `</div>
@@ -325,6 +325,7 @@ async function displayChart(
     visualMapColor,
     lineStyle,
     cssTheme,
+    cssSelector: `#${id}_chart`,
   });
   cssThemeName = Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find(
     (name) => JSON.stringify(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name]) === JSON.stringify(themeManager.options.cssTheme)
@@ -467,7 +468,7 @@ async function displayChart(
 ///////////////////////////////////////////////////
 
 // this is the data to be displayed
-var dataOptions = ${JSON.stringify(options, undefined, 2)};   
+var dataOptions = ${JSON.stringify(options, undefined, 2)};
 
 ///////////////////////////////////////////////////
 // ODSCharts
@@ -507,7 +508,8 @@ var themeManager = ODSCharts.getThemeManager({
       (key) => iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle
     )
   },
-  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)}
+  cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)},
+  cssSelector: '#${id}_chart',
 });
 
 // register this theme to echarts
@@ -537,7 +539,7 @@ themeManager.externalizePopover({
     shared: ${'shared' === popoverSharedInput ? 'true' : 'false'},
     tooltip: ${'tooltip' === popoverInput || 'enterable' === popoverInput ? 'true' : 'false'},
     axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.${popoverAxisInput},
-  }, 
+  },
   ODSCharts.ODSChartsPopoverManagers.${'external' === popoverTemplateInput ? cssThemeName : 'NONE'}
 );`
       : ''
