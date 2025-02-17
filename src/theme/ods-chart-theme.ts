@@ -37,7 +37,7 @@ import { DARK_COLORS_PURPLE } from './dark/ODS.colors.purple';
 import { DARK_COLORS_YELLOW } from './dark/ODS.colors.yellow';
 import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
-import { mergeObjects } from '../tools/merge-objects';
+import { isVarArray, isVarObject, mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemes, ODSChartsCSSThemesNames } from './css-themes/css-themes';
 import { getStringValue } from '../tools/hash';
@@ -46,6 +46,20 @@ import { ODSChartsPopover } from './popover/ods-chart-popover';
 import { ODSChartsPopoverConfig, ODSChartsPopoverDefinition, ODSChartsPopoverManagers } from './popover/ods-chart-popover-definitions';
 import { isMainAxis } from './const/main-axis-type.const';
 import { ODSChartsLegendHolderDefinition } from './legends/ods-chart-legends-definitions';
+import { DEFAULT_COLORS_YELLOW } from './default/ODS.colors.yellow';
+import { DEFAULT_COLORS_PURPLE } from './default/ODS.colors.purple';
+import { DEFAULT_COLORS_PINK } from './default/ODS.colors.pink';
+import { DEFAULT_COLORS_GREEN } from './default/ODS.colors.green';
+import { DEFAULT_COLORS_BLUE } from './default/ODS.colors.blue';
+import { DEFAULT_COLORS_LIGHTER_TINTS } from './default/ODS.colors.lighter-tints';
+import { DEFAULT_COLORS_DARKER_TINTS } from './default/ODS.colors.darker-tints';
+import { DEFAULT_COLORS_SUPPORTING_COLORS } from './default/ODS.colors.supporting-colors';
+import { DEFAULT_COLORS_FUNCTIONAL } from './default/ODS.colors.functional';
+import { DEFAULT_COLORS_CATEGORICAL } from './default/ODS.colors.categorical';
+import { DEFAULT_COLORS } from './default/ODS.colors';
+import { DEFAULT_COMMON } from './default/ODS.common';
+import { DEFAULT_LINES_AXIS } from './default/ODS.lines.axis';
+import { ODS_CHARTS_CSS_VARIABLES } from './colors/colors-css-variables';
 
 /**
  * ODSChartsColorsSet is used for predefined color sets.
@@ -121,6 +135,7 @@ export enum ODSChartsLineStyle {
 export enum ODSChartsMode {
   LIGHT = 'light',
   DARK = 'dark',
+  DEFAULT = 'default',
 }
 
 /**
@@ -128,9 +143,11 @@ export enum ODSChartsMode {
  */
 export interface ODSChartsThemeOptions {
   /**
-   * The mode of the theme can be {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
+   * The mode of the theme can be {@link ODSChartsMode.DEFAULT},  {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
    *
-   * Default mode is {@link ODSChartsMode.LIGHT}
+   * Default mode is {@link ODSChartsMode.DEFAULT}.
+   * The {@link ODSChartsMode.DEFAULT} mode uses the `data-bs-theme` attribute to determine if mode is light or dark (cf https://boosted.orange.com/docs/5.3/customize/color-modes/#content).
+   *
    */
   mode?: ODSChartsMode;
   /**
@@ -185,6 +202,13 @@ export interface ODSChartsThemeOptions {
    * Default cssTheme in  {@link ODSChartsCSSThemes} is `ODSChartsCSSThemes.NONE`
    */
   cssTheme?: ODSChartsCSSThemeDefinition;
+  /**
+   * cssSelector the selector of the DOM element where the grph will be built.
+   * It is used to get css variable values when using a third party theme genartor base on css variable like Boosted 5.
+   *
+   * Default cssSelector is `'body'`
+   */
+  cssSelector?: string;
 }
 
 const THEMES: {
@@ -270,6 +294,41 @@ const THEMES: {
       smooth: COMMON_LINE_STYLE_SMOOTH,
     },
   },
+  default: {
+    common: DEFAULT_COMMON,
+    linesAxis: DEFAULT_LINES_AXIS,
+    colors: {
+      default: DEFAULT_COLORS,
+      categorical: DEFAULT_COLORS_CATEGORICAL,
+      functional: DEFAULT_COLORS_FUNCTIONAL,
+      supportingColors: DEFAULT_COLORS_SUPPORTING_COLORS,
+      darkerTints: DEFAULT_COLORS_DARKER_TINTS,
+      lighterTints: DEFAULT_COLORS_LIGHTER_TINTS,
+      blue: DEFAULT_COLORS_BLUE,
+      green: DEFAULT_COLORS_GREEN,
+      pink: DEFAULT_COLORS_PINK,
+      purple: DEFAULT_COLORS_PURPLE,
+      yellow: DEFAULT_COLORS_YELLOW,
+    },
+    visualMapColors: {
+      default: { visualMapColor: DEFAULT_COLORS.color },
+      categorical: { visualMapColor: DEFAULT_COLORS_CATEGORICAL.color },
+      functional: { visualMapColor: DEFAULT_COLORS_FUNCTIONAL.color },
+      supportingColors: { visualMapColor: DEFAULT_COLORS_SUPPORTING_COLORS.color },
+      darkerTints: { visualMapColor: DEFAULT_COLORS_DARKER_TINTS.color },
+      lighterTints: { visualMapColor: DEFAULT_COLORS_LIGHTER_TINTS.color },
+      blue: { visualMapColor: DEFAULT_COLORS_BLUE.color },
+      green: { visualMapColor: DEFAULT_COLORS_GREEN.color },
+      pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
+      purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
+      yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
+    },
+    linesStyle: {
+      broken: COMMON_LINE_STYLE_BROKEN,
+      withPoints: COMMON_LINE_STYLE_POINTS,
+      smooth: COMMON_LINE_STYLE_SMOOTH,
+    },
+  },
 };
 
 /**
@@ -306,6 +365,136 @@ export class ODSChartsTheme {
   private chartResizeManager: ODSChartsResize = undefined as unknown as ODSChartsResize;
   private chartPopoverManager: ODSChartsPopover = undefined as unknown as ODSChartsPopover;
   public cssThemeName: ODSChartsCSSThemesNames;
+  private cssVarsMapping: { [variable: string]: string } = {};
+
+  private _computedStyle: CSSStyleDeclaration | undefined | null = undefined;
+
+  private get computedStyle(): CSSStyleDeclaration | undefined {
+    if (undefined === this._computedStyle) {
+      if (this.options.cssSelector) {
+        let contextElement = document.querySelector(
+          this.options.cssSelector + '>.ods-charts-style-' + (this.options.mode ? this.options.mode : ODSChartsMode.DEFAULT)
+        );
+        if (!contextElement) {
+          const domElement: Element = (this.options.cssSelector ? document.querySelector(this.options.cssSelector) : null) as Element;
+          if (domElement) {
+            contextElement = document.createElement('div');
+            if (this.options.mode && this.options.mode !== ODSChartsMode.DEFAULT) {
+              contextElement.setAttribute('data-bs-theme', this.options.mode);
+            }
+            contextElement.classList.add('ods-charts-context');
+            contextElement.classList.add('ods-charts-style-' + (this.options.mode ? this.options.mode : ODSChartsMode.DEFAULT));
+            domElement.append(contextElement);
+          }
+        }
+        if (contextElement) {
+          this._computedStyle = window.getComputedStyle(contextElement);
+        }
+      }
+      this._computedStyle = this._computedStyle ? this._computedStyle : null;
+      if (!this._computedStyle) {
+        console.error('uunable to build computed style for chart css context', this.options.cssSelector, this.options.cssSelector);
+      }
+    }
+    return this._computedStyle ? this._computedStyle : undefined;
+  }
+
+  private removeComputedStyle() {
+    if (this.options.cssSelector) {
+      const contextElement = document.querySelector(
+        this.options.cssSelector + '>.ods-charts-style-' + (this.options.mode ? this.options.mode : ODSChartsMode.DEFAULT)
+      );
+      if (contextElement) {
+        contextElement.remove();
+      }
+      this._computedStyle = undefined;
+    }
+  }
+
+  private getPropertyValue(name: string): string {
+    const value = this.computedStyle ? this.computedStyle.getPropertyValue(name) : '';
+    return value ? value : '';
+  }
+
+  private replaceOneCssVar(css: any) {
+    let retunedValue = css;
+    if (this.options.cssSelector && 'string' === typeof retunedValue && !!this.computedStyle) {
+      try {
+        const regex = /var\(([^,]*),?(.*)\)/g;
+        const matches = retunedValue.match(regex);
+        if (matches) {
+          for (const foundVar of matches) {
+            if (!(foundVar in this.cssVarsMapping)) {
+              const varPartsRex = /var\( ?([^, ]+) ?, ?([^ ]+) ?\)/;
+              const varParts = foundVar.match(varPartsRex);
+              if (varParts) {
+                const varValue = this.getPropertyValue(varParts[1]);
+                if (!varValue) {
+                  console.error('missing css var ', foundVar);
+                }
+                this.cssVarsMapping[foundVar] = varValue ? varValue : varParts[2];
+              } else {
+                const varNameRex = /var\( ?(.+) ?\)/;
+                const varName = foundVar.match(varNameRex);
+                if (varName) {
+                  const varValue = this.getPropertyValue(varName[1]);
+                  if (varValue) {
+                    this.cssVarsMapping[foundVar] = varValue;
+                  } else {
+                    console.error('missing css var ', foundVar);
+                    this.cssVarsMapping[foundVar] = foundVar;
+                  }
+                } else {
+                  console.error('missing css var ', foundVar);
+                  this.cssVarsMapping[foundVar] = foundVar;
+                }
+              }
+            }
+
+            if (foundVar in this.cssVarsMapping) {
+              retunedValue = retunedValue.replace(foundVar, this.cssVarsMapping[foundVar]);
+            }
+          }
+        }
+      } catch (error) {}
+    }
+    return retunedValue;
+  }
+
+  private replaceRecursivelyCssVars<T extends { [key: string]: any }>(subTreeConfig: T): T {
+    var newConfig: { [key: string]: any } = subTreeConfig;
+    for (const key of Object.keys(newConfig)) {
+      if (isVarArray(newConfig[key])) {
+        for (let index = 0; index < newConfig[key].length; index++) {
+          if (isVarObject(newConfig[key][index])) {
+            newConfig[key][index] = this.replaceRecursivelyCssVars(newConfig[key][index]);
+          } else if ('string' === typeof newConfig[key][index]) {
+            newConfig[key][index] = this.replaceOneCssVar(newConfig[key][index]);
+          }
+        }
+      } else if (isVarObject(newConfig[key])) {
+        newConfig[key] = this.replaceRecursivelyCssVars(newConfig[key]);
+      } else if ('string' === typeof newConfig[key]) {
+        newConfig[key] = this.replaceOneCssVar(newConfig[key]);
+      }
+    }
+    return newConfig as T;
+  }
+
+  private replaceAllCssVars<T extends { [key: string]: any }>(themeConfiguration: T): T {
+    let result = themeConfiguration;
+    if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && ODS_CHARTS_CSS_VARIABLES[this.cssThemeName]) {
+      const style = document.createElement('style');
+      style.textContent = ODS_CHARTS_CSS_VARIABLES[this.cssThemeName];
+      style.id = 'ods-charts-style-' + this.cssThemeName;
+      document.querySelector('head')?.append(style);
+    }
+    if (!!this.computedStyle) {
+      result = this.replaceRecursivelyCssVars(themeConfiguration);
+      this.removeComputedStyle();
+    }
+    return result;
+  }
 
   private constructor(
     public name: string,
@@ -316,6 +505,7 @@ export class ODSChartsTheme {
       (Object.keys(ODSChartsCSSThemes).find(
         (oneTheme) => ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] === options.cssTheme
       ) as ODSChartsCSSThemesNames) || ODSChartsCSSThemesNames.CUSTOM;
+    this.theme = this.replaceAllCssVars(this.theme);
   }
 
   /**
@@ -346,7 +536,7 @@ export class ODSChartsTheme {
       options = {};
     }
     if (!options.mode) {
-      options.mode = ODSChartsMode.LIGHT;
+      options.mode = ODSChartsMode.DEFAULT;
     }
     const mode: ODSChartsMode = options.mode;
     if (!options.colors) {
@@ -360,6 +550,9 @@ export class ODSChartsTheme {
     }
     if (!options.cssTheme) {
       options.cssTheme = ODSChartsCSSThemes.NONE;
+    }
+    if (!options.cssSelector) {
+      options.cssSelector = 'body';
     }
     var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.colors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
       options.lineStyle
@@ -460,38 +653,63 @@ export class ODSChartsTheme {
       fontWeight: '700',
       fontSize: 14,
       fontFamily: 'Helvetica Neue, sans-serif',
-      color: ODSChartsMode.LIGHT === this.options.mode ? 'rgba(0, 0, 0, 1)' : '#FFFFFF',
+      color:
+        ODSChartsMode.DEFAULT === this.options.mode
+          ? 'var(--bs-body-color, #000)'
+          : ODSChartsMode.LIGHT === this.options.mode
+            ? 'var(--bs-black, #000)'
+            : 'var(--bs-white, #fff)',
     };
     const axisLine = {
       show: true,
       lineStyle: {
         width: 2,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-border-color-subtle, #ccc)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-gray-500, #ccc)'
+              : 'var(--bs-gray-700, #666)',
       },
     };
     const splitLine = {
       show: true,
       lineStyle: {
         width: 1,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#CCCCCC' : '#666666',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-border-color-subtle, #ccc)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-gray-500, #ccc)'
+              : 'var(--bs-gray-700, #666)',
       },
     };
     const legend = {
       textStyle: {
         fontWeight: 'bold',
         fontSize: 14,
-        color: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        color:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-body-color, #000)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-black, #000)'
+              : 'var(--bs-white, #fff)',
       },
       icon: 'rect',
       itemWidth: 10,
       itemHeight: 10,
       itemStyle: {
-        borderColor: ODSChartsMode.LIGHT === this.options.mode ? '#000000' : '#FFFFFF',
+        borderColor:
+          ODSChartsMode.DEFAULT === this.options.mode
+            ? 'var(--bs-body-color, #000)'
+            : ODSChartsMode.LIGHT === this.options.mode
+              ? 'var(--bs-black, #000)'
+              : 'var(--bs-white, #fff)',
         borderWidth: 1,
       },
     };
 
-    const themeOptions: any = {
+    let themeOptions: any = {
       xAxis: { axisLabel: cloneDeepObject(axisLabel) },
       yAxis: { axisLabel: cloneDeepObject(axisLabel) },
       legend: cloneDeepObject(legend),
@@ -508,6 +726,8 @@ export class ODSChartsTheme {
     }
 
     const displayedColors = this.getDisplayedColors(this.theme.color);
+
+    themeOptions = this.replaceAllCssVars(themeOptions);
 
     if (this.chartLegendManager) {
       this.chartLegendManager.addLegend(

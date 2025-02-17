@@ -7,5 +7,12 @@
 //
 
 export const LIGHT_COLORS_PINK = {
-  color: ['#BC4D9A', '#D573BB', '#FF8AD4', '#FFB4E6', '#FFCEEF', '#FFE8F7'],
+  color: [
+    'var(--ods-pink-600, #BC4D9A)',
+    'var(--ods-pink-500, #D573BB)',
+    'var(--ods-pink-400, #FF8AD4)',
+    'var(--ods-pink-300, #FFB4E6)',
+    'var(--ods-pink-200, #FFCEEF)',
+    'var(--ods-pink-100, #FFE8F7)',
+  ],
 };
