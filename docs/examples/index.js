@@ -265,6 +265,9 @@ async function displayChart(
   legendsOrientation,
   refresh = false
 ) {
+  if (!mode) {
+    mode = 'default';
+  }
   if (!refresh) {
     generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column');
     let iframe = document.querySelector(`#${id} iframe`);
@@ -441,7 +444,7 @@ async function displayChart(
   document.getElementById(id + '_html').innerText = generateChartDiv(
     id,
     usedLegends === 'odscharts' && 'vertical' === legendsOrientation ? 'row' : 'column',
-    themeManager.options.mode
+    mode
   );
   document.getElementById(id + '_code').innerText = `///////////////////////////////////////////////////
 // Used data
@@ -569,7 +572,7 @@ myChart.setOption(themeManager.getChartOptions());
       document.querySelector(`#body_content_1_${id}`).append(custumColorDiv);
     }
 
-    document.querySelector(`#accordion_${id} #darkModeInput option[value="${themeManager.options.mode}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #darkModeInput option[value="${mode}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #rendererInput option[value="${rendererInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
