@@ -374,6 +374,18 @@ export class ODSChartsTheme {
 
   private _computedStyle: CSSStyleDeclaration | undefined | null = undefined;
 
+  private constructor(
+    public name: string,
+    private initialTheme: EChartsProject,
+    public options: ODSChartsThemeOptions
+  ) {
+    this.cssThemeName =
+      (Object.keys(ODSChartsCSSThemes).find(
+        (oneTheme) => ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] === options.cssTheme
+      ) as ODSChartsCSSThemesNames) || ODSChartsCSSThemesNames.CUSTOM;
+    this.theme = this.calculateTheme();
+  }
+
   private get computedStyle(): CSSStyleDeclaration | undefined {
     if (undefined === this._computedStyle) {
       if (this.options.cssSelector) {
@@ -505,18 +517,6 @@ export class ODSChartsTheme {
     this.cssVarsMapping = {};
     this.theme = this.replaceAllCssVars(cloneDeepObject(this.initialTheme));
     return this.theme;
-  }
-
-  private constructor(
-    public name: string,
-    private initialTheme: EChartsProject,
-    public options: ODSChartsThemeOptions
-  ) {
-    this.cssThemeName =
-      (Object.keys(ODSChartsCSSThemes).find(
-        (oneTheme) => ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] === options.cssTheme
-      ) as ODSChartsCSSThemesNames) || ODSChartsCSSThemesNames.CUSTOM;
-    this.theme = this.calculateTheme();
   }
 
   /**
@@ -738,18 +738,12 @@ export class ODSChartsTheme {
   /**
    * getThemeOptions() can be used to get the options that should be added to charts options to implement the Orange Design System.
    *
-   * getThemeOptions() does not need to be called if you use getChartOptions() as getChartOptions() internally already calls it.
+   * getThemeOptions() needs graph data to be already set
    *
-   * getThemeOptions() needs graph data, already set or given in the dataOptions parameter
-   *
-   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
    * @param addGlobalThemeOptions indicates if the specificities of the global theme used in the chart init method
    * @returns modifications to be made to the [Apache Echarts data options](https://echarts.apache.org/en/option.html) to implement the Orange Design System.
    */
-  public getThemeOptions(dataOptions?: any, addGlobalThemeOptions: boolean = false): any {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  private getThemeOptions(addGlobalThemeOptions: boolean = false): any {
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
@@ -887,17 +881,9 @@ export class ODSChartsTheme {
    * - a string, and then is interpreted as the CSS selector of the legends container
    * - a {@link ODSChartsLegendHolderDefinition} if you want to sepcify the orientation of the legends holder or specify the series to be displayed in the legends holder
    * - an array of {@link ODSChartsLegendHolderDefinition} if you want to group legends in several legends holders
-   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
    * @returns the theme manager object itself to be able to chain calls.
    */
-  public externalizeLegends(
-    echart: any,
-    legendHolderSelector: string | ODSChartsLegendHolderDefinition | ODSChartsLegendHolderDefinition[],
-    dataOptions?: any
-  ): ODSChartsTheme {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  public externalizeLegends(echart: any, legendHolderSelector: string | ODSChartsLegendHolderDefinition | ODSChartsLegendHolderDefinition[]): ODSChartsTheme {
     this.chartLegendManager = ODSChartsLegends.addLegend(echart, legendHolderSelector);
     return this;
   }
@@ -914,13 +900,9 @@ export class ODSChartsTheme {
    * Default value is {@link ODSChartsPopoverManagers}.NONE, that means it uses default Apache ECharts template to externalize tooltip/popover HTML element, implementing Orange Design system.
    *
    * **WARNING**: Boosted 4 or Boosted 5 rendering requires dependency on the boosted library and access to the boosted global variable.
-   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
    * @returns the theme manager object itself to be able to chain calls.
    */
-  public externalizePopover(popoverConfig: ODSChartsPopoverConfig = {}, popoverDefinition?: ODSChartsPopoverDefinition, dataOptions?: any): ODSChartsTheme {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  public externalizePopover(popoverConfig: ODSChartsPopoverConfig = {}, popoverDefinition?: ODSChartsPopoverDefinition): ODSChartsTheme {
     if (!popoverDefinition) {
       popoverDefinition = ODSChartsPopoverManagers.NONE;
     }
@@ -933,13 +915,9 @@ export class ODSChartsTheme {
    *
    * @param echart the initialized eCharts object.
    * @param chartId an unique id that identify the chart container in the DOM.
-   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
    * @returns the theme manager object itself to be able to chain calls.
    */
-  public manageChartResize(echart: any, chartId: string, dataOptions?: any): ODSChartsTheme {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  public manageChartResize(echart: any, chartId: string): ODSChartsTheme {
     this.chartResizeManager = ODSChartsResize.addResizeManagement(echart, chartId);
     return this;
   }
@@ -949,17 +927,13 @@ export class ODSChartsTheme {
    * It observe the closest element with a data-bs-theme indicator to
    * adapt the graph colour to the new theme.
    * @param echart the initialized eCharts object
-   * @param dataOptions optionally you can use this call to set dataOptions
    * @returns returns back the theme manager object
    */
-  public manageThemeObserver(echart: any, dataOptions?: any): ODSChartsTheme {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  public manageThemeObserver(echart: any): ODSChartsTheme {
     this.chartThemeObserver = ODSChartsThemeObserver.addThemeObserver(echart, () => {
       // update chart options with theme options enriched with values
       // from a newly calculated global theme
-      echart.setOption(this.getChartOptions(undefined, true));
+      echart.setOption(this.getChartOptions(true));
     });
     return this;
   }
@@ -973,19 +947,15 @@ export class ODSChartsTheme {
    * - optionally options implementing {@link manageThemeObserver},
    * - data from {@link setDataOptions}
    *
-   * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
    * @param addGlobalThemeOptions indicates if the specificities of the global theme used in the chart init method
    * must be added in the options of the chart
    * @returns the Apache ECharts options to use in [Apache Echarts `setOption()`](https://echarts.apache.org/en/option.html) call.
    */
-  public getChartOptions(dataOptions?: any, addGlobalThemeOptions: boolean = false): any {
-    if (dataOptions) {
-      this.dataOptions = dataOptions;
-    }
+  public getChartOptions(addGlobalThemeOptions: boolean = false): any {
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
-    const result = mergeObjects(this.getThemeOptions(undefined, addGlobalThemeOptions), this.dataOptions);
+    const result = mergeObjects(this.getThemeOptions(addGlobalThemeOptions), this.dataOptions);
     return result;
   }
 }
