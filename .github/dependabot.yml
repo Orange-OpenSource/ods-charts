@@ -4,8 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
-      day: tuesday
-      time: "12:00"
+      day: friday
+      time: "06:00"
       timezone: Europe/Paris
   - package-ecosystem: npm
     directory: "/"
@@ -16,8 +16,8 @@ updates:
       - dependencies
     schedule:
       interval: weekly
-      day: tuesday
-      time: "12:00"
+      day: friday
+      time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
     rebase-strategy: disabled
@@ -27,6 +27,9 @@ updates:
       - dependencies
     schedule:
       interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-ngx-echarts-all-deps:
@@ -38,6 +41,9 @@ updates:
       - dependencies
     schedule:
       interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-echarts-all-deps:
@@ -49,6 +55,9 @@ updates:
       - dependencies
     schedule:
       interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-ng-boosted-all-deps:
@@ -60,6 +69,9 @@ updates:
       - dependencies
     schedule:
       interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       react-all-deps:
@@ -71,6 +83,9 @@ updates:
       - dependencies
     schedule:
       interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       vue-all-deps:
