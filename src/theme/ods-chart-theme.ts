@@ -60,6 +60,7 @@ import { DEFAULT_COLORS } from './default/ODS.colors';
 import { DEFAULT_COMMON } from './default/ODS.common';
 import { DEFAULT_LINES_AXIS } from './default/ODS.lines.axis';
 import { ODS_CHARTS_CSS_VARIABLES } from './colors/colors-css-variables';
+import { ODSChartsThemeObserver } from './theme-observer/ods-charts-theme-observer';
 
 /**
  * ODSChartsColorsSet is used for predefined color sets.
@@ -203,8 +204,8 @@ export interface ODSChartsThemeOptions {
    */
   cssTheme?: ODSChartsCSSThemeDefinition;
   /**
-   * cssSelector the selector of the DOM element where the grph will be built.
-   * It is used to get css variable values when using a third party theme genartor base on css variable like Boosted 5.
+   * cssSelector the selector of the DOM element where the graph will be built.
+   * It is used to get css variable values when using a third party theme generator base on css variable like Boosted 5.
    *
    * Default cssSelector is `'body'`
    */
@@ -350,6 +351,8 @@ const THEMES: {
  * themeManager.externalizeLegends(...);
  * // Manage chart container size changed
  * themeManager.manageChartResize(...);
+ * // Observe dark / light mode changes
+ * themeManager.manageThemeObserver(...);
  * // Register the externalization of the tooltip/popup
  * themeManager.externalizePopover(...);
  * // Display the chart using the configured theme and data.
@@ -364,8 +367,10 @@ export class ODSChartsTheme {
   private chartLegendManager: ODSChartsLegends = undefined as unknown as ODSChartsLegends;
   private chartResizeManager: ODSChartsResize = undefined as unknown as ODSChartsResize;
   private chartPopoverManager: ODSChartsPopover = undefined as unknown as ODSChartsPopover;
+  private chartThemeObserver: ODSChartsThemeObserver = undefined as unknown as ODSChartsThemeObserver;
   public cssThemeName: ODSChartsCSSThemesNames;
   private cssVarsMapping: { [variable: string]: string } = {};
+  public theme: EChartsProject;
 
   private _computedStyle: CSSStyleDeclaration | undefined | null = undefined;
 
@@ -496,16 +501,22 @@ export class ODSChartsTheme {
     return result;
   }
 
+  private calculateTheme(): EChartsProject {
+    this.cssVarsMapping = {};
+    this.theme = this.replaceAllCssVars(cloneDeepObject(this.initialTheme));
+    return this.theme;
+  }
+
   private constructor(
     public name: string,
-    public theme: EChartsProject,
+    private initialTheme: EChartsProject,
     public options: ODSChartsThemeOptions
   ) {
     this.cssThemeName =
       (Object.keys(ODSChartsCSSThemes).find(
         (oneTheme) => ODSChartsCSSThemes[oneTheme as ODSChartsCSSThemesNames] === options.cssTheme
       ) as ODSChartsCSSThemesNames) || ODSChartsCSSThemesNames.CUSTOM;
-    this.theme = this.replaceAllCssVars(this.theme);
+    this.theme = this.calculateTheme();
   }
 
   /**
@@ -627,6 +638,104 @@ export class ODSChartsTheme {
   }
 
   /**
+   * As it seems not possible to update a theme after the charts was initialized,
+   * this method calculate the new theme values and update these values directly inside the
+   * themeOptions that will be merge with the dataOptions to update the charts options with
+   * this new chartOptions
+   * @param themeOptions the basic themeOptions
+   * @returns this.theme, the new global theme calculated.
+   */
+  private calculateNewThemeAndAddItInThemeOptions(themeOptions: any): any {
+    const newTheme = this.calculateTheme();
+    mergeObjects(themeOptions, {
+      color: newTheme.color,
+      backgroundColor: newTheme.backgroundColor,
+      title: newTheme.title,
+      grid: { tooltip: newTheme.tooltip },
+    });
+
+    if (this.dataOptions.toolbox) {
+      themeOptions.toolbox = newTheme.toolbox;
+    }
+    if (this.dataOptions.timeline) {
+      themeOptions.timeline = newTheme.timeline;
+    }
+    //TODO: check the mapping of radar
+    // themeOptions.radar = newTheme.radar;
+    //TODO:  missing parallel mapping
+    // themeOptions.parallel = newTheme.parallel;
+    //TODO: check the mapping of geo
+    // themeOptions.geo = newTheme.geo;
+
+    if (this.dataOptions.series) {
+      themeOptions.series = [];
+      for (let index = 0; index < this.dataOptions.series.length; index++) {
+        switch (this.dataOptions.series[index].type) {
+          case 'line':
+            themeOptions.series[index] = { ...newTheme.line, markPoint: newTheme.markPoint };
+            break;
+          case 'bar':
+            themeOptions.series[index] = newTheme.bar;
+            break;
+          case 'pie':
+            themeOptions.series[index] = newTheme.pie;
+            break;
+          case 'scatter':
+            themeOptions.series[index] = newTheme.scatter;
+            break;
+          case 'boxplot':
+            themeOptions.series[index] = newTheme.boxplot;
+            break;
+          case 'sankey':
+            themeOptions.series[index] = newTheme.sankey;
+            break;
+          case 'funnel':
+            themeOptions.series[index] = newTheme.funnel;
+            break;
+          case 'gauge':
+            themeOptions.series[index] = newTheme.gauge;
+            break;
+          case 'candlestick':
+            themeOptions.series[index] = newTheme.candlestick;
+            break;
+          case 'graph':
+            themeOptions.series[index] = newTheme.graph;
+            break;
+          case 'treemap':
+            themeOptions.series[index] = newTheme.map;
+            break;
+        }
+      }
+    }
+
+    if (this.dataOptions.visualMap) {
+      themeOptions.visualMap = [];
+      for (let index = 0; index < this.dataOptions.series.length; index++) {
+        themeOptions.visualMap[index] = newTheme.visualMap;
+      }
+    }
+    for (const axisType of ['xAxis', 'yAxis']) {
+      if (this.dataOptions[axisType]) {
+        switch (this.dataOptions[axisType].type) {
+          case 'category':
+            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.categoryAxis);
+            break;
+          case 'value':
+            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.valueAxis);
+            break;
+          case 'log':
+            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.logAxis);
+            break;
+          case 'time':
+            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.timeAxis);
+            break;
+        }
+      }
+    }
+    return newTheme;
+  }
+
+  /**
    * getThemeOptions() can be used to get the options that should be added to charts options to implement the Orange Design System.
    *
    * getThemeOptions() does not need to be called if you use getChartOptions() as getChartOptions() internally already calls it.
@@ -634,9 +743,10 @@ export class ODSChartsTheme {
    * getThemeOptions() needs graph data, already set or given in the dataOptions parameter
    *
    * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @param addGlobalThemeOptions indicates if the specificities of the global theme used in the chart init method
    * @returns modifications to be made to the [Apache Echarts data options](https://echarts.apache.org/en/option.html) to implement the Orange Design System.
    */
-  public getThemeOptions(dataOptions?: any): any {
+  public getThemeOptions(dataOptions?: any, addGlobalThemeOptions: boolean = false): any {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
@@ -715,6 +825,8 @@ export class ODSChartsTheme {
       legend: cloneDeepObject(legend),
     };
 
+    let usedTheme = addGlobalThemeOptions ? this.calculateNewThemeAndAddItInThemeOptions(themeOptions) : this.theme;
+
     for (const axis of ['xAxis', 'yAxis']) {
       if (!isMainAxis(this.dataOptions[axis]) && !(this.dataOptions[axis] && this.dataOptions[axis].axisLine)) {
         themeOptions[axis].axisLine = { show: false };
@@ -725,7 +837,9 @@ export class ODSChartsTheme {
       }
     }
 
-    const displayedColors = this.getDisplayedColors(this.theme.color);
+    const displayedColors = this.getDisplayedColors(usedTheme.color);
+
+    themeOptions = this.replaceAllCssVars(themeOptions);
 
     themeOptions = this.replaceAllCssVars(themeOptions);
 
@@ -741,6 +855,10 @@ export class ODSChartsTheme {
 
     if (this.chartResizeManager) {
       this.chartResizeManager.addResizeManagement();
+    }
+
+    if (this.chartThemeObserver) {
+      this.chartThemeObserver.addThemeObserver();
     }
 
     if (this.chartPopoverManager) {
@@ -827,24 +945,47 @@ export class ODSChartsTheme {
   }
 
   /**
+   * manageThemeObserver() is used to enable auto-switch between dark and light mode.
+   * It observe the closest element with a data-bs-theme indicator to
+   * adapt the graph colour to the new theme.
+   * @param echart the initialized eCharts object
+   * @param dataOptions optionally you can use this call to set dataOptions
+   * @returns returns back the theme manager object
+   */
+  public manageThemeObserver(echart: any, dataOptions?: any): ODSChartsTheme {
+    if (dataOptions) {
+      this.dataOptions = dataOptions;
+    }
+    this.chartThemeObserver = ODSChartsThemeObserver.addThemeObserver(echart, () => {
+      // update chart options with theme options enriched with values
+      // from a newly calculated global theme
+      echart.setOption(this.getChartOptions(undefined, true));
+    });
+    return this;
+  }
+
+  /**
    * getChartOptions() build the eCharts options merging
    * - options implementing the Orange Design System {@link ODSChartsThemeOptions}
    * - optionally options implementing {@link externalizeLegends},
    * - optionally options implementing {@link externalizePopover},
    * - optionally options implementing {@link manageChartResize},
+   * - optionally options implementing {@link manageThemeObserver},
    * - data from {@link setDataOptions}
    *
    * @param dataOptions optionally you can use this call to set dataOptions, if not already set.
+   * @param addGlobalThemeOptions indicates if the specificities of the global theme used in the chart init method
+   * must be added in the options of the chart
    * @returns the Apache ECharts options to use in [Apache Echarts `setOption()`](https://echarts.apache.org/en/option.html) call.
    */
-  public getChartOptions(dataOptions?: any): any {
+  public getChartOptions(dataOptions?: any, addGlobalThemeOptions: boolean = false): any {
     if (dataOptions) {
       this.dataOptions = dataOptions;
     }
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
-    const result = mergeObjects(this.getThemeOptions(), this.dataOptions);
+    const result = mergeObjects(this.getThemeOptions(undefined, addGlobalThemeOptions), this.dataOptions);
     return result;
   }
 }

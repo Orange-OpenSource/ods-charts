@@ -19,10 +19,22 @@ export class ODSChartsResize {
     return new ODSChartsResize(echart, chartId);
   }
 
+  private get divElement(): Element | undefined {
+    let div: HTMLElement | undefined;
+    div = document.getElementById(this.chartId) || undefined;
+    if (!div) {
+      div = this.echart.getDom() || undefined;
+      if (div) {
+        div = div.parentElement || undefined;
+      }
+    }
+    return div;
+  }
+
   public addResizeManagement() {
     this.removeListener();
 
-    const div = document.getElementById(this.chartId);
+    const div = this.divElement;
     if (div && ResizeObserver) {
       this.observer = new ResizeObserver(this.resizeChart.bind(this));
       this.observer.observe(div);
@@ -34,7 +46,7 @@ export class ODSChartsResize {
 
   private removeListener() {
     try {
-      const div = document.getElementById(this.chartId);
+      const div = this.divElement;
       if (div && ResizeObserver) {
         if (this.observer) {
           this.observer.unobserve(div);
