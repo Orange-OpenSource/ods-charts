@@ -540,10 +540,10 @@ export class ODSChartsPopover {
       document.head.appendChild(style);
     }
 
-    return `
-  <div class="ods-charts-popover-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
+    return ` 
+  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(
     cssTheme.popover?.odsChartsPopoverHolder
-  )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverHolder)}">
+  )}" data-bs-theme="${mode}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverHolder)}">
     <div class="ods-charts-popover-inner ${ODSChartsItemCSSDefinition.getClasses(
       cssTheme.popover?.odsChartsPopoverInner
     )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverInner)}">
