@@ -12,7 +12,7 @@ import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
  * Added for None or Boosted 4 themes
  */
 const BOOSTED5_VARIABLE = `
-.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light], [data-bs-theme] .ods-charts-context[data-bs-theme=light]  {
+.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {
   color-scheme: light;
   --bs-blue: #4170d8;
   --bs-indigo: #a885d8;
@@ -63,7 +63,7 @@ const BOOSTED5_VARIABLE = `
   --bs-tertiary-bg: #fafafa;
 }
 
-[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark], [data-bs-theme] .ods-charts-context[data-bs-theme=dark] {
+[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {
   color-scheme: dark;
   --bs-body-color: #fff;
   --bs-body-color-rgb: 255, 255, 255;
@@ -105,7 +105,7 @@ const BOOSTED5_VARIABLE = `
  * Added for all themes
  */
 const NON_BOOSTED5_VARIABLE = `
-.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light] {
+.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"] {
   --ods-yellow-100: #fff6b6;
   --ods-yellow-200: #ffe45b;
   --ods-yellow-300: #ffd200;
@@ -225,7 +225,7 @@ const NON_BOOSTED5_VARIABLE = `
 
 }
 
-[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark] {
+[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"] {
   --ods-yellow-1: var(--ods-yellow-100);
   --ods-yellow-2: var(--ods-yellow-200);
   --ods-yellow-3: var(--ods-yellow-300);

@@ -58,16 +58,16 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   line-height 24px
 }
 
-[data-bs-theme=dark] .ods-charts-no-css-lib.ods-charts-legend-holder {
+[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {
   background-color: var(--bs-gray-950, #141414);
 }
-[data-bs-theme=dark] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
+[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
   color: var(--bs-white, #fff);
 }
-[data-bs-theme=light] .ods-charts-no-css-lib.ods-charts-legend-holder {
+[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {
   background-color: var(--bs-white, #fff);
 }
-[data-bs-theme=light] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
+[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
   color: var(--bs-black, #000);
 }
 `;
