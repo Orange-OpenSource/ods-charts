@@ -471,18 +471,6 @@ export class ODSChartsTheme {
     if (!options.cssSelector) {
       options.cssSelector = 'body';
     }
-    /*
-    const divTheme = document.querySelector(options.cssSelector);
-    if (divTheme) {
-      const computedStyle = window.getComputedStyle(divTheme);
-      if (computedStyle) {
-        const foundMode = computedStyle.getPropertyValue('color-scheme');
-        if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(foundMode as ODSChartsMode)) {
-          mode = foundMode as ODSChartsMode;
-        }
-      }
-    }
-      */
 
     var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
 
