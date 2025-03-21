@@ -56,9 +56,9 @@ export class LineChartComponent implements AfterViewInit {
 
     // ODS Charts
     const lineChartODSTheme = ODSCharts.getThemeManager({
-      mode: ODSCharts.ODSChartsMode.DARK,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
       lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+      cssSelector: '#lineChartLegendODS',
     });
 
     console.log('>>', ODSCharts);
