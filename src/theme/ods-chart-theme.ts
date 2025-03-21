@@ -144,14 +144,6 @@ export enum ODSChartsMode {
  */
 export interface ODSChartsThemeOptions {
   /**
-   * The mode of the theme can be {@link ODSChartsMode.DEFAULT},  {@link ODSChartsMode.LIGHT} or  {@link ODSChartsMode.DARK}.
-   *
-   * Default mode is {@link ODSChartsMode.DEFAULT}.
-   * The {@link ODSChartsMode.DEFAULT} mode uses the `data-bs-theme` attribute to determine if mode is light or dark (cf https://boosted.orange.com/docs/5.3/customize/color-modes/#content).
-   *
-   */
-  mode?: ODSChartsMode;
-  /**
    * colors is the set of colors to be used to graph the chart.
    *
    * It can be
@@ -181,12 +173,6 @@ export interface ODSChartsThemeOptions {
    */
   colors?: ODSChartsColorsSet | ODSChartsCustomColor[];
   /**
-   * visualMapColor is the set of colors to be used if map graphs (like Heatmap)
-   *
-   * Default visualMapColor is {@link ODSChartsColorsSet.SEQUENTIAL_BLUE}
-   */
-  visualMapColor?: ODSChartsColorsSet;
-  /**
    * lineStyle specifies the style of line in lineCharts.
    *
    * It can be {@link ODSChartsLineStyle.BROKEN}, {@link ODSChartsLineStyle.SMOOTH} of {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
@@ -212,123 +198,49 @@ export interface ODSChartsThemeOptions {
   cssSelector?: string;
 }
 
-const THEMES: {
-  [mode in ODSChartsMode]: {
-    common: any;
-    linesAxis: any;
-    colors: {
-      [colorSet in ODSChartsColorsSet]: { color: string[] };
-    };
-    visualMapColors: {
-      [colorSet in ODSChartsColorsSet]: { visualMapColor: string[] };
-    };
-    linesStyle: { [style in ODSChartsLineStyle]: any };
+const THEME: {
+  common: any;
+  linesAxis: any;
+  colors: {
+    [colorSet in ODSChartsColorsSet]: { color: string[] };
   };
+  visualMapColors: {
+    [colorSet in ODSChartsColorsSet]: { visualMapColor: string[] };
+  };
+  linesStyle: { [style in ODSChartsLineStyle]: any };
 } = {
-  light: {
-    common: LIGHT_COMMON,
-    linesAxis: LIGHT_LINES_AXIS,
-    colors: {
-      default: LIGHT_COLORS,
-      categorical: LIGHT_COLORS_CATEGORICAL,
-      functional: LIGHT_COLORS_FUNCTIONAL,
-      supportingColors: LIGHT_COLORS_SUPPORTING_COLORS,
-      darkerTints: LIGHT_COLORS_DARKER_TINTS,
-      lighterTints: LIGHT_COLORS_LIGHTER_TINTS,
-      blue: LIGHT_COLORS_BLUE,
-      green: LIGHT_COLORS_GREEN,
-      pink: LIGHT_COLORS_PINK,
-      purple: LIGHT_COLORS_PURPLE,
-      yellow: LIGHT_COLORS_YELLOW,
-    },
-    visualMapColors: {
-      default: { visualMapColor: LIGHT_COLORS.color },
-      categorical: { visualMapColor: LIGHT_COLORS_CATEGORICAL.color },
-      functional: { visualMapColor: LIGHT_COLORS_FUNCTIONAL.color },
-      supportingColors: { visualMapColor: LIGHT_COLORS_SUPPORTING_COLORS.color },
-      darkerTints: { visualMapColor: LIGHT_COLORS_DARKER_TINTS.color },
-      lighterTints: { visualMapColor: LIGHT_COLORS_LIGHTER_TINTS.color },
-      blue: { visualMapColor: LIGHT_COLORS_BLUE.color },
-      green: { visualMapColor: LIGHT_COLORS_GREEN.color },
-      pink: { visualMapColor: LIGHT_COLORS_PINK.color },
-      purple: { visualMapColor: LIGHT_COLORS_PURPLE.color },
-      yellow: { visualMapColor: LIGHT_COLORS_YELLOW.color },
-    },
-    linesStyle: {
-      broken: COMMON_LINE_STYLE_BROKEN,
-      withPoints: COMMON_LINE_STYLE_POINTS,
-      smooth: COMMON_LINE_STYLE_SMOOTH,
-    },
+  common: DEFAULT_COMMON,
+  linesAxis: DEFAULT_LINES_AXIS,
+  colors: {
+    default: DEFAULT_COLORS,
+    categorical: DEFAULT_COLORS_CATEGORICAL,
+    functional: DEFAULT_COLORS_FUNCTIONAL,
+    supportingColors: DEFAULT_COLORS_SUPPORTING_COLORS,
+    darkerTints: DEFAULT_COLORS_DARKER_TINTS,
+    lighterTints: DEFAULT_COLORS_LIGHTER_TINTS,
+    blue: DEFAULT_COLORS_BLUE,
+    green: DEFAULT_COLORS_GREEN,
+    pink: DEFAULT_COLORS_PINK,
+    purple: DEFAULT_COLORS_PURPLE,
+    yellow: DEFAULT_COLORS_YELLOW,
   },
-  dark: {
-    common: DARK_COMMON,
-    linesAxis: DARK_LINES_AXIS,
-    colors: {
-      default: DARK_COLORS,
-      categorical: DARK_COLORS_CATEGORICAL,
-      functional: DARK_COLORS_FUNCTIONAL,
-      supportingColors: DARK_COLORS_SUPPORTING_COLORS,
-      darkerTints: DARK_COLORS_DARKER_TINTS,
-      lighterTints: DARK_COLORS_LIGHTER_TINTS,
-      blue: DARK_COLORS_BLUE,
-      green: DARK_COLORS_GREEN,
-      pink: DARK_COLORS_PINK,
-      purple: DARK_COLORS_PURPLE,
-      yellow: DARK_COLORS_YELLOW,
-    },
-    visualMapColors: {
-      default: { visualMapColor: DARK_COLORS.color },
-      categorical: { visualMapColor: DARK_COLORS_CATEGORICAL.color },
-      functional: { visualMapColor: DARK_COLORS_FUNCTIONAL.color },
-      supportingColors: { visualMapColor: DARK_COLORS_SUPPORTING_COLORS.color },
-      darkerTints: { visualMapColor: DARK_COLORS_DARKER_TINTS.color },
-      lighterTints: { visualMapColor: DARK_COLORS_LIGHTER_TINTS.color },
-      blue: { visualMapColor: DARK_COLORS_BLUE.color },
-      green: { visualMapColor: DARK_COLORS_GREEN.color },
-      pink: { visualMapColor: DARK_COLORS_PINK.color },
-      purple: { visualMapColor: DARK_COLORS_PURPLE.color },
-      yellow: { visualMapColor: DARK_COLORS_YELLOW.color },
-    },
-    linesStyle: {
-      broken: COMMON_LINE_STYLE_BROKEN,
-      withPoints: COMMON_LINE_STYLE_POINTS,
-      smooth: COMMON_LINE_STYLE_SMOOTH,
-    },
+  visualMapColors: {
+    default: { visualMapColor: DEFAULT_COLORS.color },
+    categorical: { visualMapColor: DEFAULT_COLORS_CATEGORICAL.color },
+    functional: { visualMapColor: DEFAULT_COLORS_FUNCTIONAL.color },
+    supportingColors: { visualMapColor: DEFAULT_COLORS_SUPPORTING_COLORS.color },
+    darkerTints: { visualMapColor: DEFAULT_COLORS_DARKER_TINTS.color },
+    lighterTints: { visualMapColor: DEFAULT_COLORS_LIGHTER_TINTS.color },
+    blue: { visualMapColor: DEFAULT_COLORS_BLUE.color },
+    green: { visualMapColor: DEFAULT_COLORS_GREEN.color },
+    pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
+    purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
+    yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
   },
-  default: {
-    common: DEFAULT_COMMON,
-    linesAxis: DEFAULT_LINES_AXIS,
-    colors: {
-      default: DEFAULT_COLORS,
-      categorical: DEFAULT_COLORS_CATEGORICAL,
-      functional: DEFAULT_COLORS_FUNCTIONAL,
-      supportingColors: DEFAULT_COLORS_SUPPORTING_COLORS,
-      darkerTints: DEFAULT_COLORS_DARKER_TINTS,
-      lighterTints: DEFAULT_COLORS_LIGHTER_TINTS,
-      blue: DEFAULT_COLORS_BLUE,
-      green: DEFAULT_COLORS_GREEN,
-      pink: DEFAULT_COLORS_PINK,
-      purple: DEFAULT_COLORS_PURPLE,
-      yellow: DEFAULT_COLORS_YELLOW,
-    },
-    visualMapColors: {
-      default: { visualMapColor: DEFAULT_COLORS.color },
-      categorical: { visualMapColor: DEFAULT_COLORS_CATEGORICAL.color },
-      functional: { visualMapColor: DEFAULT_COLORS_FUNCTIONAL.color },
-      supportingColors: { visualMapColor: DEFAULT_COLORS_SUPPORTING_COLORS.color },
-      darkerTints: { visualMapColor: DEFAULT_COLORS_DARKER_TINTS.color },
-      lighterTints: { visualMapColor: DEFAULT_COLORS_LIGHTER_TINTS.color },
-      blue: { visualMapColor: DEFAULT_COLORS_BLUE.color },
-      green: { visualMapColor: DEFAULT_COLORS_GREEN.color },
-      pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
-      purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
-      yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
-    },
-    linesStyle: {
-      broken: COMMON_LINE_STYLE_BROKEN,
-      withPoints: COMMON_LINE_STYLE_POINTS,
-      smooth: COMMON_LINE_STYLE_SMOOTH,
-    },
+  linesStyle: {
+    broken: COMMON_LINE_STYLE_BROKEN,
+    withPoints: COMMON_LINE_STYLE_POINTS,
+    smooth: COMMON_LINE_STYLE_SMOOTH,
   },
 };
 
@@ -377,7 +289,7 @@ export class ODSChartsTheme {
   private constructor(
     public name: string,
     private initialTheme: EChartsProject,
-    public options: ODSChartsThemeOptions
+    public options: ODSChartsThemeOptions & { mode: ODSChartsMode }
   ) {
     this.cssThemeName =
       (Object.keys(ODSChartsCSSThemes).find(
@@ -546,15 +458,9 @@ export class ODSChartsTheme {
     if (!options) {
       options = {};
     }
-    if (!options.mode) {
-      options.mode = ODSChartsMode.DEFAULT;
-    }
-    const mode: ODSChartsMode = options.mode;
+    let mode: ODSChartsMode = ODSChartsMode.DEFAULT;
     if (!options.colors) {
       options.colors = ODSChartsColorsSet.DEFAULT;
-    }
-    if (!options.visualMapColor) {
-      options.visualMapColor = ODSChartsColorsSet.SEQUENTIAL_BLUE;
     }
     if (!options.lineStyle) {
       options.lineStyle = ODSChartsLineStyle.SMOOTH;
@@ -565,32 +471,33 @@ export class ODSChartsTheme {
     if (!options.cssSelector) {
       options.cssSelector = 'body';
     }
-    var themeName = `ods.${getStringValue(mode)}.${getStringValue(options.colors)}.${getStringValue(options.visualMapColor)}.${getStringValue(
-      options.lineStyle
-    )}`;
+
+    var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
 
     const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].common));
+    mergeObjects(theme, cloneDeepObject(THEME.common));
 
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].linesAxis));
+    mergeObjects(theme, cloneDeepObject(THEME.linesAxis));
 
     if (typeof options.colors === 'string') {
-      mergeObjects(theme, cloneDeepObject(THEMES[mode].colors[options.colors]));
+      mergeObjects(theme, cloneDeepObject(THEME.colors[options.colors]));
+      mergeObjects(theme, cloneDeepObject(THEME.visualMapColors[options.colors]));
     } else {
       mergeObjects(
         theme,
         cloneDeepObject({
-          color: options.colors.map((color) => ('string' === typeof color ? color : THEMES[mode].colors[color.colorPalette].color[color.colorIndex])),
+          color: options.colors.map((color) => ('string' === typeof color ? color : THEME.colors[color.colorPalette].color[color.colorIndex])),
+          visualMapColor: options.colors.map((color) =>
+            'string' === typeof color ? color : THEME.visualMapColors[color.colorPalette].visualMapColor[color.colorIndex]
+          ),
         })
       );
     }
 
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].visualMapColors[options.visualMapColor]));
+    mergeObjects(theme, cloneDeepObject(THEME.linesStyle[options.lineStyle]));
 
-    mergeObjects(theme, cloneDeepObject(THEMES[mode].linesStyle[options.lineStyle]));
-
-    return new ODSChartsTheme(themeName, theme, options);
+    return new ODSChartsTheme(themeName, theme, { ...options, mode: ODSChartsMode.DEFAULT });
   }
 
   /**
