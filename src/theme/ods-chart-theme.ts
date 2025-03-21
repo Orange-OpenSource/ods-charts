@@ -6,35 +6,9 @@
 // This software is distributed under the MIT license.
 //
 
-import { LIGHT_COMMON } from './light/ODS.common';
-import { LIGHT_LINES_AXIS } from './light/ODS.lines.axis';
-import { LIGHT_COLORS } from './light/ODS.colors';
-import { LIGHT_COLORS_CATEGORICAL } from './light/ODS.colors.categorical';
-import { LIGHT_COLORS_FUNCTIONAL } from './light/ODS.colors.functional';
-import { LIGHT_COLORS_SUPPORTING_COLORS } from './light/ODS.colors.supporting-colors';
-import { LIGHT_COLORS_DARKER_TINTS } from './light/ODS.colors.darker-tints';
-import { LIGHT_COLORS_LIGHTER_TINTS } from './light/ODS.colors.lighter-tints';
-import { LIGHT_COLORS_BLUE } from './light/ODS.colors.blue';
-import { LIGHT_COLORS_GREEN } from './light/ODS.colors.green';
-import { LIGHT_COLORS_PINK } from './light/ODS.colors.pink';
-import { LIGHT_COLORS_PURPLE } from './light/ODS.colors.purple';
-import { LIGHT_COLORS_YELLOW } from './light/ODS.colors.yellow';
 import { COMMON_LINE_STYLE_BROKEN } from './common/ODS.line-style.broken';
 import { COMMON_LINE_STYLE_POINTS } from './common/ODS.line-style.with-points';
 import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
-import { DARK_COMMON } from './dark/ODS.common';
-import { DARK_LINES_AXIS } from './dark/ODS.lines.axis';
-import { DARK_COLORS } from './dark/ODS.colors';
-import { DARK_COLORS_CATEGORICAL } from './dark/ODS.colors.categorical';
-import { DARK_COLORS_FUNCTIONAL } from './dark/ODS.colors.functional';
-import { DARK_COLORS_SUPPORTING_COLORS } from './dark/ODS.colors.supporting-colors';
-import { DARK_COLORS_DARKER_TINTS } from './dark/ODS.colors.darker-tints';
-import { DARK_COLORS_LIGHTER_TINTS } from './dark/ODS.colors.lighter-tints';
-import { DARK_COLORS_BLUE } from './dark/ODS.colors.blue';
-import { DARK_COLORS_GREEN } from './dark/ODS.colors.green';
-import { DARK_COLORS_PINK } from './dark/ODS.colors.pink';
-import { DARK_COLORS_PURPLE } from './dark/ODS.colors.purple';
-import { DARK_COLORS_YELLOW } from './dark/ODS.colors.yellow';
 import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { isVarArray, isVarObject, mergeObjects } from '../tools/merge-objects';
@@ -431,6 +405,20 @@ export class ODSChartsTheme {
     return this.theme;
   }
 
+  private static getMode(divTheme: Element | null | undefined): ODSChartsMode {
+    let mode: ODSChartsMode = ODSChartsMode.DEFAULT;
+    if (divTheme) {
+      const computedStyle = window.getComputedStyle(divTheme);
+      if (computedStyle) {
+        const foundMode = computedStyle.getPropertyValue('color-scheme');
+        if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(foundMode as ODSChartsMode)) {
+          mode = foundMode as ODSChartsMode;
+        }
+      }
+    }
+    return mode;
+  }
+
   /**
    * Entry point of the library.
    *
@@ -472,6 +460,8 @@ export class ODSChartsTheme {
       options.cssSelector = 'body';
     }
 
+    mode = ODSChartsTheme.getMode(document.querySelector(options.cssSelector));
+
     var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
 
     const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
@@ -497,7 +487,7 @@ export class ODSChartsTheme {
 
     mergeObjects(theme, cloneDeepObject(THEME.linesStyle[options.lineStyle]));
 
-    return new ODSChartsTheme(themeName, theme, { ...options, mode: ODSChartsMode.DEFAULT });
+    return new ODSChartsTheme(themeName, theme, { ...options, mode });
   }
 
   /**
@@ -659,6 +649,10 @@ export class ODSChartsTheme {
     // each feature is responsible to deep copy the changed part according to their changes
     this.dataOptions = { ...this.dataOptions };
 
+    if (this.chartThemeObserver) {
+      this.options.mode = ODSChartsTheme.getMode(this.chartThemeObserver.addThemeObserver());
+    }
+
     const axisLabel = {
       fontStyle: 'normal',
       fontWeight: '700',
@@ -756,10 +750,6 @@ export class ODSChartsTheme {
 
     if (this.chartResizeManager) {
       this.chartResizeManager.addResizeManagement();
-    }
-
-    if (this.chartThemeObserver) {
-      this.chartThemeObserver.addThemeObserver();
     }
 
     if (this.chartPopoverManager) {
