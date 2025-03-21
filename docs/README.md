@@ -41,7 +41,7 @@ Additional features can be added calling methods on {@link ODSChartsTheme}:
 
 - {@link ODSChartsTheme.externalizeLegends}: to add Orange Design System theme to legends.
 - {@link ODSChartsTheme.externalizePopover}: to add Orange Design System theme to popover or tooltip.
-- {@link ODSChartsTheme.manageChartResize}`: to dynamically adapt graph size to its container.
+- {@link ODSChartsTheme.manageChartResize}: to dynamically adapt graph size to its container.
 - {@link ODSChartsTheme.manageThemeObserver}`: to dynamically switch between theme dark/light mode .
 
 The {@link ODSChartsTheme} is used to build the ODS theme and the charts options.
