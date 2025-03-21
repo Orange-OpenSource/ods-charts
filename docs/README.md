@@ -33,7 +33,7 @@ The theme is configured with {@link ODSChartsThemeOptions}:
 - {@link ODSChartsThemeOptions.colors}: colors to be used to graph the chart.
 - {@link ODSChartsThemeOptions.cssTheme}: optionally indicates an external theme to be used like boosted.
 - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
-- {@link ODSChartsThemeOptions.cssSelector}: css selector of an element that determines the light or dark mode. Optional, default is 'body'. Not needed if the {@link ODSChartsTheme.manageThemeObserver}` feature is used.
+- {@link ODSChartsThemeOptions.cssSelector}: css selector of an element that determines the light or dark mode. Optional, default is 'body'. Not needed if the {@link ODSChartsTheme.manageThemeObserver} feature is used.
 
 ### Graph features
 
