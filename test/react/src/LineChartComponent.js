@@ -50,9 +50,9 @@ class LineChartComponent extends Component {
 
     // ODS Charts
     const lineChartODSTheme = ODSCharts.getThemeManager({
-      mode: ODSCharts.ODSChartsMode.DARK,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
       lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+      cssSelector: '#chartsContainer',
     });
 
     console.log('>>', ODSCharts);
@@ -169,10 +169,12 @@ class LineChartComponent extends Component {
           <div className="mGraph" id="lineChartCanvas"></div>
         </div>
         <hr />
-        <div className="mGraph-wrapper">
-          <div className="mGraph" id="lineChartCanvasODS"></div>
+        <div data-bs-theme="dark" class="ods-charts-context" id="chartsContainer">
+          <div className="mGraph-wrapper">
+            <div className="mGraph" id="lineChartCanvasODS"></div>
+          </div>
+          <div className="mGraph" id="lineChartLegendODS"></div>
         </div>
-        <div className="mGraph" id="lineChartLegendODS"></div>
       </>
     );
   }

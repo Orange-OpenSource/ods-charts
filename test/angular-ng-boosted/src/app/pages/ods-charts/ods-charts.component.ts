@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EChartsOption } from 'echarts';
@@ -21,7 +21,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipCo
   templateUrl: './ods-charts.component.html',
   styleUrl: './ods-charts.component.scss',
 })
-export class OdsChartsComponent {
+export class OdsChartsComponent implements OnInit {
   currentMode!: string;
   public myTheme1!: ODSCharts.ODSChartsTheme;
   public myTheme2!: ODSCharts.ODSChartsTheme;
@@ -74,7 +74,9 @@ export class OdsChartsComponent {
   };
   public updateOptions2: EChartsOption = {};
 
-  constructor(private colorModeService: ColorModeService) {
+  constructor(private colorModeService: ColorModeService) {}
+
+  ngOnInit(): void {
     this.colorModeService.currentMode.subscribe((value) => {
       if (this.currentMode !== value) {
         this.currentMode = value;
@@ -135,14 +137,14 @@ export class OdsChartsComponent {
 
   private generateThemes() {
     this.myTheme1 = ODSCharts.getThemeManager({
-      mode: this.currentMode === 'light' ? ODSCharts.ODSChartsMode.LIGHT : ODSCharts.ODSChartsMode.DARK,
       colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      cssSelector: '#chartsContainer',
     });
     this.myTheme2 = ODSCharts.getThemeManager({
-      mode: this.currentMode === 'light' ? ODSCharts.ODSChartsMode.LIGHT : ODSCharts.ODSChartsMode.DARK,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      cssSelector: '#chartsContainer',
     });
   }
 }

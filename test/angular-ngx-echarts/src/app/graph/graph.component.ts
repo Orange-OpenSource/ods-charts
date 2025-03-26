@@ -59,7 +59,6 @@ export class GraphComponent {
 
   constructor() {
     this.myTheme = ODSCharts.getThemeManager({
-      mode: ODSCharts.ODSChartsMode.LIGHT,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });

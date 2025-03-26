@@ -39,7 +39,6 @@ export class GraphComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     // ODS Charts
     this.myTheme = ODSCharts.getThemeManager({
-      mode: ODSCharts.ODSChartsMode.LIGHT,
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
       lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
     });

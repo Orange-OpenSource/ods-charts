@@ -49,9 +49,9 @@ onMounted(() => {
 
   // ODS Charts
   const lineChartODSTheme = ODSCharts.getThemeManager({
-    mode: ODSCharts.ODSChartsMode.DARK,
     colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-    lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
+    lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+    cssSelector: '#chartsContainer'
   })
 
   console.log('>>', ODSCharts)
@@ -171,10 +171,12 @@ onMounted(() => {
     <div className="mGraph" id="lineChartCanvas"></div>
   </div>
   <hr />
-  <div className="mGraph-wrapper">
-    <div className="mGraph" id="lineChartCanvasODS"></div>
+  <div className="ods-charts-context" id="chartsContainer" data-bs-theme="dark">
+    <div className="mGraph-wrapper">
+      <div className="mGraph" id="lineChartCanvasODS"></div>
+    </div>
+    <div className="mGraph" id="lineChartLegendODS"></div>
   </div>
-  <div className="mGraph" id="lineChartLegendODS"></div>
 </template>
 
 <style scoped>
