@@ -78,11 +78,30 @@
         <h1 class="display-1">ODS Charts colors sets</h1>
       </div>
     </div>
-    <div class="container">
-      <div class="row" id="container"></div>
+    <div>
+      <div class="container-fluid">
+        <div class="container">
+          <h2 class="pt-3 h1">Default mode theme</h2>
+          <div class="row" id="container"></div>
+        </div>
+      </div>
+      <div data-bs-theme="light" class="container-fluid">
+        <div class="container">
+          <h2 class="pt-3 h1">Light mode theme</h2>
+          <div class="row" id="containerLight"></div>
+        </div>
+      </div>
+      <div data-bs-theme="dark" class="container-fluid">
+        <div class="container">
+          <h2 class="pt-3 h1">Dark mode theme</h2>
+          <div class="row" id="containerDark"></div>
+        </div>
+      </div>
     </div>
     <script>
-      displayAllColorSets();
+      displayAllColorSets('container');
+      displayAllColorSets('containerLight');
+      displayAllColorSets('containerDark');
       addThemeObserver();
     </script>
 

@@ -9,12 +9,12 @@ function colorIsDark(bgColor) {
   return r * 0.299 + g * 0.587 + b * 0.114 <= 186;
 }
 
-function displayColorSet(colorSet, colorSetLabel) {
-  const theme = ODSCharts.getThemeManager({ colors: ODSCharts.ODSChartsColorsSet[colorSet], cssSelector: '#' + colorSet });
+function displayColorSet(containerId, colorSet, colorSetLabel) {
+  const theme = ODSCharts.getThemeManager({ colors: ODSCharts.ODSChartsColorsSet[colorSet], cssSelector: '#' + containerId + colorSet });
   const initialColors = theme.initialTheme.color;
   const colors = theme.theme.color;
 
-  document.getElementById(colorSet).innerHTML = `
+  document.getElementById(containerId + colorSet).innerHTML = `
   ${initialColors
     .map((color, index) => {
       const textColor = colorIsDark(colors[index]) ? 'var(--bs-white)' : 'var(--bs-black)';
@@ -34,11 +34,14 @@ function displayColorSet(colorSet, colorSetLabel) {
     `;
 
   if (colorSetLabel) {
-    document.getElementById(colorSet).previousSibling.previousSibling.previousSibling.previousSibling.innerHTML = colorSetLabel + ' (' + colors.length + ')';
+    document
+      .getElementById(containerId + colorSet)
+      .closest('.card-body')
+      .querySelector('h3').innerHTML = colorSetLabel + ' (' + colors.length + ')';
   }
 }
 
-function displayAllColorSets() {
+function displayAllColorSets(divId) {
   var sets = [
     ['DEFAULT', 'Default colors'],
     ['CATEGORICAL', 'Categorical colors'],
@@ -52,15 +55,15 @@ function displayAllColorSets() {
     ['SEQUENTIAL_PURPLE', 'Purple'],
     ['SEQUENTIAL_YELLOW', 'Yellow'],
   ];
-  document.getElementById('container').innerHTML = sets
+  document.getElementById(divId).innerHTML = sets
     .map(
       (element) => `
   <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="h3">${element[1]}</h5>
-          <h6 class="card-subtitle">ODSCharts.<br />&nbsp;&nbsp;ODSChartsColorsSet.<br />&nbsp;&nbsp;&nbsp;&nbsp;${element[0]}</h6>
-          <div id="${element[0]}"></div>
+          <h3 class="h3">${element[1]}</h3>
+          <h4 class="card-subtitle">ODSCharts.<br />&nbsp;&nbsp;ODSChartsColorsSet.<br />&nbsp;&nbsp;&nbsp;&nbsp;${element[0]}</h4>
+          <div id="${divId + element[0]}"></div>
         </div>
       </div>
     </div>
@@ -69,7 +72,7 @@ function displayAllColorSets() {
     )
     .join('');
   sets.forEach((element) => {
-    displayColorSet(element[0], element[1]);
+    displayColorSet(divId, element[0], element[1]);
   });
 }
 
@@ -79,7 +82,17 @@ function addThemeObserver() {
     div = div.closest('[data-bs-theme]') || undefined;
     if (div) {
       const observer = new MutationObserver(() => {
-        displayAllColorSets();
+        displayAllColorSets('container');
+
+        if ('light' === div.getAttribute('data-bs-theme')) {
+          document.getElementById('containerLight').closest('.container-fluid').classList.add('d-none');
+          document.getElementById('containerDark').closest('.container-fluid').classList.remove('d-none');
+          document.getElementById('container').closest('.container').querySelector('h2').innerHTML = 'Default light mode theme';
+        } else {
+          document.getElementById('containerDark').closest('.container-fluid').classList.add('d-none');
+          document.getElementById('containerLight').closest('.container-fluid').classList.remove('d-none');
+          document.getElementById('container').closest('.container').querySelector('h2').innerHTML = 'Default dark mode theme';
+        }
       });
       observer.observe(div, { attributes: true, childList: false, subtree: false });
     }
