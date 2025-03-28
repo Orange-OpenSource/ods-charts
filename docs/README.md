@@ -2,15 +2,20 @@
 
 <p align="center">
   ODS Charts provides Orange Charts components to developers.
+  <br>
+  <br>
+  <a href="../"><strong style="font-size: larger;">Visit ODS Charts general documentation</strong></a>
 </p>
 
-## Table of contents
+## API documentation
+
+### Table of contents
 
 - [Documentation](#documentation)
 - [Example](#example)
 - [Copyright and license](#copyright-and-license)
 
-## Documentation
+### Documentation
 
 Once the library integrated, via
 
@@ -26,7 +31,7 @@ The ODS Charts library is configured
 
 {@link ODSChartsTheme.getThemeManager}
 
-### Theme options
+#### Theme options
 
 The theme is configured with {@link ODSChartsThemeOptions}:
 
@@ -35,7 +40,7 @@ The theme is configured with {@link ODSChartsThemeOptions}:
 - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
 - {@link ODSChartsThemeOptions.cssSelector}: css selector of an element that determines the light or dark mode. Optional, default is 'body'. Not needed if the {@link ODSChartsTheme.manageThemeObserver} feature is used.
 
-### Graph features
+#### Graph features
 
 Additional features can be added calling methods on {@link ODSChartsTheme}:
 
@@ -46,7 +51,7 @@ Additional features can be added calling methods on {@link ODSChartsTheme}:
 
 The {@link ODSChartsTheme} is used to build the ODS theme and the charts options.
 
-## Examples
+### Examples
 
 ```html
 <html lang="en">
@@ -89,9 +94,11 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 </html>
 ```
 
-<a href="/examples/">See more online dynamic examples</a>
+<a href="../examples/">See more online dynamic examples</a>
+<br>
+<a href="../use_cases/">See more online use cases</a>
 
-## Copyright and license
+### Copyright and license
 
 Code released under the MIT License.
 
