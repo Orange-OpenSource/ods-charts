@@ -234,28 +234,28 @@ const NON_BOOSTED5_VARIABLE = `
   --ods-yellow-6: var(--ods-yellow-600);
 
   --ods-blue-1: var(--ods-blue-100);
-  --ods-blue-1: var(--ods-blue-100);
+  --ods-blue-2: var(--ods-blue-200);
   --ods-blue-3: var(--ods-blue-300);
   --ods-blue-4: var(--ods-blue-400);
   --ods-blue-5: var(--ods-blue-500);
   --ods-blue-6: var(--ods-blue-600);
 
   --ods-green-1: var(--ods-green-100);
-  --ods-green-1: var(--ods-green-100);
+  --ods-green-2: var(--ods-green-200);
   --ods-green-3: var(--ods-green-300);
   --ods-green-4: var(--ods-green-400);
   --ods-green-5: var(--ods-green-500);
   --ods-green-6: var(--ods-green-600);
 
   --ods-pink-1: var(--ods-pink-100);
-  --ods-pink-1: var(--ods-pink-100);
+  --ods-pink-2: var(--ods-pink-200);
   --ods-pink-3: var(--ods-pink-300);
   --ods-pink-4: var(--ods-pink-400);
   --ods-pink-5: var(--ods-pink-500);
   --ods-pink-6: var(--ods-pink-600);
 
   --ods-purple-1: var(--ods-purple-100);
-  --ods-purple-1: var(--ods-purple-100);
+  --ods-purple-2: var(--ods-purple-200);
   --ods-purple-3: var(--ods-purple-300);
   --ods-purple-4: var(--ods-purple-400);
   --ods-purple-5: var(--ods-purple-500);

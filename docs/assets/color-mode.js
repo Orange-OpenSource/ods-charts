@@ -25,7 +25,9 @@
     }
     document.documentElement.setAttribute('data-bs-theme', theme);
     document.querySelectorAll('iframe').forEach((iframe) => {
-      iframe.contentDocument.body.setAttribute('data-bs-theme', theme);
+      if (iframe && iframe.contentDocument && iframe.contentDocument.body) {
+        iframe.contentDocument.body.setAttribute('data-bs-theme', theme);
+      }
     });
   };
 
