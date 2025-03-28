@@ -206,13 +206,13 @@ const NON_BOOSTED5_VARIABLE = `
 
   --ods-cyan-light: var(--ods-blue-100);
   --ods-teal-light: var(--ods-green-100);
-  --ods-pink-light: var(--ods-pink-600);
+  --ods-pink-light: var(--ods-pink-100);
   --ods-indigo-light: var(--ods-purple-100);
   --ods-yellow-light: var(--ods-yellow-100);
 
   --ods-cyan-dark: var(--ods-blue-600);
   --ods-teal-dark: var(--ods-green-600);
-  --ods-pink-dark: var(--ods-pink-300);
+  --ods-pink-dark: var(--ods-pink-400);
   --ods-indigo-dark: var(--ods-purple-600);
   --ods-yellow-dark: var(--ods-yellow-400);
 
@@ -289,13 +289,13 @@ const NON_BOOSTED5_VARIABLE = `
 
   --ods-cyan-light: var(--ods-blue-600);
   --ods-teal-light: var(--ods-green-600);
-  --ods-pink-light: var(--ods-pink-300);
+  --ods-pink-light: var(--ods-pink-400);
   --ods-indigo-light: var(--ods-purple-600);
   --ods-yellow-light: var(--ods-yellow-400);
 
   --ods-cyan-dark: var(--ods-blue-100);
   --ods-teal-dark: var(--ods-green-100);
-  --ods-pink-dark: var(--ods-pink-600);
+  --ods-pink-dark: var(--ods-pink-100);
   --ods-indigo-dark: var(--ods-purple-100);
   --ods-yellow-dark: var(--ods-yellow-100);
 
