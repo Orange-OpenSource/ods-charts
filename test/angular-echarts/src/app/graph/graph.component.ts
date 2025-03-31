@@ -1,7 +1,33 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import * as ODSCharts from 'ods-charts';
-import * as echarts from 'echarts';
-import { ECharts, EChartsOption } from 'echarts';
+import * as echarts from 'echarts/core';
+import { BarChart, LineChart } from 'echarts/charts';
+import { DatasetComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LegendComponent } from 'echarts/components';
+import { TooltipComponent } from 'echarts/components';
+echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
+
+import { ECharts } from 'echarts/core';
+
+import type {
+  // The series option types are defined with the SeriesOption suffix
+  BarSeriesOption,
+  LineSeriesOption,
+} from 'echarts/charts';
+import type {
+  // The component option types are defined with the ComponentOption suffix
+  TitleComponentOption,
+  TooltipComponentOption,
+  GridComponentOption,
+  DatasetComponentOption,
+} from 'echarts/components';
+import type { ComposeOption } from 'echarts/core';
+
+// Create an Option type with only the required components and charts via ComposeOption
+type EChartsOption = ComposeOption<
+  BarSeriesOption | LineSeriesOption | TitleComponentOption | TooltipComponentOption | GridComponentOption | DatasetComponentOption
+>;
 
 @Component({
   selector: 'app-graph',
