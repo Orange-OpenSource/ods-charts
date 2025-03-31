@@ -1,6 +1,12 @@
 import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import * as ODSCharts from 'ods-charts';
-import * as echarts from 'echarts';
+import * as echarts from 'echarts/core';
+import { BarChart, LineChart } from 'echarts/charts';
+import { DatasetComponent, GridComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LegendComponent } from 'echarts/components';
+import { TooltipComponent } from 'echarts/components';
+echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
 
 @Component({
   selector: 'app-line-chart',
