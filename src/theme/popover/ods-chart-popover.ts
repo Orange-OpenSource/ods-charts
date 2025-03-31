@@ -288,7 +288,7 @@ export class ODSChartsPopover {
       style.textContent = DEFAULT_NONE_CSS;
       document.head.appendChild(style);
     }
-    const popoverOptions = {};
+    const popoverOptions: any = {};
     const tooltipTrigger: 'xAxis' | 'yAxis' | 'grid' = this.getTooltipTrigger(dataOptions, themeOptions);
     this.enterable = !!dataOptions && !!dataOptions.tooltip && !!dataOptions.tooltip.enterable;
 
@@ -386,7 +386,7 @@ export class ODSChartsPopover {
             hideDelay: 0,
             appendTo: 'body',
             renderMode: 'html',
-            className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ods-charts-mode-${this.mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
+            className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopover)}`,
             axisPointer: {
               type: this.popoverConfig.axisPointer,
             },
@@ -454,15 +454,21 @@ export class ODSChartsPopover {
         });
       }
 
+      if (popoverOptions?.tooltip?.formatter) {
+        popoverOptions.tooltip.formatter.IsOdsChartsFormatter = true;
+      }
+
       // We have to delete any default formatter as it is incompatible with externalizePopover feature
       if (dataOptions?.tooltip?.formatter) {
-        dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
-        // But if no formatter has been provided through the popoverDefinition,
-        // we will use the Apache ECharts config
-        if (!this.popoverDefinition.getPopupContentValue) {
-          const formatter = dataOptions.tooltip.formatter;
-          this.popoverDefinition = cloneDeepObject(this.popoverDefinition);
-          this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formatter([tooltipElement]);
+        if (!dataOptions.tooltip.formatter.IsOdsChartsFormatter) {
+          dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
+          // But if no formatter has been provided through the popoverDefinition,
+          // we will use the Apache ECharts config
+          if (!this.popoverDefinition.getPopupContentValue) {
+            const formatter = dataOptions.tooltip.formatter;
+            this.popoverDefinition = cloneDeepObject(this.popoverDefinition);
+            this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => formatter([tooltipElement]);
+          }
         }
         delete dataOptions.tooltip.formatter;
       }
