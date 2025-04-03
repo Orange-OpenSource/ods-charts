@@ -109,6 +109,15 @@ function generateConfigurator(id) {
                 <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
                 <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
                 <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE}">[OUDS] Blue (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_GREEN}">[OUDS] Green (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_PINK}">[OUDS] Pink (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_PURPLE}">[OUDS] Purple (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_YELLOW}">[OUDS] Yellow (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL}">[OUDS] Categorical (10)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_FUNCTIONAL}">[OUDS] Functional (3)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_HIGHLIGHT}">[OUDS] Highlight (2)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SINGLE}">[OUDS] Single (6)</option>
               </select>
             </div>
 
@@ -627,7 +636,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
+    20 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #lineStyleInput`).value,
@@ -643,7 +652,7 @@ async function changeTheme(id) {
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
-    if (11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
+    if (20 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
       document.querySelector('#view_custom_color_' + id).classList.remove('d-none');
     } else {
       document.querySelector('#view_custom_color_' + id).classList.add('d-none');

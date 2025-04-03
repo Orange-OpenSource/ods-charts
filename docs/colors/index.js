@@ -38,7 +38,7 @@ function displayColorSet(containerId, colorSet, colorSetLabel) {
     `;
     })
     .join('')}
-   
+
     `;
 
   if (colorSetLabel) {
@@ -62,6 +62,15 @@ function displayAllColorSets(divId) {
     ['SEQUENTIAL_PINK', 'Pink'],
     ['SEQUENTIAL_PURPLE', 'Purple'],
     ['SEQUENTIAL_YELLOW', 'Yellow'],
+    ['OUDS_SEQUENTIAL_BLUE', '[OUDS] Blue'],
+    ['OUDS_SEQUENTIAL_GREEN', '[OUDS] Green'],
+    ['OUDS_SEQUENTIAL_PINK', '[OUDS] Pink'],
+    ['OUDS_SEQUENTIAL_PURPLE', '[OUDS] Purple'],
+    ['OUDS_SEQUENTIAL_YELLOW', '[OUDS] Yellow'],
+    ['OUDS_CATEGORICAL', '[OUDS] Categorical'],
+    ['OUDS_FUNCTIONAL', '[OUDS] Functional'],
+    ['OUDS_HIGHLIGHT', '[OUDS] Highlight'],
+    ['OUDS_SINGLE', '[OUDS] Single'],
   ];
   document.getElementById(divId).innerHTML = sets
     .map(
@@ -75,12 +84,11 @@ function displayAllColorSets(divId) {
         </div>
       </div>
     </div>
-  
   `
     )
     .join('');
   sets.forEach((element) => {
-    displayColorSet(divId, element[0], element[1]);
+    displayColorSet(divId, element[0], `${element[1]}${element[1].startsWith('[OUDS]') ? ' (Experimental)' : ''}`);
   });
 }
 

@@ -36,6 +36,18 @@ import { DEFAULT_LINES_AXIS } from './default/ODS.lines.axis';
 import { ODS_CHARTS_CSS_VARIABLES } from './colors/colors-css-variables';
 import { ODSChartsThemeObserver } from './theme-observer/ods-charts-theme-observer';
 
+import { DEFAULT_OUDS_COLORS_BLUE } from './default/OUDS.colors.blue';
+import { DEFAULT_OUDS_COLORS_CATEGORICAL } from './default/OUDS.colors.categorical';
+import { DEFAULT_OUDS_COLORS_FUNCTIONAL } from './default/OUDS.colors.functional';
+import { DEFAULT_OUDS_COLORS_GREEN } from './default/OUDS.colors.green';
+import { DEFAULT_OUDS_COLORS_HIGHLIGHT } from './default/OUDS.colors.highlight';
+import { DEFAULT_OUDS_COLORS_PINK } from './default/OUDS.colors.pink';
+import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
+import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
+import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
+import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
+import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
+
 /**
  * ODSChartsColorsSet is used for predefined color sets.
  *
@@ -54,6 +66,15 @@ import { ODSChartsThemeObserver } from './theme-observer/ods-charts-theme-observ
  * - {@link SEQUENTIAL_PINK} is the color set embedding all the Orange Design System pink colors.
  * - {@link SEQUENTIAL_PURPLE} is the color set embedding all the Orange Design System purple colors.
  * - {@link SEQUENTIAL_YELLOW} is the color set embedding all the Orange Design System yellow colors.
+ * - {@link OUDS_SEQUENTIAL_BLUE} is the color set embedding all the Orange Unified Design System blue colors. It's still experimental.
+ * - {@link OUDS_SEQUENTIAL_GREEN} is the color set embedding all the Orange Unified Design System green colors. It's still experimental.
+ * - {@link OUDS_SEQUENTIAL_PINK} is the color set embedding all the Orange Unified Design System pink colors. It's still experimental.
+ * - {@link OUDS_SEQUENTIAL_PURPLE} is the color set embedding all the Orange Unified Design System purple colors. It's still experimental.
+ * - {@link OUDS_SEQUENTIAL_YELLOW} is the color set embedding all the Orange Unified Design System yellow colors. It's still experimental.
+ * - {@link OUDS_CATEGORICAL} is the color set embedding all the Orange Unified Design System categorical colors. It's still experimental.
+ * - {@link OUDS_FUNCTIONAL} is the color set embedding all the Orange Unified Design System functional colors. It's still experimental.
+ * - {@link OUDS_HIGHLIGHT} is the color set embedding all the Orange Unified Design System highlight colors. It's still experimental.
+ * - {@link OUDS_SINGLE} is the color set embedding all the Orange Unified Design System single colors. It's still experimental.
  */
 export enum ODSChartsColorsSet {
   DEFAULT = 'default',
@@ -67,6 +88,15 @@ export enum ODSChartsColorsSet {
   SEQUENTIAL_PINK = 'pink',
   SEQUENTIAL_PURPLE = 'purple',
   SEQUENTIAL_YELLOW = 'yellow',
+  OUDS_SEQUENTIAL_BLUE = 'oudsBlue',
+  OUDS_SEQUENTIAL_GREEN = 'oudsGreen',
+  OUDS_SEQUENTIAL_PINK = 'oudsPink',
+  OUDS_SEQUENTIAL_PURPLE = 'oudsPurple',
+  OUDS_SEQUENTIAL_YELLOW = 'oudsYellow',
+  OUDS_CATEGORICAL = 'oudsCategorical',
+  OUDS_FUNCTIONAL = 'oudsFunctional',
+  OUDS_HIGHLIGHT = 'oudsHighlight',
+  OUDS_SINGLE = 'oudsSingle',
 }
 
 /**
@@ -197,6 +227,15 @@ const THEME: {
     pink: DEFAULT_COLORS_PINK,
     purple: DEFAULT_COLORS_PURPLE,
     yellow: DEFAULT_COLORS_YELLOW,
+    oudsBlue: DEFAULT_OUDS_COLORS_BLUE,
+    oudsGreen: DEFAULT_OUDS_COLORS_GREEN,
+    oudsPink: DEFAULT_OUDS_COLORS_PINK,
+    oudsPurple: DEFAULT_OUDS_COLORS_PURPLE,
+    oudsYellow: DEFAULT_OUDS_COLORS_YELLOW,
+    oudsCategorical: DEFAULT_OUDS_COLORS_CATEGORICAL,
+    oudsFunctional: DEFAULT_OUDS_COLORS_FUNCTIONAL,
+    oudsHighlight: DEFAULT_OUDS_COLORS_HIGHLIGHT,
+    oudsSingle: DEFAULT_OUDS_COLORS_SINGLE,
   },
   visualMapColors: {
     default: { visualMapColor: DEFAULT_COLORS.color },
@@ -210,6 +249,15 @@ const THEME: {
     pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
     purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
     yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
+    oudsBlue: { visualMapColor: DEFAULT_OUDS_COLORS_BLUE.color },
+    oudsGreen: { visualMapColor: DEFAULT_OUDS_COLORS_GREEN.color },
+    oudsPink: { visualMapColor: DEFAULT_OUDS_COLORS_PINK.color },
+    oudsPurple: { visualMapColor: DEFAULT_OUDS_COLORS_PURPLE.color },
+    oudsYellow: { visualMapColor: DEFAULT_OUDS_COLORS_YELLOW.color },
+    oudsCategorical: { visualMapColor: DEFAULT_OUDS_COLORS_CATEGORICAL.color },
+    oudsFunctional: { visualMapColor: DEFAULT_OUDS_COLORS_FUNCTIONAL.color },
+    oudsHighlight: { visualMapColor: DEFAULT_OUDS_COLORS_HIGHLIGHT.color },
+    oudsSingle: { visualMapColor: DEFAULT_OUDS_COLORS_SINGLE.color },
   },
   linesStyle: {
     broken: COMMON_LINE_STYLE_BROKEN,
@@ -296,7 +344,7 @@ export class ODSChartsTheme {
       }
       this._computedStyle = this._computedStyle ? this._computedStyle : null;
       if (!this._computedStyle) {
-        console.error('uunable to build computed style for chart css context', this.options.cssSelector, this.options.cssSelector);
+        console.error('unable to build computed style for chart css context', this.options.cssSelector, this.options.cssSelector);
       }
     }
     return this._computedStyle ? this._computedStyle : undefined;
@@ -320,11 +368,11 @@ export class ODSChartsTheme {
   }
 
   private replaceOneCssVar(css: any) {
-    let retunedValue = css;
-    if (this.options.cssSelector && 'string' === typeof retunedValue && !!this.computedStyle) {
+    let returnedValue = css;
+    if (this.options.cssSelector && 'string' === typeof returnedValue && !!this.computedStyle) {
       try {
         const regex = /var\(([^,]*),?(.*)\)/g;
-        const matches = retunedValue.match(regex);
+        const matches = returnedValue.match(regex);
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
@@ -355,13 +403,13 @@ export class ODSChartsTheme {
             }
 
             if (foundVar in this.cssVarsMapping) {
-              retunedValue = retunedValue.replace(foundVar, this.cssVarsMapping[foundVar]);
+              returnedValue = returnedValue.replace(foundVar, this.cssVarsMapping[foundVar]);
             }
           }
         }
       } catch (error) {}
     }
-    return retunedValue;
+    return returnedValue;
   }
 
   private replaceRecursivelyCssVars<T extends { [key: string]: any }>(subTreeConfig: T): T {

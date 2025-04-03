@@ -7,6 +7,7 @@
 //
 
 import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
+import { ODS_CHARTS_CONTEXT } from './_ouds-colors-css-variables';
 
 /**
  * Added for None or Boosted 4 themes
@@ -312,16 +313,20 @@ export const ODS_CHARTS_CSS_VARIABLES: { [theme in ODSChartsCSSThemesNames]: str
   BOOSTED4: `
   ${BOOSTED5_VARIABLE}
   ${NON_BOOSTED5_VARIABLE}
+  ${ODS_CHARTS_CONTEXT}
   `,
   BOOSTED5: `
   ${NON_BOOSTED5_VARIABLE}
+  ${ODS_CHARTS_CONTEXT}
   `,
   CUSTOM: `
   ${BOOSTED5_VARIABLE}
   ${NON_BOOSTED5_VARIABLE}
+  ${ODS_CHARTS_CONTEXT}
   `,
   NONE: `
   ${BOOSTED5_VARIABLE}
   ${NON_BOOSTED5_VARIABLE}
+  ${ODS_CHARTS_CONTEXT}
   `,
 };
