@@ -98,17 +98,17 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Colors</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">Default colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">Categorical colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">Functional (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">Darker tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">[ODS] Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">[ODS] Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">[ODS] Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">[ODS] Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">[ODS] Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">[ODS] Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">[ODS] Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">[ODS] Green (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">[ODS] Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">[ODS] Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">[ODS] Yellow (6)</option>
                 <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE}">[OUDS] Blue (9)</option>
                 <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_GREEN}">[OUDS] Green (9)</option>
                 <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_PINK}">[OUDS] Pink (9)</option>
