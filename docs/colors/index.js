@@ -38,7 +38,7 @@ function displayColorSet(containerId, colorSet, colorSetLabel) {
     `;
     })
     .join('')}
-   
+
     `;
 
   if (colorSetLabel) {
@@ -51,22 +51,33 @@ function displayColorSet(containerId, colorSet, colorSetLabel) {
 
 function displayAllColorSets(divId) {
   var sets = [
-    ['DEFAULT', 'Default colors'],
-    ['CATEGORICAL', 'Categorical colors'],
-    ['FUNCTIONAL', 'Functional'],
-    ['SUPPORTING_COLORS', 'Supporting colors'],
-    ['LIGHTER_TINTS', 'Lighter tints'],
-    ['DARKER_TINTS', 'Darker tints'],
-    ['SEQUENTIAL_BLUE', 'Blue'],
-    ['SEQUENTIAL_GREEN', 'Green'],
-    ['SEQUENTIAL_PINK', 'Pink'],
-    ['SEQUENTIAL_PURPLE', 'Purple'],
-    ['SEQUENTIAL_YELLOW', 'Yellow'],
+    ['DEFAULT', '[ODS] Default colors'],
+    ['CATEGORICAL', '[ODS] Categorical colors'],
+    ['FUNCTIONAL', '[ODS] Functional'],
+    ['SUPPORTING_COLORS', '[ODS] Supporting colors'],
+    ['LIGHTER_TINTS', '[ODS] Lighter tints'],
+    ['DARKER_TINTS', '[ODS] Darker tints'],
+    ['SEQUENTIAL_BLUE', '[ODS] Blue'],
+    ['SEQUENTIAL_GREEN', '[ODS] Green'],
+    ['SEQUENTIAL_PINK', '[ODS] Pink'],
+    ['SEQUENTIAL_PURPLE', '[ODS] Purple'],
+    ['SEQUENTIAL_YELLOW', '[ODS] Yellow'],
+    [],
+    ['OUDS_SEQUENTIAL_BLUE', '[OUDS] Blue'],
+    ['OUDS_SEQUENTIAL_GREEN', '[OUDS] Green'],
+    ['OUDS_SEQUENTIAL_PINK', '[OUDS] Pink'],
+    ['OUDS_SEQUENTIAL_PURPLE', '[OUDS] Purple'],
+    ['OUDS_SEQUENTIAL_YELLOW', '[OUDS] Yellow'],
+    ['OUDS_CATEGORICAL', '[OUDS] Categorical'],
+    ['OUDS_FUNCTIONAL', '[OUDS] Functional'],
+    ['OUDS_HIGHLIGHT', '[OUDS] Highlight'],
+    ['OUDS_SINGLE', '[OUDS] Single'],
   ];
   document.getElementById(divId).innerHTML = sets
-    .map(
-      (element) => `
-  <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+    .map((element) =>
+      element[0]
+        ? `
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
       <div class="card h-100">
         <div class="card-body">
           <h3 class="h3">${element[1]}</h3>
@@ -75,12 +86,17 @@ function displayAllColorSets(divId) {
         </div>
       </div>
     </div>
-  
-  `
+    `
+        : `
+      <!-- Force next columns to break to new line -->
+      <div class="w-100"></div>
+      `
     )
     .join('');
   sets.forEach((element) => {
-    displayColorSet(divId, element[0], element[1]);
+    if (element[0]) {
+      displayColorSet(divId, element[0], `${element[1]}${element[1].startsWith('[OUDS]') ? ' (Experimental)' : ''}`);
+    }
   });
 }
 

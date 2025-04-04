@@ -98,17 +98,26 @@ function generateConfigurator(id) {
             <div class="col-md-4">
               <label for="colorSetInput" class="form-label">Colors</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
-                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">Default colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">Categorical colors (12)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">Functional (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">Supporting colors (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">Lighter tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">Darker tints (5)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">Blue (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">Green (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">Pink (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">Purple (6)</option>
-                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">Yellow (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">[ODS] Default colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.CATEGORICAL}">[ODS] Categorical colors (12)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.FUNCTIONAL}">[ODS] Functional (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS}">[ODS] Supporting colors (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.LIGHTER_TINTS}">[ODS] Lighter tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.DARKER_TINTS}">[ODS] Darker tints (5)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE}">[ODS] Blue (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN}">[ODS] Green (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PINK}">[ODS] Pink (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE}">[ODS] Purple (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.SEQUENTIAL_YELLOW}">[ODS] Yellow (6)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE}">[OUDS] Blue (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_GREEN}">[OUDS] Green (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_PINK}">[OUDS] Pink (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_PURPLE}">[OUDS] Purple (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_YELLOW}">[OUDS] Yellow (9)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL}">[OUDS] Categorical (10)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_FUNCTIONAL}">[OUDS] Functional (3)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_HIGHLIGHT}">[OUDS] Highlight (2)</option>
+                <option value="${ODSCharts.ODSChartsColorsSet.OUDS_SINGLE}">[OUDS] Single (6)</option>
               </select>
             </div>
 
@@ -627,7 +636,7 @@ async function changeTheme(id) {
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
-    11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
+    20 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex
       ? JSON.parse(document.querySelector(`#accordion_${id} #colorSetInput`).value)
       : document.querySelector(`#accordion_${id} #colorSetInput`).value,
     document.querySelector(`#accordion_${id} #lineStyleInput`).value,
@@ -643,7 +652,7 @@ async function changeTheme(id) {
     true
   );
   if (document.querySelector('#view_custom_color_' + id)) {
-    if (11 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
+    if (20 === document.querySelector(`#accordion_${id} #colorSetInput`).selectedIndex) {
       document.querySelector('#view_custom_color_' + id).classList.remove('d-none');
     } else {
       document.querySelector('#view_custom_color_' + id).classList.add('d-none');
