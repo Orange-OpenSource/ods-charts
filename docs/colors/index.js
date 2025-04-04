@@ -62,6 +62,7 @@ function displayAllColorSets(divId) {
     ['SEQUENTIAL_PINK', '[ODS] Pink'],
     ['SEQUENTIAL_PURPLE', '[ODS] Purple'],
     ['SEQUENTIAL_YELLOW', '[ODS] Yellow'],
+    [],
     ['OUDS_SEQUENTIAL_BLUE', '[OUDS] Blue'],
     ['OUDS_SEQUENTIAL_GREEN', '[OUDS] Green'],
     ['OUDS_SEQUENTIAL_PINK', '[OUDS] Pink'],
@@ -73,9 +74,10 @@ function displayAllColorSets(divId) {
     ['OUDS_SINGLE', '[OUDS] Single'],
   ];
   document.getElementById(divId).innerHTML = sets
-    .map(
-      (element) => `
-  <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+    .map((element) =>
+      element[0]
+        ? `
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
       <div class="card h-100">
         <div class="card-body">
           <h3 class="h3">${element[1]}</h3>
@@ -84,11 +86,17 @@ function displayAllColorSets(divId) {
         </div>
       </div>
     </div>
-  `
+    `
+        : `
+      <!-- Force next columns to break to new line -->
+      <div class="w-100"></div>
+      `
     )
     .join('');
   sets.forEach((element) => {
-    displayColorSet(divId, element[0], `${element[1]}${element[1].startsWith('[OUDS]') ? ' (Experimental)' : ''}`);
+    if (element[0]) {
+      displayColorSet(divId, element[0], `${element[1]}${element[1].startsWith('[OUDS]') ? ' (Experimental)' : ''}`);
+    }
   });
 }
 
