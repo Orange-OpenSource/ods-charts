@@ -6,6 +6,8 @@
 // This software is distributed under the MIT license.
 //
 
+// /!\ This file is a placeholder until we have a good way to handle OUDS inside the library /!\
+
 export const DEFAULT_OUDS_LINES_AXIS = {
   categoryAxis: {
     axisLine: {
