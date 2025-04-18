@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-import { type ECharts } from 'echarts';
+import { type EChartsOption, type ECharts, type ResizeOpts } from 'echarts';
 export class ODSChartsResize {
   private static sizeListeners: any = {};
   private observer: ResizeObserver | undefined = undefined;
@@ -61,7 +61,16 @@ export class ODSChartsResize {
 
   private resizeChart() {
     try {
-      this.echart.resize();
+      const chartOptions: EChartsOption = this.echart.getOption() as EChartsOption;
+      const opts: ResizeOpts = {};
+      if (chartOptions.animation) {
+        opts.animation = {
+          duration: 'number' === typeof chartOptions.animationDuration ? chartOptions.animationDuration : 1000,
+          easing: chartOptions.animationEasing ? chartOptions.animationEasing : 'cubicInOut',
+        };
+      }
+
+      this.echart.resize(opts);
     } catch (error) {
       this.removeListener();
     }
