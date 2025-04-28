@@ -26,7 +26,12 @@
     "serve:react": "serve test/react/build/",
     "serve:vue": "serve test/vue/dist/",
     "typedoc": "typedoc --out docs/api src/ods-charts.ts --disableSources --excludePrivate --excludeProtected --readme docs/README.md && node build/add_head.mjs",
-    "watch": "webpack --watch --mode development"
+    "watch": "webpack --watch --mode development",
+    "test:angular-ngx-echarts": "npm i && npm run build && cd test/angular-ngx-echarts && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-ngx-echarts",
+    "test:angular-ng-boosted": "npm i && npm run build && cd test/angular-ng-boosted && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-ng-boosted",
+    "test:angular-echarts": "npm i && npm run build && cd test/angular-echarts && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-echarts",
+    "test:react": "npm i && npm run build && cd test/react && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:react",
+    "test:vue": "npm i && npm run build && cd test/vue && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:vue"
   },
   "devDependencies": {
     "echarts": "^5.6.0",
