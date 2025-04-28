@@ -195,7 +195,9 @@ export interface ODSChartsThemeOptions {
   cssTheme?: ODSChartsCSSThemeDefinition;
   /**
    * cssSelector the selector of the DOM element where the graph will be built.
-   * It is used to get css variable values when using a third party theme generator base on css variable like Boosted 5.
+   * It is used
+   * - to get css variable values when using a third party theme generator base on css variable like Boosted 5.
+   * - to determine if the graph is displayed in dark or light mode
    *
    * Default cssSelector is `'body'`
    */
@@ -482,13 +484,16 @@ export class ODSChartsTheme {
    * - {@link ODSChartsThemeOptions.colors}: colors to be used to graph the chart.
    * - {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
    * - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
-   * - {@link ODSChartsThemeOptions.mode}: fixes the light or dark mode.
+   * - {@link ODSChartsThemeOptions.cssSelector}: selector of the DOM element where the graph will be built. It is used
+   *   - to get css variable values when using a third party theme generator base on css variable like Boosted 5.
+   *   - to determine if the graph is displayed in dark or light mode
    * @returns the theme manager.
    * This manager is used to retrieve the Apache ECharts theme and manage the chart options in accordance with the Orange Design System.
    * It is used to add features:
    * - {@link ODSChartsTheme.externalizeLegends}: to add Orange Design System theme to legends.
    * - {@link ODSChartsTheme.externalizePopover}: to add Orange Design System theme to popover or tooltip.
-   * - {@link ODSChartsTheme.manageChartResize}`: to dynamically adapt graph size the its container.
+   * - {@link ODSChartsTheme.manageChartResize}: to dynamically adapt graph size the its container.
+   * - {@link ODSChartsTheme.manageThemeObserver}: to enable auto-switch between dark and light mode.
    */
   public static getThemeManager(options?: ODSChartsThemeOptions): ODSChartsTheme {
     if (!options) {
