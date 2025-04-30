@@ -1,4 +1,4 @@
-Copyright (C) 2023 - 2024 Orange SA All rights reserved
+Copyright (c) 2023 - 2025 Orange SA All rights reserved
 
 The following parts are proprietary information of Orange.
 You shall not use or display any trade names, trademarks, service marks, products names, illustrations or designs used within the software
