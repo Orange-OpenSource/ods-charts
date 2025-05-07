@@ -1045,3 +1045,86 @@ window.generateDonutChart = async (id) => {
   };
   displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
 };
+
+window.generateGaugeChart = async (id, circular = false, dial = false) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    series: [
+      {
+        type: 'gauge',
+        endAngle: circular ? -270 : 0,
+        startAngle: circular ? 90 : 180,
+        min: 0,
+        max: 100,
+        data: [
+          {
+            value: 40,
+          },
+        ],
+
+        radius: circular ? '90%' : dial ? '125%' : '150%',
+        center: ['50%', circular ? '50%' : '75%'],
+        splitNumber: dial ? 4 : 1,
+        detail: {
+          offsetCenter: [0, circular ? 0 : dial ? 30 : -10],
+          color: 'var(--bs-body-color, #000)',
+          fontSize: 40,
+          fontFamily: 'Helvetica Neue',
+          fontWeight: 'bold',
+        },
+        progress: {
+          show: dial ? false : true,
+          width: 32,
+        },
+        splitLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        pointer: {
+          show: dial ? true : false,
+          width: 20,
+          icon: 'path://M2090.36389,615.30999 L2090.36389,615.30999 C2091.48372,615.30999 2092.40383,616.194028 2092.44859,617.312956 L2096.90698,728.755929 C2097.05155,732.369577 2094.2393,735.416212 2090.62566,735.56078 C2090.53845,735.564269 2090.45117,735.566014 2090.36389,735.566014 L2090.36389,735.566014 C2086.74736,735.566014 2083.81557,732.63423 2083.81557,729.017692 C2083.81557,728.930412 2083.81732,728.84314 2083.82081,728.755929 L2088.2792,617.312956 C2088.32396,616.194028 2089.24407,615.30999 2090.36389,615.30999 Z',
+          itemStyle: {
+            color: 'var(--bs-body-color, #000)',
+          },
+          offsetCenter: [0, 0],
+        },
+        axisLabel: {
+          show: circular ? false : true,
+          distance: dial ? -40 : -50,
+          color: 'var(--bs-body-color, #000)',
+          fontSize: 14,
+          fontFamily: 'Helvetica Neue',
+          fontWeight: 400,
+          ...(dial
+            ? {
+                formatter: function (value) {
+                  return ['A', 'B', 'C', 'D', 'E'][value / 25];
+                },
+              }
+            : {}),
+        },
+        axisLine: {
+          roundCap: false,
+          lineStyle: {
+            width: 32,
+            ...(dial
+              ? {
+                  color: [
+                    [0.498, 'var(--ouds-charts-color-functional-positive)'],
+                    [0.502, 'transparent'],
+                    [0.748, 'var(--ouds-charts-color-functional-warning)'],
+                    [0.752, 'transparent'],
+                    [1, 'var(--ouds-charts-color-functional-negative)'],
+                  ],
+                }
+              : { color: [[1, 'var(--bs-light)']] }),
+          },
+        },
+      },
+    ],
+  };
+  displayChart(id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE, colorIndex: 1 }], undefined, undefined, 'none');
+};
