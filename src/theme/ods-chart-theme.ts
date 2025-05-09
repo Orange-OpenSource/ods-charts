@@ -789,8 +789,6 @@ export class ODSChartsTheme {
 
     themeOptions = this.replaceAllCssVars(themeOptions);
 
-    themeOptions = this.replaceAllCssVars(themeOptions);
-
     if (this.chartLegendManager) {
       this.chartLegendManager.addLegend(
         this.dataOptions,
@@ -905,7 +903,7 @@ export class ODSChartsTheme {
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
-    const result = mergeObjects(this.getThemeOptions(addGlobalThemeOptions), this.dataOptions);
+    const result = mergeObjects(this.getThemeOptions(addGlobalThemeOptions), this.replaceAllCssVars(cloneDeepObject(this.dataOptions)));
     return result;
   }
 }
