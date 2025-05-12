@@ -324,6 +324,10 @@ export class ODSChartsTheme {
     this.theme = this.calculateTheme();
   }
 
+  /**
+   * build a CSSStyleDeclaration build from a DOM element insert in the current charts holder.
+   * It is used to calculate real time values for the css var.
+   */
   private get computedStyle(): CSSStyleDeclaration | undefined {
     if (undefined === this._computedStyle) {
       if (this.options.cssSelector) {
@@ -354,6 +358,12 @@ export class ODSChartsTheme {
     return this._computedStyle ? this._computedStyle : undefined;
   }
 
+  /**
+   * Init DOM elemnts for style. Add any specific style for the current theme.
+   * Register a computed style will be initialised.
+   * if `initComputedStyle()` return true, `removeComputedStyle()` must be called`after current treatment is done.
+   * @returns
+   */
   private initComputedStyle(): boolean {
     if (!this._computedStyleInitialized) {
       if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && ODS_CHARTS_CSS_VARIABLES[this.cssThemeName]) {
@@ -368,6 +378,11 @@ export class ODSChartsTheme {
     return false;
   }
 
+  /**
+   * After replacing all the css var of used objects by their value calculated in the DOM,
+   * remove the used temporay DOM element.
+   * `removeComputedStyle()` must be called if and only if the previous `initComputedStyle()` call returns true.
+   */
   private removeComputedStyle() {
     if (this.options.cssSelector) {
       const contextElement = document.querySelector(
@@ -381,11 +396,21 @@ export class ODSChartsTheme {
     this._computedStyleInitialized = false;
   }
 
+  /**
+   * give the calculated value of a property
+   * @param name : the property name
+   * @returns the value of that property in the style computed from the DOM
+   */
   private getPropertyValue(name: string): string {
     const value = this.computedStyle ? this.computedStyle.getPropertyValue(name) : '';
     return value ? value : '';
   }
 
+  /**
+   * Replace a css var by it value
+   * @param css the string to be analysed
+   * @returns the updated value
+   */
   private replaceOneCssVar(css: any) {
     let returnedValue = css;
     if (this.options.cssSelector && 'string' === typeof returnedValue && !!this.computedStyle) {
@@ -430,6 +455,11 @@ export class ODSChartsTheme {
     return returnedValue;
   }
 
+  /**
+   * replace any css var reference by its value
+   * @param subTreeConfig: subTree in which css var must be replaced by their value
+   * @returns the subTreeConfig updated
+   */
   private replaceRecursivelyCssVars<T extends { [key: string]: any }>(subTreeConfig: T): T {
     var newConfig: { [key: string]: any } = subTreeConfig;
     for (const key of Object.keys(newConfig)) {
@@ -450,11 +480,21 @@ export class ODSChartsTheme {
     return newConfig as T;
   }
 
+  /**
+   * Return matches of a css var in the given string
+   * @param value : string in whic looking for in css var
+   * @returns : the regular expresion matches
+   */
   private getCssVarMatch(value: string): RegExpMatchArray | null {
     const regex = /var\(([^,]*),?(.*)\)/g;
     return value.match(regex);
   }
 
+  /**
+   * Replace any css var reference (like `var(--bs-border-color-subtle)`) by its value.
+   * @param themeConfiguration : object containing some css var string refernce
+   * @returns : the themeCongiguration updated
+   */
   private replaceAllCssVars<T extends { [key: string]: any }>(themeConfiguration: T): T {
     let result = themeConfiguration;
 
@@ -469,17 +509,33 @@ export class ODSChartsTheme {
     return result;
   }
 
+  /**
+   * Make a copy of any object parts that contains css var reference (like `var(--bs-border-color-subtle)`)
+   * and replace those css vars by their value.
+   * @param chartData : object containing some css var string reference
+   * @returns the new object partially clone
+   */
   private cloneAndReplaceAllCssVars<T extends { [key: string]: any }>(chartData: T): T {
     return this.replaceAllCssVars(conditionalCloneDeepObject(chartData, (value) => !!this.getCssVarMatch(value)));
   }
 
+  /**
+   * Replace in current theme any colors specify through a css var by its hexa value.
+   * Initialised a mapping between a css var and its haxe value for the current theme and dark/light mode.
+   * @returns the updated current theme
+   */
   private calculateTheme(): EChartsProject {
     this.cssVarsMapping = {};
     this.theme = this.replaceAllCssVars(cloneDeepObject(this.initialTheme));
     return this.theme;
   }
 
-  private static getMode(divTheme: Element | null | undefined): ODSChartsMode {
+  /**
+   * Determine the dark or light mode from the html color-scheme property
+   * @param divTheme : div used as html reference element to determine the dark/light mode
+   * @returns
+   */
+  private static getDarkOrLightMode(divTheme: Element | null | undefined): ODSChartsMode {
     let mode: ODSChartsMode = ODSChartsMode.DEFAULT;
     if (divTheme) {
       const computedStyle = window.getComputedStyle(divTheme);
@@ -537,7 +593,7 @@ export class ODSChartsTheme {
       options.cssSelector = 'body';
     }
 
-    mode = ODSChartsTheme.getMode(document.querySelector(options.cssSelector));
+    mode = ODSChartsTheme.getDarkOrLightMode(document.querySelector(options.cssSelector));
 
     var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
 
@@ -594,7 +650,13 @@ export class ODSChartsTheme {
     return this;
   }
 
-  private getDisplayedColors(themeColors: string[], dataOptions: any) {
+  /**
+   *
+   * @param themeColors : colors set to be used by default
+   * @param dataOptions : dataOptions that may content specific color for one data serie
+   * @returns : array of colors
+   */
+  private getDisplayedColors(themeColors: string[], dataOptions: any): string[] {
     const colors: string[] = cloneDeepObject(themeColors);
     if (dataOptions && dataOptions.series) {
       for (let serieIndex = 0; serieIndex < dataOptions.series.length; serieIndex++) {
@@ -723,7 +785,7 @@ export class ODSChartsTheme {
     }
 
     if (this.chartThemeObserver) {
-      this.options.mode = ODSChartsTheme.getMode(this.chartThemeObserver.addThemeObserver());
+      this.options.mode = ODSChartsTheme.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver());
     }
 
     const hasInitializedCompitedStyle = this.initComputedStyle();
