@@ -789,30 +789,40 @@ export class ODSChartsTheme {
 
     themeOptions = this.replaceAllCssVars(themeOptions);
 
-    themeOptions = this.replaceAllCssVars(themeOptions);
-
     if (this.chartLegendManager) {
-      this.chartLegendManager.addLegend(
-        this.dataOptions,
-        displayedColors,
-        this.options.cssTheme as ODSChartsCSSThemeDefinition,
-        this.cssThemeName,
-        this.options.mode as ODSChartsMode
-      );
+      try {
+        this.chartLegendManager.addLegend(
+          this.dataOptions,
+          displayedColors,
+          this.options.cssTheme as ODSChartsCSSThemeDefinition,
+          this.cssThemeName,
+          this.options.mode as ODSChartsMode
+        );
+      } catch (error) {
+        console.error('unable to init Legend Manager', error);
+      }
     }
 
     if (this.chartResizeManager) {
-      this.chartResizeManager.addResizeManagement();
+      try {
+        this.chartResizeManager.addResizeManagement();
+      } catch (error) {
+        console.error('unable to init Resize Manager', error);
+      }
     }
 
     if (this.chartPopoverManager) {
-      this.chartPopoverManager.addPopoverManagement(
-        this.dataOptions,
-        themeOptions,
-        this.options.cssTheme as ODSChartsCSSThemeDefinition,
-        this.cssThemeName,
-        this.options.mode as ODSChartsMode
-      );
+      try {
+        this.chartPopoverManager.addPopoverManagement(
+          this.dataOptions,
+          themeOptions,
+          this.options.cssTheme as ODSChartsCSSThemeDefinition,
+          this.cssThemeName,
+          this.options.mode as ODSChartsMode
+        );
+      } catch (error) {
+        console.error('unable to init Popover Manager', error);
+      }
     }
 
     return themeOptions;
