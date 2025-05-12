@@ -422,8 +422,10 @@ export class ODSChartsPopover {
                 categoryLabel: string;
                 tooltipElements: ODSChartsPopoverItem[];
               } = this.getTooltipElements(params, legends);
-              if (elements && elements.tooltipElements.length > 0) {
-                this.displayPopup(window.event as MouseEvent, elements, cssTheme, this.mode);
+              if (elements && elements.tooltipElements.length > 0 && window.event) {
+                try {
+                  this.displayPopup(window.event as MouseEvent, elements, cssTheme, this.mode);
+                } catch (error) {}
               }
               return ' ';
             },
