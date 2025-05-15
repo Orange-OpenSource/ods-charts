@@ -32,13 +32,17 @@
     "test:angular-ng-boosted": "npm i && npm run build && cd test/angular-ng-boosted && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-ng-boosted",
     "test:angular-echarts": "npm i && npm run build && cd test/angular-echarts && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-echarts",
     "test:react": "npm i && npm run build && cd test/react && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:react",
-    "test:vue": "npm i && npm run build && cd test/vue && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:vue"
+    "test:vue": "npm i && npm run build && cd test/vue && rm -rf package-lock.json node_modules && npm i && npm run build && cd ../.. && npm run serve:vue",
+    "test": "ts-node node_modules/jasmine/bin/jasmine"
   },
   "devDependencies": {
+    "@types/jasmine": "^5.1.8",
     "echarts": "^5.6.0",
+    "jasmine": "^5.7.1",
     "prettier": "^3.5.3",
     "serve": "^14.2.3",
     "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
     "typedoc": "^0.28.3",
     "typescript": "^5.8.3",
     "webpack": "^5.99.6",
