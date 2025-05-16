@@ -494,7 +494,7 @@ var themeManager = ODSCharts.getThemeManager({
   lineStyle: ${
     'ODSCharts.ODSChartsLineStyle.' +
     Object.keys(iframe.contentWindow.ODSCharts.ODSChartsLineStyle).find(
-      (key) => iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle
+      (key) => iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] === themeManager.options.chartConfiguration.lineStyle
     )
   },
   cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)},
@@ -586,7 +586,9 @@ myChart.setOption(themeManager.getChartOptions());
     }
 
     document.querySelector(`#accordion_${id} #darkModeInput option[value="${mode}"]`).setAttribute('selected', 'selected');
-    document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`).setAttribute('selected', 'selected');
+    document
+      .querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.chartConfiguration.lineStyle}"]`)
+      .setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #rendererInput option[value="${rendererInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');

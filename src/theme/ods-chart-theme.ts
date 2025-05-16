@@ -14,7 +14,7 @@ import { ODSChartsLegends } from './legends/ods-chart-legends';
 import { mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemes, ODSChartsCSSThemesNames } from './css-themes/css-themes';
-import { getStringValue } from '../tools/hash';
+import { buildHash, getStringValue } from '../tools/hash';
 import { cloneDeepObject } from '../tools/clone-deep-object';
 import { ODSChartsPopover } from './popover/ods-chart-popover';
 import { ODSChartsPopoverConfig, ODSChartsPopoverDefinition, ODSChartsPopoverManagers } from './popover/ods-chart-popover-definitions';
@@ -45,6 +45,7 @@ import { DEFAULT_OUDS_COLORS_PINK } from './default/OUDS.colors.pink';
 import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
 import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
 import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
+import { ODSChartsConfiguration, ODSChartsLine, ODSChartsTypes } from '../ods-charts';
 // import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
 // import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
 
@@ -183,8 +184,14 @@ export interface ODSChartsThemeOptions {
    * It can be {@link ODSChartsLineStyle.BROKEN}, {@link ODSChartsLineStyle.SMOOTH} of {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
    *
    * Default lineStyle is {@link ODSChartsLineStyle.SMOOTH}
+   *
+   * @deprecated Use new configuration option {@link lineStyle}.
    */
   lineStyle?: ODSChartsLineStyle;
+  /**
+   * chart configuration {@link ODSChartsConfiguration}
+   */
+  chartConfiguration?: ODSChartsConfiguration;
   /**
    * cssTheme is the CSS styles to be used for designing legends and popover elements.
    *
@@ -386,8 +393,8 @@ export class ODSChartsTheme {
     if (!options.colors) {
       options.colors = ODSChartsColorsSet.DEFAULT;
     }
-    if (!options.lineStyle) {
-      options.lineStyle = ODSChartsLineStyle.SMOOTH;
+    if (!options.chartConfiguration) {
+      options.chartConfiguration = new ODSChartsLine(ODSChartsTypes.MULTIPLE_LINE, !options.lineStyle ? options.lineStyle : ODSChartsLineStyle.SMOOTH);
     }
     if (!options.cssTheme) {
       options.cssTheme = ODSChartsCSSThemes.NONE;
@@ -398,7 +405,7 @@ export class ODSChartsTheme {
 
     mode = ODSChartsTheme.getDarkOrLightMode(document.querySelector(options.cssSelector));
 
-    var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.lineStyle)}`;
+    var themeName = `ods.${getStringValue(options.colors)}.${getStringValue(options.chartConfiguration)}`;
 
     const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
@@ -421,9 +428,11 @@ export class ODSChartsTheme {
       );
     }
 
-    mergeObjects(theme, cloneDeepObject(THEME.linesStyle[options.lineStyle]));
+    if (options.chartConfiguration instanceof ODSChartsLine) {
+      mergeObjects(theme, cloneDeepObject(THEME.linesStyle[(options.chartConfiguration as ODSChartsLine).lineStyle]));
+    }
 
-    return new ODSChartsTheme(themeName, theme, { ...options, mode });
+    return new ODSChartsTheme(buildHash(themeName), theme, { ...options, mode });
   }
 
   /**
