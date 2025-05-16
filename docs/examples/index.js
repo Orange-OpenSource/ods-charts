@@ -1,6 +1,8 @@
 const BOOSTED4_VERSION = '4.6.2';
 const BOOSTED5_VERSION = '5.3.3';
 
+var initialOptions = {};
+
 var themeElements = {
   BOOSTED5: {
     css: [
@@ -237,8 +239,9 @@ function generateConfigurator(id) {
 
 function generateExampleDiv(id, direction) {
   var div = document.getElementById(id);
+  const hauteur = div.clientHeight;
 
-  div.innerHTML = `<iframe style="width: 100%; min-height: 60vh;"></iframe>
+  div.innerHTML = `<iframe style="width: 100%; ${hauteur ? 'min-height: ' + div.clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
@@ -291,11 +294,12 @@ async function displayChart(
 
   let iframe = document.querySelector(`#${id} iframe`);
 
-  if (document.getElementById(id).dataset.initialOptions) {
-    options = JSON.parse(document.getElementById(id).dataset.initialOptions);
+  if (initialOptions[id]) {
+    options = initialOptions[id];
   } else {
-    document.getElementById(id).dataset.initialOptions = JSON.stringify(options);
+    initialOptions[id] = options;
   }
+
   if (!cssThemeName) {
     cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
   }
@@ -1127,4 +1131,72 @@ window.generateGaugeChart = async (id, circular = false, dial = false) => {
     ],
   };
   displayChart(id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE, colorIndex: 1 }], undefined, undefined, 'none');
+};
+
+window.generateHorizontalGaugeChart = async (id) => {
+  const barData = [
+    {
+      value: 250,
+    },
+  ];
+  // Specify the configuration items and data for the chart
+  var option = {
+    grid: {
+      left: 20,
+      top: 32,
+      right: 20,
+      height: 32,
+    },
+    yAxis: {
+      data: ['Data'],
+      show: true,
+      type: 'category',
+      axisLabel: {
+        margin: 0,
+        lineHeight: 50,
+        inside: true,
+        verticalAlign: 'bottom',
+      },
+      axisLine: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
+      },
+    },
+    xAxis: {
+      type: 'value',
+      position: 'top',
+      min: 0,
+      max: 400,
+      splitNumber: 1,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: {
+        show: false,
+      },
+      axisLabel: {
+        formatter: (val) => (0 === val ? '' : val),
+        align: 'right',
+        show: true,
+        lineHeight: 0,
+        fontWeight: 'normal',
+      },
+    },
+    series: [
+      {
+        type: 'bar',
+        pointer: {
+          show: false,
+        },
+        barWidth: 32,
+        data: barData,
+        showBackground: true,
+        backgroundStyle: {
+          color: 'var(--bs-gray-500)',
+        },
+      },
+    ],
+  };
+  displayChart(id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL, colorIndex: 4 }]);
 };

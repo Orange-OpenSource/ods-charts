@@ -76,6 +76,22 @@
           <h1 class="display-1">Gauge charts example</h1>
         </div>
       </div>
+
+      <div class="container d-flex flex-nowrap pt-3">
+        <div class="card w-100">
+          <div class="card-body">
+            <h5 class="card-title">Horizontal gauge</h5>
+            <p class="card-text">A horizontal gauge displays a single data value along a linear scale and shows progress toward a specific value.</p>
+            <div id="horizontalGaugeChart" style="min-height: 200px"></div>
+            <script>
+              window.addEventListener('DOMContentLoaded', () => {
+                window.generateHorizontalGaugeChart('horizontalGaugeChart');
+              });
+            </script>
+          </div>
+        </div>
+      </div>
+
       <div class="container d-flex flex-nowrap pt-3">
         <div class="card w-100">
           <div class="card-body">
