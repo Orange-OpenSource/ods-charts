@@ -185,7 +185,7 @@ export interface ODSChartsThemeOptions {
    *
    * Default lineStyle is {@link ODSChartsLineStyle.SMOOTH}
    *
-   * @deprecated Use new configuration option {@link lineStyle}.
+   * @deprecated Use new configuration option {@link chartConfiguration}.
    */
   lineStyle?: ODSChartsLineStyle;
   /**
@@ -371,9 +371,10 @@ export class ODSChartsTheme {
    * It returns the generated theme manager.
    *
    * @param options options used to generate the theme.
+   * All the options parameters are optional
    * - {@link ODSChartsThemeOptions.colors}: colors to be used to graph the chart.
    * - {@link ODSChartsThemeOptions.cssTheme}: optionaly indicates a external theme to be used like boosted.
-   * - {@link ODSChartsThemeOptions.lineStyle}: style of line in lineCharts.
+   * - {@link ODSChartsThemeOptions.chartConfiguration}: type of chart using this theme and its configuration.
    * - {@link ODSChartsThemeOptions.cssSelector}: selector of the DOM element where the graph will be built. It is used
    *   - to get css variable values when using a third party theme generator base on css variable like Boosted 5.
    *   - to determine if the graph is displayed in dark or light mode
@@ -428,9 +429,14 @@ export class ODSChartsTheme {
       );
     }
 
-    if (options.chartConfiguration instanceof ODSChartsLine) {
-      mergeObjects(theme, cloneDeepObject(THEME.linesStyle[(options.chartConfiguration as ODSChartsLine).lineStyle]));
-    }
+    mergeObjects(
+      theme,
+      cloneDeepObject(
+        THEME.linesStyle[
+          (options.chartConfiguration as ODSChartsLine).lineStyle ? (options.chartConfiguration as ODSChartsLine).lineStyle : ODSChartsLineStyle.SMOOTH
+        ]
+      )
+    );
 
     return new ODSChartsTheme(buildHash(themeName), theme, { ...options, mode });
   }
