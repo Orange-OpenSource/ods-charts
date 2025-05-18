@@ -50,7 +50,9 @@
         // Build the theme
         var themeManager = ODSCharts.getThemeManager({
           colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE,
-          lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+          chartConfiguration: ODSCharts.ODSChartsConfiguration.getLineChartConfiguration({
+            lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+          }),
           cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
           cssSelector: '#singleLineChart_chart',
         });
@@ -79,7 +81,7 @@
             tooltip: true,
             axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
           },
-          ODSCharts.ODSChartsPopoverManagers.NONE
+          ODSCharts.ODSChartsPopoverManagers.BOOSTED5
         );
         // Display the chart using the configured theme and data.
         myChart.setOption(themeManager.getChartOptions());

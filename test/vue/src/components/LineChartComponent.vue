@@ -50,7 +50,9 @@ onMounted(() => {
   // ODS Charts
   const lineChartODSTheme = ODSCharts.getThemeManager({
     colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-    lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+    chartConfiguration: ODSCharts.ODSChartsConfiguration.getLineChartConfiguration({
+      lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS
+    }),
     cssSelector: '#chartsContainer'
   })
 
