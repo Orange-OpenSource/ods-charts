@@ -24,7 +24,6 @@
           <div id="barLine_legend" style="min-width: 150px"></div>
         </div>
       </div>
-
       <script>
         ///////////////////////////////////////////////////
         // Used data
@@ -61,7 +60,9 @@
             { colorPalette: ODSCharts.ODSChartsColorsSet.SUPPORTING_COLORS, colorIndex: 2 },
             { colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_GREEN, colorIndex: 0 },
           ],
-          lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+          chartConfiguration: ODSCharts.ODSChartsConfiguration.getLineAndBarChartConfiguration({
+            lineStyle: ODSCharts.ODSChartsLineStyle.BROKEN_WITH_POINTS,
+          }),
           cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
           cssSelector: '#barLine_chart',
         });
@@ -92,7 +93,7 @@
             tooltip: true,
             axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
           },
-          ODSCharts.ODSChartsPopoverManagers.NONE
+          ODSCharts.ODSChartsPopoverManagers.BOOSTED5
         );
         // Display the chart using the configured theme and data.
         myChart.setOption(themeManager.getChartOptions());
