@@ -1,0 +1,33 @@
+---
+import Head from '@components/Head.astro'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+import Scripts from '@components/Scripts.astro'
+
+interface Props {
+  data: {
+    title?: string
+  }
+}
+
+const { data } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <Head title={data.title || 'ODS Charts'} />
+    <slot name="head-scripts" />
+  </head>
+  <body>
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer />
+    <Scripts />
+    <slot name="scripts" />
+  </body>
+</html>
