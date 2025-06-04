@@ -26,6 +26,7 @@ type: 'inside',
 type: 'slider',
 },
 ],
+
 </pre>
 </code>
 </p>
@@ -41,6 +42,7 @@ dataZoom: {},
 restore: {},
 },
 },
+
 </pre>
 </code>
 </p>
