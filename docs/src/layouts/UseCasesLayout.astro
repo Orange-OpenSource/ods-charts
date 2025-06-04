@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+interface Props {
+  data: {
+    title: string
+  }
+}
+
+const { data } = Astro.props
+---
+
+<BaseLayout data={data}>
+  <script slot="head-scripts" src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
+  <slot />
+  <script slot="scripts" src="/use-cases.js"></script>
+</BaseLayout>
