@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { EChartsOption } from 'echarts';
 import * as ODSCharts from 'ods-charts';
@@ -16,7 +16,7 @@ echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipCo
 @Component({
   selector: 'app-ods-charts',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgxEchartsDirective],
+  imports: [RouterModule, NgxEchartsDirective],
   providers: [provideEchartsCore({ echarts })],
   templateUrl: './ods-charts.component.html',
   styleUrl: './ods-charts.component.scss',
