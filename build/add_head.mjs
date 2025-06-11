@@ -32,4 +32,4 @@ function fromDir(startPath, filter, prefix = '../') {
 }
 
 console.log(`\n\nAdding cookies to API files\n`);
-fromDir('./docs/api', '.html');
+fromDir('./docs/dist/0.1.1/api', '.html');
