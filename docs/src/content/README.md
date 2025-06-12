@@ -94,9 +94,9 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 </html>
 ```
 
-<a href="../../0.1.1/examples/">See more online dynamic examples</a>
+<a href="../../0.1/examples/">See more online dynamic examples</a>
 <br>
-<a href="../../0.1.1/use_cases/">See more online use cases</a>
+<a href="../../0.1/use_cases/">See more online use cases</a>
 
 ### Copyright and license
 
