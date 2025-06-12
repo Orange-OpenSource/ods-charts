@@ -1,13 +1,16 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getConfig } from '@libs/config'
 
 const data = { title: 'Colors - ODS Charts' }
 
-export function getStaticPaths() { return [{ params: { version: '0.1.1' } }] }
+const version = getConfig().docs_version
+
+export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
 ---
 
 <BaseLayout data={data}>
-  <script slot="head-scripts" type="text/javascript" src="/colors.js"></script>
+  <script slot="head-scripts" type="text/javascript" src={`/${version}/colors.js`}></script>
   <div class="title-bar">
     <div class="container-xxl">
       <h1 class="display-1">ODS Charts colors sets</h1>
