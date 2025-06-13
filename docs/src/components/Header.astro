@@ -1,6 +1,12 @@
 ---
 import { getConfig } from '@libs/config'
 
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+
 const version = getConfig().docs_version
 ---
 
@@ -32,13 +38,13 @@ const version = getConfig().docs_version
             <a class="nav-link" href={`/${version}/api`}>API</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={`/${version}/examples`}>Examples</a>
+            <a class:list={['nav-link', {'active': title === 'Examples - ODS Charts'}]} href={`/${version}/examples/`} aria-current={title === 'Examples - ODS Charts' ? 'page' : false}>Examples</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={`/${version}/use_cases`}>Use cases</a>
+            <a class:list={['nav-link', {'active': title === 'Use cases - ODS Charts'}]} href={`/${version}/use_cases/`} aria-current={title === 'Use cases - ODS Charts' ? 'page' : false}>Use cases</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href={`/${version}/colors`}>Colors</a>
+            <a class:list={['nav-link', {'active': title === 'Colors - ODS Charts'}]} href={`/${version}/colors`} aria-current={title === 'Colors - ODS Charts' ? 'page' : false}>Colors</a>
           </li>
         </ul>
       </div>
