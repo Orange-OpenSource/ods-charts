@@ -20,7 +20,7 @@ const { data } = Astro.props
     <slot name="head-scripts" />
   </head>
   <body>
-    <Header />
+    <Header title={data.title} />
 
     <main>
       <slot />
