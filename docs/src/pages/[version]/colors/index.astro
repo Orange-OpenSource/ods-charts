@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getConfig } from '@libs/config'
+
+const data = { title: 'Colors - ODS Charts' }
+
+const version = getConfig().docs_version
+
+export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
+---
+
+<BaseLayout data={data}>
+  <script slot="head-scripts" type="text/javascript" src={`/${version}/colors.js`}></script>
+  <div class="title-bar">
+    <div class="container-xxl">
+      <h1 class="display-1">ODS Charts colors sets</h1>
+    </div>
+  </div>
+  <div class="container-xxl mt-3 lh-base">
+    <p class="lead ll-md">ODS and OUDS colors sets are provided at the same level at the moment.</p>
+    <p class="ll-md">
+      OUDS colors sets are kind of experimental at the moment, please see more in our associated <a href="https://unified-design-system.orange.com/472794e18/p/700671-colour" target="blank" rel="noopener">Data display guidelines</a> page. Please note that the OUDS colors are supposed to be used even in ODS project (except for ODS Functional and Highlight) right now according to the
+      <a href="https://system.design.orange.com/0c1af118d/p/18177e-colour" target="blank" rel="noopener">DSM guidelines page</a>. Here is a summary:
+    </p>
+    <ul class="ll-md">
+      <li><strong>OUDS Sequential</strong> colors sets are almost for the same usage as the ODS ones. They should be used when data values can be ordered from low to high. Choose accessible colors compared to the background whenever it's possible.</li>
+      <li><strong>OUDS Categorical</strong> colors set is almost for the same usage as the ODS one. It should be used to distinguish discrete categories of data that are unrelated. Know that the sequence is carefully curated to maximise contrast between neighbouring colors. So the colors inside should be used in the sequencing order.</li>
+      <li><strong>OUDS Functional</strong> colors set is almost for the same usage as the ODS one. It should be used to establish color association for statuses. This set should be used to reinforce meaning through data display visualization.</li>
+      <li><strong>OUDS Highlight</strong> colors set is new compared to the ODS ones. It's a part of the previous ODS Functional. It should be used to draw attention on a specific data within a dataset.</li>
+      <li><strong>OUDS Single</strong> colors set is new compared to the ODS ones. It's a set made to help people choosing an accessible color for single color charts. Their accessibility was tested against light (<code>#ffffff</code>) values and dark (<code>#141414</code> and so <code>#000000</code>) values.</li>
+    </ul>
+  </div>
+  <div>
+    <div class="container-fluid">
+      <div class="container">
+        <h2 class="pt-3 h1">Default mode theme</h2>
+        <div class="row" id="container"></div>
+      </div>
+    </div>
+    <div data-bs-theme="light" class="container-fluid">
+      <div class="container">
+        <h2 class="pt-3 h1">Light mode theme</h2>
+        <div class="row" id="containerLight"></div>
+      </div>
+    </div>
+    <div data-bs-theme="dark" class="container-fluid">
+      <div class="container">
+        <h2 class="pt-3 h1">Dark mode theme</h2>
+        <div class="row" id="containerDark"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    displayAllColorSets('container');
+    displayAllColorSets('containerLight');
+    displayAllColorSets('containerDark');
+    addThemeObserver();
+  </script>
+</BaseLayout>
