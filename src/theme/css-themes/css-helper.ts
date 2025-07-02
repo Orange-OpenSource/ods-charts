@@ -114,7 +114,7 @@ export class ODSChartsCssHelper {
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
-              const varPartsRex = /var\( ?([^, ]+) ?, ?([^ ]+) ?\)/;
+              const varPartsRex = /var\( ?([^, ]+) ?, ?([^\)]+) ?\)/;
               const varParts = foundVar.match(varPartsRex);
               if (varParts) {
                 const varValue = this.getPropertyValue(varParts[1]);
