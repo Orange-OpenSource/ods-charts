@@ -4,7 +4,7 @@
   ODS Charts provides Orange Charts components to developers.
   <br>
   <br>
-  <a href="../../"><strong style="font-size: larger;">Visit ODS Charts general documentation</strong></a>
+  <a href="/"><strong style="font-size: larger;">Visit ODS Charts general documentation</strong></a>
 </p>
 
 ## API documentation
@@ -94,9 +94,9 @@ The {@link ODSChartsTheme} is used to build the ODS theme and the charts options
 </html>
 ```
 
-<a href="../../0.1/examples/">See more online dynamic examples</a>
+<a href="../examples/">See more online dynamic examples</a>
 <br>
-<a href="../../0.1/use_cases/">See more online use cases</a>
+<a href="../use_cases/">See more online use cases</a>
 
 ### Copyright and license
 
