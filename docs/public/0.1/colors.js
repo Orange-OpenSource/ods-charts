@@ -105,7 +105,7 @@ function addThemeObserver() {
   if (div && MutationObserver) {
     div = div.closest('[data-bs-theme]') || undefined;
     if (div) {
-      const observer = new MutationObserver(() => {
+      const updateThemesDisplay = () => {
         displayAllColorSets('container');
 
         if ('light' === div.getAttribute('data-bs-theme')) {
@@ -117,8 +117,11 @@ function addThemeObserver() {
           document.getElementById('containerLight').closest('.container-fluid').classList.remove('d-none');
           document.getElementById('container').closest('.container').querySelector('h2').innerHTML = 'Default dark mode theme';
         }
-      });
+      };
+
+      const observer = new MutationObserver(updateThemesDisplay);
       observer.observe(div, { attributes: true, childList: false, subtree: false });
+      updateThemesDisplay();
     }
   }
   return div;
