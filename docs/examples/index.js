@@ -1073,7 +1073,7 @@ window.generateGaugeChart = async (id, circular = false, dial = false) => {
           offsetCenter: [0, circular ? 0 : dial ? 30 : -10],
           color: 'var(--bs-body-color, #000)',
           fontSize: 40,
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
           fontWeight: 'bold',
         },
         progress: {
@@ -1100,7 +1100,7 @@ window.generateGaugeChart = async (id, circular = false, dial = false) => {
           distance: dial ? -40 : -50,
           color: 'var(--bs-body-color, #000)',
           fontSize: 14,
-          fontFamily: 'Helvetica Neue',
+          fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
           fontWeight: 400,
           ...(dial
             ? {
