@@ -107,7 +107,6 @@ tooltip: {
     <div class="card-body">
       <h5 class="card-title">Specific value tooltip content</h5>
       <p class="card-text">You may need to specify a specific tooltip content.</p>
-
       <p class="card-text">The first use case is to provide a sepcific content for a tooltip/popover value.</p>
       <p class="card-text">
         For that you just have to specify the <code>formatter</code> method of the <code>tooltip</code> Apache Echarts option :
@@ -121,7 +120,6 @@ tooltip: {
           </pre>
         </code>
       </p>
-
       <div id="div6_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

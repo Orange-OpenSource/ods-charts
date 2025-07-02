@@ -14,7 +14,6 @@ title: Time slider axis - Specific use cases - ODS Charts
       <p class="card-text">This use case illustrates the use of the timeline slider.</p>
       <p class="card-text">
         You can add the timeline slider with the <code>dataZoom</code> option:
-
         <code>
           <pre>
 
@@ -32,7 +31,6 @@ type: 'slider',
 </p>
 <p class="card-text">
 You can also configure the toolbox to switch between zoom and slider with the <code>toolbox</code> option:
-
         <code>
           <pre>
 
@@ -50,7 +48,6 @@ restore: {},
 Refer to the online Apache ECharts documentation for more detail on <a href="https://echarts.apache.org/en/option.html#dataZoom" target="_blank">dataZoom</a> and on <a href="https://echarts.apache.org/en/option.html#toolbox.feature" target="_blank">toolbox</a>
 configurations
 </p>
-
       <div id="htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

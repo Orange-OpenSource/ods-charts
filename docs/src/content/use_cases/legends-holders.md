@@ -162,7 +162,6 @@ themeManager.externalizeLegends(
           <div id="barLine_holder">
             <div id="barLine_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
           </div>
-
           <div class="row mx-2">
             <div class="col-4">
               <label class="label">Results</label>

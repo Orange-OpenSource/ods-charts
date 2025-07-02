@@ -58,7 +58,6 @@ themeManager.manageThemeObserver(myChart);
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
-
           <div id="t1-barLineGroup_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: column">
             <div id="t1-barLineGroup_holder">
               <div id="t1-barLineGroup_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
@@ -161,7 +160,6 @@ themeManager.manageThemeObserver(myChart);
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
-
           <div id="t2-barLineGroup_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: column">
             <div id="t2-barLineGroup_holder">
               <div id="t2-barLineGroup_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
@@ -252,7 +250,6 @@ cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
           </pre>
         </code>
       </p>
-
       <p>
         You still can use a dark/light theme mode by adding the <code>ods-charts-context</code> class and <code>data-bs-theme</code> attribute on the graph element holder:
         <code>
@@ -273,7 +270,6 @@ cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
 <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
 <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
 </div>
-
           <div id="t3-barLineGroup_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: column">
             <div id="t3-barLineGroup_holder">
               <div id="t3-barLineGroup_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
