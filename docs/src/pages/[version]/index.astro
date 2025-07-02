@@ -2,9 +2,10 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getConfig } from '@libs/config'
 
-const data = { title: 'ODS Charts' }
+const data = { title: 'ODS Charts - V0.1' }
 
 const version = getConfig().docs_version
+export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
 ---
 
 <BaseLayout data={data}>
@@ -22,7 +23,7 @@ const version = getConfig().docs_version
           </div>
 
           <div class="card-footer">
-            <a href={`./${version}/api/`} class="btn btn-primary mt-3">See API documentation</a>
+            <a href={`./api/`} class="btn btn-primary mt-3">See API documentation</a>
           </div>
         </div>
       </div>
@@ -36,7 +37,7 @@ const version = getConfig().docs_version
           </div>
 
           <div class="card-footer">
-            <a href={`./${version}/examples/`} class="btn btn-primary mt-3">Examples</a>
+            <a href={`./examples/`} class="btn btn-primary mt-3">Examples</a>
           </div>
         </div>
       </div>
@@ -49,7 +50,7 @@ const version = getConfig().docs_version
           </div>
 
           <div class="card-footer">
-            <a href={`./${version}/use_cases/`} class="btn btn-primary mt-3">Use cases</a>
+            <a href={`./use_cases/`} class="btn btn-primary mt-3">Use cases</a>
           </div>
         </div>
       </div>
@@ -63,13 +64,10 @@ const version = getConfig().docs_version
           </div>
 
           <div class="card-footer">
-            <a href={`./${version}/colors/`} class="btn btn-primary mt-3">Color sets</a>
+            <a href={`./colors/`} class="btn btn-primary mt-3">Color sets</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-<script>
-  window.location.replace('./0.1/');
-</script>
 </BaseLayout>
