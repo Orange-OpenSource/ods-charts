@@ -872,7 +872,7 @@ window.generateBarChart = async (id, horizontal = false, grouped = false, stacke
       ),
   };
   displayChart(
-    stacked ? 'getBarChartConfiguration' : 'getBarChartConfiguration',
+    'getBarChartConfiguration',
     id,
     option,
     undefined,
