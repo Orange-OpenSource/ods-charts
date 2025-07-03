@@ -160,7 +160,7 @@ export class ODSChartsCssHelper {
     for (const key of Object.keys(newConfig)) {
       if (isVarArray(newConfig[key])) {
         for (let index = 0; index < newConfig[key].length; index++) {
-          if (isVarObject(newConfig[key][index])) {
+          if (isVarObject(newConfig[key][index]) || isVarArray(newConfig[key][index])) {
             newConfig[key][index] = this.replaceRecursivelyCssVars(newConfig[key][index]);
           } else if ('string' === typeof newConfig[key][index]) {
             newConfig[key][index] = this.replaceOneCssVar(newConfig[key][index]);
