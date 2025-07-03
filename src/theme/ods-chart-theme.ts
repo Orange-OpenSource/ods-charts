@@ -505,12 +505,16 @@ export class ODSChartsTheme {
    */
   private calculateNewThemeAndAddItInThemeOptions(themeOptions: any, dataOptions: any): any {
     const newTheme = this.calculateTheme();
-    mergeObjects(themeOptions, {
-      color: newTheme.color,
-      backgroundColor: newTheme.backgroundColor,
-      title: newTheme.title,
-      grid: { tooltip: newTheme.tooltip },
-    });
+    mergeObjects(
+      themeOptions,
+      {
+        color: newTheme.color,
+        backgroundColor: newTheme.backgroundColor,
+        title: newTheme.title,
+        grid: { tooltip: newTheme.tooltip },
+      },
+      this.options.chartConfiguration?.getDefaultConfiguration()
+    );
 
     if (dataOptions.toolbox) {
       themeOptions.toolbox = newTheme.toolbox;
@@ -528,6 +532,7 @@ export class ODSChartsTheme {
     if (dataOptions.series) {
       themeOptions.series = [];
       for (let index = 0; index < dataOptions.series.length; index++) {
+        themeOptions.series[index] = {};
         switch (dataOptions.series[index].type) {
           case 'line':
             themeOptions.series[index] = { ...newTheme.line, markPoint: newTheme.markPoint };
@@ -563,6 +568,7 @@ export class ODSChartsTheme {
             themeOptions.series[index] = newTheme.map;
             break;
         }
+        themeOptions.series[index] = { ...themeOptions.series[index], ...this.options.chartConfiguration?.getSerieConfiguration(dataOptions.series[index]) };
       }
     }
 
@@ -601,7 +607,7 @@ export class ODSChartsTheme {
    * @param addGlobalThemeOptions indicates if the specificities of the global theme used in the chart init method
    * @returns modifications to be made to the [Apache Echarts data options](https://echarts.apache.org/en/option.html) to implement the Orange Design System and dataOptions with css vars replaced.
    */
-  private getThemeOptions(addGlobalThemeOptions: boolean = false): { themeOptions: any; dataOptions: any } {
+  private getThemeOptions(): { themeOptions: any; dataOptions: any } {
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
@@ -686,7 +692,7 @@ export class ODSChartsTheme {
         legend: cloneDeepObject(legend),
       };
 
-      let usedTheme = addGlobalThemeOptions ? this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme) : this.theme;
+      let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
 
       for (const axis of ['xAxis', 'yAxis']) {
         if (!isMainAxis(updatedDataOptionsForTheme[axis]) && !(updatedDataOptionsForTheme[axis] && updatedDataOptionsForTheme[axis].axisLine)) {
@@ -811,7 +817,7 @@ export class ODSChartsTheme {
     this.chartThemeObserver = ODSChartsThemeObserver.addThemeObserver(echart, () => {
       // update chart options with theme options enriched with values
       // from a newly calculated global theme
-      echart.setOption(this.getChartOptions(true));
+      echart.setOption(this.getChartOptions());
     });
     return this;
   }
@@ -829,12 +835,12 @@ export class ODSChartsTheme {
    * must be added in the options of the chart
    * @returns the Apache ECharts options to use in [Apache Echarts `setOption()`](https://echarts.apache.org/en/option.html) call.
    */
-  public getChartOptions(addGlobalThemeOptions: boolean = false): any {
+  public getChartOptions(): any {
     if (!this.dataOptions) {
       throw new Error('the chart basic options must be set to get the theme completion');
     }
 
-    const { themeOptions, dataOptions } = this.getThemeOptions(addGlobalThemeOptions);
+    const { themeOptions, dataOptions } = this.getThemeOptions();
     return mergeObjects(themeOptions, dataOptions);
   }
 }

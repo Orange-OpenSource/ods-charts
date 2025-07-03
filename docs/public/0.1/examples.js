@@ -97,7 +97,7 @@ function generateConfigurator(id) {
                 <option value="dark">Dark mode</option>
               </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 color-config">
               <label for="colorSetInput" class="form-label">Colors</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
                 <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">[ODS] Default colors (12)</option>
@@ -123,7 +123,7 @@ function generateConfigurator(id) {
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 line-style-config">
               <label for="lineStyleInput" class="form-label">Line style</label>
               <select class="form-select" id="lineStyleInput" onchange="changeTheme('${id}')">
                 <option value="smooth">Smooth</option>
@@ -331,7 +331,25 @@ async function displayChart(
 
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
     colors,
-    chartConfiguration: iframe.contentWindow.ODSCharts.ODSChartsConfiguration[chartConfigMethod]({ lineStyle }),
+    chartConfiguration: iframe.contentWindow.ODSCharts.ODSChartsConfiguration[chartConfigMethod](
+      -1 < chartConfigMethod.search(/Line/)
+        ? { lineStyle }
+        : 'getDialGaugeChartConfiguration' === chartConfigMethod
+          ? {
+              dialParts: [
+                { value: 0, label: 'A' },
+                { value: 25, label: 'B' },
+                { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },
+                { value: 75, label: 'D', beforeColor: 'var(--ouds-charts-color-functional-warning)' },
+                { value: 100, label: 'E', beforeColor: 'var(--ouds-charts-color-functional-negative)' },
+              ],
+            }
+          : 'getHorizontalGaugeChartConfiguration' === chartConfigMethod
+            ? { minValue: 0, maxValue: 400 }
+            : -1 < chartConfigMethod.search(/Gauge/)
+              ? { minValue: 0, maxValue: 100 }
+              : {}
+    ),
     cssTheme,
     cssSelector: `#${id}_chart`,
   });
@@ -509,7 +527,21 @@ var themeManager = ODSCharts.getThemeManager({
         ) +
         `
   }`
-      : ''
+      : 'getDialGaugeChartConfiguration' === chartConfigMethod
+        ? `{
+    dialParts: [
+      { value: 0, label: 'A' },
+      { value: 25, label: 'B' },
+      { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },
+      { value: 75, label: 'D', beforeColor: 'var(--ouds-charts-color-functional-warning)' },
+      { value: 100, label: 'E', beforeColor: 'var(--ouds-charts-color-functional-negative)' },
+    ],
+  }`
+        : 'getHorizontalGaugeChartConfiguration' === chartConfigMethod
+          ? `{ minValue: 0, maxValue: 400 }`
+          : -1 < chartConfigMethod.search(/Gauge/)
+            ? `{ minValue: 0, maxValue: 100 }`
+            : ''
   }),
   cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)},
   cssSelector: '#${id}_chart'
@@ -622,6 +654,12 @@ myChart.setOption(themeManager.getChartOptions());
   });
   document.querySelectorAll(`#accordion_${id} .popover-config`).forEach((elt) => {
     elt.style.display = 'none' === popoverInput ? 'none' : 'block';
+  });
+  document.querySelectorAll(`#accordion_${id} .line-style-config`).forEach((elt) => {
+    elt.style.display = -1 === chartConfigMethod.search(/Line/) ? 'none' : 'block';
+  });
+  document.querySelectorAll(`#accordion_${id} .color-config`).forEach((elt) => {
+    elt.style.display = 'getDialGaugeChartConfiguration' === chartConfigMethod ? 'none' : 'block';
   });
 
   var myChart = iframe.contentWindow.echarts.init(div, themeManager.name, {
@@ -1079,82 +1117,16 @@ window.generateGaugeChart = async (id, circular = false, dial = false) => {
     series: [
       {
         type: 'gauge',
-        endAngle: circular ? -270 : 0,
-        startAngle: circular ? 90 : 180,
-        min: 0,
-        max: 100,
         data: [
           {
             value: 40,
           },
         ],
-
-        radius: circular ? '90%' : dial ? '125%' : '150%',
-        center: ['50%', circular ? '50%' : '75%'],
-        splitNumber: dial ? 4 : 1,
-        detail: {
-          offsetCenter: [0, circular ? 0 : dial ? 30 : -10],
-          color: 'var(--bs-body-color, #000)',
-          fontSize: 40,
-          fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
-          fontWeight: 'bold',
-        },
-        progress: {
-          show: dial ? false : true,
-          width: 32,
-        },
-        splitLine: {
-          show: false,
-        },
-        axisTick: {
-          show: false,
-        },
-        pointer: {
-          show: dial ? true : false,
-          width: 50,
-          icon: 'image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22black%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22black%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%3C%2Fsvg%3E',
-          itemStyle: {
-            color: 'var(--bs-body-color, #000)',
-          },
-          offsetCenter: [0, 0],
-        },
-        axisLabel: {
-          show: circular ? false : true,
-          distance: dial ? -40 : -50,
-          color: 'var(--bs-body-color, #000)',
-          fontSize: 14,
-          fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
-          fontWeight: 400,
-          ...(dial
-            ? {
-                formatter: function (value) {
-                  return ['A', 'B', 'C', 'D', 'E'][value / 25];
-                },
-              }
-            : {}),
-        },
-        axisLine: {
-          roundCap: false,
-          lineStyle: {
-            width: 32,
-            ...(dial
-              ? {
-                  color: [
-                    [0.498, 'var(--ouds-charts-color-functional-positive)'],
-                    [0.502, 'transparent'],
-                    [0.748, 'var(--ouds-charts-color-functional-warning)'],
-                    [0.752, 'transparent'],
-                    [1, 'var(--ouds-charts-color-functional-negative)'],
-                  ],
-                }
-              : { color: [[1, 'var(--bs-light)']] }),
-          },
-        },
       },
     ],
   };
   displayChart(
-    'getCircularGaugeChartConfiguration',
+    dial ? 'getDialGaugeChartConfiguration' : circular ? 'getCircularGaugeChartConfiguration' : 'getSemiCircularGaugeChartConfiguration',
     id,
     option,
     undefined,
@@ -1173,60 +1145,13 @@ window.generateHorizontalGaugeChart = async (id) => {
   ];
   // Specify the configuration items and data for the chart
   var option = {
-    grid: {
-      left: 20,
-      top: 32,
-      right: 20,
-      height: 32,
-    },
     yAxis: {
       data: ['Data'],
-      show: true,
-      type: 'category',
-      axisLabel: {
-        margin: 0,
-        lineHeight: 50,
-        inside: true,
-        verticalAlign: 'bottom',
-      },
-      axisLine: {
-        show: false,
-      },
-      splitLine: {
-        show: false,
-      },
-    },
-    xAxis: {
-      type: 'value',
-      position: 'top',
-      min: 0,
-      max: 400,
-      splitNumber: 1,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: {
-        show: false,
-      },
-      axisLabel: {
-        formatter: (val) => (0 === val ? '' : val),
-        align: 'right',
-        show: true,
-        lineHeight: 0,
-        fontWeight: 'normal',
-      },
     },
     series: [
       {
         type: 'bar',
-        pointer: {
-          show: false,
-        },
-        barWidth: 32,
         data: barData,
-        showBackground: true,
-        backgroundStyle: {
-          color: 'var(--bs-gray-500)',
-        },
       },
     ],
   };

@@ -2,7 +2,7 @@ const path = require('path');
 
 const commonDef = {
   mode: 'production',
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   entry: {
     main: './index.ts',
   },
