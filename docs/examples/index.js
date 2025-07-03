@@ -239,9 +239,9 @@ function generateConfigurator(id) {
 
 function generateExampleDiv(id, direction) {
   var div = document.getElementById(id);
-  const hauteur = div.clientHeight;
+  const divHeight = div.clientHeight;
 
-  div.innerHTML = `<iframe style="width: 100%; ${hauteur ? 'min-height: ' + hauteur + 'px' : 'min-height: 60vh;'}"></iframe>
+  div.innerHTML = `<iframe style="width: 100%; ${divHeight ? 'min-height: ' + divHeight + 'px' : 'min-height: 60vh;'}"></iframe>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
