@@ -78,7 +78,7 @@ export class GraphComponent {
   constructor() {
     this.myTheme = ODSCharts.getThemeManager({
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-      lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
     });
   }
 

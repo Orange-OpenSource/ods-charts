@@ -114,7 +114,7 @@ export class ODSChartsCssHelper {
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
-              const varPartsRex = /var\( ?([^, ]+) ?, ?([^ ]+) ?\)/;
+              const varPartsRex = /var\( ?([^, ]+) ?, ?([^\)]+) ?\)/;
               const varParts = foundVar.match(varPartsRex);
               if (varParts) {
                 const varValue = this.getPropertyValue(varParts[1]);
@@ -160,7 +160,7 @@ export class ODSChartsCssHelper {
     for (const key of Object.keys(newConfig)) {
       if (isVarArray(newConfig[key])) {
         for (let index = 0; index < newConfig[key].length; index++) {
-          if (isVarObject(newConfig[key][index])) {
+          if (isVarObject(newConfig[key][index]) || isVarArray(newConfig[key][index])) {
             newConfig[key][index] = this.replaceRecursivelyCssVars(newConfig[key][index]);
           } else if ('string' === typeof newConfig[key][index]) {
             newConfig[key][index] = this.replaceOneCssVar(newConfig[key][index]);
