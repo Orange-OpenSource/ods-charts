@@ -83,7 +83,7 @@ export const ODS_CHARTS_CONTEXT = `
   --ouds-charts-color-categorical-tier-10: #1fa2e0;
   --ouds-charts-color-categorical-tier-2: #50be87;
   --ouds-charts-color-categorical-tier-3: #ff80d4;
-  --ouds-charts-color-categorical-tier-4: #cc9000;
+  --ouds-charts-color-categorical-tier-4: #d6aa00;
   --ouds-charts-color-categorical-tier-5: #79c7ec;
   --ouds-charts-color-categorical-tier-6: #8d60cd;
   --ouds-charts-color-categorical-tier-7: #9bdaba;
