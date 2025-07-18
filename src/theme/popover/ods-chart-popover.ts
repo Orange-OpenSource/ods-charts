@@ -247,7 +247,7 @@ export class ODSChartsPopover {
               legends &&
               legends.names &&
               legends.labels &&
-              legends.labels.find((label, index) => {
+              legends.labels.find((_label, index) => {
                 return legends.names[index] === param.seriesName;
               });
             const itemValue =
@@ -325,9 +325,9 @@ export class ODSChartsPopover {
           tooltip: {
             position: (
               mousePosition: number[],
-              params: any,
-              dom: HTMLElement,
-              rect: { [position: string]: number },
+              _params: any,
+              _dom: HTMLElement,
+              _rect: { [position: string]: number },
               containerSize: { [size: string]: number[] }
             ) => {
               let tooltipPosition: { [position: string]: number | string } = {
@@ -650,7 +650,7 @@ export class ODSChartsPopover {
       window.setTimeout(() => {
         addEventListener(
           'click',
-          (event) => {
+          (_event) => {
             if (tooltipAnchor.getAttribute('data-id') === id) {
               try {
                 popover.dispose();

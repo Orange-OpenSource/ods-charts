@@ -296,7 +296,7 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
   public tooltipDelay = 0;
   public tooltipMarging = 10;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean, mode: ODSChartsMode) {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean, _mode: ODSChartsMode) {
     const elt: any = document.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];

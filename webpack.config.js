@@ -1,16 +1,10 @@
 const path = require('path');
 
-module.exports = {
-  mode: 'development',
+const commonDef = {
+  mode: 'production',
   devtool: 'inline-source-map',
   entry: {
     main: './index.ts',
-  },
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'ods-charts.js',
-    libraryTarget: 'umd',
-    library: 'ODSCharts',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
@@ -24,3 +18,39 @@ module.exports = {
     ],
   },
 };
+
+module.exports = [
+  {
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: 'ods-charts.js',
+      libraryTarget: 'umd',
+      library: 'ODSCharts',
+      globalObject: 'this', // pour que ça fonctionne dans tous les environnements
+    },
+    ...commonDef,
+  },
+  {
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: 'ods-charts.esm.js',
+      library: {
+        type: 'module', // pour ESM
+      },
+    },
+    experiments: {
+      outputModule: true, // nécessaire pour output en module
+    },
+    ...commonDef,
+  },
+  {
+    output: {
+      path: path.resolve(__dirname, './dist'),
+      filename: 'ods-charts.cjs.js',
+      library: {
+        type: 'commonjs2',
+      },
+    },
+    ...commonDef,
+  },
+];
