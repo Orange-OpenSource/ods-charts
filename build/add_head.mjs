@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-function fromDir(startPath, filter, prefix = '../') {
+const version = 0.1;
+
+function fromDir(startPath, filter, prefix = `/${version}/`) {
   const favicon = `
   <link rel="apple-touch-icon" href="${prefix}images/favicons/apple-touch-icon.png" sizes="180x180">
   <link rel="icon" href="${prefix}images/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -11,10 +13,10 @@ function fromDir(startPath, filter, prefix = '../') {
   <link rel="icon" href="${prefix}images/favicons/favicon.ico">
   <meta name="msapplication-config" content="${prefix}images/favicons/browserconfig.xml">
   <meta name="theme-color" content="#000">`;
-  const boosted_CSS = `<link href="${prefix}assets/tarteaucitron-config.css" rel="stylesheet">`;
+  const boosted_CSS = `<link href="${prefix}tarteaucitron-config.css" rel="stylesheet">`;
   const cookies = `
   <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script>
-  <script src="${prefix}assets/tarteaucitron-config.js"></script>`;
+  <script src="${prefix}tarteaucitron-config.js"></script>`;
 
   var files = fs.readdirSync(startPath);
   for (var i = 0; i < files.length; i++) {
@@ -32,4 +34,4 @@ function fromDir(startPath, filter, prefix = '../') {
 }
 
 console.log(`\n\nAdding cookies to API files\n`);
-fromDir('./docs/api', '.html');
+fromDir(`./docs/dist/${version}/api`, '.html');

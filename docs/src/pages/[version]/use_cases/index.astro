@@ -1,0 +1,116 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const data = { title: 'Use cases - ODS Charts' }
+
+export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
+---
+
+<BaseLayout data={data}>
+<div class="title-bar">
+  <div class="container-xxl">
+    <h1 class="display-1">Specific use cases illustrations</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Tooltip</h5>
+          <p class="card-text">Prevent the tooltip or popover from being cut off at the edge of the graph.</p>
+          <p class="card-text">Specific tooltip content with links.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./tooltip/" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Two colors for one series</h5>
+          <p class="card-text">Highlight values in a series with a different color.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./two-colors-serie.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Add unit</h5>
+          <p class="card-text">Add a unit on Y axis and in the tooltip.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./add-unit/" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Specific series color</h5>
+          <p class="card-text">You may want to specify the color of a series in the series itself, regardless of its index.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./specify-color.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Size management</h5>
+          <p class="card-text">The chart may need to be redrawn if it is placed in a div that changes size.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./size-management.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Specific legend holders</h5>
+          <p class="card-text">You may want to position legends vertically or to separate them into different containers.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./legends-holders.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Time slider</h5>
+          <p class="card-text">You may want to add a timeline slider under the graph.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./time-slider.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Theme</h5>
+          <p class="card-text">For the moment, ODS Charts supports 3 CSS themes : Boosted 5, Boosted 4 and a minimalist CSS theme embedded in ODS Charts.</p>
+          <p class="card-text">For popover/tooltip management, it also support both renderer from Boosted 5 or 4 and renderer from Apache Echarts.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./theme.html" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getConfig } from '@libs/config'
+
+interface Props {
+  data: {
+    title: string
+  }
+}
+
+const { data } = Astro.props
+
+const version = getConfig().docs_version
+---
+
+<BaseLayout data={data}>
+  <slot />
+  <script slot="scripts" src={`/${version}/examples.js`}></script>
+</BaseLayout>
