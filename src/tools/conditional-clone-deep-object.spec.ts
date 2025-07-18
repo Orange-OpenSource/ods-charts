@@ -34,7 +34,7 @@ describe('lookForPaths', () => {
     };
   });
   it('should work', () => {
-    expect(lookForPaths(testedValue, (value) => false)).toEqual([]);
+    expect(lookForPaths(testedValue, (_value) => false)).toEqual([]);
   });
 
   it('should detect paths', () => {
@@ -82,7 +82,7 @@ describe('conditionalCloneDeepObject', () => {
   });
 
   it('should work', () => {
-    expect(conditionalCloneDeepObject(testedValue, (value) => false)).toEqual(testedValue);
+    expect(conditionalCloneDeepObject(testedValue, (_value) => false)).toEqual(testedValue);
   });
 
   it('should copy only needed parts', () => {
