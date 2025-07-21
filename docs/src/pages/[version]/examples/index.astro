@@ -24,7 +24,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Single line chart</h6>
             <p class="card-text">Used to display quantitative values over a continuous interval or time period.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/49412d" class="card-link">Orange Design System - Data display</a>
+            <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/49412d" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./single-line-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -38,7 +38,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Multiple line chart</h6>
             <p class="card-text">Compare the relationship between several values over time.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/74b580" class="card-link">Orange Design System - Data display</a>
+            <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/74b580" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./multiple-line-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -52,7 +52,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Bar chart</h6>
             <p class="card-text">Used to compare related data sets.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/47ab68" class="card-link">Orange Design System - Data display</a>
+            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/47ab68" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./bar-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -66,7 +66,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Stacked bar chart</h6>
             <p class="card-text">Compare proportional contributions within a category.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/241b98" class="card-link">Orange Design System - Data display</a>
+            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/241b98" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./stacked-bar-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -80,7 +80,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Bar + line chart</h6>
             <p class="card-text">Two metric values showing quantity alongside changes in trends over time.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/66991e" class="card-link">Orange Design System - Data display</a>
+            <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/66991e" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./bar-line-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -94,7 +94,7 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Pie chart</h6>
             <p class="card-text">Divides data into sectors that each represent a proportion of the whole.</p>
-            <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/10ead7" class="card-link">Orange Design System - Data display</a>
+            <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/10ead7" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./pie-chart/" class="btn btn-primary mt-3">Go to example</a>
@@ -108,13 +108,27 @@ export function getStaticPaths() { return [{ params: { version: '0.1' } }] }
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Donut chart</h6>
             <p class="card-text">Shows the relationship of parts to a whole.</p>
-            <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/80abab" class="card-link">Orange Design System - Data display</a>
+            <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/80abab" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
             <a href="./donut-chart/" class="btn btn-primary mt-3">Go to example</a>
           </div>
         </div>
       </div>
+       <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+          <div class="card h-100">
+            <img src={`/${version}/images/ods-gauge-charts.png`} class="card-img-top" alt="" />
+            <div class="card-body">
+              <h5 class="card-title">Orange Design System</h5>
+              <h6 class="card-subtitle">Gauges chart</h6>
+              <p class="card-text">Gauges show progress at a glance.</p>
+              <a href="https://system.design.orange.com/0c1af118d/p/673c90-gauges" target="_blank" class="card-link">Orange Design System - Data display</a>
+            </div>
+            <div class="card-footer">
+              <a href="./gauge-chart/" class="btn btn-primary mt-3">Go to example</a>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </BaseLayout>
