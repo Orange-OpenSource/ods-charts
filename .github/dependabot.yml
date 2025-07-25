@@ -103,6 +103,19 @@ updates:
     versioning-strategy: increase
     ignore:
       - dependency-name: "@angular-devkit/build-angular"
+      - dependency-name: "@angular/animations"
+      - dependency-name: "@angular/common"
+      - dependency-name: "@angular/compiler"
+      - dependency-name: "@angular/core"
+      - dependency-name: "@angular/forms"
+      - dependency-name: "@angular/platform-browser"
+      - dependency-name: "@angular/platform-browser-dynamic"
+      - dependency-name: "@angular/router"
+      - dependency-name: "@angular/cli"
+      - dependency-name: "@angular/compiler-cli"
+      - dependency-name: "@types/jasmine"
+      - dependency-name: "@types/node"
+      - dependency-name: "jasmine-core"
     groups:
       angular-14-all-deps:
         patterns:
