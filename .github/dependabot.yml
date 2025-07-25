@@ -111,11 +111,20 @@ updates:
       - dependency-name: "@angular/platform-browser"
       - dependency-name: "@angular/platform-browser-dynamic"
       - dependency-name: "@angular/router"
+      - dependency-name: "rxjs"
+      - dependency-name: "tslib"
+      - dependency-name: "zone.js"
       - dependency-name: "@angular/cli"
       - dependency-name: "@angular/compiler-cli"
       - dependency-name: "@types/jasmine"
       - dependency-name: "@types/node"
       - dependency-name: "jasmine-core"
+      - dependency-name: "karma"
+      - dependency-name: "karma-chrome-launcher"
+      - dependency-name: "karma-coverage"
+      - dependency-name: "karma-jasmine"
+      - dependency-name: "karma-jasmine-html-reporter"
+      - dependency-name: "typescript"
     groups:
       angular-14-all-deps:
         patterns:
