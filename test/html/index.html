@@ -15,13 +15,13 @@
     <div id="chart5" style="max-width: 800px; height: 400px"></div>
     <div id="chart5_legends"></div>
     <script>
-      var lineChartODSTheme = ODSCharts.getThemeManager({
+      var barChartODSTheme = ODSCharts.getThemeManager({
         colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
-        lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+        chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
       });
-      echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
+      echarts.registerTheme(barChartODSTheme.name, barChartODSTheme.theme);
 
-      const chart1 = echarts.init(document.getElementById('chart1'), lineChartODSTheme.name, {
+      const chart1 = echarts.init(document.getElementById('chart1'), barChartODSTheme.name, {
         renderer: 'svg',
       });
       chart1.setOption({
@@ -42,6 +42,11 @@
         ],
       });
 
+      var lineChartODSTheme = ODSCharts.getThemeManager({
+        colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
+        chartConfiguration: ODSCharts.ODSChartsConfiguration.getLineChartConfiguration({ lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH }),
+      });
+      echarts.registerTheme(lineChartODSTheme.name, lineChartODSTheme.theme);
       const chart2 = echarts.init(document.getElementById('chart2'), lineChartODSTheme.name);
       chart2.setOption({
         xAxis: {

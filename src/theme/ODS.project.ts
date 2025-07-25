@@ -436,7 +436,7 @@ export const ODS_PROJECT: EChartsProject = {
   bar: {
     itemStyle: {
       barBorderWidth: '2',
-      barBorderColor: 'var(--bs-body-bg, #ffffff)',
+      barBorderColor: 'transparent',
     },
   },
   pie: {
