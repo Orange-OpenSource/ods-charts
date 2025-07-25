@@ -24,7 +24,6 @@
     "boosted": "^5.3.7",
     "echarts": "^5.6.0",
     "focus-visible": "^5.2.0",
-    "marked": "^16.1.1",
     "ngx-echarts": "^20.0.1",
     "ngx-markdown": "^20.0.0",
     "ods-charts": "file:../..",
