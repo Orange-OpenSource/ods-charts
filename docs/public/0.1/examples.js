@@ -336,7 +336,7 @@ async function displayChart(
         ? { lineStyle }
         : 'getDialGaugeChartConfiguration' === chartConfigMethod
           ? {
-              dialParts: [
+              dialPoints: [
                 { value: 0, label: 'A' },
                 { value: 25, label: 'B' },
                 { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },
@@ -529,7 +529,7 @@ var themeManager = ODSCharts.getThemeManager({
   }`
       : 'getDialGaugeChartConfiguration' === chartConfigMethod
         ? `{
-    dialParts: [
+    dialPoints: [
       { value: 0, label: 'A' },
       { value: 25, label: 'B' },
       { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },

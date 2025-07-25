@@ -45,7 +45,7 @@ import { DEFAULT_OUDS_COLORS_PINK } from './default/OUDS.colors.pink';
 import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
 import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
 import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
-import { ODSChartsConfiguration, ODSChartsLineType } from '../ods-charts';
+import { ODSChartsConfiguration } from '../ods-charts';
 // import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
 // import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
 
@@ -433,8 +433,8 @@ export class ODSChartsTheme {
       theme,
       cloneDeepObject(
         THEME.linesStyle[
-          (options.chartConfiguration as ODSChartsLineType).lineStyle
-            ? ((options.chartConfiguration as ODSChartsLineType).lineStyle as ODSChartsLineStyle)
+          (options.chartConfiguration as any).lineStyle
+            ? ((options.chartConfiguration as any).lineStyle as ODSChartsLineStyle)
             : options.lineStyle
               ? options.lineStyle
               : ODSChartsLineStyle.SMOOTH

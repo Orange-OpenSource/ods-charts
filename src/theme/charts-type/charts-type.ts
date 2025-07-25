@@ -27,17 +27,36 @@ export enum ODSChartsTypes {
 /**
  * Configuration of a line chart.
  */
-class ODSChartsLineConfiguration {
+export class ODSChartsLineConfiguration {
   lineStyle?: ODSChartsLineStyle;
 }
 
-class ODSChartsGaugeConfiguration {
+/**
+ * Configuration of a gauge chart.
+ */
+export class ODSChartsGaugeConfiguration {
+  /**
+   * Minimum value of the gauge.
+   */
   minValue?: number;
+  /**
+   * Maximum value of the gauge.
+   */
   maxValue?: number;
 }
 
-class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration {
-  dialParts?: {
+/**
+ * Configuration of dial gauge chart.
+ * It extends the ODSChartsGaugeConfiguration to include specific properties for dial points.
+ */
+export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration {
+  /**
+   * Configuration of the dial points. Points are used to divide the gauge into segments.
+   * The point is identify by its value.
+   * A label can be displayed, associated with this value.
+   * A color can be used to specify the color of the segment before the value.
+   */
+  dialPoints?: {
     value: number;
     label?: number;
     beforeColor?: string;
@@ -61,52 +80,118 @@ class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration {
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
 
+  /**
+   * For internal use only.
+   * This method should not be called directly by the user. It is used internally by the class to build the configuration of the charts.
+   * @returns The default configuration of a chart.
+   * @internal
+   */
   public getDefaultConfiguration(): any {
     return {};
   }
 
+  /**
+   * For internal use only.
+   * This method should not be called directly by the user. It is used internally by the class to build the configuration of the charts.
+   * @param _serie The serie to get the configuration for.
+   * @returns The configuration of the serie.
+   * @internal
+   */
   public getSerieConfiguration(_serie: { type: string }): any {
     return {};
   }
 
+  /**
+   * Get the empty default configuration of a chart.
+   * This method should not be used. Prefer to use the specific methods to get the configuration of a chart.
+   * For example, use {@link getLineChartConfiguration} to get the configuration of a line chart.
+   * @returns The default configuration of a chart.
+   */
   public static getDefaultChartConfiguration(): ODSChartsConfiguration {
     return new ODSChartsConfiguration();
   }
 
+  /**
+   * Get the configuration of a line chart.
+   * @param config Configuration of the line chart, can be used to specify the line style
+   *               {@link ODSChartsLineStyle.SMOOTH} or {@link ODSChartsLineStyle.BROKEN} or {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}}.
+   * @returns Configuration of a line chart.
+   */
   public static getLineChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
     return new ODSChartsLine(config.lineStyle);
   }
 
+  /**
+   * Get the configuration of a bar chart.
+   * @returns Configuration of a bar chart.
+   */
   public static getBarChartConfiguration(): ODSChartsConfiguration {
     return new ODSChartsBar();
   }
 
+  /**
+   * get the configuration of a line and bar chart.
+   * @param config Configuration of the line and bar chart, can be used to specify the line style
+   *               {@link ODSChartsLineStyle.SMOOTH} or {@link ODSChartsLineStyle.BROKEN} or {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}}.
+   * @returns Configuration of a line and bar chart.
+   */
   public static getLineAndBarChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
     return new ODSChartsLineAndBar(config.lineStyle);
   }
 
+  /**
+   * Get the configuration of a pie chart.
+   * @returns Configuration of a pie chart.
+   */
   public static getPieChartConfiguration(): ODSChartsConfiguration {
     return new ODSChartsPie();
   }
 
+  /**
+   * Get the configuration of a donut chart.
+   * @returns Configuration of a donut chart.
+   */
   public static getDonutChartConfiguration(): ODSChartsConfiguration {
     return new ODSChartsDonut();
   }
 
+  /**
+   * Get the configuration of a horizontal gauge chart.
+   * This chart is a bar chart with a horizontal orientation, used to display a single value within a range.
+   * It is useful for showing progress or performance against a target.
+   * @param config Configuration of the horizontal gauge chart, must be used to specify the minimum and maximum values.
+   *               The chart will display a bar that fills the space between these two values.
+   * @returns Configuration of the horizontal gauge chart.
+   */
   public static getHorizontalGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
     return new ODSChartsHorizontalGauge(config.minValue, config.maxValue);
   }
 
+  /**
+   * Get the configuration of a semi-circular gauge chart.
+   * @param config Configuration of the semi-circular gauge chart, must be used to specify the minimum and maximum values.
+   * @returns Configuration of the semi-circular gauge chart.
+   */
   public static getSemiCircularGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
     return new ODSChartsSemiCircularGauge(config.minValue, config.maxValue);
   }
 
+  /**
+   * Get the configuration of a circular gauge chart.
+   * @param config Configuration of the circular gauge chart, must be used to specify the minimum and maximum values.
+   * @returns Configuration of the circular gauge chart.
+   */
   public static getCircularGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
     return new ODSChartsCircularGauge(config.minValue, config.maxValue);
   }
 
+  /**
+   * Get the configuration of a dial gauge chart.
+   * @param config Configuration of the dial gauge chart, must be used to specify the minimum and maximum values and the dial parts.
+   * @returns Configuration of the dial gauge chart.
+   */
   public static getDialGaugeChartConfiguration(config: ODSChartsDialGaugeConfiguration): ODSChartsConfiguration {
-    return new ODSChartsDialGauge(config.minValue, config.maxValue, config.dialParts);
+    return new ODSChartsDialGauge(config.minValue, config.maxValue, config.dialPoints);
   }
 }
 
@@ -115,7 +200,7 @@ export class ODSChartsConfiguration {
  * - {@link ODSChartsTypes.LINE}
  * - {@link ODSChartsTypes.LINE_AND_BAR}
  */
-export class ODSChartsLineType extends ODSChartsConfiguration {
+class ODSChartsLineType extends ODSChartsConfiguration {
   constructor(
     type: ODSChartsTypes.LINE_AND_BAR | ODSChartsTypes.LINE = ODSChartsTypes.LINE,
     public lineStyle?: ODSChartsLineStyle
@@ -150,7 +235,7 @@ class ODSChartsLine extends ODSChartsLineType {
  * - {@link ODSChartsTypes.BAR}
  * - {@link ODSChartsTypes.STACKED_BAR}
  */
-export class ODSChartsBarType extends ODSChartsConfiguration {
+class ODSChartsBarType extends ODSChartsConfiguration {
   protected constructor(type: ODSChartsTypes.BAR) {
     super(type);
   }
@@ -220,7 +305,7 @@ class ODSChartsDonut extends ODSChartsConfiguration {
  * - {@link ODSChartsTypes.CIRCULAR_GAUGE}
  * - {@link ODSChartsTypes.CIRCLE_GAUGE}
  */
-export class ODSChartsGaugeType extends ODSChartsConfiguration {
+class ODSChartsGaugeType extends ODSChartsConfiguration {
   protected constructor(type: ODSChartsTypes.HORIZONTAL_GAUGE | ODSChartsTypes.CIRCULAR_GAUGE) {
     super(type);
   }
@@ -309,7 +394,7 @@ class ODSChartsHorizontalGauge extends ODSChartsGaugeType {
  * - {@link ODSChartsTypes.CIRCULAR_GAUGE}
  * - {@link ODSChartsTypes.DIAL_GAUGE}
  */
-export class ODSChartsCircularGaugeType extends ODSChartsConfiguration {
+class ODSChartsCircularGaugeType extends ODSChartsConfiguration {
   constructor(
     type: ODSChartsTypes.SEMI_CIRCULAR_GAUGE | ODSChartsTypes.CIRCULAR_GAUGE | ODSChartsTypes.DIAL_GAUGE = ODSChartsTypes.SEMI_CIRCULAR_GAUGE,
     public minValue?: number,
@@ -389,18 +474,18 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
   constructor(
     minValue?: number,
     maxValue?: number,
-    public dialParts?: {
+    public dialPoints?: {
       value: number;
       label?: number;
       beforeColor?: string;
     }[]
   ) {
     super(ODSChartsTypes.DIAL_GAUGE, minValue, maxValue);
-    if (undefined === minValue && dialParts && dialParts.length > 1) {
-      this.minValue = dialParts[0].value;
+    if (undefined === minValue && dialPoints && dialPoints.length > 1) {
+      this.minValue = dialPoints[0].value;
     }
-    if (undefined === maxValue && dialParts && dialParts.length > 0) {
-      this.maxValue = dialParts[dialParts.length - 1].value;
+    if (undefined === maxValue && dialPoints && dialPoints.length > 0) {
+      this.maxValue = dialPoints[dialPoints.length - 1].value;
     }
   }
 
@@ -430,23 +515,23 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
     const minValue = config.min;
     const maxValue = config.max;
 
-    const dialParts: {
+    const dialPoints: {
       value: number;
       label?: number;
       beforeColor?: string;
-    }[] = this.dialParts && 0 < this.dialParts.length ? this.dialParts : [{ value: minValue }, { value: maxValue }];
+    }[] = this.dialPoints && 0 < this.dialPoints.length ? this.dialPoints : [{ value: minValue }, { value: maxValue }];
 
-    if (minValue !== dialParts[0].value) {
-      dialParts.unshift({ value: minValue });
+    if (minValue !== dialPoints[0].value) {
+      dialPoints.unshift({ value: minValue });
     }
 
-    if (maxValue !== dialParts[dialParts.length - 1].value) {
-      dialParts.push({ value: maxValue });
+    if (maxValue !== dialPoints[dialPoints.length - 1].value) {
+      dialPoints.push({ value: maxValue });
     }
 
-    const steps: number[] = dialParts.reduce((foundPeriods: number[], currentPart, index) => {
+    const steps: number[] = dialPoints.reduce((foundPeriods: number[], currentPart, index) => {
       if (index > 0) {
-        foundPeriods.push(currentPart.value - dialParts[index - 1].value);
+        foundPeriods.push(currentPart.value - dialPoints[index - 1].value);
       }
       return foundPeriods;
     }, []);
@@ -486,7 +571,7 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
         fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
         fontWeight: 400,
         formatter: function (value: number) {
-          const labelValue = dialParts.find((part) => value === part.value);
+          const labelValue = dialPoints.find((part) => value === part.value);
           return labelValue && labelValue.label ? labelValue.label : '';
         },
       },
@@ -503,16 +588,16 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
                 [1, 'var(--ouds-charts-color-functional-negative)'],
               ]
           */
-          color: dialParts.reduce((colors: [number, string][], part, index) => {
+          color: dialPoints.reduce((colors: [number, string][], part, index) => {
             if (index > 0 && part.beforeColor) {
               const valuePct = part.value / (maxValue - minValue);
-              if (dialParts.length - 1 === index) {
+              if (dialPoints.length - 1 === index) {
                 colors.push([valuePct, part.beforeColor]);
               } else {
                 colors.push([valuePct - 0.002, part.beforeColor]);
                 colors.push([valuePct + 0.002, 'transparent']);
               }
-            } else if (dialParts.length - 1 === index) {
+            } else if (dialPoints.length - 1 === index) {
               colors.push([1, 'var(--bs-light)']);
             }
             return colors;
