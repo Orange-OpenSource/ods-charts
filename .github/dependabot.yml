@@ -91,3 +91,19 @@ updates:
       vue-all-deps:
         patterns:
           - "*"
+  - package-ecosystem: npm
+    directory: "/test/angular-14"
+    labels:
+      - dependencies
+    schedule:
+      interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
+    versioning-strategy: increase
+    ignore:
+      - dependency-name: "@angular-devkit/build-angular"
+    groups:
+      angular-14-all-deps:
+        patterns:
+          - "*"
