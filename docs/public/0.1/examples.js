@@ -1053,8 +1053,6 @@ window.generatePieChart = async (id) => {
     series: [
       {
         type: 'pie',
-        label: { show: false },
-        labelLine: { show: false },
         data: [
           { name: 'Label 1', value: 25 },
           { name: 'Label 2', value: 50 },
@@ -1064,11 +1062,6 @@ window.generatePieChart = async (id) => {
           { name: 'Label 6', value: 30 },
           { name: 'Label 7', value: 5 },
         ],
-        label: {
-          show: false,
-          position: 'outside',
-        },
-        radius: ['0%', '95%'],
       },
     ],
   };
@@ -1081,8 +1074,6 @@ window.generateDonutChart = async (id) => {
     series: [
       {
         type: 'pie',
-        label: { show: false },
-        labelLine: { show: false },
         data: [
           { name: 'Label 1', value: 25 },
           { name: 'Label 2', value: 50 },
@@ -1092,19 +1083,6 @@ window.generateDonutChart = async (id) => {
           { name: 'Label 6', value: 30 },
           { name: 'Label 7', value: 5 },
         ],
-        label: {
-          show: false,
-          position: 'center',
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 35,
-            fontWeight: 700,
-            formatter: '{d}%',
-          },
-        },
-        radius: ['80%', '95%'],
       },
     ],
   };

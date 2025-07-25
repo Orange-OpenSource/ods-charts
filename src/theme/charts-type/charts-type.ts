@@ -169,6 +169,17 @@ class ODSChartsBar extends ODSChartsBarType {
  * Configuration of a pie chart of type {@link ODSChartsTypes.PIE}
  */
 class ODSChartsPie extends ODSChartsConfiguration {
+  public getSerieConfiguration(serie: { type: string }) {
+    if (serie.type !== 'pie') {
+      return {};
+    }
+    return {
+      label: { show: false, position: 'outside' },
+      labelLine: { show: false },
+      radius: ['0%', '95%'],
+    };
+  }
+
   constructor() {
     super(ODSChartsTypes.PIE);
   }
@@ -178,6 +189,25 @@ class ODSChartsPie extends ODSChartsConfiguration {
  * Configuration of a chart of type {@link ODSChartsTypes.HorizontalGauge}
  */
 class ODSChartsDonut extends ODSChartsConfiguration {
+  getSerieConfiguration(serie: { type: string }): any {
+    if (serie.type !== 'pie') {
+      return {};
+    }
+    return {
+      label: { show: false, position: 'center' },
+      labelLine: { show: false },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 35,
+          fontWeight: 700,
+          formatter: '{d}%',
+        },
+      },
+      radius: ['80%', '95%'],
+    };
+  }
+
   constructor() {
     super(ODSChartsTypes.DONUT);
   }
@@ -464,7 +494,7 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
         roundCap: false,
         lineStyle: {
           width: 32,
-          /* build the color sets of the gauge, like :  
+          /* build the color sets of the gauge, like :
               [
                 [0.498, 'var(--ouds-charts-color-functional-positive)'],
                 [0.502, 'transparent'],
