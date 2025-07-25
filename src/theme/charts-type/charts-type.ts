@@ -179,6 +179,7 @@ class ODSChartsPie extends ODSChartsConfiguration {
       radius: ['0%', '95%'],
     };
   }
+
   constructor() {
     super(ODSChartsTypes.PIE);
   }
@@ -493,7 +494,7 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
         roundCap: false,
         lineStyle: {
           width: 32,
-          /* build the color sets of the gauge, like :  
+          /* build the color sets of the gauge, like :
               [
                 [0.498, 'var(--ouds-charts-color-functional-positive)'],
                 [0.502, 'transparent'],
