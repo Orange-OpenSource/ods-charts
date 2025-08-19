@@ -12,11 +12,11 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
 <BaseLayout data={data}>
   <script slot="head-scripts" type="text/javascript" src={`/${version}/colors.js`}></script>
   <div class="title-bar">
-    <div class="container-xxl">
-      <h1 class="display-1">ODS Charts colors sets</h1>
+    <div class="container-fluid container-max-width">
+      <h1 class="display-large">ODS Charts colors sets</h1>
     </div>
   </div>
-  <div class="container-xxl mt-3 lh-base">
+  <div class="container-fluid container-max-width mt-lg lh-base">
     <p class="lead ll-md">ODS and OUDS colors sets are provided at the same level at the moment.</p>
     <p class="ll-md">
       OUDS colors sets are kind of experimental at the moment, please see more in our associated <a href="https://unified-design-system.orange.com/472794e18/p/700671-colour" target="blank" rel="noopener">Data display guidelines</a> page. Please note that the OUDS colors are supposed to be used even in ODS project (except for ODS Functional and Highlight) right now according to the
@@ -31,23 +31,17 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
     </ul>
   </div>
   <div>
-    <div class="container-fluid">
-      <div class="container">
-        <h2 class="pt-3 h1">Default mode theme</h2>
-        <div class="row" id="container"></div>
-      </div>
+    <div class="container-fluid container-max-width">
+      <h2 class="pt-lg h1">Default mode theme</h2>
+      <div class="row" id="container"></div>
     </div>
-    <div data-bs-theme="light" class="container-fluid">
-      <div class="container">
-        <h2 class="pt-3 h1">Light mode theme</h2>
-        <div class="row" id="containerLight"></div>
-      </div>
+    <div data-bs-theme="light" class="container-fluid container-max-width">
+      <h2 class="pt-lg h1">Light mode theme</h2>
+      <div class="row" id="containerLight"></div>
     </div>
-    <div data-bs-theme="dark" class="container-fluid">
-      <div class="container">
-        <h2 class="pt-3 h1">Dark mode theme</h2>
-        <div class="row" id="containerDark"></div>
-      </div>
+    <div data-bs-theme="dark" class="container-fluid container-max-width">
+      <h2 class="pt-lg h1">Dark mode theme</h2>
+      <div class="row" id="containerDark"></div>
     </div>
   </div>
   <script>

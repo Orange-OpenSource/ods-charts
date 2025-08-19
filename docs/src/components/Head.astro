@@ -14,8 +14,8 @@ const version = getConfig().docs_version
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{title}</title>
 
-<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous" />
-<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous" />
+<!-- <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous" />
+<link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous" /> -->
 <link href={`/${version}/tarteaucitron-config.css`} rel="stylesheet" />
 <link href={`/${version}/style.css`} rel="stylesheet" />
 
@@ -30,3 +30,319 @@ const version = getConfig().docs_version
 
 <script is:inline type="text/javascript" src={`/${version}/ods-charts.js`}></script>
 <script is:inline type="text/javascript" src={`/${version}/color-mode.js`}></script>
+
+<style is:global lang="scss">
+@import "@ouds/web/dist/css/ouds-web";
+
+.boosted {
+  // Configuration
+  @import "boosted/scss/functions";
+  @import "boosted/scss/variables";
+  @import "boosted/scss/variables-dark";
+  @import "@ouds/web/scss/config";
+  @import "@ouds/web/scss/functions";
+  @import "@ouds/web/scss/tokens/raw";
+  @import "@ouds/web/scss/tokens/semantic";
+  @import "@ouds/web/scss/tokens/semantic-colors-custom-props";
+  @import "@ouds/web/scss/tokens/composite";
+  @import "@ouds/web/scss/tokens/component-colors-custom-props";
+  @import "@ouds/web/scss/tokens/component";
+  @import "@ouds/web/scss/variables";
+  @import "@ouds/web/scss/variables-dark";
+  @import "boosted/scss/maps";
+  @import "@ouds/web/scss/maps";
+  @import "boosted/scss/mixins";
+  @import "@ouds/web/scss/mixins";
+  // @import "boosted/scss/utilities";
+
+  // Layout & components
+
+  [data-bs-theme] { // TODO: Point d'attention sur les sélecteurs
+    color: var(--#{$prefix}body-color);
+    background-color: var(--#{$prefix}body-bg);
+  }
+
+  // Note that some of the following variables in `:root, [data-bs-theme="light"]` could be extracted into `:root` only selector since they are not modified by other color modes!
+  // End mod
+
+  &,
+  [data-bs-theme="light"],
+  :root[data-bs-theme="light"] & [data-bs-theme="root"],
+  :root[data-bs-theme="dark"] & [data-bs-theme="root-inverted"],
+  :root[data-bs-theme="light"] &[data-bs-theme="root"],
+  :root[data-bs-theme="dark"] &[data-bs-theme="root-inverted"] {
+    color-scheme: light;
+
+    // Note: Custom variable values only support SassScript inside `#{}`.
+
+    // Colors
+    //
+    // Generate palettes for full colors, grays, and theme colors.
+
+    @each $color, $value in $colors {
+      --#{$prefix}#{$color}: #{$value};
+    }
+
+    @each $color, $value in $grays {
+      --#{$prefix}gray-#{$color}: #{$value};
+    }
+
+    @each $color, $value in $theme-colors {
+      --#{$prefix}#{$color}: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-rgb {
+      --#{$prefix}#{$color}-rgb: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-text {
+      --#{$prefix}#{$color}-text-emphasis: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-bg-subtle {
+      --#{$prefix}#{$color}-bg-subtle: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-border-subtle {
+      --#{$prefix}#{$color}-border-subtle: #{$value};
+    }
+
+    --#{$prefix}white-rgb: #{to-rgb($white)};
+    --#{$prefix}black-rgb: #{to-rgb($black)};
+
+
+    @each $icon, $svg in $svg-as-custom-props {
+      --#{$prefix}#{$icon}-icon: #{escape-svg($svg)};
+    }
+    // End mod
+
+    // Fonts
+    // Root and body
+    @if $font-size-root != null {
+      --#{$prefix}root-font-size: #{$font-size-root};
+    }
+    --#{$prefix}body-font-family: #{inspect($font-family-base)};
+    @include rfs($font-size-base, --#{$prefix}body-font-size);
+    --#{$prefix}body-font-weight: #{$font-weight-base};
+    --#{$prefix}body-line-height: #{$line-height-base};
+    @if $body-text-align != null {
+      --#{$prefix}body-text-align: #{$body-text-align};
+    }
+
+    --#{$prefix}body-color: #{$body-color};
+    --#{$prefix}body-color-rgb: #{to-rgb($body-color)};
+    --#{$prefix}body-bg: #{$body-bg};
+    --#{$prefix}body-bg-rgb: #{to-rgb($body-bg)};
+
+    --#{$prefix}emphasis-color: #{$body-emphasis-color};
+    --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color)};
+
+    --#{$prefix}secondary-color: #{$body-secondary-color};
+    --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color)};
+    --#{$prefix}secondary-bg: #{$body-secondary-bg};
+    --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg)};
+
+    --#{$prefix}tertiary-color: #{$body-tertiary-color};
+    --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color)};
+    --#{$prefix}tertiary-bg: #{$body-tertiary-bg};
+    --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg)};
+
+    --#{$prefix}heading-color: #{$headings-color};
+
+    --#{$prefix}disabled-color: #{$disabled-color};
+    --#{$prefix}tertiary-active-bg: #{$tertiary-active-bg};
+
+    --#{$prefix}border-width: #{$border-width};
+    --#{$prefix}border-style: #{$border-style};
+    --#{$prefix}border-color: #{$border-color};
+    --#{$prefix}border-color-subtle: #{$border-color-subtle};
+    --#{$prefix}border-color-translucent: #{$border-color-translucent};
+
+    --#{$prefix}border-radius: #{0px};
+    --#{$prefix}border-radius-sm: #{$border-radius-sm};
+    --#{$prefix}border-radius-lg: #{$border-radius-lg};
+    --#{$prefix}border-radius-xl: #{$border-radius-xl};
+    --#{$prefix}border-radius-xxl: #{$border-radius-xxl};
+    --#{$prefix}border-radius-2xl: var(--#{$prefix}border-radius-xxl);
+    --#{$prefix}border-radius-pill: #{$border-radius-pill};
+
+    --#{$prefix}box-shadow: #{$box-shadow};
+    --#{$prefix}box-shadow-sm: #{$box-shadow-sm};
+    --#{$prefix}box-shadow-lg: #{$box-shadow-lg};
+    --#{$prefix}box-shadow-inset: #{$box-shadow-inset};
+
+    // Focus styles
+    --#{$prefix}focus-ring-width: #{$focus-ring-width};
+    --#{$prefix}focus-ring-opacity: #{$focus-ring-opacity};
+    --#{$prefix}focus-ring-color: #{$focus-ring-color};
+
+    --#{$prefix}form-valid-color: #{$form-valid-color};
+    --#{$prefix}form-valid-border-color: #{$form-valid-border-color};
+    --#{$prefix}form-invalid-color: #{$form-invalid-color};
+    --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color};
+
+    --#{$prefix}form-check-filter: #{$form-check-filter};
+    --#{$prefix}form-check-input-disabled-color: #{$form-check-input-disabled-color};
+    --#{$prefix}form-color-disabled-filter: #{$form-color-disabled-filter};
+    --#{$prefix}form-select-indicator: #{$form-select-indicator};
+    --#{$prefix}form-select-disabled-indicator: #{$form-select-disabled-indicator};
+    --#{$prefix}form-switch-square-bg: #{$form-switch-square-bg};
+    --#{$prefix}form-switch-unchecked-invalid-border-color: #{$form-switch-unchecked-invalid-border-color};
+
+    // Table-specific styles
+    --#{$prefix}table-active-bg-factor: #{$table-active-bg-factor};
+    --#{$prefix}table-hover-bg-factor: #{$table-hover-bg-factor};
+    --#{$prefix}table-striped-bg-factor: #{$table-striped-bg-factor};
+
+    // Breadcrumb-specific styles
+    --#{$prefix}breadcrumb-divider-filter: #{$breadcrumb-divider-filter};
+
+    --#{$prefix}font-max-width-display-large: none; // TODO Problématique ?
+    --#{$prefix}font-max-width-display-medium: none;
+    --#{$prefix}font-max-width-display-small: none;
+    --#{$prefix}font-max-width-heading-xlarge: none;
+    --#{$prefix}font-max-width-heading-large: none;
+    --#{$prefix}font-max-width-heading-medium: none;
+    --#{$prefix}font-max-width-heading-small: none;
+    --#{$prefix}font-max-width-body-large: none;
+    --#{$prefix}font-max-width-body-medium: none;
+    --#{$prefix}font-max-width-body-small: none;
+  }
+
+  [data-bs-theme="dark"] &,
+  &[data-bs-theme="dark"],
+  :root[data-bs-theme="dark"] & [data-bs-theme="root"],
+  :root[data-bs-theme="light"] & [data-bs-theme="root-inverted"],
+  :root[data-bs-theme="dark"] &[data-bs-theme="root"],
+  :root[data-bs-theme="light"] &[data-bs-theme="root-inverted"] {
+    color-scheme: dark;
+
+    --#{$prefix}body-color: #{$body-color-dark};
+    --#{$prefix}body-color-rgb: #{to-rgb($body-color-dark)};
+    --#{$prefix}body-bg: #{$body-bg-dark};
+    --#{$prefix}body-bg-rgb: #{to-rgb($body-bg-dark)};
+
+    --#{$prefix}emphasis-color: #{$body-emphasis-color-dark};
+    --#{$prefix}emphasis-color-rgb: #{to-rgb($body-emphasis-color-dark)};
+
+    --#{$prefix}secondary-color: #{$body-secondary-color-dark};
+    --#{$prefix}secondary-color-rgb: #{to-rgb($body-secondary-color-dark)};
+    --#{$prefix}secondary-bg: #{$body-secondary-bg-dark};
+    --#{$prefix}secondary-bg-rgb: #{to-rgb($body-secondary-bg-dark)};
+
+    --#{$prefix}tertiary-color: #{$body-tertiary-color-dark};
+    --#{$prefix}tertiary-color-rgb: #{to-rgb($body-tertiary-color-dark)};
+    --#{$prefix}tertiary-bg: #{$body-tertiary-bg-dark};
+    --#{$prefix}tertiary-bg-rgb: #{to-rgb($body-tertiary-bg-dark)};
+
+    @each $color, $value in $theme-colors-dark {
+      --#{$prefix}#{$color}: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-rgb-dark {
+      --#{$prefix}#{$color}-rgb: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-text-dark {
+      --#{$prefix}#{$color}-text-emphasis: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-bg-subtle-dark {
+      --#{$prefix}#{$color}-bg-subtle: #{$value};
+    }
+
+    @each $color, $value in $theme-colors-border-subtle-dark {
+      --#{$prefix}#{$color}-border-subtle: #{$value};
+    }
+
+    @each $icon, $svg in $svg-as-custom-props-dark {
+      --#{$prefix}#{$icon}-icon: #{escape-svg($svg)};
+    }
+
+    --#{$prefix}heading-color: #{$headings-color-dark};
+
+    --#{$prefix}disabled-color: #{$disabled-color-dark};
+    --#{$prefix}tertiary-active-bg: #{$tertiary-active-bg-dark};
+
+    --#{$prefix}border-color: #{$border-color-dark};
+    --#{$prefix}border-color-subtle: #{$border-color-subtle-dark};
+    --#{$prefix}border-color-translucent: #{$border-color-translucent-dark};
+
+    --#{$prefix}focus-ring-color: #{$focus-ring-color-dark};
+
+    --#{$prefix}form-valid-color: #{$form-valid-color-dark};
+    --#{$prefix}form-valid-border-color: #{$form-valid-border-color-dark};
+    --#{$prefix}form-invalid-color: #{$form-invalid-color-dark};
+    --#{$prefix}form-invalid-border-color: #{$form-invalid-border-color-dark};
+    --#{$prefix}form-check-filter: #{$form-check-filter-dark};
+    --#{$prefix}form-check-input-disabled-color: #{$form-check-input-disabled-color-dark};
+    --#{$prefix}form-select-indicator: #{$form-select-indicator-dark};
+    --#{$prefix}form-select-disabled-indicator: #{$form-select-disabled-indicator-dark};
+    --#{$prefix}form-color-disabled-filter: #{$form-color-disabled-filter-dark};
+    --#{$prefix}form-switch-square-bg: #{$form-switch-square-bg-dark};
+    --#{$prefix}form-switch-unchecked-invalid-border-color: #{$form-switch-unchecked-invalid-border-color-dark};
+
+    // Table-specific styles
+    --#{$prefix}table-active-bg-factor: #{$table-active-bg-factor-dark};
+    --#{$prefix}table-hover-bg-factor: #{$table-hover-bg-factor-dark};
+    --#{$prefix}table-striped-bg-factor: #{$table-striped-bg-factor-dark};
+
+    // Breadcrumb-specific styles
+    --#{$prefix}breadcrumb-divider-filter: #{$breadcrumb-divider-filter-dark};
+  }
+
+  // @import "@ouds/web/scss/reboot";
+  // @import "@ouds/web/scss/type";
+  @import "boosted/scss/images";
+  // @import "boosted/scss/containers";
+  // @import "boosted/scss/grid";
+  @import "boosted/scss/tables";
+  @import "boosted/scss/forms/labels";
+  @import "boosted/scss/forms/form-text";
+  @import "boosted/scss/forms/form-control";
+  @import "boosted/scss/forms/form-select";
+  // @import "boosted/scss/forms/form-check";
+  @import "boosted/scss/forms/form-range";
+  // Boosteboosted/scss/d mod: no floating-labels
+  @import "boosted/scss/forms/input-group";
+  @import "boosted/scss/forms/star-rating";
+  @import "boosted/scss/forms/validation";
+  @import "boosted/scss/forms/quantity-selector";
+  // @import "boosted/scss/buttons";
+  @import "boosted/scss/transitions";
+  @import "boosted/scss/dropdown";
+  @import "boosted/scss/button-group";
+  @import "boosted/scss/nav";
+  @import "boosted/scss/navbar";
+  @import "boosted/scss/card"; /* TODO: changed: removed extend *********************************************************************************************/
+  @import "boosted/scss/accordion";
+  // @import "boosted/scss/breadcrumb";
+  @import "boosted/scss/pagination"; /* TODO: Test */
+  // @import "boosted/scss/badge";
+  @import "boosted/scss/tags";
+  @import "boosted/scss/alert";
+  @import "boosted/scss/progress";
+  @import "boosted/scss/list-group";
+  @import "boosted/scss/close";
+  @import "boosted/scss/toasts";
+  @import "boosted/scss/modal";
+  @import "boosted/scss/tooltip";
+  @import "boosted/scss/popover";
+  @import "boosted/scss/carousel";
+  @import "boosted/scss/spinners";
+  @import "boosted/scss/offcanvas";
+  @import "boosted/scss/placeholders";
+
+  // Boosted
+  @import "boosted/scss/back-to-top";
+  @import "boosted/scss/footer";
+  @import "boosted/scss/local-navigation";
+  @import "boosted/scss/orange-navbar";
+  @import "boosted/scss/stepped-process";
+  @import "boosted/scss/sticker";
+  @import "boosted/scss/title-bars";
+
+  // Helpers
+  @import "@ouds/web/scss/helpers";
+}
+</style>

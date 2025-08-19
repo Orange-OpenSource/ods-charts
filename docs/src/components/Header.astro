@@ -10,9 +10,9 @@ const { title } = Astro.props
 const version = getConfig().docs_version
 ---
 
-<header class="sticky-top" data-bs-theme="dark">
+<header class="boosted sticky-top" data-bs-theme="dark">
   <nav class="navbar navbar-expand-lg" aria-label="Global navigation">
-    <div class="container-xxl">
+    <div class="container-fluid container-max-width">
       <div class="navbar-brand me-auto me-lg-4">
         <a class="stretched-link" href="/">
           <img src={`/${version}/images/orange-logo.svg`} width="50" height="50" alt="ODS Charts - Back to Home" loading="lazy" />
