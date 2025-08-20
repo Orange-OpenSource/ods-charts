@@ -88,7 +88,7 @@ function generateConfigurator(id) {
       ${accordionThemes.header.end('accordion_' + id, 'content_1_' + id)}
       ${accordionThemes.content.begin('accordion_' + id, 'content_1_' + id)}
         <div class="one-chart-configurator" data-chart-id="${id}">
-          <form class="row g-3">
+          <form class="row g-lg">
             <div class="col-md-4">
               <label for="darkModeInput" class="form-label">Dark mode</label>
               <select class="form-select" aria-label="Dark mode" id="darkModeInput" onchange="changeTheme('${id}')">
@@ -132,8 +132,8 @@ function generateConfigurator(id) {
               </select>
             </div>
 
-            <div class="col-md-4 pt-3">
-              <button  class="btn btn-primary mt-1" onclick="downloadTheme('${id}'); event.preventDefault()">Download theme</button>
+            <div class="col-md-4 pt-lg">
+              <button class="btn btn-strong mt-2xs" onclick="downloadTheme('${id}'); event.preventDefault()">Download theme</button>
             </div>
             <div class="col-12">
               <h2>Optional features</h2>
@@ -219,13 +219,13 @@ function generateConfigurator(id) {
         View code
       ${accordionThemes.header.end('accordion_' + id, 'content_2_' + id)}
       ${accordionThemes.content.begin('accordion_' + id, 'content_2_' + id)}
-        <div class="border border-subtle position-relative mt-2 p-2">
+        <div class="border border-subtle position-relative mt-sm p-sm">
           <div class="display-5">HTML</div>
           <code>
             <pre id=${id + '_html'}></pre>
           </code>
         </div>
-        <div class="border border-subtle position-relative mt-2 p-2">
+        <div class="border border-subtle position-relative mt-sm p-sm">
           <div class="display-5">JavaScript / ODS Charts</div>
           <code>
             <pre id=${id + '_code'}></pre>
@@ -1083,6 +1083,7 @@ window.generateDonutChart = async (id) => {
           { name: 'Label 6', value: 30 },
           { name: 'Label 7', value: 5 },
         ],
+        radius: ['50%', '95%'],
       },
     ],
   };

@@ -11,15 +11,15 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
 
 <BaseLayout data={data}>
   <div class="title-bar">
-    <div class="container-xxl">
-      <h1 class="display-1">Examples</h1>
+    <div class="container-fluid container-max-width">
+      <h1 class="display-large">Examples</h1>
     </div>
   </div>
-  <div class="container">
+  <div class="container-fluid container-max-width">
     <div class="row">
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
-          <img src={`/${version}/images/ods-line-charts.png`} class="card-img-top" alt="..." />
+          <img src={`/${version}/images/ods-line-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Single line chart</h6>
@@ -27,13 +27,13 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/49412d" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./single-line-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./single-line-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
-          <img src={`/${version}/images/ods-double-line-charts.png`} class="card-img-top" alt="..." />
+          <img src={`/${version}/images/ods-double-line-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Multiple line chart</h6>
@@ -41,13 +41,13 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://system.design.orange.com/0c1af118d/p/88be1e-line-chart/t/74b580" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./multiple-line-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./multiple-line-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
-          <img src={`/${version}/images/ods-bar-charts.png`} class="card-img-top" alt="..." />
+          <img src={`/${version}/images/ods-bar-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Bar chart</h6>
@@ -55,13 +55,13 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/47ab68" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./bar-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./bar-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
-          <img src={`/${version}/images/ods-stacked-bar-charts.png`} class="card-img-top" alt="..." />
+          <img src={`/${version}/images/ods-stacked-bar-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Stacked bar chart</h6>
@@ -69,13 +69,13 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/241b98" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./stacked-bar-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./stacked-bar-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
-          <img src={`/${version}/images/ods-mixed-charts.png`} class="card-img-top" alt="..." />
+          <img src={`/${version}/images/ods-mixed-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
             <h6 class="card-subtitle">Bar + line chart</h6>
@@ -83,11 +83,11 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://system.design.orange.com/0c1af118d/p/68a692-bar-chart/t/66991e" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./bar-line-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./bar-line-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
           <img src={`/${version}/images/ods-pie-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
@@ -97,11 +97,11 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/10ead7" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./pie-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./pie-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
         <div class="card h-100">
           <img src={`/${version}/images/ods-donut-charts.png`} class="card-img-top" alt="" />
           <div class="card-body">
@@ -111,11 +111,11 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
             <a href="https://design.orange.com/0c1af118d/p/13c921-pie-and-donut-charts/t/80abab" target="_blank" class="card-link">Orange Design System - Data display</a>
           </div>
           <div class="card-footer">
-            <a href="./donut-chart/" class="btn btn-primary mt-3">Go to example</a>
+            <a href="./donut-chart/" class="btn btn-default mt-lg">Go to example</a>
           </div>
         </div>
       </div>
-       <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+       <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-sm">
           <div class="card h-100">
             <img src={`/${version}/images/ods-gauge-charts.png`} class="card-img-top" alt="" />
             <div class="card-body">
@@ -125,7 +125,7 @@ export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
               <a href="https://system.design.orange.com/0c1af118d/p/673c90-gauges" target="_blank" class="card-link">Orange Design System - Data display</a>
             </div>
             <div class="card-footer">
-              <a href="./gauge-chart/" class="btn btn-primary mt-3">Go to example</a>
+              <a href="./gauge-chart/" class="btn btn-default mt-lg">Go to example</a>
             </div>
           </div>
         </div>

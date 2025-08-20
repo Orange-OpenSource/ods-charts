@@ -8,9 +8,9 @@ const version = getConfig().docs_version
 ---
 
 <BaseLayout data={data}>
-  <div class="container">
+  <div class="container-fluid container-max-width">
     <div class="row">
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="boosted col-12 col-lg-4 col-md-6 align-self-stretch py-2">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">Orange Design System</h5>
@@ -21,12 +21,12 @@ const version = getConfig().docs_version
             <a href="https://echarts.apache.org/en/theme-builder.html" class="card-link">Apache ECharts theme builder</a>
           </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/api/`} class="btn btn-primary mt-3">See API documentation</a>
+          <div class="card-footer ouds-web">
+            <a href={`./${version}/api/`} class="btn btn-default mt-3">See API documentation</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="boosted col-12 col-lg-4 col-md-6 align-self-stretch py-2">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">ODS Charts</h5>
@@ -35,12 +35,12 @@ const version = getConfig().docs_version
             <a href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6" class="card-link">Orange Design System - Data display</a>
           </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/examples/`} class="btn btn-primary mt-3">Examples</a>
+          <div class="card-footer ouds-web">
+            <a href={`./${version}/examples/`} class="btn btn-default mt-3">Examples</a>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="boosted col-12 col-lg-4 col-md-6 align-self-stretch py-2">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">Specific use cases</h5>
@@ -48,13 +48,13 @@ const version = getConfig().docs_version
             <p class="card-text">Examples of specific features illustrated using Apache ECharts and ODS Charts.</p>
           </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/use_cases/`} class="btn btn-primary mt-3">Use cases</a>
+          <div class="card-footer ouds-web">
+            <a href={`./${version}/use_cases/`} class="btn btn-default mt-3">Use cases</a>
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="boosted col-12 col-lg-4 col-md-6 align-self-stretch py-2">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">Colors sets</h5>
@@ -62,8 +62,8 @@ const version = getConfig().docs_version
             <p class="card-text">Display the set of colors available in ODS Charts.</p>
           </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/colors/`} class="btn btn-primary mt-3">Color sets</a>
+          <div class="card-footer ouds-web">
+            <a href={`./${version}/colors/`} class="btn btn-default mt-3">Color sets</a>
           </div>
         </div>
       </div>
