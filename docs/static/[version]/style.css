@@ -43,7 +43,6 @@ body {
   }
 }
 
-
 /** Syntax highlighting **/
 :root,
 [data-bs-theme="light"] {
@@ -116,93 +115,93 @@ pre[class] {
 }
 
 .token.tag {
-    display: initial;
-    padding: initial;
-    font-size: inherit;
-    font-weight: initial;
-    line-height: inherit;
-    background-color: initial;
-    border: initial;
-  }
+  display: initial;
+  padding: initial;
+  font-size: inherit;
+  font-weight: initial;
+  line-height: inherit;
+  background-color: initial;
+  border: initial;
+}
 
 .token.placeholder {
-    cursor: initial;
-    background-color: initial;
-    border: initial;
-    opacity: 1;
-  }
+  cursor: initial;
+  background-color: initial;
+  border: initial;
+  opacity: 1;
+}
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata,
 .token.punctuation {
-    color: var(--base01);
-  }
+  color: var(--base01);
+}
 
 .token.string,
 .token.char,
 .token.attr-value {
-    color: var(--base02);
-  }
+  color: var(--base02);
+}
 
 .token.tag,
 .token.atrule,
 .token.selector,
 .token.class-name {
-    color: var(--base03);
-  }
+  color: var(--base03);
+}
 
 .token.number,
 .token.boolean,
 .token.attr-name,
 .token.builtin,
 .token.property {
-    color: var(--base04);
-  }
+  color: var(--base04);
+}
 
 .token.important {
-    color: var(--base05);
-  }
+  color: var(--base05);
+}
 
 .token.entity {
-    color: var(--base06);
-    cursor: help;
-  }
+  color: var(--base06);
+  cursor: help;
+}
 
 .token.deleted {
-    background-color: var(--base07);
-  }
+  background-color: var(--base07);
+}
 
 .token.inserted {
-    background-color: var(--base09);
-  }
+  background-color: var(--base09);
+}
 
 .token.constant,
 .token.keyword {
-    color: var(--base0B);
-  }
+  color: var(--base0B);
+}
 
 .token.url /* tbd */ {
-    color: var(--base0C);
-  }
+  color: var(--base0C);
+}
 
 .token.variable {
-    color: var(--base0D);
-  }
+  color: var(--base0D);
+}
 
 .token.function,
 .token.regex {
-    color: var(--base0E);
-  }
+  color: var(--base0E);
+}
 
 .token.operator {
-    color: var(--base0F);
-  }
+  color: var(--base0F);
+}
 
 .token.symbol {
-    color: var(--base11);
-  }
+  color: var(--base11);
+}
 
 .token.keyword,
 .token.important,
