@@ -122,14 +122,14 @@ export class ODSChartsLegends {
           dataOptions.legend = {};
         }
         if (monoSerieGraphe) {
-          legendData = dataOptions.series[0].data.map((serie: any, index: number) => {
+          legendData = dataOptions.series[0].data.map((serie: any, _index: number) => {
             if (!serie.name) {
               throw new Error(`Missing data array of legends in legend chart option`);
             }
             return serie.name;
           });
         } else {
-          legendData = dataOptions.series.map((serie: any, index: number) => {
+          legendData = dataOptions.series.map((serie: any, _index: number) => {
             if (!serie.name) {
               throw new Error(`Missing data array of legends in legend chart option`);
             }
@@ -143,7 +143,7 @@ export class ODSChartsLegends {
     }
 
     if (monoSerieGraphe) {
-      serieNames = dataOptions.series[0].data.map((serie: any, index: number) => {
+      serieNames = dataOptions.series[0].data.map((serie: any, _index: number) => {
         if (!serie.name) {
           throw new Error(`Missing data array of legends in legend chart option`);
         }
@@ -151,7 +151,7 @@ export class ODSChartsLegends {
       });
     } else {
       if (updateDataOption && !dataOptions.series) {
-        dataOptions.series = legendData.map((serie: any, index: number) => ({
+        dataOptions.series = legendData.map((_serie: any, index: number) => ({
           name: 'serie_Name_' + index,
         }));
       }

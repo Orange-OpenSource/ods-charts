@@ -1,6 +1,8 @@
 const BOOSTED4_VERSION = '4.6.2';
 const BOOSTED5_VERSION = '5.3.3';
 
+var initialOptions = {};
+
 var themeElements = {
   BOOSTED5: {
     css: [
@@ -95,7 +97,7 @@ function generateConfigurator(id) {
                 <option value="dark">Dark mode</option>
               </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 color-config">
               <label for="colorSetInput" class="form-label">Colors</label>
               <select class="form-select" aria-label="Color set" id="colorSetInput" onchange="changeTheme('${id}')">
                 <option value="${ODSCharts.ODSChartsColorsSet.DEFAULT}">[ODS] Default colors (12)</option>
@@ -121,7 +123,7 @@ function generateConfigurator(id) {
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 line-style-config">
               <label for="lineStyleInput" class="form-label">Line style</label>
               <select class="form-select" id="lineStyleInput" onchange="changeTheme('${id}')">
                 <option value="smooth">Smooth</option>
@@ -237,8 +239,9 @@ function generateConfigurator(id) {
 
 function generateExampleDiv(id, direction) {
   var div = document.getElementById(id);
+  const clientHeight = div.clientHeight;
 
-  div.innerHTML = `<iframe style="width: 100%; min-height: 60vh;"></iframe>
+  div.innerHTML = `<iframe style="width: 100%; ${clientHeight ? 'min-height: ' + clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
@@ -251,14 +254,15 @@ function generateExampleDiv(id, direction) {
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/0.1/ods-charts.js"></script>
-<script type="module" src="/0.1/examples.js"></script>
+<script type="text/javascript" src="/0.2/ods-charts.js"></script>
+<script type="module" src="/0.2/examples.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
 ${generateChartDiv(id, direction)}`);
   iframeDocument.close();
 }
 
 async function displayChart(
+  chartConfigMethod,
   id,
   options,
   mode,
@@ -274,6 +278,11 @@ async function displayChart(
   legendsOrientation,
   refresh = false
 ) {
+  if (!chartConfigMethod) {
+    chartConfigMethod = document.getElementById(id).getAttribute('data-chartConfigMethod');
+  } else {
+    document.getElementById(id).setAttribute('data-chartConfigMethod', chartConfigMethod);
+  }
   if (!mode) {
     mode = 'default';
   }
@@ -291,11 +300,12 @@ async function displayChart(
 
   let iframe = document.querySelector(`#${id} iframe`);
 
-  if (document.getElementById(id).dataset.initialOptions) {
-    options = JSON.parse(document.getElementById(id).dataset.initialOptions);
+  if (initialOptions[id]) {
+    options = initialOptions[id];
   } else {
-    document.getElementById(id).dataset.initialOptions = JSON.stringify(options);
+    initialOptions[id] = options;
   }
+
   if (!cssThemeName) {
     cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
   }
@@ -321,10 +331,29 @@ async function displayChart(
 
   var themeManager = iframe.contentWindow.ODSCharts.getThemeManager({
     colors,
-    lineStyle,
+    chartConfiguration: iframe.contentWindow.ODSCharts.ODSChartsConfiguration[chartConfigMethod](
+      -1 < chartConfigMethod.search(/Line/)
+        ? { lineStyle }
+        : 'getDialGaugeChartConfiguration' === chartConfigMethod
+          ? {
+              dialPoints: [
+                { value: 0, label: 'A' },
+                { value: 25, label: 'B' },
+                { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },
+                { value: 75, label: 'D', beforeColor: 'var(--ouds-charts-color-functional-warning)' },
+                { value: 100, label: 'E', beforeColor: 'var(--ouds-charts-color-functional-negative)' },
+              ],
+            }
+          : 'getHorizontalGaugeChartConfiguration' === chartConfigMethod
+            ? { minValue: 0, maxValue: 400 }
+            : -1 < chartConfigMethod.search(/Gauge/)
+              ? { minValue: 0, maxValue: 100 }
+              : {}
+    ),
     cssTheme,
     cssSelector: `#${id}_chart`,
   });
+
   cssThemeName = Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find(
     (name) => JSON.stringify(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes[name]) === JSON.stringify(themeManager.options.cssTheme)
   );
@@ -487,12 +516,33 @@ var themeManager = ODSCharts.getThemeManager({
       `)}
     ]`
   },
-  lineStyle: ${
-    'ODSCharts.ODSChartsLineStyle.' +
-    Object.keys(iframe.contentWindow.ODSCharts.ODSChartsLineStyle).find(
-      (key) => iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] === themeManager.options.lineStyle
-    )
-  },
+  chartConfiguration: ODSCharts.ODSChartsConfiguration.${chartConfigMethod}(${
+    -1 < chartConfigMethod.search(/Line/)
+      ? `{
+    lineStyle: ODSCharts.ODSChartsLineStyle.` +
+        Object.keys(iframe.contentWindow.ODSCharts.ODSChartsLineStyle).find(
+          (key) =>
+            iframe.contentWindow.ODSCharts.ODSChartsLineStyle[key] ===
+            (themeManager.options.chartConfiguration.lineStyle ? themeManager.options.chartConfiguration.lineStyle : 'smooth')
+        ) +
+        `
+  }`
+      : 'getDialGaugeChartConfiguration' === chartConfigMethod
+        ? `{
+    dialPoints: [
+      { value: 0, label: 'A' },
+      { value: 25, label: 'B' },
+      { value: 50, label: 'C', beforeColor: 'var(--ouds-charts-color-functional-positive)' },
+      { value: 75, label: 'D', beforeColor: 'var(--ouds-charts-color-functional-warning)' },
+      { value: 100, label: 'E', beforeColor: 'var(--ouds-charts-color-functional-negative)' },
+    ],
+  }`
+        : 'getHorizontalGaugeChartConfiguration' === chartConfigMethod
+          ? `{ minValue: 0, maxValue: 400 }`
+          : -1 < chartConfigMethod.search(/Gauge/)
+            ? `{ minValue: 0, maxValue: 100 }`
+            : ''
+  }),
   cssTheme: ODSCharts.ODSChartsCSSThemes.${Object.keys(iframe.contentWindow.ODSCharts.ODSChartsCSSThemes).find((key) => key === cssThemeName)},
   cssSelector: '#${id}_chart'
 });
@@ -582,7 +632,13 @@ myChart.setOption(themeManager.getChartOptions());
     }
 
     document.querySelector(`#accordion_${id} #darkModeInput option[value="${mode}"]`).setAttribute('selected', 'selected');
-    document.querySelector(`#accordion_${id} #lineStyleInput option[value="${themeManager.options.lineStyle}"]`)?.setAttribute('selected', 'selected');
+    document
+      .querySelector(
+        `#accordion_${id} #lineStyleInput option[value="${
+          themeManager.options.chartConfiguration.lineStyle ? themeManager.options.chartConfiguration.lineStyle : 'smooth'
+        }"]`
+      )
+      .setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #rendererInput option[value="${rendererInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverInput option[value="${popoverInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverSharedInput option[value="${popoverSharedInput}"]`).setAttribute('selected', 'selected');
@@ -598,6 +654,12 @@ myChart.setOption(themeManager.getChartOptions());
   });
   document.querySelectorAll(`#accordion_${id} .popover-config`).forEach((elt) => {
     elt.style.display = 'none' === popoverInput ? 'none' : 'block';
+  });
+  document.querySelectorAll(`#accordion_${id} .line-style-config`).forEach((elt) => {
+    elt.style.display = -1 === chartConfigMethod.search(/Line/) ? 'none' : 'block';
+  });
+  document.querySelectorAll(`#accordion_${id} .color-config`).forEach((elt) => {
+    elt.style.display = 'getDialGaugeChartConfiguration' === chartConfigMethod ? 'none' : 'block';
   });
 
   var myChart = iframe.contentWindow.echarts.init(div, themeManager.name, {
@@ -633,6 +695,7 @@ myChart.setOption(themeManager.getChartOptions());
 async function changeTheme(id) {
   var { option } = JSON.parse(document.getElementById(id).dataset.odsExample);
   displayChart(
+    undefined,
     id,
     option,
     document.querySelector(`#accordion_${id} #darkModeInput`).value,
@@ -697,7 +760,7 @@ window.generateSingleLineChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE);
+  displayChart('getLineChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE);
 };
 
 window.generateMultipleLineChart = async (id) => {
@@ -722,7 +785,7 @@ window.generateMultipleLineChart = async (id) => {
       { data: [26, 12, 14, 10, 20, 26], type: 'line' },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart('getLineChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateTimeSeriesLineChart = async (id) => {
@@ -805,7 +868,7 @@ window.generateTimeSeriesLineChart = async (id) => {
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
+  displayChart('getLineChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT, ODSCharts.ODSChartsLineStyle.BROKEN);
 };
 
 window.generateBarChart = async (id, horizontal = false, grouped = false, stacked = false) => {
@@ -847,6 +910,7 @@ window.generateBarChart = async (id, horizontal = false, grouped = false, stacke
       ),
   };
   displayChart(
+    'getBarChartConfiguration',
     id,
     option,
     undefined,
@@ -916,7 +980,7 @@ window.generateDatasetBarChart = async (id) => {
     // every series will auto-map to each column by default.
     series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DARKER_TINTS);
+  displayChart('getBarChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DARKER_TINTS);
 };
 
 window.generateBarLineChart = async (id, horizontal = false, grouped = false, stacked = true) => {
@@ -948,6 +1012,7 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
       .concat([{ data: [12, 28.8956454657, 23, 15, 15, 18], type: 'line' }]),
   };
   displayChart(
+    'getLineAndBarChartConfiguration',
     id,
     option,
     undefined,
@@ -988,8 +1053,6 @@ window.generatePieChart = async (id) => {
     series: [
       {
         type: 'pie',
-        label: { show: false },
-        labelLine: { show: false },
         data: [
           { name: 'Label 1', value: 25 },
           { name: 'Label 2', value: 50 },
@@ -999,15 +1062,10 @@ window.generatePieChart = async (id) => {
           { name: 'Label 6', value: 30 },
           { name: 'Label 7', value: 5 },
         ],
-        label: {
-          show: false,
-          position: 'outside',
-        },
-        radius: ['0%', '95%'],
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart('getPieChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
 };
 
 window.generateDonutChart = async (id) => {
@@ -1016,8 +1074,6 @@ window.generateDonutChart = async (id) => {
     series: [
       {
         type: 'pie',
-        label: { show: false },
-        labelLine: { show: false },
         data: [
           { name: 'Label 1', value: 25 },
           { name: 'Label 2', value: 50 },
@@ -1027,21 +1083,55 @@ window.generateDonutChart = async (id) => {
           { name: 'Label 6', value: 30 },
           { name: 'Label 7', value: 5 },
         ],
-        label: {
-          show: false,
-          position: 'center',
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 35,
-            fontWeight: 700,
-            formatter: '{d}%',
-          },
-        },
-        radius: ['80%', '95%'],
       },
     ],
   };
-  displayChart(id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart('getDonutChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
+};
+
+window.generateGaugeChart = async (id, circular = false, dial = false) => {
+  // Specify the configuration items and data for the chart
+  var option = {
+    series: [
+      {
+        type: 'gauge',
+        data: [
+          {
+            value: 40,
+          },
+        ],
+      },
+    ],
+  };
+  displayChart(
+    dial ? 'getDialGaugeChartConfiguration' : circular ? 'getCircularGaugeChartConfiguration' : 'getSemiCircularGaugeChartConfiguration',
+    id,
+    option,
+    undefined,
+    [{ colorPalette: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_PURPLE, colorIndex: 1 }],
+    undefined,
+    undefined,
+    'none'
+  );
+};
+
+window.generateHorizontalGaugeChart = async (id) => {
+  const barData = [
+    {
+      value: 250,
+    },
+  ];
+  // Specify the configuration items and data for the chart
+  var option = {
+    yAxis: {
+      data: ['Data'],
+    },
+    series: [
+      {
+        type: 'bar',
+        data: barData,
+      },
+    ],
+  };
+  displayChart('getHorizontalGaugeChartConfiguration', id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL, colorIndex: 4 }]);
 };

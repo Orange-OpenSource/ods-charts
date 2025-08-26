@@ -1,2 +1,3 @@
 # Files to ignore
 **/.angular
+docs/public/**/ods-charts.js

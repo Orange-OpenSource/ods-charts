@@ -136,12 +136,12 @@ export class OdsChartsComponent implements OnInit {
   private generateThemes() {
     this.myTheme1 = ODSCharts.getThemeManager({
       colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
-      lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
       cssSelector: '#chartsContainer',
     });
     this.myTheme2 = ODSCharts.getThemeManager({
       colors: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-      lineStyle: ODSCharts.ODSChartsLineStyle.SMOOTH,
+      chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
       cssSelector: '#chartsContainer',
     });
   }

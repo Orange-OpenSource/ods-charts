@@ -56,7 +56,7 @@ export class ODSChartsThemeObserver {
     }
   }
 
-  private observeAttributeChange(mutations: MutationRecord[], observer: MutationObserver) {
+  private observeAttributeChange(mutations: MutationRecord[], _observer: MutationObserver) {
     try {
       if (this.divElement) {
         if (mutations.find((mutation) => mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme')) {

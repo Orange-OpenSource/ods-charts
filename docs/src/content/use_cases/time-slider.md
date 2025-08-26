@@ -132,7 +132,7 @@ configurations
     themeManager.externalizeLegends(myChart, '#barLine_legend');
     // Manage window size changed
     themeManager.manageChartResize(myChart, 'barLine_chart');
-    // Register the externalization of the tooltip/popup and use the second parameter as specified in https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition to change the popup value (cf https://ods-charts.netlify.app/api/classes/odschartspopoverdefinition#getPopupContentValue)
+    // Register the externalization of the tooltip/popup and use the second parameter as specified in https://ods-charts.netlify.app/0.2/api/classes/odschartspopoverdefinition to change the popup value (cf https://ods-charts.netlify.app/0.2/api/classes/odschartspopoverdefinition#getPopupContentValue)
     themeManager.externalizePopover();
     // Observe dark / light mode changes
     themeManager.manageThemeObserver(myChart);

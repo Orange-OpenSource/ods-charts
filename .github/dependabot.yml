@@ -91,3 +91,41 @@ updates:
       vue-all-deps:
         patterns:
           - "*"
+  - package-ecosystem: npm
+    directory: "/test/angular-14"
+    labels:
+      - dependencies
+    schedule:
+      interval: weekly
+      day: friday
+      time: "06:00"
+      timezone: Europe/Paris
+    versioning-strategy: increase
+    ignore:
+      - dependency-name: "@angular-devkit/build-angular"
+      - dependency-name: "@angular/animations"
+      - dependency-name: "@angular/common"
+      - dependency-name: "@angular/compiler"
+      - dependency-name: "@angular/core"
+      - dependency-name: "@angular/forms"
+      - dependency-name: "@angular/platform-browser"
+      - dependency-name: "@angular/platform-browser-dynamic"
+      - dependency-name: "@angular/router"
+      - dependency-name: "rxjs"
+      - dependency-name: "tslib"
+      - dependency-name: "zone.js"
+      - dependency-name: "@angular/cli"
+      - dependency-name: "@angular/compiler-cli"
+      - dependency-name: "@types/jasmine"
+      - dependency-name: "@types/node"
+      - dependency-name: "jasmine-core"
+      - dependency-name: "karma"
+      - dependency-name: "karma-chrome-launcher"
+      - dependency-name: "karma-coverage"
+      - dependency-name: "karma-jasmine"
+      - dependency-name: "karma-jasmine-html-reporter"
+      - dependency-name: "typescript"
+    groups:
+      angular-14-all-deps:
+        patterns:
+          - "*"
