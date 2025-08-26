@@ -32,7 +32,7 @@
     "prettier:format": "prettier --write .",
     "release": "npm pack && npm publish",
     "release-version": "node build/change-version.mjs",
-    "release-docs": "npm i && npm run docs:build && git fetch -p && git checkout origin/gh-pages && git pull && rm ./index.html && rm ./versions/index.html && cp -r ./docs/dist . && git add . && echo \"git commit -m \"chore(release): v0.2.0 :rocket:\"\" && echo \"git push\"",
+    "release-docs": "npm i && npm run docs:build && git fetch -p && git switch gh-pages && git pull && rm ./index.html && rm ./versions/index.html && cp -r ./docs/dist . && git add . && echo \"git commit -m \"chore(release): v0.2.0 :rocket:\"\" && echo \"git push\"",
     "serve": "npm run docs:build && serve docs/dist",
     "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/browser/",
     "serve:angular-ng-boosted": "serve test/angular-ng-boosted/dist/angular-boosted/browser/",
