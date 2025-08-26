@@ -1,5 +1,6 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro"
+import { Prism } from '@astrojs/prism'
 import { getConfig } from '@libs/config'
 
 const data = { title: 'ODS Charts' }
@@ -8,65 +9,85 @@ const version = getConfig().docs_version
 ---
 
 <BaseLayout data={data}>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Orange Design System</h5>
-            <h6 class="card-subtitle">Data display</h6>
-            <p class="card-text">This project implements the Orange Design System data display using Apache ECharts theme.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6" class="card-link">Orange Design System - Data display</a>
-            <br />
-            <a href="https://echarts.apache.org/en/theme-builder.html" class="card-link">Apache ECharts theme builder</a>
-          </div>
+  <div class="docs-home-masthead bg-black mb-5" id="content" data-bs-theme="dark">
+    <div class="container-xxl pt-4 pb-5">
+      <div class="col-md-8">
+        <h1 class="display-2 text-primary mb-2">ODS Charts</h1>
 
-          <div class="card-footer">
-            <a href={`./${version}/api/`} class="btn btn-primary mt-3">See API documentation</a>
-          </div>
+        <p class="lead fw-bold mb-4">
+          Powerful and feature-packed frontend toolkit. ODS Charts is based on Apache Echarts, Orange branded and ergonomic charts library.
+        </p>
+
+        <div class="mb-4 d-inline-block user-select-all">
+          <Prism code={`npm i ods-charts@${version} echarts`} lang="sh" />
         </div>
-      </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">ODS Charts</h5>
-            <h6 class="card-subtitle">Example</h6>
-            <p class="card-text">Examples of use of Apache ECharts with ODS data display theme.</p>
-            <a href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6" class="card-link">Orange Design System - Data display</a>
-          </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/examples/`} class="btn btn-primary mt-3">Examples</a>
-          </div>
+        <div class="mb-4">
+          <a href={`${version}/`} class="btn btn-lg btn-primary">
+            Read the docs
+          </a>
         </div>
-      </div>
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Specific use cases</h5>
-            <h6 class="card-subtitle">Example</h6>
-            <p class="card-text">Examples of specific features illustrated using Apache ECharts and ODS Charts.</p>
-          </div>
 
-          <div class="card-footer">
-            <a href={`./${version}/use_cases/`} class="btn btn-primary mt-3">Use cases</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Colors sets</h5>
-            <h6 class="card-subtitle">ODS Charts available colors</h6>
-            <p class="card-text">Display the set of colors available in ODS Charts.</p>
-          </div>
-
-          <div class="card-footer">
-            <a href={`./${version}/colors/`} class="btn btn-primary mt-3">Color sets</a>
-          </div>
+        <div class="hstack gap-2">
+          <p class="mb-0">Currently v{version}</p>
+          <div class="vr m-0 border-always-on-black"></div>
+          <a href="/versions/" class="text-nowrap fw-bold">All releases</a>
         </div>
       </div>
     </div>
   </div>
+
+  <section class="container-xxl">
+    <div class="row">
+      <div class="col-xl-4 pe-xl-5">
+        <h2 class="display-4 text-primary mb-3">Get started easily</h2>
+        <p class="lead fw-bold mb-3">Get started with Apache Echarts and ODS Charts easily.</p>
+      </div>
+      <div class="col-xl-8">
+        <h2 class="display-4">Install via package manager</h2>
+        <p class="lead">Install Apache Echarts and ODS Charts via npm, or yarn.</p>
+        <div class="mb-3 user-select-all">
+          <Prism code={`npm install ods-charts@latest echarts`} lang="sh" />
+        </div>
+        <div class="mb-3 user-select-all">
+          <Prism code={`yarn add ods-charts@latest echarts`} lang="sh" />
+        </div>
+        <hr class="border-top border-1 border-light" />
+        <h2 class="display-4">Use it in your project</h2>
+        <p class="lead fw-bold mb-3">ODS Charts has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The <a href="https://echarts.apache.org/en/option.html" target="_blank">Apache ECharts documentation</a> remains the reference for configuring charts.</p>
+        <p>For instance, an Apache ECharts user can initialize a chart using code like this:</p>
+        <div class="mb-3">
+          <Prism code={`var div = document.getElementById('barLine_chart');
+var myChart = echarts.init(div, undefined, {
+  renderer: 'svg', // SVG is recommended
+});
+// display the chart.
+myChart.setOption(dataOptions);`} lang="js" />
+        </div>
+        <p>Adding the theme managed by ODS Charts will then consist of doing:</p>
+        <div class="mb-3">
+          <Prism code={`// build the theme
+var themeManager = ODSCharts.getThemeManager({
+  // options can be used for configuration
+});
+
+// register this theme to echarts
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+var div = document.getElementById('barLine_chart');
+var myChart = echarts.init(
+  div,
+  themeManager.name, // initialize the chart with the generated theme
+  {
+    renderer: 'svg', // SVG renderer is recommended
+  }
+);
+
+// enrich data options to complete implementation of the Orange Design System.
+myChart.setOption(themeManager.getChartOptions(dataOptions));`} lang="js" />
+        </div>
+        <p>The <code>themeManager</code> returned by <code>getThemeManager()</code> can be used to add other features supported by the ODS Charts library.</p>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

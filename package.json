@@ -31,6 +31,8 @@
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write .",
     "release": "npm pack && npm publish",
+    "release-version": "node build/change-version.mjs",
+    "release-docs": "npm i && npm run docs:build && git fetch -p && git checkout origin/gh-pages && git pull && rm ./index.html && rm ./versions/index.html && cp -r ./docs/dist . && git add . && echo \"git commit -m \"chore(release): v0.2.0 :rocket:\"\" && echo \"git push\"",
     "serve": "npm run docs:build && serve docs/dist",
     "serve:angular-ngx-echarts": "serve test/angular-ngx-echarts/dist/angular/browser/",
     "serve:angular-ng-boosted": "serve test/angular-ng-boosted/dist/angular-boosted/browser/",
@@ -50,6 +52,7 @@
     "test": "ts-node node_modules/jasmine/bin/jasmine"
   },
   "devDependencies": {
+    "@astrojs/prism": "^3.3.0",
     "@types/jasmine": "^5.1.8",
     "astro": "^5.13.2",
     "echarts": "^5.6.0",

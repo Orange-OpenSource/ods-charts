@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro"
+
+const data = { title: 'ODS Charts - Versions' }
+---
+
+<BaseLayout data={data}>
+  <div class="title-bar mb-4">
+    <div class="container-xxl">
+      <h1 class="display-1">ODS Charts versions</h1>
+    </div>
+  </div>
+  <div class="container-xxl">
+    <div class="row row-cols-2 row-cols-lg-3 row-cols-xl-6">
+      <div class="col">
+        <h2>Version 0.x</h2>
+        <div class="list-group">
+          <a href="/0.2" class="list-group-item list-group-item-action">0.2 <span class="badge text-bg-primary float-end">Latest</span></a>
+          <a href="/0.1" class="list-group-item list-group-item-action">0.1</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
