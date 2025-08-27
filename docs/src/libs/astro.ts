@@ -12,7 +12,10 @@ export function odsCharts(): AstroIntegration[] {
       name: 'ods-charts-integration',
       hooks: {
         'astro:config:done': () => {
-          fs.rmSync(path.join(process.cwd(), 'docs', 'public'), { recursive: true });
+          if (fs.existsSync(path.join(process.cwd(), 'docs', 'public'))) {
+            fs.rmSync(path.join(process.cwd(), 'docs', 'public'), { recursive: true });
+          }
+
           copyStaticRecursively(path.join(process.cwd(), 'docs', 'static'), path.join(process.cwd(), 'docs', 'public'));
         },
       },
