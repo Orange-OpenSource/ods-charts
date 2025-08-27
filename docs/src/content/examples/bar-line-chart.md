@@ -7,7 +7,7 @@ title: Bar + line Charts - Examples - ODS Charts
     <h1 class="display-1">Bar + line charts example</h1>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Bar chart and line chart</h5>
@@ -21,7 +21,7 @@ title: Bar + line Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Grouped bar and line chart</h5>

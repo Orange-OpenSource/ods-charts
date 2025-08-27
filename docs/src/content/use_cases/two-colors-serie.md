@@ -7,7 +7,7 @@ title: Two colors for one series - Specific use cases - ODS Charts
     <h1 class="display-1">Two colors for one series</h1>
   </div>
 </div>
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Two colors for one series example</h5>

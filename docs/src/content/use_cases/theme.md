@@ -7,7 +7,7 @@ title: Theme use cases - Specific use cases - ODS Charts
     <h1 class="display-1">Theme use cases</h1>
   </div>
 </div>
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h3 class="card-title">Global <span class="text-primary">Boosted</span> theme for <u>CSS</u> and <u>popover renderer</u></h3>
