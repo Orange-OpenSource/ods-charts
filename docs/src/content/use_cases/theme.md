@@ -11,8 +11,8 @@ title: Theme use cases - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h3 class="card-title">Global <span class="text-primary">Boosted</span> theme for <u>CSS</u> and <u>popover renderer</u></h3>
-      <p class="card-text">The most common use case should be using Boosted framework and its theme.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">The most common use case should be using Boosted framework and its theme.</p>
+      <p class="card-text pe-5">
         To do so, the <code>getThemeManager()</code> has one <code>cssTheme</code> option that allows you to specify the css theme used:
         <code>
           <pre>
@@ -52,6 +52,12 @@ themeManager.manageThemeObserver(myChart);
         <option value="dark">Dark</option>
         <option value="light" selected>Light</option>
       </select>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="t1-htmlId">
         <div data-bs-theme="light">
           <div class="chart_title overflow-hidden">
@@ -140,7 +146,7 @@ themeManager.manageThemeObserver(myChart);
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h3 class="card-title">Global <span class="text-primary">Boosted</span> theme for <u>CSS</u> but <span class="text-primary">Apache Echarts</span> for <u>popover renderer</u></h3>
-      <p>
+      <p class="pe-5">
         Let's change the previous use case to keep Boosted 5 as CSS theme but let's use Apache Echarts javascript to display popover/tooltip by changing the second argument of the <code>externalizePopover()</code> feature of the theme manager:
         <code>
           <pre>
@@ -154,6 +160,12 @@ themeManager.manageThemeObserver(myChart);
         <option value="dark">Dark</option>
         <option value="light" selected>Light</option>
       </select>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="t2-htmlId">
         <div data-bs-theme="light">
           <div class="chart_title overflow-hidden">
@@ -242,7 +254,7 @@ themeManager.manageThemeObserver(myChart);
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h3 class="card-title"><span class="text-primary">ODS Charts</span> embedded <u>CSS</u> theme and <span class="text-primary">Apache Echarts</span> <u>popover renderer</u></h3>
-      <p>
+      <p class="pe-5">
         Some ODS Charts usage may be independent from Boosted. For that, ODS Charts has a minimal CSS embedded. To use it, change the <code>cssTheme</code> option of <code>getThemeManager()</code> with:
         <code>
           <pre>
@@ -264,6 +276,12 @@ cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
 <option value="dark">Dark</option>
 <option value="light" selected>Light</option>
 </select>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
 <div id="t3-htmlId">
 <div class="ods-charts-context" data-bs-theme="light">
 <div class="chart_title overflow-hidden">

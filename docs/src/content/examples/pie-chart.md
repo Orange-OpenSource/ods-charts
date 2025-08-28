@@ -11,7 +11,13 @@ title: Pie Charts - Examples - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Pie chart</h5>
-      <p class="card-text">Used to show proportions rather than absolute values.</p>
+      <p class="card-text pe-5">Used to show proportions rather than absolute values.</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="pieChart"></div>
       <script>
         window.addEventListener('DOMContentLoaded', () => {

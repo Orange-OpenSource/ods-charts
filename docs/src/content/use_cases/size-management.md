@@ -11,9 +11,9 @@ title: Size management - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Collapsed graph example</h5>
-      <p class="card-text">The size of the graph may change due to window resizing or modifications in the DOM structure or content. For instance, the graph's size can be affected if it is displayed within a collapsed panel.</p>
-      <p class="card-text">Apache ECharts has a <code>resize</code> method to manage that. But you can ask to the <code>ODSChartsTheme</code> to manage it for you calling the <code>externalizeLegends</code> method.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">The size of the graph may change due to window resizing or modifications in the DOM structure or content. For instance, the graph's size can be affected if it is displayed within a collapsed panel.</p>
+      <p class="card-text pe-5">Apache ECharts has a <code>resize</code> method to manage that. But you can ask to the <code>ODSChartsTheme</code> to manage it for you calling the <code>externalizeLegends</code> method.</p>
+      <p class="card-text pe-5">
         In the following collapsed div, the resize is managed by the following code:
         <code>
           <pre>
@@ -21,6 +21,12 @@ themeManager.manageChartResize(myChart, 'barLine_chart');
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="htmlId">
         <p class="d-inline-flex gap-1">
           <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart">Click here to see the graph</button>

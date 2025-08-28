@@ -1,5 +1,6 @@
 ---
 import { getConfig } from '@libs/config'
+import Symbols from './Symbols.astro'
 
 interface Props {
   title?: string
@@ -9,6 +10,8 @@ const { title } = Astro.props
 
 const version = getConfig().docs_version
 ---
+
+<Symbols />
 
 <header class="sticky-top" data-bs-theme="dark">
   <nav class="navbar navbar-expand-lg" aria-label="Global navigation">

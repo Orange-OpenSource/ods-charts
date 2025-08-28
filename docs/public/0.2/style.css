@@ -11,3 +11,10 @@ body {
 .border-subtle {
   --bs-border-color: var(--bs-border-color-subtle);
 }
+
+.btn-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+}

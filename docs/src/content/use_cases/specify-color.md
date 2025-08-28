@@ -11,8 +11,8 @@ title: Specific series color - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Specify the color of a series</h5>
-      <p class="card-text">You may want to specify the color of a series in the series itself, regardless of its index. This can happen if the number of series displayed changes but, for a specific type of data, you want to keep the same color regardless of the series' place in the list of series to be displayed. This means that the ordered list of colors to use will change according to the series displayed.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">You may want to specify the color of a series in the series itself, regardless of its index. This can happen if the number of series displayed changes but, for a specific type of data, you want to keep the same color regardless of the series' place in the list of series to be displayed. This means that the ordered list of colors to use will change according to the series displayed.</p>
+      <p class="card-text pe-5">
         To freeze the color of a series, Apache ECharts provides the
         <code>itemStyle.color</code> option, which can be added to the series definition like this:
         <code>
@@ -28,6 +28,12 @@ series: [
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

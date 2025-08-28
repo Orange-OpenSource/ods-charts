@@ -11,8 +11,8 @@ title: Tooltip - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Confine tooltip example</h5>
-      <p class="card-text">ODS Charts library uses the tooltip containment feature of the Apache ECharts library to ensure that the tooltip or popover is displayed within the confines of the graph, avoiding overflow beyond the display window.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">ODS Charts library uses the tooltip containment feature of the Apache ECharts library to ensure that the tooltip or popover is displayed within the confines of the graph, avoiding overflow beyond the display window.</p>
+      <p class="card-text pe-5">
         This function is activated by configuring the graph options as follows:
         <code>
           <pre>
@@ -22,6 +22,12 @@ tooltip: {
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div1_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
@@ -106,9 +112,9 @@ tooltip: {
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Specific value tooltip content</h5>
-      <p class="card-text">You may need to specify a specific tooltip content.</p>
-      <p class="card-text">The first use case is to provide a sepcific content for a tooltip/popover value.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">You may need to specify a specific tooltip content.</p>
+      <p class="card-text pe-5">The first use case is to provide a sepcific content for a tooltip/popover value.</p>
+      <p class="card-text pe-5">
         For that you just have to specify the <code>formatter</code> method of the <code>tooltip</code> Apache Echarts option :
         <code>
           <pre>
@@ -120,6 +126,12 @@ tooltip: {
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div6_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
@@ -214,11 +226,14 @@ tooltip: {
         // Display the chart using the configured theme and data.
         myChart.setOption(div6_themeManager.getChartOptions());
       </script>
+    </div>
+  </div>
 
-      <h5 class="mt-5">Other specific content</h5>
-
-      <p class="card-text">if you want to specialize more than the value display, you can use the second parameter of the method <code>externalizePopover</code>.</p>
-      <p class="card-text">
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Other specific content</h5>
+      <p class="card-text pe-5">if you want to specialize more than the value display, you can use the second parameter of the method <code>externalizePopover</code>.</p>
+      <p class="card-text pe-5">
         This parameter must implement the <a href="../api/classes/ODSChartsPopoverDefinition"><code>ODSChartsPopoverDefinition</code></a> interface. Generally this is initialized with <a href="../api/variables/ODSChartsPopoverManagers">one of the tooltip managers provided</a> <code>ODSChartsPopoverManagers.BOOSTED5</code>, <code>ODSChartsPopoverManagers.BOOSTED4</code> or <code>ODSChartsPopoverManagers.NONE</code>.<br />
         <code>ODSChartsPopoverManagers.NONE</code> is the default one.
       </p>
@@ -236,6 +251,12 @@ tooltip: {
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div2_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
@@ -306,8 +327,12 @@ tooltip: {
         // Display the chart using the configured theme and data.
         myChart.setOption(div2_themeManager.getChartOptions());
       </script>
+    </div>
+  </div>
 
-      <h5 class="mt-5">Using Boosted 5 tooltip</h5>
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Using Boosted 5 tooltip</h5>
       <p class="card-text">
         The same code using the Boosted 5 tooltips:
         <code>
@@ -321,6 +346,12 @@ tooltip: {
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div3_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
@@ -402,8 +433,8 @@ tooltip: {
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Tooltip with HTML link(s)</h5>
-      <p class="card-text">You may need to specify a specific tooltip which include a link.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">You may need to specify a specific tooltip which include a link.</p>
+      <p class="card-text pe-5">
         In this case, you must set to <code>true</code> the parameter <code>enterable</code> of the <code>tooltip</code> Apache Echarts option:
         <code>
           <pre>
@@ -413,6 +444,12 @@ tooltip: {
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div4_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
@@ -494,9 +531,19 @@ tooltip: {
         // Display the chart using the configured theme and data.
         myChart.setOption(div4_themeManager.getChartOptions());
       </script>
+    </div>
+  </div>
 
-      <h5 class="mt-5">Using links in a Boosted 5 tooltip</h5>
-      <p class="card-text">The same code using the Boosted 5 tooltips:</p>
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Using links in a Boosted 5 tooltip</h5>
+      <p class="card-text pe-5">The same code using the Boosted 5 tooltips:</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="div5_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">
