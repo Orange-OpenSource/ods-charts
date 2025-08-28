@@ -227,6 +227,7 @@ tooltip: {
         myChart.setOption(div6_themeManager.getChartOptions());
       </script>
     </div>
+
   </div>
 
   <div class="card w-100 mt-3">
@@ -328,6 +329,7 @@ tooltip: {
         myChart.setOption(div2_themeManager.getChartOptions());
       </script>
     </div>
+
   </div>
 
   <div class="card w-100 mt-3">
@@ -532,6 +534,7 @@ tooltip: {
         myChart.setOption(div4_themeManager.getChartOptions());
       </script>
     </div>
+
   </div>
 
   <div class="card w-100 mt-3">

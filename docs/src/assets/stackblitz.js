@@ -1,7 +1,7 @@
 import sdk from '@stackblitz/sdk';
 
-document.querySelectorAll('.btn-edit').forEach(btn => {
-  btn.addEventListener('click', event => {
+document.querySelectorAll('.btn-edit').forEach((btn) => {
+  btn.addEventListener('click', (event) => {
     const id = event.target.closest('.btn-edit').nextElementSibling?.id;
     document.getElementById(`collapse_content_2_${id}`)?.classList.add('d-block');
     document.getElementById(`${id}_viewCode`)?.classList.add('d-block');
@@ -49,12 +49,12 @@ const openChartsSnippet = (htmlSnippet, jsSnippet) => {
     <!-- End Example Code -->
   </body>
 </html>`,
-      'index.js': jsSnippet
+      'index.js': jsSnippet,
     },
     title: 'ODS Charts example',
     description: `Official example from ${window.location.href}`,
     template: 'javascript',
-    tags: ['ODS_Charts']
+    tags: ['ODS_Charts'],
   };
 
   sdk.openProject(project, { openFile: 'index.js' });
