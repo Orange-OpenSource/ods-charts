@@ -59,7 +59,7 @@
   "devDependencies": {
     "@astrojs/prism": "^3.3.0",
     "@stackblitz/sdk": "^1.11.0",
-    "@types/jasmine": "^5.1.8",
+    "@types/jasmine": "^5.1.9",
     "astro": "^5.13.4",
     "echarts": "^6.0.0",
     "jasmine": "^5.9.0",
