@@ -7,7 +7,7 @@ title: Bar Charts - Examples - ODS Charts
     <h1 class="display-1">Bar charts example</h1>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical bar chart</h5>
@@ -27,7 +27,7 @@ title: Bar Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Horizontal bar chart</h5>
@@ -47,7 +47,7 @@ title: Bar Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical grouped bar chart</h5>
@@ -67,7 +67,7 @@ title: Bar Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Horizontal grouped bar chart</h5>
@@ -87,7 +87,7 @@ title: Bar Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Grouped bar chart with dataset</h5>

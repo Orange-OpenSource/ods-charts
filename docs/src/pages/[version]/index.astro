@@ -1,0 +1,72 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getConfig } from '@libs/config'
+
+const version = getConfig().docs_version
+const data = { title: `ODS Charts - V${version}` }
+export function getStaticPaths() { return [{ params: { version: '0.2' } }] }
+---
+
+<BaseLayout data={data}>
+  <div class="container-xxl">
+    <div class="row">
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Orange Design System</h5>
+            <h6 class="card-subtitle">Data display</h6>
+            <p class="card-text">This project implements the Orange Design System data display using Apache ECharts theme.</p>
+            <a href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6" class="card-link">Orange Design System - Data display</a>
+            <br />
+            <a href="https://echarts.apache.org/en/theme-builder.html" class="card-link">Apache ECharts theme builder</a>
+          </div>
+
+          <div class="card-footer">
+            <a href={`./api/`} class="btn btn-primary mt-3">See API documentation</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">ODS Charts</h5>
+            <h6 class="card-subtitle">Example</h6>
+            <p class="card-text">Examples of use of Apache ECharts with ODS data display theme.</p>
+            <a href="https://system.design.orange.com/0c1af118d/p/37a8d3-data-display/b/5127c6" class="card-link">Orange Design System - Data display</a>
+          </div>
+
+          <div class="card-footer">
+            <a href={`./examples/`} class="btn btn-primary mt-3">Examples</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Specific use cases</h5>
+            <h6 class="card-subtitle">Example</h6>
+            <p class="card-text">Examples of specific features illustrated using Apache ECharts and ODS Charts.</p>
+          </div>
+
+          <div class="card-footer">
+            <a href={`./use_cases/`} class="btn btn-primary mt-3">Use cases</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Colors sets</h5>
+            <h6 class="card-subtitle">ODS Charts available colors</h6>
+            <p class="card-text">Display the set of colors available in ODS Charts.</p>
+          </div>
+
+          <div class="card-footer">
+            <a href={`./colors/`} class="btn btn-primary mt-3">Color sets</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

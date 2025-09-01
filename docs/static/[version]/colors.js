@@ -109,13 +109,13 @@ function addThemeObserver() {
         displayAllColorSets('container');
 
         if ('light' === div.getAttribute('data-bs-theme')) {
-          document.getElementById('containerLight').closest('.container-fluid').classList.add('d-none');
-          document.getElementById('containerDark').closest('.container-fluid').classList.remove('d-none');
-          document.getElementById('container').closest('.container').querySelector('h2').innerHTML = 'Default light mode theme';
+          document.getElementById('containerLight').closest('.container-xxl').classList.add('d-none');
+          document.getElementById('containerDark').closest('.container-xxl').classList.remove('d-none');
+          document.getElementById('container').closest('.container-xxl').querySelector('h2').innerHTML = 'Default light mode theme';
         } else {
-          document.getElementById('containerDark').closest('.container-fluid').classList.add('d-none');
-          document.getElementById('containerLight').closest('.container-fluid').classList.remove('d-none');
-          document.getElementById('container').closest('.container').querySelector('h2').innerHTML = 'Default dark mode theme';
+          document.getElementById('containerDark').closest('.container-xxl').classList.add('d-none');
+          document.getElementById('containerLight').closest('.container-xxl').classList.remove('d-none');
+          document.getElementById('container').closest('.container-xxl').querySelector('h2').innerHTML = 'Default dark mode theme';
         }
       };
 

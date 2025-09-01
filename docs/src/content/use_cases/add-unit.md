@@ -7,7 +7,7 @@ title: Add unit - Specific use cases - ODS Charts
     <h1 class="display-1">Add unit</h1>
   </div>
 </div>
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Add unit in both Y axis and tooltip display</h5>

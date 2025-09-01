@@ -3,7 +3,7 @@
 <p align="center">
   ODS Charts provides Orange Charts components to developers.
   <br>
-  <a href="https://ods-charts.netlify.app/"><strong>Visit ODS Charts documentation</strong></a>
+  <a href="https://charts.unified-design-system.orange.com/"><strong>Visit ODS Charts documentation</strong></a>
   <br>
   <br>
   <a href="https://github.com/Orange-OpenSource/ods-charts/issues/new?assignees=-&labels=bug&template=bug_report.yml">Report bug</a>
@@ -73,9 +73,9 @@ myChart.setOption(themeManager.getChartOptions(dataOptions));
 
 The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library.
 
-Read the [API documentation](https://ods-charts.netlify.app/0.2/api/) for details on this legends, popover, tooltip... features.
+Read the [API documentation](https://charts.unified-design-system.orange.com/0.2/api/) for details on this legends, popover, tooltip... features.
 
-Read the [documentation](https://ods-charts.netlify.app/) for information on the library content and examples.
+Read the [documentation](https://charts.unified-design-system.orange.com/) for information on the library content and examples.
 
 ## Status
 

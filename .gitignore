@@ -1,8 +1,9 @@
 /node_modules
 /dist
 ods-charts*.tgz
-/docs/api
 /docs/.astro
 /docs/dist
 /docs/node_modules
+/docs/public
+/docs/static/\[version\]/api
 /test_local

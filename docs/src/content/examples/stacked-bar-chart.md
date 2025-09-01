@@ -7,7 +7,7 @@ title: Stacked bar Charts - Examples - ODS Charts
     <h1 class="display-1">Stacked bar charts example</h1>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical stacked bar chart</h5>
@@ -27,7 +27,7 @@ title: Stacked bar Charts - Examples - ODS Charts
     </div>
   </div>
 </div>
-<div class="container d-flex flex-nowrap pt-3">
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Horizontal stacked bar chart</h5>
