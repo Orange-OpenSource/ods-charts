@@ -4,7 +4,8 @@ import { z } from 'zod';
 
 // The config schema used to validate the config file content and ensure all values required by the site are valid.
 const configSchema = z.object({
-  docs_version: z.number(),
+  docs_version: z.string(),
+  lib_version: z.string(),
 });
 
 let config: Config | undefined;

@@ -19,7 +19,7 @@ const version = getConfig().docs_version
         </p>
 
         <div class="mb-4 d-inline-block user-select-all">
-          <Prism code={`npm i ods-charts@${version} echarts`} lang="sh" />
+          <Prism code={`npm i ods-charts@${getConfig().lib_version} echarts`} lang="sh" />
         </div>
 
         <div class="mb-4">
@@ -29,7 +29,7 @@ const version = getConfig().docs_version
         </div>
 
         <div class="hstack gap-2">
-          <p class="mb-0">Currently v{version}</p>
+          <p class="mb-0">Currently v{getConfig().lib_version}</p>
           <div class="vr m-0 border-always-on-black"></div>
           <a href="/versions/" class="text-nowrap fw-bold">All releases</a>
         </div>
@@ -37,8 +37,63 @@ const version = getConfig().docs_version
     </div>
   </div>
 
+  <section class="container-xxl mb-5">
+    <div class="row">
+      <div class="col-12">
+        <hr class="border border-1 border-subtle mt-0" />
+      </div>
+      <div class="col-xl-4">
+        <h2 class="display-4 text-primary mb-3">Main functionalities</h2>
+        <p class="lead fw-bold mb-3">Here are the main functionalities of ODS Charts.</p>
+      </div>
+      <div class="col-xl-8">
+        <ol class="list-group list-group-numbered list-group-flush border-top-0">
+          <li class="list-group-item">
+            <div>
+              Basic and advanced charts
+              <div class="fw-normal mt-1 lh-base">Access bar charts, line charts, pie charts, and many more easily.</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div>
+              Intuitive JavaScript API
+              <div class="fw-normal mt-1 lh-base">A config object and some handsome functions.</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div>
+              Ease accessibility
+              <div class="fw-normal mt-1 lh-base">We provide a full set of accessible colors, svg rendering, keyboard navigation, etc...</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div>
+              ODS branded
+              <div class="fw-normal mt-1 lh-base">Colors, typography, ODS components, and spacing are all furnished by ODS Charts.</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div>
+              Optimized rendering
+              <div class="fw-normal mt-1 lh-base">Svg rendering and efficient updates of the charts.</div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div>
+              Complete documentation and examples
+              <div class="fw-normal mt-1 lh-base">Interactive playgrounds, integration guides, detailed API, ...</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <section class="container-xxl">
     <div class="row">
+      <div class="col-12">
+        <hr class="border border-1 border-subtle mt-0" />
+      </div>
       <div class="col-xl-4 pe-xl-5">
         <h2 class="display-4 text-primary mb-3">Get started easily</h2>
         <p class="lead fw-bold mb-3">Get started with Apache Echarts and ODS Charts easily.</p>
@@ -47,12 +102,12 @@ const version = getConfig().docs_version
         <h2 class="display-4">Install via package manager</h2>
         <p class="lead">Install Apache Echarts and ODS Charts via npm, or yarn.</p>
         <div class="mb-3 user-select-all">
-          <Prism code={`npm install ods-charts@latest echarts`} lang="sh" />
+          <Prism code={`npm install ods-charts@${getConfig().lib_version} echarts`} lang="sh" />
         </div>
         <div class="mb-3 user-select-all">
-          <Prism code={`yarn add ods-charts@latest echarts`} lang="sh" />
+          <Prism code={`yarn add ods-charts@${getConfig().lib_version} echarts`} lang="sh" />
         </div>
-        <hr class="border-top border-1 border-light" />
+        <hr class="border-top border-1 border-subtle" />
         <h2 class="display-4">Use it in your project</h2>
         <p class="lead fw-bold mb-3">ODS Charts has been designed to be minimally intrusive and not to interfere with the use of the Apache ECharts library. The <a href="https://echarts.apache.org/en/option.html" target="_blank">Apache ECharts documentation</a> remains the reference for configuring charts.</p>
         <p>For instance, an Apache ECharts user can initialize a chart using code like this:</p>
