@@ -11,15 +11,15 @@ title: Two colors for one series - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Two colors for one series example</h5>
-      <p class="card-text">When representing data on a bar chart, it is possible to want to represent this data with a different color depending on a condition on the value. For example, green for a target achieved, red otherwise.</p>
-      <p class="card-text">You would then need to be able to have:</p>
+      <p class="card-text pe-5">When representing data on a bar chart, it is possible to want to represent this data with a different color depending on a condition on the value. For example, green for a target achieved, red otherwise.</p>
+      <p class="card-text pe-5">You would then need to be able to have:</p>
       <ul>
         <li>both colors in the legend</li>
         <li>the color associated with the current value in the tooltip or popover</li>
       </ul>
-      <p class="card-text">For this example, we have chosen to put the data in two series depending on whether or not the objective has been achieved. In this way, the two colors are clearly visible both on the graph and in the legend.</p>
-      <p class="card-text">On the other hand, this requires us to filter the values displayed in the tooltip so as not to display the series of a target that has not been reached when it has been reached and vice versa.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">For this example, we have chosen to put the data in two series depending on whether or not the objective has been achieved. In this way, the two colors are clearly visible both on the graph and in the legend.</p>
+      <p class="card-text pe-5">On the other hand, this requires us to filter the values displayed in the tooltip so as not to display the series of a target that has not been reached when it has been reached and vice versa.</p>
+      <p class="card-text pe-5">
         This filter is created using tooltip value formatter in the default Apache ECharts configuration, and to send back
         <code>undefined</code> if we don't want the value to be displayed:
         <code>
@@ -34,7 +34,7 @@ tooltip: {
           </pre>
         </code>
       </p>
-      <div class="ms-5 mb-2 p-2 text-body-secondary border-start border-subtle bg-body-secondary">
+      <div class="ms-5 mb-2 p-2 pe-5 text-body-secondary border-start border-subtle bg-body-secondary">
         <p class="card-text text-body-secondary">
           <small>
             NB: This formatter could also be provided through
@@ -55,6 +55,12 @@ themeManager.externalizePopover(undefined, {
         In the example below, we prefer the Apache ECharts
         <code>tooltip.formatter</code> method.
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

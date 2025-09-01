@@ -11,7 +11,13 @@ title: Stacked bar Charts - Examples - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical stacked bar chart</h5>
-      <p class="card-text">Compare proportional contributions within a category.</p>
+      <p class="card-text pe-5">Compare proportional contributions within a category.</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="barChartSV"></div>
       <script>
         window.addEventListener('DOMContentLoaded', () => {
@@ -25,7 +31,13 @@ title: Stacked bar Charts - Examples - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Horizontal stacked bar chart</h5>
-      <p class="card-text">Compare proportional contributions within a category.</p>
+      <p class="card-text pe-5">Compare proportional contributions within a category.</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="barChartSH"></div>
       <script>
         window.addEventListener('DOMContentLoaded', () => {

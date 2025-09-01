@@ -11,8 +11,8 @@ title: Add unit - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Add unit in both Y axis and tooltip display</h5>
-      <p class="card-text">Apache ECharts offer the availability to add a unit formatter.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">Apache ECharts offer the availability to add a unit formatter.</p>
+      <p class="card-text pe-5">
         There are two functions to provide. One for Y axis and one for the tooltip:
         <code>
           <pre>
@@ -31,6 +31,12 @@ title: Add unit - Specific use cases - ODS Charts
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

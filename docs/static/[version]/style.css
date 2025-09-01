@@ -16,6 +16,13 @@ body {
   line-height: 1.5;
 }
 
+.btn-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+}
+
 @media (min-width: 768px) {
   .ods-charts-nav-text {
     line-height: 1.875;

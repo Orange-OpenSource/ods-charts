@@ -11,8 +11,8 @@ title: Specific legend holders - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical legend holder example</h5>
-      <p class="card-text">You may wish to display the legends vertically, for example to the right of the graph.</p>
-      <p class="card-text">
+      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right of the graph.</p>
+      <p class="card-text pe-5">
         To do this, you can use the Apache ECharts <code>legend.orient</code> option:
         <code>
           <pre>
@@ -23,7 +23,7 @@ legend: {
           </pre>
         </code>
       </p>
-      <div class="ms-5 mb-2 p-2 text-body-secondary border-start border-subtle bg-body-secondary">
+      <div class="ms-5 mb-2 p-2 pe-5 text-body-secondary border-start border-subtle bg-body-secondary">
         <p class="card-text text-body-secondary">
           <small>
             NB: This orientation could also be provided through
@@ -37,7 +37,13 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
           </small>
         </p>
       </div>
-      <p class="card-text">In the example below, we prefer the Apache ECharts <code>legend.orient</code> method.</p>
+      <p class="card-text pe-5">In the example below, we prefer the Apache ECharts <code>legend.orient</code> method.</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="vertical_htmlId">
         <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
           <div class="chart_title">
@@ -129,8 +135,8 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h5 class="card-title">Legends holders for stacked bars example</h5>
-      <p class="card-text">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
-      <p class="card-text">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; seriesRef?: string[]}</code> object.</p>
+      <p class="card-text pe-5">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
+      <p class="card-text pe-5">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; seriesRef?: string[]}</code> object.</p>
       <ul>
         <li><code>legendHolderSelector</code> is the CSS selector of the legend holder.</li>
         <li><code>orientation</code> optionally indicates whether captions are displayed horizontally or vertically. By default, the value of the <code>legend.orient</code> option in Apache Echarts will be used if it exists, otherwise it will be <code>'horizontal'</code>.</li>
@@ -139,7 +145,7 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
           If <code>seriesRef</code> is absent, this container will be the default container for non-referenced legends.
         </li>
       </ul>
-      <p class="card-text">
+      <p class="card-text pe-5">
         We'll then have the following code to externalize our three types of legend into three different containers:
         <code>
           <pre>
@@ -153,6 +159,12 @@ themeManager.externalizeLegends(
           </pre>
         </code>
       </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
       <div id="stacked_htmlId">
         <div class="border border-subtle position-relative">
           <div class="chart_title">

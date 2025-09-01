@@ -2,7 +2,7 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
   var htmlElt = document.getElementById(prefixId + htmlId);
   var innitHtmlDoc = htmlElt.innerHTML;
   document.write(`
-    
+
     <div class="accordion py-3" id="${prefixId}viewCodeAcc">
     <div class="accordion-item">
       <h2 class="accordion-header" id="${prefixId}viewCodeHead">
@@ -10,15 +10,15 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
           class="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#${prefixId}viewCode"
+          data-bs-target="#${prefixId}${htmlId}_viewCode"
           aria-expanded="false"
-          aria-controls="${prefixId}viewCode"
+          aria-controls="${prefixId}${htmlId}_viewCode"
         >
           View code
         </button>
       </h2>
       <div
-        id="${prefixId}viewCode"
+        id="${prefixId}${htmlId}_viewCode"
         class="accordion-collapse collapse"
         aria-labelledby="${prefixId}viewCodeHead"
         data-bs-parent="#${prefixId}viewCodeAcc"
@@ -27,13 +27,13 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
           <div class="border border-subtle position-relative mt-2 p-2">
             <div class="display-5">HTML</div>
             <code>
-              <pre id="${prefixId}htmlCopyId"></pre>
+              <pre id="${prefixId}${htmlId}_html"></pre>
             </code>
           </div>
           <div class="border border-subtle position-relative mt-2 p-2">
             <div class="display-5">JavaScript / ODS Charts</div>
             <code>
-              <pre id="${prefixId}codeCopyId"></pre>
+              <pre id="${prefixId}${htmlId}_code"></pre>
             </code>
           </div>
         </div>
@@ -43,7 +43,7 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
     `);
 
   window.setTimeout(() => {
-    document.getElementById(prefixId + 'htmlCopyId').innerText = innitHtmlDoc;
-    document.getElementById(prefixId + 'codeCopyId').innerText = document.getElementById(prefixId + codeId).text;
+    document.getElementById(prefixId + htmlId + '_html').innerText = innitHtmlDoc;
+    document.getElementById(prefixId + htmlId + '_code').innerText = document.getElementById(prefixId + codeId).text;
   });
 };
