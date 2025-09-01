@@ -34,4 +34,4 @@ function fromDir(startPath, filter, prefix = `/${version}/`) {
 }
 
 console.log(`\n\nAdding cookies to API files\n`);
-fromDir(`./docs/dist/${version}/api`, '.html');
+fromDir(`./docs/static/[version]/api`, '.html');

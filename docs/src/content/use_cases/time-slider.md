@@ -7,7 +7,7 @@ title: Time slider axis - Specific use cases - ODS Charts
     <h1 class="display-1">Time slider axis</h1>
   </div>
 </div>
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Time slider axis example</h5>
@@ -132,7 +132,7 @@ configurations
     themeManager.externalizeLegends(myChart, '#barLine_legend');
     // Manage window size changed
     themeManager.manageChartResize(myChart, 'barLine_chart');
-    // Register the externalization of the tooltip/popup and use the second parameter as specified in https://ods-charts.netlify.app/0.2/api/classes/odschartspopoverdefinition to change the popup value (cf https://ods-charts.netlify.app/0.2/api/classes/odschartspopoverdefinition#getPopupContentValue)
+    // Register the externalization of the tooltip/popup and use the second parameter as specified in https://charts.unified-design-system.orange.com/0.2/api/classes/odschartspopoverdefinition to change the popup value (cf https://charts.unified-design-system.orange.com/0.2/api/classes/odschartspopoverdefinition#getPopupContentValue)
     themeManager.externalizePopover();
     // Observe dark / light mode changes
     themeManager.manageThemeObserver(myChart);

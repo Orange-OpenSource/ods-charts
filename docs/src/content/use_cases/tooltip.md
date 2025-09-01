@@ -7,7 +7,7 @@ title: Tooltip - Specific use cases - ODS Charts
     <h1 class="display-1">Tooltip</h1>
   </div>
 </div>
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Confine tooltip example</h5>
@@ -102,7 +102,7 @@ tooltip: {
   </script>
 </div>
 
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Specific value tooltip content</h5>
@@ -398,7 +398,7 @@ tooltip: {
   </div>
 </div>
 
-<div class="container pt-3">
+<div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Tooltip with HTML link(s)</h5>
