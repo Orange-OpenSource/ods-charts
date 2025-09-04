@@ -49,14 +49,19 @@
     "build:angular-14": "npm i && npm run build && cd test/angular-14 && npm i && npm run build && cd../.. && npm run serve:angular-14",
     "build:react": "npm i && npm run build && cd test/react && npm i && npm run build && cd../.. && npm run serve:react",
     "build:vue": "npm i && npm run build && cd test/vue && npm i && npm run build && cd../.. && npm run serve:vue",
-    "test": "ts-node node_modules/jasmine/bin/jasmine"
+    "test": "ts-node node_modules/jasmine/bin/jasmine",
+    "test:angular-ngx-echarts": "npm i && npm run build && cd test/angular-ngx-echarts && npm i && npm run build && cd../.. && npm run serve:angular-ngx-echarts",
+    "test:angular-ng-boosted": "npm i && npm run build && cd test/angular-ng-boosted && npm i && npm run build && cd../.. && npm run serve:angular-ng-boosted",
+    "test:angular-echarts": "npm i && npm run build && cd test/angular-echarts && npm i && npm run build && cd../.. && npm run serve:angular-echarts",
+    "test:react": "npm i && npm run build && cd test/react && npm i && npm run build && cd../.. && npm run serve:react",
+    "test:vue": "npm i && npm run build && cd test/vue && npm i && npm run build && cd../.. && npm run serve:vue"
   },
   "devDependencies": {
     "@astrojs/prism": "^3.3.0",
     "@stackblitz/sdk": "^1.11.0",
     "@types/jasmine": "^5.1.8",
     "astro": "^5.13.2",
-    "echarts": "^5.6.0",
+    "echarts": "^6.0.0",
     "jasmine": "^5.9.0",
     "prettier": "^3.6.2",
     "serve": "^14.2.3",
