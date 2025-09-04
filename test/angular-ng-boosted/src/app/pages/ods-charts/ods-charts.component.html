@@ -6,8 +6,8 @@
   <button class="btn btn-primary" (click)="generateRandomDataset()">Random Dataset</button>
 </div>
 <div id="chartsContainer" class="ods-charts-context">
-  <div id="chart1" echarts [options]="options1" [merge]="updateOptions1" [theme]="myTheme1.theme" class="demo-chart" (chartInit)="onChart1Init($event)"></div>
+  <div id="chart1" echarts [options]="options1" [merge]="updateOptions1" class="demo-chart" (chartInit)="onChart1Init($event)"></div>
   <div id="legend1"></div>
-  <div id="chart2" echarts [options]="options2" [merge]="updateOptions2" [theme]="myTheme2.theme" class="demo-chart" (chartInit)="onChart2Init($event)"></div>
+  <div id="chart2" echarts [options]="options2" [merge]="updateOptions2" class="demo-chart" (chartInit)="onChart2Init($event)"></div>
   <div id="legend2" class="mb-5"></div>
 </div>
