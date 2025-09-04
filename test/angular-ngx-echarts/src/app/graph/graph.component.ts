@@ -4,11 +4,11 @@ import * as echarts from 'echarts/core';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 // import necessary echarts components
 import { BarChart, LineChart } from 'echarts/charts';
-import { DatasetComponent, GridComponent } from 'echarts/components';
+import { DatasetComponent, GridComponent, TitleComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { LegendComponent } from 'echarts/components';
 import { TooltipComponent } from 'echarts/components';
-echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent]);
+echarts.use([BarChart, GridComponent, CanvasRenderer, LegendComponent, TooltipComponent, LineChart, DatasetComponent, TitleComponent]);
 
 import type {
   // The series option types are defined with the SeriesOption suffix
