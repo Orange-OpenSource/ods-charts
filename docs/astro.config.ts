@@ -4,7 +4,7 @@ import { getConfig } from './src/libs/config';
 
 export default defineConfig({
   build: {
-    assets: `${getConfig().docs_version}/assets`
+    assets: `${getConfig().docs_version}/assets`,
   },
   integrations: [odsCharts()],
   markdown: {
