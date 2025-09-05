@@ -16,7 +16,7 @@
     "astro:dev": "astro dev --root docs --port 3000",
     "astro:build": "astro build --root docs",
     "astro:preview": "astro preview --root docs --port 3000",
-    "docs:build": "rm -rf ./docs/dist && npm run typedoc && npm run astro:build",
+    "docs:build": "rm -rf ./docs/dist && npm run typedoc && npm run astro:build && npx prettier --write ./docs/static/[version]/ods-charts.js",
     "install:all": "npm i && npm run build && cd test/angular-echarts && npm i && cd ../angular-ng-boosted && npm i && cd ../angular-ngx-echarts && npm i && cd ../react && npm i && cd ../vue && npm i && cd ../..",
     "install:all-deep": "rm -rf ./node_modules && rm -rf ./test/angular-echarts/node_modules && rm -rf ./test/angular-ng-boosted/node_modules && rm -rf ./test/angular-14/node_modules && rm -rf ./test/angular-ngx-echarts/node_modules && rm -rf ./test/react/node_modules && rm -rf ./test/vue/node_modules && npm run install:all",
     "install:angular-ngx-echarts": "npm i && npm run build && cd test/angular-ngx-echarts && rm -rf node_modules && npm i && npm run build && cd ../.. && npm run serve:angular-ngx-echarts",
