@@ -1064,7 +1064,22 @@ window.generatePieChart = async (id) => {
       },
     ],
   };
-  displayChart('getPieChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart(
+    'getPieChartConfiguration',
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    'vertical'
+  );
 };
 
 window.generateDonutChart = async (id) => {
@@ -1085,7 +1100,22 @@ window.generateDonutChart = async (id) => {
       },
     ],
   };
-  displayChart('getDonutChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS);
+  displayChart(
+    'getDonutChartConfiguration',
+    id,
+    option,
+    undefined,
+    ODSCharts.ODSChartsColorsSet.DEFAULT_SUPPORTING_COLORS,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    'vertical'
+  );
 };
 
 window.generateGaugeChart = async (id, circular = false, dial = false) => {
