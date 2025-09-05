@@ -30,7 +30,7 @@ tooltip: {
       </button>
       <div id="div1_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -134,7 +134,7 @@ tooltip: {
       </button>
       <div id="div6_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -260,7 +260,7 @@ tooltip: {
       </button>
       <div id="div2_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -356,7 +356,7 @@ tooltip: {
       </button>
       <div id="div3_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -454,7 +454,7 @@ tooltip: {
       </button>
       <div id="div4_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -549,7 +549,7 @@ tooltip: {
       </button>
       <div id="div5_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
