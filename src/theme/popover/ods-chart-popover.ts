@@ -115,7 +115,6 @@ const DEFAULT_TEMPLATE_CSS = `
 
 const DEFAULT_NONE_CSS = `
 .ods-charts-no-css-lib .ods-charts-popover-color-holder {
-  border: 1px solid var(--bs-popover-border-color, #ccc);
   display: inline-block;
 }
 .ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {
@@ -123,8 +122,9 @@ const DEFAULT_NONE_CSS = `
 }
 
 .ods-charts-no-css-lib .ods-charts-popover-color {
-  width: 8px;
-  height: 8px;
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
   position: relative;
   display: block;
 }
@@ -294,7 +294,7 @@ export class ODSChartsPopover {
 
     let legends: ODSChartsLegendData = undefined as any;
     try {
-      legends = ODSChartsLegends.getLegendData(dataOptions);
+      legends = ODSChartsLegends.getLegendData(dataOptions, false);
     } catch (error) {}
 
     if (this.popoverConfig.enabled) {

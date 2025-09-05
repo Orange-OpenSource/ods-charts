@@ -41,7 +41,7 @@ function generateChartDiv(id, direction, mode) {
   return `
   <div class="border ods-charts-context graph-holder"${['dark', 'light'].includes(mode) ? ' data-bs-theme="' + mode + '"' : ''}
     style="display: flex; flex-direction: column; height: 100%; --bs-border-color: var(--bs-border-color-subtle);">
-    <div class="chart_title">
+    <div class="chart_title mx-3">
       <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
       <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
     </div>
@@ -414,8 +414,12 @@ async function displayChart(
       options.legend = {
         data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : options.series[0].data.map((val) => val.name),
       };
+    }
+    if (options.legend) {
       if ('vertical' === legendsOrientation) {
         options.legend.orient = legendsOrientation;
+      } else {
+        delete options.legend.orient;
       }
     }
   } else {
@@ -423,19 +427,14 @@ async function displayChart(
       options.legend = {};
     }
     if (options.series && 1 < options.series.length) {
-      options.series.forEach((serie, index) => {
-        if (!serie.name) serie.name = 'label ' + index;
+      options.series = options.series.map((serie, index) => {
+        return { ...serie, name: serie.name || 'label ' + index };
       });
     }
-    if ('horizontal' === legendsOrientation) {
-      options.legend.orient = 'horizontal';
-      options.legend.bottom = 10;
-      options.legend.left = 'left';
-      options.legend.padding = [0, 0, 0, 40];
+    if ('vertical' === legendsOrientation) {
+      options.legend.orient = legendsOrientation;
     } else {
-      options.legend.orient = 'vertical';
-      options.legend.right = 10;
-      options.legend.top = 'top';
+      delete options.legend.orient;
     }
   }
 

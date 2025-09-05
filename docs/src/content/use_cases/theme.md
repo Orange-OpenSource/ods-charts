@@ -60,7 +60,7 @@ themeManager.manageThemeObserver(myChart);
       </button>
       <div id="t1-htmlId">
         <div data-bs-theme="light">
-          <div class="chart_title overflow-hidden">
+          <div class="chart_title mx-3 overflow-hidden">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -168,7 +168,7 @@ themeManager.manageThemeObserver(myChart);
       </button>
       <div id="t2-htmlId">
         <div data-bs-theme="light">
-          <div class="chart_title overflow-hidden">
+          <div class="chart_title mx-3 overflow-hidden">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -284,7 +284,7 @@ cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
       </button>
 <div id="t3-htmlId">
 <div class="ods-charts-context" data-bs-theme="light">
-<div class="chart_title overflow-hidden">
+<div class="chart_title mx-3 overflow-hidden">
 <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
 <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
 </div>
