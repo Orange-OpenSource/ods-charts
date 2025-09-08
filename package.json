@@ -49,7 +49,7 @@
     "build:angular-14": "npm i && npm run build && cd test/angular-14 && npm i && npm run build && cd../.. && npm run serve:angular-14",
     "build:react": "npm i && npm run build && cd test/react && npm i && npm run build && cd../.. && npm run serve:react",
     "build:vue": "npm i && npm run build && cd test/vue && npm i && npm run build && cd../.. && npm run serve:vue",
-    "test": "ts-node node_modules/jasmine/bin/jasmine",
+    "test": "ts-node --project ./tsconfig.test.json ./node_modules/jasmine/bin/jasmine.js",
     "test:angular-ngx-echarts": "cd test/angular-ngx-echarts && npm i && npm run build && cd../.. && npm run serve:angular-ngx-echarts",
     "test:angular-ng-boosted": "cd test/angular-ng-boosted && npm i && npm run build && cd../.. && npm run serve:angular-ng-boosted",
     "test:angular-echarts": "cd test/angular-echarts && npm i && npm run build && cd../.. && npm run serve:angular-echarts",
