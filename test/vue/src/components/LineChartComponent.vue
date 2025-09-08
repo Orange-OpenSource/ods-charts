@@ -14,8 +14,12 @@ onMounted(() => {
   for (var i = 1; i < 50; i++) {
     var now = new Date((base += oneDay))
     date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'))
-    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]))
-    data2.push(Math.round((Math.random() - 0.5) * 20 + data2[i - 1]))
+    const dataBefore = data[i - 1]
+    data.push(Math.round((Math.random() - 0.5) * 20 + (dataBefore !== undefined ? dataBefore : 0)))
+    const data2Before = data2[i - 1]
+    data2.push(
+      Math.round((Math.random() - 0.5) * 20 + (data2Before !== undefined ? data2Before : 0))
+    )
   }
   let dataOptions = {
     title: {
