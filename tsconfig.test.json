@@ -1,13 +1,10 @@
 {
-  "extends": "./tsconfig.json", // hérite de votre config principale
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS", // Jasmine fonctionne mieux avec CommonJS
-    "outDir": "./dist-test", // dossier de sortie spécifique pour les tests
-    "noEmit": false, // pour permettre la compilation si besoin
-    "strict": false // ou true selon votre besoin
+    "module": "CommonJS",
+    "outDir": "./dist-test",
+    "noEmit": false,
+    "strict": false
   },
-  "include": [
-    "src/**/*.spec.ts", // uniquement vos fichiers de test
-    "spec/**/*.ts" // uniquement vos fichiers de test
-  ]
+  "include": ["src/**/*.spec.ts", "spec/**/*.ts"]
 }
