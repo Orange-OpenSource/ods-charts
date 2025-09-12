@@ -28,7 +28,7 @@
         ODSChartsCSSThemes: () => c,
         ODSChartsCSSThemesNames: () => s,
         ODSChartsColorsSet: () => re,
-        ODSChartsConfiguration: () => ve,
+        ODSChartsConfiguration: () => ge,
         ODSChartsDialGaugeConfiguration: () => pe,
         ODSChartsGaugeConfiguration: () => ue,
         ODSChartsItemCSSDefinition: () => r,
@@ -48,7 +48,7 @@
         ODSChartsTheme: () => le,
         ODSChartsTypes: () => de,
         ODS_PROJECT: () => t,
-        getThemeManager: () => Ee,
+        getThemeManager: () => Ae,
       }));
     const t = {
       color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
@@ -177,35 +177,37 @@
     const c = {
       BOOSTED4: {
         legends: {
-          odsChartsLegendHolder: { classes: ['pt-2'] },
+          odsChartsLegendHolder: { classes: ['pt-2', 'pb-3'] },
           odsChartsLegendContainer: { classes: ['d-flex', 'flex-wrap', 'justify-content-start'] },
           odsChartsLegendContainerVertical: { classes: ['flex-column'] },
-          odsChartsLegendLink: { classes: ['mx-3', 'pb-2', 'text-decoration-none'], styles: { opacity: '1' } },
+          odsChartsLegendContainerHorizontal: { classes: ['mx-4'] },
+          odsChartsLegendLink: { classes: ['mx-2', 'pb-2', 'text-decoration-none'], styles: { opacity: '1' } },
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'], styles: { opacity: '.25' } },
-          odsChartsLegendColorHolder: { classes: ['d-inline-block', 'border'], styles: { 'border-width': '0.10625rem!important' } },
-          odsChartsLegendColor: { classes: ['d-block', 'position-relative'], styles: { width: '8px', height: '8px' } },
+          odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
+          odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'mr-1'], styles: { width: '12px', height: '12px' } },
           odsChartsLegendLabel: {},
         },
         popover: {
-          odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'border'], styles: { 'border-width': '0.10625rem!important' } },
-          odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '8px', height: '8px' } },
+          odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'mr-1'] },
+          odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
         },
       },
       BOOSTED5: {
         legends: {
-          odsChartsLegendHolder: { classes: ['pt-2'] },
+          odsChartsLegendHolder: { classes: ['pt-2', 'pb-3'] },
           odsChartsLegendContainer: { classes: ['d-flex', 'flex-wrap', 'justify-content-start'] },
           odsChartsLegendContainerVertical: { classes: ['flex-column'] },
-          odsChartsLegendLink: { classes: ['mx-3', 'pb-2', 'text-decoration-none'] },
+          odsChartsLegendContainerHorizontal: { classes: ['mx-4'] },
+          odsChartsLegendLink: { classes: ['mx-2', 'pb-2', 'text-decoration-none'] },
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
-          odsChartsLegendColorHolder: { classes: ['d-inline-block', 'border', 'border-1'] },
-          odsChartsLegendColor: { classes: ['d-block', 'position-relative'], styles: { width: '8px', height: '8px' } },
+          odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
+          odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'me-1'], styles: { width: '12px', height: '12px' } },
           odsChartsLegendLabel: {},
         },
         popover: {
           odsChartsPopoverLine: { classes: ['text-nowrap'] },
-          odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'border', 'border-1'] },
-          odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '8px', height: '8px' } },
+          odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'me-1'] },
+          odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
         },
       },
       NONE: {
@@ -242,7 +244,10 @@
         let t,
           s = e.legend && e.legend.data ? e.legend.data : [];
         const r = 1 === e.series.length && e.series[0].data && ['pie'].includes(e.series[0].type);
-        if (!e.legend || !e.legend.data)
+        if (
+          (o && (e.legend && (e.legend = Object.assign({}, e.legend)), e.series && (e.series = [...e.series.map((e) => Object.assign({}, e))])),
+          !e.legend || !e.legend.data)
+        )
           if (e.dataset && e.dataset.source)
             try {
               (o && !e.legend && (e.legend = {}), (s = e.dataset.source[0].reduce((e, o, t) => (t > 0 && e.push(o), e), [])), o && (e.legend.data = s));
@@ -285,7 +290,7 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-legends-none-css'),
             (e.textContent =
-              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-left: 20px;\n  padding-top: 10px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 20px;\n  margin-left: 20px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  border: 1px solid var(--bs-border-color, #000000);\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  width: 8px;\n  height: 8px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height 24px\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
+              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height 24px\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
             document.head.appendChild(e));
         }
         if (e && e.legend && e.legend.orient) for (const o of this.legendHolders) o.orientation || (o.orientation = e.legend.orient);
@@ -326,15 +331,15 @@
         }
       }
       generateLegend(e, o, t, s, n, a = 'horizontal') {
-        var i, l, c, d, h, u, p, v;
-        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainerVertical) : r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerVertical) : r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
+        var i, l, c, d, h, u, p, g;
+        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainerVertical) : r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerVertical) : r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
           ? t.labels
           : []
         )
           .map((n, a) => {
-            var i, l, c, d, h, u, p, v;
-            let b = t.index[a] % o.length;
-            return `<a class="ods-charts-legend-link ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[b]}; ${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`;
+            var i, l, c, d, h, u, p, g;
+            let v = t.index[a] % o.length;
+            return `<a class="ods-charts-legend-link ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[v]}; ${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`;
           })
           .join('\n    ')}\n    </div>\n    </div>`;
       }
@@ -365,12 +370,12 @@
           }));
       }
     }
-    class v {
+    class g {
       constructor(e, o) {
         ((this.echart = e), (this.chartId = o), (this.observer = void 0));
       }
       static addResizeManagement(e, o) {
-        return new v(e, o);
+        return new g(e, o);
       }
       get divElement() {
         let e;
@@ -381,14 +386,14 @@
         const e = this.divElement;
         e && ResizeObserver
           ? ((this.observer = new ResizeObserver(this.resizeChart.bind(this))), this.observer.observe(e))
-          : ((v.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', v.sizeListeners[this.chartId]));
+          : ((g.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', g.sizeListeners[this.chartId]));
       }
       removeListener() {
         try {
           const e = this.divElement;
           e && ResizeObserver
             ? this.observer && (this.observer.unobserve(e), (this.observer = void 0))
-            : v.sizeListeners[this.chartId] && (window.removeEventListener('resize', v.sizeListeners[this.chartId]), delete v.sizeListeners[this.chartId]);
+            : g.sizeListeners[this.chartId] && (window.removeEventListener('resize', g.sizeListeners[this.chartId]), delete g.sizeListeners[this.chartId]);
         } catch (e) {}
       }
       resizeChart() {
@@ -406,14 +411,14 @@
         }
       }
     }
-    function b(e) {
+    function v(e) {
       var o = 0;
       if (('string' != typeof e && (e = JSON.stringify(e)), 0 == e.length)) return '' + o;
       for (let t = 0; t < e.length; t++) ((o = (o << 5) - o + e.charCodeAt(t)), (o &= o));
       return '' + o;
     }
-    function g(e) {
-      return 'string' == typeof e ? e : b(e);
+    function b(e) {
+      return 'string' == typeof e ? e : v(e);
     }
     function f(e) {
       if (h(e)) {
@@ -428,7 +433,7 @@
       }
       return e;
     }
-    v.sizeListeners = {};
+    g.sizeListeners = {};
     class y {
       constructor() {
         ((this.dispose = void 0), (this.show = void 0));
@@ -571,7 +576,7 @@
     !(function (e) {
       ((e.category = 'category'), (e.time = 'time'));
     })(D || (D = {}));
-    class E {
+    class A {
       constructor(e, o) {
         ((this.popoverDefinition = e), (this.popoverConfig = o), (this.tooltipStyle = ''), (this.enterable = !1), (this.mode = ae.DEFAULT));
       }
@@ -590,7 +595,7 @@
               `If you choose a specific axisPointer like ${o.axisPointer}, the popup/tooltip content will be shared between series values (shared option forced to true)`
             ),
             (o.shared = !0)),
-          new E(e, o)
+          new A(e, o)
         );
       }
       getTooltipTrigger(e, o) {
@@ -636,26 +641,26 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-popover-none-css'),
             (e.textContent =
-              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #ccc);\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  width: 8px;\n  height: 8px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height: 24px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
+              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height: 24px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
             document.head.appendChild(e));
         }
         const h = {},
-          v = this.getTooltipTrigger(e, o);
-        let b;
+          g = this.getTooltipTrigger(e, o);
+        let v;
         this.enterable = !!e && !!e.tooltip && !!e.tooltip.enterable;
         try {
-          b = p.getLegendData(e);
+          v = p.getLegendData(e, !1);
         } catch (e) {}
         if (this.popoverConfig.enabled) {
           if (
-            (u(h, { tooltip: { appendTo: 'body' }, [v]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
+            (u(h, { tooltip: { appendTo: 'body' }, [g]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
             this.popoverConfig.tooltip || u(h, { tooltip: { triggerOn: 'click', alwaysShowContent: !1 } }),
             this.popoverDefinition.getOrCreatePopupInstance
               ? u(h, {
                   tooltip: {
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, b);
+                      const o = this.getTooltipElements(e, v);
                       if (o && o.tooltipElements.length > 0 && window.event)
                         try {
                           this.displayPopup(window.event, o, t, this.mode);
@@ -666,7 +671,7 @@
                     className: 'd-none',
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [v]: {
+                  [g]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -700,7 +705,7 @@
                     },
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, b);
+                      const o = this.getTooltipElements(e, v);
                       return o && o.tooltipElements.length > 0
                         ? new DOMParser().parseFromString(
                             this.popoverDefinition.getPopupTemplate
@@ -717,7 +722,7 @@
                     className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ${r.getClasses(null === (i = t.popover) || void 0 === i ? void 0 : i.odsChartsPopover)}`,
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [v]: {
+                  [g]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -744,15 +749,15 @@
         u(o, h);
       }
       getPopupContentLine(e, o, t) {
-        var s, n, a, i, l, c, d, h, u, p, v, b;
-        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}" style="${r.getStyles(null === (b = o.popover) || void 0 === b ? void 0 : b.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
+        var s, n, a, i, l, c, d, h, u, p, g, v;
+        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverValue)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
       }
       getPopupContent(e, o, t) {
         var s, n;
         return `\n    <div  class="ods-charts-popover-body-content ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverBodyContent)}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverBodyContent)}" >\n        ${e.map((e) => (this.popoverDefinition.getPopupContentLine ? this.popoverDefinition.getPopupContentLine(e) : this.getPopupContentLine(e, o, t))).join('')}\n    </div>\n    `;
       }
       getPopupTemplate(e, o, t) {
-        var s, n, a, i, l, c, d, h, u, p, v, b;
+        var s, n, a, i, l, c, d, h, u, p, g, v;
         if (!document.querySelector('#ods-chart-tooltip-default-template')) {
           let e = document.createElement('style');
           ((e.id = 'ods-chart-tooltip-default-template'),
@@ -760,7 +765,7 @@
               '\n.ods-charts-popover {\n  margin: 0 !important;\n  padding: 0 !important;\n  border: none !important;\n  box-shadow: none !important;\n  background: none !important;\n}\n  \n.ods-charts-popover.ods-charts-enterable-false {\n  pointer-events: none !important;\n}\n\n.ods-charts-popover .ods-charts-popover-inner  {\n  display: inline-block;\n  background-color: var(--bs-body-bg, #fff);\n  color: var(--bs-body-color, #000);\n  border: 2px solid var(--bs-border-color-subtle, #ccc);\n  padding: 20px 18px 20px 18px;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-inner {\n  background-color: var(--bs-gray-950, #141414);\n  color: var(--bs-white, #fff);\n  border: 2px solid var(--bs-gray-700, #666);\n} \n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-inner {\n  background-color: var(--bs-white, #fff);\n  color: var(--bs-black, #000);\n  border: 2px solid var(--bs-gray-500, #ccc);\n} \n\n.ods-charts-popover .ods-charts-popover-header {\n  color: var(--bs-body-color, #000);\n  font-size: 18px;\n  font-weight: 700;\n  padding-bottom:10px;\n}  \n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-header {\n  color: var(--bs-white, #fff);\n}\n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-header {\n  color: var(--bs-black, #000);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow  { \n  position: absolute;\n  bottom: -8px;\n  width: 20px;\n  height: 10px;\n  left: calc(50% - 10px);\n}\n\n\n.ods-charts-popover .ods-charts-popover-arrow::before {  \n  position: absolute;\n  display: block;\n  content: "";\n  border-color: transparent;\n  border-top-color: var(--bs-border-color-subtle, #ccc);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  border-style: solid;\n  top: 2px;\n  left: 0;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {\n  border-top-color: var(--bs-gray-700, #666);\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {\n  border-top-color: var(--bs-gray-500, #ccc);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow::after {\n  border-color: transparent;\n  border-top-color: var(--bs-body-bg, #fff);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  position: absolute;\n  display: block;\n  content: "";\n  border-style: solid;\n  top: 0;\n  left: 0;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::after{\n  border-top-color: var(--bs-gray-950, #141414);\n}\n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-arrow::after{\n  border-top-color: var(--bs-white, #fff);\n}\n'),
             document.head.appendChild(e));
         }
-        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}" style="${r.getStyles(null === (b = o.popover) || void 0 === b ? void 0 : b.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
+        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverBody)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
       }
       displayPopup(e, o, t, s) {
         if (0 !== this.popoverConfig.tooltipDelay) {
@@ -818,12 +823,12 @@
         }
       }
     }
-    class A {
+    class E {
       constructor(e, o) {
         ((this.echart = e), (this.redraw = o));
       }
       static addThemeObserver(e, o) {
-        return new A(e, o);
+        return new E(e, o);
       }
       get divElement() {
         let e;
@@ -1033,7 +1038,7 @@
           'var(--ods-purple-6, #D9C2F0)',
         ],
       },
-      U = {
+      H = {
         color: [
           'var(--ods-pink-1, #BC4D9A)',
           'var(--ods-pink-2, #D573BB)',
@@ -1043,7 +1048,7 @@
           'var(--ods-pink-6, #FFE8F7)',
         ],
       },
-      H = {
+      U = {
         color: [
           'var(--ods-green-1, #0A6E31)',
           'var(--ods-green-2, #27A971)',
@@ -1280,8 +1285,8 @@
         darkerTints: z,
         lighterTints: R,
         blue: V,
-        green: H,
-        pink: U,
+        green: U,
+        pink: H,
         purple: $,
         yellow: _,
         oudsBlue: K,
@@ -1302,8 +1307,8 @@
         darkerTints: { visualMapColor: z.color },
         lighterTints: { visualMapColor: R.color },
         blue: { visualMapColor: V.color },
-        green: { visualMapColor: H.color },
-        pink: { visualMapColor: U.color },
+        green: { visualMapColor: U.color },
+        pink: { visualMapColor: H.color },
         purple: { visualMapColor: $.color },
         yellow: { visualMapColor: _.color },
         oudsBlue: { visualMapColor: K.color },
@@ -1353,11 +1358,11 @@
         e || (e = {});
         let o = ae.DEFAULT;
         (e.colors || (e.colors = re.DEFAULT),
-          e.chartConfiguration || (e.chartConfiguration = ve.getDefaultChartConfiguration()),
+          e.chartConfiguration || (e.chartConfiguration = ge.getDefaultChartConfiguration()),
           e.cssTheme || (e.cssTheme = c.NONE),
           e.cssSelector || (e.cssSelector = 'body'),
           (o = le.getDarkOrLightMode(document.querySelector(e.cssSelector))));
-        var s = `ods.${g(e.colors)}.${g(e.chartConfiguration)}`;
+        var s = `ods.${b(e.colors)}.${b(e.chartConfiguration)}`;
         const r = f(t);
         return (
           u(r, f(ie.common)),
@@ -1372,7 +1377,7 @@
                 })
               ),
           u(r, f(ie.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : ne.SMOOTH])),
-          new le(b(s), r, Object.assign(Object.assign({}, e), { mode: o }))
+          new le(v(s), r, Object.assign(Object.assign({}, e), { mode: o }))
         );
       }
       setDataOptions(e) {
@@ -1472,8 +1477,12 @@
           ((this.options.mode = le.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver())), this.cssHelper.changeThemeMode(this.options.mode));
         const e = this.cssHelper.initComputedStyle();
         try {
-          const e = this.cssHelper.cloneAndReplaceAllCssVars(Object.assign({}, this.dataOptions)),
-            o = {
+          const e = this.cssHelper.cloneAndReplaceAllCssVars(Object.assign({}, this.dataOptions));
+          ((e.xAxis = e.xAxis ? f(e.xAxis) : {}),
+            (e.yAxis = e.yAxis ? f(e.yAxis) : {}),
+            (e.legend = e.legend ? f(e.legend) : {}),
+            (e.grid = e.grid ? f(e.grid) : {}));
+          const o = {
               fontStyle: 'normal',
               fontWeight: '700',
               fontSize: 14,
@@ -1509,7 +1518,8 @@
                       : 'var(--bs-gray-700, #666)',
               },
             },
-            r = {
+            r = { left: 50, right: 50, top: 50, bottom: 30 },
+            n = {
               textStyle: {
                 fontWeight: 'bold',
                 fontSize: 14,
@@ -1519,30 +1529,33 @@
                     : ae.LIGHT === this.options.mode
                       ? 'var(--bs-black, #000)'
                       : 'var(--bs-white, #fff)',
+                padding: [0, 0, 0, 5],
               },
               icon: 'rect',
-              itemWidth: 10,
-              itemHeight: 10,
-              itemStyle: {
-                borderColor:
-                  ae.DEFAULT === this.options.mode
-                    ? 'var(--bs-body-color, #000)'
-                    : ae.LIGHT === this.options.mode
-                      ? 'var(--bs-black, #000)'
-                      : 'var(--bs-white, #fff)',
-                borderWidth: 1,
-              },
+              itemWidth: 12,
+              itemHeight: 12,
             };
-          let n = { xAxis: { axisLabel: f(o) }, yAxis: { axisLabel: f(o) }, legend: f(r) },
-            a = this.calculateNewThemeAndAddItInThemeOptions(n, e);
+          this.chartLegendManager ||
+            ('horizontal' === ((e.legend && e.legend.orient) || 'horizontal')
+              ? ((n.orient = 'horizontal'),
+                (n.bottom = 20),
+                (n.left = 0),
+                (n.padding = [0, 40, 10, 40]),
+                (n.formatter = function (e) {
+                  return e + '   ';
+                }),
+                (r.bottom = 100))
+              : ((n.orient = 'vertical'), (n.right = 50), (n.itemGap = 12), (n.top = 30), (r.right = 200)));
+          let a = { xAxis: { axisLabel: f(o) }, yAxis: { axisLabel: f(o) }, legend: f(n), grid: f(r) },
+            i = this.calculateNewThemeAndAddItInThemeOptions(a, e);
           for (const o of ['xAxis', 'yAxis'])
             O(e[o]) || (e[o] && e[o].axisLine)
-              ? ((n[o].axisLine = f(t)), (n[o].splitLine = f(s)))
-              : ((n[o].axisLine = { show: !1 }), (n[o].splitLine = { show: !1 }));
-          const i = this.getDisplayedColors(a.color, e);
-          if (((n = this.cssHelper.replaceAllCssVars(n)), this.chartLegendManager))
+              ? ((a[o].axisLine = f(t)), (a[o].splitLine = f(s)))
+              : ((a[o].axisLine = { show: !1 }), (a[o].splitLine = { show: !1 }));
+          const l = this.getDisplayedColors(i.color, e);
+          if (((a = this.cssHelper.replaceAllCssVars(a)), this.chartLegendManager))
             try {
-              this.chartLegendManager.addLegend(e, i, this.options.cssTheme, this.cssThemeName, this.options.mode);
+              this.chartLegendManager.addLegend(e, l, this.options.cssTheme, this.cssThemeName, this.options.mode);
             } catch (e) {
               console.error('unable to init Legend Manager', e);
             }
@@ -1554,11 +1567,11 @@
             }
           if (this.chartPopoverManager)
             try {
-              this.chartPopoverManager.addPopoverManagement(e, n, this.options.cssTheme, this.cssThemeName, this.options.mode);
+              this.chartPopoverManager.addPopoverManagement(e, a, this.options.cssTheme, this.cssThemeName, this.options.mode);
             } catch (e) {
               console.error('unable to init Popover Manager', e);
             }
-          return { themeOptions: n, dataOptions: e };
+          return { themeOptions: a, dataOptions: e };
         } finally {
           e && this.cssHelper.removeComputedStyle();
         }
@@ -1567,14 +1580,14 @@
         return ((this.chartLegendManager = p.addLegend(e, o)), this);
       }
       externalizePopover(e = {}, o) {
-        return (o || (o = k.NONE), (this.chartPopoverManager = E.addPopoverManagement(o, e)), this);
+        return (o || (o = k.NONE), (this.chartPopoverManager = A.addPopoverManagement(o, e)), this);
       }
       manageChartResize(e, o) {
-        return ((this.chartResizeManager = v.addResizeManagement(e, o)), this);
+        return ((this.chartResizeManager = g.addResizeManagement(e, o)), this);
       }
       manageThemeObserver(e) {
         return (
-          (this.chartThemeObserver = A.addThemeObserver(e, () => {
+          (this.chartThemeObserver = E.addThemeObserver(e, () => {
             e.setOption(this.getChartOptions());
           })),
           this
@@ -1607,7 +1620,7 @@
     class he {}
     class ue {}
     class pe extends ue {}
-    class ve {
+    class ge {
       constructor(e = de.DEFAULT) {
         this.type = e;
       }
@@ -1618,7 +1631,7 @@
         return {};
       }
       static getDefaultChartConfiguration() {
-        return new ve();
+        return new ge();
       }
       static getLineChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
         return new fe(e.lineStyle);
@@ -1627,7 +1640,7 @@
         return new me();
       }
       static getLineAndBarChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
-        return new ge(e.lineStyle);
+        return new be(e.lineStyle);
       }
       static getPieChartConfiguration() {
         return new Ce();
@@ -1648,22 +1661,22 @@
         return new De(e.minValue, e.maxValue, e.dialPoints);
       }
     }
-    class be extends ve {
+    class ve extends ge {
       constructor(e = de.LINE, o) {
         (super(e), (this.lineStyle = o), void 0 === this.lineStyle && (this.lineStyle = ne.SMOOTH));
       }
     }
-    class ge extends be {
+    class be extends ve {
       constructor(e) {
         super(de.LINE_AND_BAR, e);
       }
     }
-    class fe extends be {
+    class fe extends ve {
       constructor(e) {
         super(de.LINE, e);
       }
     }
-    class ye extends ve {
+    class ye extends ge {
       constructor(e) {
         super(e);
       }
@@ -1673,7 +1686,7 @@
         super(de.BAR);
       }
     }
-    class Ce extends ve {
+    class Ce extends ge {
       getSerieConfiguration(e) {
         return 'pie' !== e.type ? {} : { label: { show: !1, position: 'outside' }, labelLine: { show: !1 }, radius: ['0%', '95%'] };
       }
@@ -1681,7 +1694,7 @@
         super(de.PIE);
       }
     }
-    class we extends ve {
+    class we extends ge {
       getSerieConfiguration(e) {
         return 'pie' !== e.type
           ? {}
@@ -1696,7 +1709,7 @@
         super(de.DONUT);
       }
     }
-    class Se extends ve {
+    class Se extends ge {
       constructor(e) {
         super(e);
       }
@@ -1736,7 +1749,7 @@
           : { pointer: { show: !1 }, barWidth: 32, showBackground: !0, backgroundStyle: { color: 'var(--bs-gray-500)' }, itemStyle: { barBorderWidth: 0 } };
       }
     }
-    class Le extends ve {
+    class Le extends ge {
       constructor(e = de.SEMI_CIRCULAR_GAUGE, o, t) {
         (super(e), (this.minValue = o), (this.maxValue = t));
       }
@@ -1857,7 +1870,7 @@
         super(de.CIRCULAR_GAUGE, e, o);
       }
     }
-    const Ee = le.getThemeManager;
+    const Ae = le.getThemeManager;
     return o;
   })()
 );
