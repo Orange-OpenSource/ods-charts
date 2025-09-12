@@ -623,7 +623,11 @@ export class ODSChartsTheme {
       // only make an asign at the first level in order to avoid deep copy of all data
       // each feature is responsible to deep copy the changed part according to their changes.
       // Also make a deep copy when needed to replace any css var
-      const updatedDataOptionsForTheme = this.cssHelper.cloneAndReplaceAllCssVars({ ...this.dataOptions });
+      const updatedDataOptionsForTheme: any = this.cssHelper.cloneAndReplaceAllCssVars({ ...this.dataOptions });
+      updatedDataOptionsForTheme.xAxis = updatedDataOptionsForTheme.xAxis ? cloneDeepObject(updatedDataOptionsForTheme.xAxis) : {};
+      updatedDataOptionsForTheme.yAxis = updatedDataOptionsForTheme.yAxis ? cloneDeepObject(updatedDataOptionsForTheme.yAxis) : {};
+      updatedDataOptionsForTheme.legend = updatedDataOptionsForTheme.legend ? cloneDeepObject(updatedDataOptionsForTheme.legend) : {};
+      updatedDataOptionsForTheme.grid = updatedDataOptionsForTheme.grid ? cloneDeepObject(updatedDataOptionsForTheme.grid) : {};
 
       const axisLabel = {
         fontStyle: 'normal',
@@ -661,7 +665,15 @@ export class ODSChartsTheme {
                 : 'var(--bs-gray-700, #666)',
         },
       };
-      const legend = {
+
+      const grid: any = {
+        left: 50,
+        right: 50,
+        top: 50,
+        bottom: 30,
+      };
+
+      const legend: any = {
         textStyle: {
           fontWeight: 'bold',
           fontSize: 14,
@@ -671,25 +683,38 @@ export class ODSChartsTheme {
               : ODSChartsMode.LIGHT === this.options.mode
                 ? 'var(--bs-black, #000)'
                 : 'var(--bs-white, #fff)',
+          padding: [0, 0, 0, 5],
         },
         icon: 'rect',
-        itemWidth: 10,
-        itemHeight: 10,
-        itemStyle: {
-          borderColor:
-            ODSChartsMode.DEFAULT === this.options.mode
-              ? 'var(--bs-body-color, #000)'
-              : ODSChartsMode.LIGHT === this.options.mode
-                ? 'var(--bs-black, #000)'
-                : 'var(--bs-white, #fff)',
-          borderWidth: 1,
-        },
+        itemWidth: 12,
+        itemHeight: 12,
       };
+
+      if (!this.chartLegendManager) {
+        const legendsOrientation = (updatedDataOptionsForTheme.legend && updatedDataOptionsForTheme.legend.orient) || 'horizontal';
+        if ('horizontal' === legendsOrientation) {
+          legend.orient = 'horizontal';
+          legend.bottom = 20;
+          legend.left = 0;
+          legend.padding = [0, 40, 10, 40];
+          legend.formatter = function (name: string) {
+            return name + '   '; // Add spaces at the end of the line
+          };
+          grid.bottom = 100;
+        } else {
+          legend.orient = 'vertical';
+          legend.right = 50;
+          legend.itemGap = 12;
+          legend.top = 30;
+          grid.right = 200;
+        }
+      }
 
       let themeOptions: any = {
         xAxis: { axisLabel: cloneDeepObject(axisLabel) },
         yAxis: { axisLabel: cloneDeepObject(axisLabel) },
         legend: cloneDeepObject(legend),
+        grid: cloneDeepObject(grid),
       };
 
       let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);

@@ -46,7 +46,7 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
       </button>
       <div id="vertical_htmlId">
         <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
@@ -167,7 +167,7 @@ themeManager.externalizeLegends(
       </button>
       <div id="stacked_htmlId">
         <div class="border border-subtle position-relative">
-          <div class="chart_title">
+          <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>

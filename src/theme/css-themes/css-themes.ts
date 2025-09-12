@@ -110,7 +110,7 @@ export class ODSChartsCSSThemeDefinition {
 const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
   legends: {
     odsChartsLegendHolder: {
-      classes: ['pt-2'],
+      classes: ['pt-2', 'pb-3'],
     },
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
@@ -118,16 +118,19 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendContainerVertical: {
       classes: ['flex-column'],
     },
-    odsChartsLegendLink: { classes: ['mx-3', 'pb-2', 'text-decoration-none'] },
+    odsChartsLegendContainerHorizontal: {
+      classes: ['mx-4'],
+    },
+    odsChartsLegendLink: { classes: ['mx-2', 'pb-2', 'text-decoration-none'] },
     odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
     odsChartsLegendColorHolder: {
-      classes: ['d-inline-block', 'border', 'border-1'],
+      classes: ['d-inline-block'],
     },
     odsChartsLegendColor: {
-      classes: ['d-block', 'position-relative'],
+      classes: ['d-block', 'position-relative', 'me-1'],
       styles: {
-        width: '8px',
-        height: '8px',
+        width: '12px',
+        height: '12px',
       },
     },
     odsChartsLegendLabel: {},
@@ -135,13 +138,13 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
   popover: {
     odsChartsPopoverLine: { classes: ['text-nowrap'] },
     odsChartsPopoverColorHolder: {
-      classes: ['d-inline-block', 'border', 'border-1'],
+      classes: ['d-inline-block', 'me-1'],
     },
     odsChartsPopoverColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '8px',
-        height: '8px',
+        width: '12px',
+        height: '12px',
       },
     },
   },
@@ -150,7 +153,7 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
 const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
   legends: {
     odsChartsLegendHolder: {
-      classes: ['pt-2'],
+      classes: ['pt-2', 'pb-3'],
     },
     odsChartsLegendContainer: {
       classes: ['d-flex', 'flex-wrap', 'justify-content-start'],
@@ -158,8 +161,11 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendContainerVertical: {
       classes: ['flex-column'],
     },
+    odsChartsLegendContainerHorizontal: {
+      classes: ['mx-4'],
+    },
     odsChartsLegendLink: {
-      classes: ['mx-3', 'pb-2', 'text-decoration-none'],
+      classes: ['mx-2', 'pb-2', 'text-decoration-none'],
       styles: {
         opacity: '1',
       },
@@ -171,32 +177,26 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
       },
     },
     odsChartsLegendColorHolder: {
-      classes: ['d-inline-block', 'border'],
-      styles: {
-        'border-width': '0.10625rem!important',
-      },
+      classes: ['d-inline-block'],
     },
     odsChartsLegendColor: {
-      classes: ['d-block', 'position-relative'],
+      classes: ['d-block', 'position-relative', 'mr-1'],
       styles: {
-        width: '8px',
-        height: '8px',
+        width: '12px',
+        height: '12px',
       },
     },
     odsChartsLegendLabel: {},
   },
   popover: {
     odsChartsPopoverColorHolder: {
-      classes: ['d-inline-block', 'border'],
-      styles: {
-        'border-width': '0.10625rem!important',
-      },
+      classes: ['d-inline-block', 'mr-1'],
     },
     odsChartsPopoverColor: {
       classes: ['d-block', 'position-relative'],
       styles: {
-        width: '8px',
-        height: '8px',
+        width: '12px',
+        height: '12px',
       },
     },
   },

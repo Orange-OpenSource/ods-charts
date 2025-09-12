@@ -13,8 +13,8 @@ import { isVarArray, isVarObject } from '../../tools/merge-objects';
 import { ODSChartsLegendHolderDefinition } from './ods-chart-legends-definitions';
 
 const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
-  padding-left: 20px;
   padding-top: 10px;
+  padding-bottom: 20px;
   position: relative;
 }
 
@@ -28,11 +28,17 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   flex-direction: column;
 }
 
+
+.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
 .ods-charts-no-css-lib .ods-charts-legend-link {
   text-decoration: none;
   padding-bottom: 0.625rem;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 10px;
+  margin-left: 10px;
   color: var(--bs-body-color, #000000);
 }
 .ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {
@@ -40,13 +46,13 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
 }
 
 .ods-charts-no-css-lib .ods-charts-legend-color-holder {
-  border: 1px solid var(--bs-border-color, #000000);
   display: inline-block;
 }
 
 .ods-charts-no-css-lib .ods-charts-legend-color {
-  width: 8px;
-  height: 8px;
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
   position: relative;
   display: block;
 }
@@ -96,6 +102,15 @@ export class ODSChartsLegends {
     let legendData: string[] = dataOptions.legend && dataOptions.legend.data ? dataOptions.legend.data : [];
     let serieNames: string[];
     const monoSerieGraphe = 1 === dataOptions.series.length && dataOptions.series[0].data && ['pie'].includes(dataOptions.series[0].type);
+
+    if (updateDataOption) {
+      if (dataOptions.legend) {
+        dataOptions.legend = { ...dataOptions.legend };
+      }
+      if (dataOptions.series) {
+        dataOptions.series = [...dataOptions.series.map((v: any) => ({ ...v }))];
+      }
+    }
 
     if (!dataOptions.legend || !dataOptions.legend.data) {
       if (dataOptions.dataset && dataOptions.dataset.source) {

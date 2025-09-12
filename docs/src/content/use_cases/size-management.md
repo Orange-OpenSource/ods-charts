@@ -35,7 +35,7 @@ themeManager.manageChartResize(myChart, 'barLine_chart');
           <div class="card card-body">
             <div>
               <div class="border border-subtle position-relative">
-                <div class="chart_title">
+                <div class="chart_title mx-3">
                   <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
                   <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
                 </div>
