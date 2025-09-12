@@ -177,7 +177,7 @@
     const c = {
       BOOSTED4: {
         legends: {
-          odsChartsLegendHolder: { classes: ['pt-2 pb-3'] },
+          odsChartsLegendHolder: { classes: ['pt-2', 'pb-3'] },
           odsChartsLegendContainer: { classes: ['d-flex', 'flex-wrap', 'justify-content-start'] },
           odsChartsLegendContainerVertical: { classes: ['flex-column'] },
           odsChartsLegendContainerHorizontal: { classes: ['mx-4'] },
@@ -194,7 +194,7 @@
       },
       BOOSTED5: {
         legends: {
-          odsChartsLegendHolder: { classes: ['pt-2 pb-3'] },
+          odsChartsLegendHolder: { classes: ['pt-2', 'pb-3'] },
           odsChartsLegendContainer: { classes: ['d-flex', 'flex-wrap', 'justify-content-start'] },
           odsChartsLegendContainerVertical: { classes: ['flex-column'] },
           odsChartsLegendContainerHorizontal: { classes: ['mx-4'] },
