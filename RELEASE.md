@@ -17,7 +17,7 @@
 - Run `npm run release-docs`
 - Create a new branch with `git checkout -b gh-pages-$newversion`, e.g. `git checkout -b gh-pages-0.2.1`
 - `git commit -m "chore(release): v0.2.1 🚀"`
-- `git push`
+- `git push  --set-upstream origin gh-pages-0.2.1`
 - create a new PR targeting gh-pages
 - merge it
 
