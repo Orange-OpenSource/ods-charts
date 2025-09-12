@@ -623,7 +623,7 @@ export class ODSChartsTheme {
       // only make an asign at the first level in order to avoid deep copy of all data
       // each feature is responsible to deep copy the changed part according to their changes.
       // Also make a deep copy when needed to replace any css var
-      const updatedDataOptionsForTheme = this.cssHelper.cloneAndReplaceAllCssVars({ ...this.dataOptions });
+      const updatedDataOptionsForTheme: any = this.cssHelper.cloneAndReplaceAllCssVars({ ...this.dataOptions });
       updatedDataOptionsForTheme.xAxis = updatedDataOptionsForTheme.xAxis ? cloneDeepObject(updatedDataOptionsForTheme.xAxis) : {};
       updatedDataOptionsForTheme.yAxis = updatedDataOptionsForTheme.yAxis ? cloneDeepObject(updatedDataOptionsForTheme.yAxis) : {};
       updatedDataOptionsForTheme.legend = updatedDataOptionsForTheme.legend ? cloneDeepObject(updatedDataOptionsForTheme.legend) : {};
@@ -666,7 +666,7 @@ export class ODSChartsTheme {
         },
       };
 
-      const grid = {
+      const grid: any = {
         left: 50,
         right: 50,
         top: 50,
