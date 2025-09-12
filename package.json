@@ -1,7 +1,7 @@
 {
   "name": "ods-charts",
   "description": "ODS Charts is based on Apache ECharts and provides Orange charts components.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Orange SA",
   "contributors": [],
   "license": "MIT",
