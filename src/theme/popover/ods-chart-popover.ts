@@ -128,13 +128,33 @@ const DEFAULT_NONE_CSS = `
   position: relative;
   display: block;
 }
+
+.ods-charts-no-css-lib .ods-charts-popover-line {
+  display: flex;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  align-items: center;
+}
+
 .ods-charts-no-css-lib .ods-charts-popover-text {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
+  flex-grow: 1;
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
   color: var(--bs-body-color, #000000);
 }
+
+
+.ods-charts-no-css-lib .ods-charts-popover-label {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.ods-charts-no-css-lib .ods-charts-popover-value {
+  font-weight: 700;
+}
+
 .ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {
   color: var(--bs-body-color, #fff);
 }

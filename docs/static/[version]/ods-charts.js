@@ -37,14 +37,14 @@
         ODSChartsLineConfiguration: () => he,
         ODSChartsLineStyle: () => ne,
         ODSChartsMode: () => ae,
-        ODSChartsPopoverAxisPointer: () => S,
+        ODSChartsPopoverAxisPointer: () => x,
         ODSChartsPopoverConfig: () => L,
         ODSChartsPopoverDefinition: () => C,
         ODSChartsPopoverDefinitionWithRenderer: () => w,
         ODSChartsPopoverItem: () => m,
         ODSChartsPopoverManager: () => y,
         ODSChartsPopoverManagers: () => k,
-        ODSChartsPopoverTooltipTrigger: () => x,
+        ODSChartsPopoverTooltipTrigger: () => S,
         ODSChartsTheme: () => le,
         ODSChartsTypes: () => de,
         ODS_PROJECT: () => t,
@@ -188,8 +188,12 @@
           odsChartsLegendLabel: { classes: ['font-weight-normal', 'small'] },
         },
         popover: {
+          odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
           odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'mr-1'] },
           odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
+          odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+          odsChartsPopoverLabel: { classes: ['mr-2', 'flex-grow-1'] },
+          odsChartsPopoverValue: { classes: ['font-weight-bold'] },
         },
       },
       BOOSTED5: {
@@ -205,9 +209,12 @@
           odsChartsLegendLabel: { classes: ['fw-normal', 'small'] },
         },
         popover: {
-          odsChartsPopoverLine: { classes: ['text-nowrap'] },
+          odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
           odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'me-1'] },
           odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
+          odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+          odsChartsPopoverLabel: { classes: ['me-2', 'flex-grow-1'] },
+          odsChartsPopoverValue: { classes: ['fw-bold'] },
         },
       },
       NONE: {
@@ -290,7 +297,7 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-legends-none-css'),
             (e.textContent =
-              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
+              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 16px;\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
             document.head.appendChild(e));
         }
         if (e && e.legend && e.legend.orient) for (const o of this.legendHolders) o.orientation || (o.orientation = e.legend.orient);
@@ -463,13 +470,13 @@
         return !1;
       }
     }
-    var S, x;
+    var x, S;
     (!(function (e) {
       ((e.none = 'none'), (e.shadow = 'shadow'), (e.line = 'line'), (e.cross = 'cross'));
-    })(S || (S = {})),
+    })(x || (x = {})),
       (function (e) {
         ((e.xAxis = 'xAxis'), (e.yAxis = 'yAxis'), (e.grid = 'grid'));
-      })(x || (x = {})));
+      })(S || (S = {})));
     class L {}
     const k = {
       BOOSTED5: new (class extends w {
@@ -585,7 +592,7 @@
           (void 0 === e || (e.testAvailability && !e.testAvailability())) && (e = k.NONE),
           void 0 === o && (o = {}),
           void 0 === o.enabled && (o.enabled = !0),
-          void 0 === o.axisPointer && (o.axisPointer = S.none),
+          void 0 === o.axisPointer && (o.axisPointer = x.none),
           void 0 === o.shared && (o.shared = !1),
           void 0 === o.tooltip && (o.tooltip = !0),
           void 0 === o.tooltipDelay && (o.tooltipDelay = void 0 === e.tooltipDelay ? 0 : e.tooltipDelay),
@@ -641,7 +648,7 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-popover-none-css'),
             (e.textContent =
-              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height: 24px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
+              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-line {\n  display: flex;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  align-items: center;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  flex-grow: 1;\n  display: flex;\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 16px;\n  color: var(--bs-body-color, #000000);\n}\n\n\n.ods-charts-no-css-lib .ods-charts-popover-label {\n  margin-right: 10px;\n  flex-grow: 1;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-value {\n  font-weight: 700;\n}\n\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
             document.head.appendChild(e));
         }
         const h = {},
@@ -1038,7 +1045,7 @@
           'var(--ods-purple-6, #D9C2F0)',
         ],
       },
-      H = {
+      V = {
         color: [
           'var(--ods-pink-1, #BC4D9A)',
           'var(--ods-pink-2, #D573BB)',
@@ -1048,7 +1055,7 @@
           'var(--ods-pink-6, #FFE8F7)',
         ],
       },
-      U = {
+      H = {
         color: [
           'var(--ods-green-1, #0A6E31)',
           'var(--ods-green-2, #27A971)',
@@ -1058,7 +1065,7 @@
           'var(--ods-green-6, #B8EBD6)',
         ],
       },
-      V = {
+      U = {
         color: [
           'var(--ods-blue-1, #085EBD)',
           'var(--ods-blue-2, #237ECA)',
@@ -1284,9 +1291,9 @@
         supportingColors: G,
         darkerTints: z,
         lighterTints: R,
-        blue: V,
-        green: U,
-        pink: H,
+        blue: U,
+        green: H,
+        pink: V,
         purple: $,
         yellow: _,
         oudsBlue: K,
@@ -1306,9 +1313,9 @@
         supportingColors: { visualMapColor: G.color },
         darkerTints: { visualMapColor: z.color },
         lighterTints: { visualMapColor: R.color },
-        blue: { visualMapColor: V.color },
-        green: { visualMapColor: U.color },
-        pink: { visualMapColor: H.color },
+        blue: { visualMapColor: U.color },
+        green: { visualMapColor: H.color },
+        pink: { visualMapColor: V.color },
         purple: { visualMapColor: $.color },
         yellow: { visualMapColor: _.color },
         oudsBlue: { visualMapColor: K.color },
@@ -1649,7 +1656,7 @@
         return new we();
       }
       static getHorizontalGaugeChartConfiguration(e) {
-        return new xe(e.minValue, e.maxValue);
+        return new Se(e.minValue, e.maxValue);
       }
       static getSemiCircularGaugeChartConfiguration(e) {
         return new ke(e.minValue, e.maxValue);
@@ -1709,12 +1716,12 @@
         super(de.DONUT);
       }
     }
-    class Se extends ge {
+    class xe extends ge {
       constructor(e) {
         super(e);
       }
     }
-    class xe extends Se {
+    class Se extends xe {
       constructor(e, o) {
         (super(de.HORIZONTAL_GAUGE), (this.minValue = e), (this.maxValue = o));
       }

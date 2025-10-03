@@ -138,7 +138,7 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     },
   },
   popover: {
-    odsChartsPopoverLine: { classes: ['text-nowrap'] },
+    odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
     odsChartsPopoverColorHolder: {
       classes: ['d-inline-block', 'me-1'],
     },
@@ -149,6 +149,9 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
         height: '12px',
       },
     },
+    odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+    odsChartsPopoverLabel: { classes: ['me-2', 'flex-grow-1'] },
+    odsChartsPopoverValue: { classes: ['fw-bold'] },
   },
 };
 
@@ -193,6 +196,7 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     },
   },
   popover: {
+    odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
     odsChartsPopoverColorHolder: {
       classes: ['d-inline-block', 'mr-1'],
     },
@@ -203,6 +207,9 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
         height: '12px',
       },
     },
+    odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+    odsChartsPopoverLabel: { classes: ['mr-2', 'flex-grow-1'] },
+    odsChartsPopoverValue: { classes: ['font-weight-bold'] },
   },
 };
 
