@@ -1484,7 +1484,7 @@
             (e.grid = e.grid ? f(e.grid) : {}));
           const o = {
               fontStyle: 'normal',
-              fontWeight: '700',
+              fontWeight: 'var(--bs-font-weight-normal, 400)',
               fontSize: 14,
               fontFamily: 'Helvetica Neue, sans-serif',
               color:
