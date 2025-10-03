@@ -27,16 +27,16 @@
         ODSChartsCSSThemeDefinition: () => l,
         ODSChartsCSSThemes: () => c,
         ODSChartsCSSThemesNames: () => s,
-        ODSChartsColorsSet: () => re,
-        ODSChartsConfiguration: () => ge,
-        ODSChartsDialGaugeConfiguration: () => pe,
-        ODSChartsGaugeConfiguration: () => ue,
+        ODSChartsColorsSet: () => ne,
+        ODSChartsConfiguration: () => ve,
+        ODSChartsDialGaugeConfiguration: () => ge,
+        ODSChartsGaugeConfiguration: () => pe,
         ODSChartsItemCSSDefinition: () => r,
         ODSChartsItemGroupCSSDefinition: () => n,
-        ODSChartsLegendHolderDefinition: () => ce,
-        ODSChartsLineConfiguration: () => he,
-        ODSChartsLineStyle: () => ne,
-        ODSChartsMode: () => ae,
+        ODSChartsLegendHolderDefinition: () => de,
+        ODSChartsLineConfiguration: () => ue,
+        ODSChartsLineStyle: () => ae,
+        ODSChartsMode: () => ie,
         ODSChartsPopoverAxisPointer: () => x,
         ODSChartsPopoverConfig: () => L,
         ODSChartsPopoverDefinition: () => C,
@@ -45,10 +45,10 @@
         ODSChartsPopoverManager: () => y,
         ODSChartsPopoverManagers: () => k,
         ODSChartsPopoverTooltipTrigger: () => S,
-        ODSChartsTheme: () => le,
-        ODSChartsTypes: () => de,
+        ODSChartsTheme: () => ce,
+        ODSChartsTypes: () => he,
         ODS_PROJECT: () => t,
-        getThemeManager: () => Ae,
+        getThemeManager: () => Ee,
       }));
     const t = {
       color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
@@ -510,7 +510,7 @@
           return (
             i ||
               ((i = document.createElement('div')),
-              [ae.DARK, ae.LIGHT].includes(r) && i.setAttribute('data-bs-theme', r),
+              [ie.DARK, ie.LIGHT].includes(r) && i.setAttribute('data-bs-theme', r),
               (i.id = 'ods-chart-popover-container-' + r),
               i.classList.add('ods-charts-context'),
               null === (n = document.querySelector('body')) || void 0 === n || n.append(i)),
@@ -585,7 +585,7 @@
     })(D || (D = {}));
     class A {
       constructor(e, o) {
-        ((this.popoverDefinition = e), (this.popoverConfig = o), (this.tooltipStyle = ''), (this.enterable = !1), (this.mode = ae.DEFAULT));
+        ((this.popoverDefinition = e), (this.popoverConfig = o), (this.tooltipStyle = ''), (this.enterable = !1), (this.mode = ie.DEFAULT));
       }
       static addPopoverManagement(e, o) {
         return (
@@ -901,16 +901,18 @@
     const M =
         '\n.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light] {\n  color-scheme: light;\n  --ouds-charts-color-border: #ffffff;\n  --ouds-charts-color-border-contrast: #ffffff;\n  --ouds-charts-color-categorical-tier-1: #5b2f98;\n  --ouds-charts-color-categorical-tier-10: #009bf0;\n  --ouds-charts-color-categorical-tier-2: #3ba06e;\n  --ouds-charts-color-categorical-tier-3: #b20077;\n  --ouds-charts-color-categorical-tier-4: #a38200;\n  --ouds-charts-color-categorical-tier-5: #007abd;\n  --ouds-charts-color-categorical-tier-6: #8d60cd;\n  --ouds-charts-color-categorical-tier-7: #2e7b54;\n  --ouds-charts-color-categorical-tier-8: #e50099;\n  --ouds-charts-color-categorical-tier-9: #665100;\n  --ouds-charts-color-functional-info: #009bf0;\n  --ouds-charts-color-functional-negative: #db0002;\n  --ouds-charts-color-functional-positive: #17a02f;\n  --ouds-charts-color-functional-warning: #a38200;\n  --ouds-charts-color-gridlines: #cccccc;\n  --ouds-charts-color-highlight: #f15e00;\n  --ouds-charts-color-neutral: #8f8f8f;\n  --ouds-charts-color-sequential-accent-1-tint-100: #d2ecf9;\n  --ouds-charts-color-sequential-accent-1-tint-200: #a5daf3;\n  --ouds-charts-color-sequential-accent-1-tint-300: #79c7ec;\n  --ouds-charts-color-sequential-accent-1-tint-400: #4ab4e6;\n  --ouds-charts-color-sequential-accent-1-tint-500: #1fa2e0;\n  --ouds-charts-color-sequential-accent-1-tint-600: #1982b3;\n  --ouds-charts-color-sequential-accent-1-tint-700: #136186;\n  --ouds-charts-color-sequential-accent-1-tint-800: #0c415a;\n  --ouds-charts-color-sequential-accent-1-tint-900: #06202d;\n  --ouds-charts-color-sequential-accent-2-tint-100: #e5f5ed;\n  --ouds-charts-color-sequential-accent-2-tint-200: #c0e8d4;\n  --ouds-charts-color-sequential-accent-2-tint-300: #9bdaba;\n  --ouds-charts-color-sequential-accent-2-tint-400: #75cca1;\n  --ouds-charts-color-sequential-accent-2-tint-500: #50be87;\n  --ouds-charts-color-sequential-accent-2-tint-600: #3ba06e;\n  --ouds-charts-color-sequential-accent-2-tint-700: #2e7b54;\n  --ouds-charts-color-sequential-accent-2-tint-800: #20563b;\n  --ouds-charts-color-sequential-accent-2-tint-900: #123021;\n  --ouds-charts-color-sequential-accent-3-tint-100: #ffe5f6;\n  --ouds-charts-color-sequential-accent-3-tint-200: #ffb4e6;\n  --ouds-charts-color-sequential-accent-3-tint-300: #ff80d4;\n  --ouds-charts-color-sequential-accent-3-tint-400: #ff4dc3;\n  --ouds-charts-color-sequential-accent-3-tint-500: #ff1ab2;\n  --ouds-charts-color-sequential-accent-3-tint-600: #e50099;\n  --ouds-charts-color-sequential-accent-3-tint-700: #b20077;\n  --ouds-charts-color-sequential-accent-3-tint-800: #800055;\n  --ouds-charts-color-sequential-accent-3-tint-900: #4d0033;\n  --ouds-charts-color-sequential-accent-4-tint-100: #f1ecf9;\n  --ouds-charts-color-sequential-accent-4-tint-200: #e0d4f2;\n  --ouds-charts-color-sequential-accent-4-tint-300: #c5ade6;\n  --ouds-charts-color-sequential-accent-4-tint-400: #a885d8;\n  --ouds-charts-color-sequential-accent-4-tint-500: #8d60cd;\n  --ouds-charts-color-sequential-accent-4-tint-600: #5b2f98;\n  --ouds-charts-color-sequential-accent-4-tint-700: #432371;\n  --ouds-charts-color-sequential-accent-4-tint-800: #2c174a;\n  --ouds-charts-color-sequential-accent-4-tint-900: #150b23;\n  --ouds-charts-color-sequential-accent-5-tint-100: #fff0cc;\n  --ouds-charts-color-sequential-accent-5-tint-200: #ffe199;\n  --ouds-charts-color-sequential-accent-5-tint-300: #ffd266;\n  --ouds-charts-color-sequential-accent-5-tint-400: #ffc333;\n  --ouds-charts-color-sequential-accent-5-tint-500: #ffb400;\n  --ouds-charts-color-sequential-accent-5-tint-600: #cc9000;\n  --ouds-charts-color-sequential-accent-5-tint-700: #996c00;\n  --ouds-charts-color-sequential-accent-5-tint-800: #664800;\n  --ouds-charts-color-sequential-accent-5-tint-900: #332400;\n}\n\n[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark] {\n  color-scheme: dark;\n  --ouds-charts-color-border: #141414;\n  --ouds-charts-color-border-contrast: #000000;\n  --ouds-charts-color-categorical-tier-1: #a885d8;\n  --ouds-charts-color-categorical-tier-10: #1fa2e0;\n  --ouds-charts-color-categorical-tier-2: #50be87;\n  --ouds-charts-color-categorical-tier-3: #ff80d4;\n  --ouds-charts-color-categorical-tier-4: #d6aa00;\n  --ouds-charts-color-categorical-tier-5: #79c7ec;\n  --ouds-charts-color-categorical-tier-6: #8d60cd;\n  --ouds-charts-color-categorical-tier-7: #9bdaba;\n  --ouds-charts-color-categorical-tier-8: #ff4dc3;\n  --ouds-charts-color-categorical-tier-9: #ffd266;\n  --ouds-charts-color-functional-info: #26b2ff;\n  --ouds-charts-color-functional-negative: #ff4d4e;\n  --ouds-charts-color-functional-positive: #1ecd3c;\n  --ouds-charts-color-functional-warning: #ffd000;\n  --ouds-charts-color-gridlines: #666666;\n  --ouds-charts-color-highlight: #ff7900;\n  --ouds-charts-color-neutral: #858585;\n  --ouds-charts-color-sequential-accent-1-tint-100: #06202d;\n  --ouds-charts-color-sequential-accent-1-tint-200: #0c415a;\n  --ouds-charts-color-sequential-accent-1-tint-300: #136186;\n  --ouds-charts-color-sequential-accent-1-tint-400: #1982b3;\n  --ouds-charts-color-sequential-accent-1-tint-500: #1fa2e0;\n  --ouds-charts-color-sequential-accent-1-tint-600: #4ab4e6;\n  --ouds-charts-color-sequential-accent-1-tint-700: #79c7ec;\n  --ouds-charts-color-sequential-accent-1-tint-800: #a5daf3;\n  --ouds-charts-color-sequential-accent-1-tint-900: #d2ecf9;\n  --ouds-charts-color-sequential-accent-2-tint-100: #123021;\n  --ouds-charts-color-sequential-accent-2-tint-200: #20563b;\n  --ouds-charts-color-sequential-accent-2-tint-300: #2e7b54;\n  --ouds-charts-color-sequential-accent-2-tint-400: #3ba06e;\n  --ouds-charts-color-sequential-accent-2-tint-500: #50be87;\n  --ouds-charts-color-sequential-accent-2-tint-600: #75cca1;\n  --ouds-charts-color-sequential-accent-2-tint-700: #9bdaba;\n  --ouds-charts-color-sequential-accent-2-tint-800: #c0e8d4;\n  --ouds-charts-color-sequential-accent-2-tint-900: #e5f5ed;\n  --ouds-charts-color-sequential-accent-3-tint-100: #4d0033;\n  --ouds-charts-color-sequential-accent-3-tint-200: #800055;\n  --ouds-charts-color-sequential-accent-3-tint-300: #b20077;\n  --ouds-charts-color-sequential-accent-3-tint-400: #e50099;\n  --ouds-charts-color-sequential-accent-3-tint-500: #ff1ab2;\n  --ouds-charts-color-sequential-accent-3-tint-600: #ff4dc3;\n  --ouds-charts-color-sequential-accent-3-tint-700: #ff80d4;\n  --ouds-charts-color-sequential-accent-3-tint-800: #ffb4e6;\n  --ouds-charts-color-sequential-accent-3-tint-900: #ffe5f6;\n  --ouds-charts-color-sequential-accent-4-tint-100: #150b23;\n  --ouds-charts-color-sequential-accent-4-tint-200: #2c174a;\n  --ouds-charts-color-sequential-accent-4-tint-300: #432371;\n  --ouds-charts-color-sequential-accent-4-tint-400: #5b2f98;\n  --ouds-charts-color-sequential-accent-4-tint-500: #8d60cd;\n  --ouds-charts-color-sequential-accent-4-tint-600: #a885d8;\n  --ouds-charts-color-sequential-accent-4-tint-700: #c5ade6;\n  --ouds-charts-color-sequential-accent-4-tint-800: #e0d4f2;\n  --ouds-charts-color-sequential-accent-4-tint-900: #f1ecf9;\n  --ouds-charts-color-sequential-accent-5-tint-100: #332400;\n  --ouds-charts-color-sequential-accent-5-tint-200: #664800;\n  --ouds-charts-color-sequential-accent-5-tint-300: #996c00;\n  --ouds-charts-color-sequential-accent-5-tint-400: #cc9000;\n  --ouds-charts-color-sequential-accent-5-tint-500: #ffb400;\n  --ouds-charts-color-sequential-accent-5-tint-600: #ffc333;\n  --ouds-charts-color-sequential-accent-5-tint-700: #ffd266;\n  --ouds-charts-color-sequential-accent-5-tint-800: #ffe199;\n  --ouds-charts-color-sequential-accent-5-tint-900: #fff0cc;\n}',
       I =
-        '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {\n  color-scheme: light;\n  --bs-blue: #4170d8;\n  --bs-indigo: #a885d8;\n  --bs-purple: #a885d8;\n  --bs-pink: #ffb4e6;\n  --bs-red: #cd3c14;\n  --bs-orange: #f16e00;\n  --bs-yellow: #fc0;\n  --bs-green: #228722;\n  --bs-teal: #50be87;\n  --bs-cyan: #4bb4e6;\n  --bs-black: #000;\n  --bs-white: #fff;\n  --bs-gray: #999;\n  --bs-gray-dark: #595959;\n  --bs-gray-100: #fafafa;\n  --bs-gray-200: #f6f6f6;\n  --bs-gray-300: #eee;\n  --bs-gray-400: #ddd;\n  --bs-gray-500: #ccc;\n  --bs-gray-600: #999;\n  --bs-gray-700: #666;\n  --bs-gray-800: #595959;\n  --bs-gray-900: #333;\n  --bs-gray-950: #141414;\n  --bs-body-color: #000;\n  --bs-body-color-rgb: 0, 0, 0;\n  --bs-body-bg: #fff;\n  --bs-body-bg-rgb: 255, 255, 255;\n  --bs-link-color: #000;\n  --bs-border-width: 0.125rem;\n  --bs-border-color: #000;\n  --bs-border-color-subtle: #ccc;\n\n  --bs-secondary-color: #666;\n  --bs-secondary-bg: #eee;\n  --bs-primary: #f16e00;\n  --bs-secondary: #000;\n  --bs-success: #228722;\n  --bs-info: #4170d8;\n  --bs-warning: #fc0;\n  --bs-danger: #cd3c14;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 204, 204, 204;\n  --bs-tertiary-bg: #fafafa;\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {\n  color-scheme: dark;\n  --bs-body-color: #fff;\n  --bs-body-color-rgb: 255, 255, 255;\n  --bs-body-bg: #141414;\n  --bs-body-bg-rgb: 20, 20, 20;\n  --bs-link-color: #fff;\n  --bs-border-color: #fff;\n  --bs-border-color-subtle: #666;\n\n  --bs-secondary-color: #999;\n  --bs-secondary-bg: #333;\n  --bs-primary: #ff7900;\n  --bs-secondary: #fff;\n  --bs-success: #6c6;\n  --bs-info: #69f;\n  --bs-warning: #fc0;\n  --bs-danger: #f66;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 102, 102, 102;\n  --bs-tertiary-bg: #000;\n}\n\n\n[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme] {\n    color: var(--bs-body-color);\n    background-color: var(--bs-body-bg);\n}\n\n\n[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {\n    color: var(--bs-link-color);\n}\n',
+        '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {\n  color-scheme: light;\n  --bs-blue: #4170d8;\n  --bs-indigo: #a885d8;\n  --bs-purple: #a885d8;\n  --bs-pink: #ffb4e6;\n  --bs-red: #cd3c14;\n  --bs-orange: #f16e00;\n  --bs-yellow: #fc0;\n  --bs-green: #228722;\n  --bs-teal: #50be87;\n  --bs-cyan: #4bb4e6;\n  --bs-black: #000;\n  --bs-white: #fff;\n  --bs-gray: #999;\n  --bs-gray-dark: #595959;\n  --bs-gray-100: #fafafa;\n  --bs-gray-200: #f6f6f6;\n  --bs-gray-300: #eee;\n  --bs-gray-400: #ddd;\n  --bs-gray-500: #ccc;\n  --bs-gray-600: #999;\n  --bs-gray-700: #666;\n  --bs-gray-800: #595959;\n  --bs-gray-900: #333;\n  --bs-gray-950: #141414;\n  --bs-body-color: #000;\n  --bs-body-color-rgb: 0, 0, 0;\n  --bs-body-bg: #fff;\n  --bs-body-bg-rgb: 255, 255, 255;\n  --bs-link-color: #000;\n  --bs-border-width: 0.125rem;\n  --bs-border-color: #000;\n  --bs-border-color-subtle: #ccc;\n\n  --bs-secondary-color: #666;\n  --bs-secondary-bg: #eee;\n  --bs-primary: #f16e00;\n  --bs-secondary: #000;\n  --bs-success: #228722;\n  --bs-info: #4170d8;\n  --bs-warning: #fc0;\n  --bs-danger: #cd3c14;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 204, 204, 204;\n  --bs-tertiary-bg: #fafafa;\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {\n  color-scheme: dark;\n  --bs-body-color: #fff;\n  --bs-body-color-rgb: 255, 255, 255;\n  --bs-body-bg: #141414;\n  --bs-body-bg-rgb: 20, 20, 20;\n  --bs-link-color: #fff;\n  --bs-border-color: #fff;\n  --bs-border-color-subtle: #666;\n\n  --bs-secondary-color: #999;\n  --bs-secondary-bg: #333;\n  --bs-primary: #ff7900;\n  --bs-secondary: #fff;\n  --bs-success: #6c6;\n  --bs-info: #69f;\n  --bs-warning: #fc0;\n  --bs-danger: #f66;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 102, 102, 102;\n  --bs-tertiary-bg: #000;\n}\n\n\n[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme] {\n    color: var(--bs-body-color);\n    background-color: var(--bs-body-bg);\n}\n\n\n[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {\n    color: var(--bs-link-color);\n}\n    \n.ods-charts-context {\n  --bs-body-font-weight: 400;\n}\n',
       F =
+        '\n.ods-charts-context {\n  --bs-font-sans-serif:  "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";\n}\n',
+      N =
         '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"] {\n  --ods-yellow-100: #fff6b6;\n  --ods-yellow-200: #ffe45b;\n  --ods-yellow-300: #ffd200;\n  --ods-yellow-400: #ffb400;\n  --ods-yellow-500: #b98f11;\n  --ods-yellow-600: #9d6e06;\n\n  --ods-yellow: var(--ods-yellow-300);\n\n  --ods-blue-100: #b5e8f7;\n  --ods-blue-200: #80ceef;\n  --ods-blue-300: #4bb4e6;\n  --ods-blue-400: #3e9dd6;\n  --ods-blue-500: #237ecA;\n  --ods-blue-600: #085ebd;\n\n  --ods-green-100: #B8EBD6;\n  --ods-green-200: #84D5AF;\n  --ods-green-300: #50BE87;\n  --ods-green-400: #27A971;\n  --ods-green-500: #198C51;\n  --ods-green-600: #0A6E31;\n\n  --ods-pink-100: #FFE8F7;\n  --ods-pink-200: #FFCEEF;\n  --ods-pink-300: #FFB4E6;\n  --ods-pink-400: #FF8AD4;\n  --ods-pink-500: #D573BB;\n  --ods-pink-600: #BC4D9A;\n\n  --ods-purple-100: #D9C2F0;\n  --ods-purple-200: #C1A4E4;\n  --ods-purple-300: #A885D8;\n  --ods-purple-400: #9373BD;\n  --ods-purple-500: #6E4AA7;\n  --ods-purple-600: #492191;\n\n  --ods-yellow-1: var(--ods-yellow-600);\n  --ods-yellow-2: var(--ods-yellow-500);\n  --ods-yellow-3: var(--ods-yellow-400);\n  --ods-yellow-4: var(--ods-yellow-300);\n  --ods-yellow-5: var(--ods-yellow-200);\n  --ods-yellow-6: var(--ods-yellow-100);\n\n  --ods-blue-1: var(--ods-blue-600);\n  --ods-blue-2: var(--ods-blue-500);\n  --ods-blue-3: var(--ods-blue-400);\n  --ods-blue-4: var(--ods-blue-300);\n  --ods-blue-5: var(--ods-blue-200);\n  --ods-blue-6: var(--ods-blue-100);\n\n  --ods-green-1: var(--ods-green-600);\n  --ods-green-2: var(--ods-green-500);\n  --ods-green-3: var(--ods-green-400);\n  --ods-green-4: var(--ods-green-300);\n  --ods-green-5: var(--ods-green-200);\n  --ods-green-6: var(--ods-green-100);\n\n  --ods-pink-1: var(--ods-pink-600);\n  --ods-pink-2: var(--ods-pink-500);\n  --ods-pink-3: var(--ods-pink-400);\n  --ods-pink-4: var(--ods-pink-300);\n  --ods-pink-5: var(--ods-pink-200);\n  --ods-pink-6: var(--ods-pink-100);\n\n  --ods-purple-1: var(--ods-purple-600);\n  --ods-purple-2: var(--ods-purple-500);\n  --ods-purple-3: var(--ods-purple-400);\n  --ods-purple-4: var(--ods-purple-300);\n  --ods-purple-5: var(--ods-purple-200);\n  --ods-purple-6: var(--ods-purple-100);\n\n  --ods-categorical-1: var(--ods-blue-600);\n  --ods-categorical-2: var(--ods-green-400);\n  --ods-categorical-3: var(--ods-pink-600);\n  --ods-categorical-4: var(--ods-purple-400);\n  --ods-categorical-5: var(--ods-yellow-600);\n  --ods-categorical-6: var(--bs-gray-900);\n  --ods-categorical-7: var(--ods-blue-400);\n  --ods-categorical-8: var(--ods-green-600);\n  --ods-categorical-9: var(--ods-pink-500);\n  --ods-categorical-10: var(--ods-purple-600);\n  --ods-categorical-11: var(--ods-yellow-500);\n  --ods-categorical-12: var(--bs-gray-700);\n\n  --ods-default-1: var(--ods-blue-600);\n  --ods-default-2: var(--ods-green-600);\n  --ods-default-3: var(--ods-pink-600);\n  --ods-default-4: var(--ods-purple-600);\n  --ods-default-5: var(--ods-yellow-500);\n  --ods-default-6: var(--bs-gray-700);\n  --ods-default-7: var(--ods-blue-400);\n  --ods-default-8: var(--ods-green-400);\n  --ods-default-9: var(--ods-pink-500);\n  --ods-default-10: var(--ods-purple-400);\n  --ods-default-11: var(--ods-yellow-600);\n  --ods-default-12: var(--bs-gray-900);\n\n  --ods-cyan-light: var(--ods-blue-100);\n  --ods-teal-light: var(--ods-green-100);\n  --ods-pink-light: var(--ods-pink-100);\n  --ods-indigo-light: var(--ods-purple-100);\n  --ods-yellow-light: var(--ods-yellow-100);\n\n  --ods-cyan-dark: var(--ods-blue-600);\n  --ods-teal-dark: var(--ods-green-600);\n  --ods-pink-dark: var(--ods-pink-400);\n  --ods-indigo-dark: var(--ods-purple-600);\n  --ods-yellow-dark: var(--ods-yellow-400);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-300);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"] {\n  --ods-yellow-1: var(--ods-yellow-100);\n  --ods-yellow-2: var(--ods-yellow-200);\n  --ods-yellow-3: var(--ods-yellow-300);\n  --ods-yellow-4: var(--ods-yellow-400);\n  --ods-yellow-5: var(--ods-yellow-500);\n  --ods-yellow-6: var(--ods-yellow-600);\n\n  --ods-blue-1: var(--ods-blue-100);\n  --ods-blue-2: var(--ods-blue-200);\n  --ods-blue-3: var(--ods-blue-300);\n  --ods-blue-4: var(--ods-blue-400);\n  --ods-blue-5: var(--ods-blue-500);\n  --ods-blue-6: var(--ods-blue-600);\n\n  --ods-green-1: var(--ods-green-100);\n  --ods-green-2: var(--ods-green-200);\n  --ods-green-3: var(--ods-green-300);\n  --ods-green-4: var(--ods-green-400);\n  --ods-green-5: var(--ods-green-500);\n  --ods-green-6: var(--ods-green-600);\n\n  --ods-pink-1: var(--ods-pink-100);\n  --ods-pink-2: var(--ods-pink-200);\n  --ods-pink-3: var(--ods-pink-300);\n  --ods-pink-4: var(--ods-pink-400);\n  --ods-pink-5: var(--ods-pink-500);\n  --ods-pink-6: var(--ods-pink-600);\n\n  --ods-purple-1: var(--ods-purple-100);\n  --ods-purple-2: var(--ods-purple-200);\n  --ods-purple-3: var(--ods-purple-300);\n  --ods-purple-4: var(--ods-purple-400);\n  --ods-purple-5: var(--ods-purple-500);\n  --ods-purple-6: var(--ods-purple-600);\n\n  --ods-categorical-1: var(--ods-blue-500);\n  --ods-categorical-2: var(--ods-green-300);\n  --ods-categorical-3: var(--ods-pink-400);\n  --ods-categorical-4: var(--ods-purple-300);\n  --ods-categorical-5: var(--ods-yellow-400);\n  --ods-categorical-6: var(--bs-gray-600);\n  --ods-categorical-7: var(--ods-blue-300);\n  --ods-categorical-8: var(--ods-green-500);\n  --ods-categorical-9: var(--ods-pink-300);\n  --ods-categorical-10: var(--ods-purple-500);\n  --ods-categorical-11: var(--ods-yellow-300);\n  --ods-categorical-12: var(--bs-gray-500);\n\n  --ods-default-1: var(--ods-blue-500);\n  --ods-default-2: var(--ods-green-500);\n  --ods-default-3: var(--ods-pink-400);\n  --ods-default-4: var(--ods-purple-500);\n  --ods-default-5: var(--ods-yellow-300);\n  --ods-default-6: var(--bs-gray-500);\n  --ods-default-7: var(--ods-blue-300);\n  --ods-default-8: var(--ods-green-300);\n  --ods-default-9: var(--ods-pink-300);\n  --ods-default-10: var(--ods-purple-300);\n  --ods-default-11: var(--ods-yellow-400);\n  --ods-default-12: var(--bs-gray-600);\n\n  --ods-cyan-light: var(--ods-blue-600);\n  --ods-teal-light: var(--ods-green-600);\n  --ods-pink-light: var(--ods-pink-400);\n  --ods-indigo-light: var(--ods-purple-600);\n  --ods-yellow-light: var(--ods-yellow-400);\n\n  --ods-cyan-dark: var(--ods-blue-100);\n  --ods-teal-dark: var(--ods-green-100);\n  --ods-pink-dark: var(--ods-pink-100);\n  --ods-indigo-dark: var(--ods-purple-100);\n  --ods-yellow-dark: var(--ods-yellow-100);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-700);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n\n}\n',
-      N = {
-        BOOSTED4: `\n  ${I}\n  ${F}\n  ${M}\n  `,
-        BOOSTED5: `\n  ${F}\n  ${M}\n  `,
-        CUSTOM: `\n  ${I}\n  ${F}\n  ${M}\n  `,
-        NONE: `\n  ${I}\n  ${F}\n  ${M}\n  `,
+      B = {
+        BOOSTED4: `\n  \n.ods-charts-context {\n  --bs-font-sans-serif:  var(--font-family-sans-serif, "Helvetica Neue");\n}\n\n  ${I}\n  ${N}\n  ${M}\n  `,
+        BOOSTED5: `\n  ${N}\n  ${M}\n  `,
+        CUSTOM: `\n  ${F}\n  ${I}\n  ${N}\n  ${M}\n  `,
+        NONE: `\n  ${F}\n  ${I}\n  ${N}\n  ${M}\n  `,
       };
-    class B {
+    class _ {
       constructor(e, o, t) {
         ((this.cssSelector = e),
           (this.mode = o),
@@ -922,14 +924,14 @@
       get computedStyle() {
         if (void 0 === this._computedStyle) {
           if (this.cssSelector) {
-            let e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT));
+            let e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ie.DEFAULT));
             if (!e) {
               const o = this.cssSelector ? document.querySelector(this.cssSelector) : null;
               o &&
                 ((e = document.createElement('div')),
-                this.mode && this.mode !== ae.DEFAULT && e.setAttribute('data-bs-theme', this.mode),
+                this.mode && this.mode !== ie.DEFAULT && e.setAttribute('data-bs-theme', this.mode),
                 e.classList.add('ods-charts-context'),
-                e.classList.add('ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT)),
+                e.classList.add('ods-charts-style-' + (this.mode ? this.mode : ie.DEFAULT)),
                 o.append(e));
             }
             e && (this._computedStyle = window.getComputedStyle(e));
@@ -942,9 +944,9 @@
       initComputedStyle() {
         var e;
         if (!this._computedStyleInitialized) {
-          if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && N[this.cssThemeName]) {
+          if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && B[this.cssThemeName]) {
             const o = document.createElement('style');
-            ((o.textContent = N[this.cssThemeName]),
+            ((o.textContent = B[this.cssThemeName]),
               (o.id = 'ods-charts-style-' + this.cssThemeName),
               null === (e = document.querySelector('head')) || void 0 === e || e.append(o));
           }
@@ -954,7 +956,7 @@
       }
       removeComputedStyle() {
         if (this.cssSelector) {
-          const e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT));
+          const e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ie.DEFAULT));
           e && e.remove();
         }
         ((this._computedStyle = void 0), (this._computedStyleInitialized = !1));
@@ -1025,7 +1027,7 @@
         }
       }
     }
-    const _ = {
+    const $ = {
         color: [
           'var(--ods-yellow-1, #9D6E06)',
           'var(--ods-yellow-2, #B98F11)',
@@ -1035,7 +1037,7 @@
           'var(--ods-yellow-6, #FFF6B6)',
         ],
       },
-      $ = {
+      H = {
         color: [
           'var(--ods-purple-1, #492191)',
           'var(--ods-purple-2, #6E4AA7)',
@@ -1045,7 +1047,7 @@
           'var(--ods-purple-6, #D9C2F0)',
         ],
       },
-      V = {
+      U = {
         color: [
           'var(--ods-pink-1, #BC4D9A)',
           'var(--ods-pink-2, #D573BB)',
@@ -1055,7 +1057,7 @@
           'var(--ods-pink-6, #FFE8F7)',
         ],
       },
-      H = {
+      V = {
         color: [
           'var(--ods-green-1, #0A6E31)',
           'var(--ods-green-2, #27A971)',
@@ -1065,7 +1067,7 @@
           'var(--ods-green-6, #B8EBD6)',
         ],
       },
-      U = {
+      R = {
         color: [
           'var(--ods-blue-1, #085EBD)',
           'var(--ods-blue-2, #237ECA)',
@@ -1075,7 +1077,7 @@
           'var(--ods-blue-6, #B5E8F7)',
         ],
       },
-      R = {
+      z = {
         color: [
           'var(--ods-cyan-light, #B5E8F7)',
           'var(--ods-teal-light, #B8EBD6)',
@@ -1084,7 +1086,7 @@
           'var(--ods-yellow-light, #FFF6B6)',
         ],
       },
-      z = {
+      G = {
         color: [
           'var(--ods-cyan-dark, #085EBD)',
           'var(--ods-teal-dark, #0A6E31)',
@@ -1093,10 +1095,10 @@
           'var(--ods-yellow-dark, #FFB400)',
         ],
       },
-      G = {
+      j = {
         color: ['var(--bs-cyan, #4bb4e6)', 'var(--bs-teal, #50be87)', 'var(--bs-pink, #ffb4e6)', 'var(--bs-indigo, #a885d8)', 'var(--ods-yellow, #ffd200)'],
       },
-      j = {
+      W = {
         color: [
           'var(--ods-functional-1, #F16E00)',
           'var(--ods-functional-2, #EEEEEE)',
@@ -1106,7 +1108,7 @@
           'var(--ods-functional-6, #4170D8)',
         ],
       },
-      W = {
+      Q = {
         color: [
           'var(--ods-categorical-1, #085ebd)',
           'var(--ods-categorical-2, #27a971)',
@@ -1122,7 +1124,7 @@
           'var(--ods-categorical-12, #666666)',
         ],
       },
-      Q = {
+      K = {
         color: [
           'var(--ods-default-1, #085edb)',
           'var(--ods-default-2, #0a6e31)',
@@ -1138,7 +1140,7 @@
           'var(--ods-default-12, #333333)',
         ],
       },
-      K = {
+      Y = {
         color: [
           'var(--ouds-charts-color-sequential-accent-1-tint-100)',
           'var(--ouds-charts-color-sequential-accent-1-tint-200)',
@@ -1151,7 +1153,7 @@
           'var(--ouds-charts-color-sequential-accent-1-tint-900)',
         ],
       },
-      Y = {
+      Z = {
         color: [
           'var(--ouds-charts-color-categorical-tier-1)',
           'var(--ouds-charts-color-categorical-tier-2)',
@@ -1165,10 +1167,10 @@
           'var(--ouds-charts-color-categorical-tier-10)',
         ],
       },
-      Z = {
+      J = {
         color: ['var(--ouds-charts-color-functional-positive)', 'var(--ouds-charts-color-functional-warning)', 'var(--ouds-charts-color-functional-negative)'],
       },
-      J = {
+      X = {
         color: [
           'var(--ouds-charts-color-sequential-accent-2-tint-100)',
           'var(--ouds-charts-color-sequential-accent-2-tint-200)',
@@ -1181,8 +1183,8 @@
           'var(--ouds-charts-color-sequential-accent-2-tint-900)',
         ],
       },
-      X = { color: ['var(--ouds-charts-color-highlight)', 'var(--ouds-charts-color-neutral)'] },
-      ee = {
+      ee = { color: ['var(--ouds-charts-color-highlight)', 'var(--ouds-charts-color-neutral)'] },
+      oe = {
         color: [
           'var(--ouds-charts-color-sequential-accent-3-tint-100)',
           'var(--ouds-charts-color-sequential-accent-3-tint-200)',
@@ -1195,7 +1197,7 @@
           'var(--ouds-charts-color-sequential-accent-3-tint-900)',
         ],
       },
-      oe = {
+      te = {
         color: [
           'var(--ouds-charts-color-sequential-accent-4-tint-100)',
           'var(--ouds-charts-color-sequential-accent-4-tint-200)',
@@ -1208,7 +1210,7 @@
           'var(--ouds-charts-color-sequential-accent-4-tint-900)',
         ],
       },
-      te = {
+      se = {
         color: [
           'var(--ouds-charts-color-categorical-tier-1)',
           'var(--ouds-charts-color-categorical-tier-6)',
@@ -1218,7 +1220,7 @@
           'var(--ouds-charts-color-categorical-tier-10)',
         ],
       },
-      se = {
+      re = {
         color: [
           'var(--ouds-charts-color-sequential-accent-5-tint-100)',
           'var(--ouds-charts-color-sequential-accent-5-tint-200)',
@@ -1231,7 +1233,7 @@
           'var(--ouds-charts-color-sequential-accent-5-tint-900)',
         ],
       };
-    var re, ne, ae;
+    var ne, ae, ie;
     (!(function (e) {
       ((e.DEFAULT = 'default'),
         (e.CATEGORICAL = 'categorical'),
@@ -1253,14 +1255,14 @@
         (e.OUDS_FUNCTIONAL = 'oudsFunctional'),
         (e.OUDS_HIGHLIGHT = 'oudsHighlight'),
         (e.OUDS_SINGLE = 'oudsSingle'));
-    })(re || (re = {})),
+    })(ne || (ne = {})),
       (function (e) {
         ((e.BROKEN = 'broken'), (e.SMOOTH = 'smooth'), (e.BROKEN_WITH_POINTS = 'withPoints'));
-      })(ne || (ne = {})),
+      })(ae || (ae = {})),
       (function (e) {
         ((e.LIGHT = 'light'), (e.DARK = 'dark'), (e.DEFAULT = 'default'));
-      })(ae || (ae = {})));
-    const ie = {
+      })(ie || (ie = {})));
+    const le = {
       common: { backgroundColor: 'var(--bs-body-bg, #fff)' },
       linesAxis: {
         categoryAxis: {
@@ -1285,48 +1287,48 @@
         },
       },
       colors: {
-        default: Q,
-        categorical: W,
-        functional: j,
-        supportingColors: G,
-        darkerTints: z,
-        lighterTints: R,
-        blue: U,
-        green: H,
-        pink: V,
-        purple: $,
-        yellow: _,
-        oudsBlue: K,
-        oudsGreen: J,
-        oudsPink: ee,
-        oudsPurple: oe,
-        oudsYellow: se,
-        oudsCategorical: Y,
-        oudsFunctional: Z,
-        oudsHighlight: X,
-        oudsSingle: te,
+        default: K,
+        categorical: Q,
+        functional: W,
+        supportingColors: j,
+        darkerTints: G,
+        lighterTints: z,
+        blue: R,
+        green: V,
+        pink: U,
+        purple: H,
+        yellow: $,
+        oudsBlue: Y,
+        oudsGreen: X,
+        oudsPink: oe,
+        oudsPurple: te,
+        oudsYellow: re,
+        oudsCategorical: Z,
+        oudsFunctional: J,
+        oudsHighlight: ee,
+        oudsSingle: se,
       },
       visualMapColors: {
-        default: { visualMapColor: Q.color },
-        categorical: { visualMapColor: W.color },
-        functional: { visualMapColor: j.color },
-        supportingColors: { visualMapColor: G.color },
-        darkerTints: { visualMapColor: z.color },
-        lighterTints: { visualMapColor: R.color },
-        blue: { visualMapColor: U.color },
-        green: { visualMapColor: H.color },
-        pink: { visualMapColor: V.color },
-        purple: { visualMapColor: $.color },
-        yellow: { visualMapColor: _.color },
-        oudsBlue: { visualMapColor: K.color },
-        oudsGreen: { visualMapColor: J.color },
-        oudsPink: { visualMapColor: ee.color },
-        oudsPurple: { visualMapColor: oe.color },
-        oudsYellow: { visualMapColor: se.color },
-        oudsCategorical: { visualMapColor: Y.color },
-        oudsFunctional: { visualMapColor: Z.color },
-        oudsHighlight: { visualMapColor: X.color },
-        oudsSingle: { visualMapColor: te.color },
+        default: { visualMapColor: K.color },
+        categorical: { visualMapColor: Q.color },
+        functional: { visualMapColor: W.color },
+        supportingColors: { visualMapColor: j.color },
+        darkerTints: { visualMapColor: G.color },
+        lighterTints: { visualMapColor: z.color },
+        blue: { visualMapColor: R.color },
+        green: { visualMapColor: V.color },
+        pink: { visualMapColor: U.color },
+        purple: { visualMapColor: H.color },
+        yellow: { visualMapColor: $.color },
+        oudsBlue: { visualMapColor: Y.color },
+        oudsGreen: { visualMapColor: X.color },
+        oudsPink: { visualMapColor: oe.color },
+        oudsPurple: { visualMapColor: te.color },
+        oudsYellow: { visualMapColor: re.color },
+        oudsCategorical: { visualMapColor: Z.color },
+        oudsFunctional: { visualMapColor: J.color },
+        oudsHighlight: { visualMapColor: ee.color },
+        oudsSingle: { visualMapColor: se.color },
       },
       linesStyle: {
         broken: { line: { itemStyle: { borderWidth: 1 }, lineStyle: { width: 2 }, symbolSize: 0, symbol: 'circle', smooth: !1 } },
@@ -1334,7 +1336,7 @@
         smooth: { line: { itemStyle: { borderWidth: 1 }, lineStyle: { width: 2 }, symbolSize: 0, symbol: 'circle', smooth: !0 } },
       },
     };
-    class le {
+    class ce {
       constructor(e, o, t) {
         ((this.name = e),
           (this.initialTheme = o),
@@ -1344,47 +1346,47 @@
           (this.chartPopoverManager = void 0),
           (this.chartThemeObserver = void 0),
           (this.cssThemeName = Object.keys(c).find((e) => c[e] === t.cssTheme) || s.CUSTOM),
-          (this.cssHelper = new B(this.options.cssSelector, this.options.mode, this.cssThemeName)),
+          (this.cssHelper = new _(this.options.cssSelector, this.options.mode, this.cssThemeName)),
           (this.theme = this.calculateTheme()));
       }
       calculateTheme() {
         return ((this.theme = this.cssHelper.replaceAllCssVars(f(this.initialTheme))), this.theme);
       }
       static getDarkOrLightMode(e) {
-        let o = ae.DEFAULT;
+        let o = ie.DEFAULT;
         if (e) {
           const t = window.getComputedStyle(e);
           if (t) {
             const e = t.getPropertyValue('color-scheme');
-            [ae.DARK, ae.LIGHT].includes(e) && (o = e);
+            [ie.DARK, ie.LIGHT].includes(e) && (o = e);
           }
         }
         return o;
       }
       static getThemeManager(e) {
         e || (e = {});
-        let o = ae.DEFAULT;
-        (e.colors || (e.colors = re.DEFAULT),
-          e.chartConfiguration || (e.chartConfiguration = ge.getDefaultChartConfiguration()),
+        let o = ie.DEFAULT;
+        (e.colors || (e.colors = ne.DEFAULT),
+          e.chartConfiguration || (e.chartConfiguration = ve.getDefaultChartConfiguration()),
           e.cssTheme || (e.cssTheme = c.NONE),
           e.cssSelector || (e.cssSelector = 'body'),
-          (o = le.getDarkOrLightMode(document.querySelector(e.cssSelector))));
+          (o = ce.getDarkOrLightMode(document.querySelector(e.cssSelector))));
         var s = `ods.${b(e.colors)}.${b(e.chartConfiguration)}`;
         const r = f(t);
         return (
-          u(r, f(ie.common)),
-          u(r, f(ie.linesAxis)),
+          u(r, f(le.common)),
+          u(r, f(le.linesAxis)),
           'string' == typeof e.colors
-            ? (u(r, f(ie.colors[e.colors])), u(r, f(ie.visualMapColors[e.colors])))
+            ? (u(r, f(le.colors[e.colors])), u(r, f(le.visualMapColors[e.colors])))
             : u(
                 r,
                 f({
-                  color: e.colors.map((e) => ('string' == typeof e ? e : ie.colors[e.colorPalette].color[e.colorIndex])),
-                  visualMapColor: e.colors.map((e) => ('string' == typeof e ? e : ie.visualMapColors[e.colorPalette].visualMapColor[e.colorIndex])),
+                  color: e.colors.map((e) => ('string' == typeof e ? e : le.colors[e.colorPalette].color[e.colorIndex])),
+                  visualMapColor: e.colors.map((e) => ('string' == typeof e ? e : le.visualMapColors[e.colorPalette].visualMapColor[e.colorIndex])),
                 })
               ),
-          u(r, f(ie.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : ne.SMOOTH])),
-          new le(v(s), r, Object.assign(Object.assign({}, e), { mode: o }))
+          u(r, f(le.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : ae.SMOOTH])),
+          new ce(v(s), r, Object.assign(Object.assign({}, e), { mode: o }))
         );
       }
       setDataOptions(e) {
@@ -1481,7 +1483,7 @@
       getThemeOptions() {
         if (!this.dataOptions) throw new Error('the chart basic options must be set to get the theme completion');
         this.chartThemeObserver &&
-          ((this.options.mode = le.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver())), this.cssHelper.changeThemeMode(this.options.mode));
+          ((this.options.mode = ce.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver())), this.cssHelper.changeThemeMode(this.options.mode));
         const e = this.cssHelper.initComputedStyle();
         try {
           const e = this.cssHelper.cloneAndReplaceAllCssVars(Object.assign({}, this.dataOptions));
@@ -1491,13 +1493,13 @@
             (e.grid = e.grid ? f(e.grid) : {}));
           const o = {
               fontStyle: 'normal',
-              fontWeight: 'var(--bs-font-weight-normal, 400)',
+              fontWeight: 'var(--bs-body-font-weight, 400)',
               fontSize: 14,
               fontFamily: 'Helvetica Neue, sans-serif',
               color:
-                ae.DEFAULT === this.options.mode
+                ie.DEFAULT === this.options.mode
                   ? 'var(--bs-body-color, #000)'
-                  : ae.LIGHT === this.options.mode
+                  : ie.LIGHT === this.options.mode
                     ? 'var(--bs-black, #000)'
                     : 'var(--bs-white, #fff)',
             },
@@ -1506,9 +1508,9 @@
               lineStyle: {
                 width: 2,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ie.DEFAULT === this.options.mode
                     ? 'var(--bs-border-color-subtle, #ccc)'
-                    : ae.LIGHT === this.options.mode
+                    : ie.LIGHT === this.options.mode
                       ? 'var(--bs-gray-500, #ccc)'
                       : 'var(--bs-gray-700, #666)',
               },
@@ -1518,9 +1520,9 @@
               lineStyle: {
                 width: 1,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ie.DEFAULT === this.options.mode
                     ? 'var(--bs-border-color-subtle, #ccc)'
-                    : ae.LIGHT === this.options.mode
+                    : ie.LIGHT === this.options.mode
                       ? 'var(--bs-gray-500, #ccc)'
                       : 'var(--bs-gray-700, #666)',
               },
@@ -1531,9 +1533,9 @@
                 fontWeight: 'bold',
                 fontSize: 14,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ie.DEFAULT === this.options.mode
                     ? 'var(--bs-body-color, #000)'
-                    : ae.LIGHT === this.options.mode
+                    : ie.LIGHT === this.options.mode
                       ? 'var(--bs-black, #000)'
                       : 'var(--bs-white, #fff)',
                 padding: [0, 0, 0, 5],
@@ -1606,12 +1608,12 @@
         return u(e, o);
       }
     }
-    class ce {
+    class de {
       constructor(e, o, t) {
         ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t));
       }
     }
-    var de;
+    var he;
     !(function (e) {
       ((e.DEFAULT = 'DEFAULT'),
         (e.LINE = 'LINE'),
@@ -1623,12 +1625,12 @@
         (e.SEMI_CIRCULAR_GAUGE = 'SEMI_CIRCULAR_GAUGE'),
         (e.CIRCULAR_GAUGE = 'CIRCULAR_GAUGE'),
         (e.DIAL_GAUGE = 'DIAL_GAUGE'));
-    })(de || (de = {}));
-    class he {}
+    })(he || (he = {}));
     class ue {}
-    class pe extends ue {}
-    class ge {
-      constructor(e = de.DEFAULT) {
+    class pe {}
+    class ge extends pe {}
+    class ve {
+      constructor(e = he.DEFAULT) {
         this.type = e;
       }
       getDefaultConfiguration() {
@@ -1638,70 +1640,70 @@
         return {};
       }
       static getDefaultChartConfiguration() {
-        return new ge();
+        return new ve();
       }
-      static getLineChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
-        return new fe(e.lineStyle);
+      static getLineChartConfiguration(e = { lineStyle: ae.SMOOTH }) {
+        return new ye(e.lineStyle);
       }
       static getBarChartConfiguration() {
-        return new me();
-      }
-      static getLineAndBarChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
-        return new be(e.lineStyle);
-      }
-      static getPieChartConfiguration() {
         return new Ce();
       }
-      static getDonutChartConfiguration() {
+      static getLineAndBarChartConfiguration(e = { lineStyle: ae.SMOOTH }) {
+        return new fe(e.lineStyle);
+      }
+      static getPieChartConfiguration() {
         return new we();
       }
+      static getDonutChartConfiguration() {
+        return new xe();
+      }
       static getHorizontalGaugeChartConfiguration(e) {
-        return new Se(e.minValue, e.maxValue);
+        return new Le(e.minValue, e.maxValue);
       }
       static getSemiCircularGaugeChartConfiguration(e) {
-        return new ke(e.minValue, e.maxValue);
+        return new De(e.minValue, e.maxValue);
       }
       static getCircularGaugeChartConfiguration(e) {
-        return new Oe(e.minValue, e.maxValue);
+        return new Ae(e.minValue, e.maxValue);
       }
       static getDialGaugeChartConfiguration(e) {
-        return new De(e.minValue, e.maxValue, e.dialPoints);
-      }
-    }
-    class ve extends ge {
-      constructor(e = de.LINE, o) {
-        (super(e), (this.lineStyle = o), void 0 === this.lineStyle && (this.lineStyle = ne.SMOOTH));
+        return new Oe(e.minValue, e.maxValue, e.dialPoints);
       }
     }
     class be extends ve {
-      constructor(e) {
-        super(de.LINE_AND_BAR, e);
+      constructor(e = he.LINE, o) {
+        (super(e), (this.lineStyle = o), void 0 === this.lineStyle && (this.lineStyle = ae.SMOOTH));
       }
     }
-    class fe extends ve {
+    class fe extends be {
       constructor(e) {
-        super(de.LINE, e);
+        super(he.LINE_AND_BAR, e);
       }
     }
-    class ye extends ge {
+    class ye extends be {
+      constructor(e) {
+        super(he.LINE, e);
+      }
+    }
+    class me extends ve {
       constructor(e) {
         super(e);
       }
     }
-    class me extends ye {
+    class Ce extends me {
       constructor() {
-        super(de.BAR);
+        super(he.BAR);
       }
     }
-    class Ce extends ge {
+    class we extends ve {
       getSerieConfiguration(e) {
         return 'pie' !== e.type ? {} : { label: { show: !1, position: 'outside' }, labelLine: { show: !1 }, radius: ['0%', '95%'] };
       }
       constructor() {
-        super(de.PIE);
+        super(he.PIE);
       }
     }
-    class we extends ge {
+    class xe extends ve {
       getSerieConfiguration(e) {
         return 'pie' !== e.type
           ? {}
@@ -1713,17 +1715,17 @@
             };
       }
       constructor() {
-        super(de.DONUT);
+        super(he.DONUT);
       }
     }
-    class xe extends ge {
+    class Se extends ve {
       constructor(e) {
         super(e);
       }
     }
-    class Se extends xe {
+    class Le extends Se {
       constructor(e, o) {
-        (super(de.HORIZONTAL_GAUGE), (this.minValue = e), (this.maxValue = o));
+        (super(he.HORIZONTAL_GAUGE), (this.minValue = e), (this.maxValue = o));
       }
       getDefaultConfiguration() {
         return {
@@ -1756,13 +1758,13 @@
           : { pointer: { show: !1 }, barWidth: 32, showBackground: !0, backgroundStyle: { color: 'var(--bs-gray-500)' }, itemStyle: { barBorderWidth: 0 } };
       }
     }
-    class Le extends ge {
-      constructor(e = de.SEMI_CIRCULAR_GAUGE, o, t) {
+    class ke extends ve {
+      constructor(e = he.SEMI_CIRCULAR_GAUGE, o, t) {
         (super(e), (this.minValue = o), (this.maxValue = t));
       }
       getSerieConfiguration(e) {
         if ('gauge' !== e.type) return {};
-        const o = de.CIRCULAR_GAUGE === this.type;
+        const o = he.CIRCULAR_GAUGE === this.type;
         return {
           endAngle: o ? -270 : 0,
           startAngle: o ? 90 : 180,
@@ -1775,7 +1777,7 @@
             offsetCenter: [0, o ? 0 : -10],
             color: 'var(--bs-body-color, #000)',
             fontSize: 40,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 'bold',
           },
           progress: { show: !0, width: 32 },
@@ -1787,21 +1789,21 @@
             distance: -50,
             color: 'var(--bs-body-color, #000)',
             fontSize: 14,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 400,
           },
           axisLine: { roundCap: !1, lineStyle: { width: 32, color: [[1, 'var(--bs-light)']] } },
         };
       }
     }
-    class ke extends Le {
+    class De extends ke {
       constructor(e, o) {
-        super(de.SEMI_CIRCULAR_GAUGE, e, o);
+        super(he.SEMI_CIRCULAR_GAUGE, e, o);
       }
     }
-    class De extends Le {
+    class Oe extends ke {
       constructor(e, o, t) {
-        (super(de.DIAL_GAUGE, e, o),
+        (super(he.DIAL_GAUGE, e, o),
           (this.dialPoints = t),
           void 0 === e && t && t.length > 1 && (this.minValue = t[0].value),
           void 0 === o && t && t.length > 0 && (this.maxValue = t[t.length - 1].value));
@@ -1833,7 +1835,7 @@
             offsetCenter: [0, 30],
             color: 'var(--bs-body-color, #000)',
             fontSize: 40,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 'bold',
           },
           progress: { show: !1 },
@@ -1849,7 +1851,7 @@
             distance: -40,
             color: 'var(--bs-body-color, #000)',
             fontSize: 14,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 400,
             formatter: function (e) {
               const o = r.find((o) => e === o.value);
@@ -1872,12 +1874,12 @@
         });
       }
     }
-    class Oe extends Le {
+    class Ae extends ke {
       constructor(e, o) {
-        super(de.CIRCULAR_GAUGE, e, o);
+        super(he.CIRCULAR_GAUGE, e, o);
       }
     }
-    const Ae = le.getThemeManager;
+    const Ee = ce.getThemeManager;
     return o;
   })()
 );

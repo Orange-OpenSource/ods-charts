@@ -12,7 +12,7 @@ import { ODS_CHARTS_CONTEXT } from './_ouds-colors-css-variables';
 /**
  * Added for None or Boosted 4 themes
  */
-const BOOSTED5_VARIABLE = `
+const EXISTING_IN_BOOSTED5_VARIABLES = `
 .ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {
   color-scheme: light;
   --bs-blue: #4170d8;
@@ -100,12 +100,34 @@ const BOOSTED5_VARIABLE = `
 [data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {
     color: var(--bs-link-color);
 }
+    
+.ods-charts-context {
+  --bs-body-font-weight: 400;
+}
+`;
+
+/**
+ * Added for None theme
+ */
+const NONE_THEME_SPECIFIC_VARIABLES = `
+.ods-charts-context {
+  --bs-font-sans-serif:  "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+`;
+
+/**
+ * Added for Boosted 4 theme
+ */
+const BOOSTED4_THEME_SPECIFIC_VARIABLES = `
+.ods-charts-context {
+  --bs-font-sans-serif:  var(--font-family-sans-serif, "Helvetica Neue");
+}
 `;
 
 /**
  * Added for all themes
  */
-const NON_BOOSTED5_VARIABLE = `
+const ALL_THEMES_SPECIFIC_VARIABLES = `
 .ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"] {
   --ods-yellow-100: #fff6b6;
   --ods-yellow-200: #ffe45b;
@@ -315,22 +337,25 @@ const NON_BOOSTED5_VARIABLE = `
 
 export const ODS_CHARTS_CSS_VARIABLES: { [theme in ODSChartsCSSThemesNames]: string } = {
   BOOSTED4: `
-  ${BOOSTED5_VARIABLE}
-  ${NON_BOOSTED5_VARIABLE}
+  ${BOOSTED4_THEME_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
   `,
   BOOSTED5: `
-  ${NON_BOOSTED5_VARIABLE}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
   `,
   CUSTOM: `
-  ${BOOSTED5_VARIABLE}
-  ${NON_BOOSTED5_VARIABLE}
+  ${NONE_THEME_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
   `,
   NONE: `
-  ${BOOSTED5_VARIABLE}
-  ${NON_BOOSTED5_VARIABLE}
+  ${NONE_THEME_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
   `,
 };
