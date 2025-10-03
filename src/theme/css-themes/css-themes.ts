@@ -133,7 +133,9 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
         height: '12px',
       },
     },
-    odsChartsLegendLabel: {},
+    odsChartsLegendLabel: {
+      classes: ['fw-normal', 'small'],
+    },
   },
   popover: {
     odsChartsPopoverLine: { classes: ['text-nowrap'] },
@@ -186,7 +188,9 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
         height: '12px',
       },
     },
-    odsChartsLegendLabel: {},
+    odsChartsLegendLabel: {
+      classes: ['font-weight-normal', 'small'],
+    },
   },
   popover: {
     odsChartsPopoverColorHolder: {

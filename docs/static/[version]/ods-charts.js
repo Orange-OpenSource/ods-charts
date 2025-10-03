@@ -185,7 +185,7 @@
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'], styles: { opacity: '.25' } },
           odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
           odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'mr-1'], styles: { width: '12px', height: '12px' } },
-          odsChartsLegendLabel: {},
+          odsChartsLegendLabel: { classes: ['font-weight-normal', 'small'] },
         },
         popover: {
           odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'mr-1'] },
@@ -202,7 +202,7 @@
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
           odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
           odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'me-1'], styles: { width: '12px', height: '12px' } },
-          odsChartsLegendLabel: {},
+          odsChartsLegendLabel: { classes: ['fw-normal', 'small'] },
         },
         popover: {
           odsChartsPopoverLine: { classes: ['text-nowrap'] },
@@ -290,7 +290,7 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-legends-none-css'),
             (e.textContent =
-              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height 24px\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
+              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
             document.head.appendChild(e));
         }
         if (e && e.legend && e.legend.orient) for (const o of this.legendHolders) o.orientation || (o.orientation = e.legend.orient);
