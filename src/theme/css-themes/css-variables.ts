@@ -6,8 +6,8 @@
 // This software is distributed under the MIT license.
 //
 
-import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
-import { ODS_CHARTS_CONTEXT } from './_ouds-colors-css-variables';
+import { ODSChartsCSSThemesNames } from './css-themes';
+import { ODS_CHARTS_CONTEXT } from '../colors/_ouds-colors-css-variables';
 
 /**
  * Added for None or Boosted 4 themes
@@ -122,6 +122,55 @@ const BOOSTED4_THEME_SPECIFIC_VARIABLES = `
 .ods-charts-context {
   --bs-font-sans-serif:  var(--font-family-sans-serif, "Helvetica Neue");
 }
+
+.ods-charts-context .popover {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color-subtle);
+}
+
+.ods-charts-context .popover .popover-header {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  padding-left: var(--ods-popover-header-padding-x, 9px);
+  padding-right: var(--ods-popover-header-padding-x, 9px);
+  padding-top: var(--ods-popover-header-padding-top, 5px);
+  padding-bottom: var(--ods-popover-header-padding-bottom, 7px);
+  font-size: var(--ods-popover-header-font-size, 14px);
+  line-height: var(--ods-popover-header-line-height, 1.11);
+  border:none;
+}
+
+.ods-charts-context .popover .popover-body {
+  color: var(--bs-body-color);
+  padding-left: var(--ods-popover-body-padding-x, 9px);
+  padding-right: var(--ods-popover-body-padding-x, 9px);
+  padding-top: var(--ods-popover-body-padding-top, 0);
+  padding-bottom: var(--ods-popover-body-padding-bottom, 7px);
+}
+
+.ods-charts-context .popover .arrow {
+  display: var(--ods-poppover-arrow-display, none);
+}
+`;
+
+export const BOOSTED5_THEME_SPECIFIC_VARIABLES = `
+.ods-charts-context .popover {
+  --bs-popover-header-padding-y: var(--ods-popover-header-padding-y, initial);
+  --bs-popover-header-padding-top: var(--ods-popover-header-padding-top, 5px);
+  --bs-popover-header-padding-x: var(--ods-popover-header-padding-x, 9px);
+  --bs-popover-header-padding-bottom: var(--ods-popover-header-padding-bottom, 7px);
+  --bs-popover-body-padding-x: var(--ods-popover-body-padding-x, 9px);
+  --bs-popover-body-padding-y: var(--ods-popover-body-padding-y, initial);
+  --bs-popover-body-padding-top: var(--ods-popover-body-padding-top, 0);
+  --bs-popover-body-padding-bottom: var(--ods-popover-body-padding-bottom, 7px);
+
+  --bs-popover-header-font-size: var(--ods-popover-header-font-size, 14px);
+  --bs-popover-header-line-height: var(--ods-popover-header-line-height, 1.11);
+}
+.ods-charts-context .popover .popover-arrow {
+  display: var(--ods-poppover-arrow-display, none);
+}  
 `;
 
 /**
@@ -333,29 +382,51 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
   --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E
 
 }
+
+.ods-charts-context {
+  --ods-popover-header-padding-y: initial;
+  --ods-popover-header-padding-top: 5px;
+  --ods-popover-header-padding-x: 9px;
+  --ods-popover-header-padding-bottom: 7px;
+  --ods-popover-body-padding-x: 9px;
+  --ods-popover-body-padding-y: initial;
+  --ods-popover-body-padding-top: 0;
+  --ods-popover-body-padding-bottom: 7px;
+  
+  --ods-popover-header-font-size: 14px;
+  --ods-popover-header-line-height: 1.11;
+  --ods-popover-header-font-weight: 700;
+
+  --ods-popover-body-font-size: 14px;
+  --ods-popover-body-line-height: 1.1;
+  --ods-popover-body-font-weight: 400;
+
+  --ods-poppover-arrow-display: none;
+}
 `;
 
 export const ODS_CHARTS_CSS_VARIABLES: { [theme in ODSChartsCSSThemesNames]: string } = {
   BOOSTED4: `
-  ${BOOSTED4_THEME_SPECIFIC_VARIABLES}
-  ${EXISTING_IN_BOOSTED5_VARIABLES}
-  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${BOOSTED4_THEME_SPECIFIC_VARIABLES}
   `,
   BOOSTED5: `
-  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
+  ${BOOSTED5_THEME_SPECIFIC_VARIABLES}
   `,
   CUSTOM: `
-  ${NONE_THEME_SPECIFIC_VARIABLES}
-  ${EXISTING_IN_BOOSTED5_VARIABLES}
-  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${NONE_THEME_SPECIFIC_VARIABLES}
   `,
   NONE: `
-  ${NONE_THEME_SPECIFIC_VARIABLES}
-  ${EXISTING_IN_BOOSTED5_VARIABLES}
-  ${ALL_THEMES_SPECIFIC_VARIABLES}
   ${ODS_CHARTS_CONTEXT}
+  ${ALL_THEMES_SPECIFIC_VARIABLES}
+  ${EXISTING_IN_BOOSTED5_VARIABLES}
+  ${NONE_THEME_SPECIFIC_VARIABLES}
   `,
 };

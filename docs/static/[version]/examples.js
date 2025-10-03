@@ -237,9 +237,9 @@ function generateConfigurator(id) {
 `;
 }
 
-function generateExampleDiv(id, direction) {
+function generateExampleDiv(id, direction, clientHeight = 0) {
   var div = document.getElementById(id);
-  const clientHeight = div.clientHeight;
+  clientHeight = clientHeight ? clientHeight : div.clientHeight;
 
   div.innerHTML = `<iframe style="width: 100%; ${clientHeight ? 'min-height: ' + clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>
   <div id="configurator_${id}">
@@ -286,9 +286,20 @@ async function displayChart(
   if (!mode) {
     mode = 'default';
   }
+
+  if (!cssThemeName) {
+    cssThemeName = 'BOOSTED5';
+  }
+  let iframe = document.querySelector(`#${id} iframe`);
+  let clientHeight = 0;
+  if (iframe) {
+    clientHeight = iframe.clientHeight;
+    iframe.remove();
+    refresh = false;
+  }
   if (!refresh) {
-    generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column');
-    let iframe = document.querySelector(`#${id} iframe`);
+    generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column', clientHeight);
+    iframe = document.querySelector(`#${id} iframe`);
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
@@ -298,7 +309,7 @@ async function displayChart(
     }
   }
 
-  let iframe = document.querySelector(`#${id} iframe`);
+  iframe = document.querySelector(`#${id} iframe`);
 
   if (initialOptions[id]) {
     options = initialOptions[id];
@@ -306,9 +317,6 @@ async function displayChart(
     initialOptions[id] = options;
   }
 
-  if (!cssThemeName) {
-    cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
-  }
   if (!rendererInput) {
     rendererInput = 'svg';
   }

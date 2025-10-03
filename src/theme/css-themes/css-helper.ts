@@ -8,7 +8,7 @@
 
 import { conditionalCloneDeepObject } from '../../tools/conditional-clone-deep-object';
 import { isVarArray, isVarObject } from '../../tools/merge-objects';
-import { ODS_CHARTS_CSS_VARIABLES } from '../colors/colors-css-variables';
+import { ODS_CHARTS_CSS_VARIABLES } from '../css-themes/css-variables';
 import { ODSChartsMode } from '../ods-chart-theme';
 import { ODSChartsCSSThemesNames } from './css-themes';
 

@@ -207,7 +207,7 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
         height: '12px',
       },
     },
-    odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+    odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small', 'm-0'] },
     odsChartsPopoverLabel: { classes: ['mr-2', 'flex-grow-1'] },
     odsChartsPopoverValue: { classes: ['font-weight-bold'] },
   },
