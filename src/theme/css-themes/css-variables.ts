@@ -126,7 +126,7 @@ const BOOSTED4_THEME_SPECIFIC_VARIABLES = `
 .ods-charts-context .popover {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
-  border: 1px solid var(--bs-border-color-subtle);
+  border: 2px solid var(--bs-border-color-subtle);
 }
 
 .ods-charts-context .popover .popover-header {
