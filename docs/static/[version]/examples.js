@@ -293,9 +293,12 @@ async function displayChart(
   let iframe = document.querySelector(`#${id} iframe`);
   let clientHeight = 0;
   if (iframe) {
-    clientHeight = iframe.clientHeight;
-    iframe.remove();
-    refresh = false;
+    const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
+    if (actualTheme !== cssThemeName) {
+      clientHeight = iframe.clientHeight;
+      iframe.remove();
+      refresh = false;
+    }
   }
   if (!refresh) {
     generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column', clientHeight);
