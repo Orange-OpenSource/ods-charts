@@ -241,11 +241,17 @@ function generateExampleDiv(id, direction, clientHeight = 0) {
   var div = document.getElementById(id);
   clientHeight = clientHeight ? clientHeight : div.clientHeight;
 
-  div.innerHTML = `<iframe style="width: 100%; ${clientHeight ? 'min-height: ' + clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>
+  let iframeHolder = document.getElementById('iframe_' + id);
+  if (!iframeHolder) {
+    div.innerHTML = `<div id="iframe_${id}"></div>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
 `;
+    iframeHolder = document.getElementById('iframe_' + id);
+  }
+
+  iframeHolder.innerHTML = `<iframe style="width: 100%; ${clientHeight ? 'min-height: ' + clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>`;
 
   let iframeDocument = div.querySelector('iframe').contentDocument;
   // Firefox approach
@@ -293,6 +299,7 @@ async function displayChart(
   let iframe = document.querySelector(`#${id} iframe`);
   let clientHeight = 0;
   if (iframe) {
+    // In case
     const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
     if (actualTheme !== cssThemeName) {
       clientHeight = iframe.clientHeight;
@@ -311,8 +318,6 @@ async function displayChart(
       iframe.contentDocument.body.setAttribute('data-bs-theme', document.querySelector('[data-bs-theme]').getAttribute('data-bs-theme'));
     }
   }
-
-  iframe = document.querySelector(`#${id} iframe`);
 
   if (initialOptions[id]) {
     options = initialOptions[id];
