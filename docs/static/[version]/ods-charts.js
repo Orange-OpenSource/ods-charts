@@ -944,9 +944,11 @@
         var e;
         if (!this._computedStyleInitialized) {
           if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && B[this.cssThemeName]) {
+            document.querySelectorAll('style[data-ods-charts-type="theme"]').forEach((e) => e.remove());
             const o = document.createElement('style');
             ((o.textContent = B[this.cssThemeName]),
               (o.id = 'ods-charts-style-' + this.cssThemeName),
+              o.setAttribute('data-ods-charts-type', 'theme'),
               null === (e = document.querySelector('head')) || void 0 === e || e.append(o));
           }
           return ((this._computedStyleInitialized = !0), !0);
