@@ -9,6 +9,7 @@
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
 import { mergeObjects, isVarArray } from '../../tools/merge-objects';
 import {
+  DEFAULT_ARROW_SIZE,
   ODSChartsPopoverAxisPointer,
   ODSChartsPopoverConfig,
   ODSChartsPopoverDefinition,
@@ -54,7 +55,7 @@ const DEFAULT_TEMPLATE_CSS = `
 }
 
 .ods-charts-popover .ods-charts-popover-arrow  {
-  display: var(--ods-poppover-arrow-display, inherit);
+  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
   position: absolute;
   bottom: -8px;
   width: 20px;
@@ -331,14 +332,14 @@ export class ODSChartsPopover {
                 left: mousePosition[0] - containerSize.contentSize[0] / 2,
               };
 
+              const arrowSize: number = DEFAULT_ARROW_SIZE;
               if (dataOptions?.tooltip?.confine) {
-                const arrowSize: number = 10;
                 const displayTooltipOnTop: boolean = mousePosition[1] > containerSize.contentSize[1];
                 let tooltipLeftPosition: number;
 
                 tooltipPosition[['top', 'bottom'][+displayTooltipOnTop]] = displayTooltipOnTop
-                  ? containerSize.viewSize[1] - mousePosition[1] + 10
-                  : mousePosition[1] + 10;
+                  ? containerSize.viewSize[1] - mousePosition[1] + arrowSize
+                  : mousePosition[1] + arrowSize;
 
                 if (mousePosition[0] > containerSize.viewSize[0] - containerSize.contentSize[0] / 2) {
                   tooltipLeftPosition = Math.min(
@@ -357,7 +358,7 @@ export class ODSChartsPopover {
                   this.tooltipStyle += ' top: -8px; transform: scaleY(-1);';
                 }
               } else {
-                tooltipPosition['top'] = mousePosition[1] - containerSize.contentSize[1] - 10;
+                tooltipPosition['top'] = mousePosition[1] - containerSize.contentSize[1] - arrowSize;
               }
 
               return tooltipPosition;

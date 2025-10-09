@@ -8,6 +8,7 @@
 
 import { ODSChartsCSSThemesNames } from './css-themes';
 import { ODS_CHARTS_CONTEXT } from '../colors/_ouds-colors-css-variables';
+import { DEFAULT_ARROW_SIZE } from '../popover/ods-chart-popover-definitions';
 
 /**
  * Added for None or Boosted 4 themes
@@ -150,7 +151,7 @@ const BOOSTED4_THEME_SPECIFIC_VARIABLES = `
 }
 
 .ods-charts-context .popover .arrow {
-  display: var(--ods-poppover-arrow-display, inherit);
+  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
 }
 
 .ods-charts-context .popover-header::before {
@@ -193,7 +194,7 @@ export const BOOSTED5_THEME_SPECIFIC_VARIABLES = `
   --bs-popover-header-line-height: var(--ods-popover-header-line-height, 1.11);
 }
 .ods-charts-context .popover .popover-arrow {
-  display: var(--ods-poppover-arrow-display, inherit);
+  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
 }  
 `;
 
@@ -425,7 +426,7 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
   --ods-popover-body-line-height: 1.1;
   --ods-popover-body-font-weight: 400;
 
-  --ods-poppover-arrow-display: inherit;
+  --ods-poppover-arrow-display: ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'};
 }
 `;
 

@@ -11,6 +11,8 @@ import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
 import { ODSChartsMode } from '../ods-chart-theme';
 declare var boosted: any;
 
+export const DEFAULT_ARROW_SIZE: number = 0; // in px. Set to 0 to disable arrow
+
 export class ODSChartsPopoverManager {
   public dispose: () => void = undefined as any;
   public show: () => void = undefined as any;
@@ -222,7 +224,7 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
     mode: ODSChartsMode
   ) => ODSChartsPopoverManager | undefined = this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
-  public tooltipMarging = 15;
+  public tooltipMarging = 25;
 
   private _getOrCreatePopupInstance(
     selector: string,
