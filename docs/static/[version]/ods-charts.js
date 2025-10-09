@@ -348,31 +348,10 @@
             : l && (l.legends.labels.push(a.labels[o]), l.legends.names.push(a.names[o]), l.legends.index.push(o));
         }
         e.legend.show = !1;
-        for (const s of Object.keys(i)) {
-          if ((this.generateHandler(s, t), !document.querySelector(s))) throw new Error(`Can't find legend holder using the selector ${s}`);
-          document.querySelector(s).innerHTML = this.generateLegend(
-            s,
-            o,
-            i[s].legends,
-            t,
-            n,
-            i[s].orientation,
-            e.legend && e.legend.formatter ? e.legend.formatter : void 0
-          );
+        for (const e of Object.keys(i)) {
+          if ((this.generateHandler(e, t), !document.querySelector(e))) throw new Error(`Can't find legend holder using the selector ${e}`);
+          document.querySelector(e).innerHTML = this.generateLegend(e, o, i[e].legends, t, n, i[e].orientation, i[e].postItemContent);
         }
-      }
-      getLegendName(e, o) {
-        let t = e;
-        try {
-          t = o ? o(e) : e;
-        } catch (o) {
-          console.error(`Error while formatting legend name ${e}: ${o}`);
-        }
-        return (function (e) {
-          if (!e) return '';
-          const o = document.createElement('div');
-          return ((o.textContent = e), o.innerHTML);
-        })(t);
       }
       generateLegend(e, o, t, s, n, a = 'horizontal', i) {
         var l, c, d, h, p, u, g, v;
@@ -383,9 +362,15 @@
           .map((n, a) => {
             var l, c, d, h, p, u, g, v;
             let b = t.index[a] % o.length;
-            return `<a class="ods-charts-legend-link ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[b]}; ${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${this.getLegendName(n, i)}</label>\n  </a>`;
+            const f = `<a class="ods-charts-legend-link ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[b]}; ${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`,
+              y = a === ((null == t ? void 0 : t.labels.length) || 0) - 1,
+              m = this.getCustomLegendContent(n, i, y);
+            return (console.log(f + m), f + m);
           })
           .join('\n    ')}\n    </div>\n    </div>`;
+      }
+      getCustomLegendContent(e, o, t = !1) {
+        return o ? ('function' == typeof o ? o(e) : 'string' == typeof o ? (t ? o : '') : ('object' == typeof o && o[e]) || '') : '';
       }
       generateHandler(e, o) {
         (window.ods_chart_legend_switchLegend || (window.ods_chart_legend_switchLegend = {}),
@@ -1645,8 +1630,8 @@
       }
     }
     class pe {
-      constructor(e, o, t) {
-        ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t));
+      constructor(e, o, t, s) {
+        ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t), (this.postItemContent = s));
       }
     }
     var ue;

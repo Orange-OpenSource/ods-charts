@@ -18,6 +18,17 @@
  *    { legendHolderSelector: '#line_legend' }]
  * );
  * ```
+ *
+ * Example with postItemContent:
+ * ```
+ * themeManager.externalizeLegends(
+ *   myChart,
+ *   [{ legendHolderSelector: '#legend_with_custom_content',
+ *      seriesRef: ['sales'],
+ *      orientation: 'horizontal',
+ *      postItemContent: '<div class="custom-legend-footer">Additional information</div>' }]
+ * );
+ * ```
  */
 export class ODSChartsLegendHolderDefinition {
   constructor(
@@ -36,6 +47,40 @@ export class ODSChartsLegendHolderDefinition {
      * The reference can be the series name, the series label or simply the stack name in the case of stacked bars.
      * If `seriesRef` is absent, this container will be the default container for non-referenced legends.
      */
-    public seriesRef?: string[]
+    public seriesRef?: string[],
+    /**
+     * This option defines HTML content that will be displayed after the legend items.
+     * It can be:
+     * - A string containing HTML content (applied to all legends)
+     * - A function that receives the legend label and returns custom HTML content for that specific legend
+     * - An object mapping legend labels to their custom HTML content
+     *
+     * Example with static content:
+     * ```
+     * postItemContent: '<div class="custom-footer">Additional info</div>'
+     * ```
+     *
+     * Example with dynamic content based on legend label:
+     * ```
+     * postItemContent: (legendLabel) => {
+     *   if (legendLabel === 'Sales') {
+     *     return '<div class="sales-note">Revenue data includes taxes</div>';
+     *   }
+     *   if (legendLabel === 'Profit') {
+     *     return '<div class="profit-note">Net profit after adjustments</div>';
+     *   }
+     *   return '';
+     * }
+     * ```
+     *
+     * Example with object mapping:
+     * ```
+     * postItemContent: {
+     *   'Sales': '<div class="sales-note">Revenue data includes taxes</div>',
+     *   'Profit': '<div class="profit-note">Net profit after adjustments</div>'
+     * }
+     * ```
+     */
+    public postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string }
   ) {}
 }

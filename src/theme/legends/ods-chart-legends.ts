@@ -307,7 +307,8 @@ export class ODSChartsLegends {
         cssTheme,
         mode,
         legendHolders[legendHolderSelector].orientation,
-        dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined
+        dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined,
+        legendHolders[legendHolderSelector].postItemContent
       );
     }
   }
@@ -329,7 +330,8 @@ export class ODSChartsLegends {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
-    formatter?: (name: string) => string
+    formatter?: (name: string) => string,
+    postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string }
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -339,7 +341,7 @@ export class ODSChartsLegends {
     >
     ${(legends ? legends.labels : []).map((legendLabel: string, indexInHolder: number) => {
       let colorIndex = legends.index[indexInHolder] % colors.length;
-      return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
+      const legendHtml = `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
       style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
       href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
         legends.names[indexInHolder]
@@ -355,10 +357,47 @@ export class ODSChartsLegends {
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
     role="button">${this.getLegendName(legendLabel, formatter)}</label>
   </a>`;
+
+      const isLastLegend = indexInHolder === (legends?.labels.length || 0) - 1;
+      const customContent = this.getCustomLegendContent(legendLabel, postItemContent, isLastLegend);
+      console.log(legendHtml + customContent);
+      return legendHtml + customContent;
     }).join(`
     `)}
     </div>
     </div>`;
+  }
+
+  /**
+   * Generates custom content for a legend item based on the provided postItemContent configuration.
+   * @param legendLabel The label of the legend item
+   * @param postItemContent The configuration for custom content (string, function, or Map)
+   * @param isLastLegend Indicates if this is the last legend item (used for string type content)
+   * @returns The generated HTML content string
+   */
+  private getCustomLegendContent(
+    legendLabel: string,
+    postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string },
+    isLastLegend: boolean = false
+  ): string {
+    if (!postItemContent) {
+      return '';
+    }
+
+    if (typeof postItemContent === 'function') {
+      return postItemContent(legendLabel);
+    }
+
+    if (typeof postItemContent === 'string') {
+      // For string type, we add the content only after the last legend
+      return isLastLegend ? postItemContent : '';
+    }
+
+    if (typeof postItemContent === 'object') {
+      return postItemContent[legendLabel] || '';
+    }
+
+    return '';
   }
 
   private generateHandler(legendHolderSelector: string, cssTheme: ODSChartsCSSThemeDefinition) {
