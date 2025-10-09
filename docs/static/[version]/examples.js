@@ -295,16 +295,17 @@ async function displayChart(
   if (!cssThemeName) {
     cssThemeName = 'BOOSTED5';
   }
+  let generateIFrame = !refresh;
   let iframe = document.querySelector(`#${id} iframe`);
   if (iframe) {
     // In case of theme change, we need to recreate the iframe to avoid javascript and css themes cohabitation
     const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
     if (actualTheme !== cssThemeName) {
       iframe.remove();
-      refresh = false;
+      generateIFrame = true;
     }
   }
-  if (!refresh) {
+  if (generateIFrame) {
     generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column');
     iframe = document.querySelector(`#${id} iframe`);
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
