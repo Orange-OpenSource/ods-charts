@@ -95,9 +95,6 @@ const DEFAULT_NONE_CSS = `
 .ods-charts-no-css-lib .ods-charts-popover-color-holder {
   display: inline-block;
 }
-.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {
-  border: 1px solid var(--bs-popover-border-color, #666);
-}
 
 .ods-charts-no-css-lib .ods-charts-popover-color {
   margin-right: 5px;
@@ -131,10 +128,6 @@ const DEFAULT_NONE_CSS = `
 
 .ods-charts-no-css-lib .ods-charts-popover-value {
   font-weight: 700;
-}
-
-.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {
-  color: var(--bs-body-color, #fff);
 }
 `;
 
