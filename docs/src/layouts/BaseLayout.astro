@@ -3,14 +3,16 @@ import Head from '@components/Head.astro'
 import Header from '@components/Header.astro'
 import Footer from '@components/Footer.astro'
 import Scripts from '@components/Scripts.astro'
+import BoostedScript from "@components/BoostedScript.astro"
 
 interface Props {
   data: {
     title?: string
   }
+  removeBoosted?: boolean
 }
 
-const { data } = Astro.props
+const { data, removeBoosted } = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -27,6 +29,7 @@ const { data } = Astro.props
     </main>
 
     <Footer />
+    {!removeBoosted && <BoostedScript />}
     <Scripts />
     <slot name="scripts" />
   </body>
