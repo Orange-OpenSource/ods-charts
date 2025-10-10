@@ -423,7 +423,7 @@ class ODSChartsCircularGaugeType extends ODSChartsConfiguration {
         offsetCenter: [0, circular ? 0 : -10],
         color: 'var(--bs-body-color, #000)',
         fontSize: 40,
-        fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+        fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
         fontWeight: 'bold',
       },
       progress: {
@@ -444,7 +444,7 @@ class ODSChartsCircularGaugeType extends ODSChartsConfiguration {
         distance: -50,
         color: 'var(--bs-body-color, #000)',
         fontSize: 14,
-        fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+        fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
         fontWeight: 400,
       },
       axisLine: {
@@ -548,7 +548,7 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
         offsetCenter: [0, 30],
         color: 'var(--bs-body-color, #000)',
         fontSize: 40,
-        fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+        fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
         fontWeight: 'bold',
       },
       progress: {
@@ -568,7 +568,7 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
         distance: -40,
         color: 'var(--bs-body-color, #000)',
         fontSize: 14,
-        fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+        fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
         fontWeight: 400,
         formatter: function (value: number) {
           const labelValue = dialPoints.find((part) => value === part.value);

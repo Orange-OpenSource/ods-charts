@@ -11,6 +11,8 @@ import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
 import { ODSChartsMode } from '../ods-chart-theme';
 declare var boosted: any;
 
+export const DEFAULT_ARROW_SIZE: number = 0; // in px. Set to 0 to disable arrow
+
 export class ODSChartsPopoverManager {
   public dispose: () => void = undefined as any;
   public show: () => void = undefined as any;
@@ -296,7 +298,7 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
   public tooltipDelay = 0;
   public tooltipMarging = 10;
 
-  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean, _mode: ODSChartsMode) {
+  private _getOrCreatePopupInstance(selector: string, title: string, htmlContent: string, enterable: boolean, mode: ODSChartsMode) {
     const elt: any = document.querySelector(selector);
     const whiteList = cloneDeepObject(boosted.Tooltip.Default.whiteList);
     whiteList.span = ['style', 'class'];
@@ -314,12 +316,23 @@ class BOOSTED4_Definition extends ODSChartsPopoverDefinitionWithRenderer {
         elt.chartPopover.dispose();
       } catch (error) {}
     }
+    let container: HTMLElement = document.getElementById('ods-chart-popover-container-' + mode) as HTMLElement;
+    if (!container) {
+      container = document.createElement('div');
+      if ([ODSChartsMode.DARK, ODSChartsMode.LIGHT].includes(mode)) {
+        container.setAttribute('data-bs-theme', mode);
+      }
+      container.id = 'ods-chart-popover-container-' + mode;
+      container.classList.add('ods-charts-context');
+
+      document.querySelector('body')?.append(container);
+    }
     const popover = new boosted.Popover(elt, {
       whiteList: whiteList,
       html: true,
       trigger: 'click',
       placement: 'top',
-      container: 'body',
+      container: container,
       title: title,
       content: htmlContent,
       customClass: '',

@@ -8,7 +8,7 @@
 
 import { conditionalCloneDeepObject } from '../../tools/conditional-clone-deep-object';
 import { isVarArray, isVarObject } from '../../tools/merge-objects';
-import { ODS_CHARTS_CSS_VARIABLES } from '../colors/colors-css-variables';
+import { ODS_CHARTS_CSS_VARIABLES } from '../css-themes/css-variables';
 import { ODSChartsMode } from '../ods-chart-theme';
 import { ODSChartsCSSThemesNames } from './css-themes';
 
@@ -64,9 +64,12 @@ export class ODSChartsCssHelper {
   public initComputedStyle(): boolean {
     if (!this._computedStyleInitialized) {
       if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && ODS_CHARTS_CSS_VARIABLES[this.cssThemeName]) {
+        // clean any existing style previously inserted.
+        document.querySelectorAll('style[data-ods-charts-type="theme"]').forEach((el) => el.remove());
         const style = document.createElement('style');
         style.textContent = ODS_CHARTS_CSS_VARIABLES[this.cssThemeName];
         style.id = 'ods-charts-style-' + this.cssThemeName;
+        style.setAttribute('data-ods-charts-type', 'theme');
         document.querySelector('head')?.append(style);
       }
       this._computedStyleInitialized = true;

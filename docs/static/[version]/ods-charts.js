@@ -22,33 +22,34 @@
       o = {};
     (e.r(o),
       e.d(o, {
+        DEFAULT_ARROW_SIZE: () => y,
         ODSChartsCSSLegendsDefinition: () => a,
         ODSChartsCSSPopoverDefinition: () => i,
         ODSChartsCSSThemeDefinition: () => l,
         ODSChartsCSSThemes: () => c,
         ODSChartsCSSThemesNames: () => s,
-        ODSChartsColorsSet: () => re,
-        ODSChartsConfiguration: () => ge,
-        ODSChartsDialGaugeConfiguration: () => pe,
-        ODSChartsGaugeConfiguration: () => ue,
+        ODSChartsColorsSet: () => ie,
+        ODSChartsConfiguration: () => fe,
+        ODSChartsDialGaugeConfiguration: () => be,
+        ODSChartsGaugeConfiguration: () => ge,
         ODSChartsItemCSSDefinition: () => r,
         ODSChartsItemGroupCSSDefinition: () => n,
-        ODSChartsLegendHolderDefinition: () => ce,
-        ODSChartsLineConfiguration: () => he,
-        ODSChartsLineStyle: () => ne,
-        ODSChartsMode: () => ae,
+        ODSChartsLegendHolderDefinition: () => pe,
+        ODSChartsLineConfiguration: () => ve,
+        ODSChartsLineStyle: () => le,
+        ODSChartsMode: () => ce,
         ODSChartsPopoverAxisPointer: () => S,
-        ODSChartsPopoverConfig: () => L,
-        ODSChartsPopoverDefinition: () => C,
+        ODSChartsPopoverConfig: () => k,
+        ODSChartsPopoverDefinition: () => x,
         ODSChartsPopoverDefinitionWithRenderer: () => w,
-        ODSChartsPopoverItem: () => m,
-        ODSChartsPopoverManager: () => y,
-        ODSChartsPopoverManagers: () => k,
-        ODSChartsPopoverTooltipTrigger: () => x,
-        ODSChartsTheme: () => le,
-        ODSChartsTypes: () => de,
+        ODSChartsPopoverItem: () => C,
+        ODSChartsPopoverManager: () => m,
+        ODSChartsPopoverManagers: () => D,
+        ODSChartsPopoverTooltipTrigger: () => L,
+        ODSChartsTheme: () => he,
+        ODSChartsTypes: () => ue,
         ODS_PROJECT: () => t,
-        getThemeManager: () => Ae,
+        getThemeManager: () => Pe,
       }));
     const t = {
       color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
@@ -185,11 +186,15 @@
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'], styles: { opacity: '.25' } },
           odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
           odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'mr-1'], styles: { width: '12px', height: '12px' } },
-          odsChartsLegendLabel: {},
+          odsChartsLegendLabel: { classes: ['font-weight-normal', 'small'] },
         },
         popover: {
+          odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
           odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'mr-1'] },
           odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
+          odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small', 'm-0'] },
+          odsChartsPopoverLabel: { classes: ['mr-2', 'flex-grow-1'] },
+          odsChartsPopoverValue: { classes: ['font-weight-bold'] },
         },
       },
       BOOSTED5: {
@@ -202,12 +207,15 @@
           odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
           odsChartsLegendColorHolder: { classes: ['d-inline-block'] },
           odsChartsLegendColor: { classes: ['d-block', 'position-relative', 'me-1'], styles: { width: '12px', height: '12px' } },
-          odsChartsLegendLabel: {},
+          odsChartsLegendLabel: { classes: ['fw-normal', 'small'] },
         },
         popover: {
-          odsChartsPopoverLine: { classes: ['text-nowrap'] },
+          odsChartsPopoverLine: { classes: ['text-nowrap', 'd-flex', 'align-items-center', 'mb-1'] },
           odsChartsPopoverColorHolder: { classes: ['d-inline-block', 'me-1'] },
           odsChartsPopoverColor: { classes: ['d-block', 'position-relative'], styles: { width: '12px', height: '12px' } },
+          odsChartsPopoverText: { classes: ['flex-grow-1', 'd-flex', 'small'] },
+          odsChartsPopoverLabel: { classes: ['me-2', 'flex-grow-1'] },
+          odsChartsPopoverValue: { classes: ['fw-bold'] },
         },
       },
       NONE: {
@@ -227,18 +235,18 @@
     function h(e) {
       return 'object' == typeof e && !d(e);
     }
-    function u(e, o, ...t) {
-      if (t && d(t) && 0 < t.length) return u(u(e, o), t[0], ...t.slice(1));
-      if ((h(e) && h(o)) || (d(e) && d(o))) for (const t of Object.keys(o)) (h(e[t]) && h(o[t])) || (d(e[t]) && d(o[t])) ? u(e[t], o[t]) : (e[t] = o[t]);
+    function p(e, o, ...t) {
+      if (t && d(t) && 0 < t.length) return p(p(e, o), t[0], ...t.slice(1));
+      if ((h(e) && h(o)) || (d(e) && d(o))) for (const t of Object.keys(o)) (h(e[t]) && h(o[t])) || (d(e[t]) && d(o[t])) ? p(e[t], o[t]) : (e[t] = o[t]);
       return e;
     }
-    class p {
+    class u {
       constructor(e, o) {
         ((this.echart = e), (this.legendHolders = o));
       }
       static addLegend(e, o) {
         const t = d(o) ? o : h(o) ? [o] : [{ legendHolderSelector: o }];
-        return new p(e, t);
+        return new u(e, t);
       }
       static getLegendData(e, o = !0) {
         let t,
@@ -290,11 +298,11 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-legends-none-css'),
             (e.textContent =
-              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height 24px\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
+              '.ods-charts-no-css-lib.ods-charts-legend-holder {\n  padding-top: 10px;\n  padding-bottom: 20px;\n  position: relative;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: flex-start;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-container-vertical {\n  flex-direction: column;\n}\n\n\n.ods-charts-no-css-lib .ods-charts-legend-container-horizontal {\n  margin-left: 30px;\n  margin-right: 30px;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-link {\n  text-decoration: none;\n  padding-bottom: 0.625rem;\n  margin-right: 10px;\n  margin-left: 10px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {\n  opacity: .25;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color-holder {\n  display: inline-block;\n}\n\n.ods-charts-no-css-lib .ods-charts-legend-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-legend-label {\n  cursor: pointer;\n  display: inline-block;\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 16px;\n}\n\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-gray-950, #141414);\n}\n[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {\n  background-color: var(--bs-white, #fff);\n}\n[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {\n  color: var(--bs-black, #000);\n}\n'),
             document.head.appendChild(e));
         }
         if (e && e.legend && e.legend.orient) for (const o of this.legendHolders) o.orientation || (o.orientation = e.legend.orient);
-        const a = p.getLegendData(e),
+        const a = u.getLegendData(e),
           i = {};
         let l;
         for (const e of this.legendHolders) {
@@ -331,15 +339,15 @@
         }
       }
       generateLegend(e, o, t, s, n, a = 'horizontal') {
-        var i, l, c, d, h, u, p, g;
-        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainerVertical) : r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerVertical) : r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
+        var i, l, c, d, h, p, u, v;
+        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainerVertical) : r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainerVertical) : r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
           ? t.labels
           : []
         )
           .map((n, a) => {
-            var i, l, c, d, h, u, p, g;
-            let v = t.index[a] % o.length;
-            return `<a class="ods-charts-legend-link ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[v]}; ${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`;
+            var i, l, c, d, h, p, u, v;
+            let g = t.index[a] % o.length;
+            return `<a class="ods-charts-legend-link ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[g]}; ${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`;
           })
           .join('\n    ')}\n    </div>\n    </div>`;
       }
@@ -370,12 +378,12 @@
           }));
       }
     }
-    class g {
+    class v {
       constructor(e, o) {
         ((this.echart = e), (this.chartId = o), (this.observer = void 0));
       }
       static addResizeManagement(e, o) {
-        return new g(e, o);
+        return new v(e, o);
       }
       get divElement() {
         let e;
@@ -386,14 +394,14 @@
         const e = this.divElement;
         e && ResizeObserver
           ? ((this.observer = new ResizeObserver(this.resizeChart.bind(this))), this.observer.observe(e))
-          : ((g.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', g.sizeListeners[this.chartId]));
+          : ((v.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', v.sizeListeners[this.chartId]));
       }
       removeListener() {
         try {
           const e = this.divElement;
           e && ResizeObserver
             ? this.observer && (this.observer.unobserve(e), (this.observer = void 0))
-            : g.sizeListeners[this.chartId] && (window.removeEventListener('resize', g.sizeListeners[this.chartId]), delete g.sizeListeners[this.chartId]);
+            : v.sizeListeners[this.chartId] && (window.removeEventListener('resize', v.sizeListeners[this.chartId]), delete v.sizeListeners[this.chartId]);
         } catch (e) {}
       }
       resizeChart() {
@@ -411,14 +419,14 @@
         }
       }
     }
-    function v(e) {
+    function g(e) {
       var o = 0;
       if (('string' != typeof e && (e = JSON.stringify(e)), 0 == e.length)) return '' + o;
       for (let t = 0; t < e.length; t++) ((o = (o << 5) - o + e.charCodeAt(t)), (o &= o));
       return '' + o;
     }
     function b(e) {
-      return 'string' == typeof e ? e : v(e);
+      return 'string' == typeof e ? e : g(e);
     }
     function f(e) {
       if (h(e)) {
@@ -433,19 +441,20 @@
       }
       return e;
     }
-    g.sizeListeners = {};
-    class y {
+    v.sizeListeners = {};
+    const y = 0;
+    class m {
       constructor() {
         ((this.dispose = void 0), (this.show = void 0));
       }
     }
-    class m {
+    class C {
       constructor() {
         ((this.seriesName = void 0), (this.markerColor = void 0));
       }
     }
-    class C {}
-    class w extends C {
+    class x {}
+    class w extends x {
       testIfMouseIsOverTooltip(e) {
         var o;
         try {
@@ -463,15 +472,15 @@
         return !1;
       }
     }
-    var S, x;
+    var S, L;
     (!(function (e) {
       ((e.none = 'none'), (e.shadow = 'shadow'), (e.line = 'line'), (e.cross = 'cross'));
     })(S || (S = {})),
       (function (e) {
         ((e.xAxis = 'xAxis'), (e.yAxis = 'yAxis'), (e.grid = 'grid'));
-      })(x || (x = {})));
-    class L {}
-    const k = {
+      })(L || (L = {})));
+    class k {}
+    const D = {
       BOOSTED5: new (class extends w {
         constructor() {
           (super(...arguments),
@@ -503,7 +512,7 @@
           return (
             i ||
               ((i = document.createElement('div')),
-              [ae.DARK, ae.LIGHT].includes(r) && i.setAttribute('data-bs-theme', r),
+              [ce.DARK, ce.LIGHT].includes(r) && i.setAttribute('data-bs-theme', r),
               (i.id = 'ods-chart-popover-container-' + r),
               i.classList.add('ods-charts-context'),
               null === (n = document.querySelector('body')) || void 0 === n || n.append(i)),
@@ -537,52 +546,52 @@
             (this.tooltipMarging = 10));
         }
         _getOrCreatePopupInstance(e, o, t, s, r) {
-          const n = document.querySelector(e),
-            a = f(boosted.Tooltip.Default.whiteList);
-          if (((a.span = ['style', 'class']), (a.div = ['class']), (a.label = ['class']), n && n.chartPopover))
+          var n;
+          const a = document.querySelector(e),
+            i = f(boosted.Tooltip.Default.whiteList);
+          if (((i.span = ['style', 'class']), (i.div = ['class']), (i.label = ['class']), a && a.chartPopover))
             try {
-              if (s && this.testIfMouseIsOverTooltip(n.chartPopover)) return;
-              if (n.chartPopover.config.title === o && n.chartPopover.config.content === t) return void n.chartPopover.update();
-              n.chartPopover.dispose();
+              if (s && this.testIfMouseIsOverTooltip(a.chartPopover)) return;
+              if (a.chartPopover.config.title === o && a.chartPopover.config.content === t) return void a.chartPopover.update();
+              a.chartPopover.dispose();
             } catch (e) {}
-          const i = new boosted.Popover(n, {
-            whiteList: a,
-            html: !0,
-            trigger: 'click',
-            placement: 'top',
-            container: 'body',
-            title: o,
-            content: t,
-            customClass: '',
-          });
+          let l = document.getElementById('ods-chart-popover-container-' + r);
+          l ||
+            ((l = document.createElement('div')),
+            [ce.DARK, ce.LIGHT].includes(r) && l.setAttribute('data-bs-theme', r),
+            (l.id = 'ods-chart-popover-container-' + r),
+            l.classList.add('ods-charts-context'),
+            null === (n = document.querySelector('body')) || void 0 === n || n.append(l));
+          const c = new boosted.Popover(a, { whiteList: i, html: !0, trigger: 'click', placement: 'top', container: l, title: o, content: t, customClass: '' });
           return (
-            (n.chartPopover = i),
+            (a.chartPopover = c),
             s ||
               window.setTimeout(() => {
                 try {
-                  n.chartPopover.tip.style.pointerEvents = 'none';
+                  a.chartPopover.tip.style.pointerEvents = 'none';
                 } catch (e) {}
               }),
-            i
+            c
           );
         }
       })(),
       NONE: {},
     };
-    var D;
-    function O(e) {
-      return e && (e.data || (e.type && Object.values(D).includes(e.type)));
+    var O;
+    function A(e) {
+      return e && (e.data || (e.type && Object.values(O).includes(e.type)));
     }
     !(function (e) {
       ((e.category = 'category'), (e.time = 'time'));
-    })(D || (D = {}));
-    class A {
+    })(O || (O = {}));
+    const E = `\n.ods-charts-popover {\n  margin: 0 !important;\n  padding: 0 !important;\n  border: none !important;\n  box-shadow: none !important;\n  background: none !important;\n}\n  \n.ods-charts-popover.ods-charts-enterable-false {\n  pointer-events: none !important;\n}\n\n.ods-charts-popover .ods-charts-popover-inner  {\n  display: inline-block;\n  background-color: var(--bs-body-bg, #fff);\n  color: var(--bs-body-color, #000);\n  border: 2px solid var(--bs-border-color-subtle, #ccc);  \n  padding-left: var(--ods-popover-body-padding-x, 9px);\n  padding-right: var(--ods-popover-body-padding-x, 9px);\n  padding-top: var(--ods-popover-header-padding-top, 5px);\n  padding-bottom: var(--ods-popover-body-padding-bottom, 7px);\n}\n\n.ods-charts-popover .ods-charts-popover-header {\n  color: var(--bs-body-color, #000);\n  font-size: var(--ods-popover-header-font-size, 14px);\n  font-weight: var(--ods-popover-header-font-weight, 700);\n  line-height: var(--ods-popover-header-line-height, 1.11);\n  padding-bottom:var(--ods-popover-header-padding-bottom, 5px);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow  {\n  display: var(--ods-poppover-arrow-display, ${0 == y ? 'none' : 'inherit'});\n  position: absolute;\n  bottom: -8px;\n  width: 20px;\n  height: 10px;\n  left: calc(50% - 10px);\n}\n\n\n.ods-charts-popover .ods-charts-popover-arrow::before {  \n  position: absolute;\n  display: block;\n  content: "";\n  border-color: transparent;\n  border-top-color: var(--bs-border-color-subtle, #ccc);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  border-style: solid;\n  top: 2px;\n  left: 0;\n}\n\n.ods-charts-popover .ods-charts-popover-arrow::after {\n  border-color: transparent;\n  border-top-color: var(--bs-body-bg, #fff);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  position: absolute;\n  display: block;\n  content: "";\n  border-style: solid;\n  top: 0;\n  left: 0;\n}\n`;
+    class T {
       constructor(e, o) {
-        ((this.popoverDefinition = e), (this.popoverConfig = o), (this.tooltipStyle = ''), (this.enterable = !1), (this.mode = ae.DEFAULT));
+        ((this.popoverDefinition = e), (this.popoverConfig = o), (this.tooltipStyle = ''), (this.enterable = !1), (this.mode = ce.DEFAULT));
       }
       static addPopoverManagement(e, o) {
         return (
-          (void 0 === e || (e.testAvailability && !e.testAvailability())) && (e = k.NONE),
+          (void 0 === e || (e.testAvailability && !e.testAvailability())) && (e = D.NONE),
           void 0 === o && (o = {}),
           void 0 === o.enabled && (o.enabled = !0),
           void 0 === o.axisPointer && (o.axisPointer = S.none),
@@ -595,12 +604,12 @@
               `If you choose a specific axisPointer like ${o.axisPointer}, the popup/tooltip content will be shared between series values (shared option forced to true)`
             ),
             (o.shared = !0)),
-          new A(e, o)
+          new T(e, o)
         );
       }
       getTooltipTrigger(e, o) {
         let t = 'cross' === this.popoverConfig.axisPointer ? 'grid' : this.popoverConfig.tooltipTrigger;
-        if (null == t) for (const o of ['xAxis', 'yAxis']) O(e[o]) && (t = t ? void 0 : o);
+        if (null == t) for (const o of ['xAxis', 'yAxis']) A(e[o]) && (t = t ? void 0 : o);
         if (null == t) for (const e of ['xAxis', 'yAxis']) o[e] && o[e].splitLine && o[e].splitLine.show && (t = t ? void 0 : e);
         if (null == t) for (const e of ['xAxis', 'yAxis']) o[e] && o[e].axisLine && o[e].axisLine.show && (t = t ? void 0 : e);
         if (null == t) for (const o of ['xAxis', 'yAxis']) e[o] && e[o].data && (t = t ? void 0 : o);
@@ -623,7 +632,7 @@
                         ? void 0
                         : e.value
                     : e.value[1],
-                r = u(f(e), { markerColor: e.color, itemValue: s, label: t || '' });
+                r = p(f(e), { markerColor: e.color, itemValue: s, label: t || '' });
               return (
                 void 0 !== r.itemValue &&
                   this.popoverDefinition &&
@@ -641,26 +650,26 @@
           let e = document.createElement('style');
           ((e.id = 'ods-chart-popover-none-css'),
             (e.textContent =
-              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  display: inline-block;\n  font-weight: 700;\n  font-size: 16px;\n  line-height: 24px;\n  color: var(--bs-body-color, #000000);\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
+              '\n.ods-charts-no-css-lib .ods-charts-popover-color-holder {\n  display: inline-block;\n}\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-color-holder {\n  border: 1px solid var(--bs-popover-border-color, #666);\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-color {\n  margin-right: 5px;\n  width: 12px;\n  height: 12px;\n  position: relative;\n  display: block;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-line {\n  display: flex;\n  margin-bottom: 5px;\n  white-space: nowrap;\n  align-items: center;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-text {\n  flex-grow: 1;\n  display: flex;\n  font-size: var(--ods-popover-body-font-size, 14px);\n  font-weight: var(--ods-popover-body-font-weight, 700);\n  line-height: var(--ods-popover-body-line-height, 1.11);\n  color: var(--bs-body-color, #000000);\n}\n\n\n.ods-charts-no-css-lib .ods-charts-popover-label {\n  margin-right: 10px;\n  flex-grow: 1;\n}\n\n.ods-charts-no-css-lib .ods-charts-popover-value {\n  font-weight: 700;\n}\n\n.ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {\n  color: var(--bs-body-color, #fff);\n}\n'),
             document.head.appendChild(e));
         }
         const h = {},
-          g = this.getTooltipTrigger(e, o);
-        let v;
+          v = this.getTooltipTrigger(e, o);
+        let g;
         this.enterable = !!e && !!e.tooltip && !!e.tooltip.enterable;
         try {
-          v = p.getLegendData(e, !1);
+          g = u.getLegendData(e, !1);
         } catch (e) {}
         if (this.popoverConfig.enabled) {
           if (
-            (u(h, { tooltip: { appendTo: 'body' }, [g]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
-            this.popoverConfig.tooltip || u(h, { tooltip: { triggerOn: 'click', alwaysShowContent: !1 } }),
+            (p(h, { tooltip: { appendTo: 'body' }, [v]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
+            this.popoverConfig.tooltip || p(h, { tooltip: { triggerOn: 'click', alwaysShowContent: !1 } }),
             this.popoverDefinition.getOrCreatePopupInstance
-              ? u(h, {
+              ? p(h, {
                   tooltip: {
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, v);
+                      const o = this.getTooltipElements(e, g);
                       if (o && o.tooltipElements.length > 0 && window.event)
                         try {
                           this.displayPopup(window.event, o, t, this.mode);
@@ -671,7 +680,7 @@
                     className: 'd-none',
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [g]: {
+                  [v]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -682,30 +691,30 @@
                     },
                   },
                 })
-              : u(h, {
+              : p(h, {
                   tooltip: {
                     position: (o, t, s, r, n) => {
                       var a;
                       let i = { left: o[0] - n.contentSize[0] / 2 };
+                      const l = y;
                       if (null === (a = null == e ? void 0 : e.tooltip) || void 0 === a ? void 0 : a.confine) {
-                        const e = 10,
-                          t = o[1] > n.contentSize[1];
-                        let s;
-                        ((i[['top', 'bottom'][+t]] = t ? n.viewSize[1] - o[1] + 10 : o[1] + 10),
-                          (s =
+                        const e = o[1] > n.contentSize[1];
+                        let t;
+                        ((i[['top', 'bottom'][+e]] = e ? n.viewSize[1] - o[1] + l : o[1] + l),
+                          (t =
                             o[0] > n.viewSize[0] - n.contentSize[0] / 2
-                              ? Math.min(o[0] - n.viewSize[0] + n.contentSize[0] - e, n.contentSize[0] - 2 * e - 5)
+                              ? Math.min(o[0] - n.viewSize[0] + n.contentSize[0] - l, n.contentSize[0] - 2 * l - 5)
                               : o[0] < n.contentSize[0] / 2
-                                ? Math.max(o[0] - e, 5)
-                                : n.contentSize[0] / 2 - e),
-                          (this.tooltipStyle = `${s}px;`),
-                          t || (this.tooltipStyle += ' top: -8px; transform: scaleY(-1);'));
-                      } else i.top = o[1] - n.contentSize[1] - 10;
+                                ? Math.max(o[0] - l, 5)
+                                : n.contentSize[0] / 2 - l),
+                          (this.tooltipStyle = `${t}px;`),
+                          e || (this.tooltipStyle += ' top: -8px; transform: scaleY(-1);'));
+                      } else i.top = o[1] - n.contentSize[1] - l;
                       return i;
                     },
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, v);
+                      const o = this.getTooltipElements(e, g);
                       return o && o.tooltipElements.length > 0
                         ? new DOMParser().parseFromString(
                             this.popoverDefinition.getPopupTemplate
@@ -722,7 +731,7 @@
                     className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ${r.getClasses(null === (i = t.popover) || void 0 === i ? void 0 : i.odsChartsPopover)}`,
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [g]: {
+                  [v]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -743,29 +752,26 @@
             delete e.tooltip.formatter;
           }
           this.popoverConfig.shared || 'none' !== this.popoverConfig.axisPointer
-            ? u(h, { tooltip: { trigger: 'axis' } })
-            : u(h, { tooltip: { trigger: 'item' } });
-        } else u(h, { tooltip: { triggerOn: 'none' } });
-        u(o, h);
+            ? p(h, { tooltip: { trigger: 'axis' } })
+            : p(h, { tooltip: { trigger: 'item' } });
+        } else p(h, { tooltip: { triggerOn: 'none' } });
+        p(o, h);
       }
       getPopupContentLine(e, o, t) {
-        var s, n, a, i, l, c, d, h, u, p, g, v;
-        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverValue)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
+        var s, n, a, i, l, c, d, h, p, u, v, g;
+        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}" style="${r.getStyles(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
       }
       getPopupContent(e, o, t) {
         var s, n;
         return `\n    <div  class="ods-charts-popover-body-content ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverBodyContent)}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverBodyContent)}" >\n        ${e.map((e) => (this.popoverDefinition.getPopupContentLine ? this.popoverDefinition.getPopupContentLine(e) : this.getPopupContentLine(e, o, t))).join('')}\n    </div>\n    `;
       }
       getPopupTemplate(e, o, t) {
-        var s, n, a, i, l, c, d, h, u, p, g, v;
+        var s, n, a, i, l, c, d, h, p, u, v, g;
         if (!document.querySelector('#ods-chart-tooltip-default-template')) {
           let e = document.createElement('style');
-          ((e.id = 'ods-chart-tooltip-default-template'),
-            (e.textContent =
-              '\n.ods-charts-popover {\n  margin: 0 !important;\n  padding: 0 !important;\n  border: none !important;\n  box-shadow: none !important;\n  background: none !important;\n}\n  \n.ods-charts-popover.ods-charts-enterable-false {\n  pointer-events: none !important;\n}\n\n.ods-charts-popover .ods-charts-popover-inner  {\n  display: inline-block;\n  background-color: var(--bs-body-bg, #fff);\n  color: var(--bs-body-color, #000);\n  border: 2px solid var(--bs-border-color-subtle, #ccc);\n  padding: 20px 18px 20px 18px;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-inner {\n  background-color: var(--bs-gray-950, #141414);\n  color: var(--bs-white, #fff);\n  border: 2px solid var(--bs-gray-700, #666);\n} \n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-inner {\n  background-color: var(--bs-white, #fff);\n  color: var(--bs-black, #000);\n  border: 2px solid var(--bs-gray-500, #ccc);\n} \n\n.ods-charts-popover .ods-charts-popover-header {\n  color: var(--bs-body-color, #000);\n  font-size: 18px;\n  font-weight: 700;\n  padding-bottom:10px;\n}  \n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-header {\n  color: var(--bs-white, #fff);\n}\n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-header {\n  color: var(--bs-black, #000);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow  { \n  position: absolute;\n  bottom: -8px;\n  width: 20px;\n  height: 10px;\n  left: calc(50% - 10px);\n}\n\n\n.ods-charts-popover .ods-charts-popover-arrow::before {  \n  position: absolute;\n  display: block;\n  content: "";\n  border-color: transparent;\n  border-top-color: var(--bs-border-color-subtle, #ccc);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  border-style: solid;\n  top: 2px;\n  left: 0;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {\n  border-top-color: var(--bs-gray-700, #666);\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {\n  border-top-color: var(--bs-gray-500, #ccc);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow::after {\n  border-color: transparent;\n  border-top-color: var(--bs-body-bg, #fff);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  position: absolute;\n  display: block;\n  content: "";\n  border-style: solid;\n  top: 0;\n  left: 0;\n}\n.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::after{\n  border-top-color: var(--bs-gray-950, #141414);\n}\n.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-arrow::after{\n  border-top-color: var(--bs-white, #fff);\n}\n'),
-            document.head.appendChild(e));
+          ((e.id = 'ods-chart-tooltip-default-template'), (e.textContent = E), document.head.appendChild(e));
         }
-        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}" style="${r.getStyles(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverBody)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
+        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}" style="${r.getStyles(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
       }
       displayPopup(e, o, t, s) {
         if (0 !== this.popoverConfig.tooltipDelay) {
@@ -823,12 +829,12 @@
         }
       }
     }
-    class E {
+    class P {
       constructor(e, o) {
         ((this.echart = e), (this.redraw = o));
       }
       static addThemeObserver(e, o) {
-        return new E(e, o);
+        return new P(e, o);
       }
       get divElement() {
         let e;
@@ -866,44 +872,45 @@
         }
       }
     }
-    function T(e, o, t = ['string'], s = '', r = []) {
+    function q(e, o, t = ['string'], s = '', r = []) {
       if (t.includes(typeof e) && o(e)) r.push(s);
-      else if (d(e)) for (let n = 0; n < e.length; n++) T(e[n], o, t, s + '[' + n + ']', r);
-      else if (h(e)) for (const n of Object.keys(e)) T(e[n], o, t, ('' === s ? '' : s + '.') + n, r);
+      else if (d(e)) for (let n = 0; n < e.length; n++) q(e[n], o, t, s + '[' + n + ']', r);
+      else if (h(e)) for (const n of Object.keys(e)) q(e[n], o, t, ('' === s ? '' : s + '.') + n, r);
       return r;
     }
-    function P(e, o, t = '') {
+    function M(e, o, t = '') {
       if (o.find((e) => e.startsWith(t))) {
         if (h(e)) {
           const s = {};
-          for (const r of Object.keys(e)) s[r] = P(e[r], o, ('' === t ? '' : t + '.') + r);
+          for (const r of Object.keys(e)) s[r] = M(e[r], o, ('' === t ? '' : t + '.') + r);
           return s;
         }
         if (d(e)) {
           const s = [];
-          for (let r = 0; r < e.length; r++) s[r] = P(e[r], o, t + '[' + r + ']');
+          for (let r = 0; r < e.length; r++) s[r] = M(e[r], o, t + '[' + r + ']');
           return s;
         }
       }
       return e;
     }
-    function q(e, o, t = ['string']) {
-      const s = T(e, o, t);
-      return 0 < s.length ? P(e, s) : e;
+    function I(e, o, t = ['string']) {
+      const s = q(e, o, t);
+      return 0 < s.length ? M(e, s) : e;
     }
-    const M =
+    const F =
         '\n.ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light] {\n  color-scheme: light;\n  --ouds-charts-color-border: #ffffff;\n  --ouds-charts-color-border-contrast: #ffffff;\n  --ouds-charts-color-categorical-tier-1: #5b2f98;\n  --ouds-charts-color-categorical-tier-10: #009bf0;\n  --ouds-charts-color-categorical-tier-2: #3ba06e;\n  --ouds-charts-color-categorical-tier-3: #b20077;\n  --ouds-charts-color-categorical-tier-4: #a38200;\n  --ouds-charts-color-categorical-tier-5: #007abd;\n  --ouds-charts-color-categorical-tier-6: #8d60cd;\n  --ouds-charts-color-categorical-tier-7: #2e7b54;\n  --ouds-charts-color-categorical-tier-8: #e50099;\n  --ouds-charts-color-categorical-tier-9: #665100;\n  --ouds-charts-color-functional-info: #009bf0;\n  --ouds-charts-color-functional-negative: #db0002;\n  --ouds-charts-color-functional-positive: #17a02f;\n  --ouds-charts-color-functional-warning: #a38200;\n  --ouds-charts-color-gridlines: #cccccc;\n  --ouds-charts-color-highlight: #f15e00;\n  --ouds-charts-color-neutral: #8f8f8f;\n  --ouds-charts-color-sequential-accent-1-tint-100: #d2ecf9;\n  --ouds-charts-color-sequential-accent-1-tint-200: #a5daf3;\n  --ouds-charts-color-sequential-accent-1-tint-300: #79c7ec;\n  --ouds-charts-color-sequential-accent-1-tint-400: #4ab4e6;\n  --ouds-charts-color-sequential-accent-1-tint-500: #1fa2e0;\n  --ouds-charts-color-sequential-accent-1-tint-600: #1982b3;\n  --ouds-charts-color-sequential-accent-1-tint-700: #136186;\n  --ouds-charts-color-sequential-accent-1-tint-800: #0c415a;\n  --ouds-charts-color-sequential-accent-1-tint-900: #06202d;\n  --ouds-charts-color-sequential-accent-2-tint-100: #e5f5ed;\n  --ouds-charts-color-sequential-accent-2-tint-200: #c0e8d4;\n  --ouds-charts-color-sequential-accent-2-tint-300: #9bdaba;\n  --ouds-charts-color-sequential-accent-2-tint-400: #75cca1;\n  --ouds-charts-color-sequential-accent-2-tint-500: #50be87;\n  --ouds-charts-color-sequential-accent-2-tint-600: #3ba06e;\n  --ouds-charts-color-sequential-accent-2-tint-700: #2e7b54;\n  --ouds-charts-color-sequential-accent-2-tint-800: #20563b;\n  --ouds-charts-color-sequential-accent-2-tint-900: #123021;\n  --ouds-charts-color-sequential-accent-3-tint-100: #ffe5f6;\n  --ouds-charts-color-sequential-accent-3-tint-200: #ffb4e6;\n  --ouds-charts-color-sequential-accent-3-tint-300: #ff80d4;\n  --ouds-charts-color-sequential-accent-3-tint-400: #ff4dc3;\n  --ouds-charts-color-sequential-accent-3-tint-500: #ff1ab2;\n  --ouds-charts-color-sequential-accent-3-tint-600: #e50099;\n  --ouds-charts-color-sequential-accent-3-tint-700: #b20077;\n  --ouds-charts-color-sequential-accent-3-tint-800: #800055;\n  --ouds-charts-color-sequential-accent-3-tint-900: #4d0033;\n  --ouds-charts-color-sequential-accent-4-tint-100: #f1ecf9;\n  --ouds-charts-color-sequential-accent-4-tint-200: #e0d4f2;\n  --ouds-charts-color-sequential-accent-4-tint-300: #c5ade6;\n  --ouds-charts-color-sequential-accent-4-tint-400: #a885d8;\n  --ouds-charts-color-sequential-accent-4-tint-500: #8d60cd;\n  --ouds-charts-color-sequential-accent-4-tint-600: #5b2f98;\n  --ouds-charts-color-sequential-accent-4-tint-700: #432371;\n  --ouds-charts-color-sequential-accent-4-tint-800: #2c174a;\n  --ouds-charts-color-sequential-accent-4-tint-900: #150b23;\n  --ouds-charts-color-sequential-accent-5-tint-100: #fff0cc;\n  --ouds-charts-color-sequential-accent-5-tint-200: #ffe199;\n  --ouds-charts-color-sequential-accent-5-tint-300: #ffd266;\n  --ouds-charts-color-sequential-accent-5-tint-400: #ffc333;\n  --ouds-charts-color-sequential-accent-5-tint-500: #ffb400;\n  --ouds-charts-color-sequential-accent-5-tint-600: #cc9000;\n  --ouds-charts-color-sequential-accent-5-tint-700: #996c00;\n  --ouds-charts-color-sequential-accent-5-tint-800: #664800;\n  --ouds-charts-color-sequential-accent-5-tint-900: #332400;\n}\n\n[data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark] {\n  color-scheme: dark;\n  --ouds-charts-color-border: #141414;\n  --ouds-charts-color-border-contrast: #000000;\n  --ouds-charts-color-categorical-tier-1: #a885d8;\n  --ouds-charts-color-categorical-tier-10: #1fa2e0;\n  --ouds-charts-color-categorical-tier-2: #50be87;\n  --ouds-charts-color-categorical-tier-3: #ff80d4;\n  --ouds-charts-color-categorical-tier-4: #d6aa00;\n  --ouds-charts-color-categorical-tier-5: #79c7ec;\n  --ouds-charts-color-categorical-tier-6: #8d60cd;\n  --ouds-charts-color-categorical-tier-7: #9bdaba;\n  --ouds-charts-color-categorical-tier-8: #ff4dc3;\n  --ouds-charts-color-categorical-tier-9: #ffd266;\n  --ouds-charts-color-functional-info: #26b2ff;\n  --ouds-charts-color-functional-negative: #ff4d4e;\n  --ouds-charts-color-functional-positive: #1ecd3c;\n  --ouds-charts-color-functional-warning: #ffd000;\n  --ouds-charts-color-gridlines: #666666;\n  --ouds-charts-color-highlight: #ff7900;\n  --ouds-charts-color-neutral: #858585;\n  --ouds-charts-color-sequential-accent-1-tint-100: #06202d;\n  --ouds-charts-color-sequential-accent-1-tint-200: #0c415a;\n  --ouds-charts-color-sequential-accent-1-tint-300: #136186;\n  --ouds-charts-color-sequential-accent-1-tint-400: #1982b3;\n  --ouds-charts-color-sequential-accent-1-tint-500: #1fa2e0;\n  --ouds-charts-color-sequential-accent-1-tint-600: #4ab4e6;\n  --ouds-charts-color-sequential-accent-1-tint-700: #79c7ec;\n  --ouds-charts-color-sequential-accent-1-tint-800: #a5daf3;\n  --ouds-charts-color-sequential-accent-1-tint-900: #d2ecf9;\n  --ouds-charts-color-sequential-accent-2-tint-100: #123021;\n  --ouds-charts-color-sequential-accent-2-tint-200: #20563b;\n  --ouds-charts-color-sequential-accent-2-tint-300: #2e7b54;\n  --ouds-charts-color-sequential-accent-2-tint-400: #3ba06e;\n  --ouds-charts-color-sequential-accent-2-tint-500: #50be87;\n  --ouds-charts-color-sequential-accent-2-tint-600: #75cca1;\n  --ouds-charts-color-sequential-accent-2-tint-700: #9bdaba;\n  --ouds-charts-color-sequential-accent-2-tint-800: #c0e8d4;\n  --ouds-charts-color-sequential-accent-2-tint-900: #e5f5ed;\n  --ouds-charts-color-sequential-accent-3-tint-100: #4d0033;\n  --ouds-charts-color-sequential-accent-3-tint-200: #800055;\n  --ouds-charts-color-sequential-accent-3-tint-300: #b20077;\n  --ouds-charts-color-sequential-accent-3-tint-400: #e50099;\n  --ouds-charts-color-sequential-accent-3-tint-500: #ff1ab2;\n  --ouds-charts-color-sequential-accent-3-tint-600: #ff4dc3;\n  --ouds-charts-color-sequential-accent-3-tint-700: #ff80d4;\n  --ouds-charts-color-sequential-accent-3-tint-800: #ffb4e6;\n  --ouds-charts-color-sequential-accent-3-tint-900: #ffe5f6;\n  --ouds-charts-color-sequential-accent-4-tint-100: #150b23;\n  --ouds-charts-color-sequential-accent-4-tint-200: #2c174a;\n  --ouds-charts-color-sequential-accent-4-tint-300: #432371;\n  --ouds-charts-color-sequential-accent-4-tint-400: #5b2f98;\n  --ouds-charts-color-sequential-accent-4-tint-500: #8d60cd;\n  --ouds-charts-color-sequential-accent-4-tint-600: #a885d8;\n  --ouds-charts-color-sequential-accent-4-tint-700: #c5ade6;\n  --ouds-charts-color-sequential-accent-4-tint-800: #e0d4f2;\n  --ouds-charts-color-sequential-accent-4-tint-900: #f1ecf9;\n  --ouds-charts-color-sequential-accent-5-tint-100: #332400;\n  --ouds-charts-color-sequential-accent-5-tint-200: #664800;\n  --ouds-charts-color-sequential-accent-5-tint-300: #996c00;\n  --ouds-charts-color-sequential-accent-5-tint-400: #cc9000;\n  --ouds-charts-color-sequential-accent-5-tint-500: #ffb400;\n  --ouds-charts-color-sequential-accent-5-tint-600: #ffc333;\n  --ouds-charts-color-sequential-accent-5-tint-700: #ffd266;\n  --ouds-charts-color-sequential-accent-5-tint-800: #ffe199;\n  --ouds-charts-color-sequential-accent-5-tint-900: #fff0cc;\n}',
-      I =
-        '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {\n  color-scheme: light;\n  --bs-blue: #4170d8;\n  --bs-indigo: #a885d8;\n  --bs-purple: #a885d8;\n  --bs-pink: #ffb4e6;\n  --bs-red: #cd3c14;\n  --bs-orange: #f16e00;\n  --bs-yellow: #fc0;\n  --bs-green: #228722;\n  --bs-teal: #50be87;\n  --bs-cyan: #4bb4e6;\n  --bs-black: #000;\n  --bs-white: #fff;\n  --bs-gray: #999;\n  --bs-gray-dark: #595959;\n  --bs-gray-100: #fafafa;\n  --bs-gray-200: #f6f6f6;\n  --bs-gray-300: #eee;\n  --bs-gray-400: #ddd;\n  --bs-gray-500: #ccc;\n  --bs-gray-600: #999;\n  --bs-gray-700: #666;\n  --bs-gray-800: #595959;\n  --bs-gray-900: #333;\n  --bs-gray-950: #141414;\n  --bs-body-color: #000;\n  --bs-body-color-rgb: 0, 0, 0;\n  --bs-body-bg: #fff;\n  --bs-body-bg-rgb: 255, 255, 255;\n  --bs-link-color: #000;\n  --bs-border-width: 0.125rem;\n  --bs-border-color: #000;\n  --bs-border-color-subtle: #ccc;\n\n  --bs-secondary-color: #666;\n  --bs-secondary-bg: #eee;\n  --bs-primary: #f16e00;\n  --bs-secondary: #000;\n  --bs-success: #228722;\n  --bs-info: #4170d8;\n  --bs-warning: #fc0;\n  --bs-danger: #cd3c14;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 204, 204, 204;\n  --bs-tertiary-bg: #fafafa;\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {\n  color-scheme: dark;\n  --bs-body-color: #fff;\n  --bs-body-color-rgb: 255, 255, 255;\n  --bs-body-bg: #141414;\n  --bs-body-bg-rgb: 20, 20, 20;\n  --bs-link-color: #fff;\n  --bs-border-color: #fff;\n  --bs-border-color-subtle: #666;\n\n  --bs-secondary-color: #999;\n  --bs-secondary-bg: #333;\n  --bs-primary: #ff7900;\n  --bs-secondary: #fff;\n  --bs-success: #6c6;\n  --bs-info: #69f;\n  --bs-warning: #fc0;\n  --bs-danger: #f66;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 102, 102, 102;\n  --bs-tertiary-bg: #000;\n}\n\n\n[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme] {\n    color: var(--bs-body-color);\n    background-color: var(--bs-body-bg);\n}\n\n\n[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {\n    color: var(--bs-link-color);\n}\n',
-      F =
-        '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"] {\n  --ods-yellow-100: #fff6b6;\n  --ods-yellow-200: #ffe45b;\n  --ods-yellow-300: #ffd200;\n  --ods-yellow-400: #ffb400;\n  --ods-yellow-500: #b98f11;\n  --ods-yellow-600: #9d6e06;\n\n  --ods-yellow: var(--ods-yellow-300);\n\n  --ods-blue-100: #b5e8f7;\n  --ods-blue-200: #80ceef;\n  --ods-blue-300: #4bb4e6;\n  --ods-blue-400: #3e9dd6;\n  --ods-blue-500: #237ecA;\n  --ods-blue-600: #085ebd;\n\n  --ods-green-100: #B8EBD6;\n  --ods-green-200: #84D5AF;\n  --ods-green-300: #50BE87;\n  --ods-green-400: #27A971;\n  --ods-green-500: #198C51;\n  --ods-green-600: #0A6E31;\n\n  --ods-pink-100: #FFE8F7;\n  --ods-pink-200: #FFCEEF;\n  --ods-pink-300: #FFB4E6;\n  --ods-pink-400: #FF8AD4;\n  --ods-pink-500: #D573BB;\n  --ods-pink-600: #BC4D9A;\n\n  --ods-purple-100: #D9C2F0;\n  --ods-purple-200: #C1A4E4;\n  --ods-purple-300: #A885D8;\n  --ods-purple-400: #9373BD;\n  --ods-purple-500: #6E4AA7;\n  --ods-purple-600: #492191;\n\n  --ods-yellow-1: var(--ods-yellow-600);\n  --ods-yellow-2: var(--ods-yellow-500);\n  --ods-yellow-3: var(--ods-yellow-400);\n  --ods-yellow-4: var(--ods-yellow-300);\n  --ods-yellow-5: var(--ods-yellow-200);\n  --ods-yellow-6: var(--ods-yellow-100);\n\n  --ods-blue-1: var(--ods-blue-600);\n  --ods-blue-2: var(--ods-blue-500);\n  --ods-blue-3: var(--ods-blue-400);\n  --ods-blue-4: var(--ods-blue-300);\n  --ods-blue-5: var(--ods-blue-200);\n  --ods-blue-6: var(--ods-blue-100);\n\n  --ods-green-1: var(--ods-green-600);\n  --ods-green-2: var(--ods-green-500);\n  --ods-green-3: var(--ods-green-400);\n  --ods-green-4: var(--ods-green-300);\n  --ods-green-5: var(--ods-green-200);\n  --ods-green-6: var(--ods-green-100);\n\n  --ods-pink-1: var(--ods-pink-600);\n  --ods-pink-2: var(--ods-pink-500);\n  --ods-pink-3: var(--ods-pink-400);\n  --ods-pink-4: var(--ods-pink-300);\n  --ods-pink-5: var(--ods-pink-200);\n  --ods-pink-6: var(--ods-pink-100);\n\n  --ods-purple-1: var(--ods-purple-600);\n  --ods-purple-2: var(--ods-purple-500);\n  --ods-purple-3: var(--ods-purple-400);\n  --ods-purple-4: var(--ods-purple-300);\n  --ods-purple-5: var(--ods-purple-200);\n  --ods-purple-6: var(--ods-purple-100);\n\n  --ods-categorical-1: var(--ods-blue-600);\n  --ods-categorical-2: var(--ods-green-400);\n  --ods-categorical-3: var(--ods-pink-600);\n  --ods-categorical-4: var(--ods-purple-400);\n  --ods-categorical-5: var(--ods-yellow-600);\n  --ods-categorical-6: var(--bs-gray-900);\n  --ods-categorical-7: var(--ods-blue-400);\n  --ods-categorical-8: var(--ods-green-600);\n  --ods-categorical-9: var(--ods-pink-500);\n  --ods-categorical-10: var(--ods-purple-600);\n  --ods-categorical-11: var(--ods-yellow-500);\n  --ods-categorical-12: var(--bs-gray-700);\n\n  --ods-default-1: var(--ods-blue-600);\n  --ods-default-2: var(--ods-green-600);\n  --ods-default-3: var(--ods-pink-600);\n  --ods-default-4: var(--ods-purple-600);\n  --ods-default-5: var(--ods-yellow-500);\n  --ods-default-6: var(--bs-gray-700);\n  --ods-default-7: var(--ods-blue-400);\n  --ods-default-8: var(--ods-green-400);\n  --ods-default-9: var(--ods-pink-500);\n  --ods-default-10: var(--ods-purple-400);\n  --ods-default-11: var(--ods-yellow-600);\n  --ods-default-12: var(--bs-gray-900);\n\n  --ods-cyan-light: var(--ods-blue-100);\n  --ods-teal-light: var(--ods-green-100);\n  --ods-pink-light: var(--ods-pink-100);\n  --ods-indigo-light: var(--ods-purple-100);\n  --ods-yellow-light: var(--ods-yellow-100);\n\n  --ods-cyan-dark: var(--ods-blue-600);\n  --ods-teal-dark: var(--ods-green-600);\n  --ods-pink-dark: var(--ods-pink-400);\n  --ods-indigo-dark: var(--ods-purple-600);\n  --ods-yellow-dark: var(--ods-yellow-400);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-300);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"] {\n  --ods-yellow-1: var(--ods-yellow-100);\n  --ods-yellow-2: var(--ods-yellow-200);\n  --ods-yellow-3: var(--ods-yellow-300);\n  --ods-yellow-4: var(--ods-yellow-400);\n  --ods-yellow-5: var(--ods-yellow-500);\n  --ods-yellow-6: var(--ods-yellow-600);\n\n  --ods-blue-1: var(--ods-blue-100);\n  --ods-blue-2: var(--ods-blue-200);\n  --ods-blue-3: var(--ods-blue-300);\n  --ods-blue-4: var(--ods-blue-400);\n  --ods-blue-5: var(--ods-blue-500);\n  --ods-blue-6: var(--ods-blue-600);\n\n  --ods-green-1: var(--ods-green-100);\n  --ods-green-2: var(--ods-green-200);\n  --ods-green-3: var(--ods-green-300);\n  --ods-green-4: var(--ods-green-400);\n  --ods-green-5: var(--ods-green-500);\n  --ods-green-6: var(--ods-green-600);\n\n  --ods-pink-1: var(--ods-pink-100);\n  --ods-pink-2: var(--ods-pink-200);\n  --ods-pink-3: var(--ods-pink-300);\n  --ods-pink-4: var(--ods-pink-400);\n  --ods-pink-5: var(--ods-pink-500);\n  --ods-pink-6: var(--ods-pink-600);\n\n  --ods-purple-1: var(--ods-purple-100);\n  --ods-purple-2: var(--ods-purple-200);\n  --ods-purple-3: var(--ods-purple-300);\n  --ods-purple-4: var(--ods-purple-400);\n  --ods-purple-5: var(--ods-purple-500);\n  --ods-purple-6: var(--ods-purple-600);\n\n  --ods-categorical-1: var(--ods-blue-500);\n  --ods-categorical-2: var(--ods-green-300);\n  --ods-categorical-3: var(--ods-pink-400);\n  --ods-categorical-4: var(--ods-purple-300);\n  --ods-categorical-5: var(--ods-yellow-400);\n  --ods-categorical-6: var(--bs-gray-600);\n  --ods-categorical-7: var(--ods-blue-300);\n  --ods-categorical-8: var(--ods-green-500);\n  --ods-categorical-9: var(--ods-pink-300);\n  --ods-categorical-10: var(--ods-purple-500);\n  --ods-categorical-11: var(--ods-yellow-300);\n  --ods-categorical-12: var(--bs-gray-500);\n\n  --ods-default-1: var(--ods-blue-500);\n  --ods-default-2: var(--ods-green-500);\n  --ods-default-3: var(--ods-pink-400);\n  --ods-default-4: var(--ods-purple-500);\n  --ods-default-5: var(--ods-yellow-300);\n  --ods-default-6: var(--bs-gray-500);\n  --ods-default-7: var(--ods-blue-300);\n  --ods-default-8: var(--ods-green-300);\n  --ods-default-9: var(--ods-pink-300);\n  --ods-default-10: var(--ods-purple-300);\n  --ods-default-11: var(--ods-yellow-400);\n  --ods-default-12: var(--bs-gray-600);\n\n  --ods-cyan-light: var(--ods-blue-600);\n  --ods-teal-light: var(--ods-green-600);\n  --ods-pink-light: var(--ods-pink-400);\n  --ods-indigo-light: var(--ods-purple-600);\n  --ods-yellow-light: var(--ods-yellow-400);\n\n  --ods-cyan-dark: var(--ods-blue-100);\n  --ods-teal-dark: var(--ods-green-100);\n  --ods-pink-dark: var(--ods-pink-100);\n  --ods-indigo-dark: var(--ods-purple-100);\n  --ods-yellow-dark: var(--ods-yellow-100);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-700);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n\n}\n',
-      N = {
-        BOOSTED4: `\n  ${I}\n  ${F}\n  ${M}\n  `,
-        BOOSTED5: `\n  ${F}\n  ${M}\n  `,
-        CUSTOM: `\n  ${I}\n  ${F}\n  ${M}\n  `,
-        NONE: `\n  ${I}\n  ${F}\n  ${M}\n  `,
+      N =
+        '\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"], [data-bs-theme] .ods-charts-context[data-bs-theme="light"]  {\n  color-scheme: light;\n  --bs-blue: #4170d8;\n  --bs-indigo: #a885d8;\n  --bs-purple: #a885d8;\n  --bs-pink: #ffb4e6;\n  --bs-red: #cd3c14;\n  --bs-orange: #f16e00;\n  --bs-yellow: #fc0;\n  --bs-green: #228722;\n  --bs-teal: #50be87;\n  --bs-cyan: #4bb4e6;\n  --bs-black: #000;\n  --bs-white: #fff;\n  --bs-gray: #999;\n  --bs-gray-dark: #595959;\n  --bs-gray-100: #fafafa;\n  --bs-gray-200: #f6f6f6;\n  --bs-gray-300: #eee;\n  --bs-gray-400: #ddd;\n  --bs-gray-500: #ccc;\n  --bs-gray-600: #999;\n  --bs-gray-700: #666;\n  --bs-gray-800: #595959;\n  --bs-gray-900: #333;\n  --bs-gray-950: #141414;\n  --bs-body-color: #000;\n  --bs-body-color-rgb: 0, 0, 0;\n  --bs-body-bg: #fff;\n  --bs-body-bg-rgb: 255, 255, 255;\n  --bs-link-color: #000;\n  --bs-border-width: 0.125rem;\n  --bs-border-color: #000;\n  --bs-border-color-subtle: #ccc;\n\n  --bs-secondary-color: #666;\n  --bs-secondary-bg: #eee;\n  --bs-primary: #f16e00;\n  --bs-secondary: #000;\n  --bs-success: #228722;\n  --bs-info: #4170d8;\n  --bs-warning: #fc0;\n  --bs-danger: #cd3c14;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 204, 204, 204;\n  --bs-tertiary-bg: #fafafa;\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {\n  color-scheme: dark;\n  --bs-body-color: #fff;\n  --bs-body-color-rgb: 255, 255, 255;\n  --bs-body-bg: #141414;\n  --bs-body-bg-rgb: 20, 20, 20;\n  --bs-link-color: #fff;\n  --bs-border-color: #fff;\n  --bs-border-color-subtle: #666;\n\n  --bs-secondary-color: #999;\n  --bs-secondary-bg: #333;\n  --bs-primary: #ff7900;\n  --bs-secondary: #fff;\n  --bs-success: #6c6;\n  --bs-info: #69f;\n  --bs-warning: #fc0;\n  --bs-danger: #f66;\n  --bs-light: #ccc;\n  --bs-dark: #000;\n\n  --bs-warning-rgb: 255, 204, 0;\n  --bs-tertiary-color-rgb: 102, 102, 102;\n  --bs-tertiary-bg: #000;\n}\n\n\n[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme] {\n    color: var(--bs-body-color);\n    background-color: var(--bs-body-bg);\n}\n\n\n[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {\n    color: var(--bs-link-color);\n}\n    \n.ods-charts-context {\n  --bs-body-font-weight: 400;\n}\n',
+      $ =
+        '\n.ods-charts-context {\n  --bs-font-sans-serif:  "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";\n}\n',
+      _ = `\n.ods-charts-context, [data-bs-theme="light"] .ods-charts-context, .ods-charts-context[data-bs-theme="light"] {\n  --ods-yellow-100: #fff6b6;\n  --ods-yellow-200: #ffe45b;\n  --ods-yellow-300: #ffd200;\n  --ods-yellow-400: #ffb400;\n  --ods-yellow-500: #b98f11;\n  --ods-yellow-600: #9d6e06;\n\n  --ods-yellow: var(--ods-yellow-300);\n\n  --ods-blue-100: #b5e8f7;\n  --ods-blue-200: #80ceef;\n  --ods-blue-300: #4bb4e6;\n  --ods-blue-400: #3e9dd6;\n  --ods-blue-500: #237ecA;\n  --ods-blue-600: #085ebd;\n\n  --ods-green-100: #B8EBD6;\n  --ods-green-200: #84D5AF;\n  --ods-green-300: #50BE87;\n  --ods-green-400: #27A971;\n  --ods-green-500: #198C51;\n  --ods-green-600: #0A6E31;\n\n  --ods-pink-100: #FFE8F7;\n  --ods-pink-200: #FFCEEF;\n  --ods-pink-300: #FFB4E6;\n  --ods-pink-400: #FF8AD4;\n  --ods-pink-500: #D573BB;\n  --ods-pink-600: #BC4D9A;\n\n  --ods-purple-100: #D9C2F0;\n  --ods-purple-200: #C1A4E4;\n  --ods-purple-300: #A885D8;\n  --ods-purple-400: #9373BD;\n  --ods-purple-500: #6E4AA7;\n  --ods-purple-600: #492191;\n\n  --ods-yellow-1: var(--ods-yellow-600);\n  --ods-yellow-2: var(--ods-yellow-500);\n  --ods-yellow-3: var(--ods-yellow-400);\n  --ods-yellow-4: var(--ods-yellow-300);\n  --ods-yellow-5: var(--ods-yellow-200);\n  --ods-yellow-6: var(--ods-yellow-100);\n\n  --ods-blue-1: var(--ods-blue-600);\n  --ods-blue-2: var(--ods-blue-500);\n  --ods-blue-3: var(--ods-blue-400);\n  --ods-blue-4: var(--ods-blue-300);\n  --ods-blue-5: var(--ods-blue-200);\n  --ods-blue-6: var(--ods-blue-100);\n\n  --ods-green-1: var(--ods-green-600);\n  --ods-green-2: var(--ods-green-500);\n  --ods-green-3: var(--ods-green-400);\n  --ods-green-4: var(--ods-green-300);\n  --ods-green-5: var(--ods-green-200);\n  --ods-green-6: var(--ods-green-100);\n\n  --ods-pink-1: var(--ods-pink-600);\n  --ods-pink-2: var(--ods-pink-500);\n  --ods-pink-3: var(--ods-pink-400);\n  --ods-pink-4: var(--ods-pink-300);\n  --ods-pink-5: var(--ods-pink-200);\n  --ods-pink-6: var(--ods-pink-100);\n\n  --ods-purple-1: var(--ods-purple-600);\n  --ods-purple-2: var(--ods-purple-500);\n  --ods-purple-3: var(--ods-purple-400);\n  --ods-purple-4: var(--ods-purple-300);\n  --ods-purple-5: var(--ods-purple-200);\n  --ods-purple-6: var(--ods-purple-100);\n\n  --ods-categorical-1: var(--ods-blue-600);\n  --ods-categorical-2: var(--ods-green-400);\n  --ods-categorical-3: var(--ods-pink-600);\n  --ods-categorical-4: var(--ods-purple-400);\n  --ods-categorical-5: var(--ods-yellow-600);\n  --ods-categorical-6: var(--bs-gray-900);\n  --ods-categorical-7: var(--ods-blue-400);\n  --ods-categorical-8: var(--ods-green-600);\n  --ods-categorical-9: var(--ods-pink-500);\n  --ods-categorical-10: var(--ods-purple-600);\n  --ods-categorical-11: var(--ods-yellow-500);\n  --ods-categorical-12: var(--bs-gray-700);\n\n  --ods-default-1: var(--ods-blue-600);\n  --ods-default-2: var(--ods-green-600);\n  --ods-default-3: var(--ods-pink-600);\n  --ods-default-4: var(--ods-purple-600);\n  --ods-default-5: var(--ods-yellow-500);\n  --ods-default-6: var(--bs-gray-700);\n  --ods-default-7: var(--ods-blue-400);\n  --ods-default-8: var(--ods-green-400);\n  --ods-default-9: var(--ods-pink-500);\n  --ods-default-10: var(--ods-purple-400);\n  --ods-default-11: var(--ods-yellow-600);\n  --ods-default-12: var(--bs-gray-900);\n\n  --ods-cyan-light: var(--ods-blue-100);\n  --ods-teal-light: var(--ods-green-100);\n  --ods-pink-light: var(--ods-pink-100);\n  --ods-indigo-light: var(--ods-purple-100);\n  --ods-yellow-light: var(--ods-yellow-100);\n\n  --ods-cyan-dark: var(--ods-blue-600);\n  --ods-teal-dark: var(--ods-green-600);\n  --ods-pink-dark: var(--ods-pink-400);\n  --ods-indigo-dark: var(--ods-purple-600);\n  --ods-yellow-dark: var(--ods-yellow-400);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-300);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23000%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n}\n\n[data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"] {\n  --ods-yellow-1: var(--ods-yellow-100);\n  --ods-yellow-2: var(--ods-yellow-200);\n  --ods-yellow-3: var(--ods-yellow-300);\n  --ods-yellow-4: var(--ods-yellow-400);\n  --ods-yellow-5: var(--ods-yellow-500);\n  --ods-yellow-6: var(--ods-yellow-600);\n\n  --ods-blue-1: var(--ods-blue-100);\n  --ods-blue-2: var(--ods-blue-200);\n  --ods-blue-3: var(--ods-blue-300);\n  --ods-blue-4: var(--ods-blue-400);\n  --ods-blue-5: var(--ods-blue-500);\n  --ods-blue-6: var(--ods-blue-600);\n\n  --ods-green-1: var(--ods-green-100);\n  --ods-green-2: var(--ods-green-200);\n  --ods-green-3: var(--ods-green-300);\n  --ods-green-4: var(--ods-green-400);\n  --ods-green-5: var(--ods-green-500);\n  --ods-green-6: var(--ods-green-600);\n\n  --ods-pink-1: var(--ods-pink-100);\n  --ods-pink-2: var(--ods-pink-200);\n  --ods-pink-3: var(--ods-pink-300);\n  --ods-pink-4: var(--ods-pink-400);\n  --ods-pink-5: var(--ods-pink-500);\n  --ods-pink-6: var(--ods-pink-600);\n\n  --ods-purple-1: var(--ods-purple-100);\n  --ods-purple-2: var(--ods-purple-200);\n  --ods-purple-3: var(--ods-purple-300);\n  --ods-purple-4: var(--ods-purple-400);\n  --ods-purple-5: var(--ods-purple-500);\n  --ods-purple-6: var(--ods-purple-600);\n\n  --ods-categorical-1: var(--ods-blue-500);\n  --ods-categorical-2: var(--ods-green-300);\n  --ods-categorical-3: var(--ods-pink-400);\n  --ods-categorical-4: var(--ods-purple-300);\n  --ods-categorical-5: var(--ods-yellow-400);\n  --ods-categorical-6: var(--bs-gray-600);\n  --ods-categorical-7: var(--ods-blue-300);\n  --ods-categorical-8: var(--ods-green-500);\n  --ods-categorical-9: var(--ods-pink-300);\n  --ods-categorical-10: var(--ods-purple-500);\n  --ods-categorical-11: var(--ods-yellow-300);\n  --ods-categorical-12: var(--bs-gray-500);\n\n  --ods-default-1: var(--ods-blue-500);\n  --ods-default-2: var(--ods-green-500);\n  --ods-default-3: var(--ods-pink-400);\n  --ods-default-4: var(--ods-purple-500);\n  --ods-default-5: var(--ods-yellow-300);\n  --ods-default-6: var(--bs-gray-500);\n  --ods-default-7: var(--ods-blue-300);\n  --ods-default-8: var(--ods-green-300);\n  --ods-default-9: var(--ods-pink-300);\n  --ods-default-10: var(--ods-purple-300);\n  --ods-default-11: var(--ods-yellow-400);\n  --ods-default-12: var(--bs-gray-600);\n\n  --ods-cyan-light: var(--ods-blue-600);\n  --ods-teal-light: var(--ods-green-600);\n  --ods-pink-light: var(--ods-pink-400);\n  --ods-indigo-light: var(--ods-purple-600);\n  --ods-yellow-light: var(--ods-yellow-400);\n\n  --ods-cyan-dark: var(--ods-blue-100);\n  --ods-teal-dark: var(--ods-green-100);\n  --ods-pink-dark: var(--ods-pink-100);\n  --ods-indigo-dark: var(--ods-purple-100);\n  --ods-yellow-dark: var(--ods-yellow-100);\n\n  --ods-functional-1: var(--bs-primary);\n  --ods-functional-2: var(--bs-gray-700);\n  --ods-functional-3: var(--bs-success);\n  --ods-functional-4: var(--bs-warning);\n  --ods-functional-5: var(--bs-danger);\n  --ods-functional-6: var(--bs-info);\n\n  --ods-dial-gauge-pointer: image://data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%22147%2065.2635%2023%20104.4226%22%20width%3D%2223px%22%20height%3D%22107.735px%22%3E%0A%20%20%3Cpath%20d%3D%22M%20123.034%2079.908%20L%20179.603%20150.618%20L%20193.745%20136.476%20L%20123.034%2079.908%20Z%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20158.389px%20115.263px%3B%22%20transform%3D%22matrix(0.70710701%2C%200.70710701%2C%20-0.70710701%2C%200.70710701%2C%200.00000871%2C%20-0.0000095)%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22131.469%22%20cy%3D%2290.553%22%20r%3D%2210%22%20fill%3D%22%23fff%22%20style%3D%22stroke-width%3A%201%3B%20transform-origin%3A%20131.469px%2090.553px%3B%22%20transform%3D%22matrix(-0.70710701%2C%20-0.70710701%2C%200.70710701%2C%20-0.70710701%2C%2026.91516753%2C%2064.99089065)%22%2F%3E%0A%3C%2Fsvg%3E\n\n}\n\n.ods-charts-context {\n  --ods-popover-header-padding-y: initial;\n  --ods-popover-header-padding-top: 5px;\n  --ods-popover-header-padding-x: 9px;\n  --ods-popover-header-padding-bottom: 7px;\n  --ods-popover-body-padding-x: 9px;\n  --ods-popover-body-padding-y: initial;\n  --ods-popover-body-padding-top: 0;\n  --ods-popover-body-padding-bottom: 7px;\n  \n  --ods-popover-header-font-size: 14px;\n  --ods-popover-header-line-height: 1.11;\n  --ods-popover-header-font-weight: 700;\n\n  --ods-popover-body-font-size: 14px;\n  --ods-popover-body-line-height: 1.1;\n  --ods-popover-body-font-weight: 400;\n\n  --ods-poppover-arrow-display: ${0 == y ? 'none' : 'inherit'};\n}\n`,
+      B = {
+        BOOSTED4: `\n  ${F}\n  ${_}\n  ${N}\n  \n.ods-charts-context {\n  --bs-font-sans-serif:  var(--font-family-sans-serif, "Helvetica Neue");\n}\n\n.ods-charts-context .popover {\n  color: var(--bs-body-color);\n  background-color: var(--bs-body-bg);\n  border: 2px solid var(--bs-border-color-subtle);\n}\n\n.ods-charts-context .popover .popover-header {\n  color: var(--bs-body-color);\n  background-color: var(--bs-body-bg);\n  padding-left: var(--ods-popover-header-padding-x, 9px);\n  padding-right: var(--ods-popover-header-padding-x, 9px);\n  padding-top: var(--ods-popover-header-padding-top, 5px);\n  padding-bottom: var(--ods-popover-header-padding-bottom, 7px);\n  font-size: var(--ods-popover-header-font-size, 14px);\n  line-height: var(--ods-popover-header-line-height, 1.11);\n  border:none;\n}\n\n.ods-charts-context .popover .popover-body {\n  color: var(--bs-body-color);\n  padding-left: var(--ods-popover-body-padding-x, 9px);\n  padding-right: var(--ods-popover-body-padding-x, 9px);\n  padding-top: var(--ods-popover-body-padding-top, 0);\n  padding-bottom: var(--ods-popover-body-padding-bottom, 7px);\n}\n\n.ods-charts-context .popover .arrow {\n  display: var(--ods-poppover-arrow-display, ${0 == y ? 'none' : 'inherit'});\n}\n\n.ods-charts-context .popover-header::before {\n    visibility: hidden;\n}\n\n.ods-charts-context .bs-popover-auto[x-placement^=bottom]>.arrow::after, \n.ods-charts-context .bs-popover-bottom>.arrow::after {\n    border-bottom-color: var(--bs-body-bg);\n}\n\n.ods-charts-context .bs-popover-auto[x-placement^=top]>.arrow::after, \n.ods-charts-context .bs-popover-top>.arrow::after {\n    border-top-color: var(--bs-body-bg);\n}\n\n.ods-charts-context .bs-popover-auto[x-placement^=left]>.arrow::after, \n.ods-charts-context .bs-popover-left >.arrow::after {\n    border-left-color: var(--bs-body-bg);\n}\n    \n.ods-charts-context .bs-popover-auto[x-placement^=right]>.arrow::after,\n.ods-charts-context .bs-popover-right >.arrow::after {\n    border-right-color: var(--bs-body-bg);\n}\n\n  `,
+        BOOSTED5: `\n  ${F}\n  ${_}\n  \n.ods-charts-context .popover {\n  --bs-popover-header-padding-y: var(--ods-popover-header-padding-y, initial);\n  --bs-popover-header-padding-top: var(--ods-popover-header-padding-top, 5px);\n  --bs-popover-header-padding-x: var(--ods-popover-header-padding-x, 9px);\n  --bs-popover-header-padding-bottom: var(--ods-popover-header-padding-bottom, 7px);\n  --bs-popover-body-padding-x: var(--ods-popover-body-padding-x, 9px);\n  --bs-popover-body-padding-y: var(--ods-popover-body-padding-y, initial);\n  --bs-popover-body-padding-top: var(--ods-popover-body-padding-top, 0);\n  --bs-popover-body-padding-bottom: var(--ods-popover-body-padding-bottom, 7px);\n\n  --bs-popover-header-font-size: var(--ods-popover-header-font-size, 14px);\n  --bs-popover-header-line-height: var(--ods-popover-header-line-height, 1.11);\n}\n.ods-charts-context .popover .popover-arrow {\n  display: var(--ods-poppover-arrow-display, ${0 == y ? 'none' : 'inherit'});\n}  \n\n  `,
+        CUSTOM: `\n  ${F}\n  ${_}\n  ${N}\n  ${$}\n  `,
+        NONE: `\n  ${F}\n  ${_}\n  ${N}\n  ${$}\n  `,
       };
-    class B {
+    class H {
       constructor(e, o, t) {
         ((this.cssSelector = e),
           (this.mode = o),
@@ -915,14 +922,14 @@
       get computedStyle() {
         if (void 0 === this._computedStyle) {
           if (this.cssSelector) {
-            let e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT));
+            let e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ce.DEFAULT));
             if (!e) {
               const o = this.cssSelector ? document.querySelector(this.cssSelector) : null;
               o &&
                 ((e = document.createElement('div')),
-                this.mode && this.mode !== ae.DEFAULT && e.setAttribute('data-bs-theme', this.mode),
+                this.mode && this.mode !== ce.DEFAULT && e.setAttribute('data-bs-theme', this.mode),
                 e.classList.add('ods-charts-context'),
-                e.classList.add('ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT)),
+                e.classList.add('ods-charts-style-' + (this.mode ? this.mode : ce.DEFAULT)),
                 o.append(e));
             }
             e && (this._computedStyle = window.getComputedStyle(e));
@@ -935,10 +942,12 @@
       initComputedStyle() {
         var e;
         if (!this._computedStyleInitialized) {
-          if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && N[this.cssThemeName]) {
+          if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && B[this.cssThemeName]) {
+            document.querySelectorAll('style[data-ods-charts-type="theme"]').forEach((e) => e.remove());
             const o = document.createElement('style');
-            ((o.textContent = N[this.cssThemeName]),
+            ((o.textContent = B[this.cssThemeName]),
               (o.id = 'ods-charts-style-' + this.cssThemeName),
+              o.setAttribute('data-ods-charts-type', 'theme'),
               null === (e = document.querySelector('head')) || void 0 === e || e.append(o));
           }
           return ((this._computedStyleInitialized = !0), !0);
@@ -947,7 +956,7 @@
       }
       removeComputedStyle() {
         if (this.cssSelector) {
-          const e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ae.DEFAULT));
+          const e = document.querySelector(this.cssSelector + '>.ods-charts-style-' + (this.mode ? this.mode : ce.DEFAULT));
           e && e.remove();
         }
         ((this._computedStyle = void 0), (this._computedStyleInitialized = !1));
@@ -1012,13 +1021,13 @@
       cloneAndReplaceAllCssVars(e) {
         const o = this.initComputedStyle();
         try {
-          return this.replaceAllCssVars(q(e, (e) => !!this.getCssVarMatch(e)));
+          return this.replaceAllCssVars(I(e, (e) => !!this.getCssVarMatch(e)));
         } finally {
           o && this.removeComputedStyle();
         }
       }
     }
-    const _ = {
+    const U = {
         color: [
           'var(--ods-yellow-1, #9D6E06)',
           'var(--ods-yellow-2, #B98F11)',
@@ -1028,7 +1037,7 @@
           'var(--ods-yellow-6, #FFF6B6)',
         ],
       },
-      $ = {
+      z = {
         color: [
           'var(--ods-purple-1, #492191)',
           'var(--ods-purple-2, #6E4AA7)',
@@ -1038,7 +1047,7 @@
           'var(--ods-purple-6, #D9C2F0)',
         ],
       },
-      H = {
+      V = {
         color: [
           'var(--ods-pink-1, #BC4D9A)',
           'var(--ods-pink-2, #D573BB)',
@@ -1048,7 +1057,7 @@
           'var(--ods-pink-6, #FFE8F7)',
         ],
       },
-      U = {
+      R = {
         color: [
           'var(--ods-green-1, #0A6E31)',
           'var(--ods-green-2, #27A971)',
@@ -1058,7 +1067,7 @@
           'var(--ods-green-6, #B8EBD6)',
         ],
       },
-      V = {
+      G = {
         color: [
           'var(--ods-blue-1, #085EBD)',
           'var(--ods-blue-2, #237ECA)',
@@ -1068,7 +1077,7 @@
           'var(--ods-blue-6, #B5E8F7)',
         ],
       },
-      R = {
+      j = {
         color: [
           'var(--ods-cyan-light, #B5E8F7)',
           'var(--ods-teal-light, #B8EBD6)',
@@ -1077,7 +1086,7 @@
           'var(--ods-yellow-light, #FFF6B6)',
         ],
       },
-      z = {
+      W = {
         color: [
           'var(--ods-cyan-dark, #085EBD)',
           'var(--ods-teal-dark, #0A6E31)',
@@ -1086,10 +1095,10 @@
           'var(--ods-yellow-dark, #FFB400)',
         ],
       },
-      G = {
+      Q = {
         color: ['var(--bs-cyan, #4bb4e6)', 'var(--bs-teal, #50be87)', 'var(--bs-pink, #ffb4e6)', 'var(--bs-indigo, #a885d8)', 'var(--ods-yellow, #ffd200)'],
       },
-      j = {
+      K = {
         color: [
           'var(--ods-functional-1, #F16E00)',
           'var(--ods-functional-2, #EEEEEE)',
@@ -1099,7 +1108,7 @@
           'var(--ods-functional-6, #4170D8)',
         ],
       },
-      W = {
+      Y = {
         color: [
           'var(--ods-categorical-1, #085ebd)',
           'var(--ods-categorical-2, #27a971)',
@@ -1115,7 +1124,7 @@
           'var(--ods-categorical-12, #666666)',
         ],
       },
-      Q = {
+      Z = {
         color: [
           'var(--ods-default-1, #085edb)',
           'var(--ods-default-2, #0a6e31)',
@@ -1131,7 +1140,7 @@
           'var(--ods-default-12, #333333)',
         ],
       },
-      K = {
+      J = {
         color: [
           'var(--ouds-charts-color-sequential-accent-1-tint-100)',
           'var(--ouds-charts-color-sequential-accent-1-tint-200)',
@@ -1144,7 +1153,7 @@
           'var(--ouds-charts-color-sequential-accent-1-tint-900)',
         ],
       },
-      Y = {
+      X = {
         color: [
           'var(--ouds-charts-color-categorical-tier-1)',
           'var(--ouds-charts-color-categorical-tier-2)',
@@ -1158,10 +1167,10 @@
           'var(--ouds-charts-color-categorical-tier-10)',
         ],
       },
-      Z = {
+      ee = {
         color: ['var(--ouds-charts-color-functional-positive)', 'var(--ouds-charts-color-functional-warning)', 'var(--ouds-charts-color-functional-negative)'],
       },
-      J = {
+      oe = {
         color: [
           'var(--ouds-charts-color-sequential-accent-2-tint-100)',
           'var(--ouds-charts-color-sequential-accent-2-tint-200)',
@@ -1174,8 +1183,8 @@
           'var(--ouds-charts-color-sequential-accent-2-tint-900)',
         ],
       },
-      X = { color: ['var(--ouds-charts-color-highlight)', 'var(--ouds-charts-color-neutral)'] },
-      ee = {
+      te = { color: ['var(--ouds-charts-color-highlight)', 'var(--ouds-charts-color-neutral)'] },
+      se = {
         color: [
           'var(--ouds-charts-color-sequential-accent-3-tint-100)',
           'var(--ouds-charts-color-sequential-accent-3-tint-200)',
@@ -1188,7 +1197,7 @@
           'var(--ouds-charts-color-sequential-accent-3-tint-900)',
         ],
       },
-      oe = {
+      re = {
         color: [
           'var(--ouds-charts-color-sequential-accent-4-tint-100)',
           'var(--ouds-charts-color-sequential-accent-4-tint-200)',
@@ -1201,7 +1210,7 @@
           'var(--ouds-charts-color-sequential-accent-4-tint-900)',
         ],
       },
-      te = {
+      ne = {
         color: [
           'var(--ouds-charts-color-categorical-tier-1)',
           'var(--ouds-charts-color-categorical-tier-6)',
@@ -1211,7 +1220,7 @@
           'var(--ouds-charts-color-categorical-tier-10)',
         ],
       },
-      se = {
+      ae = {
         color: [
           'var(--ouds-charts-color-sequential-accent-5-tint-100)',
           'var(--ouds-charts-color-sequential-accent-5-tint-200)',
@@ -1224,7 +1233,7 @@
           'var(--ouds-charts-color-sequential-accent-5-tint-900)',
         ],
       };
-    var re, ne, ae;
+    var ie, le, ce;
     (!(function (e) {
       ((e.DEFAULT = 'default'),
         (e.CATEGORICAL = 'categorical'),
@@ -1246,14 +1255,14 @@
         (e.OUDS_FUNCTIONAL = 'oudsFunctional'),
         (e.OUDS_HIGHLIGHT = 'oudsHighlight'),
         (e.OUDS_SINGLE = 'oudsSingle'));
-    })(re || (re = {})),
+    })(ie || (ie = {})),
       (function (e) {
         ((e.BROKEN = 'broken'), (e.SMOOTH = 'smooth'), (e.BROKEN_WITH_POINTS = 'withPoints'));
-      })(ne || (ne = {})),
+      })(le || (le = {})),
       (function (e) {
         ((e.LIGHT = 'light'), (e.DARK = 'dark'), (e.DEFAULT = 'default'));
-      })(ae || (ae = {})));
-    const ie = {
+      })(ce || (ce = {})));
+    const de = {
       common: { backgroundColor: 'var(--bs-body-bg, #fff)' },
       linesAxis: {
         categoryAxis: {
@@ -1278,48 +1287,48 @@
         },
       },
       colors: {
-        default: Q,
-        categorical: W,
-        functional: j,
-        supportingColors: G,
-        darkerTints: z,
-        lighterTints: R,
-        blue: V,
-        green: U,
-        pink: H,
-        purple: $,
-        yellow: _,
-        oudsBlue: K,
-        oudsGreen: J,
-        oudsPink: ee,
-        oudsPurple: oe,
-        oudsYellow: se,
-        oudsCategorical: Y,
-        oudsFunctional: Z,
-        oudsHighlight: X,
-        oudsSingle: te,
+        default: Z,
+        categorical: Y,
+        functional: K,
+        supportingColors: Q,
+        darkerTints: W,
+        lighterTints: j,
+        blue: G,
+        green: R,
+        pink: V,
+        purple: z,
+        yellow: U,
+        oudsBlue: J,
+        oudsGreen: oe,
+        oudsPink: se,
+        oudsPurple: re,
+        oudsYellow: ae,
+        oudsCategorical: X,
+        oudsFunctional: ee,
+        oudsHighlight: te,
+        oudsSingle: ne,
       },
       visualMapColors: {
-        default: { visualMapColor: Q.color },
-        categorical: { visualMapColor: W.color },
-        functional: { visualMapColor: j.color },
-        supportingColors: { visualMapColor: G.color },
-        darkerTints: { visualMapColor: z.color },
-        lighterTints: { visualMapColor: R.color },
-        blue: { visualMapColor: V.color },
-        green: { visualMapColor: U.color },
-        pink: { visualMapColor: H.color },
-        purple: { visualMapColor: $.color },
-        yellow: { visualMapColor: _.color },
-        oudsBlue: { visualMapColor: K.color },
-        oudsGreen: { visualMapColor: J.color },
-        oudsPink: { visualMapColor: ee.color },
-        oudsPurple: { visualMapColor: oe.color },
-        oudsYellow: { visualMapColor: se.color },
-        oudsCategorical: { visualMapColor: Y.color },
-        oudsFunctional: { visualMapColor: Z.color },
-        oudsHighlight: { visualMapColor: X.color },
-        oudsSingle: { visualMapColor: te.color },
+        default: { visualMapColor: Z.color },
+        categorical: { visualMapColor: Y.color },
+        functional: { visualMapColor: K.color },
+        supportingColors: { visualMapColor: Q.color },
+        darkerTints: { visualMapColor: W.color },
+        lighterTints: { visualMapColor: j.color },
+        blue: { visualMapColor: G.color },
+        green: { visualMapColor: R.color },
+        pink: { visualMapColor: V.color },
+        purple: { visualMapColor: z.color },
+        yellow: { visualMapColor: U.color },
+        oudsBlue: { visualMapColor: J.color },
+        oudsGreen: { visualMapColor: oe.color },
+        oudsPink: { visualMapColor: se.color },
+        oudsPurple: { visualMapColor: re.color },
+        oudsYellow: { visualMapColor: ae.color },
+        oudsCategorical: { visualMapColor: X.color },
+        oudsFunctional: { visualMapColor: ee.color },
+        oudsHighlight: { visualMapColor: te.color },
+        oudsSingle: { visualMapColor: ne.color },
       },
       linesStyle: {
         broken: { line: { itemStyle: { borderWidth: 1 }, lineStyle: { width: 2 }, symbolSize: 0, symbol: 'circle', smooth: !1 } },
@@ -1327,7 +1336,7 @@
         smooth: { line: { itemStyle: { borderWidth: 1 }, lineStyle: { width: 2 }, symbolSize: 0, symbol: 'circle', smooth: !0 } },
       },
     };
-    class le {
+    class he {
       constructor(e, o, t) {
         ((this.name = e),
           (this.initialTheme = o),
@@ -1337,47 +1346,47 @@
           (this.chartPopoverManager = void 0),
           (this.chartThemeObserver = void 0),
           (this.cssThemeName = Object.keys(c).find((e) => c[e] === t.cssTheme) || s.CUSTOM),
-          (this.cssHelper = new B(this.options.cssSelector, this.options.mode, this.cssThemeName)),
+          (this.cssHelper = new H(this.options.cssSelector, this.options.mode, this.cssThemeName)),
           (this.theme = this.calculateTheme()));
       }
       calculateTheme() {
         return ((this.theme = this.cssHelper.replaceAllCssVars(f(this.initialTheme))), this.theme);
       }
       static getDarkOrLightMode(e) {
-        let o = ae.DEFAULT;
+        let o = ce.DEFAULT;
         if (e) {
           const t = window.getComputedStyle(e);
           if (t) {
             const e = t.getPropertyValue('color-scheme');
-            [ae.DARK, ae.LIGHT].includes(e) && (o = e);
+            [ce.DARK, ce.LIGHT].includes(e) && (o = e);
           }
         }
         return o;
       }
       static getThemeManager(e) {
         e || (e = {});
-        let o = ae.DEFAULT;
-        (e.colors || (e.colors = re.DEFAULT),
-          e.chartConfiguration || (e.chartConfiguration = ge.getDefaultChartConfiguration()),
+        let o = ce.DEFAULT;
+        (e.colors || (e.colors = ie.DEFAULT),
+          e.chartConfiguration || (e.chartConfiguration = fe.getDefaultChartConfiguration()),
           e.cssTheme || (e.cssTheme = c.NONE),
           e.cssSelector || (e.cssSelector = 'body'),
-          (o = le.getDarkOrLightMode(document.querySelector(e.cssSelector))));
+          (o = he.getDarkOrLightMode(document.querySelector(e.cssSelector))));
         var s = `ods.${b(e.colors)}.${b(e.chartConfiguration)}`;
         const r = f(t);
         return (
-          u(r, f(ie.common)),
-          u(r, f(ie.linesAxis)),
+          p(r, f(de.common)),
+          p(r, f(de.linesAxis)),
           'string' == typeof e.colors
-            ? (u(r, f(ie.colors[e.colors])), u(r, f(ie.visualMapColors[e.colors])))
-            : u(
+            ? (p(r, f(de.colors[e.colors])), p(r, f(de.visualMapColors[e.colors])))
+            : p(
                 r,
                 f({
-                  color: e.colors.map((e) => ('string' == typeof e ? e : ie.colors[e.colorPalette].color[e.colorIndex])),
-                  visualMapColor: e.colors.map((e) => ('string' == typeof e ? e : ie.visualMapColors[e.colorPalette].visualMapColor[e.colorIndex])),
+                  color: e.colors.map((e) => ('string' == typeof e ? e : de.colors[e.colorPalette].color[e.colorIndex])),
+                  visualMapColor: e.colors.map((e) => ('string' == typeof e ? e : de.visualMapColors[e.colorPalette].visualMapColor[e.colorIndex])),
                 })
               ),
-          u(r, f(ie.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : ne.SMOOTH])),
-          new le(v(s), r, Object.assign(Object.assign({}, e), { mode: o }))
+          p(r, f(de.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : le.SMOOTH])),
+          new he(g(s), r, Object.assign(Object.assign({}, e), { mode: o }))
         );
       }
       setDataOptions(e) {
@@ -1399,7 +1408,7 @@
         var t, s;
         const r = this.calculateTheme();
         if (
-          (u(
+          (p(
             e,
             { color: r.color, backgroundColor: r.backgroundColor, title: r.title, grid: { tooltip: r.tooltip } },
             null === (t = this.options.chartConfiguration) || void 0 === t ? void 0 : t.getDefaultConfiguration()
@@ -1458,23 +1467,23 @@
           if (o[t])
             switch (o[t].type) {
               case 'category':
-                e[t] = u(e[t], r.categoryAxis);
+                e[t] = p(e[t], r.categoryAxis);
                 break;
               case 'value':
-                e[t] = u(e[t], r.valueAxis);
+                e[t] = p(e[t], r.valueAxis);
                 break;
               case 'log':
-                e[t] = u(e[t], r.logAxis);
+                e[t] = p(e[t], r.logAxis);
                 break;
               case 'time':
-                e[t] = u(e[t], r.timeAxis);
+                e[t] = p(e[t], r.timeAxis);
             }
         return r;
       }
       getThemeOptions() {
         if (!this.dataOptions) throw new Error('the chart basic options must be set to get the theme completion');
         this.chartThemeObserver &&
-          ((this.options.mode = le.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver())), this.cssHelper.changeThemeMode(this.options.mode));
+          ((this.options.mode = he.getDarkOrLightMode(this.chartThemeObserver.addThemeObserver())), this.cssHelper.changeThemeMode(this.options.mode));
         const e = this.cssHelper.initComputedStyle();
         try {
           const e = this.cssHelper.cloneAndReplaceAllCssVars(Object.assign({}, this.dataOptions));
@@ -1484,13 +1493,13 @@
             (e.grid = e.grid ? f(e.grid) : {}));
           const o = {
               fontStyle: 'normal',
-              fontWeight: '700',
+              fontWeight: 'var(--bs-body-font-weight, 400)',
               fontSize: 14,
               fontFamily: 'Helvetica Neue, sans-serif',
               color:
-                ae.DEFAULT === this.options.mode
+                ce.DEFAULT === this.options.mode
                   ? 'var(--bs-body-color, #000)'
-                  : ae.LIGHT === this.options.mode
+                  : ce.LIGHT === this.options.mode
                     ? 'var(--bs-black, #000)'
                     : 'var(--bs-white, #fff)',
             },
@@ -1499,9 +1508,9 @@
               lineStyle: {
                 width: 2,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ce.DEFAULT === this.options.mode
                     ? 'var(--bs-border-color-subtle, #ccc)'
-                    : ae.LIGHT === this.options.mode
+                    : ce.LIGHT === this.options.mode
                       ? 'var(--bs-gray-500, #ccc)'
                       : 'var(--bs-gray-700, #666)',
               },
@@ -1511,9 +1520,9 @@
               lineStyle: {
                 width: 1,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ce.DEFAULT === this.options.mode
                     ? 'var(--bs-border-color-subtle, #ccc)'
-                    : ae.LIGHT === this.options.mode
+                    : ce.LIGHT === this.options.mode
                       ? 'var(--bs-gray-500, #ccc)'
                       : 'var(--bs-gray-700, #666)',
               },
@@ -1524,9 +1533,9 @@
                 fontWeight: 'bold',
                 fontSize: 14,
                 color:
-                  ae.DEFAULT === this.options.mode
+                  ce.DEFAULT === this.options.mode
                     ? 'var(--bs-body-color, #000)'
-                    : ae.LIGHT === this.options.mode
+                    : ce.LIGHT === this.options.mode
                       ? 'var(--bs-black, #000)'
                       : 'var(--bs-white, #fff)',
                 padding: [0, 0, 0, 5],
@@ -1549,7 +1558,7 @@
           let a = { xAxis: { axisLabel: f(o) }, yAxis: { axisLabel: f(o) }, legend: f(n), grid: f(r) },
             i = this.calculateNewThemeAndAddItInThemeOptions(a, e);
           for (const o of ['xAxis', 'yAxis'])
-            O(e[o]) || (e[o] && e[o].axisLine)
+            A(e[o]) || (e[o] && e[o].axisLine)
               ? ((a[o].axisLine = f(t)), (a[o].splitLine = f(s)))
               : ((a[o].axisLine = { show: !1 }), (a[o].splitLine = { show: !1 }));
           const l = this.getDisplayedColors(i.color, e);
@@ -1577,17 +1586,17 @@
         }
       }
       externalizeLegends(e, o) {
-        return ((this.chartLegendManager = p.addLegend(e, o)), this);
+        return ((this.chartLegendManager = u.addLegend(e, o)), this);
       }
       externalizePopover(e = {}, o) {
-        return (o || (o = k.NONE), (this.chartPopoverManager = A.addPopoverManagement(o, e)), this);
+        return (o || (o = D.NONE), (this.chartPopoverManager = T.addPopoverManagement(o, e)), this);
       }
       manageChartResize(e, o) {
-        return ((this.chartResizeManager = g.addResizeManagement(e, o)), this);
+        return ((this.chartResizeManager = v.addResizeManagement(e, o)), this);
       }
       manageThemeObserver(e) {
         return (
-          (this.chartThemeObserver = E.addThemeObserver(e, () => {
+          (this.chartThemeObserver = P.addThemeObserver(e, () => {
             e.setOption(this.getChartOptions());
           })),
           this
@@ -1596,15 +1605,15 @@
       getChartOptions() {
         if (!this.dataOptions) throw new Error('the chart basic options must be set to get the theme completion');
         const { themeOptions: e, dataOptions: o } = this.getThemeOptions();
-        return u(e, o);
+        return p(e, o);
       }
     }
-    class ce {
+    class pe {
       constructor(e, o, t) {
         ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t));
       }
     }
-    var de;
+    var ue;
     !(function (e) {
       ((e.DEFAULT = 'DEFAULT'),
         (e.LINE = 'LINE'),
@@ -1616,12 +1625,12 @@
         (e.SEMI_CIRCULAR_GAUGE = 'SEMI_CIRCULAR_GAUGE'),
         (e.CIRCULAR_GAUGE = 'CIRCULAR_GAUGE'),
         (e.DIAL_GAUGE = 'DIAL_GAUGE'));
-    })(de || (de = {}));
-    class he {}
-    class ue {}
-    class pe extends ue {}
-    class ge {
-      constructor(e = de.DEFAULT) {
+    })(ue || (ue = {}));
+    class ve {}
+    class ge {}
+    class be extends ge {}
+    class fe {
+      constructor(e = ue.DEFAULT) {
         this.type = e;
       }
       getDefaultConfiguration() {
@@ -1631,70 +1640,70 @@
         return {};
       }
       static getDefaultChartConfiguration() {
-        return new ge();
+        return new fe();
       }
-      static getLineChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
-        return new fe(e.lineStyle);
+      static getLineChartConfiguration(e = { lineStyle: le.SMOOTH }) {
+        return new Ce(e.lineStyle);
       }
       static getBarChartConfiguration() {
-        return new me();
-      }
-      static getLineAndBarChartConfiguration(e = { lineStyle: ne.SMOOTH }) {
-        return new be(e.lineStyle);
-      }
-      static getPieChartConfiguration() {
-        return new Ce();
-      }
-      static getDonutChartConfiguration() {
         return new we();
       }
+      static getLineAndBarChartConfiguration(e = { lineStyle: le.SMOOTH }) {
+        return new me(e.lineStyle);
+      }
+      static getPieChartConfiguration() {
+        return new Se();
+      }
+      static getDonutChartConfiguration() {
+        return new Le();
+      }
       static getHorizontalGaugeChartConfiguration(e) {
-        return new xe(e.minValue, e.maxValue);
+        return new De(e.minValue, e.maxValue);
       }
       static getSemiCircularGaugeChartConfiguration(e) {
-        return new ke(e.minValue, e.maxValue);
+        return new Ae(e.minValue, e.maxValue);
       }
       static getCircularGaugeChartConfiguration(e) {
-        return new Oe(e.minValue, e.maxValue);
+        return new Te(e.minValue, e.maxValue);
       }
       static getDialGaugeChartConfiguration(e) {
-        return new De(e.minValue, e.maxValue, e.dialPoints);
+        return new Ee(e.minValue, e.maxValue, e.dialPoints);
       }
     }
-    class ve extends ge {
-      constructor(e = de.LINE, o) {
-        (super(e), (this.lineStyle = o), void 0 === this.lineStyle && (this.lineStyle = ne.SMOOTH));
+    class ye extends fe {
+      constructor(e = ue.LINE, o) {
+        (super(e), (this.lineStyle = o), void 0 === this.lineStyle && (this.lineStyle = le.SMOOTH));
       }
     }
-    class be extends ve {
+    class me extends ye {
       constructor(e) {
-        super(de.LINE_AND_BAR, e);
+        super(ue.LINE_AND_BAR, e);
       }
     }
-    class fe extends ve {
+    class Ce extends ye {
       constructor(e) {
-        super(de.LINE, e);
+        super(ue.LINE, e);
       }
     }
-    class ye extends ge {
+    class xe extends fe {
       constructor(e) {
         super(e);
       }
     }
-    class me extends ye {
+    class we extends xe {
       constructor() {
-        super(de.BAR);
+        super(ue.BAR);
       }
     }
-    class Ce extends ge {
+    class Se extends fe {
       getSerieConfiguration(e) {
         return 'pie' !== e.type ? {} : { label: { show: !1, position: 'outside' }, labelLine: { show: !1 }, radius: ['0%', '95%'] };
       }
       constructor() {
-        super(de.PIE);
+        super(ue.PIE);
       }
     }
-    class we extends ge {
+    class Le extends fe {
       getSerieConfiguration(e) {
         return 'pie' !== e.type
           ? {}
@@ -1706,17 +1715,17 @@
             };
       }
       constructor() {
-        super(de.DONUT);
+        super(ue.DONUT);
       }
     }
-    class Se extends ge {
+    class ke extends fe {
       constructor(e) {
         super(e);
       }
     }
-    class xe extends Se {
+    class De extends ke {
       constructor(e, o) {
-        (super(de.HORIZONTAL_GAUGE), (this.minValue = e), (this.maxValue = o));
+        (super(ue.HORIZONTAL_GAUGE), (this.minValue = e), (this.maxValue = o));
       }
       getDefaultConfiguration() {
         return {
@@ -1749,13 +1758,13 @@
           : { pointer: { show: !1 }, barWidth: 32, showBackground: !0, backgroundStyle: { color: 'var(--bs-gray-500)' }, itemStyle: { barBorderWidth: 0 } };
       }
     }
-    class Le extends ge {
-      constructor(e = de.SEMI_CIRCULAR_GAUGE, o, t) {
+    class Oe extends fe {
+      constructor(e = ue.SEMI_CIRCULAR_GAUGE, o, t) {
         (super(e), (this.minValue = o), (this.maxValue = t));
       }
       getSerieConfiguration(e) {
         if ('gauge' !== e.type) return {};
-        const o = de.CIRCULAR_GAUGE === this.type;
+        const o = ue.CIRCULAR_GAUGE === this.type;
         return {
           endAngle: o ? -270 : 0,
           startAngle: o ? 90 : 180,
@@ -1768,7 +1777,7 @@
             offsetCenter: [0, o ? 0 : -10],
             color: 'var(--bs-body-color, #000)',
             fontSize: 40,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 'bold',
           },
           progress: { show: !0, width: 32 },
@@ -1780,21 +1789,21 @@
             distance: -50,
             color: 'var(--bs-body-color, #000)',
             fontSize: 14,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 400,
           },
           axisLine: { roundCap: !1, lineStyle: { width: 32, color: [[1, 'var(--bs-light)']] } },
         };
       }
     }
-    class ke extends Le {
+    class Ae extends Oe {
       constructor(e, o) {
-        super(de.SEMI_CIRCULAR_GAUGE, e, o);
+        super(ue.SEMI_CIRCULAR_GAUGE, e, o);
       }
     }
-    class De extends Le {
+    class Ee extends Oe {
       constructor(e, o, t) {
-        (super(de.DIAL_GAUGE, e, o),
+        (super(ue.DIAL_GAUGE, e, o),
           (this.dialPoints = t),
           void 0 === e && t && t.length > 1 && (this.minValue = t[0].value),
           void 0 === o && t && t.length > 0 && (this.maxValue = t[t.length - 1].value));
@@ -1826,7 +1835,7 @@
             offsetCenter: [0, 30],
             color: 'var(--bs-body-color, #000)',
             fontSize: 40,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 'bold',
           },
           progress: { show: !1 },
@@ -1842,7 +1851,7 @@
             distance: -40,
             color: 'var(--bs-body-color, #000)',
             fontSize: 14,
-            fontFamily: 'var(--bs-body-font-family, Helvetica Neue)',
+            fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
             fontWeight: 400,
             formatter: function (e) {
               const o = r.find((o) => e === o.value);
@@ -1865,12 +1874,12 @@
         });
       }
     }
-    class Oe extends Le {
+    class Te extends Oe {
       constructor(e, o) {
-        super(de.CIRCULAR_GAUGE, e, o);
+        super(ue.CIRCULAR_GAUGE, e, o);
       }
     }
-    const Ae = le.getThemeManager;
+    const Pe = he.getThemeManager;
     return o;
   })()
 );

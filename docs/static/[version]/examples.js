@@ -238,16 +238,21 @@ function generateConfigurator(id) {
 }
 
 function generateExampleDiv(id, direction) {
-  var div = document.getElementById(id);
-  const clientHeight = div.clientHeight;
-
-  div.innerHTML = `<iframe style="width: 100%; ${clientHeight ? 'min-height: ' + clientHeight + 'px' : 'min-height: 60vh;'}"></iframe>
+  let iframeHolder = document.getElementById('iframe_' + id);
+  if (!iframeHolder) {
+    const div = document.getElementById(id);
+    const clientHeight = div.clientHeight;
+    div.innerHTML = `<div id="iframe_${id}" data-iframe-min-height="${clientHeight ? 'min-height: ' + clientHeight + 'px;' : 'min-height: 60vh;'}""></div>
   <div id="configurator_${id}">
     ${generateConfigurator(id)}
   </div>
 `;
+    iframeHolder = document.getElementById('iframe_' + id);
+  }
 
-  let iframeDocument = div.querySelector('iframe').contentDocument;
+  iframeHolder.innerHTML = `<iframe style="width: 100%; ${iframeHolder.getAttribute('data-iframe-min-height')}"></iframe>`;
+
+  let iframeDocument = iframeHolder.querySelector('iframe').contentDocument;
   // Firefox approach
   iframeDocument.open();
   iframeDocument.write(`
@@ -286,9 +291,23 @@ async function displayChart(
   if (!mode) {
     mode = 'default';
   }
-  if (!refresh) {
+
+  if (!cssThemeName) {
+    cssThemeName = 'BOOSTED5';
+  }
+  let generateIFrame = !refresh;
+  let iframe = document.querySelector(`#${id} iframe`);
+  if (iframe) {
+    // In case of theme change, we need to recreate the iframe to avoid javascript and css themes cohabitation
+    const actualTheme = iframe.contentDocument.getElementById('mainCSS').getAttribute('cssThemeName');
+    if (actualTheme !== cssThemeName) {
+      iframe.remove();
+      generateIFrame = true;
+    }
+  }
+  if (generateIFrame) {
     generateExampleDiv(id, (!usedLegends || usedLegends === 'odscharts') && 'vertical' === legendsOrientation ? 'row' : 'column');
-    let iframe = document.querySelector(`#${id} iframe`);
+    iframe = document.querySelector(`#${id} iframe`);
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
@@ -298,17 +317,12 @@ async function displayChart(
     }
   }
 
-  let iframe = document.querySelector(`#${id} iframe`);
-
   if (initialOptions[id]) {
     options = initialOptions[id];
   } else {
     initialOptions[id] = options;
   }
 
-  if (!cssThemeName) {
-    cssThemeName = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.BOOSTED5;
-  }
   if (!rendererInput) {
     rendererInput = 'svg';
   }

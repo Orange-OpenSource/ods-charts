@@ -9,6 +9,7 @@
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
 import { mergeObjects, isVarArray } from '../../tools/merge-objects';
 import {
+  DEFAULT_ARROW_SIZE,
   ODSChartsPopoverAxisPointer,
   ODSChartsPopoverConfig,
   ODSChartsPopoverDefinition,
@@ -38,34 +39,23 @@ const DEFAULT_TEMPLATE_CSS = `
   display: inline-block;
   background-color: var(--bs-body-bg, #fff);
   color: var(--bs-body-color, #000);
-  border: 2px solid var(--bs-border-color-subtle, #ccc);
-  padding: 20px 18px 20px 18px;
+  border: 2px solid var(--bs-border-color-subtle, #ccc);  
+  padding-left: var(--ods-popover-body-padding-x, 9px);
+  padding-right: var(--ods-popover-body-padding-x, 9px);
+  padding-top: var(--ods-popover-header-padding-top, 5px);
+  padding-bottom: var(--ods-popover-body-padding-bottom, 7px);
 }
-.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-inner {
-  background-color: var(--bs-gray-950, #141414);
-  color: var(--bs-white, #fff);
-  border: 2px solid var(--bs-gray-700, #666);
-} 
-.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-inner {
-  background-color: var(--bs-white, #fff);
-  color: var(--bs-black, #000);
-  border: 2px solid var(--bs-gray-500, #ccc);
-} 
 
 .ods-charts-popover .ods-charts-popover-header {
   color: var(--bs-body-color, #000);
-  font-size: 18px;
-  font-weight: 700;
-  padding-bottom:10px;
-}  
-.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-header {
-  color: var(--bs-white, #fff);
-}
-.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-header {
-  color: var(--bs-black, #000);
+  font-size: var(--ods-popover-header-font-size, 14px);
+  font-weight: var(--ods-popover-header-font-weight, 700);
+  line-height: var(--ods-popover-header-line-height, 1.11);
+  padding-bottom:var(--ods-popover-header-padding-bottom, 5px);
 }
 
-.ods-charts-popover .ods-charts-popover-arrow  { 
+.ods-charts-popover .ods-charts-popover-arrow  {
+  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
   position: absolute;
   bottom: -8px;
   width: 20px;
@@ -86,12 +76,6 @@ const DEFAULT_TEMPLATE_CSS = `
   top: 2px;
   left: 0;
 }
-.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {
-  border-top-color: var(--bs-gray-700, #666);
-}
-.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::before {
-  border-top-color: var(--bs-gray-500, #ccc);
-}
 
 .ods-charts-popover .ods-charts-popover-arrow::after {
   border-color: transparent;
@@ -104,12 +88,6 @@ const DEFAULT_TEMPLATE_CSS = `
   border-style: solid;
   top: 0;
   left: 0;
-}
-.ods-charts-popover.ods-charts-mode-dark .ods-charts-popover-arrow::after{
-  border-top-color: var(--bs-gray-950, #141414);
-}
-.ods-charts-popover.ods-charts-mode-light .ods-charts-popover-arrow::after{
-  border-top-color: var(--bs-white, #fff);
 }
 `;
 
@@ -128,13 +106,33 @@ const DEFAULT_NONE_CSS = `
   position: relative;
   display: block;
 }
+
+.ods-charts-no-css-lib .ods-charts-popover-line {
+  display: flex;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  align-items: center;
+}
+
 .ods-charts-no-css-lib .ods-charts-popover-text {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
+  flex-grow: 1;
+  display: flex;
+  font-size: var(--ods-popover-body-font-size, 14px);
+  font-weight: var(--ods-popover-body-font-weight, 700);
+  line-height: var(--ods-popover-body-line-height, 1.11);
   color: var(--bs-body-color, #000000);
 }
+
+
+.ods-charts-no-css-lib .ods-charts-popover-label {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.ods-charts-no-css-lib .ods-charts-popover-value {
+  font-weight: 700;
+}
+
 .ods-charts-no-css-lib.ods-charts-mode-dark .ods-charts-popover-text {
   color: var(--bs-body-color, #fff);
 }
@@ -334,14 +332,14 @@ export class ODSChartsPopover {
                 left: mousePosition[0] - containerSize.contentSize[0] / 2,
               };
 
+              const arrowSize: number = DEFAULT_ARROW_SIZE;
               if (dataOptions?.tooltip?.confine) {
-                const arrowSize: number = 10;
                 const displayTooltipOnTop: boolean = mousePosition[1] > containerSize.contentSize[1];
                 let tooltipLeftPosition: number;
 
                 tooltipPosition[['top', 'bottom'][+displayTooltipOnTop]] = displayTooltipOnTop
-                  ? containerSize.viewSize[1] - mousePosition[1] + 10
-                  : mousePosition[1] + 10;
+                  ? containerSize.viewSize[1] - mousePosition[1] + arrowSize
+                  : mousePosition[1] + arrowSize;
 
                 if (mousePosition[0] > containerSize.viewSize[0] - containerSize.contentSize[0] / 2) {
                   tooltipLeftPosition = Math.min(
@@ -360,7 +358,7 @@ export class ODSChartsPopover {
                   this.tooltipStyle += ' top: -8px; transform: scaleY(-1);';
                 }
               } else {
-                tooltipPosition['top'] = mousePosition[1] - containerSize.contentSize[1] - 10;
+                tooltipPosition['top'] = mousePosition[1] - containerSize.contentSize[1] - arrowSize;
               }
 
               return tooltipPosition;

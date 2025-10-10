@@ -631,7 +631,7 @@ export class ODSChartsTheme {
 
       const axisLabel = {
         fontStyle: 'normal',
-        fontWeight: '700',
+        fontWeight: 'var(--bs-body-font-weight, 400)',
         fontSize: 14,
         fontFamily: 'Helvetica Neue, sans-serif',
         color:

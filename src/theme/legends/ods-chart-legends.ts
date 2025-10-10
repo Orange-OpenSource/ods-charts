@@ -59,9 +59,9 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
 .ods-charts-no-css-lib .ods-charts-legend-label {
   cursor: pointer;
   display: inline-block;
-  font-weight: 700;
-  font-size: 16px;
-  line-height 24px
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }
 
 [data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {
