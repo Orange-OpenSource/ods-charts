@@ -92,13 +92,13 @@ const EXISTING_IN_BOOSTED5_VARIABLES = `
 }
 
 
-[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme], [data-bs-theme] .ods-charts-context[data-bs-theme] {
+[data-bs-theme] .ods-charts-context, .ods-charts-context[data-bs-theme] {
     color: var(--bs-body-color);
     background-color: var(--bs-body-bg);
 }
 
 
-[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a, [data-bs-theme] .ods-charts-context[data-bs-theme] a {
+[data-bs-theme] .ods-charts-context a, .ods-charts-context[data-bs-theme] a {
     color: var(--bs-link-color);
 }
     
@@ -330,7 +330,7 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
 
 [data-bs-theme="dark"] .ods-charts-context, .ods-charts-context[data-bs-theme="dark"], [data-bs-theme] .ods-charts-context[data-bs-theme="dark"] {
   color-scheme: dark;
-  
+
   --ods-yellow-1: var(--ods-yellow-100);
   --ods-yellow-2: var(--ods-yellow-200);
   --ods-yellow-3: var(--ods-yellow-300);
