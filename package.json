@@ -17,6 +17,7 @@
     "astro:build": "astro build --root docs",
     "astro:preview": "astro preview --root docs --port 3000",
     "docs:build": "rm -rf ./docs/dist && npm run typedoc && npm run astro:build",
+    "install:lib": "rm -rf node_modules package-lock.json && npm run install:all && npm run serve",
     "install:all": "npm i && npm run build && cd test/angular-echarts && npm i && cd ../angular-ng-boosted && npm i && cd ../angular-ngx-echarts && npm i && cd ../react && npm i && cd ../vue && npm i && cd ../..",
     "install:all-deep": "rm -rf node_modules package-lock.json && cd ./test/angular-echarts/node_modules && rm -rf node_modules package-lock.json && cd ../angular-ng-boosted && rm -rf node_modules package-lock.json && cd ../angular-14/node_modules && rm -rf node_modules package-lock.json && cd ../angular-ngx-echarts && rm -rf node_modules package-lock.json && cd ../react && rm -rf node_modules package-lock.json && cd ../vue && rm -rf node_modules package-lock.json && cd ../.. && npm run install:all",
     "install:angular-ngx-echarts": "npm i && npm run build && cd test/angular-ngx-echarts && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-ngx-echarts",
@@ -69,7 +70,7 @@
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.13",
     "typescript": "^5.9.3",
-    "webpack": "^5.101.3",
+    "webpack": "^5.102.1",
     "webpack-cli": "^6.0.1"
   }
 }
