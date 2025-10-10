@@ -31,14 +31,13 @@ legend: {
             <code class="text-body-secondary">
               <pre>
 themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_legend', orientation: 'vertical'});
-            </pre
-              >
+              </pre>
             </code>
           </small>
         </p>
       </div>
       <p class="card-text pe-5">In the example below, we prefer the Apache ECharts <code>legend.orient</code> method.</p>
-      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">      
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
           <use xlink:href="#lightning-charge-fill" />
         </svg>
@@ -414,7 +413,136 @@ themeManager.externalizeLegends(
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h5 class="card-title">Legend holder with custom content example</h5>
-      <p class="card-text pe-5">In this example, we demonstrate how to add custom HTML content after the legend items using the <code>postItemContent</code> option.</p>
+      <p class="card-text pe-5">In this example, we show a very simple example on how to add custom HTML content after the legend items using the <code>postItemContent</code> option.</p>
+      <p class="card-text pe-5">The <code>postItemContent</code> property allows you to inject HTML content in three ways:</p>
+      <ol>
+        <li>As a string: content will be displayed after all legend items</li>
+        <li>As a function: content will be customized for each legend label</li>
+        <li>As a Map: content will be mapped directly to legend labels</li>
+      </ol>
+      <p class="card-text pe-5">
+        For full illustration, have a look to the next use case, here will illustrate usage of the map:
+        <code>
+          <pre>
+themeManager.externalizeLegends(
+  myChart,
+  {
+    legendHolderSelector: '#legend_with_custom_content', 
+    postItemContent: {
+      'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
+      'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
+    }
+  }
+);
+          </pre>
+        </code>
+      </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />          
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="custom_simple_content_htmlId">
+        <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div id="barChartCSC_holder">
+                <div id="barChartCSC_chart" style="width: 100%; height: 50vh"></div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div id="barChartCSC_legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('custom_simple_content_');
+      </script>
+    </div>
+
+  </div>
+  <script id="custom_simple_content_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+
+    // this is the data to be displayed
+    var dataOptions = {
+      yAxis: {
+        type: 'category',
+        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      },
+      xAxis: {},
+      series: [
+        {
+          data: [10, 22, 28.8956454657, 23, 19, 15],
+          type: 'bar',
+          stack: true,
+        },
+        {
+          data: [28.8956454657, 23, 19, 15, 18, 12],
+          type: 'bar',
+          stack: true,
+        },
+        {
+          data: [19, 15, 18, 12, 28.8956454657, 23],
+          type: 'bar',
+          stack: true,
+        },
+      ],
+      legend: {
+        data: ['label 0', 'label 1', 'label 2'],
+        orient: 'vertical',
+      },
+    };
+
+    ///////////////////////////////////////////////////
+    // ODSCharts
+    ///////////////////////////////////////////////////
+    // Build the theme
+    var themeManager = ODSCharts.getThemeManager();
+
+    // register this theme to echarts
+    echarts.registerTheme(themeManager.name, themeManager.theme);
+
+    // get the chart holder and initiate it with the generated theme
+    var div = document.getElementById('barChartCSC_chart');
+    var myChart = echarts.init(div, themeManager.name, {
+      renderer: 'svg',
+    });
+
+    // Set the data to be displayed.
+    themeManager.setDataOptions(dataOptions);
+    // Register the externalization of the legend.
+    themeManager.externalizeLegends(myChart,
+      {
+        legendHolderSelector: '#barChartCSC_legend',
+        postItemContent: {
+          'label 2': '<small>(partial result)</small>',
+        }
+      }
+    );
+    // Manage window size changed
+    themeManager.manageChartResize(myChart, 'barChartCSC_chart');
+    // Register the externalization of the tooltip/popup
+    themeManager.externalizePopover();
+    // Observe dark / light mode changes
+    themeManager.manageThemeObserver(myChart);
+    // Display the chart using the configured theme and data.
+    myChart.setOption(themeManager.getChartOptions());
+
+  </script>
+
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Legend holder with custom content complex example</h5>
+      <p class="card-text pe-5">In this example, we demonstrate how to add custom HTML content after the legend items using the different possibilities of <code>postItemContent</code> option.</p>
       <p class="card-text pe-5">The <code>postItemContent</code> property allows you to inject HTML content in three ways:</p>
       <ol>
         <li>As a string: content will be displayed after all legend items</li>
@@ -428,83 +556,75 @@ themeManager.externalizeLegends(
 // Example 1: Static content for all legends
 themeManager.externalizeLegends(
   myChart,
-  [{ 
+  { 
     legendHolderSelector: '#legend_with_custom_content', 
-    seriesRef: ['sales'], 
-    orientation: 'horizontal',
     postItemContent: '&lt;div class="custom-legend-footer"&gt;Additional information&lt;/div&gt;'
-  }]
+  }
 );
-
+          </pre>
+          <pre>
 // Example 2: Dynamic content based on legend label
 themeManager.externalizeLegends(
-myChart,
-[{
-legendHolderSelector: '#legend_with_custom_content',
-seriesRef: ['sales', 'profit'],
-orientation: 'horizontal',
-postItemContent: (legendLabel) => {
-switch(legendLabel) {
-case 'Sales':
-return '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;';
-case 'Profit':
-return '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;';
-default:
-return '';
-}
-}
-}]
+  myChart,
+  {
+    legendHolderSelector: '#legend_with_custom_content', 
+    postItemContent: (legendLabel) => {
+      switch(legendLabel) {
+        case 'Sales':
+          return '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;';
+        case 'Profit':
+          return '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;';
+        default:
+          return '';
+      }
+    }
+  }
 );
-
+          </pre>
+          <pre>
 // Example 3: Using an object to map legend labels to content
-const legendContent = {
-'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
-'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
-};
-
 themeManager.externalizeLegends(
 myChart,
-[{
-legendHolderSelector: '#legend\*with_custom_content',
-seriesRef: ['sales', 'profit'],
-orientation: 'horizontal',
-postItemContent: legendContent
-}]
+  {
+    legendHolderSelector: '#legend_with_custom_content', 
+    postItemContent: {
+      'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
+      'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
+    }
+  }
 );
-
-</pre>
-</code>
-</p>
-<button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
-<svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-<use xlink:href="#lightning-charge-fill" />
-</svg>
-<span class="visually-hidden">Open in playground using StackBlitz</span>
-</button>
-<div id="custom_content_htmlId">
-<div class="border border-subtle">
-<div class="chart_title mx-3">
-<h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
-<h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
-</div>
-<div id="customContent_holder">
-<div id="customContent_chart" style="width: 100%; height: 40vh"></div>
-</div>
-<div class="mx-3">
-<h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
-<div id="legend_with_custom_content"></div>  
- <h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
-<div id="legend_with_map_content"></div>
-<h6 class="mt-4 mb-2">Website Analytics (String-based legend)</h6>
-<div id="legend_with_string_content"></div>
-</div>
-</div>
-</div>
-<script>
-addViewCode('custom_content_');
-</script>
-</div>
-
+          </pre>
+        </code>
+      </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />          
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="custom_content_htmlId">      
+        <div class="border border-subtle">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
+          </div>
+          <div id="customContent_holder">
+            <div id="customContent_chart" style="width: 100%; height: 40vh"></div>
+          </div>
+          <div class="mx-3">
+            <h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
+            <div id="legend_with_custom_content"></div>  
+            <h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
+            <div id="legend_with_map_content"></div>
+            <h6 class="mt-4 mb-2">Website Analytics (String-based legend)</h6>
+            <div id="legend_with_string_content"></div>
+          </div>
+        </div>
+      </div>
+      <script>
+      addViewCode('custom_content_');
+      </script>
+    </div>
   </div>
   <script id="custom_content_codeId">
     ///////////////////////////////////////////////////

@@ -363,9 +363,8 @@
             var l, c, d, h, p, u, g, v;
             let b = t.index[a] % o.length;
             const f = `<a class="ods-charts-legend-link ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[b]}; ${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`,
-              y = a === ((null == t ? void 0 : t.labels.length) || 0) - 1,
-              m = this.getCustomLegendContent(n, i, y);
-            return (console.log(f + m), f + m);
+              y = a === ((null == t ? void 0 : t.labels.length) || 0) - 1;
+            return f + this.getCustomLegendContent(n, i, y);
           })
           .join('\n    ')}\n    </div>\n    </div>`;
       }
