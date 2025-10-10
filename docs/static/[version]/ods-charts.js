@@ -495,7 +495,7 @@
             }),
             (this.getOrCreatePopupInstance = this._getOrCreatePopupInstance.bind(this)),
             (this.tooltipDelay = 0),
-            (this.tooltipMarging = 25));
+            (this.tooltipMarging = 15));
         }
         _getOrCreatePopupInstance(e, o, t, s, r) {
           var n;
