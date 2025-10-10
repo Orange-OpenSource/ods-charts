@@ -982,19 +982,37 @@ window.generateDatasetBarChart = async (id) => {
   displayChart('getBarChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.DARKER_TINTS);
 };
 
-window.generateBarLineChart = async (id, horizontal = false, grouped = false, stacked = true) => {
+window.generateBarLineChart = async (id, horizontal = false, grouped = false, stacked = true, dualAxis = false) => {
   // Specify the configuration items and data for the chart
   var option = {
     [horizontal ? 'yAxis' : 'xAxis']: {
       type: 'category',
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
     },
-    [horizontal ? 'xAxis' : 'yAxis']: {},
+    [horizontal ? 'xAxis' : 'yAxis']: dualAxis
+      ? [
+          {
+            type: 'value',
+            name: 'Quantité',
+            position: 'left',
+          },
+          {
+            type: 'value',
+            name: 'Pourcentage',
+            position: 'right',
+            axisLabel: {
+              formatter: '{value} %',
+            },
+          },
+        ]
+      : {},
     series: [
       {
-        data: [10, 22, 28.8956454657, 23, 19, 15],
+        name: 'Quantité',
+        data: [120, 200, 150, 180, 230, 190],
         type: 'bar',
         stack: stacked ? true : undefined,
+        yAxisIndex: 0,
       },
     ]
       .concat(
@@ -1004,11 +1022,21 @@ window.generateBarLineChart = async (id, horizontal = false, grouped = false, st
                 data: [28.8956454657, 23, 19, 15, 18, 12],
                 type: 'bar',
                 stack: stacked ? true : undefined,
+                yAxisIndex: 0,
               },
             ]
           : []
       )
-      .concat([{ data: [12, 28.8956454657, 23, 15, 15, 18], type: 'line' }]),
+      .concat([
+        {
+          name: 'Taux de croissance',
+          data: [15, 25, 18, 22, 28, 20],
+          type: 'line',
+          yAxisIndex: dualAxis ? 1 : 0,
+          symbol: 'circle',
+          symbolSize: 8,
+        },
+      ]),
   };
   displayChart(
     'getLineAndBarChartConfiguration',
