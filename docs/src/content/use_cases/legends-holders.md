@@ -501,7 +501,7 @@ postItemContent: legendContent
 </div>
 </div>
 <script>
-addViewCode('custom_content*');
+addViewCode('custom_content_');
 </script>
 </div>
 
