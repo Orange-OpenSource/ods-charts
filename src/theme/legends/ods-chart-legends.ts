@@ -360,7 +360,6 @@ export class ODSChartsLegends {
 
       const isLastLegend = indexInHolder === (legends?.labels.length || 0) - 1;
       const customContent = this.getCustomLegendContent(legendLabel, postItemContent, isLastLegend);
-      console.log(legendHtml + customContent);
       return legendHtml + customContent;
     }).join(`
     `)}
