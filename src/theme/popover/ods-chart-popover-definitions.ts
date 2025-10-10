@@ -224,7 +224,7 @@ class BOOSTED5_Definition extends ODSChartsPopoverDefinitionWithRenderer {
     mode: ODSChartsMode
   ) => ODSChartsPopoverManager | undefined = this._getOrCreatePopupInstance.bind(this);
   public tooltipDelay = 0;
-  public tooltipMarging = 25;
+  public tooltipMarging = 15;
 
   private _getOrCreatePopupInstance(
     selector: string,
