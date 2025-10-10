@@ -72,6 +72,9 @@ export class ODSChartsCSSLegendsDefinition extends ODSChartsItemGroupCSSDefiniti
   odsChartsLegendColorHolder?: ODSChartsItemCSSDefinition;
   odsChartsLegendColor?: ODSChartsItemCSSDefinition;
   odsChartsLegendLabel?: ODSChartsItemCSSDefinition;
+  odsChartsLegendItem?: ODSChartsItemCSSDefinition;
+  odsChartsLegendCustomContent?: ODSChartsItemCSSDefinition;
+  odsChartsLegendGlobalCustomContent?: ODSChartsItemCSSDefinition;
 }
 
 export class ODSChartsCSSPopoverDefinition extends ODSChartsItemGroupCSSDefinition {
@@ -121,7 +124,10 @@ const BOOSTED5_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendContainerHorizontal: {
       classes: ['mx-4'],
     },
-    odsChartsLegendLink: { classes: ['mx-2', 'pb-2', 'text-decoration-none'] },
+    odsChartsLegendItem: { classes: ['mx-2', 'pb-2'] },
+    odsChartsLegendCustomContent: { classes: ['ms-1'] },
+    odsChartsLegendGlobalCustomContent: { classes: ['ms-2'] },
+    odsChartsLegendLink: { classes: ['text-decoration-none'] },
     odsChartsLegendLinkOpacity: { classes: ['opacity-25'] },
     odsChartsLegendColorHolder: {
       classes: ['d-inline-block'],
@@ -169,8 +175,11 @@ const BOOSTED4_Definition: ODSChartsCSSThemeDefinition = {
     odsChartsLegendContainerHorizontal: {
       classes: ['mx-4'],
     },
+    odsChartsLegendItem: { classes: ['mx-2', 'pb-2'] },
+    odsChartsLegendCustomContent: { classes: ['ml-1'] },
+    odsChartsLegendGlobalCustomContent: { classes: ['ml-2'] },
     odsChartsLegendLink: {
-      classes: ['mx-2', 'pb-2', 'text-decoration-none'],
+      classes: ['text-decoration-none'],
       styles: {
         opacity: '1',
       },

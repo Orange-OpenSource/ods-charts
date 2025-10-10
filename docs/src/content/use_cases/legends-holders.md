@@ -427,10 +427,9 @@ themeManager.externalizeLegends(
 themeManager.externalizeLegends(
   myChart,
   {
-    legendHolderSelector: '#legend_with_custom_content', 
+    legendHolderSelector: '#legend_with_custom_content',
     postItemContent: {
-      'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
-      'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
+      'label 1': '&lt;small>(partial result)&lt;/small>',
     }
   }
 );
@@ -450,12 +449,12 @@ themeManager.externalizeLegends(
             <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
           </div>
           <div class="row">
-            <div class="col-8">
+            <div class="col-9">
               <div id="barChartCSC_holder">
                 <div id="barChartCSC_chart" style="width: 100%; height: 50vh"></div>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <div id="barChartCSC_legend"></div>
             </div>
           </div>
@@ -524,7 +523,7 @@ themeManager.externalizeLegends(
       {
         legendHolderSelector: '#barChartCSC_legend',
         postItemContent: {
-          'label 2': '<small>(partial result)</small>',
+          'label 1': '<small>(partial result)</small>',
         }
       }
     );
@@ -764,8 +763,6 @@ myChart,
       .global-note {
         background-color: #f8f9fa;
         border-radius: 4px;
-        padding: 8px;
-        margin-top: 12px;
         font-style: italic;
       }
       .metric-note {
@@ -773,8 +770,7 @@ myChart,
         font-size: 0.85em;
         background: #e9ecef;
         border-radius: 4px;
-        padding: 2px 8px;
-        margin-left: 12px;
+        padding: 2px 0px;
       }
       .revenue-note { color: #1b6ec2; }
       .profit-note { color: #2b8a3e; }
