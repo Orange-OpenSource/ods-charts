@@ -1,1 +1,2 @@
 npm run prettier:staged
+npm run lint
