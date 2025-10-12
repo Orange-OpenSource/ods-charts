@@ -49,16 +49,10 @@ export class ODSChartsLegendHolderDefinition {
      */
     public seriesRef?: string[],
     /**
-     * This option defines HTML content that will be displayed after the legend items.
+     * This option defines HTML content that will be displayed after each individual legend item.
      * It can be:
-     * - A string containing HTML content (applied to all legends)
      * - A function that receives the legend label and returns custom HTML content for that specific legend
      * - An object mapping legend labels to their custom HTML content
-     *
-     * Example with static content:
-     * ```
-     * postItemContent: '<div class="custom-footer">Additional info</div>'
-     * ```
      *
      * Example with dynamic content based on legend label:
      * ```
@@ -81,6 +75,16 @@ export class ODSChartsLegendHolderDefinition {
      * }
      * ```
      */
-    public postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string }
+    public postItemContent?: ((legendLabel: string) => string) | { [key: string]: string },
+    /**
+     * This option defines HTML content that will be displayed after all legend items.
+     * It should be a string containing HTML content that will be added at the end of the legend group.
+     *
+     * Example:
+     * ```
+     * afterLegendContent: '<div class="legend-footer">Last updated: October 2025</div>'
+     * ```
+     */
+    public afterLegendContent?: string
   ) {}
 }

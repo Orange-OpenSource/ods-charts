@@ -317,7 +317,8 @@ export class ODSChartsLegends {
         mode,
         legendHolders[legendHolderSelector].orientation,
         dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined,
-        legendHolders[legendHolderSelector].postItemContent
+        legendHolders[legendHolderSelector].postItemContent,
+        legendHolders[legendHolderSelector].afterLegendContent
       );
     }
   }
@@ -340,7 +341,8 @@ export class ODSChartsLegends {
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
     formatter?: (name: string) => string,
-    postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string }
+    postItemContent?: ((legendLabel: string) => string) | { [key: string]: string },
+    afterLegendContent?: string
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -379,12 +381,12 @@ export class ODSChartsLegends {
     </span>`;
     }).join(`
     `)}${
-      postItemContent && typeof postItemContent === 'string'
+      afterLegendContent
         ? `<span
       class="ods-charts-legend-global-custom-content"
       ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendGlobalCustomContent)}
       style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendGlobalCustomContent)}"
-      >${postItemContent}</span>`
+      >${afterLegendContent}</span>`
         : ''
     }
     </div>
@@ -397,18 +399,13 @@ export class ODSChartsLegends {
    * @param postItemContent The configuration for custom content (string, function, or Map)
    * @returns The generated HTML content string
    */
-  private getCustomLegendItemContent(legendLabel: string, postItemContent?: string | ((legendLabel: string) => string) | { [key: string]: string }): string {
+  private getCustomLegendItemContent(legendLabel: string, postItemContent?: ((legendLabel: string) => string) | { [key: string]: string }): string {
     if (!postItemContent) {
       return '';
     }
 
     if (typeof postItemContent === 'function') {
       return postItemContent(legendLabel);
-    }
-
-    if (typeof postItemContent === 'string') {
-      // For string type, we add the content only after the last legend
-      return '';
     }
 
     if (typeof postItemContent === 'object') {

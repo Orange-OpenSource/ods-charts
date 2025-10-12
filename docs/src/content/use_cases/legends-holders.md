@@ -541,28 +541,26 @@ themeManager.externalizeLegends(
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h5 class="card-title">Legend holder with custom content complex example</h5>
-      <p class="card-text pe-5">In this example, we demonstrate how to add custom HTML content after the legend items using the different possibilities of <code>postItemContent</code> option.</p>
-      <p class="card-text pe-5">The <code>postItemContent</code> property allows you to inject HTML content in three ways:</p>
+      <p class="card-text pe-5">In this example, we demonstrate how to add custom HTML content to your legends using both <code>postItemContent</code> and <code>afterLegendContent</code> options.</p>
+      <p class="card-text pe-5">There are two ways to add custom content to your legends:</p>
       <ol>
-        <li>As a string: content will be displayed after all legend items</li>
-        <li>As a function: content will be customized for each legend label</li>
-        <li>As a Map: content will be mapped directly to legend labels</li>
+        <li>Using <code>postItemContent</code> to add content after each individual legend item:
+          <ul>
+            <li>As a function: customize content for each legend label</li>
+            <li>As an object: map legend labels directly to their custom content</li>
+          </ul>
+        </li>
+        <li>Using <code>afterLegendContent</code> to add content that appears after all legend items:
+          <ul>
+            <li>As a string: single piece of content displayed at the bottom of the legend group</li>
+          </ul>
+        </li>
       </ol>
       <p class="card-text pe-5">
-        Here's how to use it:
+        Here's how to use both options:
         <code>
           <pre>
-// Example 1: Static content for all legends
-themeManager.externalizeLegends(
-  myChart,
-  { 
-    legendHolderSelector: '#legend_with_custom_content', 
-    postItemContent: '&lt;div class="custom-legend-footer"&gt;Additional information&lt;/div&gt;'
-  }
-);
-          </pre>
-          <pre>
-// Example 2: Dynamic content based on legend label
+// Example 1: Function-based postItemContent - Customize content per legend
 themeManager.externalizeLegends(
   myChart,
   {
@@ -581,15 +579,25 @@ themeManager.externalizeLegends(
 );
           </pre>
           <pre>
-// Example 3: Using an object to map legend labels to content
+// Example 2: Object-based postItemContent - Map labels to content
 themeManager.externalizeLegends(
-myChart,
+  myChart,
   {
-    legendHolderSelector: '#legend_with_custom_content', 
+    legendHolderSelector: '#legend_with_map_content', 
     postItemContent: {
       'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
       'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
     }
+  }
+);
+          </pre>
+          <pre>
+// Example 3: Using afterLegendContent - Add global content after all legends
+themeManager.externalizeLegends(
+  myChart,
+  {
+    legendHolderSelector: '#legend_with_string_content',
+    afterLegendContent: '&lt;div class="global-note"&gt;Last updated: October 2025&lt;/div&gt;'
   }
 );
           </pre>
@@ -813,11 +821,11 @@ myChart,
         }
       },
       {
-        // Example 3: String-based content - Same content for all legends
+        // Example 3: Content after all legends using afterLegendContent
         legendHolderSelector: '#legend_with_string_content',
         orientation: 'horizontal',
         seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
-        postItemContent: '<div class="global-note">Data from our analytics platform - Updated daily</div>'
+        afterLegendContent: '<div class="global-note">Data from our analytics platform - Updated daily</div>'
       }
     ]);
 

@@ -356,12 +356,12 @@
         e.legend.show = !1;
         for (const e of Object.keys(i)) {
           if ((this.generateHandler(e, t), !document.querySelector(e))) throw new Error(`Can't find legend holder using the selector ${e}`);
-          document.querySelector(e).innerHTML = this.generateLegend(e, o, i[e].legends, t, n, i[e].orientation, i[e].postItemContent);
+          document.querySelector(e).innerHTML = this.generateLegend(e, o, i[e].legends, t, n, i[e].orientation, i[e].postItemContent, i[e].afterLegendContent);
         }
       }
-      generateLegend(e, o, t, s, n, a = 'horizontal', i) {
-        var l, c, d, h, p, u, g, v, b, f;
-        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerVertical) : r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendContainerVertical) : r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
+      generateLegend(e, o, t, s, n, a = 'horizontal', i, l) {
+        var c, d, h, p, u, g, v, b, f, y;
+        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerVertical) : r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerVertical) : r.getStyles(null === (b = s.legends) || void 0 === b ? void 0 : b.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
           ? t.labels
           : []
         )
@@ -373,10 +373,10 @@
           })
           .join(
             '\n    '
-          )}${i && 'string' == typeof i ? `<span\n      class="ods-charts-legend-global-custom-content"\n      ${r.getClasses(null === (b = s.legends) || void 0 === b ? void 0 : b.odsChartsLegendGlobalCustomContent)}\n      style="${r.getStyles(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendGlobalCustomContent)}"\n      >${i}</span>` : ''}\n    </div>\n    </div>`;
+          )}${l ? `<span\n      class="ods-charts-legend-global-custom-content"\n      ${r.getClasses(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendGlobalCustomContent)}\n      style="${r.getStyles(null === (y = s.legends) || void 0 === y ? void 0 : y.odsChartsLegendGlobalCustomContent)}"\n      >${l}</span>` : ''}\n    </div>\n    </div>`;
       }
       getCustomLegendItemContent(e, o) {
-        return o ? ('function' == typeof o ? o(e) : 'string' == typeof o ? '' : ('object' == typeof o && o[e]) || '') : '';
+        return o ? ('function' == typeof o ? o(e) : ('object' == typeof o && o[e]) || '') : '';
       }
       generateHandler(e, o) {
         (window.ods_chart_legend_switchLegend || (window.ods_chart_legend_switchLegend = {}),
@@ -1636,8 +1636,8 @@
       }
     }
     class pe {
-      constructor(e, o, t, s) {
-        ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t), (this.postItemContent = s));
+      constructor(e, o, t, s, r) {
+        ((this.legendHolderSelector = e), (this.orientation = o), (this.seriesRef = t), (this.postItemContent = s), (this.afterLegendContent = r));
       }
     }
     var ue;
