@@ -442,9 +442,9 @@ themeManager.externalizeLegends(
   myChart,
   {
     legendHolderSelector: '#legend_with_custom_content',
-    postItemContent: {
-      'label 1': '&lt;small>(partial result)&lt;/small>',
-    }
+    postItemContent: new Map([
+      ['label 1', '&lt;small>(partial result)&lt;/small>']
+    ])
   }
 );
           </pre>
@@ -593,15 +593,15 @@ themeManager.externalizeLegends(
 );
           </pre>
           <pre>
-// Example 2: Object-based postItemContent - Map labels to content
+// Example 2: Map-based postItemContent - Map labels to content
 themeManager.externalizeLegends(
   myChart,
   {
     legendHolderSelector: '#legend_with_map_content', 
-    postItemContent: {
-      'Sales': '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;',
-      'Profit': '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;'
-    }
+    postItemContent: new Map([
+      ['Sales', '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;'],
+      ['Profit', '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;']
+    ])
   }
 );
           </pre>
@@ -830,15 +830,15 @@ themeManager.externalizeLegends(
         }
       },
       {
-        // Example 2: Object-based content - Direct mapping between labels and content
+        // Example 2: Map-based content - Direct mapping between labels and content
         legendHolderSelector: '#legend_with_map_content',
         orientation: 'horizontal',
         seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
-        postItemContent: {
-          'Sales 2025': '<span class="metric-note revenue-note">Projected data</span>',
-          'Sales 2024': '<span class="metric-note profit-note">Historical data</span>',
-          'Growth Rate': '<span class="metric-note conversion-note">Year-over-year change</span>'
-        }
+        postItemContent: new Map([
+          ['Sales 2025', '<span class="metric-note revenue-note">Projected data</span>'],
+          ['Sales 2024', '<span class="metric-note profit-note">Historical data</span>'],
+          ['Growth Rate', '<span class="metric-note conversion-note">Year-over-year change</span>']
+        ])
       },
       {
         // Example 3: Content after all legends using afterLegendContent

@@ -69,12 +69,12 @@ export class ODSChartsLegendHolderDefinition {
      * }
      * ```
      *
-     * Example with object mapping:
+     * Example with Map:
      * ```
-     * postItemContent: {
-     *   'Sales': '<div class="sales-note">Revenue data includes taxes</div>',
-     *   'Profit': '<div class="profit-note">Net profit after adjustments</div>'
-     * }
+     * postItemContent: new Map([
+     *   ['Sales', '<div class="sales-note">Revenue data includes taxes</div>'],
+     *   ['Profit', '<div class="profit-note">Net profit after adjustments</div>']
+     * ])
      * ```
      *
      * @param legendName The label of the legend item
@@ -84,7 +84,7 @@ export class ODSChartsLegendHolderDefinition {
      */
     public postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | { [key: string]: string },
+      | Map<string, string>,
     /**
      * This option defines HTML content that will be displayed after all legend items.
      * It should be a string containing HTML content that will be added at the end of the legend group.

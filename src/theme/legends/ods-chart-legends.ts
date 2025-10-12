@@ -341,7 +341,7 @@ export class ODSChartsLegends {
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
     formatter?: (name: string) => string,
-    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | { [key: string]: string },
+    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | Map<string, string>,
     afterLegendContent?: string
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -418,7 +418,7 @@ export class ODSChartsLegends {
     legendIndex: number,
     color: string,
     colorIndex: number,
-    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | { [key: string]: string }
+    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | Map<string, string>
   ): string {
     if (!postItemContent) {
       return '';
@@ -428,8 +428,8 @@ export class ODSChartsLegends {
       return postItemContent(legendLabel, legendName, legendIndex, color, colorIndex);
     }
 
-    if (typeof postItemContent === 'object') {
-      return postItemContent[legendName] || '';
+    if (postItemContent instanceof Map) {
+      return postItemContent.get(legendName) || '';
     }
 
     return '';
