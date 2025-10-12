@@ -376,7 +376,7 @@
           )}${l ? `<span\n      class="ods-charts-legend-global-custom-content"\n      ${r.getClasses(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendGlobalCustomContent)}\n      style="${r.getStyles(null === (y = s.legends) || void 0 === y ? void 0 : y.odsChartsLegendGlobalCustomContent)}"\n      >${l}</span>` : ''}\n    </div>\n    </div>`;
       }
       getCustomLegendItemContent(e, o, t, s, r, n) {
-        return n ? ('function' == typeof n ? n(e, o, t, s, r) : (n instanceof Map && n.get(o)) || '') : '';
+        return n ? ('function' == typeof n ? n(e, o, t, s, r) : n instanceof Map ? n.get(o) || '' : (Array.isArray(n) && n[t]) || '') : '';
       }
       generateHandler(e, o) {
         (window.ods_chart_legend_switchLegend || (window.ods_chart_legend_switchLegend = {}),
@@ -604,13 +604,13 @@
       })(),
       NONE: {},
     };
-    var O;
-    function A(e) {
-      return e && (e.data || (e.type && Object.values(O).includes(e.type)));
+    var A;
+    function O(e) {
+      return e && (e.data || (e.type && Object.values(A).includes(e.type)));
     }
     !(function (e) {
       ((e.category = 'category'), (e.time = 'time'));
-    })(O || (O = {}));
+    })(A || (A = {}));
     const E = `\n.ods-charts-popover {\n  margin: 0 !important;\n  padding: 0 !important;\n  border: none !important;\n  box-shadow: none !important;\n  background: none !important;\n}\n  \n.ods-charts-popover.ods-charts-enterable-false {\n  pointer-events: none !important;\n}\n\n.ods-charts-popover .ods-charts-popover-inner  {\n  display: inline-block;\n  background-color: var(--bs-body-bg, #fff);\n  color: var(--bs-body-color, #000);\n  border: 2px solid var(--bs-border-color-subtle, #ccc);  \n  padding-left: var(--ods-popover-body-padding-x, 9px);\n  padding-right: var(--ods-popover-body-padding-x, 9px);\n  padding-top: var(--ods-popover-header-padding-top, 5px);\n  padding-bottom: var(--ods-popover-body-padding-bottom, 7px);\n}\n\n.ods-charts-popover .ods-charts-popover-header {\n  color: var(--bs-body-color, #000);\n  font-size: var(--ods-popover-header-font-size, 14px);\n  font-weight: var(--ods-popover-header-font-weight, 700);\n  line-height: var(--ods-popover-header-line-height, 1.11);\n  padding-bottom:var(--ods-popover-header-padding-bottom, 5px);\n}\n\n.ods-charts-popover .ods-charts-popover-arrow  {\n  display: var(--ods-poppover-arrow-display, ${0 == y ? 'none' : 'inherit'});\n  position: absolute;\n  bottom: -8px;\n  width: 20px;\n  height: 10px;\n  left: calc(50% - 10px);\n}\n\n\n.ods-charts-popover .ods-charts-popover-arrow::before {  \n  position: absolute;\n  display: block;\n  content: "";\n  border-color: transparent;\n  border-top-color: var(--bs-border-color-subtle, #ccc);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  border-style: solid;\n  top: 2px;\n  left: 0;\n}\n\n.ods-charts-popover .ods-charts-popover-arrow::after {\n  border-color: transparent;\n  border-top-color: var(--bs-body-bg, #fff);\n  border-width: 10px;\n  border-bottom-width: 0px;\n  position: absolute;\n  display: block;\n  content: "";\n  border-style: solid;\n  top: 0;\n  left: 0;\n}\n`;
     class T {
       constructor(e, o) {
@@ -636,7 +636,7 @@
       }
       getTooltipTrigger(e, o) {
         let t = 'cross' === this.popoverConfig.axisPointer ? 'grid' : this.popoverConfig.tooltipTrigger;
-        if (null == t) for (const o of ['xAxis', 'yAxis']) A(e[o]) && (t = t ? void 0 : o);
+        if (null == t) for (const o of ['xAxis', 'yAxis']) O(e[o]) && (t = t ? void 0 : o);
         if (null == t) for (const e of ['xAxis', 'yAxis']) o[e] && o[e].splitLine && o[e].splitLine.show && (t = t ? void 0 : e);
         if (null == t) for (const e of ['xAxis', 'yAxis']) o[e] && o[e].axisLine && o[e].axisLine.show && (t = t ? void 0 : e);
         if (null == t) for (const o of ['xAxis', 'yAxis']) e[o] && e[o].data && (t = t ? void 0 : o);
@@ -1585,7 +1585,7 @@
           let a = { xAxis: { axisLabel: f(o) }, yAxis: { axisLabel: f(o) }, legend: f(n), grid: f(r) },
             i = this.calculateNewThemeAndAddItInThemeOptions(a, e);
           for (const o of ['xAxis', 'yAxis'])
-            A(e[o]) || (e[o] && e[o].axisLine)
+            O(e[o]) || (e[o] && e[o].axisLine)
               ? ((a[o].axisLine = f(t)), (a[o].splitLine = f(s)))
               : ((a[o].axisLine = { show: !1 }), (a[o].splitLine = { show: !1 }));
           const l = this.getDisplayedColors(i.color, e);
@@ -1688,7 +1688,7 @@
         return new De(e.minValue, e.maxValue);
       }
       static getSemiCircularGaugeChartConfiguration(e) {
-        return new Ae(e.minValue, e.maxValue);
+        return new Oe(e.minValue, e.maxValue);
       }
       static getCircularGaugeChartConfiguration(e) {
         return new Te(e.minValue, e.maxValue);
@@ -1785,7 +1785,7 @@
           : { pointer: { show: !1 }, barWidth: 32, showBackground: !0, backgroundStyle: { color: 'var(--bs-gray-500)' }, itemStyle: { barBorderWidth: 0 } };
       }
     }
-    class Oe extends fe {
+    class Ae extends fe {
       constructor(e = ue.SEMI_CIRCULAR_GAUGE, o, t) {
         (super(e), (this.minValue = o), (this.maxValue = t));
       }
@@ -1823,12 +1823,12 @@
         };
       }
     }
-    class Ae extends Oe {
+    class Oe extends Ae {
       constructor(e, o) {
         super(ue.SEMI_CIRCULAR_GAUGE, e, o);
       }
     }
-    class Ee extends Oe {
+    class Ee extends Ae {
       constructor(e, o, t) {
         (super(ue.DIAL_GAUGE, e, o),
           (this.dialPoints = t),
@@ -1901,7 +1901,7 @@
         });
       }
     }
-    class Te extends Oe {
+    class Te extends Ae {
       constructor(e, o) {
         super(ue.CIRCULAR_GAUGE, e, o);
       }

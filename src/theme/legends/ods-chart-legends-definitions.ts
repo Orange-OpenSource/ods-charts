@@ -53,6 +53,7 @@ export class ODSChartsLegendHolderDefinition {
      * It can be:
      * - A function that receives legend information and returns custom HTML content for that specific legend
      * - An object mapping legend labels to their custom HTML content
+     * - Un tableau de chaînes de caractères : chaque élément est associé à la légende à la même position (index)
      *
      * Example with dynamic content based on legend information:
      * ```
@@ -77,6 +78,14 @@ export class ODSChartsLegendHolderDefinition {
      * ])
      * ```
      *
+     * Example with array:
+     * ```
+     * postItemContent: [
+     *   '<div class="sales-note">Contenu pour la première légende</div>',
+     *   '<div class="profit-note">Contenu pour la deuxième légende</div>'
+     * ]
+     * ```
+     *
      * @param legendName The label of the legend item
      * @param legendIndex The index of the legend in the legend list (0-based)
      * @param color The color assigned to this legend
@@ -84,7 +93,8 @@ export class ODSChartsLegendHolderDefinition {
      */
     public postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | Map<string, string>,
+      | Map<string, string>
+      | string[],
     /**
      * This option defines HTML content that will be displayed after all legend items.
      * It should be a string containing HTML content that will be added at the end of the legend group.

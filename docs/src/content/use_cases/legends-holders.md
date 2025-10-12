@@ -433,6 +433,7 @@ themeManager.externalizeLegends(
         <li>As a string: content will be displayed after all legend items</li>
         <li>As a function: content will be customized for each legend label</li>
         <li>As a Map: content will be mapped directly to legend labels</li>
+        <li>As an array: content will be matched with legends by position (first array element for first legend, etc.)</li>
       </ol>
       <p class="card-text pe-5">
         For full illustration, have a look to the next use case, here will illustrate usage of the map:
@@ -606,46 +607,63 @@ themeManager.externalizeLegends(
 );
           </pre>
           <pre>
-// Example 3: Using afterLegendContent - Add global content after all legends
+// Example 3: Array-based postItemContent - Position-based content
 themeManager.externalizeLegends(
   myChart,
   {
-    legendHolderSelector: '#legend_with_string_content',
-    afterLegendContent: '&lt;div class="global-note"&gt;Last updated: October 2025&lt;/div&gt;'
+    legendHolderSelector: '#legend_with_array_content', 
+    postItemContent: [
+      '&lt;div class="legend-note first-note"&gt;First legend additional info&lt;/div&gt;',
+      '&lt;div class="legend-note second-note"&gt;Second legend details&lt;/div&gt;',
+      '&lt;div class="legend-note third-note"&gt;Third legend description&lt;/div&gt;'
+    ]
   }
 );
-          </pre>
-        </code>
-      </p>
-      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
-        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-          <use xlink:href="#lightning-charge-fill" />          
-        </svg>
-        <span class="visually-hidden">Open in playground using StackBlitz</span>
-      </button>
-      <div id="custom_content_htmlId">      
-        <div class="border border-subtle">
-          <div class="chart_title mx-3">
-            <h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
-            <h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
-          </div>
-          <div id="customContent_holder">
-            <div id="customContent_chart" style="width: 100%; height: 40vh"></div>
-          </div>
-          <div class="mx-3">
-            <h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
-            <div id="legend_with_custom_content"></div>  
-            <h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
-            <div id="legend_with_map_content"></div>
-            <h6 class="mt-4 mb-2">Website Analytics (String-based legend)</h6>
-            <div id="legend_with_string_content"></div>
-          </div>
-        </div>
-      </div>
-      <script>
-      addViewCode('custom_content_');
-      </script>
-    </div>
+
+// Example 4: Using afterLegendContent - Add global content after all legends
+themeManager.externalizeLegends(
+myChart,
+{
+legendHolderSelector: '#legend\*with_string_content',
+afterLegendContent: '&lt;div class="global-note"&gt;Last updated: October 2025&lt;/div&gt;'
+}
+);
+
+</pre>
+</code>
+</p>
+<button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+<svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+<use xlink:href="#lightning-charge-fill" />  
+ </svg>
+<span class="visually-hidden">Open in playground using StackBlitz</span>
+</button>
+<div id="custom_content_htmlId">  
+ <div class="border border-subtle">
+<div class="chart_title mx-3">
+<h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
+<h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
+</div>
+<div id="customContent_holder">
+<div id="customContent_chart" style="width: 100%; height: 40vh"></div>
+</div>
+<div class="mx-3">
+<h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
+<div id="legend_with_custom_content"></div>  
+ <h6 class="mt-4 mb-2">Year-over-Year Sales (Map-based legend)</h6>
+<div id="legend_with_map_content"></div>
+<h6 class="mt-4 mb-2">Web Analytics (Array-based legend)</h6>
+<div id="legend_with_array_content"></div>
+<h6 class="mt-4 mb-2">Performance Metrics (Global note example)</h6>
+<div id="legend_with_string_content"></div>
+</div>
+</div>
+</div>
+<script>
+addViewCode('custom_content*');
+</script>
+</div>
+
   </div>
   <script id="custom_content_codeId">
     ///////////////////////////////////////////////////
@@ -669,6 +687,11 @@ themeManager.externalizeLegends(
         growth: generateData()
       },
       group3: {
+        pageviews: generateData(),
+        sessionDuration: generateData(),
+        bounce: generateData()
+      },
+      group4: {
         visits: generateData(),
         conversions: generateData(),
         rate: generateData()
@@ -739,28 +762,52 @@ themeManager.externalizeLegends(
           symbol: 'diamond',
           symbolSize: 8
         },
-        // Group 3 - String-based example
+        // Group 3 - Array-based example
         {
-          name: 'Site Visits',
-          data: data.group3.visits,
+          name: 'Pageviews',
+          data: data.group3.pageviews,
           type: 'bar',
           yAxisIndex: 0,
           stack: 'group3'
         },
         {
-          name: 'Conversions',
-          data: data.group3.conversions,
+          name: 'Session Duration',
+          data: data.group3.sessionDuration,
           type: 'bar',
           yAxisIndex: 0,
           stack: 'group3'
         },
         {
-          name: 'Success Rate',
-          data: data.group3.rate,
+          name: 'Bounce Rate',
+          data: data.group3.bounce,
           type: 'line',
           yAxisIndex: 1,
           smooth: true,
           symbol: 'triangle',
+          symbolSize: 8
+        },
+        // Group 4 - Global note example
+        {
+          name: 'Site Visits',
+          data: data.group4.visits,
+          type: 'bar',
+          yAxisIndex: 0,
+          stack: 'group4'
+        },
+        {
+          name: 'Conversions',
+          data: data.group4.conversions,
+          type: 'bar',
+          yAxisIndex: 0,
+          stack: 'group4'
+        },
+        {
+          name: 'Success Rate',
+          data: data.group4.rate,
+          type: 'line',
+          yAxisIndex: 1,
+          smooth: true,
+          symbol: 'diamond',
           symbolSize: 8
         }
       ]
@@ -841,7 +888,18 @@ themeManager.externalizeLegends(
         ])
       },
       {
-        // Example 3: Content after all legends using afterLegendContent
+        // Example 3: Array-based content - Position-based content matching
+        legendHolderSelector: '#legend_with_array_content',
+        orientation: 'horizontal',
+        seriesRef: ['Pageviews', 'Session Duration', 'Bounce Rate'],
+        postItemContent: [
+          '<span class="metric-note views-note">Total page impressions</span>',
+          '<span class="metric-note duration-note">Average time spent on site</span>',
+          '<span class="metric-note bounce-note">Session abandonment rate</span>'
+        ]
+      },
+      {
+        // Example 4: Content after all legends using afterLegendContent
         legendHolderSelector: '#legend_with_string_content',
         orientation: 'horizontal',
         seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
