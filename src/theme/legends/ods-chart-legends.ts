@@ -341,7 +341,7 @@ export class ODSChartsLegends {
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
     formatter?: (name: string) => string,
-    postItemContent?: ((legendLabel: string) => string) | { [key: string]: string },
+    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | { [key: string]: string },
     afterLegendContent?: string
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -352,7 +352,14 @@ export class ODSChartsLegends {
     >
     ${(legends ? legends.labels : []).map((legendLabel: string, indexInHolder: number) => {
       let colorIndex = legends.index[indexInHolder] % colors.length;
-      const customContent = this.getCustomLegendItemContent(legendLabel, postItemContent);
+      const customContent = this.getCustomLegendItemContent(
+        legendLabel,
+        legends.names[indexInHolder],
+        indexInHolder,
+        colors[colorIndex],
+        colorIndex,
+        postItemContent
+      );
       return `
       <span class="ods-charts-legend-item ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendItem)}"
         style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendItem)}">
@@ -370,7 +377,7 @@ export class ODSChartsLegends {
       
         <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
         style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
-        role="button">${legendLabel}</label>
+        role="button">${this.getLegendName(legendLabel, formatter)}</label>
       </a>${
         customContent
           ? `<span class="ods-charts-legend-custom-content" 
@@ -395,21 +402,34 @@ export class ODSChartsLegends {
 
   /**
    * Generates custom content for a legend item based on the provided postItemContent configuration.
-   * @param legendLabel The label of the legend item
-   * @param postItemContent The configuration for custom content (string, function, or Map)
-   * @returns The generated HTML content string
+   * @param legendLabel The displayed text of the legend item
+   * @param legendName The name of the series associated with this legend item
+   * @param legendIndex The index of this item within its legend group (0-based)
+   * @param color The color assigned to this legend item, in CSS format (e.g. '#FF0000')
+   * @param colorIndex The index of the color in the color palette (0-based)
+   * @param postItemContent The configuration for custom content, can be either:
+   *   - A function receiving all parameters and returning HTML content
+   *   - An object mapping legend names to static HTML content
+   * @returns The generated HTML content string to be displayed after the legend item
    */
-  private getCustomLegendItemContent(legendLabel: string, postItemContent?: ((legendLabel: string) => string) | { [key: string]: string }): string {
+  private getCustomLegendItemContent(
+    legendLabel: string,
+    legendName: string,
+    legendIndex: number,
+    color: string,
+    colorIndex: number,
+    postItemContent?: ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string) | { [key: string]: string }
+  ): string {
     if (!postItemContent) {
       return '';
     }
 
     if (typeof postItemContent === 'function') {
-      return postItemContent(legendLabel);
+      return postItemContent(legendLabel, legendName, legendIndex, color, colorIndex);
     }
 
     if (typeof postItemContent === 'object') {
-      return postItemContent[legendLabel] || '';
+      return postItemContent[legendName] || '';
     }
 
     return '';

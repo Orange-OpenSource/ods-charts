@@ -51,14 +51,16 @@ export class ODSChartsLegendHolderDefinition {
     /**
      * This option defines HTML content that will be displayed after each individual legend item.
      * It can be:
-     * - A function that receives the legend label and returns custom HTML content for that specific legend
+     * - A function that receives legend information and returns custom HTML content for that specific legend
      * - An object mapping legend labels to their custom HTML content
      *
-     * Example with dynamic content based on legend label:
+     * Example with dynamic content based on legend information:
      * ```
-     * postItemContent: (legendLabel) => {
+     * postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
      *   if (legendLabel === 'Sales') {
-     *     return '<div class="sales-note">Revenue data includes taxes</div>';
+     *     return `<div class="sales-note" style="color: ${color}">
+     *              ${legendName} (${legendIndex + 1}) using color ${colorIndex + 1}
+     *            </div>`;
      *   }
      *   if (legendLabel === 'Profit') {
      *     return '<div class="profit-note">Net profit after adjustments</div>';
@@ -74,8 +76,15 @@ export class ODSChartsLegendHolderDefinition {
      *   'Profit': '<div class="profit-note">Net profit after adjustments</div>'
      * }
      * ```
+     *
+     * @param legendName The label of the legend item
+     * @param legendIndex The index of the legend in the legend list (0-based)
+     * @param color The color assigned to this legend
+     * @param colorIndex The index of the color in the color list (0-based)
      */
-    public postItemContent?: ((legendLabel: string) => string) | { [key: string]: string },
+    public postItemContent?:
+      | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
+      | { [key: string]: string },
     /**
      * This option defines HTML content that will be displayed after all legend items.
      * It should be a string containing HTML content that will be added at the end of the legend group.

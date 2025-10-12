@@ -11,7 +11,21 @@ title: Specific legend holders - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Vertical legend holder example</h5>
-      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right of the graph.</p>
+      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right       postItemContent: (legendName, legendIndex, color, colorIndex) => {
+        // Vous pouvez utiliser tous les paramètres pour personnaliser le contenu
+        switch(legendName) {
+          case 'Sales':
+            return `&lt;div class="legend-note sales-note" style="color: ${color}"&gt;
+                     Legend ${legendIndex + 1} - Including taxes
+                   &lt;/div&gt;`;
+          case 'Profit':
+            return `&lt;div class="legend-note profit-note"&gt;
+                     Using color ${colorIndex + 1} - After adjustments
+                   &lt;/div&gt;`;
+          default:
+            return '';
+        }
+      }ph.</p>
       <p class="card-text pe-5">
         To do this, you can use the Apache ECharts <code>legend.orient</code> option:
         <code>
@@ -565,12 +579,12 @@ themeManager.externalizeLegends(
   myChart,
   {
     legendHolderSelector: '#legend_with_custom_content', 
-    postItemContent: (legendLabel) => {
+    postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
       switch(legendLabel) {
         case 'Sales':
-          return '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;';
+          return `&lt;div class="legend-note sales-note" style="color:${color}"&gt;Including taxes (Series ${legendIndex + 1})&lt;/div&gt;`;
         case 'Profit':
-          return '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;';
+          return `&lt;div class="legend-note profit-note"&gt;After adjustments (Color ${colorIndex + 1})&lt;/div&gt;`;
         default:
           return '';
       }
@@ -796,14 +810,20 @@ themeManager.externalizeLegends(
         legendHolderSelector: '#legend_with_custom_content',
         orientation: 'horizontal',
         seriesRef: ['Revenue', 'Costs', 'Net Profit'],
-        postItemContent: (legendLabel) => {
+        postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
           switch(legendLabel) {
             case 'Revenue':
-              return '<span class="metric-note revenue-note">Gross revenue including taxes</span>';
+              return `<span class="metric-note revenue-note">
+                       Gross revenue including taxes (${legendName} at index ${legendIndex + 1})
+                     </span>`;
             case 'Costs':
-              return '<span class="metric-note profit-note">Operating expenses only</span>';
+              return `<span class="metric-note profit-note">
+                       Operating expenses only (Using color ${color})
+                     </span>`;
             case 'Net Profit':
-              return '<span class="metric-note conversion-note">After all deductions</span>';
+              return `<span class="metric-note conversion-note">
+                       After all deductions (Color palette index ${colorIndex + 1})
+                     </span>`;
             default:
               return '';
           }

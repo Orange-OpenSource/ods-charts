@@ -368,15 +368,15 @@
           .map((n, a) => {
             var l, c, d, h, p, u, g, v, b, f, y, m;
             let C = t.index[a] % o.length;
-            const x = this.getCustomLegendItemContent(n, i);
+            const x = this.getCustomLegendItemContent(n, t.names[a], a, o[C], C, i);
             return `\n      <span class="ods-charts-legend-item ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendItem)}"\n        style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendItem)}">\n        <a class="ods-charts-legend-link ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendLink)}" \n          style="${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendLink)}"\n          href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n          <span class="ods-charts-legend-color-holder ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColorHolder)}"\n          style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColorHolder)}">  \n          <span style="background-color:${o[C]}; ${r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendColor)}"></span>\n          </span>\n      \n        <label class="ods-charts-legend-label ${r.getClasses(null === (b = s.legends) || void 0 === b ? void 0 : b.odsChartsLegendLabel)}"\n        style="${r.getStyles(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendLabel)}"\n        role="button">${n}</label>\n      </a>${x ? `<span class="ods-charts-legend-custom-content" \n        ${r.getClasses(null === (y = s.legends) || void 0 === y ? void 0 : y.odsChartsLegendCustomContent)}\n        style="${r.getStyles(null === (m = s.legends) || void 0 === m ? void 0 : m.odsChartsLegendCustomContent)}">${x}</span>` : ''}\n    </span>`;
           })
           .join(
             '\n    '
           )}${l ? `<span\n      class="ods-charts-legend-global-custom-content"\n      ${r.getClasses(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendGlobalCustomContent)}\n      style="${r.getStyles(null === (y = s.legends) || void 0 === y ? void 0 : y.odsChartsLegendGlobalCustomContent)}"\n      >${l}</span>` : ''}\n    </div>\n    </div>`;
       }
-      getCustomLegendItemContent(e, o) {
-        return o ? ('function' == typeof o ? o(e) : ('object' == typeof o && o[e]) || '') : '';
+      getCustomLegendItemContent(e, o, t, s, r, n) {
+        return n ? ('function' == typeof n ? n(e, o, t, s, r) : ('object' == typeof n && n[o]) || '') : '';
       }
       generateHandler(e, o) {
         (window.ods_chart_legend_switchLegend || (window.ods_chart_legend_switchLegend = {}),
