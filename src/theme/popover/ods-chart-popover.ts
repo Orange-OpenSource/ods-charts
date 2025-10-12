@@ -639,7 +639,7 @@ export class ODSChartsPopover {
       }
 
       window.setTimeout(() => {
-        addEventListener(
+        window.addEventListener(
           'click',
           (_event) => {
             if (tooltipAnchor.getAttribute('data-id') === id) {
@@ -652,7 +652,7 @@ export class ODSChartsPopover {
         );
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 }

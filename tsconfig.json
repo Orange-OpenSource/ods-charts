@@ -14,7 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "experimentalDecorators": true,
-    "lib": ["dom", "es2022"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "moduleResolution": "bundler",
     "module": "esnext",
     "target": "es6",
