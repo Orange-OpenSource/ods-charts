@@ -376,7 +376,7 @@
           )}${l ? `<span\n      class="ods-charts-legend-global-custom-content"\n      ${r.getClasses(null === (f = s.legends) || void 0 === f ? void 0 : f.odsChartsLegendGlobalCustomContent)}\n      style="${r.getStyles(null === (y = s.legends) || void 0 === y ? void 0 : y.odsChartsLegendGlobalCustomContent)}"\n      >${l}</span>` : ''}\n    </div>\n    </div>`;
       }
       getCustomLegendItemContent(e, o, t, s, r, n) {
-        return n ? ('function' == typeof n ? n(e, o, t, s, r) : n instanceof Map ? n.get(o) || '' : (Array.isArray(n) && n[t]) || '') : '';
+        return n ? ('function' == typeof n ? n(e, o, t, s, r) : 'object' != typeof n || Array.isArray(n) ? (Array.isArray(n) && n[t]) || '' : n[e] || '') : '';
       }
       generateHandler(e, o) {
         (window.ods_chart_legend_switchLegend || (window.ods_chart_legend_switchLegend = {}),

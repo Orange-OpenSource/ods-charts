@@ -343,7 +343,7 @@ export class ODSChartsLegends {
     formatter?: (name: string) => string,
     postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | Map<string, string>
+      | { [legendLabel: string]: string }
       | string[],
     afterLegendContent?: string
   ) {
@@ -423,7 +423,7 @@ export class ODSChartsLegends {
     colorIndex: number,
     postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | Map<string, string>
+      | { [legendLabel: string]: string }
       | string[]
   ): string {
     if (!postItemContent) {
@@ -434,8 +434,8 @@ export class ODSChartsLegends {
       return postItemContent(legendLabel, legendName, legendIndex, color, colorIndex);
     }
 
-    if (postItemContent instanceof Map) {
-      return postItemContent.get(legendName) || '';
+    if (typeof postItemContent === 'object' && !Array.isArray(postItemContent)) {
+      return postItemContent[legendLabel] || '';
     }
 
     if (Array.isArray(postItemContent)) {

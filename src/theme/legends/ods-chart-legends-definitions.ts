@@ -26,7 +26,7 @@
  *   [{ legendHolderSelector: '#legend_with_custom_content',
  *      seriesRef: ['sales'],
  *      orientation: 'horizontal',
- *      postItemContent: '<div class="custom-legend-footer">Additional information</div>' }]
+ *      postItemContent: '<div class="mt-2 alert alert-info py-1"><small>Additional information</small></div>' }]
  * );
  * ```
  */
@@ -59,30 +59,30 @@ export class ODSChartsLegendHolderDefinition {
      * ```
      * postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
      *   if (legendLabel === 'Sales') {
-     *     return `<div class="sales-note" style="color: ${color}">
-     *              ${legendName} (${legendIndex + 1}) using color ${colorIndex + 1}
+     *     return `<div class="mt-2 p-2 bg-light rounded border-start border-3 border-primary">
+     *              <small class="text-muted">${legendName} (${legendIndex + 1})</small>
      *            </div>`;
      *   }
      *   if (legendLabel === 'Profit') {
-     *     return '<div class="profit-note">Net profit after adjustments</div>';
+     *     return '<div class="mt-1 alert alert-info py-1"><small>Net profit after adjustments</small></div>';
      *   }
      *   return '';
      * }
      * ```
      *
-     * Example with Map:
+     * Example with object mapping:
      * ```
-     * postItemContent: new Map([
-     *   ['Sales', '<div class="sales-note">Revenue data includes taxes</div>'],
-     *   ['Profit', '<div class="profit-note">Net profit after adjustments</div>']
-     * ])
+     * postItemContent: {
+     *   'Sales': '<div class="mt-1 badge bg-primary-subtle text-primary-emphasis">Revenue data includes taxes</div>',
+     *   'Profit': '<div class="mt-1 badge bg-success-subtle text-success-emphasis">Net profit after adjustments</div>'
+     * }
      * ```
      *
      * Example with array:
      * ```
      * postItemContent: [
-     *   '<div class="sales-note">Contenu pour la première légende</div>',
-     *   '<div class="profit-note">Contenu pour la deuxième légende</div>'
+     *   '<div class="mt-1 text-muted small">Contenu pour la première légende</div>',
+     *   '<div class="mt-1 text-muted small">Contenu pour la deuxième légende</div>'
      * ]
      * ```
      *
@@ -93,7 +93,7 @@ export class ODSChartsLegendHolderDefinition {
      */
     public postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | Map<string, string>
+      | { [legendLabel: string]: string }
       | string[],
     /**
      * This option defines HTML content that will be displayed after all legend items.

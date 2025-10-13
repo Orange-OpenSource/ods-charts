@@ -432,20 +432,20 @@ themeManager.externalizeLegends(
       <ol>
         <li>As a string: content will be displayed after all legend items</li>
         <li>As a function: content will be customized for each legend label</li>
-        <li>As a Map: content will be mapped directly to legend labels</li>
+        <li>As an object: content will be mapped directly to legend labels</li>
         <li>As an array: content will be matched with legends by position (first array element for first legend, etc.)</li>
       </ol>
       <p class="card-text pe-5">
-        For full illustration, have a look to the next use case, here will illustrate usage of the map:
+        For full illustration, have a look to the next use case, here will illustrate usage of the object mapping:
         <code>
           <pre>
 themeManager.externalizeLegends(
   myChart,
   {
     legendHolderSelector: '#legend_with_custom_content',
-    postItemContent: new Map([
-      ['label 1', '&lt;small>(partial result)&lt;/small>']
-    ])
+    postItemContent: {
+      'label 1': '&lt;small&gt;(partial result)&lt;/small&gt;'
+    }
   }
 );
           </pre>
@@ -576,33 +576,45 @@ themeManager.externalizeLegends(
         <code>
           <pre>
 // Example 1: Function-based postItemContent - Customize content per legend
-themeManager.externalizeLegends(
-  myChart,
-  {
-    legendHolderSelector: '#legend_with_custom_content', 
-    postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
-      switch(legendLabel) {
-        case 'Sales':
-          return `&lt;div class="legend-note sales-note" style="color:${color}"&gt;Including taxes (Series ${legendIndex + 1})&lt;/div&gt;`;
-        case 'Profit':
-          return `&lt;div class="legend-note profit-note"&gt;After adjustments (Color ${colorIndex + 1})&lt;/div&gt;`;
-        default:
-          return '';
-      }
-    }
-  }
-);
+themeManager.externalizeLegends(myChart, [
+      {
+        // Example 1: Function-based content - Dynamic content based on legend label
+        legendHolderSelector: '#legend_with_custom_content',
+        orientation: 'horizontal',
+        seriesRef: ['Revenue', 'Costs', 'Net Profit'],
+        postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
+          switch(legendLabel) {
+            case 'Revenue':
+              return `&lt;span class="metric-note revenue-note"&gt;
+                       Gross revenue including taxes (${legendName} at index ${legendIndex + 1})
+                     &lt;/span&gt;`;
+            case 'Costs':
+              return `&lt;span class="metric-note profit-note"&gt;
+                       Operating expenses only (Using color ${color})
+                     &lt;/span&gt;`;
+            case 'Net Profit':
+              return `&lt;span class="metric-note conversion-note"&gt;
+                       After all deductions (Color palette index ${colorIndex + 1})
+                     &lt;/span&gt;`;
+            default:
+              return '';
+          }
+        }
+]);
           </pre>
           <pre>
-// Example 2: Map-based postItemContent - Map labels to content
+// Example 2: Object-based postItemContent - Map labels to content
 themeManager.externalizeLegends(
   myChart,
   {
-    legendHolderSelector: '#legend_with_map_content', 
-    postItemContent: new Map([
-      ['Sales', '&lt;div class="legend-note sales-note"&gt;Including taxes&lt;/div&gt;'],
-      ['Profit', '&lt;div class="legend-note profit-note"&gt;After adjustments&lt;/div&gt;']
-    ])
+     legendHolderSelector: '#legend_with_object_content',
+        orientation: 'horizontal',
+        seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
+        postItemContent: {
+          'Sales 2025': '&lt;span class="metric-note revenue-note"&gt;Projected data&lt;/span&gt;',
+          'Sales 2024': '&lt;span class="metric-note profit-note"&gt;Historical data&lt;/span&gt;',
+          'Growth Rate': '&lt;span class="metric-note conversion-note"&gt;Year-over-year change&lt;/span&gt;'
+        }
   }
 );
           </pre>
@@ -611,22 +623,27 @@ themeManager.externalizeLegends(
 themeManager.externalizeLegends(
   myChart,
   {
-    legendHolderSelector: '#legend_with_array_content', 
-    postItemContent: [
-      '&lt;div class="legend-note first-note"&gt;First legend additional info&lt;/div&gt;',
-      '&lt;div class="legend-note second-note"&gt;Second legend details&lt;/div&gt;',
-      '&lt;div class="legend-note third-note"&gt;Third legend description&lt;/div&gt;'
-    ]
+    legendHolderSelector: '#legend_with_object_content',
+        orientation: 'horizontal',
+        seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
+        postItemContent: {
+          'Sales 2025': '&lt;span class="metric-note revenue-note"&gt;Projected data&lt;/span&gt;',
+          'Sales 2024': '&lt;span class="metric-note profit-note"&gt;Historical data&lt;/span&gt;',
+          'Growth Rate': '&lt;span class="metric-note conversion-note"&gt;Year-over-year change&lt;/span&gt;'
+        }
   }
 );
-
+</pre>
+<pre>
 // Example 4: Using afterLegendContent - Add global content after all legends
 themeManager.externalizeLegends(
-myChart,
-{
-legendHolderSelector: '#legend\*with_string_content',
-afterLegendContent: '&lt;div class="global-note"&gt;Last updated: October 2025&lt;/div&gt;'
-}
+   myChart,
+   {
+     legendHolderSelector: '#legend_with_string_content',
+     orientation: 'horizontal',
+     seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
+     afterLegendContent: '&lt;div class="global-note"&gt;Data from our analytics platform - Updated daily&lt;/div&gt;'
+   }
 );
 
 </pre>
@@ -650,8 +667,8 @@ afterLegendContent: '&lt;div class="global-note"&gt;Last updated: October 2025&l
 <div class="mx-3">
 <h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
 <div id="legend_with_custom_content"></div>  
- <h6 class="mt-4 mb-2">Year-over-Year Sales (Map-based legend)</h6>
-<div id="legend_with_map_content"></div>
+<h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
+<div id="legend_with_object_content"></div>
 <h6 class="mt-4 mb-2">Web Analytics (Array-based legend)</h6>
 <div id="legend_with_array_content"></div>
 <h6 class="mt-4 mb-2">Performance Metrics (Global note example)</h6>
@@ -810,7 +827,7 @@ addViewCode('custom_content*');
           symbol: 'diamond',
           symbolSize: 8
         }
-      ]
+     ]
     };
 
     ///////////////////////////////////////////////////
@@ -877,15 +894,15 @@ addViewCode('custom_content*');
         }
       },
       {
-        // Example 2: Map-based content - Direct mapping between labels and content
-        legendHolderSelector: '#legend_with_map_content',
+        // Example 2: Object-based content - Direct mapping between labels and content
+        legendHolderSelector: '#legend_with_object_content',
         orientation: 'horizontal',
         seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
-        postItemContent: new Map([
-          ['Sales 2025', '<span class="metric-note revenue-note">Projected data</span>'],
-          ['Sales 2024', '<span class="metric-note profit-note">Historical data</span>'],
-          ['Growth Rate', '<span class="metric-note conversion-note">Year-over-year change</span>']
-        ])
+        postItemContent: {
+          'Sales 2025': '<span class="metric-note revenue-note">Projected data</span>',
+          'Sales 2024': '<span class="metric-note profit-note">Historical data</span>',
+          'Growth Rate': '<span class="metric-note conversion-note">Year-over-year change</span>'
+        }
       },
       {
         // Example 3: Array-based content - Position-based content matching
