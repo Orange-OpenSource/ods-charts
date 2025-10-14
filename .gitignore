@@ -7,3 +7,4 @@ ods-charts*.tgz
 /docs/public
 /docs/static/\[version\]/api
 /test_local
+/docs/static/\[version\]/ods-charts.js
