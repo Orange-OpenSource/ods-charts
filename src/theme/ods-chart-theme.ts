@@ -784,6 +784,14 @@ export class ODSChartsTheme {
    * - will implement the Orange Design System
    * - will be link with the graph.
    *
+   * Example of use with a single legend container:
+   * ```
+   * themeManager.externalizeLegends(
+   *   myChart,
+   *   '#my_legend_container'
+   * );
+   * ```
+   *
    * @param echart the initialized eCharts object
    * @param legendHolderSelector
    * legendHolderSelector can be:

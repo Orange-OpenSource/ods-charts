@@ -9,7 +9,18 @@
 /**
  * Definition of a container used to display legends, refer to {@link ODSChartsTheme.externalizeLegends}.
  *
- * Example of use:
+ * Example of use with a single vertical legend container:
+ * ```
+ * themeManager.externalizeLegends(
+ *   myChart,
+ *   {
+ *     legendHolderSelector: '#legend_with_custom_content',
+ *     orientation: 'vertical'
+ *   }
+ * );
+ * ```
+ *
+ * Example of use with a several legend containers:
  * ```
  * themeManager.externalizeLegends(
  *   myChart,
@@ -19,14 +30,25 @@
  * );
  * ```
  *
- * Example with postItemContent:
+ * Example of use with postItemContent:
  * ```
  * themeManager.externalizeLegends(
  *   myChart,
- *   [{ legendHolderSelector: '#legend_with_custom_content',
- *      seriesRef: ['sales'],
- *      orientation: 'horizontal',
- *      postItemContent: '<div class="mt-2 alert alert-info py-1"><small>Additional information</small></div>' }]
+ *   {
+ *     legendHolderSelector: '#legend_with_custom_content',
+ *     postItemContent: {sales: '<div class="mt-2 alert alert-info py-1"><small>Additional information</small></div>' }
+ *   }
+ * );
+ * ```
+ *
+ * Example of use with afterLegendContent:
+ * ```
+ * themeManager.externalizeLegends(
+ *   myChart,
+ *   {
+ *     legendHolderSelector: '#legend_with_custom_content',
+ *     afterLegendContent: '<div class="mt-2 alert alert-info py-1"><small>Additional information</small></div>'
+ *   }
  * );
  * ```
  */
@@ -52,8 +74,8 @@ export class ODSChartsLegendHolderDefinition {
      * This option defines HTML content that will be displayed after each individual legend item.
      * It can be:
      * - A function that receives legend information and returns custom HTML content for that specific legend
-     * - An object mapping legend labels to their custom HTML content
-     * - Un tableau de chaînes de caractères : chaque élément est associé à la légende à la même position (index)
+     * - An object mapping legend labels or series names to their custom HTML content
+     * - An array of strings: each element is associated with the legend at the same position (index)
      *
      * Example with dynamic content based on legend information:
      * ```
@@ -86,14 +108,15 @@ export class ODSChartsLegendHolderDefinition {
      * ]
      * ```
      *
-     * @param legendName The label of the legend item
+     * @param legendLabel The label of the legend item
+     * @param legendName The name of the serie corresponding to this legend item
      * @param legendIndex The index of the legend in the legend list (0-based)
      * @param color The color assigned to this legend
      * @param colorIndex The index of the color in the color list (0-based)
      */
     public postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | { [legendLabel: string]: string }
+      | { [legendNameOrLabel: string]: string }
       | string[],
     /**
      * This option defines HTML content that will be displayed after all legend items.

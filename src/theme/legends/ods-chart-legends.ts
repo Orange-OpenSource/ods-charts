@@ -343,7 +343,7 @@ export class ODSChartsLegends {
     formatter?: (name: string) => string,
     postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | { [legendLabel: string]: string }
+      | { [legendNameOrLabel: string]: string }
       | string[],
     afterLegendContent?: string
   ) {
@@ -423,7 +423,7 @@ export class ODSChartsLegends {
     colorIndex: number,
     postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
-      | { [legendLabel: string]: string }
+      | { [legendNameOrLabel: string]: string }
       | string[]
   ): string {
     if (!postItemContent) {
@@ -435,7 +435,7 @@ export class ODSChartsLegends {
     }
 
     if (typeof postItemContent === 'object' && !Array.isArray(postItemContent)) {
-      return postItemContent[legendLabel] || '';
+      return postItemContent[legendName] || postItemContent[legendLabel] || postItemContent[legendIndex] || '';
     }
 
     if (Array.isArray(postItemContent)) {
