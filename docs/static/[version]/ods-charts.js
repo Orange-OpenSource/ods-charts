@@ -31,11 +31,11 @@
         ODSChartsColorsSet: () => ie,
         ODSChartsConfiguration: () => fe,
         ODSChartsDialGaugeConfiguration: () => be,
-        ODSChartsGaugeConfiguration: () => ge,
+        ODSChartsGaugeConfiguration: () => ve,
         ODSChartsItemCSSDefinition: () => r,
         ODSChartsItemGroupCSSDefinition: () => n,
         ODSChartsLegendHolderDefinition: () => pe,
-        ODSChartsLineConfiguration: () => ve,
+        ODSChartsLineConfiguration: () => ge,
         ODSChartsLineStyle: () => le,
         ODSChartsMode: () => ce,
         ODSChartsPopoverAxisPointer: () => S,
@@ -248,24 +248,25 @@
         const t = d(o) ? o : h(o) ? [o] : [{ legendHolderSelector: o }];
         return new u(e, t);
       }
-      static getLegendData(e, o = !0) {
-        let t,
-          s = e.legend && e.legend.data ? e.legend.data : [];
-        const r = 1 === e.series.length && e.series[0].data && ['pie'].includes(e.series[0].type);
+      static getLegendData(e, o = !0, t = !0) {
+        let s,
+          r = e.legend && e.legend.data ? e.legend.data.map((e) => (h(e) ? e.name : e)) : [];
+        const n = 1 === e.series.length && e.series[0].data && ['pie'].includes(e.series[0].type);
         if (
-          (o && (e.legend && (e.legend = Object.assign({}, e.legend)), e.series && (e.series = [...e.series.map((e) => Object.assign({}, e))])),
+          (o && e.legend && (e.legend = Object.assign({}, e.legend)),
+          t && e.series && (e.series = [...e.series.map((e) => Object.assign({}, e))]),
           !e.legend || !e.legend.data)
         )
           if (e.dataset && e.dataset.source)
             try {
-              (o && !e.legend && (e.legend = {}), (s = e.dataset.source[0].reduce((e, o, t) => (t > 0 && e.push(o), e), [])), o && (e.legend.data = s));
+              (o && !e.legend && (e.legend = {}), (r = e.dataset.source[0].reduce((e, o, t) => (t > 0 && e.push(o), e), [])), o && (e.legend.data = r));
             } catch (e) {
               throw new Error('Missing data array of legends in legend chart option');
             }
           else {
             if (!e.series) throw new Error('Missing data array of legends in legend chart option');
             (o && !e.legend && (e.legend = {}),
-              (s = r
+              (r = n
                 ? e.series[0].data.map((e, o) => {
                     if (!e.name) throw new Error('Missing data array of legends in legend chart option');
                     return e.name;
@@ -274,23 +275,37 @@
                     if (!e.name) throw new Error('Missing data array of legends in legend chart option');
                     return e.name;
                   })),
-              o && (e.legend.data = s));
+              o && (e.legend.data = r));
           }
+        if (n)
+          s = e.series[0].data.map((e, o) => {
+            if (!e.name) throw new Error('Missing data array of legends in legend chart option');
+            return e.name;
+          });
+        else {
+          if ((t && !e.series && (e.series = r.map((e, o) => ({ name: r[o] || 'serie_Name_' + o }))), !e.series))
+            throw new Error('Missing series array in chart option');
+          const o = r.filter((o) => !e.series.find((e) => e.name === o));
+          s = e.series.map((e, s) => {
+            if (!e.name) {
+              if (!t) throw new Error('Missing series names in chart option');
+              e.name = o.shift() || 'serie_Name_' + s;
+            }
+            return e.name;
+          });
+        }
+        let a = r.filter((e) => s.includes(e)),
+          i = a;
         return (
-          r
-            ? (t = e.series[0].data.map((e, o) => {
-                if (!e.name) throw new Error('Missing data array of legends in legend chart option');
-                return e.name;
-              }))
-            : (o && !e.series && (e.series = s.map((e, o) => ({ name: 'serie_Name_' + o }))),
-              (t = e.series.map((e, t) => {
-                if (!e.name) {
-                  if (!o) throw new Error('Missing series names in chart option');
-                  e.name = 'serie_Name_' + t;
-                }
-                return e.name;
-              }))),
-          { labels: s, names: t }
+          r.length !== a.length &&
+            (console.info(
+              `The legend data array contains some legends that do not match any series name. Legend data: [${r}]. Series names: [${s}]. Displayed legends: [${a}]`
+            ),
+            (i = r),
+            i.length > s.length && (i = i.filter((e, o) => o < s.length)),
+            (a = s.filter((e, o) => o < i.length)),
+            console.info(`Displayed legends labels have been mapped by their index, [${i}] are the labels of the displayed series [${a}]`)),
+          { names: a, labels: i }
         );
       }
       addLegend(e, o, t, r, n) {
@@ -333,21 +348,42 @@
             : l && (l.legends.labels.push(a.labels[o]), l.legends.names.push(a.names[o]), l.legends.index.push(o));
         }
         e.legend.show = !1;
-        for (const e of Object.keys(i)) {
-          if ((this.generateHandler(e, t), !document.querySelector(e))) throw new Error(`Can't find legend holder using the selector ${e}`);
-          document.querySelector(e).innerHTML = this.generateLegend(e, o, i[e].legends, t, n, i[e].orientation);
+        for (const s of Object.keys(i)) {
+          if ((this.generateHandler(s, t), !document.querySelector(s))) throw new Error(`Can't find legend holder using the selector ${s}`);
+          document.querySelector(s).innerHTML = this.generateLegend(
+            s,
+            o,
+            i[s].legends,
+            t,
+            n,
+            i[s].orientation,
+            e.legend && e.legend.formatter ? e.legend.formatter : void 0
+          );
         }
       }
-      generateLegend(e, o, t, s, n, a = 'horizontal') {
-        var i, l, c, d, h, p, u, v;
-        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainerVertical) : r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainerVertical) : r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
+      getLegendName(e, o) {
+        let t = e;
+        try {
+          t = o ? o(e) : e;
+        } catch (o) {
+          console.error(`Error while formatting legend name ${e}: ${o}`);
+        }
+        return (function (e) {
+          if (!e) return '';
+          const o = document.createElement('div');
+          return ((o.textContent = e), o.innerHTML);
+        })(t);
+      }
+      generateLegend(e, o, t, s, n, a = 'horizontal', i) {
+        var l, c, d, h, p, u, g, v;
+        return `<div class="ods-charts-legend-holder ods-charts-mode-${n} ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendHolder)}"\n    style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendHolder)}"\n    >\n    <div class="ods-charts-legend-container ods-charts-legend-container-${a} ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendContainer)} ${'vertical' === a ? r.getClasses(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendContainerVertical) : r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendContainerHorizontal)}"\n    style="${r.getStyles(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendContainer)} ${'vertical' === a ? r.getStyles(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendContainerVertical) : r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendContainerHorizontal)}"\n    >\n    ${(t
           ? t.labels
           : []
         )
           .map((n, a) => {
-            var i, l, c, d, h, p, u, v;
-            let g = t.index[a] % o.length;
-            return `<a class="ods-charts-legend-link ${r.getClasses(null === (i = s.legends) || void 0 === i ? void 0 : i.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[g]}; ${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${n}</label>\n  </a>`;
+            var l, c, d, h, p, u, g, v;
+            let b = t.index[a] % o.length;
+            return `<a class="ods-charts-legend-link ${r.getClasses(null === (l = s.legends) || void 0 === l ? void 0 : l.odsChartsLegendLink)}" \n      style="${r.getStyles(null === (c = s.legends) || void 0 === c ? void 0 : c.odsChartsLegendLink)}"\n      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(e).replace(/"/g, '&quot;')}](this, ${JSON.stringify(t.names[a]).replace(/"/g, '&quot;')})">\n      <span class="ods-charts-legend-color-holder ${r.getClasses(null === (d = s.legends) || void 0 === d ? void 0 : d.odsChartsLegendColorHolder)}"\n      style="${r.getStyles(null === (h = s.legends) || void 0 === h ? void 0 : h.odsChartsLegendColorHolder)}">  \n      <span style="background-color:${o[b]}; ${r.getStyles(null === (p = s.legends) || void 0 === p ? void 0 : p.odsChartsLegendColor)}" class="ods-charts-legend-color ${r.getClasses(null === (u = s.legends) || void 0 === u ? void 0 : u.odsChartsLegendColor)}"></span>\n      </span>\n  \n    <label class="ods-charts-legend-label ${r.getClasses(null === (g = s.legends) || void 0 === g ? void 0 : g.odsChartsLegendLabel)}"\n    style="${r.getStyles(null === (v = s.legends) || void 0 === v ? void 0 : v.odsChartsLegendLabel)}"\n    role="button">${this.getLegendName(n, i)}</label>\n  </a>`;
           })
           .join('\n    ')}\n    </div>\n    </div>`;
       }
@@ -378,12 +414,12 @@
           }));
       }
     }
-    class v {
+    class g {
       constructor(e, o) {
         ((this.echart = e), (this.chartId = o), (this.observer = void 0));
       }
       static addResizeManagement(e, o) {
-        return new v(e, o);
+        return new g(e, o);
       }
       get divElement() {
         let e;
@@ -394,14 +430,14 @@
         const e = this.divElement;
         e && ResizeObserver
           ? ((this.observer = new ResizeObserver(this.resizeChart.bind(this))), this.observer.observe(e))
-          : ((v.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', v.sizeListeners[this.chartId]));
+          : ((g.sizeListeners[this.chartId] = this.resizeChart.bind(this)), window.addEventListener('resize', g.sizeListeners[this.chartId]));
       }
       removeListener() {
         try {
           const e = this.divElement;
           e && ResizeObserver
             ? this.observer && (this.observer.unobserve(e), (this.observer = void 0))
-            : v.sizeListeners[this.chartId] && (window.removeEventListener('resize', v.sizeListeners[this.chartId]), delete v.sizeListeners[this.chartId]);
+            : g.sizeListeners[this.chartId] && (window.removeEventListener('resize', g.sizeListeners[this.chartId]), delete g.sizeListeners[this.chartId]);
         } catch (e) {}
       }
       resizeChart() {
@@ -419,14 +455,14 @@
         }
       }
     }
-    function g(e) {
+    function v(e) {
       var o = 0;
       if (('string' != typeof e && (e = JSON.stringify(e)), 0 == e.length)) return '' + o;
       for (let t = 0; t < e.length; t++) ((o = (o << 5) - o + e.charCodeAt(t)), (o &= o));
       return '' + o;
     }
     function b(e) {
-      return 'string' == typeof e ? e : g(e);
+      return 'string' == typeof e ? e : v(e);
     }
     function f(e) {
       if (h(e)) {
@@ -441,7 +477,7 @@
       }
       return e;
     }
-    v.sizeListeners = {};
+    g.sizeListeners = {};
     const y = 0;
     class m {
       constructor() {
@@ -654,22 +690,22 @@
             document.head.appendChild(e));
         }
         const h = {},
-          v = this.getTooltipTrigger(e, o);
-        let g;
+          g = this.getTooltipTrigger(e, o);
+        let v;
         this.enterable = !!e && !!e.tooltip && !!e.tooltip.enterable;
         try {
-          g = u.getLegendData(e, !1);
+          v = u.getLegendData(e, !1);
         } catch (e) {}
         if (this.popoverConfig.enabled) {
           if (
-            (p(h, { tooltip: { appendTo: 'body' }, [v]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
+            (p(h, { tooltip: { appendTo: 'body' }, [g]: { axisPointer: { label: { show: !1 }, handle: { show: !0, icon: 'none' } } } }),
             this.popoverConfig.tooltip || p(h, { tooltip: { triggerOn: 'click', alwaysShowContent: !1 } }),
             this.popoverDefinition.getOrCreatePopupInstance
               ? p(h, {
                   tooltip: {
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, g);
+                      const o = this.getTooltipElements(e, v);
                       if (o && o.tooltipElements.length > 0 && window.event)
                         try {
                           this.displayPopup(window.event, o, t, this.mode);
@@ -680,7 +716,7 @@
                     className: 'd-none',
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [v]: {
+                  [g]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -714,7 +750,7 @@
                     },
                     formatter: (e) => {
                       d(e) || (e = [e]);
-                      const o = this.getTooltipElements(e, g);
+                      const o = this.getTooltipElements(e, v);
                       return o && o.tooltipElements.length > 0
                         ? new DOMParser().parseFromString(
                             this.popoverDefinition.getPopupTemplate
@@ -731,7 +767,7 @@
                     className: `ods-charts-popover ods-charts-enterable-${this.enterable ? 'true' : 'false'} ${r.getClasses(null === (i = t.popover) || void 0 === i ? void 0 : i.odsChartsPopover)}`,
                     axisPointer: { type: this.popoverConfig.axisPointer },
                   },
-                  [v]: {
+                  [g]: {
                     axisPointer: {
                       snap: !0,
                       show: !0,
@@ -758,20 +794,20 @@
         p(o, h);
       }
       getPopupContentLine(e, o, t) {
-        var s, n, a, i, l, c, d, h, p, u, v, g;
-        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}" style="${r.getStyles(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
+        var s, n, a, i, l, c, d, h, p, u, g, v;
+        return `<div \n    class="ods-charts-popover-line ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverLine)}"\n    style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverLine)}"    \n    >\n      <span class="ods-charts-popover-color-holder ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverColorHolder)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverColorHolder)}" >  \n        <span \n          class="ods-charts-popover-color ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverColor)}"  style="background-color:${e.markerColor};  ${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverColor)};">\n        </span> \n      </span>\n    \n      <label class="ods-charts-popover-text ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverText)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverText)}" >\n        <span class="ods-charts-popover-label ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverLabel)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverLabel)}" >${e.label ? e.label + ': ' : ''}</span>\n        <span class="ods-charts-popover-value ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverValue)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverValue)}">${e.itemValue}</span>\n      </label>\n    </div>\n        `;
       }
       getPopupContent(e, o, t) {
         var s, n;
         return `\n    <div  class="ods-charts-popover-body-content ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverBodyContent)}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverBodyContent)}" >\n        ${e.map((e) => (this.popoverDefinition.getPopupContentLine ? this.popoverDefinition.getPopupContentLine(e) : this.getPopupContentLine(e, o, t))).join('')}\n    </div>\n    `;
       }
       getPopupTemplate(e, o, t) {
-        var s, n, a, i, l, c, d, h, p, u, v, g;
+        var s, n, a, i, l, c, d, h, p, u, g, v;
         if (!document.querySelector('#ods-chart-tooltip-default-template')) {
           let e = document.createElement('style');
           ((e.id = 'ods-chart-tooltip-default-template'), (e.textContent = E), document.head.appendChild(e));
         }
-        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}" style="${r.getStyles(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
+        return ` \n  <div class="ods-charts-popover-holder ods-charts-context ods-charts-mode-${t} ${r.getClasses(null === (s = o.popover) || void 0 === s ? void 0 : s.odsChartsPopoverHolder)}" data-bs-theme="${t}" style="${r.getStyles(null === (n = o.popover) || void 0 === n ? void 0 : n.odsChartsPopoverHolder)}">\n    <div class="ods-charts-popover-inner ${r.getClasses(null === (a = o.popover) || void 0 === a ? void 0 : a.odsChartsPopoverInner)}" style="${r.getStyles(null === (i = o.popover) || void 0 === i ? void 0 : i.odsChartsPopoverInner)}">\n      <div class="ods-charts-popover-content ${r.getClasses(null === (l = o.popover) || void 0 === l ? void 0 : l.odsChartsPopoverContent)}" style="${r.getStyles(null === (c = o.popover) || void 0 === c ? void 0 : c.odsChartsPopoverContent)}" >\n        <div class="ods-charts-popover-arrow ${r.getClasses(null === (d = o.popover) || void 0 === d ? void 0 : d.odsChartsPopoverArrow)}" style="${r.getStyles(null === (h = o.popover) || void 0 === h ? void 0 : h.odsChartsPopoverArrow)}; left: ${this.tooltipStyle}" ></div>\n          <div class="ods-charts-popover-header ${r.getClasses(null === (p = o.popover) || void 0 === p ? void 0 : p.odsChartsPopoverHeader)}" style="${r.getStyles(null === (u = o.popover) || void 0 === u ? void 0 : u.odsChartsPopoverHeader)}">${e.categoryLabel}</div>\n          <div class="ods-charts-popover-body ${r.getClasses(null === (g = o.popover) || void 0 === g ? void 0 : g.odsChartsPopoverBody)}" style="${r.getStyles(null === (v = o.popover) || void 0 === v ? void 0 : v.odsChartsPopoverBody)}">\n            ${this.popoverDefinition.getPopupContent ? this.popoverDefinition.getPopupContent(e.tooltipElements) : this.getPopupContent(e.tooltipElements, o, t)}\n          </div>\n        </div>\n      </div>\n    </div>     \n`;
       }
       displayPopup(e, o, t, s) {
         if (0 !== this.popoverConfig.tooltipDelay) {
@@ -1386,7 +1422,7 @@
                 })
               ),
           p(r, f(de.linesStyle[e.chartConfiguration.lineStyle ? e.chartConfiguration.lineStyle : e.lineStyle ? e.lineStyle : le.SMOOTH])),
-          new he(g(s), r, Object.assign(Object.assign({}, e), { mode: o }))
+          new he(v(s), r, Object.assign(Object.assign({}, e), { mode: o }))
         );
       }
       setDataOptions(e) {
@@ -1592,7 +1628,7 @@
         return (o || (o = D.NONE), (this.chartPopoverManager = T.addPopoverManagement(o, e)), this);
       }
       manageChartResize(e, o) {
-        return ((this.chartResizeManager = v.addResizeManagement(e, o)), this);
+        return ((this.chartResizeManager = g.addResizeManagement(e, o)), this);
       }
       manageThemeObserver(e) {
         return (
@@ -1626,9 +1662,9 @@
         (e.CIRCULAR_GAUGE = 'CIRCULAR_GAUGE'),
         (e.DIAL_GAUGE = 'DIAL_GAUGE'));
     })(ue || (ue = {}));
-    class ve {}
     class ge {}
-    class be extends ge {}
+    class ve {}
+    class be extends ve {}
     class fe {
       constructor(e = ue.DEFAULT) {
         this.type = e;

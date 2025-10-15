@@ -72,7 +72,7 @@ tooltip: {
         },
       ],
       legend: {
-        data: ['label 0', 'label 1'],
+        data: ['label 1', 'label 2'],
       },
       tooltip: {
         confine: true,

@@ -418,6 +418,7 @@ async function displayChart(
   iframe.contentWindow.echarts.registerTheme(themeManager.name, theme);
 
   var legends = false;
+  let hasLegend = false;
 
   if ('odscharts' === usedLegends) {
     if (
@@ -425,9 +426,16 @@ async function displayChart(
       !(options.legend && options.legend.data) &&
       (options.series.length > 1 || (1 === options.series.length && 0 < options.series[0].data.length && options.series[0].data[0].name))
     ) {
-      options.legend = {
-        data: options.series.length > 1 ? options.series.map((serie, i) => 'label ' + i) : options.series[0].data.map((val) => val.name),
-      };
+      if (!options.legend) {
+        options.legend = {};
+      }
+      if (options.series.length > 1 && !options.series[0].name) {
+        // If no serie has a name, we set it to "label x"
+        options.legend = {
+          data: options.series.length > 1 ? options.series.map((serie, i) => serie.name || 'label ' + (i + 1)) : options.series[0].data.map((val) => val.name),
+        };
+      }
+      hasLegend = true;
     }
     if (options.legend) {
       if ('vertical' === legendsOrientation) {
@@ -441,8 +449,9 @@ async function displayChart(
       options.legend = {};
     }
     if (options.series && 1 < options.series.length) {
+      // If no serie has a name, we set it to "label x"
       options.series = options.series.map((serie, index) => {
-        return { ...serie, name: serie.name || 'label ' + index };
+        return { ...serie, name: serie.name || 'label ' + (index + 1) };
       });
     }
     if ('vertical' === legendsOrientation) {
@@ -464,7 +473,7 @@ async function displayChart(
     iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
   }
 
-  if (!legends && usedLegends === 'odscharts') {
+  if (!legends && !hasLegend && usedLegends === 'odscharts') {
     document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
       elt.style.display = 'none';
     });
@@ -658,6 +667,7 @@ myChart.setOption(themeManager.getChartOptions());
     document.querySelector(`#accordion_${id} #popoverAxisInput option[value="${popoverAxisInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #popoverTemplateInput option[value="${popoverTemplateInput}"]`).setAttribute('selected', 'selected');
     document.querySelector(`#accordion_${id} #usedLegends option[value="${usedLegends}"]`).setAttribute('selected', 'selected');
+    document.querySelector(`#accordion_${id} #legendsOrientation option[value="${legendsOrientation}"]`).setAttribute('selected', 'selected');
 
     document.querySelector(`#accordion_${id} #cssTheme option[value="${cssThemeName}"]`).setAttribute('selected', 'selected');
   }
@@ -837,7 +847,7 @@ window.generateTimeSeriesLineChart = async (id) => {
     yAxis: {},
     series: [
       {
-        name: 'Serie 1',
+        name: 'Label 1',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
@@ -845,35 +855,35 @@ window.generateTimeSeriesLineChart = async (id) => {
         type: 'line',
       },
       {
-        name: 'Serie 2',
+        name: 'Label 2',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
       {
-        name: 'Serie 3',
+        name: 'Label 3',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
       {
-        name: 'Serie 4',
+        name: 'Label 4',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
       {
-        name: 'Serie 5',
+        name: 'Label 5',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
         type: 'line',
       },
       {
-        name: 'Serie 6',
+        name: 'Label 6',
         data: generateData()
           .filter((oneData) => undefined !== oneData.value)
           .map((oneData) => [oneData.time, oneData.value]),
