@@ -35,12 +35,21 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   margin-right: 30px;
 }
 
-.ods-charts-no-css-lib .ods-charts-legend-link {
-  text-decoration: none;
+.ods-charts-no-css-lib .ods-charts-legend-item {
+  
   padding-bottom: 0.625rem;
   margin-right: 10px;
   margin-left: 10px;
   color: var(--bs-body-color, #000000);
+}
+.ods-charts-no-css-lib .ods-charts-legend-custom-content {
+  margin-left: 5px;
+}
+.ods-charts-no-css-lib .ods-charts-legend-global-custom-content {
+  margin-left: 10px;
+}
+.ods-charts-no-css-lib .ods-charts-legend-link {
+  text-decoration: none;
 }
 .ods-charts-no-css-lib .ods-charts-legend-link.ods-charts-legend-link-opacity {
   opacity: .25;
@@ -68,13 +77,13 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
 [data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {
   background-color: var(--bs-gray-950, #141414);
 }
-[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
+[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-item {
   color: var(--bs-white, #fff);
 }
 [data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {
   background-color: var(--bs-white, #fff);
 }
-[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-link {
+[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-item {
   color: var(--bs-black, #000);
 }
 `;
@@ -307,7 +316,9 @@ export class ODSChartsLegends {
         cssTheme,
         mode,
         legendHolders[legendHolderSelector].orientation,
-        dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined
+        dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined,
+        legendHolders[legendHolderSelector].postItemContent,
+        legendHolders[legendHolderSelector].afterLegendContent
       );
     }
   }
@@ -329,7 +340,12 @@ export class ODSChartsLegends {
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
-    formatter?: (name: string) => string
+    formatter?: (name: string) => string,
+    postItemContent?:
+      | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
+      | { [legendNameOrLabel: string]: string }
+      | string[],
+    afterLegendContent?: string
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -339,26 +355,94 @@ export class ODSChartsLegends {
     >
     ${(legends ? legends.labels : []).map((legendLabel: string, indexInHolder: number) => {
       let colorIndex = legends.index[indexInHolder] % colors.length;
-      return `<a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
-      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
-      href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
-        legends.names[indexInHolder]
-      ).replace(/"/g, '&quot;')})">
-      <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
-      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
-      <span style="background-color:${colors[colorIndex]}; ${ODSChartsItemCSSDefinition.getStyles(
-        cssTheme.legends?.odsChartsLegendColor
-      )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
-      </span>
-  
-    <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
-    style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
-    role="button">${this.getLegendName(legendLabel, formatter)}</label>
-  </a>`;
+      const customContent = this.getCustomLegendItemContent(
+        legendLabel,
+        legends.names[indexInHolder],
+        indexInHolder,
+        colors[colorIndex],
+        colorIndex,
+        postItemContent
+      );
+      return `
+      <span class="ods-charts-legend-item ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendItem)}"
+        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendItem)}">
+        <a class="ods-charts-legend-link ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLink)}" 
+          style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLink)}"
+          href="javascript:" onclick="ods_chart_legend_switchLegend[${JSON.stringify(legendHolderSelector).replace(/"/g, '&quot;')}](this, ${JSON.stringify(
+            legends.names[indexInHolder]
+          ).replace(/"/g, '&quot;')})">
+          <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
+          style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
+          <span style="background-color:${colors[colorIndex]}; ${ODSChartsItemCSSDefinition.getStyles(
+            cssTheme.legends?.odsChartsLegendColor
+          )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
+          </span>
+      
+        <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
+        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
+        role="button">${this.getLegendName(legendLabel, formatter)}</label>
+      </a>${
+        customContent
+          ? `<span class="ods-charts-legend-custom-content" 
+        ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendCustomContent)}
+        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendCustomContent)}">${customContent}</span>`
+          : ''
+      }
+    </span>`;
     }).join(`
-    `)}
+    `)}${
+      afterLegendContent
+        ? `<span
+      class="ods-charts-legend-global-custom-content"
+      ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendGlobalCustomContent)}
+      style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendGlobalCustomContent)}"
+      >${afterLegendContent}</span>`
+        : ''
+    }
     </div>
     </div>`;
+  }
+
+  /**
+   * Generates custom content for a legend item based on the provided postItemContent configuration.
+   * @param legendLabel The displayed text of the legend item
+   * @param legendName The name of the series associated with this legend item
+   * @param legendIndex The index of this item within its legend group (0-based)
+   * @param color The color assigned to this legend item, in CSS format (e.g. '#FF0000')
+   * @param colorIndex The index of the color in the color palette (0-based)
+   * @param postItemContent The configuration for custom content, can be either:
+   *   - A function receiving all parameters and returning HTML content
+   *   - An object mapping legend names to static HTML content
+   * @returns The generated HTML content string to be displayed after the legend item
+   */
+  private getCustomLegendItemContent(
+    legendLabel: string,
+    legendName: string,
+    legendIndex: number,
+    color: string,
+    colorIndex: number,
+    postItemContent?:
+      | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
+      | { [legendNameOrLabel: string]: string }
+      | string[]
+  ): string {
+    if (!postItemContent) {
+      return '';
+    }
+
+    if (typeof postItemContent === 'function') {
+      return postItemContent(legendLabel, legendName, legendIndex, color, colorIndex);
+    }
+
+    if (typeof postItemContent === 'object' && !Array.isArray(postItemContent)) {
+      return postItemContent[legendName] || postItemContent[legendLabel] || postItemContent[legendIndex] || '';
+    }
+
+    if (Array.isArray(postItemContent)) {
+      return postItemContent[legendIndex] || '';
+    }
+
+    return '';
   }
 
   private generateHandler(legendHolderSelector: string, cssTheme: ODSChartsCSSThemeDefinition) {
