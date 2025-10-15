@@ -11,6 +11,7 @@ import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSD
 import { ODSChartsMode } from '../ods-chart-theme';
 import { isVarArray, isVarObject } from '../../tools/merge-objects';
 import { ODSChartsLegendHolderDefinition } from './ods-chart-legends-definitions';
+import { escapeHtml } from '../../tools/escape-html';
 
 const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   padding-top: 10px;
@@ -98,15 +99,39 @@ export class ODSChartsLegends {
     return new ODSChartsLegends(echart, legendHoldersArray);
   }
 
-  public static getLegendData(dataOptions: any, updateDataOption: boolean = true): ODSChartsLegendData {
-    let legendData: string[] = dataOptions.legend && dataOptions.legend.data ? dataOptions.legend.data : [];
+  /**
+   * Extract legend data from the chart options.
+   * NB : According to https://echarts.apache.org/en/option.html#legend.data the legend data can be :
+   *  - an array of string
+   *  - an array of objects containing a name property
+   *  - not defined (in this case the legend data is extracted from the series names or from the dataset source first row)
+   * The label is the name of the legend displayed on the chart.
+   * The name is the name of the serie associated to the legend.
+   * That means that the label is equal to the name of the serie, excepted for graph like pie chart where the legend label is the name of the data item.
+   *
+   * We keep an ODS Charts specific behavior where the legend.data contains labels in place of names
+   * and then the array order is used to map the labels to the series names.
+   *
+   * @param dataOptions : chart data options
+   * @param updateDataLegendOption : whether to update the legend option
+   * @param updateDataSeriesOption : whether to update the series option
+   * @returns {ODSChartsLegendData} : Two arrays labels and names of ordered legends to be displayed and containing respectively the label and the name of the serie.
+   * @throws Error if the legend data or series data are missing or inconsistent
+   */
+  public static getLegendData(dataOptions: any, updateDataLegendOption: boolean = true, updateDataSeriesOption: boolean = true): ODSChartsLegendData {
+    let legendData: string[] =
+      dataOptions.legend && dataOptions.legend.data
+        ? dataOptions.legend.data.map((legendDataItem: any) => (isVarObject(legendDataItem) ? legendDataItem.name : legendDataItem))
+        : [];
     let serieNames: string[];
     const monoSerieGraphe = 1 === dataOptions.series.length && dataOptions.series[0].data && ['pie'].includes(dataOptions.series[0].type);
 
-    if (updateDataOption) {
+    if (updateDataLegendOption) {
       if (dataOptions.legend) {
         dataOptions.legend = { ...dataOptions.legend };
       }
+    }
+    if (updateDataSeriesOption) {
       if (dataOptions.series) {
         dataOptions.series = [...dataOptions.series.map((v: any) => ({ ...v }))];
       }
@@ -115,7 +140,7 @@ export class ODSChartsLegends {
     if (!dataOptions.legend || !dataOptions.legend.data) {
       if (dataOptions.dataset && dataOptions.dataset.source) {
         try {
-          if (updateDataOption && !dataOptions.legend) {
+          if (updateDataLegendOption && !dataOptions.legend) {
             dataOptions.legend = {};
           }
           legendData = dataOptions.dataset.source[0].reduce((accumulator: any[], currentValue: any, currentIndex: number) => {
@@ -124,7 +149,7 @@ export class ODSChartsLegends {
             }
             return accumulator;
           }, []);
-          if (updateDataOption) {
+          if (updateDataLegendOption) {
             dataOptions.legend.data = legendData;
           }
         } catch (error) {
@@ -133,7 +158,7 @@ export class ODSChartsLegends {
       } else if (!dataOptions.series) {
         throw new Error(`Missing data array of legends in legend chart option`);
       } else {
-        if (updateDataOption && !dataOptions.legend) {
+        if (updateDataLegendOption && !dataOptions.legend) {
           dataOptions.legend = {};
         }
         if (monoSerieGraphe) {
@@ -151,7 +176,7 @@ export class ODSChartsLegends {
             return serie.name;
           });
         }
-        if (updateDataOption) {
+        if (updateDataLegendOption) {
           dataOptions.legend.data = legendData;
         }
       }
@@ -165,24 +190,49 @@ export class ODSChartsLegends {
         return serie.name;
       });
     } else {
-      if (updateDataOption && !dataOptions.series) {
+      if (updateDataSeriesOption && !dataOptions.series) {
         dataOptions.series = legendData.map((_serie: any, index: number) => ({
-          name: 'serie_Name_' + index,
+          name: legendData[index] || 'serie_Name_' + index,
         }));
       }
+      if (!dataOptions.series) {
+        throw new Error(`Missing series array in chart option`);
+      }
+      const unusedSerieNames: string[] = legendData.filter((legendLabel: string) => {
+        return !dataOptions.series.find((serie: any) => serie.name === legendLabel);
+      });
       serieNames = dataOptions.series.map((serie: any, index: number) => {
         if (!serie.name) {
-          if (!updateDataOption) {
+          if (!updateDataSeriesOption) {
             throw new Error(`Missing series names in chart option`);
           }
-          serie.name = 'serie_Name_' + index;
+          serie.name = unusedSerieNames.shift() || 'serie_Name_' + index;
         }
         return serie.name;
       });
     }
+    let displayedSeriesNames = legendData.filter((legendLabel: string) => serieNames.includes(legendLabel));
+    let displayedSeriesLabels = displayedSeriesNames;
+    if (legendData.length !== displayedSeriesNames.length) {
+      console.info(
+        `The legend data array contains some legends that do not match any series name. Legend data: [${legendData}]. Series names: [${serieNames}]. Displayed legends: [${displayedSeriesNames}]`
+      );
+      // displayedSeriesNames differs from legendData,
+      // that means that some legends do not match any serie name
+      // We asumed then that legend.data is an order list of labels
+      // that will match the series names by their index
+      displayedSeriesLabels = legendData;
+      if (displayedSeriesLabels.length > serieNames.length) {
+        displayedSeriesLabels = displayedSeriesLabels.filter((_legendLabel: string, index: number) => index < serieNames.length);
+      }
+      displayedSeriesNames = serieNames.filter((_serieName: string, index: number) => index < displayedSeriesLabels.length);
+      console.info(
+        `Displayed legends labels have been mapped by their index, [${displayedSeriesLabels}] are the labels of the displayed series [${displayedSeriesNames}]`
+      );
+    }
     return {
-      labels: legendData,
-      names: serieNames,
+      names: displayedSeriesNames,
+      labels: displayedSeriesLabels,
     };
   }
 
@@ -261,6 +311,11 @@ export class ODSChartsLegends {
     }
   }
 
+  private getLegendName(name: string): string {
+    let formatted = name;
+    return escapeHtml(formatted);
+  }
+
   private generateLegend(
     legendHolderSelector: string,
     colors: string[],
@@ -291,7 +346,7 @@ export class ODSChartsLegends {
   
     <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
-    role="button">${legendLabel}</label>
+    role="button">${this.getLegendName(legendLabel)}</label>
   </a>`;
     }).join(`
     `)}
