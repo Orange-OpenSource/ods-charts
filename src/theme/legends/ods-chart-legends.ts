@@ -306,13 +306,19 @@ export class ODSChartsLegends {
         legendHolders[legendHolderSelector].legends,
         cssTheme,
         mode,
-        legendHolders[legendHolderSelector].orientation
+        legendHolders[legendHolderSelector].orientation,
+        dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined
       );
     }
   }
 
-  private getLegendName(name: string): string {
+  private getLegendName(name: string, formatter?: (name: string) => string): string {
     let formatted = name;
+    try {
+      formatted = formatter ? formatter(name) : name;
+    } catch (error) {
+      console.error(`Error while formatting legend name ${name}: ${error}`);
+    }
     return escapeHtml(formatted);
   }
 
@@ -322,7 +328,8 @@ export class ODSChartsLegends {
     legends: { labels: string[]; names: string[]; index: number[] },
     cssTheme: ODSChartsCSSThemeDefinition,
     mode: ODSChartsMode,
-    orientation: 'vertical' | 'horizontal' = 'horizontal'
+    orientation: 'vertical' | 'horizontal' = 'horizontal',
+    formatter?: (name: string) => string
   ) {
     return `<div class="ods-charts-legend-holder ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendHolder)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendHolder)}"
@@ -346,7 +353,7 @@ export class ODSChartsLegends {
   
     <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
     style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
-    role="button">${this.getLegendName(legendLabel)}</label>
+    role="button">${this.getLegendName(legendLabel, formatter)}</label>
   </a>`;
     }).join(`
     `)}
