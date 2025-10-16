@@ -223,6 +223,7 @@ export class ODSChartsLegends {
     let displayedSeriesNames = legendData.filter((legendLabel: string) => serieNames.includes(legendLabel));
     let displayedSeriesLabels = displayedSeriesNames;
     if (legendData.length !== displayedSeriesNames.length) {
+      // eslint-disable-next-line no-console
       console.info(
         `The legend data array contains some legends that do not match any series name. Legend data: [${legendData}]. Series names: [${serieNames}]. Displayed legends: [${displayedSeriesNames}]`
       );
@@ -235,6 +236,7 @@ export class ODSChartsLegends {
         displayedSeriesLabels = displayedSeriesLabels.filter((_legendLabel: string, index: number) => index < serieNames.length);
       }
       displayedSeriesNames = serieNames.filter((_serieName: string, index: number) => index < displayedSeriesLabels.length);
+      // eslint-disable-next-line no-console
       console.info(
         `Displayed legends labels have been mapped by their index, [${displayedSeriesLabels}] are the labels of the displayed series [${displayedSeriesNames}]`
       );
