@@ -1,0 +1,223 @@
+html,
+body {
+  min-height: 100vh;
+}
+
+.footer {
+  position: sticky;
+  top: 100vh;
+}
+
+.border-subtle {
+  --bs-border-color: var(--bs-border-color-subtle);
+}
+
+.ods-charts-nav-text {
+  line-height: 1.5;
+}
+
+.btn-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+}
+
+@media (min-width: 768px) {
+  .ods-charts-nav-text {
+    line-height: 1.875;
+  }
+}
+
+.docs-home-masthead {
+  padding-bottom: 7.5rem;
+  background-image: url("/0.3/images/ouds-web-home-mobile.png");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: auto 100%;
+}
+
+@media (min-width: 768px) {
+  .docs-home-masthead {
+    padding-bottom: 0;
+    background-image: url("/0.3/images/ouds-web-home-tablet.png");
+  }
+}
+
+@media (min-width: 1280px) {
+  .docs-home-masthead {
+    background-image: url("/0.3/images/ouds-web-home-desktop.png");
+  }
+}
+
+/** Syntax highlighting **/
+:root,
+[data-bs-theme="light"] {
+  --base00: #fff;
+  --base01: #333;
+  --base02: #ff1a1b;
+  --base03: #009bf0;
+  --base04: #17a02f;
+  --base05: #0c415a;
+  --base06: #1f1f1f;
+  --base07: #ffb4e6;
+  --base08: #0a4715;
+  --base09: #c1f6ca;
+  --base0A: #003857;
+  --base0B: #136186;
+  --base0C: #b55600;
+  --base0D: #432371;
+  --base0E: #2e7b54;
+  --base0F: #000;
+  --base10: #ccc;
+  --base11: #665100;
+  --base12: #06202d;
+  --base13: #800055;
+}
+
+[data-bs-theme="dark"] {
+  --base00: #141414;
+  --base01: #ccc;
+  --base02: #9bdaba;
+  --base03: #79c7ec;
+  --base04: #ffe270;
+  --base05: #4ab4e6;
+  --base06: #ccc;
+  --base07: #800055;
+  --base08: #79c7ec;
+  --base09: #0e621d;
+  --base0A: #bde7ff;
+  --base0B: #1fa2e0;
+  --base0C: #ffa554;
+  --base0D: #c5ade6;
+  --base0E: #75cca1;
+  --base0F: #fff;
+  --base10: #333;
+  --base11: #67e97e;
+  --base12: #1fa2e0;
+  --base13: #ff1ab2;
+}
+
+pre[class] {
+  margin: 0;
+  padding: 20px 15px;
+  border: 1px solid var(--bs-border-color-subtle);
+  background-color: var(--bs-secondary-bg);
+}
+
+/** Shell prompts **/
+.language-bash .line::before,
+.language-sh .line::before {
+  display: inline-block;
+  color: var(--base12);
+  content: "$ ";
+  user-select: none;
+}
+
+.language-powershell .line::before {
+  display: inline-block;
+  color: var(--base12);
+  content: "PM> ";
+  user-select: none;
+}
+
+.token.tag {
+  display: initial;
+  padding: initial;
+  font-size: inherit;
+  font-weight: initial;
+  line-height: inherit;
+  background-color: initial;
+  border: initial;
+}
+
+.token.placeholder {
+  cursor: initial;
+  background-color: initial;
+  border: initial;
+  opacity: 1;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata,
+.token.punctuation {
+  color: var(--base01);
+}
+
+.token.string,
+.token.char,
+.token.attr-value {
+  color: var(--base02);
+}
+
+.token.tag,
+.token.atrule,
+.token.selector,
+.token.class-name {
+  color: var(--base03);
+}
+
+.token.number,
+.token.boolean,
+.token.attr-name,
+.token.builtin,
+.token.property {
+  color: var(--base04);
+}
+
+.token.important {
+  color: var(--base05);
+}
+
+.token.entity {
+  color: var(--base06);
+  cursor: help;
+}
+
+.token.deleted {
+  background-color: var(--base07);
+}
+
+.token.inserted {
+  background-color: var(--base09);
+}
+
+.token.constant,
+.token.keyword {
+  color: var(--base0B);
+}
+
+.token.url /* tbd */ {
+  color: var(--base0C);
+}
+
+.token.variable {
+  color: var(--base0D);
+}
+
+.token.function,
+.token.regex {
+  color: var(--base0E);
+}
+
+.token.operator {
+  color: var(--base0F);
+}
+
+.token.symbol {
+  color: var(--base11);
+}
+
+.token.keyword,
+.token.important,
+.token.bold,
+.token.selector,
+.token.tag > .token.tag {
+  font-weight: 700;
+}
+
+.token.italic {
+  font-style: none;
+}
