@@ -535,37 +535,37 @@ export class ODSChartsTheme {
         themeOptions.series[index] = {};
         switch (dataOptions.series[index].type) {
           case 'line':
-            themeOptions.series[index] = { ...newTheme.line, markPoint: newTheme.markPoint };
+            themeOptions.series[index] = { ...cloneDeepObject(newTheme.line), markPoint: cloneDeepObject(newTheme.markPoint) };
             break;
           case 'bar':
-            themeOptions.series[index] = newTheme.bar;
+            themeOptions.series[index] = cloneDeepObject(newTheme.bar);
             break;
           case 'pie':
-            themeOptions.series[index] = newTheme.pie;
+            themeOptions.series[index] = cloneDeepObject(newTheme.pie);
             break;
           case 'scatter':
-            themeOptions.series[index] = newTheme.scatter;
+            themeOptions.series[index] = cloneDeepObject(newTheme.scatter);
             break;
           case 'boxplot':
-            themeOptions.series[index] = newTheme.boxplot;
+            themeOptions.series[index] = cloneDeepObject(newTheme.boxplot);
             break;
           case 'sankey':
-            themeOptions.series[index] = newTheme.sankey;
+            themeOptions.series[index] = cloneDeepObject(newTheme.sankey);
             break;
           case 'funnel':
-            themeOptions.series[index] = newTheme.funnel;
+            themeOptions.series[index] = cloneDeepObject(newTheme.funnel);
             break;
           case 'gauge':
-            themeOptions.series[index] = newTheme.gauge;
+            themeOptions.series[index] = cloneDeepObject(newTheme.gauge);
             break;
           case 'candlestick':
-            themeOptions.series[index] = newTheme.candlestick;
+            themeOptions.series[index] = cloneDeepObject(newTheme.candlestick);
             break;
           case 'graph':
-            themeOptions.series[index] = newTheme.graph;
+            themeOptions.series[index] = cloneDeepObject(newTheme.graph);
             break;
           case 'treemap':
-            themeOptions.series[index] = newTheme.map;
+            themeOptions.series[index] = cloneDeepObject(newTheme.map);
             break;
         }
         themeOptions.series[index] = { ...themeOptions.series[index], ...this.options.chartConfiguration?.getSerieConfiguration(dataOptions.series[index]) };

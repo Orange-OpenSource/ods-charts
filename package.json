@@ -26,7 +26,7 @@
     "install:angular-14": "npm i && npm run build && cd test/angular-14 && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-14",
     "install:react": "npm i && npm run build && cd test/react && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:react",
     "install:vue": "npm i && npm run build && cd test/vue && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:vue",
-    "build": "webpack && cp ./dist/ods-charts.js ./docs/static/[version]/ods-charts.js && npx prettier --write ./docs/static/[version]/ods-charts.js",
+    "build": "webpack && cp ./dist/ods-charts.js ./docs/static/[version]/ods-charts.js && cp ./dist/ods-charts.js.map ./docs/static/[version]/ods-charts.js.map",
     "copyright-year": "node build/bump-copyright-year.mjs",
     "netlify": "npm run build && npm run docs:build",
     "prettier:check": "prettier --check .",
