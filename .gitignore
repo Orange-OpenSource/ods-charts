@@ -9,3 +9,6 @@ ods-charts*.tgz
 /test_local
 /docs/static/\[version\]/ods-charts.js
 /docs/static/\[version\]/ods-charts.js.map
+
+# ESLint cache
+.eslintcache
