@@ -10,13 +10,13 @@ document.querySelectorAll('.btn-edit').forEach((btn) => {
     document.getElementById(`collapse_content_2_${id}`)?.classList.remove('d-block');
     document.getElementById(`${id}_viewCode`)?.classList.remove('d-block');
 
-    openChartsSnippet(htmlText, codeText);
+    const libVersion = document.querySelector('[data-ods-charts-version]').getAttribute('data-ods-charts-version');
+
+    openChartsSnippet(htmlText, codeText, libVersion);
   });
 });
 
-const openChartsSnippet = (htmlSnippet, jsSnippet) => {
-  console.log(htmlSnippet, jsSnippet);
-
+const openChartsSnippet = (htmlSnippet, jsSnippet, libVersion) => {
   const project = {
     files: {
       'index.html': `<!doctype html>
@@ -41,7 +41,7 @@ const openChartsSnippet = (htmlSnippet, jsSnippet) => {
     <title>ODS Charts example</title>
 
     <${'script'} src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></${'script'}>
-    <${'script'} src="https://cdn.jsdelivr.net/npm/ods-charts@0.2.0/dist/ods-charts.min.js"></${'script'}>
+    <${'script'} src="https://cdn.jsdelivr.net/npm/ods-charts@${libVersion}/dist/ods-charts.min.js"></${'script'}>
   </head>
   <body class="p-3 m-0 border-0" style="height: 65vh;">
     <!-- Example Code -->
