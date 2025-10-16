@@ -73,7 +73,7 @@ myChart.setOption(themeManager.getChartOptions(dataOptions));
 
 The `themeManager` returned by `getThemeManager()` can be used to add other features supported by the ODS Charts library.
 
-Read the [API documentation](https://charts.unified-design-system.orange.com/0.2/api/) for details on this legends, popover, tooltip... features.
+Read the [API documentation](https://charts.unified-design-system.orange.com/0.3/api/) for details on this legends, popover, tooltip... features.
 
 Read the [documentation](https://charts.unified-design-system.orange.com/) for information on the library content and examples.
 

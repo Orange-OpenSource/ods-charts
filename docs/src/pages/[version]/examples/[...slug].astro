@@ -5,7 +5,7 @@ import { examplesPages } from '@libs/content'
 export async function getStaticPaths() {
   return examplesPages.map((docsPage) => {
     return {
-      params: { slug: docsPage.slug, version: '0.2' },
+      params: { slug: docsPage.slug, version: '0.3' },
       props: docsPage
     }
   })

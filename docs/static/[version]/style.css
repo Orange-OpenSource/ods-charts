@@ -31,7 +31,7 @@ body {
 
 .docs-home-masthead {
   padding-bottom: 7.5rem;
-  background-image: url("/0.2/images/ouds-web-home-mobile.png");
+  background-image: url("/0.3/images/ouds-web-home-mobile.png");
   background-repeat: no-repeat;
   background-position: center right;
   background-size: auto 100%;
@@ -40,13 +40,13 @@ body {
 @media (min-width: 768px) {
   .docs-home-masthead {
     padding-bottom: 0;
-    background-image: url("/0.2/images/ouds-web-home-tablet.png");
+    background-image: url("/0.3/images/ouds-web-home-tablet.png");
   }
 }
 
 @media (min-width: 1280px) {
   .docs-home-masthead {
-    background-image: url("/0.2/images/ouds-web-home-desktop.png");
+    background-image: url("/0.3/images/ouds-web-home-desktop.png");
   }
 }
 
