@@ -64,8 +64,6 @@ export class ODSChartsCssHelper {
   public initComputedStyle(): boolean {
     if (!this._computedStyleInitialized) {
       if (!document.getElementById('ods-charts-style-' + this.cssThemeName) && ODS_CHARTS_CSS_VARIABLES[this.cssThemeName]) {
-        // clean any existing style previously inserted.
-        document.querySelectorAll('style[data-ods-charts-type="theme"]').forEach((el) => el.remove());
         const style = document.createElement('style');
         style.textContent = ODS_CHARTS_CSS_VARIABLES[this.cssThemeName];
         style.id = 'ods-charts-style-' + this.cssThemeName;
