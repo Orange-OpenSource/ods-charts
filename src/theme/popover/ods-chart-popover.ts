@@ -108,12 +108,13 @@ const DEFAULT_NONE_CSS = `
   display: flex;
   margin-bottom: 5px;
   white-space: nowrap;
-  align-items: center;
+  align-items: baseline;
 }
 
 .ods-charts-no-css-lib .ods-charts-popover-text {
   flex-grow: 1;
   display: flex;
+  align-items: baseline;
   font-size: var(--ods-popover-body-font-size, 14px);
   font-weight: var(--ods-popover-body-font-weight, 700);
   line-height: var(--ods-popover-body-line-height, 1.11);
