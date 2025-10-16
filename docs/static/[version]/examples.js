@@ -463,7 +463,8 @@ async function displayChart(
 
   legends =
     usedLegends === 'odscharts' &&
-    ((options.legend && options.legend.data && !options.legend.show) ||
+    (hasLegend ||
+      (options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
       (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
 
@@ -473,7 +474,7 @@ async function displayChart(
     iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
   }
 
-  if (!legends && !hasLegend && usedLegends === 'odscharts') {
+  if (!legends && usedLegends === 'odscharts') {
     document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
       elt.style.display = 'none';
     });

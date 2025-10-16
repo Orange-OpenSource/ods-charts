@@ -675,7 +675,7 @@ export class ODSChartsTheme {
 
       const legend: any = {
         textStyle: {
-          fontWeight: 'bold',
+          fontWeight: 'var(--bs-body-font-weight, 400)',
           fontSize: 14,
           color:
             ODSChartsMode.DEFAULT === this.options.mode
