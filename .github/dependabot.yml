@@ -3,8 +3,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
   - package-ecosystem: npm
@@ -15,8 +14,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -26,8 +24,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -40,8 +37,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -54,8 +50,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -68,8 +63,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -82,8 +76,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
@@ -96,8 +89,7 @@ updates:
     labels:
       - dependencies
     schedule:
-      interval: weekly
-      day: friday
+      interval: monthly
       time: "06:00"
       timezone: Europe/Paris
     versioning-strategy: increase
