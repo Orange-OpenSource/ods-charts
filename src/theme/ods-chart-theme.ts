@@ -11,7 +11,6 @@ import { COMMON_LINE_STYLE_POINTS } from './common/ODS.line-style.with-points';
 import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
 import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
-import { mergeObjects } from '../tools/merge-objects';
 import { ODSChartsResize } from './resize/ods-chart-resize';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemes, ODSChartsCSSThemesNames } from './css-themes/css-themes';
 import { buildHash, getStringValue } from '../tools/hash';
@@ -46,6 +45,7 @@ import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
 import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
 import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
 import { ODSChartsConfiguration } from '../ods-charts';
+import { mergeObjectsAndArrays, mergeObjectsAndReplaceArrays } from '../tools/merge-objects';
 // import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
 // import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
 
@@ -410,15 +410,15 @@ export class ODSChartsTheme {
 
     const theme: EChartsProject = cloneDeepObject(ODS_PROJECT);
 
-    mergeObjects(theme, cloneDeepObject(THEME.common));
+    mergeObjectsAndReplaceArrays(theme, cloneDeepObject(THEME.common));
 
-    mergeObjects(theme, cloneDeepObject(THEME.linesAxis));
+    mergeObjectsAndReplaceArrays(theme, cloneDeepObject(THEME.linesAxis));
 
     if (typeof options.colors === 'string') {
-      mergeObjects(theme, cloneDeepObject(THEME.colors[options.colors]));
-      mergeObjects(theme, cloneDeepObject(THEME.visualMapColors[options.colors]));
+      mergeObjectsAndReplaceArrays(theme, cloneDeepObject(THEME.colors[options.colors]));
+      mergeObjectsAndReplaceArrays(theme, cloneDeepObject(THEME.visualMapColors[options.colors]));
     } else {
-      mergeObjects(
+      mergeObjectsAndReplaceArrays(
         theme,
         cloneDeepObject({
           color: options.colors.map((color) => ('string' === typeof color ? color : THEME.colors[color.colorPalette].color[color.colorIndex])),
@@ -429,7 +429,7 @@ export class ODSChartsTheme {
       );
     }
 
-    mergeObjects(
+    mergeObjectsAndReplaceArrays(
       theme,
       cloneDeepObject(
         THEME.linesStyle[
@@ -505,7 +505,7 @@ export class ODSChartsTheme {
    */
   private calculateNewThemeAndAddItInThemeOptions(themeOptions: any, dataOptions: any): any {
     const newTheme = this.calculateTheme();
-    mergeObjects(
+    mergeObjectsAndArrays(
       themeOptions,
       {
         color: newTheme.color,
@@ -582,16 +582,16 @@ export class ODSChartsTheme {
       if (dataOptions[axisType]) {
         switch (dataOptions[axisType].type) {
           case 'category':
-            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.categoryAxis);
+            themeOptions[axisType] = mergeObjectsAndReplaceArrays(themeOptions[axisType], newTheme.categoryAxis);
             break;
           case 'value':
-            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.valueAxis);
+            themeOptions[axisType] = mergeObjectsAndReplaceArrays(themeOptions[axisType], newTheme.valueAxis);
             break;
           case 'log':
-            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.logAxis);
+            themeOptions[axisType] = mergeObjectsAndReplaceArrays(themeOptions[axisType], newTheme.logAxis);
             break;
           case 'time':
-            themeOptions[axisType] = mergeObjects(themeOptions[axisType], newTheme.timeAxis);
+            themeOptions[axisType] = mergeObjectsAndReplaceArrays(themeOptions[axisType], newTheme.timeAxis);
             break;
         }
       }
@@ -874,6 +874,6 @@ export class ODSChartsTheme {
     }
 
     const { themeOptions, dataOptions } = this.getThemeOptions();
-    return mergeObjects(themeOptions, dataOptions);
+    return mergeObjectsAndArrays(themeOptions, dataOptions);
   }
 }
