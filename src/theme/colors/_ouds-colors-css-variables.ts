@@ -8,6 +8,7 @@
 
 export const ODS_CHARTS_CONTEXT = `
 .ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light], [data-bs-theme] .ods-charts-context[data-bs-theme=light] {
+  color-scheme: light;
   --ouds-charts-color-border: #ffffff;
   --ouds-charts-color-border-contrast: #ffffff;
   --ouds-charts-color-categorical-tier-1: #5b2f98;
@@ -15,7 +16,7 @@ export const ODS_CHARTS_CONTEXT = `
   --ouds-charts-color-categorical-tier-2: #3ba06e;
   --ouds-charts-color-categorical-tier-3: #b20077;
   --ouds-charts-color-categorical-tier-4: #a38200;
-  --ouds-charts-color-categorical-tier-5: #007abd;
+  --ouds-charts-color-categorical-tier-5: #0073b2;
   --ouds-charts-color-categorical-tier-6: #8d60cd;
   --ouds-charts-color-categorical-tier-7: #2e7b54;
   --ouds-charts-color-categorical-tier-8: #e50099;
@@ -75,6 +76,7 @@ export const ODS_CHARTS_CONTEXT = `
 }
 
 [data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark], [data-bs-theme] .ods-charts-context[data-bs-theme=dark] {
+  color-scheme: dark;
   --ouds-charts-color-border: #141414;
   --ouds-charts-color-border-contrast: #000000;
   --ouds-charts-color-categorical-tier-1: #a885d8;
