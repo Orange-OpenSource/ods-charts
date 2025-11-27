@@ -8,7 +8,6 @@
 
 export const ODS_CHARTS_CONTEXT = `
 .ods-charts-context, [data-bs-theme=light] .ods-charts-context, .ods-charts-context[data-bs-theme=light], [data-bs-theme] .ods-charts-context[data-bs-theme=light] {
-  color-scheme: light;
   --ouds-charts-color-border: #ffffff;
   --ouds-charts-color-border-contrast: #ffffff;
   --ouds-charts-color-categorical-tier-1: #5b2f98;
@@ -76,7 +75,6 @@ export const ODS_CHARTS_CONTEXT = `
 }
 
 [data-bs-theme=dark] .ods-charts-context, .ods-charts-context[data-bs-theme=dark], [data-bs-theme] .ods-charts-context[data-bs-theme=dark] {
-  color-scheme: dark;
   --ouds-charts-color-border: #141414;
   --ouds-charts-color-border-contrast: #000000;
   --ouds-charts-color-categorical-tier-1: #a885d8;
