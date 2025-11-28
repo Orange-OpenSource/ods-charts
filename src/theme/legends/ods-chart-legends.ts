@@ -35,8 +35,7 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   margin-right: 30px;
 }
 
-.ods-charts-no-css-lib .ods-charts-legend-item {
-  
+.ods-charts-no-css-lib .ods-charts-legend-item {  
   padding-bottom: 0.625rem;
   margin-right: 10px;
   margin-left: 10px;
@@ -74,17 +73,20 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   line-height: 16px;
 }
 
-[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder {
-  background-color: var(--bs-gray-950, #141414);
+[data-bs-theme="dark"] {
+  --ods-charts-legend-bg: var(--bs-gray-950, #141414);
+  --ods-charts-legend-color: var(--bs-white, #fff);
 }
-[data-bs-theme="dark"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-item {
-  color: var(--bs-white, #fff);
+[data-bs-theme="light"] {
+  --ods-charts-legend-bg: var(--bs-white, #fff);
+  --ods-charts-legend-color: var(--bs-black, #000);
 }
-[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder {
-  background-color: var(--bs-white, #fff);
+
+.ods-charts-no-css-lib.ods-charts-legend-holder {
+  background-color: var(--ods-charts-legend-bg, var(--bs-body-bg, #ffffff));
 }
-[data-bs-theme="light"] .ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-item {
-  color: var(--bs-black, #000);
+.ods-charts-no-css-lib.ods-charts-legend-holder .ods-charts-legend-item {
+  color: var(--ods-charts-legend-color, var(--bs-body-color, #000000));
 }
 `;
 
