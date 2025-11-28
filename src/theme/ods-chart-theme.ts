@@ -568,7 +568,10 @@ export class ODSChartsTheme {
             themeOptions.series[index] = cloneDeepObject(newTheme.map);
             break;
         }
-        themeOptions.series[index] = { ...themeOptions.series[index], ...this.options.chartConfiguration?.getSerieConfiguration(dataOptions.series[index]) };
+        themeOptions.series[index] = {
+          ...themeOptions.series[index],
+          ...this.options.chartConfiguration?.getSerieConfiguration(dataOptions.series[index], themeOptions, dataOptions),
+        };
       }
     }
 
