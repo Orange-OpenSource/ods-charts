@@ -502,7 +502,7 @@ export const ODS_PROJECT: EChartsProject = {
     symbolSize: 4,
     symbol: 'emptyCircle',
     smooth: false,
-    color: ['#4bb4e6', '#50be87', '#ffb4e6', '#a885d8', '#ffd200'],
+    color: [],
     label: {
       color: 'var(--bs-body-color, #000000)',
     },

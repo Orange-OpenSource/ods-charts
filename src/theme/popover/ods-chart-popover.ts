@@ -7,7 +7,7 @@
 //
 
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
-import { mergeObjects, isVarArray } from '../../tools/merge-objects';
+import { isVarArray, mergeObjectsAndReplaceArrays } from '../../tools/merge-objects';
 import {
   DEFAULT_ARROW_SIZE,
   ODSChartsPopoverAxisPointer,
@@ -250,7 +250,7 @@ export class ODSChartsPopover {
                   : isVarArray(param.value)
                     ? undefined
                     : param.value;
-            const element: ODSChartsPopoverItem = mergeObjects(cloneDeepObject(param), {
+            const element: ODSChartsPopoverItem = mergeObjectsAndReplaceArrays(cloneDeepObject(param), {
               markerColor: param.color,
               itemValue: itemValue,
               label: legendLabel || '',
@@ -285,7 +285,7 @@ export class ODSChartsPopover {
     } catch (error) {}
 
     if (this.popoverConfig.enabled) {
-      mergeObjects(popoverOptions, {
+      mergeObjectsAndReplaceArrays(popoverOptions, {
         tooltip: {
           appendTo: 'body',
         },
@@ -302,13 +302,13 @@ export class ODSChartsPopover {
         },
       });
       if (!this.popoverConfig.tooltip) {
-        mergeObjects(popoverOptions, {
+        mergeObjectsAndReplaceArrays(popoverOptions, {
           tooltip: { triggerOn: 'click', alwaysShowContent: false },
         });
       }
 
       if (!(this.popoverDefinition as ODSChartsPopoverDefinitionWithRenderer).getOrCreatePopupInstance) {
-        mergeObjects(popoverOptions, {
+        mergeObjectsAndReplaceArrays(popoverOptions, {
           tooltip: {
             position: (
               mousePosition: number[],
@@ -397,7 +397,7 @@ export class ODSChartsPopover {
           },
         });
       } else {
-        mergeObjects(popoverOptions, {
+        mergeObjectsAndReplaceArrays(popoverOptions, {
           tooltip: {
             formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
@@ -463,18 +463,18 @@ export class ODSChartsPopover {
       }
 
       if (!this.popoverConfig.shared && 'none' === this.popoverConfig.axisPointer) {
-        mergeObjects(popoverOptions, { tooltip: { trigger: 'item' } });
+        mergeObjectsAndReplaceArrays(popoverOptions, { tooltip: { trigger: 'item' } });
       } else {
-        mergeObjects(popoverOptions, { tooltip: { trigger: 'axis' } });
+        mergeObjectsAndReplaceArrays(popoverOptions, { tooltip: { trigger: 'axis' } });
       }
     } else {
-      mergeObjects(popoverOptions, {
+      mergeObjectsAndReplaceArrays(popoverOptions, {
         tooltip: {
           triggerOn: 'none',
         },
       });
     }
-    mergeObjects(themeOptions, popoverOptions);
+    mergeObjectsAndReplaceArrays(themeOptions, popoverOptions);
   }
 
   private getPopupContentLine(element: ODSChartsPopoverItem, cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode): string {
