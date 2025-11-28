@@ -23,7 +23,7 @@
     "install:angular-ngx-echarts": "npm i && npm run build && cd test/angular-ngx-echarts && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-ngx-echarts",
     "install:angular-ng-boosted": "npm i && npm run build && cd test/angular-ng-boosted && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-ng-boosted",
     "install:angular-echarts": "npm i && npm run build && cd test/angular-echarts && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-echarts",
-    "install:angular-14": "npm i && npm run build && cd test/angular-14 && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:angular-14",
+    "install:angular-14": "npm i && npm run build && cd test/angular-14 && nvm use 16.20.2 && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && nvm use 22.17.0 && npm run serve:angular-14",
     "install:react": "npm i && npm run build && cd test/react && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:react",
     "install:vue": "npm i && npm run build && cd test/vue && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:vue",
     "build": "webpack && cp ./dist/ods-charts.js ./docs/static/[version]/ods-charts.js && cp ./dist/ods-charts.js.map ./docs/static/[version]/ods-charts.js.map",
