@@ -80,6 +80,15 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
 
+  protected getLegendConfiguration(_themeOptions: any, _dataOptions: any): any {
+    return {
+      orient: 'horizontal',
+      show: true,
+      ..._themeOptions?.legend,
+      ..._dataOptions?.legend,
+    };
+  }
+
   /**
    * For internal use only.
    * This method should not be called directly by the user. It is used internally by the class to build the configuration of the charts.
@@ -259,14 +268,8 @@ class ODSChartsPie extends ODSChartsConfiguration {
       return {};
     }
 
-    const legend = {
-      orient: 'horizontal',
-      show: true,
-      ..._themeOptions?.legend,
-      ..._dataOptions?.legend,
-    };
+    const legend = this.getLegendConfiguration(_themeOptions, _dataOptions);
 
-    console.error('Pie serie configuration', serie, _themeOptions, _dataOptions);
     return {
       label: { show: false, position: 'outside' },
       labelLine: { show: false },
@@ -299,6 +302,9 @@ class ODSChartsDonut extends ODSChartsConfiguration {
     if (serie.type !== 'pie') {
       return {};
     }
+
+    const legend = this.getLegendConfiguration(_themeOptions, _dataOptions);
+
     return {
       label: { show: false, position: 'center' },
       labelLine: { show: false },
@@ -310,7 +316,19 @@ class ODSChartsDonut extends ODSChartsConfiguration {
           formatter: '{d}%',
         },
       },
-      radius: ['80%', '95%'],
+      ...(legend.show && legend.orient === 'horizontal'
+        ? {
+            center: ['50%', '40%'],
+            radius: ['65%', '80%'],
+          }
+        : legend.show && legend.orient === 'horizontal'
+          ? {
+              radius: ['80%', '95%'],
+              center: ['40%', '50%'],
+            }
+          : {
+              radius: ['80%', '95%'],
+            }),
     };
   }
 
