@@ -263,12 +263,7 @@ export class ODSChartsPopover {
             return element;
           }
         )
-        .filter((elt) => {
-          if (undefined === elt.itemValue) {
-            console.error('failed displaying', elt);
-          }
-          return undefined !== elt.itemValue;
-        }),
+        .filter((elt) => undefined !== elt.itemValue),
     };
   }
 
