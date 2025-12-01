@@ -26,11 +26,11 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.37.0",
-    "eslint-plugin-vue": "^10.5.0",
+    "eslint-plugin-vue": "^10.6.2",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
     "vite": "^7.1.11",
-    "vue-tsc": "^3.1.1"
+    "vue-tsc": "^3.1.5"
   }
 }
