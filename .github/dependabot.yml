@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
   - package-ecosystem: npm
     directory: "/"
     reviewers:
@@ -15,8 +13,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     rebase-strategy: disabled
   - package-ecosystem: npm
@@ -25,8 +21,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-ngx-echarts-all-deps:
@@ -38,8 +32,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-echarts-all-deps:
@@ -51,8 +43,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       angular-ng-boosted-all-deps:
@@ -64,8 +54,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       react-all-deps:
@@ -77,8 +65,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     groups:
       vue-all-deps:
@@ -90,8 +76,6 @@ updates:
       - dependencies
     schedule:
       interval: monthly
-      time: "06:00"
-      timezone: Europe/Paris
     versioning-strategy: increase
     ignore:
       - dependency-name: "@angular-devkit/build-angular"
