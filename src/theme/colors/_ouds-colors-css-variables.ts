@@ -7,7 +7,7 @@
 //
 
 export const ODS_CHARTS_CONTEXT = `
-:host, [data-bs-theme=light] {
+:root, :host, [data-bs-theme=light] {
   --ouds-charts-color-border: #ffffff;
   --ouds-charts-color-border-contrast: #ffffff;
   --ouds-charts-color-categorical-tier-1: #5b2f98;

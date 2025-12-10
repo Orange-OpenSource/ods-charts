@@ -185,7 +185,7 @@ export const BOOSTED5_THEME_SPECIFIC_VARIABLES = `
  * Added for all themes
  */
 const ALL_THEMES_SPECIFIC_VARIABLES = `
-:host, [data-bs-theme=light] {
+:root, :host, [data-bs-theme=light] {
   --ods-charts-blue: #4170d8;
   --ods-charts-indigo: #a885d8;
   --ods-charts-purple: #a885d8;
@@ -260,7 +260,7 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
   --ods-charts-tertiary-bg: #000;
 }
 
-:host, [data-bs-theme="light"] {
+:root, :host, [data-bs-theme="light"] {
   --ods-yellow-100: #fff6b6;
   --ods-yellow-200: #ffe45b;
   --ods-yellow-300: #ffd200;
