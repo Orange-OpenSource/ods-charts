@@ -278,7 +278,7 @@ class ODSChartsPie extends ODSChartsConfiguration {
             center: ['50%', '40%'],
             radius: ['0%', '80%'],
           }
-        : legend.show && legend.orient === 'horizontal'
+        : legend.show && legend.orient === 'vertical'
           ? {
               radius: ['0%', '95%'],
               center: ['40%', '50%'],
@@ -321,7 +321,7 @@ class ODSChartsDonut extends ODSChartsConfiguration {
             center: ['50%', '40%'],
             radius: ['65%', '80%'],
           }
-        : legend.show && legend.orient === 'horizontal'
+        : legend.show && legend.orient === 'vertical'
           ? {
               radius: ['80%', '95%'],
               center: ['40%', '50%'],
