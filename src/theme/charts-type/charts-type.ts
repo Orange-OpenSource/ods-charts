@@ -80,6 +80,15 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
 
+  protected getLegendConfiguration(_themeOptions: any, _dataOptions: any): any {
+    return {
+      orient: 'horizontal',
+      show: true,
+      ..._themeOptions?.legend,
+      ..._dataOptions?.legend,
+    };
+  }
+
   /**
    * For internal use only.
    * This method should not be called directly by the user. It is used internally by the class to build the configuration of the charts.
@@ -97,7 +106,7 @@ export class ODSChartsConfiguration {
    * @returns The configuration of the serie.
    * @internal
    */
-  public getSerieConfiguration(_serie: { type: string }): any {
+  public getSerieConfiguration(_serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     return {};
   }
 
@@ -254,14 +263,29 @@ class ODSChartsBar extends ODSChartsBarType {
  * Configuration of a pie chart of type {@link ODSChartsTypes.PIE}
  */
 class ODSChartsPie extends ODSChartsConfiguration {
-  public getSerieConfiguration(serie: { type: string }) {
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type !== 'pie') {
       return {};
     }
+
+    const legend = this.getLegendConfiguration(_themeOptions, _dataOptions);
+
     return {
       label: { show: false, position: 'outside' },
       labelLine: { show: false },
-      radius: ['0%', '95%'],
+      ...(legend.show && legend.orient === 'horizontal'
+        ? {
+            center: ['50%', '40%'],
+            radius: ['0%', '80%'],
+          }
+        : legend.show && legend.orient === 'vertical'
+          ? {
+              radius: ['0%', '95%'],
+              center: ['40%', '50%'],
+            }
+          : {
+              radius: ['0%', '95%'],
+            }),
     };
   }
 
@@ -274,10 +298,13 @@ class ODSChartsPie extends ODSChartsConfiguration {
  * Configuration of a chart of type {@link ODSChartsTypes.HorizontalGauge}
  */
 class ODSChartsDonut extends ODSChartsConfiguration {
-  getSerieConfiguration(serie: { type: string }): any {
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type !== 'pie') {
       return {};
     }
+
+    const legend = this.getLegendConfiguration(_themeOptions, _dataOptions);
+
     return {
       label: { show: false, position: 'center' },
       labelLine: { show: false },
@@ -289,7 +316,19 @@ class ODSChartsDonut extends ODSChartsConfiguration {
           formatter: '{d}%',
         },
       },
-      radius: ['80%', '95%'],
+      ...(legend.show && legend.orient === 'horizontal'
+        ? {
+            center: ['50%', '40%'],
+            radius: ['65%', '80%'],
+          }
+        : legend.show && legend.orient === 'vertical'
+          ? {
+              radius: ['80%', '95%'],
+              center: ['40%', '50%'],
+            }
+          : {
+              radius: ['80%', '95%'],
+            }),
     };
   }
 
@@ -368,7 +407,7 @@ class ODSChartsHorizontalGauge extends ODSChartsGaugeType {
     };
   }
 
-  public getSerieConfiguration(serie: { type: string }) {
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     if ('bar' !== serie.type) {
       return {};
     }
@@ -403,7 +442,7 @@ class ODSChartsCircularGaugeType extends ODSChartsConfiguration {
     super(type);
   }
 
-  public getSerieConfiguration(serie: { type: string; min?: number; max?: number }): any {
+  public getSerieConfiguration(serie: { type: string; min?: number; max?: number }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type !== 'gauge') {
       return {};
     }
@@ -506,12 +545,11 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
     return arr.reduce((acc, val) => this.gcd(acc, val), arr[0]);
   }
 
-  public getSerieConfiguration(serie: { type: string; min?: number; max?: number }): any {
+  public getSerieConfiguration(serie: { type: string; min?: number; max?: number }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type !== 'gauge') {
       return {};
     }
-    const config = super.getSerieConfiguration(serie);
-
+    const config = super.getSerieConfiguration(serie, _themeOptions, _dataOptions);
     const minValue = config.min;
     const maxValue = config.max;
 
