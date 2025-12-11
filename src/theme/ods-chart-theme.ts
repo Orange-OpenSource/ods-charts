@@ -471,6 +471,14 @@ export class ODSChartsTheme {
     return this;
   }
 
+  private sliceColor(colors: string[], color: string, serieIndex: number) {
+    const previousColorIndex = colors.indexOf(color);
+    if (previousColorIndex > -1) {
+      colors.splice(previousColorIndex, 1);
+    }
+    colors.splice(serieIndex, 0, color);
+  }
+
   /**
    *
    * @param themeColors : colors set to be used by default
@@ -482,12 +490,14 @@ export class ODSChartsTheme {
     if (dataOptions && dataOptions.series) {
       for (let serieIndex = 0; serieIndex < dataOptions.series.length; serieIndex++) {
         const serie = dataOptions.series[serieIndex];
-        if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[serieIndex]) {
-          const previousColorIndex = colors.indexOf(serie.itemStyle.color);
-          if (previousColorIndex > -1) {
-            colors.splice(previousColorIndex, 1);
+        if (serie.lineStyle && serie.lineStyle.color) {
+          // In case of color line, we will replace the default color by the specified one
+          if (serie.lineStyle.color !== colors[serieIndex]) {
+            this.sliceColor(colors, serie.lineStyle.color, serieIndex);
           }
-          colors.splice(serieIndex, 0, serie.itemStyle.color);
+        } else if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[serieIndex]) {
+          // In case of item line, we will replace the default color by the specified one
+          this.sliceColor(colors, serie.itemStyle.color, serieIndex);
         }
       }
     }
@@ -762,6 +772,7 @@ export class ODSChartsTheme {
           this.chartPopoverManager.addPopoverManagement(
             updatedDataOptionsForTheme,
             themeOptions,
+            displayedColors,
             this.options.cssTheme as ODSChartsCSSThemeDefinition,
             this.cssThemeName,
             this.options.mode as ODSChartsMode

@@ -19,8 +19,10 @@ export class ODSChartsPopoverManager {
 }
 
 export class ODSChartsPopoverItem {
-  seriesName: string = undefined as any;
-  markerColor: string = undefined as any;
+  seriesName!: string;
+  markerColor!: string;
+  serieColor!: string;
+  itemColor!: string;
   itemValue: any;
   color?: string;
   value?: any;
