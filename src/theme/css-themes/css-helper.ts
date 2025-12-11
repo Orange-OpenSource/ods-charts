@@ -159,18 +159,20 @@ export class ODSChartsCssHelper {
   private replaceRecursivelyCssVars<T extends { [key: string]: any }>(subTreeConfig: T): T {
     var newConfig: { [key: string]: any } = subTreeConfig;
     for (const key of Object.keys(newConfig)) {
-      if (isVarArray(newConfig[key])) {
-        for (let index = 0; index < newConfig[key].length; index++) {
-          if (isVarObject(newConfig[key][index]) || isVarArray(newConfig[key][index])) {
-            newConfig[key][index] = this.replaceRecursivelyCssVars(newConfig[key][index]);
-          } else if ('string' === typeof newConfig[key][index]) {
-            newConfig[key][index] = this.replaceOneCssVar(newConfig[key][index]);
+      if (key !== undefined && key !== null && newConfig[key] !== undefined && newConfig[key] !== null) {
+        if (isVarArray(newConfig[key])) {
+          for (let index = 0; index < newConfig[key].length; index++) {
+            if (isVarObject(newConfig[key][index]) || isVarArray(newConfig[key][index])) {
+              newConfig[key][index] = this.replaceRecursivelyCssVars(newConfig[key][index]);
+            } else if ('string' === typeof newConfig[key][index]) {
+              newConfig[key][index] = this.replaceOneCssVar(newConfig[key][index]);
+            }
           }
+        } else if (isVarObject(newConfig[key])) {
+          newConfig[key] = this.replaceRecursivelyCssVars(newConfig[key]);
+        } else if ('string' === typeof newConfig[key]) {
+          newConfig[key] = this.replaceOneCssVar(newConfig[key]);
         }
-      } else if (isVarObject(newConfig[key])) {
-        newConfig[key] = this.replaceRecursivelyCssVars(newConfig[key]);
-      } else if ('string' === typeof newConfig[key]) {
-        newConfig[key] = this.replaceOneCssVar(newConfig[key]);
       }
     }
     return newConfig as T;
