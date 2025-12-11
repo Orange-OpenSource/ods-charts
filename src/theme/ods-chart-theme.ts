@@ -139,11 +139,10 @@ export enum ODSChartsLineStyle {
   BROKEN_WITH_POINTS = 'withPoints',
 }
 
-export enum ODSChartsMode {
-  LIGHT = 'light',
-  DARK = 'dark',
-  DEFAULT = 'default',
-}
+// Re-export ODSChartsMode from the separate file to avoid circular dependencies
+import { ODSChartsMode } from './ods-chart-mode';
+
+export { ODSChartsMode };
 
 /**
  * `ODSChartsThemeOptions` is used to set options of the theme [ODSCharts.getThemeManager( ODSChartsThemeOptions)](../#md:documentation).

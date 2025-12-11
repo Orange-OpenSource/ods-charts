@@ -9,7 +9,7 @@
 import { conditionalCloneDeepObject } from '../../tools/conditional-clone-deep-object';
 import { isVarArray, isVarObject } from '../../tools/merge-objects';
 import { ODS_CHARTS_CSS_VARIABLES } from '../css-themes/css-variables';
-import { ODSChartsMode } from '../ods-chart-theme';
+import { ODSChartsMode } from '../ods-chart-mode';
 import { ODSChartsCSSThemesNames } from './css-themes';
 
 export class ODSChartsCssHelper {

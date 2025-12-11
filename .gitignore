@@ -10,5 +10,7 @@ ods-charts*.tgz
 /docs/static/\[version\]/ods-charts.js
 /docs/static/\[version\]/ods-charts.js.map
 
+/.vscode
+
 # ESLint cache
 .eslintcache
