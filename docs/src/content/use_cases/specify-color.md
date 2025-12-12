@@ -601,8 +601,8 @@ series: [
 
     var results = new Array(...new Array(12).keys()).map((i) => {
       return 50 + Math.random() * 50;
-    }).map((res, i) => (res >= goals[i] ? results[i] : {
-        value:results[i],
+    }).map((res, i) => (res >= goals[i] ? res : {
+        value: res,
         itemStyle: {
         color: 'var(--ods-functional-5)',
         },
