@@ -8,7 +8,7 @@
 
 import { type ECharts } from 'echarts';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
-import { ODSChartsMode } from '../ods-chart-theme';
+import { ODSChartsMode } from '../ods-chart-mode';
 import { isVarArray, isVarObject } from '../../tools/merge-objects';
 import { ODSChartsLegendHolderDefinition } from './ods-chart-legends-definitions';
 import { escapeHtml } from '../../tools/escape-html';

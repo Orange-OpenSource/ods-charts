@@ -19,7 +19,7 @@ import {
 } from './ods-chart-popover-definitions';
 import { ODSChartsLegendData, ODSChartsLegends } from '../legends/ods-chart-legends';
 import { cloneDeepObject } from '../../tools/clone-deep-object';
-import { ODSChartsMode } from '../ods-chart-theme';
+import { ODSChartsMode } from '../ods-chart-mode';
 import { isMainAxis } from '../const/main-axis-type.const';
 
 const DEFAULT_TEMPLATE_CSS = `

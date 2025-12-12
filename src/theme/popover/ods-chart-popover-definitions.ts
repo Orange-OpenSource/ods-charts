@@ -8,7 +8,7 @@
 
 import { cloneDeepObject } from '../../tools/clone-deep-object';
 import { ODSChartsCSSThemesNames } from '../css-themes/css-themes';
-import { ODSChartsMode } from '../ods-chart-theme';
+import { ODSChartsMode } from '../ods-chart-mode';
 declare var boosted: any;
 
 export const DEFAULT_ARROW_SIZE: number = 0; // in px. Set to 0 to disable arrow
