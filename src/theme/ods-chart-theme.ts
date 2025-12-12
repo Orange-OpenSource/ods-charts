@@ -496,7 +496,7 @@ export class ODSChartsTheme {
             this.sliceColor(colors, serie.lineStyle.color, seriesIndex);
           }
         } else if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[seriesIndex]) {
-          // In case of item line, we will replace the default color by the specified one
+          // In case of a series with custom item style color, we will replace the default color by the specified one
           this.sliceColor(colors, serie.itemStyle.color, seriesIndex);
         }
       }
