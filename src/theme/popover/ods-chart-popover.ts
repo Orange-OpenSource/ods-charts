@@ -246,7 +246,7 @@ export class ODSChartsPopover {
               });
 
             const colorIndex: number = undefined === param.seriesIndex ? -1 : param.seriesIndex % this.colors.length;
-            const serieColor: string = (colorIndex > -1 ? this.colors[colorIndex] : param.color) ?? 'transparent';
+            const seriesColor: string = (colorIndex > -1 ? this.colors[colorIndex] : param.color) ?? 'transparent';
             const itemColor: string = param.color ?? 'transparent';
             const itemValue =
               isVarArray(param.value) && 2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))
@@ -257,9 +257,9 @@ export class ODSChartsPopover {
                     ? undefined
                     : param.value;
             const element: ODSChartsPopoverItem = mergeObjectsAndReplaceArrays(cloneDeepObject(param), {
-              markerColor: 'line' === param.seriesType ? serieColor : itemColor,
+              markerColor: 'line' === param.seriesType ? seriesColor : itemColor,
               itemColor: itemColor,
-              serieColor: serieColor,
+              seriesColor: seriesColor,
               itemValue: itemValue,
               label: legendLabel || '',
             });
