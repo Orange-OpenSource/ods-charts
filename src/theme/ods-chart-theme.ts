@@ -491,7 +491,7 @@ export class ODSChartsTheme {
       for (let seriesIndex = 0; seriesIndex < dataOptions.series.length; seriesIndex++) {
         const serie = dataOptions.series[seriesIndex];
         if (serie.lineStyle && serie.lineStyle.color) {
-          // In case of color line, we will replace the default color by the specified one
+          // In case of a line series with a custom color, we will replace the default color by the specified one
           if (serie.lineStyle.color !== colors[seriesIndex]) {
             this.sliceColor(colors, serie.lineStyle.color, seriesIndex);
           }
