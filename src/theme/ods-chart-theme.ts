@@ -471,12 +471,12 @@ export class ODSChartsTheme {
     return this;
   }
 
-  private sliceColor(colors: string[], color: string, serieIndex: number) {
+  private sliceColor(colors: string[], color: string, seriesIndex: number) {
     const previousColorIndex = colors.indexOf(color);
     if (previousColorIndex > -1) {
       colors.splice(previousColorIndex, 1);
     }
-    colors.splice(serieIndex, 0, color);
+    colors.splice(seriesIndex, 0, color);
   }
 
   /**
@@ -488,16 +488,16 @@ export class ODSChartsTheme {
   private getDisplayedColors(themeColors: string[], dataOptions: any): string[] {
     const colors: string[] = cloneDeepObject(themeColors);
     if (dataOptions && dataOptions.series) {
-      for (let serieIndex = 0; serieIndex < dataOptions.series.length; serieIndex++) {
-        const serie = dataOptions.series[serieIndex];
+      for (let seriesIndex = 0; seriesIndex < dataOptions.series.length; seriesIndex++) {
+        const serie = dataOptions.series[seriesIndex];
         if (serie.lineStyle && serie.lineStyle.color) {
           // In case of color line, we will replace the default color by the specified one
-          if (serie.lineStyle.color !== colors[serieIndex]) {
-            this.sliceColor(colors, serie.lineStyle.color, serieIndex);
+          if (serie.lineStyle.color !== colors[seriesIndex]) {
+            this.sliceColor(colors, serie.lineStyle.color, seriesIndex);
           }
-        } else if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[serieIndex]) {
+        } else if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[seriesIndex]) {
           // In case of item line, we will replace the default color by the specified one
-          this.sliceColor(colors, serie.itemStyle.color, serieIndex);
+          this.sliceColor(colors, serie.itemStyle.color, seriesIndex);
         }
       }
     }
