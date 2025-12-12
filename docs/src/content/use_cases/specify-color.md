@@ -226,8 +226,8 @@ themeManager.externalizePopover(undefined, {
       return 50 + Math.random() * 50;
     });
 
-    var resultsOK = results.map((res, i) => (res >= goals[i] ? results[i] : 0));
-    var resultsNOK = results.map((res, i) => (res < goals[i] ? results[i] : 0));
+    var resultsOK = results.map((res, i) => (res >= goals[i] ? res : 0));
+    var resultsNOK = results.map((res, i) => (res < goals[i] ? res : 0));
     var dates = new Array(...new Array(12).keys()).map((i) => {
       var d = new Date();
       d.setMonth(d.getMonth() - i);
@@ -559,7 +559,7 @@ series: [
       {
         value:results[i],
         itemStyle: {
-          color: 'var(--ods-functional-5)'
+          color: 'var(--ouds-charts-color-functional-negative)'
         }
       }          
     ]
@@ -604,7 +604,7 @@ series: [
     }).map((res, i) => (res >= goals[i] ? res : {
         value: res,
         itemStyle: {
-        color: 'var(--ods-functional-5)',
+        color: 'var(--ouds-charts-color-functional-negative)',
         },
       }));
 
