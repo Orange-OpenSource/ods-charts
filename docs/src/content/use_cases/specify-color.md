@@ -547,7 +547,7 @@ series: [
     <div class="card-body">
       <h5 class="card-title">Bar specific color</h5>
       <p class="card-text pe-5">This example shows the example of using two colors for a single series. But this time, we actually keep a single series, displayed once in the legend, while modifying the color of the bars that are below the objective.</p>  
-      <p>To do this, we associate in the list of values the red color with the value below the objectives via the Apache ECharts <ode>itemStyle.color</code> parameter:
+      <p>To do this, we associate in the list of values the red color with the value below the objectives via the Apache ECharts <code>itemStyle.color</code> parameter:
         <code>
           <pre>
 series: [
