@@ -93,7 +93,7 @@ series: [
           data: resultsOK,
           type: 'bar',
           itemStyle: {
-            color: 'var(--ouds-charts-color-categorical-tier-2)',
+            color: 'var(--ouds-charts-color-functional-positive)',
           },
         },
         {
@@ -106,6 +106,9 @@ series: [
         {
           data: goals,
           type: 'line',
+          lineStyle:{
+            color: 'var(--ouds-charts-color-categorical-tier-5)'
+          }
         },
       ],
       legend: {
@@ -226,8 +229,8 @@ themeManager.externalizePopover(undefined, {
       return 50 + Math.random() * 50;
     });
 
-    var resultsOK = results.map((res, i) => (res >= goals[i] ? res : 0));
-    var resultsNOK = results.map((res, i) => (res < goals[i] ? res : 0));
+    var resultsOK = results.map((res, i) => (res >= goals[i] ? res : undefined));
+    var resultsNOK = results.map((res, i) => (res < goals[i] ? res : undefined));
     var dates = new Array(...new Array(12).keys()).map((i) => {
       var d = new Date();
       d.setMonth(d.getMonth() - i);
@@ -249,15 +252,24 @@ themeManager.externalizePopover(undefined, {
           data: resultsOK,
           type: 'bar',
           stack: 'result',
+          itemStyle:{
+            color: 'var(--ouds-charts-color-functional-positive)'
+          }
         },
         {
           data: resultsNOK,
           type: 'bar',
           stack: 'result',
+          itemStyle:{
+            color: 'var(--ouds-charts-color-functional-negative)'
+          }
         },
         {
           data: goals,
           type: 'line',
+          lineStyle:{
+            color: 'var(--ouds-charts-color-categorical-tier-5)'
+          }
         },
       ],
       legend: {
