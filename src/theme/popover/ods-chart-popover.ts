@@ -138,6 +138,7 @@ export class ODSChartsPopover {
   private tooltipStyle: string = '';
   private enterable: boolean = false;
   private mode: ODSChartsMode = ODSChartsMode.DEFAULT;
+  private colors!: string[];
   private constructor(
     private popoverDefinition: ODSChartsPopoverDefinition,
     private popoverConfig: ODSChartsPopoverConfig
@@ -234,6 +235,7 @@ export class ODSChartsPopover {
             value?: any;
             seriesIndex?: number;
             axisType?: 'xAxis.time' | 'xAxis.category' | 'yAxis.time' | 'yAxis.category';
+            seriesType?: string;
           }) => {
             const legendLabel =
               legends &&
@@ -242,6 +244,10 @@ export class ODSChartsPopover {
               legends.labels.find((_label, index) => {
                 return legends.names[index] === param.seriesName;
               });
+
+            const colorIndex: number = undefined === param.seriesIndex ? -1 : param.seriesIndex % this.colors.length;
+            const seriesColor: string = (colorIndex > -1 ? this.colors[colorIndex] : param.color) ?? 'transparent';
+            const itemColor: string = param.color ?? 'transparent';
             const itemValue =
               isVarArray(param.value) && 2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))
                 ? param.value[1]
@@ -251,7 +257,9 @@ export class ODSChartsPopover {
                     ? undefined
                     : param.value;
             const element: ODSChartsPopoverItem = mergeObjectsAndReplaceArrays(cloneDeepObject(param), {
-              markerColor: param.color,
+              markerColor: 'line' === param.seriesType ? seriesColor : itemColor,
+              itemColor: itemColor,
+              seriesColor: seriesColor,
               itemValue: itemValue,
               label: legendLabel || '',
             });
@@ -267,8 +275,16 @@ export class ODSChartsPopover {
     };
   }
 
-  public addPopoverManagement(dataOptions: any, themeOptions: any, cssTheme: ODSChartsCSSThemeDefinition, cssThemeName: string, currentMode: ODSChartsMode) {
+  public addPopoverManagement(
+    dataOptions: any,
+    themeOptions: any,
+    colors: string[],
+    cssTheme: ODSChartsCSSThemeDefinition,
+    cssThemeName: string,
+    currentMode: ODSChartsMode
+  ) {
     this.mode = currentMode;
+    this.colors = colors;
     if (ODSChartsCSSThemesNames.NONE === cssThemeName && !document.querySelector('#ods-chart-popover-none-css')) {
       let style = document.createElement('style');
       style.id = 'ods-chart-popover-none-css';

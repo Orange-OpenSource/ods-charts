@@ -134,7 +134,7 @@ export class ODSChartsLegends {
       dataOptions.legend && dataOptions.legend.data
         ? dataOptions.legend.data.map((legendDataItem: any) => (isVarObject(legendDataItem) ? legendDataItem.name : legendDataItem))
         : [];
-    let serieNames: string[];
+    let seriesNames: string[];
     const monoSerieGraphe = 1 === dataOptions.series.length && dataOptions.series[0].data && ['pie'].includes(dataOptions.series[0].type);
 
     if (updateDataLegendOption) {
@@ -194,7 +194,7 @@ export class ODSChartsLegends {
     }
 
     if (monoSerieGraphe) {
-      serieNames = dataOptions.series[0].data.map((serie: any, _index: number) => {
+      seriesNames = dataOptions.series[0].data.map((serie: any, _index: number) => {
         if (!serie.name) {
           throw new Error(`Missing data array of legends in legend chart option`);
         }
@@ -209,35 +209,35 @@ export class ODSChartsLegends {
       if (!dataOptions.series) {
         throw new Error(`Missing series array in chart option`);
       }
-      const unusedSerieNames: string[] = legendData.filter((legendLabel: string) => {
+      const unusedseriesNames: string[] = legendData.filter((legendLabel: string) => {
         return !dataOptions.series.find((serie: any) => serie.name === legendLabel);
       });
-      serieNames = dataOptions.series.map((serie: any, index: number) => {
+      seriesNames = dataOptions.series.map((serie: any, index: number) => {
         if (!serie.name) {
           if (!updateDataSeriesOption) {
             throw new Error(`Missing series names in chart option`);
           }
-          serie.name = unusedSerieNames.shift() || 'serie_Name_' + index;
+          serie.name = unusedseriesNames.shift() || 'serie_Name_' + index;
         }
         return serie.name;
       });
     }
-    let displayedSeriesNames = legendData.filter((legendLabel: string) => serieNames.includes(legendLabel));
+    let displayedSeriesNames = legendData.filter((legendLabel: string) => seriesNames.includes(legendLabel));
     let displayedSeriesLabels = displayedSeriesNames;
     if (legendData.length !== displayedSeriesNames.length) {
       // eslint-disable-next-line no-console
       console.info(
-        `The legend data array contains some legends that do not match any series name. Legend data: [${legendData}]. Series names: [${serieNames}]. Displayed legends: [${displayedSeriesNames}]`
+        `The legend data array contains some legends that do not match any series name. Legend data: [${legendData}]. Series names: [${seriesNames}]. Displayed legends: [${displayedSeriesNames}]`
       );
       // displayedSeriesNames differs from legendData,
       // that means that some legends do not match any serie name
       // We asumed then that legend.data is an order list of labels
       // that will match the series names by their index
       displayedSeriesLabels = legendData;
-      if (displayedSeriesLabels.length > serieNames.length) {
-        displayedSeriesLabels = displayedSeriesLabels.filter((_legendLabel: string, index: number) => index < serieNames.length);
+      if (displayedSeriesLabels.length > seriesNames.length) {
+        displayedSeriesLabels = displayedSeriesLabels.filter((_legendLabel: string, index: number) => index < seriesNames.length);
       }
-      displayedSeriesNames = serieNames.filter((_serieName: string, index: number) => index < displayedSeriesLabels.length);
+      displayedSeriesNames = seriesNames.filter((_seriesName: string, index: number) => index < displayedSeriesLabels.length);
       // eslint-disable-next-line no-console
       console.info(
         `Displayed legends labels have been mapped by their index, [${displayedSeriesLabels}] are the labels of the displayed series [${displayedSeriesNames}]`
