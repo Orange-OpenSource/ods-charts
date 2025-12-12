@@ -3,7 +3,7 @@
 ## Publish
 
 - Get last main branch
-- Run `npm run release-version $old-version $new-version`, e.g. `npm run release-release 0.2.0 0.2.1`
+- Run `npm run release-version $old-version $new-version`, e.g. `npm run release-version 0.2.0 0.2.1`
 - RUN `npm run install:all`
 - Make a commit "chore(release): v$new-version", e.g. "chore(release): v0.2.1"
 - Push it to main `git push`
