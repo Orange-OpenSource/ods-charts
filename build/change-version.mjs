@@ -31,7 +31,6 @@ const FILES = [
   'docs/src/pages/[version]/use_cases/index.astro',
   'docs/src/pages/[version]/use_cases/[...slug].astro',
   'docs/src/content/use_cases/time-slider.md',
-  'docs/src/content/use_cases/two-colors-serie.md',
 ];
 
 // Blame TC39... https://github.com/benjamingr/RegExp.escape/issues/37

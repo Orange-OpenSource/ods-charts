@@ -98,6 +98,8 @@ For transparency into our release cycle and in striving to maintain backward com
 
 See [the Releases section of our GitHub project](https://github.com/Orange-OpenSource/ods-charts/releases) for changelogs for each release version of ODS Charts.
 
+The release management process is decided in the [RELEASE.md of the gh-pages branch](https://github.com/Orange-OpenSource/ods-charts/blob/gh-pages/RELEASE.md)
+
 ## Copyright and license
 
 Code released under the MIT License.
