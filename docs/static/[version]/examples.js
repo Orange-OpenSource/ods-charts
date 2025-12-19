@@ -313,6 +313,7 @@ async function displayChart(
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
+    await loadMaps(iframe.contentWindow.echarts);
 
     if (document.querySelector('[data-bs-theme]')) {
       iframe.contentDocument.body.setAttribute('data-bs-theme', document.querySelector('[data-bs-theme]').getAttribute('data-bs-theme'));
@@ -1218,4 +1219,244 @@ window.generateHorizontalGaugeChart = async (id) => {
     ],
   };
   displayChart('getHorizontalGaugeChartConfiguration', id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL, colorIndex: 4 }]);
+};
+
+const worldMap = async () => {
+  return await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then((response) => response.json());
+};
+
+const loadMaps = async (echarts) => {
+  let worldGeoJson = await worldMap();
+
+  // Register the map with ECharts if loaded
+  if (worldGeoJson && typeof echarts !== 'undefined') {
+    echarts.registerMap('world', worldGeoJson);
+  }
+};
+
+window.generateChoroplethMapChart = async (id) => {
+  // Sample data for choropleth map - using world map (built-in)
+  const mapData = [
+    { name: 'China', value: 1380 },
+    { name: 'India', value: 1370 },
+    { name: 'United States', value: 329 },
+    { name: 'Indonesia', value: 264 },
+    { name: 'Brazil', value: 211 },
+    { name: 'Pakistan', value: 197 },
+    { name: 'Nigeria', value: 196 },
+    { name: 'Bangladesh', value: 164 },
+    { name: 'Russia', value: 146 },
+    { name: 'Japan', value: 126 },
+    { name: 'Mexico', value: 128 },
+    { name: 'Philippines', value: 109 },
+    { name: 'Ethiopia', value: 105 },
+    { name: 'Egypt', value: 99 },
+    { name: 'Vietnam', value: 96 },
+    { name: 'Germany', value: 83 },
+    { name: 'Turkey', value: 82 },
+    { name: 'Iran', value: 82 },
+    { name: 'Thailand', value: 70 },
+    { name: 'France', value: 67 },
+    { name: 'United Kingdom', value: 66 },
+    { name: 'Italy', value: 60 },
+    { name: 'South Africa', value: 58 },
+    { name: 'Tanzania', value: 58 },
+    { name: 'Myanmar', value: 54 },
+    { name: 'South Korea', value: 51 },
+    { name: 'Colombia', value: 50 },
+    { name: 'Kenya', value: 52 },
+    { name: 'Spain', value: 47 },
+    { name: 'Argentina', value: 45 },
+  ];
+
+  // Specify the configuration items and data for the chart
+  var option = {
+    visualMap: {
+      type: 'piecewise',
+      itemSymbol: 'rect',
+      orient: 'horizontal',
+      left: 'center',
+      min: 0,
+      max: 1500,
+      text: ['High', 'Low'],
+      realtime: false,
+      calculable: true,
+    },
+    series: [
+      {
+        name: 'Population (millions)',
+        type: 'map',
+        map: 'world',
+        roam: true,
+        data: mapData,
+        emphasis: {
+          label: {
+            show: true,
+          },
+        },
+      },
+    ],
+    legend: { show: false },
+  };
+
+  displayChart('getChoroplethMapChartConfiguration', id, option);
+};
+
+window.generateBubbleMapChart = async (id) => {
+  // Données des principales économies mondiales
+  // Format: [longitude, latitude, PIB en trillions USD, population en millions, nom du pays]
+  const bubbleData = [
+    // Amérique du Nord
+    [-95.7129, 37.0902, 21.43, 331, 'États-Unis'],
+    [-106.3468, 56.1304, 1.74, 38, 'Canada'],
+    [-102.5528, 23.6345, 1.29, 128, 'Mexique'],
+
+    // Europe
+    [10.4515, 51.1657, 3.85, 83, 'Allemagne'],
+    [2.2137, 46.2276, 2.94, 65, 'France'],
+    [55.3781, 3.436, 2.83, 67, 'Royaume-Uni'],
+    [12.5674, 41.8719, 2.11, 60, 'Italie'],
+    [-3.7492, 40.4637, 1.39, 47, 'Espagne'],
+    [19.1451, 51.9194, 0.59, 38, 'Pologne'],
+    [31.1656, 48.3794, 0.2, 44, 'Ukraine'],
+    [37.6173, 55.7558, 1.48, 146, 'Russie'],
+
+    // Asie
+    [104.1954, 35.8617, 14.34, 1439, 'Chine'],
+    [138.2529, 36.2048, 4.94, 126, 'Japon'],
+    [127.7669, 35.9078, 1.81, 52, 'Corée du Sud'],
+    [77.1025, 28.7041, 3.18, 1380, 'Inde'],
+    [113.9213, -0.7893, 1.16, 273, 'Indonésie'],
+    [100.9925, 15.87, 0.54, 70, 'Thaïlande'],
+    [108.2772, 14.0583, 0.36, 97, 'Vietnam'],
+    [121.774, 12.8797, 0.38, 109, 'Philippines'],
+    [101.9758, 4.2105, 0.37, 32, 'Malaisie'],
+    [103.8198, 1.3521, 0.34, 6, 'Singapour'],
+
+    // Moyen-Orient
+    [53.8478, 23.4241, 0.7, 35, 'Arabie Saoudite'],
+    [51.1839, 35.6892, 0.23, 83, 'Iran'],
+    [35.2444, 31.0461, 0.48, 9, 'Israël'],
+    [54.3773, 24.4539, 0.51, 10, 'Émirats Arabes Unis'],
+
+    // Afrique
+    [22.9375, -30.5595, 0.42, 59, 'Afrique du Sud'],
+    [30.8025, 26.8206, 0.4, 102, 'Égypte'],
+    [-1.0232, 7.9465, 0.07, 31, 'Ghana'],
+    [37.9062, -0.0236, 0.11, 53, 'Kenya'],
+    [17.8739, 13.5317, 0.05, 206, 'Nigeria'],
+
+    // Amérique du Sud
+    [-51.9253, -14.235, 1.61, 212, 'Brésil'],
+    [-58.3816, -34.6037, 0.45, 45, 'Argentine'],
+    [-74.2973, 4.5709, 0.31, 50, 'Colombie'],
+    [-76.0152, -9.19, 0.2, 33, 'Pérou'],
+    [-66.5897, -16.2902, 0.04, 12, 'Bolivie'],
+
+    // Océanie
+    [133.7751, -25.2744, 1.55, 25, 'Australie'],
+    [174.886, -40.9006, 0.25, 5, 'Nouvelle-Zélande'],
+  ];
+
+  // Fonction pour déterminer la couleur basée sur la population
+  function getColorByPopulation(population) {
+    if (population > 1000) return '#d94e5d'; // Rouge pour très haute population
+    if (population > 500) return '#eac736'; // Jaune pour haute population
+    if (population > 100) return '#50a3ba'; // Bleu pour population moyenne
+    if (population > 50) return '#91c7ae'; // Vert pour population modérée
+    return '#749f83'; // Vert foncé pour faible population
+  }
+
+  // Conversion des données pour ECharts
+  const scatterData = bubbleData.map((item) => ({
+    name: item[4],
+    value: [item[0], item[1], item[2], item[3]], // [lng, lat, PIB, population]
+    symbolSize: Math.sqrt(item[2]) * 15, // Taille basée sur le PIB
+    itemStyle: {
+      color: getColorByPopulation(item[3]),
+    },
+  }));
+
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: function (params) {
+        if (params.seriesType === 'scatter') {
+          const data = params.value;
+          return `
+                          <strong>${params.name}</strong><br/>
+                          PIB: ${data[2]} trillions USD<br/>
+                          Population: ${data[3]} millions<br/>
+                          Coordonnées: ${data[0].toFixed(2)}°, ${data[1].toFixed(2)}°
+                      `;
+        }
+        return params.name;
+      },
+    },
+    legend: {
+      show: false,
+    },
+    geo: {
+      map: 'world',
+      roam: true,
+      zoom: 1.2,
+      center: [0, 20],
+      itemStyle: {
+        areaColor: '#f3f3f3',
+        borderColor: '#999',
+        borderWidth: 0.5,
+      },
+      emphasis: {
+        itemStyle: {
+          areaColor: '#e6e6e6',
+        },
+      },
+    },
+    grid: {
+      top: 0,
+      right: 100,
+    },
+    series: [
+      {
+        name: 'Pays',
+        type: 'scatter',
+        coordinateSystem: 'geo',
+        data: scatterData,
+        symbolSize: function (val) {
+          return Math.sqrt(val[2]) * 12; // Taille basée sur le PIB
+        },
+        emphasis: {
+          scale: true,
+          scaleSize: 1.5,
+          itemStyle: {
+            borderColor: '#fff',
+            borderWidth: 2,
+          },
+        },
+        itemStyle: {
+          opacity: 0.8,
+          borderWidth: 1,
+          borderColor: '#fff',
+        },
+      },
+    ],
+    visualMap: {
+      min: 0,
+      max: 1500,
+      dimension: 3, // Population (4ème valeur dans value array)
+      orient: 'vertical',
+      right: 'right',
+      top: 'center',
+      text: ['Population élevée', 'Population faible'],
+      calculable: true,
+      inRange: {
+        color: ['#50a3ba', '#eac736', '#d94e5d'],
+      },
+      textStyle: {
+        color: '#333',
+      },
+    },
+  };
+
+  displayChart('getBubbleMapChartConfiguration', id, option);
 };

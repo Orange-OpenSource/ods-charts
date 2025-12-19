@@ -22,6 +22,8 @@ export enum ODSChartsTypes {
   SEMI_CIRCULAR_GAUGE = 'SEMI_CIRCULAR_GAUGE',
   CIRCULAR_GAUGE = 'CIRCULAR_GAUGE',
   DIAL_GAUGE = 'DIAL_GAUGE',
+  CHOROPLETH_MAP = 'CHOROPLETH_MAP',
+  BUBBLE_MAP = 'BUBBLE_MAP',
 }
 
 /**
@@ -76,6 +78,8 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
  * - {@link getSemiCircularGaugeChartConfiguration} : to build a configuration of a semicircular gauge
  * - {@link getCircularGaugeChartConfiguration} : to build a configuration of a circular gauge
  * - {@link getDialGaugeChartConfiguration} : to build a configuration of a dial gauge
+ * - {@link getChoroplethMapChartConfiguration} : to build a configuration of a choropleth map
+ * - {@link getBubbleMapChartConfiguration} : to build a configuration of a bubble map
  */
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
@@ -210,6 +214,24 @@ export class ODSChartsConfiguration {
    */
   public static getDialGaugeChartConfiguration(config: ODSChartsDialGaugeConfiguration): ODSChartsConfiguration {
     return new ODSChartsDialGauge(config.minValue, config.maxValue, config.dialPoints);
+  }
+
+  /**
+   * Get the configuration of a choropleth map chart.
+   * A choropleth map is a thematic map where areas are shaded or patterned based on a data variable.
+   * @returns Configuration of the choropleth map chart.
+   */
+  public static getChoroplethMapChartConfiguration(): ODSChartsConfiguration {
+    return new ODSChartsChoroplethMap();
+  }
+
+  /**
+   * Get the configuration of a bubble map chart.
+   * A bubble map displays data as circles (bubbles) on a geographic map, where bubble size represents a value.
+   * @returns Configuration of the bubble map chart.
+   */
+  public static getBubbleMapChartConfiguration(): ODSChartsConfiguration {
+    return new ODSChartsBubbleMap();
   }
 }
 
@@ -661,5 +683,113 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
 class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
   constructor(minValue?: number, maxValue?: number) {
     super(ODSChartsTypes.CIRCULAR_GAUGE, minValue, maxValue);
+  }
+}
+
+/**
+ * Configuration of a chart of type {@link ODSChartsTypes.CHOROPLETH_MAP}
+ * A choropleth map is a thematic map where areas are shaded or patterned in proportion to a statistical variable.
+ */
+class ODSChartsChoroplethMap extends ODSChartsConfiguration {
+  constructor() {
+    super(ODSChartsTypes.CHOROPLETH_MAP);
+  }
+
+  public getDefaultConfiguration(): any {
+    return {
+      visualMap: {
+        show: true,
+        min: 0,
+        max: 100,
+        text: ['High', 'Low'],
+        realtime: false,
+        calculable: true,
+        inRange: {
+          color: ['#e3f2fd', '#0d6efd', '#0a58ca'],
+        },
+      },
+      tooltip: {
+        trigger: 'item',
+        showDelay: 0,
+        transitionDuration: 0.2,
+      },
+    };
+  }
+
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
+    if (serie.type !== 'map') {
+      return {};
+    }
+    return {
+      roam: true,
+      itemStyle: {
+        areaColor: '#f8f9fa',
+        borderColor: '#dee2e6',
+      },
+      emphasis: {
+        label: {
+          show: true,
+        },
+        itemStyle: {
+          areaColor: '#e3f2fd',
+        },
+      },
+    };
+  }
+}
+
+/**
+ * Configuration of a chart of type {@link ODSChartsTypes.BUBBLE_MAP}
+ * A bubble map displays data as circles (bubbles) on a geographic map.
+ */
+class ODSChartsBubbleMap extends ODSChartsConfiguration {
+  constructor() {
+    super(ODSChartsTypes.BUBBLE_MAP);
+  }
+
+  public getDefaultConfiguration(): any {
+    return {
+      tooltip: {
+        trigger: 'item',
+        showDelay: 0,
+        transitionDuration: 0.2,
+      },
+    };
+  }
+
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
+    if (serie.type === 'map') {
+      return {
+        roam: true,
+        itemStyle: {
+          areaColor: '#f8f9fa',
+          borderColor: '#dee2e6',
+        },
+        emphasis: {
+          itemStyle: {
+            areaColor: '#e9ecef',
+          },
+        },
+      };
+    }
+    if (serie.type === 'scatter' || serie.type === 'effectScatter') {
+      return {
+        coordinateSystem: 'geo',
+        symbolSize: (val: number[]) => {
+          return val[2] / 10;
+        },
+        itemStyle: {
+          color: '#0d6efd',
+          opacity: 0.7,
+        },
+        emphasis: {
+          itemStyle: {
+            color: '#0a58ca',
+            opacity: 1,
+          },
+        },
+      };
+    }
+    return {};
   }
 }
