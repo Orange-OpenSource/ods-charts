@@ -466,8 +466,7 @@ async function displayChart(
 
   legends =
     usedLegends === 'odscharts' &&
-    (hasLegend ||
-      (options.legend && options.legend.data && !options.legend.show) ||
+    ((options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
       (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
 
@@ -477,7 +476,7 @@ async function displayChart(
     iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
   }
 
-  if (!legends && usedLegends === 'odscharts') {
+  if (!legends && !hasLegend && usedLegends === 'odscharts') {
     document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
       elt.style.display = 'none';
     });
@@ -1225,12 +1224,34 @@ const worldMap = async () => {
   return await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then((response) => response.json());
 };
 
+const franceDeps = async () => {
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/departements-version-simplifiee.geojson').then(
+    (response) => response.json()
+  );
+};
+
+const franceRegions = async () => {
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/regions-version-simplifiee.geojson').then((response) =>
+    response.json()
+  );
+};
+
 const loadMaps = async (echarts) => {
   let worldGeoJson = await worldMap();
+  let franceDepsGeoJson = await franceDeps();
+  let franceRegionsGeoJson = await franceRegions();
 
   // Register the map with ECharts if loaded
   if (worldGeoJson && typeof echarts !== 'undefined') {
     echarts.registerMap('world', worldGeoJson);
+  }
+
+  if (franceDepsGeoJson && typeof echarts !== 'undefined') {
+    echarts.registerMap('france-deps', franceDepsGeoJson);
+  }
+
+  if (franceRegionsGeoJson && typeof echarts !== 'undefined') {
+    echarts.registerMap('france-regions', franceRegionsGeoJson);
   }
 };
 
@@ -1239,7 +1260,7 @@ window.generateChoroplethMapChart = async (id) => {
   const mapData = [
     { name: 'China', value: 1380 },
     { name: 'India', value: 1370 },
-    { name: 'United States', value: 329 },
+    { name: 'United States of America', value: 329 },
     { name: 'Indonesia', value: 264 },
     { name: 'Brazil', value: 211 },
     { name: 'Pakistan', value: 197 },

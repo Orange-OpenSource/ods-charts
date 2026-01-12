@@ -705,7 +705,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         realtime: false,
         calculable: true,
         inRange: {
-          color: ['#e3f2fd', '#0d6efd', '#0a58ca'],
+          color: ['var(--ods-blue-200, #80ceef)', 'var(--ods-blue-400, #3e9dd6)', 'var(--ods-blue-600, #085ebd)'],
         },
       },
       tooltip: {
@@ -713,6 +713,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         showDelay: 0,
         transitionDuration: 0.2,
       },
+      color: 'transparent',
     };
   }
 
