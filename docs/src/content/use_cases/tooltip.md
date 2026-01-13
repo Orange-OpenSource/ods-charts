@@ -639,4 +639,117 @@ tooltip: {
     </div>
 
   </div>
+
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Custom tooltip template</h5>
+      <p class="card-text pe-5">If you need to completely customize the tooltip template, you can use the <code>getPopupTemplate</code> method.</p>
+      <p class="card-text pe-5">
+        This method allows you to replace the entire tooltip HTML structure with your own custom template:
+        <code>
+          <pre>
+            themeManager.externalizePopover(undefined, {
+              ...ODSCharts.ODSChartsPopoverManagers.NONE,
+              getPopupTemplate: (categoryLabel, tooltipElements) => {
+                let content = `&lt;div class="custom-tooltip" style="padding: 12px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">`;
+                content += `&lt;h6 class="text-primary" style="font-weight: bold;">${categoryLabel}&lt;/h6>`;
+                content += `&lt;ul class="list-unstyled mb-0">`;
+                tooltipElements.forEach(element => {
+                  content += `&lt;li>${element.marker} &lt;strong>${element.seriesName}:&lt;/strong> ${element.itemValue}&lt;/li>`;
+                });
+                content += `&lt;/ul>&lt;/div>`;
+                return content;
+              },
+            });
+          </pre>
+        </code>
+      </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="div7_htmlId">
+        <div class="border border-subtle position-relative">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div id="div7_holder">
+            <div id="div7_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+          </div>
+          <div id="div7_legend"></div>
+        </div>
+      </div>
+      <script>
+        addViewCode('div7_');
+      </script>
+      <script id="div7_codeId">
+        ///////////////////////////////////////////////////
+        // Used data
+        ///////////////////////////////////////////////////
+
+        // Data to be displayed
+        var div7_dataOptions = {
+          xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+          yAxis: {},
+          series: [
+            { name: 'Sales', data: [120, 200, 150, 80, 70, 110, 130], type: 'bar', barWidth: 30 },
+            { name: 'Revenue', data: [150, 230, 224, 218, 135, 147, 260], type: 'line' },
+          ],
+          legend: { data: ['Sales', 'Revenue'] },
+          tooltip: {
+            confine: true,
+          },
+          grid: {
+            left: 0,
+            right: 0,
+            top: 10,
+            bottom: 0,
+            containLabel: true,
+          },
+        };
+
+        ///////////////////////////////////////////////////
+        // ODS Charts
+        ///////////////////////////////////////////////////
+        // Build the theme
+        var div7_themeManager = ODSCharts.getThemeManager({});
+        echarts.registerTheme(div7_themeManager.name, div7_themeManager.theme);
+
+        // Get the chart holder and initiate it with the generated theme
+        var div = document.getElementById('div7_chart');
+        var myChart = echarts.init(div, div7_themeManager.name, {
+          renderer: 'svg',
+        });
+
+        // Set the data to be displayed.
+        div7_themeManager.setDataOptions(div7_dataOptions);
+        // Register the externalization of the legend.
+        div7_themeManager.externalizeLegends(myChart, '#div7_legend');
+        // Manage window size changed
+        div7_themeManager.manageChartResize(myChart, 'div7_chart');
+        // Observe dark / light mode changes
+        div7_themeManager.manageThemeObserver(myChart);
+        // Register the externalization of the tooltip/popup with custom template
+        div7_themeManager.externalizePopover(undefined, {
+          ...ODSCharts.ODSChartsPopoverManagers.NONE,
+          getPopupTemplate: (categoryLabel, tooltipElements) => {
+            let content = `<div class="custom-tooltip" style="padding: 12px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">`;
+            content += `<h6 class="text-primary mb-2" style="font-weight: bold;">${categoryLabel}</h6>`;
+            content += `<ul class="list-unstyled mb-0">`;
+            tooltipElements.forEach(element => {
+              content += `<li style="margin-bottom: 5px;">${element.marker} <strong>${element.seriesName}:</strong> ${element.itemValue}</li>`;
+            });
+            content += `</ul></div>`;
+            return content;
+          },
+        });
+        // Display the chart using the configured theme and data.
+        myChart.setOption(div7_themeManager.getChartOptions());
+      </script>
+    </div>
+
+  </div>
 </div>
