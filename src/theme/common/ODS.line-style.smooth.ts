@@ -8,14 +8,10 @@
 
 export const COMMON_LINE_STYLE_SMOOTH = {
   line: {
-    itemStyle: {
-      borderWidth: 1,
-    },
     lineStyle: {
       width: 2,
     },
     symbolSize: 0,
-    symbol: 'circle',
     smooth: true,
   },
 };

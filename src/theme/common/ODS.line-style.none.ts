@@ -6,16 +6,10 @@
 // This software is distributed under the MIT license.
 //
 
-export const COMMON_LINE_STYLE_POINTS = {
+export const COMMON_LINE_STYLE_NONE = {
   line: {
-    itemStyle: {
-      borderWidth: 1,
-    },
     lineStyle: {
-      width: 2,
+      width: 0,
     },
-    symbolSize: '10',
-    symbol: 'circle',
-    smooth: false,
   },
 };

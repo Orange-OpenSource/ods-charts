@@ -6,12 +6,12 @@
 // This software is distributed under the MIT license.
 //
 
-export const COMMON_LINE_STYLE_BROKEN = {
+export const COMMON_LINE_STYLE_POINTS = {
   line: {
-    lineStyle: {
-      width: 2,
+    itemStyle: {
+      borderWidth: 1,
     },
-    symbolSize: 0,
-    smooth: false,
+    symbolSize: 10,
+    symbol: 'circle',
   },
 };

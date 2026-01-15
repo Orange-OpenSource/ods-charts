@@ -128,7 +128,9 @@ function generateConfigurator(id) {
               <select class="form-select" id="lineStyleInput" onchange="changeTheme('${id}')">
                 <option value="smooth">Smooth</option>
                 <option value="broken">Broken</option>
-                <option value="withPoints">Broken with points</option>
+                <option value="brokenWithPoints">Broken with points</option>
+                <option value="smoothWithPoints">Smooth with points</option>
+                <option value="points">Only points</option>
               </select>
             </div>
 

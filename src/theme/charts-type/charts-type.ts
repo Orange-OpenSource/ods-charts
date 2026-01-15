@@ -122,8 +122,12 @@ export class ODSChartsConfiguration {
 
   /**
    * Get the configuration of a line chart.
-   * @param config Configuration of the line chart, can be used to specify the line style
-   *               {@link ODSChartsLineStyle.SMOOTH} or {@link ODSChartsLineStyle.BROKEN} or {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}}.
+   * @param config Configuration of the line chart, can be used to specify the line style. It can be:
+   * - {@link ODSChartsLineStyle.SMOOTH}: smooth line
+   * - {@link ODSChartsLineStyle.BROKEN}: broken line
+   * - {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}: broken line with points
+   * - {@link ODSChartsLineStyle.SMOOTH_WITH_POINTS}: smooth line with points
+   * - {@link ODSChartsLineStyle.POINTS}: only points displayed
    * @returns Configuration of a line chart.
    */
   public static getLineChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
@@ -140,8 +144,13 @@ export class ODSChartsConfiguration {
 
   /**
    * get the configuration of a line and bar chart.
-   * @param config Configuration of the line and bar chart, can be used to specify the line style
-   *               {@link ODSChartsLineStyle.SMOOTH} or {@link ODSChartsLineStyle.BROKEN} or {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}}.
+   * @param config Configuration of the line and bar chart, can be used to specify the line style.
+   *  It can be:
+   * - {@link ODSChartsLineStyle.SMOOTH}: smooth line
+   * - {@link ODSChartsLineStyle.BROKEN}: broken line
+   * - {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}: broken line with points
+   * - {@link ODSChartsLineStyle.SMOOTH_WITH_POINTS}: smooth line with points
+   * - {@link ODSChartsLineStyle.POINTS}: only points displayed
    * @returns Configuration of a line and bar chart.
    */
   public static getLineAndBarChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
