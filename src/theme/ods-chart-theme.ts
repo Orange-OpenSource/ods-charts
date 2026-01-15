@@ -7,7 +7,7 @@
 //
 
 import { COMMON_LINE_STYLE_BROKEN } from './common/ODS.line-style.broken';
-import { COMMON_LINE_STYLE_POINTS } from './common/ODS.line-style.with-points';
+import { COMMON_LINE_STYLE_POINTS } from './common/ODS.line-style.points';
 import { COMMON_LINE_STYLE_SMOOTH } from './common/ODS.line-style.smooth';
 import { EChartsProject, ODS_PROJECT } from './ODS.project';
 import { ODSChartsLegends } from './legends/ods-chart-legends';
@@ -133,14 +133,41 @@ export interface ODSChartsColor {
   colorIndex: number;
 }
 
+/**
+ * ODSChartsLineStyle is used to define the line style in line charts.
+ */
 export enum ODSChartsLineStyle {
+  /**
+   * Broken line style (straight lines between points).
+   */
   BROKEN = 'broken',
+  /**
+   * Smooth line style (curved lines between points).
+   */
   SMOOTH = 'smooth',
-  BROKEN_WITH_POINTS = 'withPoints',
+  /**
+   * Broken line style with points displayed.
+   */
+  BROKEN_WITH_POINTS = 'brokenWithPoints',
+  /**
+   * Smooth line style with points displayed.
+   */
+  SMOOTH_WITH_POINTS = 'smoothWithPoints',
+  /**
+   * Only points displayed, no line.
+   */
+  POINTS = 'points',
+  /**
+   * Equivalent to {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
+   * kept for retrocompatibility.
+   * @deprecated Use new value option {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
+   */
+  WITH_POINTS = 'withPoints',
 }
 
 // Re-export ODSChartsMode from the separate file to avoid circular dependencies
 import { ODSChartsMode } from './ods-chart-mode';
+import { COMMON_LINE_STYLE_NONE } from './common/ODS.line-style.none';
 
 export { ODSChartsMode };
 
@@ -269,9 +296,13 @@ const THEME: {
     oudsSingle: { visualMapColor: DEFAULT_OUDS_COLORS_SINGLE.color },
   },
   linesStyle: {
-    broken: COMMON_LINE_STYLE_BROKEN,
-    withPoints: COMMON_LINE_STYLE_POINTS,
-    smooth: COMMON_LINE_STYLE_SMOOTH,
+    broken: cloneDeepObject(COMMON_LINE_STYLE_BROKEN),
+    smooth: cloneDeepObject(COMMON_LINE_STYLE_SMOOTH),
+    brokenWithPoints: mergeObjectsAndReplaceArrays(cloneDeepObject(COMMON_LINE_STYLE_BROKEN), cloneDeepObject(COMMON_LINE_STYLE_POINTS)),
+    smoothWithPoints: mergeObjectsAndReplaceArrays(cloneDeepObject(COMMON_LINE_STYLE_SMOOTH), cloneDeepObject(COMMON_LINE_STYLE_POINTS)),
+    points: mergeObjectsAndReplaceArrays(cloneDeepObject(COMMON_LINE_STYLE_NONE), cloneDeepObject(COMMON_LINE_STYLE_POINTS)),
+    // Added for retrocompatibility if a lib user used directly the 'withPoints' string value
+    withPoints: mergeObjectsAndReplaceArrays(cloneDeepObject(COMMON_LINE_STYLE_BROKEN), cloneDeepObject(COMMON_LINE_STYLE_POINTS)),
   },
 };
 
