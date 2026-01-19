@@ -657,17 +657,32 @@ export class ODSChartsTheme {
     return this._displayedColors;
   }
 
-  public getSeriesColor(colorIndex: number): string {
+  /**
+   * Get the color used to display a specific series.
+   * @param seriesIndex: index of the series
+   * @returns the color used to display the series
+   */
+  public getSeriesColor(seriesIndex: number): string {
     const colors = this.displayedColors;
-    return colors[colorIndex % colors.length];
+    return colors[seriesIndex % colors.length];
   }
 
+  /**
+   * Get the legend marker HTML code for a specific series.
+   * @param seriesIndex: index of the series
+   * @returns the HTML code of the legend marker
+   */
   public getLegendMarker(seriesIndex: number): string | undefined {
     if (this.chartLegendManager) {
       return `<span style="display: inline-block">${this.chartLegendManager.getSeriesMarker(this.options.cssTheme as ODSChartsCSSThemeDefinition, this.getSeriesColor(seriesIndex))}</span>`;
     }
   }
 
+  /**
+   * Get the popover marker HTML code for a specific series.
+   * @param seriesIndex: index of the series
+   * @returns the HTML code of the popover marker
+   */
   public getPopoverMarker(seriesIndex: number): string | undefined {
     if (this.chartPopoverManager) {
       return `<span style="display: inline-block">${this.chartPopoverManager.getSeriesMarker(this.options.cssTheme as ODSChartsCSSThemeDefinition, this.getSeriesColor(seriesIndex))}</span>`;

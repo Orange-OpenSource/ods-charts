@@ -132,6 +132,25 @@ const DEFAULT_NONE_CSS = `
 }
 `;
 
+class InternalODSChartsPopoverItem extends ODSChartsPopoverItem {
+  color?: string;
+  value?: any;
+  axisValueLabel?: string;
+  axisValue: any;
+  name?: string;
+  borderColor?: string;
+  componentIndex?: number;
+  componentSubType?: string;
+  componentType?: string;
+  data: any;
+  dataIndex?: number;
+  dataType?: string;
+  marker?: string;
+  seriesId?: string;
+  seriesIndex?: number;
+  seriesType?: string;
+}
+
 export class ODSChartsPopover {
   private tooltipTimeOut: any;
   private tooltipDelay: any;
@@ -216,7 +235,7 @@ export class ODSChartsPopover {
   }
 
   private getTooltipElements(
-    params: ODSChartsPopoverItem[],
+    params: InternalODSChartsPopoverItem[],
     legends: ODSChartsLegendData
   ): {
     categoryLabel: string;
@@ -369,11 +388,11 @@ export class ODSChartsPopover {
               return tooltipPosition;
             },
 
-            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
+            formatter: (params: InternalODSChartsPopoverItem[] | InternalODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
-                params = [params as ODSChartsPopoverItem];
+                params = [params as InternalODSChartsPopoverItem];
               }
-              params = params as ODSChartsPopoverItem[];
+              params = params as InternalODSChartsPopoverItem[];
 
               const elements = this.getTooltipElements(params, legends);
               return elements && elements.tooltipElements.length > 0
@@ -415,11 +434,11 @@ export class ODSChartsPopover {
       } else {
         mergeObjectsAndReplaceArrays(popoverOptions, {
           tooltip: {
-            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
+            formatter: (params: InternalODSChartsPopoverItem[] | InternalODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
-                params = [params as ODSChartsPopoverItem];
+                params = [params as InternalODSChartsPopoverItem];
               }
-              params = params as ODSChartsPopoverItem[];
+              params = params as InternalODSChartsPopoverItem[];
 
               const elements: {
                 categoryLabel: string;
