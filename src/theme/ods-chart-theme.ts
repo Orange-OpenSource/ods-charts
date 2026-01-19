@@ -345,6 +345,7 @@ export class ODSChartsTheme {
   public cssThemeName: ODSChartsCSSThemesNames;
   public theme: EChartsProject;
   private cssHelper: ODSChartsCssHelper;
+  private _displayedColors: string[] = [];
 
   private constructor(
     public name: string,
@@ -643,6 +644,37 @@ export class ODSChartsTheme {
   }
 
   /**
+   * displayedColors gives the list of colors effectively used to display the data series.
+   *
+   * It takes into account any specific color defined in the dataOptions for a serie.
+   *
+   * @returns the list of colors effectively used to display the data series.
+   */
+  public get displayedColors(): string[] {
+    if (this._displayedColors.length === 0) {
+      this._displayedColors = this.getDisplayedColors(this.theme.color as string[], this.dataOptions);
+    }
+    return this._displayedColors;
+  }
+
+  public getSeriesColor(colorIndex: number): string {
+    const colors = this.displayedColors;
+    return colors[colorIndex % colors.length];
+  }
+
+  public getLegendMarker(seriesIndex: number): string | undefined {
+    if (this.chartLegendManager) {
+      return `<span style="display: inline-block">${this.chartLegendManager.getSeriesMarker(this.options.cssTheme as ODSChartsCSSThemeDefinition, this.getSeriesColor(seriesIndex))}</span>`;
+    }
+  }
+
+  public getPopoverMarker(seriesIndex: number): string | undefined {
+    if (this.chartPopoverManager) {
+      return `<span style="display: inline-block">${this.chartPopoverManager.getSeriesMarker(this.options.cssTheme as ODSChartsCSSThemeDefinition, this.getSeriesColor(seriesIndex))}</span>`;
+    }
+  }
+
+  /**
    * getThemeOptions() can be used to get the options that should be added to charts options to implement the Orange Design System.
    *
    * getThemeOptions() needs graph data to be already set
@@ -772,7 +804,7 @@ export class ODSChartsTheme {
         }
       }
 
-      const displayedColors = this.getDisplayedColors(usedTheme.color, updatedDataOptionsForTheme);
+      this._displayedColors = this.getDisplayedColors(usedTheme.color, updatedDataOptionsForTheme);
 
       themeOptions = this.cssHelper.replaceAllCssVars(themeOptions);
 
@@ -780,7 +812,7 @@ export class ODSChartsTheme {
         try {
           this.chartLegendManager.addLegend(
             updatedDataOptionsForTheme,
-            displayedColors,
+            this._displayedColors,
             this.options.cssTheme as ODSChartsCSSThemeDefinition,
             this.cssThemeName,
             this.options.mode as ODSChartsMode
@@ -803,7 +835,7 @@ export class ODSChartsTheme {
           this.chartPopoverManager.addPopoverManagement(
             updatedDataOptionsForTheme,
             themeOptions,
-            displayedColors,
+            this._displayedColors,
             this.options.cssTheme as ODSChartsCSSThemeDefinition,
             this.cssThemeName,
             this.options.mode as ODSChartsMode

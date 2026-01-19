@@ -337,6 +337,12 @@ export class ODSChartsLegends {
     return escapeHtml(formatted);
   }
 
+  public getSeriesMarker(cssTheme: ODSChartsCSSThemeDefinition, markerColor: string): string {
+    return `<span style="background-color:${markerColor}; ${ODSChartsItemCSSDefinition.getStyles(
+      cssTheme.legends?.odsChartsLegendColor
+    )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>`;
+  }
+
   private generateLegend(
     legendHolderSelector: string,
     colors: string[],
@@ -377,9 +383,7 @@ export class ODSChartsLegends {
           ).replace(/"/g, '&quot;')})">
           <span class="ods-charts-legend-color-holder ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColorHolder)}"
           style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendColorHolder)}">  
-          <span style="background-color:${colors[colorIndex]}; ${ODSChartsItemCSSDefinition.getStyles(
-            cssTheme.legends?.odsChartsLegendColor
-          )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
+          ${this.getSeriesMarker(cssTheme, colors[colorIndex])}
           </span>
       
         <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"

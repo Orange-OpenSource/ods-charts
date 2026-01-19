@@ -493,6 +493,14 @@ export class ODSChartsPopover {
     mergeObjectsAndReplaceArrays(themeOptions, popoverOptions);
   }
 
+  public getSeriesMarker(cssTheme: ODSChartsCSSThemeDefinition, markerColor: string): string {
+    return `<span 
+          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
+            markerColor
+          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
+        </span> `;
+  }
+
   private getPopupContentLine(element: ODSChartsPopoverItem, cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode): string {
     return `<div 
     class="ods-charts-popover-line ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverLine)}"
@@ -501,11 +509,7 @@ export class ODSChartsPopover {
       <span class="ods-charts-popover-color-holder ${ODSChartsItemCSSDefinition.getClasses(
         cssTheme.popover?.odsChartsPopoverColorHolder
       )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColorHolder)}" >  
-        <span 
-          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
-            element.markerColor
-          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
-        </span> 
+        ${this.getSeriesMarker(cssTheme, element.markerColor)}
       </span>
     
       <label class="ods-charts-popover-text ${ODSChartsItemCSSDefinition.getClasses(
