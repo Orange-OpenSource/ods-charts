@@ -321,6 +321,7 @@ export class ODSChartsLegends {
         mode,
         legendHolders[legendHolderSelector].orientation,
         dataOptions.legend && dataOptions.legend.formatter ? dataOptions.legend.formatter : undefined,
+        legendHolders[legendHolderSelector].preItemContent,
         legendHolders[legendHolderSelector].postItemContent,
         legendHolders[legendHolderSelector].afterLegendContent
       );
@@ -345,6 +346,10 @@ export class ODSChartsLegends {
     mode: ODSChartsMode,
     orientation: 'vertical' | 'horizontal' = 'horizontal',
     formatter?: (name: string) => string,
+    preItemContent?:
+      | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
+      | { [legendNameOrLabel: string]: string }
+      | string[],
     postItemContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
       | { [legendNameOrLabel: string]: string }
@@ -359,13 +364,21 @@ export class ODSChartsLegends {
     >
     ${(legends ? legends.labels : []).map((legendLabel: string, indexInHolder: number) => {
       let colorIndex = legends.index[indexInHolder] % colors.length;
-      const customContent = this.getCustomLegendItemContent(
+      const postItemCustomContent = this.getCustomLegendItemContent(
         legendLabel,
         legends.names[indexInHolder],
         indexInHolder,
         colors[colorIndex],
         colorIndex,
         postItemContent
+      );
+      const preItemCustomContent = this.getCustomLegendItemContent(
+        legendLabel,
+        legends.names[indexInHolder],
+        indexInHolder,
+        colors[colorIndex],
+        colorIndex,
+        preItemContent
       );
       return `
       <span class="ods-charts-legend-item ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendItem)}"
@@ -381,15 +394,21 @@ export class ODSChartsLegends {
             cssTheme.legends?.odsChartsLegendColor
           )}" class="ods-charts-legend-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendColor)}"></span>
           </span>
-      
+      ${
+        preItemCustomContent
+          ? `<span class="ods-charts-legend-pre-label-content" 
+        ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendPreLabelContent)}
+        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendPreLabelContent)}">${preItemCustomContent}</span>`
+          : ''
+      }
         <label class="ods-charts-legend-label ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendLabel)}"
         style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendLabel)}"
         role="button">${this.getLegendName(legendLabel, formatter)}</label>
       </a>${
-        customContent
+        postItemCustomContent
           ? `<span class="ods-charts-legend-custom-content" 
         ${ODSChartsItemCSSDefinition.getClasses(cssTheme.legends?.odsChartsLegendCustomContent)}
-        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendCustomContent)}">${customContent}</span>`
+        style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.legends?.odsChartsLegendCustomContent)}">${postItemCustomContent}</span>`
           : ''
       }
     </span>`;
@@ -414,7 +433,7 @@ export class ODSChartsLegends {
    * @param legendIndex The index of this item within its legend group (0-based)
    * @param color The color assigned to this legend item, in CSS format (e.g. '#FF0000')
    * @param colorIndex The index of the color in the color palette (0-based)
-   * @param postItemContent The configuration for custom content, can be either:
+   * @param itemCustomContent The configuration for custom content, can be either:
    *   - A function receiving all parameters and returning HTML content
    *   - An object mapping legend names to static HTML content
    * @returns The generated HTML content string to be displayed after the legend item
@@ -425,25 +444,25 @@ export class ODSChartsLegends {
     legendIndex: number,
     color: string,
     colorIndex: number,
-    postItemContent?:
+    itemCustomContent?:
       | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
       | { [legendNameOrLabel: string]: string }
       | string[]
   ): string {
-    if (!postItemContent) {
+    if (!itemCustomContent) {
       return '';
     }
 
-    if (typeof postItemContent === 'function') {
-      return postItemContent(legendLabel, legendName, legendIndex, color, colorIndex);
+    if (typeof itemCustomContent === 'function') {
+      return itemCustomContent(legendLabel, legendName, legendIndex, color, colorIndex);
     }
 
-    if (typeof postItemContent === 'object' && !Array.isArray(postItemContent)) {
-      return postItemContent[legendName] || postItemContent[legendLabel] || postItemContent[legendIndex] || '';
+    if (typeof itemCustomContent === 'object' && !Array.isArray(itemCustomContent)) {
+      return itemCustomContent[legendName] || itemCustomContent[legendLabel] || itemCustomContent[legendIndex] || '';
     }
 
-    if (Array.isArray(postItemContent)) {
-      return postItemContent[legendIndex] || '';
+    if (Array.isArray(itemCustomContent)) {
+      return itemCustomContent[legendIndex] || '';
     }
 
     return '';

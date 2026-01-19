@@ -71,6 +71,7 @@ export class ODSChartsCSSLegendsDefinition extends ODSChartsItemGroupCSSDefiniti
   odsChartsLegendLinkOpacity?: ODSChartsItemCSSDefinition;
   odsChartsLegendColorHolder?: ODSChartsItemCSSDefinition;
   odsChartsLegendColor?: ODSChartsItemCSSDefinition;
+  odsChartsLegendPreLabelContent?: ODSChartsItemCSSDefinition;
   odsChartsLegendLabel?: ODSChartsItemCSSDefinition;
   odsChartsLegendItem?: ODSChartsItemCSSDefinition;
   odsChartsLegendCustomContent?: ODSChartsItemCSSDefinition;

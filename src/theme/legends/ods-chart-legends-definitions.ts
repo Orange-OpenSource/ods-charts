@@ -71,6 +71,17 @@ export class ODSChartsLegendHolderDefinition {
      */
     public seriesRef?: string[],
     /**
+     * This option defines HTML content that will be displayed before each individual legend item.
+     * It can be:
+     * - A function that receives legend information and returns custom HTML content for that specific legend
+     * - An object mapping legend labels or series names to their custom HTML content
+     * - An array of strings: each element is associated with the legend at the same position (index)
+     */
+    public preItemContent?:
+      | ((legendLabel: string, legendName: string, legendIndex: number, color: string, colorIndex: number) => string)
+      | { [legendNameOrLabel: string]: string }
+      | string[],
+    /**
      * This option defines HTML content that will be displayed after each individual legend item.
      * It can be:
      * - A function that receives legend information and returns custom HTML content for that specific legend

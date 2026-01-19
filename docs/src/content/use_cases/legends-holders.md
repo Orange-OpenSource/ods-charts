@@ -110,6 +110,7 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
         },
       ],
       legend: {
+        data: ['label 0', 'label 1', 'label 2'],
         orient: 'vertical',
       },
     };
@@ -938,179 +939,332 @@ themeManager.externalizeLegends(
   </script>
 
   <!--
-    Pie chart with values in legend example
+    Pie chart with percent or value in legend example
   -->
-  <div class="card w-50 mt-3">
+  <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Pie chart with values in legend example</h5>
+      <h5 class="card-title">Pie chart with percent in legend example</h5>
       <p class="card-text pe-5">When displaying a donut or a pie, there is only one value in the donut/pie to display per item of the legend. It may then be interesting to display the value of this item directly in the legend itself.</p>
-      <p class="card-text pe-5">In this example, we will use the <code>postItemContent()</code> method when configuring an externalized legend to display the percentage of the current item in the legend.</p>
-      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
-        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-          <use xlink:href="#lightning-charge-fill" />  
-        </svg>        
-        <span class="visually-hidden">Open in playground using StackBlitz</span>
-      </button>
-      <div id="pct_legend_htmlId">      
-        <style>
-          .ods-charts-legend-item {
-            display: flex;
-          }
-          .ods-charts-legend-label:after {
-            content: ': ';
-          }
-          .ods-charts-legend-custom-content {
-            margin-left: auto !important;
-            font-weight: bold;
-          }
-          .pie-chart-legend {
-            min-width: 250px;
-          }
-        </style>
-        <div
-          class="border ods-charts-context graph-holder"
-          style="
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            --bs-border-color: var(--bs-border-color-subtle);
-          "
-        >
-          <div class="chart_title mx-3">
-            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
-            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
-          </div>
-          <div
-            id="pct_legend_pieChart_holder_with_legend"
-            style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: row"
-          >
-            <div id="pct_legend_pieChart_holder" style="flex-grow: 1; flex-shrink: 1">
-              <div
-                id="pct_legend_pieChart_chart"
-                style="width: 100%; height: 100%; position: relative"
-              ></div>
+      <div class="row">
+        <div class="col-6">
+          <div class="card me-1">
+            <div class="card-body">
+              <p class="card-text pe-5">In this example, we will use the <code>postItemContent()</code> method when configuring an externalized legend to display the percentage of the current item in the legend.</p>
+              <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+                <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+                  <use xlink:href="#lightning-charge-fill" />
+                </svg>
+                <span class="visually-hidden">Open in playground using StackBlitz</span>
+              </button>
+              <div id="pct_legend_htmlId">
+                <style>
+                  .pct_legend .ods-charts-legend-item {
+                    display: flex;
+                  }
+                  .pct_legend .ods-charts-legend-label:after {
+                    content: ': ';
+                  }
+                  .pct_legend .ods-charts-legend-custom-content {
+                    margin-left: auto !important;
+                    font-weight: bold;
+                  }
+                  .pct_legend .pie-chart-legend {
+                    min-width: 250px;
+                  }
+                </style>
+                <div
+                  class="border ods-charts-context graph-holder pct_legend"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    --bs-border-color: var(--bs-border-color-subtle);
+                  "
+                >
+                  <div class="chart_title mx-3">
+                    <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                    <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+                  </div>
+                  <div
+                    id="pct_legend_pieChart_holder_with_legend"
+                    style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: row"
+                  >
+                    <div id="pct_legend_pieChart_holder" style="flex-grow: 1; flex-shrink: 1">
+                      <div
+                        id="pct_legend_pieChart_chart"
+                        style="width: 100%; height: 100%; position: relative"
+                      ></div>
+                    </div>
+                    <div id="pct_legend_pieChart_legend" class="pie-chart-legend"></div>
+                  </div>
+                </div>
+              </div>              
+              <script>
+                addViewCode('pct_legend_');
+              </script>
             </div>
-            <div id="pct_legend_pieChart_legend" class="pie-chart-legend"></div>
+            <script id="pct_legend_codeId">
+              ///////////////////////////////////////////////////
+              // Used data
+              ///////////////////////////////////////////////////
+              // this is the data to be displayed
+              var dataOptions = {
+                series: [
+                  {
+                    type: 'pie',
+                    data: [
+                      {
+                        name: 'Demonstrator',
+                        value: 15,
+                      },
+                      {
+                        name: 'Demonstrator LCD',
+                        value: 3,
+                      },
+                      {
+                        name: 'Microchip RN2483',
+                        value: 2,
+                      },
+                      {
+                        name: 'Demonstrator2',
+                        value: 1,
+                      },
+                      {
+                        name: ' RF Sensors',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 6',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 754',
+                        value: 1,
+                      },
+                    ],
+                    center: ['50%', '50%'],
+                    radius: ['0%', '85%'],
+                  },
+                ],
+                legend: {
+                  orient: 'vertical',
+                },
+              };
+              ///////////////////////////////////////////////////
+              // ODSCharts
+              ///////////////////////////////////////////////////
+              // Build the theme
+              var themeManager = ODSCharts.getThemeManager({
+                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
+                chartConfiguration:
+                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
+                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
+                cssSelector: '#pct_legend_pieChart_chart',
+              });
+              // register this theme to echarts
+              echarts.registerTheme(themeManager.name, themeManager.theme);
+              // get the chart holder and initiate it with the generated theme
+              var div = document.getElementById('pct_legend_pieChart_chart');
+              var myChart = echarts.init(div, themeManager.name, {
+                renderer: 'svg',
+              });
+              // Set the data to be displayed.
+              themeManager.setDataOptions(dataOptions);
+              // Register the externalization of the legend.
+              themeManager.externalizeLegends(myChart, {
+                legendHolderSelector: '#pct_legend_pieChart_legend',
+                postItemContent: (
+                  legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex
+                ) => {
+                  let total = 0;
+                  let value = 0;
+                  dataOptions.series[0].data.forEach((item) => {
+                    total += item.value;
+                    if (item.name === legendName) {
+                      value = item.value;
+                    }
+                  });
+                  let percent = ((value / total) * 100).toFixed(2);
+                  return percent + '%';
+                },
+              });
+              // Manage window size changed
+              themeManager.manageChartResize(myChart, 'pct_legend_pieChart_chart');
+              // Automatically manage data-bs-theme attribute change. Only needed if you want the
+              // chart to automatically react to the global light or dark theme change
+              themeManager.manageThemeObserver(myChart);
+              // Register the externalization of the tooltip/popup
+              themeManager.externalizePopover(
+                {
+                  enabled: true,
+                  shared: false,
+                  tooltip: false,
+                },
+                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
+              );
+              // Display the chart using the configured theme and data.
+              myChart.setOption(themeManager.getChartOptions());
+            </script>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card ms-1">
+            <div class="card-body">
+              <p class="card-text pe-5">In this example, we will use the <code>preItemContent()</code> method when configuring an externalized legend to display the value of the current item before the item in the legend.</p>
+              <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+                <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+                  <use xlink:href="#lightning-charge-fill" />  
+                </svg>        
+                <span class="visually-hidden">Open in playground using StackBlitz</span>
+              </button>
+              <div id="value_legend_htmlId">      
+                <style>
+                  .value_legend .ods-charts-legend-pre-label-content {
+                    font-weight: bold;
+                  }
+                </style>
+                <div
+                  class="border ods-charts-context graph-holder value_legend"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    --bs-border-color: var(--bs-border-color-subtle);
+                  "
+                >
+                  <div class="chart_title mx-3">
+                    <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                    <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+                  </div>
+                  <div
+                    id="value_legend_pieChart_holder_with_legend"
+                    style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: row"
+                  >
+                    <div id="value_legend_pieChart_holder" style="flex-grow: 1; flex-shrink: 1">
+                      <div
+                        id="value_legend_pieChart_chart"
+                        style="width: 100%; height: 100%; position: relative"
+                      ></div>
+                    </div>
+                    <div id="value_legend_pieChart_legend" class="pie-chart-legend"></div>
+                  </div>
+                </div>
+              </div>
+              <script>
+                addViewCode('value_legend_');
+              </script>
+            </div>
+            <script id="value_legend_codeId">
+              ///////////////////////////////////////////////////
+              // Used data
+              ///////////////////////////////////////////////////
+              // this is the data to be displayed
+              var dataOptions = {
+                series: [
+                  {
+                    type: 'pie',
+                    data: [
+                      {
+                        name: 'Demonstrator',
+                        value: 15,
+                      },
+                      {
+                        name: 'Demonstrator LCD',
+                        value: 3,
+                      },
+                      {
+                        name: 'Microchip RN2483',
+                        value: 2,
+                      },
+                      {
+                        name: 'Demonstrator2',
+                        value: 1,
+                      },
+                      {
+                        name: ' RF Sensors',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 6',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 754',
+                        value: 1,
+                      },
+                    ],
+                    center: ['50%', '50%'],
+                    radius: ['0%', '85%'],
+                  },
+                ],
+                legend: {
+                  orient: 'vertical',
+                },
+              };
+              ///////////////////////////////////////////////////
+              // ODSCharts
+              ///////////////////////////////////////////////////
+              // Build the theme
+              var themeManager = ODSCharts.getThemeManager({
+                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
+                chartConfiguration:
+                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
+                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
+                cssSelector: '#value_legend_pieChart_chart',
+              });
+              // register this theme to echarts
+              echarts.registerTheme(themeManager.name, themeManager.theme);
+              // get the chart holder and initiate it with the generated theme
+              var div = document.getElementById('value_legend_pieChart_chart');
+              var myChart = echarts.init(div, themeManager.name, {
+                renderer: 'svg',
+              });
+              // Set the data to be displayed.
+              themeManager.setDataOptions(dataOptions);
+              // Register the externalization of the legend.
+              themeManager.externalizeLegends(myChart, {
+                legendHolderSelector: '#value_legend_pieChart_legend',
+                preItemContent: (
+                  legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex
+                ) => {
+                  console.log(legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex,
+                  dataOptions.series[0].data[legendIndex]?.value)
+                  return dataOptions.series[0].data[legendIndex]?.value?(
+                    Math.round(dataOptions.series[0].data[legendIndex].value * 100)/100 + ''):'';
+                },
+              });
+              // Manage window size changed
+              themeManager.manageChartResize(myChart, 'value_legend_pieChart_chart');
+              // Automatically manage data-bs-theme attribute change. Only needed if you want the
+              // chart to automatically react to the global light or dark theme change
+              themeManager.manageThemeObserver(myChart);
+              // Register the externalization of the tooltip/popup
+              themeManager.externalizePopover(
+                {
+                  enabled: true,
+                  shared: false,
+                  tooltip: false,
+                },
+                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
+              );
+              // Display the chart using the configured theme and data.
+              myChart.setOption(themeManager.getChartOptions());
+            </script>
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('pct_legend_');
-      </script>
     </div>
-
   </div>
-  <script id="pct_legend_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-    // this is the data to be displayed
-    var dataOptions = {
-      series: [
-        {
-          type: 'pie',
-          data: [
-            {
-              name: 'Demonstrator',
-              value: 15,
-            },
-            {
-              name: 'Demonstrator LCD',
-              value: 3,
-            },
-            {
-              name: 'Microchip RN2483',
-              value: 2,
-            },
-            {
-              name: 'Demonstrator2',
-              value: 1,
-            },
-            {
-              name: ' RF Sensors',
-              value: 1,
-            },
-            {
-              name: 'Label 6',
-              value: 1,
-            },
-            {
-              name: 'Label 754',
-              value: 1,
-            },
-          ],
-          center: ['50%', '50%'],
-
-          radius: ['0%', '85%'],
-        },
-      ],
-      legend: {
-        orient: 'vertical',
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODSCharts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager({
-      colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
-      chartConfiguration:
-        ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
-      cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
-      cssSelector: '#pct_legend_pieChart_chart',
-    });
-
-    // register this theme to echarts
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('pct_legend_pieChart_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    themeManager.setDataOptions(dataOptions);
-    // Register the externalization of the legend.
-    themeManager.externalizeLegends(myChart, {
-      legendHolderSelector: '#pct_legend_pieChart_legend',
-      postItemContent: (
-        legendLabel,
-        legendName,
-        legendIndex,
-        color,
-        colorIndex
-      ) => {
-        let total = 0;
-        let value = 0;
-
-        dataOptions.series[0].data.forEach((item) => {
-          total += item.value;
-          if (item.name === legendName) {
-            value = item.value;
-          }
-        });
-        let percent = ((value / total) * 100).toFixed(2);
-        return percent + '%';
-      },
-    });
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'pct_legend_pieChart_chart');
-    // Automatically manage data-bs-theme attribute change. Only needed if you want the
-    // chart to automatically react to the global light or dark theme change
-    themeManager.manageThemeObserver(myChart);
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover(
-      {
-        enabled: true,
-        shared: false,
-        tooltip: false,
-      },
-      ODSCharts.ODSChartsPopoverManagers.BOOSTED5
-    );
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
 </div>
