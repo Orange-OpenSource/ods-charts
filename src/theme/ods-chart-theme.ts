@@ -677,35 +677,29 @@ export class ODSChartsTheme {
         fontWeight: 'var(--bs-body-font-weight, 400)',
         fontSize: 14,
         fontFamily: 'Helvetica Neue, sans-serif',
-        color:
-          ODSChartsMode.DEFAULT === this.options.mode
-            ? 'var(--bs-body-color, #000)'
-            : ODSChartsMode.LIGHT === this.options.mode
-              ? 'var(--bs-black, #000)'
-              : 'var(--bs-white, #fff)',
+        color: 'var(--bs-body-color, #000)',
       };
       const axisLine = {
         show: true,
         lineStyle: {
           width: 2,
-          color:
-            ODSChartsMode.DEFAULT === this.options.mode
-              ? 'var(--bs-border-color-subtle, #ccc)'
-              : ODSChartsMode.LIGHT === this.options.mode
-                ? 'var(--bs-gray-500, #ccc)'
-                : 'var(--bs-gray-700, #666)',
+          color: 'var(--bs-border-color-subtle, #ccc)',
         },
       };
       const splitLine = {
         show: true,
         lineStyle: {
           width: 1,
-          color:
-            ODSChartsMode.DEFAULT === this.options.mode
-              ? 'var(--bs-border-color-subtle, #ccc)'
-              : ODSChartsMode.LIGHT === this.options.mode
-                ? 'var(--bs-gray-500, #ccc)'
-                : 'var(--bs-gray-700, #666)',
+          color: 'var(--bs-border-color-subtle, #ccc)',
+        },
+      };
+      const axisTick = {
+        show: true,
+        alignWithLabel: true,
+        length: 8,
+        lineStyle: {
+          width: 1,
+          color: 'var(--bs-border-color-subtle, #ccc)',
         },
       };
 
@@ -764,11 +758,20 @@ export class ODSChartsTheme {
 
       for (const axis of ['xAxis', 'yAxis']) {
         if (!isMainAxis(updatedDataOptionsForTheme[axis]) && !(updatedDataOptionsForTheme[axis] && updatedDataOptionsForTheme[axis].axisLine)) {
+          // We configure a value axis with no line, no split but keeping the label and the split
           themeOptions[axis].axisLine = { show: false };
-          themeOptions[axis].splitLine = { show: false };
-        } else {
-          themeOptions[axis].axisLine = cloneDeepObject(axisLine);
           themeOptions[axis].splitLine = cloneDeepObject(splitLine);
+          themeOptions[axis].axisTick = { show: false };
+        } else {
+          // For categorical and time axis, we do not display split lines but keep axis line.
+          themeOptions[axis].axisLine = cloneDeepObject(axisLine);
+          themeOptions[axis].splitLine = { show: false };
+          // we also display ticks if we display only line
+          if (this.dataOptions.series?.every((serie: any) => serie.type === 'line')) {
+            themeOptions[axis].axisTick = cloneDeepObject(axisTick);
+          } else {
+            themeOptions[axis].axisTick = { show: false };
+          }
         }
       }
 

@@ -835,7 +835,7 @@ window.generateTimeSeriesLineChart = async (id) => {
     for (var i = 1; i < NB_POINTS; i++) {
       data.push({
         time: dataDates[i],
-        value: Math.random() < 0.3 ? undefined : Math.round((Math.random() - 0.5) * 20 + lastValue),
+        value: Math.random() < 0.3 ? undefined : Math.max(0, Math.round((Math.random() - 0.5) * 20 + lastValue)),
       });
       lastValue = undefined !== data[data.length - 1].value ? data[data.length - 1].value : lastValue;
     }

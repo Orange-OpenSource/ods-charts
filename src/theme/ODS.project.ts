@@ -165,7 +165,8 @@ export interface EChartsProject {
       };
     };
     axisTick: {
-      show: false;
+      show: true;
+      alignWithLabel: true;
       lineStyle: {
         color: string;
       };
@@ -196,6 +197,7 @@ export interface EChartsProject {
     };
     axisTick: {
       show: false;
+      alignWithLabel: true;
       lineStyle: {
         color: string;
       };
@@ -205,7 +207,7 @@ export interface EChartsProject {
       color: string;
     };
     splitLine: {
-      show: false;
+      show: true;
       lineStyle: {
         color: string[];
       };
@@ -226,6 +228,7 @@ export interface EChartsProject {
     };
     axisTick: {
       show: false;
+      alignWithLabel: true;
       lineStyle: {
         color: string;
       };
@@ -255,7 +258,8 @@ export interface EChartsProject {
       };
     };
     axisTick: {
-      show: false;
+      show: true;
+      alignWithLabel: true;
       lineStyle: {
         color: string;
       };
@@ -416,7 +420,7 @@ export const ODS_PROJECT: EChartsProject = {
       borderWidth: 1,
     },
     lineStyle: {
-      width: 2,
+      width: 3,
     },
     symbolSize: 0,
     symbol: 'emptyCircle',
@@ -555,7 +559,8 @@ export const ODS_PROJECT: EChartsProject = {
       },
     },
     axisTick: {
-      show: false,
+      show: true,
+      alignWithLabel: true,
       lineStyle: {
         color: 'var(--bs-danger, #eb0909)',
       },
@@ -586,6 +591,7 @@ export const ODS_PROJECT: EChartsProject = {
     },
     axisTick: {
       show: false,
+      alignWithLabel: true,
       lineStyle: {
         color: 'var(--secondary-color, #6E7079)',
       },
@@ -595,7 +601,7 @@ export const ODS_PROJECT: EChartsProject = {
       color: 'var(--bs-body-color, #000000)',
     },
     splitLine: {
-      show: false,
+      show: true,
       lineStyle: {
         color: ['var(--bs-border-color-subtle, #cccccc)'],
       },
@@ -616,6 +622,7 @@ export const ODS_PROJECT: EChartsProject = {
     },
     axisTick: {
       show: false,
+      alignWithLabel: true,
       lineStyle: {
         color: 'var(--bs-secondary-color, #6E7079)',
       },
@@ -645,7 +652,8 @@ export const ODS_PROJECT: EChartsProject = {
       },
     },
     axisTick: {
-      show: false,
+      show: true,
+      alignWithLabel: true,
       lineStyle: {
         color: 'var(--bs-border-color-subtle, #cccccc)',
       },
