@@ -261,8 +261,8 @@ function generateExampleDiv(id, direction) {
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/0.3/ods-charts.js"></script>
-<script type="module" src="/0.3/examples.js"></script>
+<script type="text/javascript" src="/0.4/ods-charts.js"></script>
+<script type="module" src="/0.4/examples.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
 ${generateChartDiv(id, direction)}`);
   iframeDocument.close();
@@ -835,7 +835,7 @@ window.generateTimeSeriesLineChart = async (id) => {
     for (var i = 1; i < NB_POINTS; i++) {
       data.push({
         time: dataDates[i],
-        value: Math.random() < 0.3 ? undefined : Math.max(0, Math.round((Math.random() - 0.5) * 20 + lastValue)),
+        value: Math.random() < 0.4 ? undefined : Math.max(0, Math.round((Math.random() - 0.5) * 20 + lastValue)),
       });
       lastValue = undefined !== data[data.length - 1].value ? data[data.length - 1].value : lastValue;
     }
