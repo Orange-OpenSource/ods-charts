@@ -132,6 +132,65 @@ const DEFAULT_NONE_CSS = `
 }
 `;
 
+class InternalODSChartsPopoverItem extends ODSChartsPopoverItem {
+  axisValueLabel?: string;
+  axisValue: any;
+  borderColor?: string;
+  componentIndex?: number;
+  componentSubType?: string;
+  dataType?: string;
+  marker?: string;
+  seriesId?: string;
+  /**
+   * Description from ECharts doc:
+   * Component type. Each component has its own component type.
+   */
+  componentType!: 'series';
+  /** Series type */
+  seriesType!: string;
+  /** Series index in option.series */
+  seriesIndex!: number;
+  /** Series name */
+  seriesName!: string;
+  /** Data name, or category name */
+  name!: string;
+  /** Data index in input data array */
+  dataIndex!: number;
+  /** Original data as input */
+  data!: object;
+  /** Value of data. In most series it is the same as data.
+   * But in some series it is some part of the data (e.g., in map, radar) */
+  value!: number | Array<any> | object;
+  /** encoding info of coordinate system
+   * Key: coord, like ('x' 'y' 'radius' 'angle')
+   * value: Must be an array, not null/undefined. Contain dimension indices, like:
+   * {
+   *     x: [2] // values on dimension index 2 are mapped to x axis.
+   *     y: [0] // values on dimension index 0 are mapped to y axis.
+   * }
+   */
+  encode!: object;
+  /** dimension names list */
+  dimensionNames!: Array<string>;
+  /** data dimension index, for example 0 or 1 or 2 ...
+   * Only work in `radar` series.
+   */
+  dimensionIndex!: number;
+  /** Color of data */
+  color!: string;
+  /** The percentage of current data item in the pie/funnel series */
+  percent!: number;
+  /** The ancestors of current node in the sunburst series (including self) */
+  treePathInfo!: Array<any>;
+  /** The ancestors of current node in the tree/treemap series (including self) */
+  treeAncestors!: Array<any>;
+  /** A function that returns a boolean value to flag if the axis label is truncated */
+  //   eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  isTruncated!: Function;
+  /** Current index of the axis label tick */
+  tickIndex!: number;
+}
+
 export class ODSChartsPopover {
   private tooltipTimeOut: any;
   private tooltipDelay: any;
@@ -216,7 +275,7 @@ export class ODSChartsPopover {
   }
 
   private getTooltipElements(
-    params: ODSChartsPopoverItem[],
+    params: InternalODSChartsPopoverItem[],
     legends: ODSChartsLegendData
   ): {
     categoryLabel: string;
@@ -369,11 +428,11 @@ export class ODSChartsPopover {
               return tooltipPosition;
             },
 
-            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
+            formatter: (params: InternalODSChartsPopoverItem[] | InternalODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
-                params = [params as ODSChartsPopoverItem];
+                params = [params as InternalODSChartsPopoverItem];
               }
-              params = params as ODSChartsPopoverItem[];
+              params = params as InternalODSChartsPopoverItem[];
 
               const elements = this.getTooltipElements(params, legends);
               return elements && elements.tooltipElements.length > 0
@@ -415,11 +474,11 @@ export class ODSChartsPopover {
       } else {
         mergeObjectsAndReplaceArrays(popoverOptions, {
           tooltip: {
-            formatter: (params: ODSChartsPopoverItem[] | ODSChartsPopoverItem) => {
+            formatter: (params: InternalODSChartsPopoverItem[] | InternalODSChartsPopoverItem) => {
               if (!isVarArray(params)) {
-                params = [params as ODSChartsPopoverItem];
+                params = [params as InternalODSChartsPopoverItem];
               }
-              params = params as ODSChartsPopoverItem[];
+              params = params as InternalODSChartsPopoverItem[];
 
               const elements: {
                 categoryLabel: string;
@@ -493,6 +552,14 @@ export class ODSChartsPopover {
     mergeObjectsAndReplaceArrays(themeOptions, popoverOptions);
   }
 
+  public getSeriesMarker(cssTheme: ODSChartsCSSThemeDefinition, markerColor: string): string {
+    return `<span 
+          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
+            markerColor
+          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
+        </span> `;
+  }
+
   private getPopupContentLine(element: ODSChartsPopoverItem, cssTheme: ODSChartsCSSThemeDefinition, mode: ODSChartsMode): string {
     return `<div 
     class="ods-charts-popover-line ods-charts-mode-${mode} ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverLine)}"
@@ -501,11 +568,7 @@ export class ODSChartsPopover {
       <span class="ods-charts-popover-color-holder ${ODSChartsItemCSSDefinition.getClasses(
         cssTheme.popover?.odsChartsPopoverColorHolder
       )}" style="${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColorHolder)}" >  
-        <span 
-          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
-            element.markerColor
-          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
-        </span> 
+        ${this.getSeriesMarker(cssTheme, element.markerColor)}
       </span>
     
       <label class="ods-charts-popover-text ${ODSChartsItemCSSDefinition.getClasses(

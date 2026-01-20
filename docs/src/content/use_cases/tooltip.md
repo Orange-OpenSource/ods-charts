@@ -232,7 +232,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Other specific content</h5>
+      <h5 class="card-title">Other specific content, specific line, with ODS Charts series marker</h5>
       <p class="card-text pe-5">if you want to specialize more than the value display, you can use the second parameter of the method <code>externalizePopover</code>.</p>
       <p class="card-text pe-5">
         This parameter must implement the <a href="../api/classes/ODSChartsPopoverDefinition"><code>ODSChartsPopoverDefinition</code></a> interface. Generally this is initialized with <a href="../api/variables/ODSChartsPopoverManagers">one of the tooltip managers provided</a> <code>ODSChartsPopoverManagers.BOOSTED5</code>, <code>ODSChartsPopoverManagers.BOOSTED4</code> or <code>ODSChartsPopoverManagers.NONE</code>.<br />
@@ -245,8 +245,8 @@ tooltip: {
           <pre>
             themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.NONE,
-              getPopupContentLine: ({ seriesName, itemValue }) => {
-                return `&lt;p>This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
+              getPopupContentLine: ({ seriesName, itemValue, seriesIndex }) => {
+                return `&lt;p>${themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
               },
             });
           </pre>
@@ -321,8 +321,8 @@ tooltip: {
         // Register the externalization of the tooltip/popup
         div2_themeManager.externalizePopover(undefined, {
           ...ODSCharts.ODSChartsPopoverManagers.NONE,
-          getPopupContentLine: ({ seriesName, itemValue }) => {
-            return `<p>This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
+          getPopupContentLine: ({ seriesName, itemValue , seriesIndex }) => {
+            return `<p>${div2_themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
           },
         });
         // Display the chart using the configured theme and data.
