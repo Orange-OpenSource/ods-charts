@@ -232,7 +232,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Other specific content, specific line, with ODS Charts seires marker</h5>
+      <h5 class="card-title">Other specific content, specific line, with ODS Charts series marker</h5>
       <p class="card-text pe-5">if you want to specialize more than the value display, you can use the second parameter of the method <code>externalizePopover</code>.</p>
       <p class="card-text pe-5">
         This parameter must implement the <a href="../api/classes/ODSChartsPopoverDefinition"><code>ODSChartsPopoverDefinition</code></a> interface. Generally this is initialized with <a href="../api/variables/ODSChartsPopoverManagers">one of the tooltip managers provided</a> <code>ODSChartsPopoverManagers.BOOSTED5</code>, <code>ODSChartsPopoverManagers.BOOSTED4</code> or <code>ODSChartsPopoverManagers.NONE</code>.<br />
