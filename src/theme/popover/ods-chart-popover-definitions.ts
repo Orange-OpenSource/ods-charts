@@ -32,30 +32,30 @@ export class ODSChartsPopoverManager {
  * ```
  */
 export class ODSChartsPopoverItem {
-  /**
-   * name of the series the item belongs to
-   */
+  /** name of the series the item belongs to */
   seriesName!: string;
-  /**
-   * label of the series the item belongs to
-   */
+  /** label of the series the item belongs to */
   label!: string;
-  /**
-   * Color of the marker representing the series
-   */
+  /** Color of the marker representing the series */
   markerColor!: string;
-  /**
-   * Color used to display the series. May differ from itemColor in some cases (like specific item coloring)
-   */
+  /** Color used to display the series. May differ from itemColor in some cases (like specific item coloring) */
   seriesColor!: string;
-  /**
-   * Color used to display the item
-   */
+  /** Color used to display the item */
   itemColor!: string;
-  /**
-   * Value of the item
-   */
+  /** Value of the item */
   itemValue: any;
+  /** Series type */
+  seriesType!: string;
+  /** Series index in option.series */
+  seriesIndex!: number;
+  /** Data name; or category name */
+  name!: string;
+  /** Data index in input data array */
+  dataIndex!: number;
+  /** The percentage of current data item in the pie/funnel series */
+  percent!: number;
+  /** Current index of the axis label tick */
+  tickIndex!: number;
 }
 
 /**
