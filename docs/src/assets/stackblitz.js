@@ -1,4 +1,7 @@
 import sdk from '@stackblitz/sdk';
+import packageJson from '../../../package.json';
+
+const echartsVersion = packageJson.devDependencies.echarts.replace(/^[\^~]/, '');
 
 document.querySelectorAll('.btn-edit').forEach((btn) => {
   btn.addEventListener('click', (event) => {
@@ -40,7 +43,7 @@ const openChartsSnippet = (htmlSnippet, jsSnippet, libVersion) => {
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.7/dist/css/boosted.min.css" rel="stylesheet" />
     <title>ODS Charts example</title>
 
-    <${'script'} src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></${'script'}>
+    <${'script'} src="https://cdn.jsdelivr.net/npm/echarts@${echartsVersion}/dist/echarts.min.js"></${'script'}>
     <${'script'} src="https://cdn.jsdelivr.net/npm/ods-charts@${libVersion}/dist/ods-charts.min.js"></${'script'}>
   </head>
   <body class="p-3 m-0 border-0" style="height: 65vh;">
