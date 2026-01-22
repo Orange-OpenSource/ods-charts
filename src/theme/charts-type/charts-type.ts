@@ -698,15 +698,25 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
   public getDefaultConfiguration(): any {
     return {
       visualMap: {
+        type: 'piecewise',
+        orient: 'horizontal',
+        splitNumber: 6,
+        itemSymbol: 'rect',
         show: true,
         min: 0,
         max: 100,
         text: ['High', 'Low'],
         realtime: false,
         calculable: true,
-        inRange: {
-          color: ['var(--ods-blue-200, #80ceef)', 'var(--ods-blue-400, #3e9dd6)', 'var(--ods-blue-600, #085ebd)'],
+        textStyle: {
+          color: 'var(--bs-color-content-default, var(--bs-body-color))',
         },
+        backgroundColor: 'var(--bs-color-bg-default, var(--bs-body-bg))',
+        itemWidth: 48,
+        itemHeight: 16,
+        itemGap: 2,
+        textGap: 4,
+        showLabel: true,
       },
       tooltip: {
         trigger: 'item',
@@ -714,6 +724,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         transitionDuration: 0.2,
       },
       color: 'transparent',
+      legend: { show: false },
     };
   }
 
@@ -724,15 +735,22 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
     return {
       roam: true,
       itemStyle: {
-        areaColor: '#f8f9fa',
-        borderColor: '#dee2e6',
+        areaColor: 'var(--ouds-charts-color-gridlines)',
+        borderColor: 'var(--ouds-charts-color-border)',
+        borderWidth: 1,
       },
       emphasis: {
         label: {
-          show: true,
+          show: false,
+          color: 'var(--bs-color-content-default, var(--bs-body-color))',
         },
         itemStyle: {
-          areaColor: '#e3f2fd',
+          areaColor: 'var(--ouds-charts-color-border)',
+        },
+      },
+      select: {
+        itemStyle: {
+          areaColor: '#123456',
         },
       },
     };

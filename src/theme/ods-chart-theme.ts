@@ -245,7 +245,7 @@ const THEME: {
     [colorSet in ODSChartsColorsSet]: { color: string[] };
   };
   visualMapColors: {
-    [colorSet in ODSChartsColorsSet]: { visualMapColor: string[] };
+    [colorSet in ODSChartsColorsSet]: { visualMap: { inRange: { color: string[] } } };
   };
   linesStyle: { [style in ODSChartsLineStyle]: any };
 } = {
@@ -274,26 +274,26 @@ const THEME: {
     oudsSingle: DEFAULT_OUDS_COLORS_SINGLE,
   },
   visualMapColors: {
-    default: { visualMapColor: DEFAULT_COLORS.color },
-    categorical: { visualMapColor: DEFAULT_COLORS_CATEGORICAL.color },
-    functional: { visualMapColor: DEFAULT_COLORS_FUNCTIONAL.color },
-    supportingColors: { visualMapColor: DEFAULT_COLORS_SUPPORTING_COLORS.color },
-    darkerTints: { visualMapColor: DEFAULT_COLORS_DARKER_TINTS.color },
-    lighterTints: { visualMapColor: DEFAULT_COLORS_LIGHTER_TINTS.color },
-    blue: { visualMapColor: DEFAULT_COLORS_BLUE.color },
-    green: { visualMapColor: DEFAULT_COLORS_GREEN.color },
-    pink: { visualMapColor: DEFAULT_COLORS_PINK.color },
-    purple: { visualMapColor: DEFAULT_COLORS_PURPLE.color },
-    yellow: { visualMapColor: DEFAULT_COLORS_YELLOW.color },
-    oudsBlue: { visualMapColor: DEFAULT_OUDS_COLORS_BLUE.color },
-    oudsGreen: { visualMapColor: DEFAULT_OUDS_COLORS_GREEN.color },
-    oudsPink: { visualMapColor: DEFAULT_OUDS_COLORS_PINK.color },
-    oudsPurple: { visualMapColor: DEFAULT_OUDS_COLORS_PURPLE.color },
-    oudsYellow: { visualMapColor: DEFAULT_OUDS_COLORS_YELLOW.color },
-    oudsCategorical: { visualMapColor: DEFAULT_OUDS_COLORS_CATEGORICAL.color },
-    oudsFunctional: { visualMapColor: DEFAULT_OUDS_COLORS_FUNCTIONAL.color },
-    oudsHighlight: { visualMapColor: DEFAULT_OUDS_COLORS_HIGHLIGHT.color },
-    oudsSingle: { visualMapColor: DEFAULT_OUDS_COLORS_SINGLE.color },
+    default: { visualMap: { inRange: DEFAULT_COLORS } },
+    categorical: { visualMap: { inRange: DEFAULT_COLORS_CATEGORICAL } },
+    functional: { visualMap: { inRange: DEFAULT_COLORS_FUNCTIONAL } },
+    supportingColors: { visualMap: { inRange: DEFAULT_COLORS_SUPPORTING_COLORS } },
+    darkerTints: { visualMap: { inRange: DEFAULT_COLORS_DARKER_TINTS } },
+    lighterTints: { visualMap: { inRange: DEFAULT_COLORS_LIGHTER_TINTS } },
+    blue: { visualMap: { inRange: DEFAULT_COLORS_BLUE } },
+    green: { visualMap: { inRange: DEFAULT_COLORS_GREEN } },
+    pink: { visualMap: { inRange: DEFAULT_COLORS_PINK } },
+    purple: { visualMap: { inRange: DEFAULT_COLORS_PURPLE } },
+    yellow: { visualMap: { inRange: DEFAULT_COLORS_YELLOW } },
+    oudsBlue: { visualMap: { inRange: DEFAULT_OUDS_COLORS_BLUE } },
+    oudsGreen: { visualMap: { inRange: DEFAULT_OUDS_COLORS_GREEN } },
+    oudsPink: { visualMap: { inRange: DEFAULT_OUDS_COLORS_PINK } },
+    oudsPurple: { visualMap: { inRange: DEFAULT_OUDS_COLORS_PURPLE } },
+    oudsYellow: { visualMap: { inRange: DEFAULT_OUDS_COLORS_YELLOW } },
+    oudsCategorical: { visualMap: { inRange: DEFAULT_OUDS_COLORS_CATEGORICAL } },
+    oudsFunctional: { visualMap: { inRange: DEFAULT_OUDS_COLORS_FUNCTIONAL } },
+    oudsHighlight: { visualMap: { inRange: DEFAULT_OUDS_COLORS_HIGHLIGHT } },
+    oudsSingle: { visualMap: { inRange: DEFAULT_OUDS_COLORS_SINGLE } },
   },
   linesStyle: {
     broken: cloneDeepObject(COMMON_LINE_STYLE_BROKEN),
@@ -454,7 +454,7 @@ export class ODSChartsTheme {
         cloneDeepObject({
           color: options.colors.map((color) => ('string' === typeof color ? color : THEME.colors[color.colorPalette].color[color.colorIndex])),
           visualMapColor: options.colors.map((color) =>
-            'string' === typeof color ? color : THEME.visualMapColors[color.colorPalette].visualMapColor[color.colorIndex]
+            'string' === typeof color ? color : THEME.visualMapColors[color.colorPalette].visualMap.inRange.color[color.colorIndex]
           ),
         })
       );
@@ -616,12 +616,6 @@ export class ODSChartsTheme {
       }
     }
 
-    if (dataOptions.visualMap) {
-      themeOptions.visualMap = [];
-      for (let index = 0; index < dataOptions.series.length; index++) {
-        themeOptions.visualMap[index] = newTheme.visualMap;
-      }
-    }
     for (const axisType of ['xAxis', 'yAxis']) {
       if (dataOptions[axisType]) {
         switch (dataOptions[axisType].type) {
@@ -707,7 +701,7 @@ export class ODSChartsTheme {
       this.cssHelper.changeThemeMode(this.options.mode);
     }
 
-    const hasInitializedCompitedStyle = this.cssHelper.initComputedStyle();
+    const hasInitializedComputedStyle = this.cssHelper.initComputedStyle();
     try {
       // need to copy dataOptions as theme feature may change the original dataOptions
       // only make an asign at the first level in order to avoid deep copy of all data
@@ -803,6 +797,12 @@ export class ODSChartsTheme {
 
       let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
 
+      if (this.dataOptions.visualMap?.splitNumber || this.dataOptions.visualMap?.piece) {
+        if (this.theme.visualMap.inRange.color.length >= this.dataOptions.visualMap?.splitNumber) {
+          themeOptions.visualMap.inRange = { color: this.theme.visualMap.inRange.color.slice(0, this.dataOptions.visualMap.splitNumber) };
+        }
+      }
+
       for (const axis of ['xAxis', 'yAxis']) {
         if (!isMainAxis(updatedDataOptionsForTheme[axis]) && !(updatedDataOptionsForTheme[axis] && updatedDataOptionsForTheme[axis].axisLine)) {
           // We configure a value axis with no line, no split but keeping the label and the split
@@ -865,7 +865,7 @@ export class ODSChartsTheme {
 
       return { themeOptions, dataOptions: updatedDataOptionsForTheme };
     } finally {
-      if (hasInitializedCompitedStyle) {
+      if (hasInitializedComputedStyle) {
         this.cssHelper.removeComputedStyle();
       }
     }

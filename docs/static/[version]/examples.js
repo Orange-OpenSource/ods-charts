@@ -1225,15 +1225,15 @@ const worldMap = async () => {
 };
 
 const franceDeps = async () => {
-  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/departements-version-simplifiee.geojson').then(
-    (response) => response.json()
-  );
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/departements-version-simplifiee.geojson')
+    .then((response) => response.json())
+    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
 };
 
 const franceRegions = async () => {
-  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/regions-version-simplifiee.geojson').then((response) =>
-    response.json()
-  );
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/regions-version-simplifiee.geojson')
+    .then((response) => response.json())
+    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
 };
 
 const loadMaps = async (echarts) => {
@@ -1293,13 +1293,10 @@ window.generateChoroplethMapChart = async (id) => {
   // Specify the configuration items and data for the chart
   var option = {
     visualMap: {
-      type: 'piecewise',
-      itemSymbol: 'rect',
-      orient: 'horizontal',
       left: 'center',
       min: 0,
       max: 1500,
-      text: ['High', 'Low'],
+      text: ['High density', 'Low density'],
       realtime: false,
       calculable: true,
     },
@@ -1308,16 +1305,53 @@ window.generateChoroplethMapChart = async (id) => {
         name: 'Population (millions)',
         type: 'map',
         map: 'world',
-        roam: true,
         data: mapData,
-        emphasis: {
-          label: {
-            show: true,
-          },
-        },
       },
     ],
-    legend: { show: false },
+  };
+
+  displayChart('getChoroplethMapChartConfiguration', id, option);
+};
+
+window.generateRegionsChoroplethMapChart = async (id) => {
+  // Sample data for choropleth map - using regions map (built-in)
+  const mapData = [
+    { name: 'Auvergne-Rhône-Alpes', value: 8260 },
+    { name: 'Bourgogne-Franche-Comté', value: 2793 },
+    { name: 'Bretagne', value: 3475 },
+    { name: 'Centre-Val de Loire', value: 2581 },
+    { name: 'Corse', value: 360 },
+    { name: 'Grand Est', value: 5544 },
+    { name: 'Hauts-de-France', value: 5973 },
+    { name: 'Île-de-France', value: 12450 },
+    { name: 'Normandie', value: 3341 },
+    { name: 'Nouvelle-Aquitaine', value: 6191 },
+    { name: 'Occitanie', value: 6201 },
+    { name: 'Pays de la Loire', value: 3936 },
+    { name: "Provence-Alpes-Côte d'Azur", value: 5241 },
+  ];
+
+  // Specify the configuration items and data for the chart
+  var option = {
+    visualMap: {
+      // orient: 'vertical',
+      left: 'center',
+      min: 0,
+      max: 12450,
+      splitNumber: 4,
+      text: ['Many people', 'Few people'],
+      realtime: false,
+      calculable: true,
+      showLabel: false,
+    },
+    series: [
+      {
+        name: 'Population (thousands)',
+        type: 'map',
+        map: 'france-regions',
+        data: mapData,
+      },
+    ],
   };
 
   displayChart('getChoroplethMapChartConfiguration', id, option);
