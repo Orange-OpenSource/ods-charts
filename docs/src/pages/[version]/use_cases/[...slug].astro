@@ -1,11 +1,12 @@
 ---
 import UseCasesLayout from '@layouts/UseCasesLayout.astro';
 import { useCasesPages } from '@libs/content'
+import { getConfig } from '@libs/config'
 
 export async function getStaticPaths() {
   return useCasesPages.map((docsPage) => {
     return {
-      params: { slug: docsPage.slug, version: '0.4' },
+      params: { slug: docsPage.slug, version: getConfig().docs_version },
       props: docsPage
     }
   })

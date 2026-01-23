@@ -15,10 +15,12 @@ interface Props {
 
 const { data, removeBoosted } = Astro.props
 const libVersion = getConfig().lib_version
+const echartsVersion = getConfig().echarts_version
+const docsVersion = getConfig().docs_version
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-ods-charts-version={libVersion}>
+<html lang="en" data-ods-charts-version={libVersion} data-ods-charts-docs-version={docsVersion} data-echarts-version={echartsVersion} >
   <head>
     <Head title={data.title || 'ODS Charts'} />
     <slot name="head-scripts" />

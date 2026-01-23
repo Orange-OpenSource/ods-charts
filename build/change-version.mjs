@@ -18,20 +18,7 @@ const VERBOSE = process.argv.includes('--verbose');
 const DRY_RUN = process.argv.includes('--dry') || process.argv.includes('--dry-run');
 
 // These are the files we only care about replacing the version
-const FILES = [
-  'config.yml',
-  'README.md',
-  'build/add_head.mjs',
-  'docs/static/[version]/examples.js',
-  'docs/static/[version]/style.css',
-  'docs/src/pages/[version]/index.astro',
-  'docs/src/pages/[version]/colors/index.astro',
-  'docs/src/pages/[version]/examples/index.astro',
-  'docs/src/pages/[version]/examples/[...slug].astro',
-  'docs/src/pages/[version]/use_cases/index.astro',
-  'docs/src/pages/[version]/use_cases/[...slug].astro',
-  'docs/src/content/use_cases/time-slider.md',
-];
+const FILES = ['README.md', 'build/add_head.mjs', 'docs/static/[version]/style.css', 'docs/src/content/use_cases/time-slider.md'];
 
 // Blame TC39... https://github.com/benjamingr/RegExp.escape/issues/37
 function regExpQuote(string) {

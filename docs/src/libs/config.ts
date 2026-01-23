@@ -1,11 +1,11 @@
-import fs from 'node:fs';
-import yaml from 'js-yaml';
 import { z } from 'zod';
+import packageJson from '../../../package.json';
 
 // The config schema used to validate the config file content and ensure all values required by the site are valid.
 const configSchema = z.object({
   docs_version: z.string(),
   lib_version: z.string(),
+  echarts_version: z.string().optional(),
 });
 
 let config: Config | undefined;
@@ -19,11 +19,11 @@ export function getConfig(): Config {
   }
 
   try {
-    // Load the config from the `config.yml` file.
-    const rawConfig = yaml.load(fs.readFileSync('./config.yml', 'utf8'));
-
-    // Parse the config using the config schema to validate its content and get back a fully typed config object.
-    config = configSchema.parse(rawConfig);
+    config = {
+      echarts_version: packageJson.devDependencies.echarts.replace(/^[\^~]/, ''),
+      lib_version: packageJson.version,
+      docs_version: packageJson.version.substring(0, packageJson.version.lastIndexOf('.')),
+    };
 
     return config;
   } catch (error) {
