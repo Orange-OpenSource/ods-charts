@@ -703,20 +703,29 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         splitNumber: 6,
         itemSymbol: 'rect',
         show: true,
-        min: 0,
-        max: 100,
-        text: ['High', 'Low'],
-        realtime: false,
-        calculable: true,
-        textStyle: {
-          color: 'var(--bs-color-content-default, var(--bs-body-color))',
-        },
-        backgroundColor: 'var(--bs-color-bg-default, var(--bs-body-bg))',
+        left: 'center',
+        backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
         itemWidth: 48,
         itemHeight: 16,
-        itemGap: 2,
-        textGap: 4,
+        itemGap: 10,
+        textGap: 0,
         showLabel: true,
+        calculable: true,
+        textStyle: {
+          align: 'left',
+          rich: {
+            text: {
+              width: 48,
+              padding: [0, 0, 0, -48],
+              lineHeight: 53,
+              verticalAlign: 'bottom',
+              color: 'var(--bs-body-color, #000000)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
+            },
+          },
+        },
+        formatter: (value: number, value2: number) => {
+          return '{text|' + value + '-' + value2 + '}';
+        },
       },
       tooltip: {
         trigger: 'item',
@@ -742,7 +751,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
       emphasis: {
         label: {
           show: false,
-          color: 'var(--bs-color-content-default, var(--bs-body-color))',
+          color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
         },
         itemStyle: {
           areaColor: 'var(--ouds-charts-color-border)',

@@ -260,7 +260,7 @@ function generateExampleDiv(id, direction) {
   iframeDocument.write(`
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js" integrity="sha384-pPi0zxBAoDu6+JXW/C68UZLvBUUtU+7zonhif43rqj7pxsGyqyqzcian2Rj37Rss" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/0.4/ods-charts.js"></script>
 <script type="module" src="/0.4/examples.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
@@ -1335,14 +1335,10 @@ window.generateRegionsChoroplethMapChart = async (id) => {
   var option = {
     visualMap: {
       // orient: 'vertical',
-      left: 'center',
       min: 0,
       max: 12450,
       splitNumber: 4,
       text: ['Many people', 'Few people'],
-      realtime: false,
-      calculable: true,
-      showLabel: false,
     },
     series: [
       {
@@ -1354,7 +1350,7 @@ window.generateRegionsChoroplethMapChart = async (id) => {
     ],
   };
 
-  displayChart('getChoroplethMapChartConfiguration', id, option);
+  displayChart('getChoroplethMapChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE);
 };
 
 window.generateBubbleMapChart = async (id) => {
