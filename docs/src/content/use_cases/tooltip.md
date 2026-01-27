@@ -752,4 +752,113 @@ tooltip: {
     </div>
 
   </div>
+
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Using markers with custom series colors</h5>
+      <p class="card-text pe-5">When you define custom colors for specific series, the <code>getPopoverMarker()</code> and <code>getLegendMarker()</code> methods automatically use the correct colors to ensure visual consistency between the chart and tooltips.</p>
+      <p class="card-text pe-5">
+        In the example below, the first series has a custom red color defined with <code>color: 'red'</code>. The marker in the tooltip automatically reflects this color:
+        <code>
+          <pre>
+            series: [
+              {
+                data: [10, 22, 28, 23, 19, 15],
+                type: 'bar',
+                color: 'red', // Custom color
+              },
+              { data: [12, 28, 23, 15, 15, 18], type: 'bar' },
+            ]
+          </pre>
+        </code>
+      </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="div8_htmlId">
+        <div class="border border-subtle position-relative">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Sales Report</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
+          </div>
+          <div id="div8_holder">
+            <div id="div8_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+          </div>
+          <div id="div8_legend"></div>
+        </div>
+      </div>
+      <script>
+        addViewCode('div8_');
+      </script>
+      <script id="div8_codeId">
+        ///////////////////////////////////////////////////
+        // Used data
+        ///////////////////////////////////////////////////
+
+        // Data to be displayed
+        var div8_dataOptions = {
+          xAxis: {
+            type: 'category',
+            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          },
+          yAxis: {},
+          series: [
+            {
+              data: [10, 22, 28, 23, 19, 15],
+              type: 'bar',
+              barWidth: 30,
+              color: 'red', // Custom color for this series
+            },
+            {
+              data: [12, 28, 23, 15, 15, 18],
+              type: 'bar',
+              barWidth: 30,
+            },
+          ],
+          legend: {
+            data: ['Critical Issues', 'Normal Issues'],
+          },
+          tooltip: {
+            confine: true,
+          },
+        };
+
+        ///////////////////////////////////////////////////
+        // ODS Charts
+        ///////////////////////////////////////////////////
+        // Build the theme
+        var div8_themeManager = ODSCharts.getThemeManager({});
+        echarts.registerTheme(div8_themeManager.name, div8_themeManager.theme);
+
+        // Get the chart holder and initiate it with the generated theme
+        var div = document.getElementById('div8_chart');
+        var myChart = echarts.init(div, div8_themeManager.name, {
+          renderer: 'svg',
+        });
+
+        // Set the data to be displayed.
+        div8_themeManager.setDataOptions(div8_dataOptions);
+        // Register the externalization of the legend.
+        div8_themeManager.externalizeLegends(myChart, '#div8_legend');
+        // Manage window size changed
+        div8_themeManager.manageChartResize(myChart, 'div8_chart');
+        // Observe dark / light mode changes
+        div8_themeManager.manageThemeObserver(myChart);
+        // Register the externalization of the tooltip/popup with custom content
+        div8_themeManager.externalizePopover(undefined, {
+          ...ODSCharts.ODSChartsPopoverManagers.NONE,
+          getPopupContentLine: ({ seriesName, itemValue, seriesIndex }) => {
+            // The marker automatically uses the custom color defined in the series
+            return `<p>${div8_themeManager.getPopoverMarker(seriesIndex)}<strong>${seriesName}:</strong> ${itemValue} issues</p>`;
+          },
+        });
+        // Display the chart using the configured theme and data.
+        myChart.setOption(div8_themeManager.getChartOptions());
+      </script>
+    </div>
+
+  </div>
 </div>

@@ -530,6 +530,13 @@ export class ODSChartsTheme {
         } else if (serie.itemStyle && serie.itemStyle.color && serie.itemStyle.color !== colors[seriesIndex]) {
           // In case of a series with custom item style color, we will replace the default color by the specified one
           this.sliceColor(colors, serie.itemStyle.color, seriesIndex);
+        } else if (serie.color && typeof serie.color === 'string' && serie.color !== colors[seriesIndex]) {
+          // In case of a series with a direct custom color property, we will replace the default color by the specified one
+          // Note: serie.color can be a function that returns different colors for each data point (e.g., based on dataIndex).
+          // We only handle string colors here because a marker must represent the entire series with a single color,
+          // and we cannot determine which data point's color should represent the whole series when using a function.
+          // For function-based colors, we fall back to the default palette color.
+          this.sliceColor(colors, serie.color, seriesIndex);
         }
       }
     }
