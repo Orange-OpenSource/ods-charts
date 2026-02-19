@@ -147,7 +147,7 @@ async function main(args) {
   bumpNpmVersion(newVersion);
 
   try {
-    const olddDocsVersion = oldVersion.substring(0, oldVersion.lastIndexOf('.'));
+    const oldDocsVersion = oldVersion.substring(0, oldVersion.lastIndexOf('.'));
     const newDocsVersion = newVersion.substring(0, newVersion.lastIndexOf('.'));
     await Promise.all(
       FILES.map((file) => replaceRecursively(file, oldVersion, newVersion)),
