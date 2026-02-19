@@ -72,6 +72,46 @@ function showUsage(args) {
   process.exit(1);
 }
 
+async function replaceMultiLineTextInFile(file, regexpText, newText) {
+  const originalString = await fs.readFile(file, 'utf8');
+  const newString = originalString.replace(regexpText, newText);
+
+  // No need to move any further if the strings are identical
+  if (originalString === newString) {
+    return;
+  }
+
+  if (VERBOSE) {
+    console.log(`Found ${oldText} in ${file}`);
+  }
+
+  if (DRY_RUN) {
+    return;
+  }
+
+  await fs.writeFile(file, newString, 'utf8');
+}
+
+async function addversionSeletors(newVersion) {
+  await replaceMultiLineTextInFile(
+    'docs/src/components/Header.astro',
+    new RegExp('<li>\\s*<a class="dropdown-item d-flex align-items-center" href="/">Go to latest</a>\\s*</li>'),
+    `<li>
+                <a class="dropdown-item d-flex align-items-center" href="/">Go to latest</a>
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="/${newVersion}">v${newVersion}</a>
+              </li>`
+  );
+  await replaceMultiLineTextInFile('docs/src/pages/versions.astro', new RegExp(' <span class="badge text-bg-primary float-end">Latest</span>'), '');
+  await replaceMultiLineTextInFile(
+    'docs/src/pages/versions.astro',
+    new RegExp('<div class="list-group">'),
+    `<div class="list-group">
+          <a href="/${newVersion}" class="list-group-item list-group-item-action">${newVersion} <span class="badge text-bg-primary float-end">Latest</span></a>`
+  );
+}
+
 async function main(args) {
   let [oldVersion, newVersion] = args;
 
@@ -89,13 +129,22 @@ async function main(args) {
     showUsage(args);
   }
 
+  console.log(`\n\nChanging version from ${oldVersion} to ${newVersion}\n`);
+
   bumpNpmVersion(newVersion);
 
   try {
+    const oldDocsVersion = oldVersion.substring(0, oldVersion.lastIndexOf('.'));
+    const newDocsVersion = newVersion.substring(0, newVersion.lastIndexOf('.'));
     await Promise.all(
       FILES.map((file) => replaceRecursively(file, oldVersion, newVersion)),
-      FILES.map((file) => replaceRecursively(file, oldVersion.slice(0, 3), newVersion.slice(0, 3)))
+      oldDocsVersion !== newDocsVersion ? FILES.map((file) => replaceRecursively(file, oldDocsVersion, newDocsVersion)) : []
     );
+
+    if (oldDocsVersion !== newDocsVersion) {
+      console.log(`\n\nAdd new major/minor version selectors in docs\n`);
+      await addversionSeletors(newDocsVersion);
+    }
   } catch (error) {
     console.error(error);
     process.exit(1);
