@@ -871,6 +871,7 @@ class ODSChartsBubbleMap extends ODSChartsConfiguration {
           },
           itemStyle: {
             areaColor: 'var(--ouds-charts-color-border)',
+            opacity: 1,
           },
         },
       };
