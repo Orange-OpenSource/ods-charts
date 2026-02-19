@@ -11,12 +11,13 @@ document.querySelectorAll('.btn-edit').forEach((btn) => {
     document.getElementById(`${id}_viewCode`)?.classList.remove('d-block');
 
     const libVersion = document.querySelector('[data-ods-charts-version]').getAttribute('data-ods-charts-version');
+    const echartsVersion = document.querySelector('[data-echarts-version]').getAttribute('data-echarts-version');
 
-    openChartsSnippet(htmlText, codeText, libVersion);
+    openChartsSnippet(htmlText, codeText, libVersion, echartsVersion);
   });
 });
 
-const openChartsSnippet = (htmlSnippet, jsSnippet, libVersion) => {
+const openChartsSnippet = (htmlSnippet, jsSnippet, libVersion, echartsVersion) => {
   const project = {
     files: {
       'index.html': `<!doctype html>
@@ -40,7 +41,7 @@ const openChartsSnippet = (htmlSnippet, jsSnippet, libVersion) => {
     <link href="https://cdn.jsdelivr.net/npm/boosted@5.3.7/dist/css/boosted.min.css" rel="stylesheet" />
     <title>ODS Charts example</title>
 
-    <${'script'} src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></${'script'}>
+    <${'script'} src="https://cdn.jsdelivr.net/npm/echarts@${echartsVersion}/dist/echarts.min.js"></${'script'}>
     <${'script'} src="https://cdn.jsdelivr.net/npm/ods-charts@${libVersion}/dist/ods-charts.min.js"></${'script'}>
   </head>
   <body class="p-3 m-0 border-0" style="height: 65vh;">
