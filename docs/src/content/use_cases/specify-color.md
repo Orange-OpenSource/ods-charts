@@ -558,7 +558,7 @@ series: [
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Bar specific color</h5>
-      <p class="card-text pe-5">This example shows the example of using two colors for a single series. But this time, we actually keep a single series, displayed once in the legend, while modifying the color of the bars that are below the objective.</p>  
+      <p class="card-text pe-5">This example shows the example of using two colors for a single series. But this time, we actually keep a single series, displayed once in the legend, while modifying the color of the bars that are below the objective.</p>
       <p>To do this, we associate in the list of values the red color with the value below the objectives via the Apache ECharts <code>itemStyle.color</code> parameter:
         <code>
           <pre>
@@ -573,12 +573,12 @@ series: [
         itemStyle: {
           color: 'var(--ouds-charts-color-functional-negative)'
         }
-      }          
+      }
     ]
   }
           </pre>
-        </code>    
-      </p>   
+        </code>
+      </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
           <use xlink:href="#lightning-charge-fill" />
@@ -616,7 +616,7 @@ series: [
     }).map((res, i) => (res >= goals[i] ? res : {
         value: res,
         itemStyle: {
-        color: 'var(--ouds-charts-color-functional-negative)',
+          color: 'var(--ouds-charts-color-functional-negative)',
         },
       }));
 

@@ -344,7 +344,9 @@ export interface EChartsProject {
     };
   };
   visualMap: {
-    color: string[];
+    inRange: {
+      color: string[];
+    };
   };
   dataZoom?: {
     borderColor?: string;
@@ -738,7 +740,16 @@ export const ODS_PROJECT: EChartsProject = {
     },
   },
   visualMap: {
-    color: ['#085ebd', '#3179c8', '#5a94d3', '#84afde', '#adc9e9', '#d6e4f4'],
+    inRange: {
+      color: [
+        'var(--ouds-charts-color-sequential-accent-1-tint-100, #d2ecf9)',
+        'var(--ouds-charts-color-sequential-accent-1-tint-200, #a5daf3)',
+        'var(--ouds-charts-color-sequential-accent-1-tint-300, #79c7ec)',
+        'var(--ouds-charts-color-sequential-accent-1-tint-400, #4ab4e6)',
+        'var(--ouds-charts-color-sequential-accent-1-tint-500, #1fa2e0)',
+        'var(--ouds-charts-color-sequential-accent-1-tint-600, #1982b3)',
+      ],
+    },
   },
   markPoint: {
     label: {
