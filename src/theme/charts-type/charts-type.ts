@@ -743,6 +743,10 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
     }
     return {
       roam: true,
+      scaleLimit: {
+        min: 0.5,
+        max: 3,
+      },
       itemStyle: {
         areaColor: 'var(--ouds-charts-color-gridlines)',
         borderColor: 'var(--ouds-charts-color-border)',
@@ -758,9 +762,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         },
       },
       select: {
-        itemStyle: {
-          areaColor: '#123456',
-        },
+        disabled: true,
       },
     };
   }
@@ -777,10 +779,49 @@ class ODSChartsBubbleMap extends ODSChartsConfiguration {
 
   public getDefaultConfiguration(): any {
     return {
+      visualMap: {
+        type: 'piecewise',
+        orient: 'vertical',
+        splitNumber: 6,
+        itemSymbol: 'circle',
+        show: true,
+        top: 0,
+        right: 0,
+        backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
+        itemGap: 8,
+        textGap: 8,
+        showLabel: true,
+        calculable: true,
+        textStyle: {
+          align: 'left',
+        },
+        formatter: (value: number, value2: number) => {
+          return value + '-' + value2;
+        },
+      },
       tooltip: {
-        trigger: 'item',
-        showDelay: 0,
-        transitionDuration: 0.2,
+        // trigger: 'item',
+        // showDelay: 0,
+        // transitionDuration: 0.2,
+      },
+      legend: {
+        show: false,
+      },
+      color: 'transparent',
+      geo: {
+        roam: true,
+        scaleLimit: {
+          min: 0.5,
+          max: 3,
+        },
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-gridlines)',
+          borderColor: 'var(--ouds-charts-color-border)',
+          borderWidth: 1,
+        },
+        emphasis: {
+          disabled: true,
+        },
       },
     };
   }
@@ -789,31 +830,47 @@ class ODSChartsBubbleMap extends ODSChartsConfiguration {
     if (serie.type === 'map') {
       return {
         roam: true,
+        scaleLimit: {
+          min: 0.5,
+          max: 3,
+        },
         itemStyle: {
-          areaColor: '#f8f9fa',
-          borderColor: '#dee2e6',
+          areaColor: 'var(--ouds-charts-color-gridlines)',
+          borderColor: 'var(--ouds-charts-color-border)',
+          borderWidth: 1,
         },
         emphasis: {
-          itemStyle: {
-            areaColor: '#e9ecef',
+          label: {
+            show: false,
+            color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
           },
+          itemStyle: {
+            areaColor: 'var(--ouds-charts-color-border)',
+          },
+        },
+        select: {
+          disabled: true,
         },
       };
     }
     if (serie.type === 'scatter' || serie.type === 'effectScatter') {
       return {
         coordinateSystem: 'geo',
-        symbolSize: (val: number[]) => {
-          return val[2] / 10;
-        },
+        roam: true,
         itemStyle: {
-          color: '#0d6efd',
-          opacity: 0.7,
+          areaColor: 'var(--ouds-charts-color-gridlines)',
+          borderColor: 'var(--ouds-charts-color-border)',
+          borderWidth: 2,
         },
         emphasis: {
+          scale: true,
+          scaleSize: 1.5,
+          label: {
+            // show: false,
+            color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
+          },
           itemStyle: {
-            color: '#0a58ca',
-            opacity: 1,
+            areaColor: 'var(--ouds-charts-color-border)',
           },
         },
       };
