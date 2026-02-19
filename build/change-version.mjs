@@ -151,10 +151,10 @@ async function main(args) {
     const newDocsVersion = newVersion.substring(0, newVersion.lastIndexOf('.'));
     await Promise.all(
       FILES.map((file) => replaceRecursively(file, oldVersion, newVersion)),
-      olddDocsVersion !== newDocsVersion ? FILES.map((file) => replaceRecursively(file, olddDocsVersion, newDocsVersion)) : []
+      oldDocsVersion !== newDocsVersion ? FILES.map((file) => replaceRecursively(file, oldDocsVersion, newDocsVersion)) : []
     );
 
-    if (olddDocsVersion !== newDocsVersion) {
+    if (oldDocsVersion !== newDocsVersion) {
       console.log(`\n\nAdd new major/minor version selectors in docs\n`);
       await addversionSeletors(newDocsVersion);
     }
