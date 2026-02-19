@@ -141,54 +141,7 @@ class InternalODSChartsPopoverItem extends ODSChartsPopoverItem {
   dataType?: string;
   marker?: string;
   seriesId?: string;
-  /**
-   * Description from ECharts doc:
-   * Component type. Each component has its own component type.
-   */
   componentType!: 'series';
-  /** Series type */
-  seriesType!: string;
-  /** Series index in option.series */
-  seriesIndex!: number;
-  /** Series name */
-  seriesName!: string;
-  /** Data name, or category name */
-  name!: string;
-  /** Data index in input data array */
-  dataIndex!: number;
-  /** Original data as input */
-  data!: object;
-  /** Value of data. In most series it is the same as data.
-   * But in some series it is some part of the data (e.g., in map, radar) */
-  value!: number | Array<any> | object;
-  /** encoding info of coordinate system
-   * Key: coord, like ('x' 'y' 'radius' 'angle')
-   * value: Must be an array, not null/undefined. Contain dimension indices, like:
-   * {
-   *     x: [2] // values on dimension index 2 are mapped to x axis.
-   *     y: [0] // values on dimension index 0 are mapped to y axis.
-   * }
-   */
-  encode!: object;
-  /** dimension names list */
-  dimensionNames!: Array<string>;
-  /** data dimension index, for example 0 or 1 or 2 ...
-   * Only work in `radar` series.
-   */
-  dimensionIndex!: number;
-  /** Color of data */
-  color!: string;
-  /** The percentage of current data item in the pie/funnel series */
-  percent!: number;
-  /** The ancestors of current node in the sunburst series (including self) */
-  treePathInfo!: Array<any>;
-  /** The ancestors of current node in the tree/treemap series (including self) */
-  treeAncestors!: Array<any>;
-  /** A function that returns a boolean value to flag if the axis label is truncated */
-  //   eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  isTruncated!: Function;
-  /** Current index of the axis label tick */
-  tickIndex!: number;
 }
 
 export class ODSChartsPopover {
@@ -295,6 +248,7 @@ export class ODSChartsPopover {
             seriesIndex?: number;
             axisType?: 'xAxis.time' | 'xAxis.category' | 'yAxis.time' | 'yAxis.category';
             seriesType?: string;
+            dimensionNames?: string[];
           }) => {
             const legendLabel =
               legends &&
@@ -307,14 +261,18 @@ export class ODSChartsPopover {
             const colorIndex: number = undefined === param.seriesIndex ? -1 : param.seriesIndex % this.colors.length;
             const seriesColor: string = (colorIndex > -1 ? this.colors[colorIndex] : param.color) ?? 'transparent';
             const itemColor: string = param.color ?? 'transparent';
-            const itemValue =
-              isVarArray(param.value) && 2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))
-                ? param.value[1]
-                : isVarArray(param.value) && (param.seriesIndex as number) + 1 < param.value.length
-                  ? param.value[(param.seriesIndex as number) + 1]
-                  : isVarArray(param.value)
-                    ? undefined
-                    : param.value;
+            let itemValue: any = undefined;
+            if (isVarArray(param.value)) {
+              if (param.dimensionNames && param.dimensionNames.length === param.value.length && param.dimensionNames.indexOf('value') > -1) {
+                itemValue = param.value[param.dimensionNames.indexOf('value')];
+              } else if (2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))) {
+                itemValue = param.value[1];
+              } else if ((param.seriesIndex as number) === param.value.length) {
+                itemValue = param.value[(param.seriesIndex as number) + 1];
+              }
+            } else {
+              itemValue = param.value;
+            }
             const element: ODSChartsPopoverItem = mergeObjectsAndReplaceArrays(cloneDeepObject(param), {
               markerColor: 'line' === param.seriesType ? seriesColor : itemColor,
               itemColor: itemColor,
