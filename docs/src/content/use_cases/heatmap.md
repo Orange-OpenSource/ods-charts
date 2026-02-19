@@ -434,7 +434,7 @@ var myChart = echarts.init(div, themeManager.name, {
 // Set the data to be displayed.
 themeManager.setDataOptions(dataOptions);
 // Manage window size changed
-themeManager.manageChartResize(myChart, 'heatmap*chart');
+themeManager.manageChartResize(myChart, 'heatmap_chart');
 // Automatically manage data-bs-theme attribute change. Only needed if you want the
 // chart to automatically react to the global light or dark theme change
 themeManager.manageThemeObserver(myChart);
