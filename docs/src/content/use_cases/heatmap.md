@@ -211,7 +211,7 @@ var dataOptions = {
         textStyle: {
             fontWeight: '400',
             fontSize: 14,
-            color: '#000',
+            color: 'var(--bs-body-color)',
             padding: [0, 0, 0, 5],
         },
         icon: 'rect',
