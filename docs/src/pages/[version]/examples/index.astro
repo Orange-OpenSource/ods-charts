@@ -4,9 +4,9 @@ import { getConfig } from '@libs/config'
 
 const data = { title: 'Examples - ODS Charts' }
 
-const version = getConfig().docs_version
+export const version = getConfig().docs_version
 
-export function getStaticPaths() { return [{ params: { version: getConfig().docs_version } }] }
+export function getStaticPaths() { return [{ params: { version: version } }] }
 ---
 
 <BaseLayout data={data}>
