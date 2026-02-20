@@ -691,8 +691,8 @@ class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
  * A choropleth map is a thematic map where areas are shaded or patterned in proportion to a statistical variable.
  */
 class ODSChartsChoroplethMap extends ODSChartsConfiguration {
-  constructor() {
-    super(ODSChartsTypes.CHOROPLETH_MAP);
+  constructor(type = ODSChartsTypes.CHOROPLETH_MAP) {
+    super(type);
   }
 
   public getDefaultConfiguration(): any {
@@ -777,7 +777,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
  * Configuration of a chart of type {@link ODSChartsTypes.BUBBLE_MAP}
  * A bubble map displays data as circles (bubbles) on a geographic map.
  */
-class ODSChartsBubbleMap extends ODSChartsConfiguration {
+class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
   constructor() {
     super(ODSChartsTypes.BUBBLE_MAP);
   }
@@ -833,30 +833,7 @@ class ODSChartsBubbleMap extends ODSChartsConfiguration {
 
   public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type === 'map') {
-      return {
-        roam: true,
-        scaleLimit: {
-          min: 0.5,
-          max: 3,
-        },
-        itemStyle: {
-          areaColor: 'var(--ouds-charts-color-gridlines)',
-          borderColor: 'var(--ouds-charts-color-border)',
-          borderWidth: 1,
-        },
-        emphasis: {
-          label: {
-            show: false,
-            color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
-          },
-          itemStyle: {
-            areaColor: 'var(--ouds-charts-color-border)',
-          },
-        },
-        select: {
-          disabled: true,
-        },
-      };
+      return super.getSerieConfiguration(serie, _themeOptions, _dataOptions);
     }
     if (serie.type === 'scatter' || serie.type === 'effectScatter') {
       return {
@@ -866,16 +843,17 @@ class ODSChartsBubbleMap extends ODSChartsConfiguration {
           areaColor: 'var(--ouds-charts-color-gridlines)',
           borderColor: 'var(--ouds-charts-color-border)',
           borderWidth: 2,
+          opacity: 1,
         },
         emphasis: {
-          scale: true,
-          scaleSize: 1.5,
+          scale: false,
           label: {
             // show: false,
             color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
           },
           itemStyle: {
-            areaColor: 'var(--ouds-charts-color-border)',
+            color: 'var(--ouds-charts-color-highlight)',
+            borderColor: 'var(--ouds-charts-color-border)',
             opacity: 1,
           },
         },
