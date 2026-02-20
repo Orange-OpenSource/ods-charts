@@ -28,6 +28,15 @@ title: Geographic Data - Examples - ODS Charts
   </div>
 </div> -->
 <div class="container-xxl d-flex flex-nowrap pt-3">
+  <div class="alert alert-warning">
+    <span class="alert-icon"></span>
+    <div>
+      <h2 class="alert-heading"><span class="visually-hidden">Warning about </span>Map assets</h2>
+      <p>The maps used in this page aren't studied for a commercial use. We use them as placeholders in our docs. We're trying our best to provide some, that you'll be able to use on your side.</p>
+    </div>
+  </div>
+</div>
+<div class="container-xxl d-flex flex-nowrap pt-3">
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title">Choropleth map</h5>

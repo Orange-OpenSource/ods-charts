@@ -1360,6 +1360,7 @@ window.generateRegionsChoroplethMapChart = async (id) => {
       min: 0,
       max: 12450,
       splitNumber: 4,
+      text: ['Population'],
     },
     series: [
       {
