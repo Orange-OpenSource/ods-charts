@@ -797,11 +797,9 @@ export class ODSChartsTheme {
 
       let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
 
-      const toto = this.dataOptions.visualMap?.pieces.length || this.dataOptions.visualMap?.splitNumber;
-      if (toto) {
-        if (this.theme.visualMap.inRange.color.length >= toto) {
-          themeOptions.visualMap.inRange = { color: this.theme.visualMap.inRange.color.slice(0, toto) };
-        }
+      const splitNumber = this.dataOptions.visualMap?.pieces?.length || this.dataOptions.visualMap?.splitNumber;
+      if (splitNumber && this.theme.visualMap.inRange?.color?.length >= splitNumber) {
+        themeOptions.visualMap.inRange = { color: this.theme.visualMap.inRange.color.slice(0, splitNumber) };
       }
 
       for (const axis of ['xAxis', 'yAxis']) {

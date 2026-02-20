@@ -707,12 +707,16 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
         itemWidth: 48,
         itemHeight: 16,
-        itemGap: 10,
+        itemGap: 2,
         textGap: 0,
         showLabel: true,
         calculable: true,
         textStyle: {
           align: 'left',
+          fontWeight: 400,
+          fontSize: 14,
+          fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
+
           rich: {
             text: {
               width: 48,
@@ -723,8 +727,8 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
             },
           },
         },
-        formatter: (value: number, value2: number) => {
-          return '{text|' + value + '-' + value2 + '}';
+        formatter: (value: number, _value2: number) => {
+          return '{text|' + value + '}';
         },
       },
       tooltip: {
@@ -758,7 +762,8 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
           color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
         },
         itemStyle: {
-          areaColor: 'var(--ouds-charts-color-border)',
+          areaColor: 'var(--ouds-charts-color-highlight)',
+          borderColor: 'var(--ouds-charts-color-border)',
         },
       },
       select: {
