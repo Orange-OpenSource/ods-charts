@@ -2,9 +2,9 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getConfig } from '@libs/config'
 
-const version = getConfig().docs_version
+export const version = getConfig().docs_version
 const data = { title: `ODS Charts - V${version}` }
-export function getStaticPaths() { return [{ params: { version: '0.4' } }] }
+export function getStaticPaths() { return [{ params: { version: version } }] }
 ---
 
 <BaseLayout data={data}>

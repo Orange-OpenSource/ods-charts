@@ -56,6 +56,35 @@ export class ODSChartsPopoverItem {
   percent!: number;
   /** Current index of the axis label tick */
   tickIndex!: number;
+  /** Original data as input */
+  data!: object;
+  /** Value of data. In most series it is the same as data.
+   * But in some series it is some part of the data (e.g., in map, radar) */
+  value!: number | Array<any> | object;
+  /** encoding info of coordinate system
+   * Key: coord, like ('x' 'y' 'radius' 'angle')
+   * value: Must be an array, not null/undefined. Contain dimension indices, like:
+   * {
+   *     x: [2] // values on dimension index 2 are mapped to x axis.
+   *     y: [0] // values on dimension index 0 are mapped to y axis.
+   * }
+   */
+  encode!: object;
+  /** dimension names list */
+  dimensionNames!: Array<string>;
+  /** data dimension index, for example 0 or 1 or 2 ...
+   * Only work in `radar` series.
+   */
+  dimensionIndex!: number;
+  /** Color of data */
+  color!: string;
+  /** The ancestors of current node in the sunburst series (including self) */
+  treePathInfo!: Array<any>;
+  /** The ancestors of current node in the tree/treemap series (including self) */
+  treeAncestors!: Array<any>;
+  /** A function that returns a boolean value to flag if the axis label is truncated */
+  //   eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  isTruncated!: Function;
 }
 
 /**

@@ -1,11 +1,12 @@
 ---
 import ExamplesLayout from '@layouts/ExamplesLayout.astro';
 import { examplesPages } from '@libs/content'
+import { getConfig } from '@libs/config'
 
 export async function getStaticPaths() {
   return examplesPages.map((docsPage) => {
     return {
-      params: { slug: docsPage.slug, version: '0.4' },
+      params: { slug: docsPage.slug, version: getConfig().docs_version },
       props: docsPage
     }
   })

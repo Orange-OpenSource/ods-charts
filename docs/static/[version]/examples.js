@@ -24,6 +24,12 @@ var themeElements = {
   },
 };
 
+/**
+ * Get versions from data attributes in index.html
+ */
+var echartsVersion = document.querySelector('[data-echarts-version]')?.getAttribute('data-echarts-version');
+var docsVersion = document.querySelector('[data-ods-charts-docs-version]')?.getAttribute('data-ods-charts-docs-version');
+
 // Generate examples
 function buildChartDiv(id) {
   return `<div id="${id}_chart" style="width:100%; height:100%; position: relative;"></div>`;
@@ -260,9 +266,9 @@ function generateExampleDiv(id, direction) {
   iframeDocument.write(`
 <link id="mainFont" href="${themeElements.BOOSTED5.css[0]}" rel="stylesheet">
 <link id="mainCSS" cssThemeName="BOOSTED5" href="${themeElements.BOOSTED5.css[1]}" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/0.4/ods-charts.js"></script>
-<script type="module" src="/0.4/examples.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@${echartsVersion}/dist/echarts.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/${docsVersion}/ods-charts.js"></script>
+<script type="module" src="/${docsVersion}/examples.js"></script>
 <script id="mainJS" src="${themeElements.BOOSTED5.script[0]}"></script>
 ${generateChartDiv(id, direction)}`);
   iframeDocument.close();

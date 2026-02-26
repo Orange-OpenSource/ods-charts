@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { getConfig } from '@libs/config'
 
 const data = { title: 'Use cases - ODS Charts' }
 
-export function getStaticPaths() { return [{ params: { version: '0.4' } }] }
+export function getStaticPaths() { return [{ params: { version: getConfig().docs_version } }] }
 ---
 
 <BaseLayout data={data}>
@@ -83,6 +84,18 @@ export function getStaticPaths() { return [{ params: { version: '0.4' } }] }
         </div>
         <div class="card-footer">
           <a href="./time-slider/" class="btn btn-primary mt-3">Go to use case</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-4 col-md-6 align-self-stretch py-2">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Heatmap</h5>
+          <p class="card-text">You can use the heat map to visualize a distribution.</p>
+        </div>
+        <div class="card-footer">
+          <a href="./heatmap/" class="btn btn-primary mt-3">Go to use case</a>
         </div>
       </div>
     </div>
