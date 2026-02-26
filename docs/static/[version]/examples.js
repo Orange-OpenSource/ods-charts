@@ -1360,7 +1360,7 @@ window.generateRegionsChoroplethMapChart = async (id) => {
       min: 0,
       max: 12450,
       splitNumber: 4,
-      text: ['Population'],
+      text: ['Population (in thousands)'],
     },
     series: [
       {
@@ -1457,7 +1457,7 @@ Coordonnées: ${data[0].toFixed(2)}°, ${data[1].toFixed(2)}°`;
     geo: {
       map: 'world',
       zoom: 1.2,
-      center: [0, 20],
+      center: [0, 15],
     },
     grid: {
       top: 0,
