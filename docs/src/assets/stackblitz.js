@@ -6,7 +6,9 @@ document.querySelectorAll('.btn-edit').forEach((btn) => {
     document.getElementById(`collapse_content_2_${id}`)?.classList.add('d-block');
     document.getElementById(`${id}_viewCode`)?.classList.add('d-block');
     const htmlText = document.getElementById(`${id}_html`).innerText; // Problème pour le formatage
-    const codeText = document.getElementById(`${id}_code`).innerText;
+    let codeText = btn.getAttribute('data-additional-js') ? btn.getAttribute('data-additional-js') + '\n\n' : '';
+    codeText += document.getElementById(`${id}_code`).innerText;
+    codeText += btn.getAttribute('data-additional-js') ? '});' : '';
     document.getElementById(`collapse_content_2_${id}`)?.classList.remove('d-block');
     document.getElementById(`${id}_viewCode`)?.classList.remove('d-block');
 

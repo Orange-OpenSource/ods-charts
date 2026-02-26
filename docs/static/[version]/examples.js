@@ -1233,10 +1233,12 @@ window.generateHorizontalGaugeChart = async (id) => {
 //   return await fetch(`/0.4/images/maps/world.svg`).then((response) => response.text());
 // };
 
-// 1Mo: https://raw.githubusercontent.com/apache/echarts-website/refs/heads/asf-site/examples/data/asset/geo/world.json
+// 1Mo
 // No License so far
 const worldMap = async () => {
-  return await fetch('/0.4/images/maps/world.geo.json').then((response) => response.json());
+  return await fetch('https://raw.githubusercontent.com/apache/echarts-website/refs/heads/asf-site/examples/data/asset/geo/world.json').then((response) =>
+    response.json()
+  );
 };
 
 // 250Ko
@@ -1286,63 +1288,6 @@ const loadMaps = async (echarts) => {
 };
 
 window.generateChoroplethMapChart = async (id) => {
-  // Sample data for choropleth map - using world map (built-in)
-  const mapData = [
-    { name: 'China', value: 1380 },
-    { name: 'India', value: 1370 },
-    { name: 'United States', value: 329 },
-    { name: 'Indonesia', value: 264 },
-    { name: 'Brazil', value: 211 },
-    { name: 'Pakistan', value: 197 },
-    { name: 'Nigeria', value: 196 },
-    { name: 'Bangladesh', value: 164 },
-    { name: 'Russia', value: 146 },
-    { name: 'Japan', value: 126 },
-    { name: 'Mexico', value: 128 },
-    { name: 'Philippines', value: 109 },
-    { name: 'Ethiopia', value: 105 },
-    { name: 'Egypt', value: 99 },
-    { name: 'Vietnam', value: 96 },
-    { name: 'Germany', value: 83 },
-    { name: 'Turkey', value: 82 },
-    { name: 'Iran', value: 82 },
-    { name: 'Thailand', value: 70 },
-    { name: 'France', value: 67 },
-    { name: 'United Kingdom', value: 66 },
-    { name: 'Italy', value: 60 },
-    { name: 'South Africa', value: 58 },
-    { name: 'Tanzania', value: 58 },
-    { name: 'Myanmar', value: 54 },
-    { name: 'South Korea', value: 51 },
-    { name: 'Colombia', value: 50 },
-    { name: 'Kenya', value: 52 },
-    { name: 'Spain', value: 47 },
-    { name: 'Argentina', value: 45 },
-  ];
-
-  // Specify the configuration items and data for the chart
-  var option = {
-    visualMap: {
-      left: 'center',
-      min: 0,
-      max: 1500,
-      splitNumber: 6,
-      text: ['High density', 'Low density'],
-    },
-    series: [
-      {
-        name: 'Population (millions)',
-        type: 'map',
-        map: 'world',
-        data: mapData,
-      },
-    ],
-  };
-
-  displayChart('getChoroplethMapChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE);
-};
-
-window.generateRegionsChoroplethMapChart = async (id) => {
   // Sample data for choropleth map - using regions map (built-in)
   const mapData = [
     { name: 'Auvergne-Rhône-Alpes', value: 8260 },
