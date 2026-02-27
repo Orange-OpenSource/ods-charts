@@ -22,6 +22,8 @@ export enum ODSChartsTypes {
   SEMI_CIRCULAR_GAUGE = 'SEMI_CIRCULAR_GAUGE',
   CIRCULAR_GAUGE = 'CIRCULAR_GAUGE',
   DIAL_GAUGE = 'DIAL_GAUGE',
+  CHOROPLETH_MAP = 'CHOROPLETH_MAP',
+  BUBBLE_MAP = 'BUBBLE_MAP',
 }
 
 /**
@@ -76,6 +78,8 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
  * - {@link getSemiCircularGaugeChartConfiguration} : to build a configuration of a semicircular gauge
  * - {@link getCircularGaugeChartConfiguration} : to build a configuration of a circular gauge
  * - {@link getDialGaugeChartConfiguration} : to build a configuration of a dial gauge
+ * - {@link getChoroplethMapChartConfiguration} : to build a configuration of a choropleth map
+ * - {@link getBubbleMapChartConfiguration} : to build a configuration of a bubble map
  */
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
@@ -210,6 +214,24 @@ export class ODSChartsConfiguration {
    */
   public static getDialGaugeChartConfiguration(config: ODSChartsDialGaugeConfiguration): ODSChartsConfiguration {
     return new ODSChartsDialGauge(config.minValue, config.maxValue, config.dialPoints);
+  }
+
+  /**
+   * Get the configuration of a choropleth map chart.
+   * A choropleth map is a thematic map where areas are shaded or patterned based on a data variable.
+   * @returns Configuration of the choropleth map chart.
+   */
+  public static getChoroplethMapChartConfiguration(): ODSChartsConfiguration {
+    return new ODSChartsChoroplethMap();
+  }
+
+  /**
+   * Get the configuration of a bubble map chart.
+   * A bubble map displays data as circles (bubbles) on a geographic map, where bubble size represents a value.
+   * @returns Configuration of the bubble map chart.
+   */
+  public static getBubbleMapChartConfiguration(): ODSChartsConfiguration {
+    return new ODSChartsBubbleMap();
   }
 }
 
@@ -661,5 +683,189 @@ class ODSChartsDialGauge extends ODSChartsCircularGaugeType {
 class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
   constructor(minValue?: number, maxValue?: number) {
     super(ODSChartsTypes.CIRCULAR_GAUGE, minValue, maxValue);
+  }
+}
+
+/**
+ * Configuration of a chart of type {@link ODSChartsTypes.CHOROPLETH_MAP}
+ * A choropleth map is a thematic map where areas are shaded or patterned in proportion to a statistical variable.
+ */
+class ODSChartsChoroplethMap extends ODSChartsConfiguration {
+  constructor(type = ODSChartsTypes.CHOROPLETH_MAP) {
+    super(type);
+  }
+
+  public getDefaultConfiguration(): any {
+    return {
+      visualMap: {
+        type: 'piecewise',
+        orient: 'horizontal',
+        splitNumber: 6,
+        itemSymbol: 'rect',
+        show: true,
+        left: 'center',
+        backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
+        itemWidth: 48,
+        itemHeight: 16,
+        itemGap: 2,
+        textGap: 0,
+        showLabel: true,
+        calculable: true,
+        textStyle: {
+          align: 'left',
+          fontWeight: 400,
+          fontSize: 14,
+          fontFamily: 'var(--bs-font-sans-serif, "Helvetica Neue")',
+
+          rich: {
+            text: {
+              width: 48,
+              padding: [0, 0, 0, -48],
+              lineHeight: 53,
+              verticalAlign: 'bottom',
+              color: 'var(--bs-body-color, #000000)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
+            },
+          },
+        },
+        formatter: (value: number, _value2: number) => {
+          return '{text|' + value + '}';
+        },
+      },
+      tooltip: {
+        trigger: 'item',
+        showDelay: 0,
+        transitionDuration: 0.2,
+      },
+      color: 'transparent',
+      legend: { show: false },
+    };
+  }
+
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any, forBubbleMap?: boolean): any {
+    if (serie.type !== 'map') {
+      return {};
+    }
+    return {
+      ...(forBubbleMap
+        ? {}
+        : {
+            top: '0',
+            bottom: '60px',
+          }),
+      roam: true,
+      scaleLimit: {
+        min: 0.5,
+        max: 3,
+      },
+      itemStyle: {
+        areaColor: 'var(--ouds-charts-color-gridlines)',
+        borderColor: 'var(--ouds-charts-color-border)',
+        borderWidth: 1,
+      },
+      emphasis: {
+        label: {
+          show: false,
+          color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
+        },
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-highlight)',
+          borderColor: 'var(--ouds-charts-color-border)',
+        },
+      },
+      select: {
+        disabled: true,
+      },
+    };
+  }
+}
+
+/**
+ * Configuration of a chart of type {@link ODSChartsTypes.BUBBLE_MAP}
+ * A bubble map displays data as circles (bubbles) on a geographic map.
+ */
+class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
+  constructor() {
+    super(ODSChartsTypes.BUBBLE_MAP);
+  }
+
+  public getDefaultConfiguration(): any {
+    return {
+      visualMap: {
+        type: 'piecewise',
+        orient: 'vertical',
+        splitNumber: 6,
+        itemSymbol: 'circle',
+        show: true,
+        top: 0,
+        right: 0,
+        backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
+        itemGap: 8,
+        textGap: 8,
+        showLabel: true,
+        calculable: true,
+        textStyle: {
+          align: 'left',
+        },
+        align: 'left',
+        formatter: (value: number, value2: number) => {
+          return value + '-' + value2;
+        },
+      },
+      tooltip: {
+        // trigger: 'item',
+        // showDelay: 0,
+        // transitionDuration: 0.2,
+      },
+      legend: {
+        show: false,
+      },
+      color: 'transparent',
+      geo: {
+        roam: true,
+        scaleLimit: {
+          min: 0.5,
+          max: 3,
+        },
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-gridlines)',
+          borderColor: 'var(--ouds-charts-color-border)',
+          borderWidth: 1,
+        },
+        emphasis: {
+          disabled: true,
+        },
+      },
+    };
+  }
+
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
+    if (serie.type === 'map') {
+      return super.getSerieConfiguration(serie, _themeOptions, _dataOptions, true);
+    }
+    if (serie.type === 'scatter' || serie.type === 'effectScatter') {
+      return {
+        coordinateSystem: 'geo',
+        roam: true,
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-gridlines)',
+          borderColor: 'var(--ouds-charts-color-border)',
+          borderWidth: 2,
+          opacity: 1,
+        },
+        emphasis: {
+          scale: false,
+          label: {
+            // show: false,
+            color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
+          },
+          itemStyle: {
+            color: 'var(--ouds-charts-color-highlight)',
+            borderColor: 'var(--ouds-charts-color-border)',
+            opacity: 1,
+          },
+        },
+      };
+    }
+    return {};
   }
 }

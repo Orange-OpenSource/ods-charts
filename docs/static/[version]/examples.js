@@ -319,6 +319,7 @@ async function displayChart(
     while (!(iframe.contentWindow.boosted && iframe.contentWindow.ODSCharts && iframe.contentWindow.echarts)) {
       await wait(50);
     }
+    await loadMaps(iframe.contentWindow.echarts);
 
     if (document.querySelector('[data-bs-theme]')) {
       iframe.contentDocument.body.setAttribute('data-bs-theme', document.querySelector('[data-bs-theme]').getAttribute('data-bs-theme'));
@@ -471,8 +472,7 @@ async function displayChart(
 
   legends =
     usedLegends === 'odscharts' &&
-    (hasLegend ||
-      (options.legend && options.legend.data && !options.legend.show) ||
+    ((options.legend && options.legend.data && !options.legend.show) ||
       (options.dataset && options.dataset.source) ||
       (options.series && 1 === options.series.length && 'pie' === options.series[0].type));
 
@@ -482,7 +482,7 @@ async function displayChart(
     iframe.contentDocument.getElementById(id + '_holder_with_legend').style.flexDirection = 'column';
   }
 
-  if (!legends && usedLegends === 'odscharts') {
+  if ((!legends && !hasLegend && usedLegends === 'odscharts') || chartConfigMethod.search(/MapChart/)) {
     document.querySelectorAll(`#accordion_${id} .legends-style`).forEach((elt) => {
       elt.style.display = 'none';
     });
@@ -685,7 +685,7 @@ myChart.setOption(themeManager.getChartOptions());
     elt.style.display = iframe.contentWindow.ODSCharts.ODSChartsCSSThemesNames.NONE === cssThemeName || 'none' === popoverInput ? 'none' : 'block';
   });
   document.querySelectorAll(`#accordion_${id} .popover-config`).forEach((elt) => {
-    elt.style.display = 'none' === popoverInput ? 'none' : 'block';
+    elt.style.display = 'none' === popoverInput || chartConfigMethod.search(/MapChart/) ? 'none' : 'block';
   });
   document.querySelectorAll(`#accordion_${id} .line-style-config`).forEach((elt) => {
     elt.style.display = -1 === chartConfigMethod.search(/Line/) ? 'none' : 'block';
@@ -1224,4 +1224,220 @@ window.generateHorizontalGaugeChart = async (id) => {
     ],
   };
   displayChart('getHorizontalGaugeChartConfiguration', id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL, colorIndex: 4 }]);
+};
+
+// const worldMap = async () => {
+//   // TODO: License
+// 1Mo
+// License: https://mapsvg.com/maps/world
+//   return await fetch(`/0.4/images/maps/world.svg`).then((response) => response.text());
+// };
+
+// 1Mo
+// No License so far
+const worldMap = async () => {
+  return await fetch('https://raw.githubusercontent.com/apache/echarts-website/refs/heads/asf-site/examples/data/asset/geo/world.json').then((response) =>
+    response.json()
+  );
+};
+
+// 250Ko
+// License: Unlicense
+// const worldMap = async () => {
+//   return await fetch('https://raw.githubusercontent.com/johan/world.geo.json/refs/heads/master/countries.geo.json').then((response) => response.json());
+// };
+
+// 14Mo
+// License: https://opendatacommons.org/licenses/pddl/1-0/
+// const worldMap = async () => {
+//   return await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then((response) => response.json());
+// };
+
+// License to ask for the 2 following
+const franceDeps = async () => {
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/departements-version-simplifiee.geojson')
+    .then((response) => response.json())
+    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
+};
+
+const franceRegions = async () => {
+  // https://adresse.data.gouv.fr/data/contours-administratifs/latest/geojson/regions-1000m.geojson
+  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/regions-version-simplifiee.geojson')
+    .then((response) => response.json())
+    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
+};
+
+const loadMaps = async (echarts) => {
+  let worldMapGeoJson = await worldMap();
+  // let franceDepsGeoJson = await franceDeps();
+  let franceRegionsGeoJson = await franceRegions();
+
+  // Register the map with ECharts if loaded
+  if (worldMapGeoJson && typeof echarts !== 'undefined') {
+    // echarts.registerMap('world', { svg: worldMapGeoJson });
+    echarts.registerMap('world', worldMapGeoJson);
+  }
+
+  // if (franceDepsGeoJson && typeof echarts !== 'undefined') {
+  //   echarts.registerMap('france-deps', franceDepsGeoJson);
+  // }
+
+  if (franceRegionsGeoJson && typeof echarts !== 'undefined') {
+    echarts.registerMap('france-regions', franceRegionsGeoJson);
+  }
+};
+
+window.generateChoroplethMapChart = async (id) => {
+  // Sample data for choropleth map - using regions map (built-in)
+  const mapData = [
+    { name: 'Auvergne-Rhône-Alpes', value: 8260 },
+    { name: 'Bourgogne-Franche-Comté', value: 2793 },
+    { name: 'Bretagne', value: 3475 },
+    { name: 'Centre-Val de Loire', value: 2581 },
+    { name: 'Corse', value: 360 },
+    { name: 'Grand Est', value: 5544 },
+    { name: 'Hauts-de-France', value: 5973 },
+    { name: 'Île-de-France', value: 12450 },
+    { name: 'Normandie', value: 3341 },
+    { name: 'Nouvelle-Aquitaine', value: 6191 },
+    { name: 'Occitanie', value: 6201 },
+    { name: 'Pays de la Loire', value: 3936 },
+    { name: "Provence-Alpes-Côte d'Azur", value: 5241 },
+  ];
+
+  // Specify the configuration items and data for the chart
+  var option = {
+    visualMap: {
+      min: 0,
+      max: 12450,
+      splitNumber: 4,
+      text: ['Population (in thousands)'],
+    },
+    series: [
+      {
+        name: 'Population (thousands)',
+        type: 'map',
+        map: 'france-regions',
+        data: mapData,
+      },
+    ],
+  };
+
+  displayChart('getChoroplethMapChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE);
+};
+
+window.generateBubbleMapChart = async (id) => {
+  // Données des principales économies mondiales
+  // Format: [longitude, latitude, PIB en trillions USD, population en millions, nom du pays]
+  const bubbleData = [
+    // Amérique du Nord
+    [-95.7129, 37.0902, 21.43, 331, 'États-Unis'],
+    [-106.3468, 56.1304, 1.74, 38, 'Canada'],
+    [-102.5528, 23.6345, 1.29, 128, 'Mexique'],
+
+    // Europe
+    [10.4515, 51.1657, 3.85, 83, 'Allemagne'],
+    [2.2137, 46.2276, 2.94, 65, 'France'],
+    [-3.436, 55.3781, 2.83, 67, 'Royaume-Uni'],
+    [12.5674, 41.8719, 2.11, 60, 'Italie'],
+    [-3.7492, 40.4637, 1.39, 47, 'Espagne'],
+    [19.1451, 51.9194, 0.59, 38, 'Pologne'],
+    [31.1656, 48.3794, 0.2, 44, 'Ukraine'],
+    [37.6173, 55.7558, 1.48, 146, 'Russie'],
+
+    // Asie
+    [104.1954, 35.8617, 14.34, 1439, 'Chine'],
+    [138.2529, 36.2048, 4.94, 126, 'Japon'],
+    [127.7669, 35.9078, 1.81, 52, 'Corée du Sud'],
+    [77.1025, 28.7041, 3.18, 1380, 'Inde'],
+    [113.9213, -0.7893, 1.16, 273, 'Indonésie'],
+    [100.9925, 15.87, 0.54, 70, 'Thaïlande'],
+    [108.2772, 14.0583, 0.36, 97, 'Vietnam'],
+    [121.774, 12.8797, 0.38, 109, 'Philippines'],
+    [101.9758, 4.2105, 0.37, 32, 'Malaisie'],
+    [103.8198, 1.3521, 0.34, 6, 'Singapour'],
+
+    // Moyen-Orient
+    [53.8478, 23.4241, 0.7, 35, 'Arabie Saoudite'],
+    [51.1839, 35.6892, 0.23, 83, 'Iran'],
+    [35.2444, 31.0461, 0.48, 9, 'Israël'],
+    [54.3773, 24.4539, 0.51, 10, 'Émirats Arabes Unis'],
+
+    // Afrique
+    [22.9375, -30.5595, 0.42, 59, 'Afrique du Sud'],
+    [30.8025, 26.8206, 0.4, 102, 'Égypte'],
+    [-1.0232, 7.9465, 0.07, 31, 'Ghana'],
+    [37.9062, -0.0236, 0.11, 53, 'Kenya'],
+    [17.8739, 13.5317, 0.05, 206, 'Nigeria'],
+
+    // Amérique du Sud
+    [-51.9253, -14.235, 1.61, 212, 'Brésil'],
+    [-58.3816, -34.6037, 0.45, 45, 'Argentine'],
+    [-74.2973, 4.5709, 0.31, 50, 'Colombie'],
+    [-76.0152, -9.19, 0.2, 33, 'Pérou'],
+    [-66.5897, -16.2902, 0.04, 12, 'Bolivie'],
+
+    // Océanie
+    [133.7751, -25.2744, 1.55, 25, 'Australie'],
+    [174.886, -40.9006, 0.25, 5, 'Nouvelle-Zélande'],
+  ];
+
+  // Conversion des données pour ECharts
+  const scatterData = bubbleData.map((item) => ({
+    name: item[4],
+    value: [item[0], item[1], item[2], item[3]], // [lng, lat, PIB, population]
+    symbolSize: Math.sqrt(item[2]) * 15, // Taille basée sur le PIB
+  }));
+
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: (params) => {
+        params = params[0];
+        if (params.seriesType === 'scatter') {
+          const data = params.value;
+          return `
+<strong>${params.name}</strong><br/>
+PIB: ${data[2]} trillions USD<br/>
+Population: ${data[3]} millions<br/>
+Coordonnées: ${data[0].toFixed(2)}°, ${data[1].toFixed(2)}°`;
+        }
+        return params.name;
+      },
+    },
+    geo: {
+      map: 'world',
+      zoom: 1.2,
+      center: [0, 15],
+    },
+    grid: {
+      top: 0,
+      right: 100,
+    },
+    series: [
+      {
+        name: 'Pays',
+        type: 'scatter',
+        data: scatterData,
+        symbolSize: function (val) {
+          return Math.sqrt(val[2]) * 12; // Taille basée sur le PIB
+        },
+      },
+    ],
+    visualMap: {
+      min: 0,
+      max: 1500,
+      dimension: 3, // Population (4ème valeur dans value array)
+      pieces: [
+        { min: 0, max: 50 },
+        { min: 50, max: 100 },
+        { min: 100, max: 200 },
+        { min: 200, max: 800 },
+        { min: 800, max: 1500 },
+      ],
+      text: ['Population'],
+    },
+  };
+
+  displayChart('getBubbleMapChartConfiguration', id, option, undefined, ODSCharts.ODSChartsColorsSet.OUDS_SEQUENTIAL_BLUE);
 };
