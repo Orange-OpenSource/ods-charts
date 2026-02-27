@@ -1,0 +1,1233 @@
+<!DOCTYPE html><html lang="en" data-ods-charts-version="0.5.0" data-ods-charts-docs-version="0.5" data-echarts-version="6.0.0"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Specific legend holders - Specific use cases - ODS Charts</title><link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/orange-helvetica.min.css" rel="stylesheet" integrity="sha384-A0Qk1uKfS1i83/YuU13i2nx5pk79PkIfNFOVzTcjCMPGKIDj9Lqx9lJmV7cdBVQZ" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/css/boosted.min.css" rel="stylesheet" integrity="sha384-laZ3JUZ5Ln2YqhfBvadDpNyBo7w5qmWaRnnXuRwNhJeTEFuSdGbzl4ZGHAEnTozR" crossorigin="anonymous"><link href="/0.5/tarteaucitron-config.css" rel="stylesheet"><link href="/0.5/style.css" rel="stylesheet"><link rel="apple-touch-icon" href="/0.5/images/favicons/apple-touch-icon.png" sizes="180x180"><link rel="icon" href="/0.5/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png"><link rel="icon" href="/0.5/images/favicons/favicon-16x16.png" sizes="16x16" type="image/png"><link rel="manifest" href="/0.5/images/favicons/manifest.json"><link rel="mask-icon" href="/0.5/images/favicons/safari-pinned-tab.svg" color="#000"><link rel="icon" href="/0.5/images/favicons/favicon.ico"><meta name="msapplication-config" content="/0.5/images/favicons/browserconfig.xml"><meta name="theme-color" content="#000"><script type="text/javascript" src="/0.5/ods-charts.js"></script><script type="text/javascript" src="/0.5/color-mode.js"></script><script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js" crossorigin="anonymous"></script><script src="/0.5/use-cases.js"></script></head> <body> <svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol id="lightning-charge-fill" viewBox="0 0 16 16"> <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"></path> </symbol> </svg> <header class="sticky-top" data-bs-theme="dark"> <nav class="navbar navbar-expand-lg" aria-label="Global navigation"> <div class="container-xxl"> <div class="navbar-brand me-auto me-lg-4"> <a class="stretched-link" href="/"> <img src="/0.5/images/orange-logo.svg" width="50" height="50" alt="ODS Charts - Back to Home" loading="lazy"> </a> <h1 class="title">ODS Charts</h1> </div> <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target=".global-header" aria-controls="global-header1 global-header2" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> <div id="global-header1" class="navbar-collapse collapse me-lg-auto mb-0 border-0 global-header"> <ul class="navbar-nav"> <li class="nav-item"> <a class="nav-link" href="/0.5/api">API</a> </li> <li class="nav-item"> <a class="nav-link" href="/0.5/examples/" aria-current="false">Examples</a> </li> <li class="nav-item"> <a class="nav-link active" href="/0.5/use_cases/" aria-current="page">Use cases</a> </li> <li class="nav-item"> <a class="nav-link" href="/0.5/colors" aria-current="false">Colors</a> </li> </ul> </div> <div id="global-header2" class="navbar-collapse collapse global-header"> <hr class="m-0 border-1 border-dark d-lg-none"> <ul class="navbar-nav flex-row"> <li class="nav-item"> <a class="nav-link nav-icon" href="https://github.com/Orange-OpenSource/ods-charts" target="blank" rel="noopener"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 499.36" role="img" height="16" width="16"> <title>GitHub</title> <path fill="currentColor" fill-rule="evenodd" d="M256 0C114.64 0 0 114.61 0 256c0 113.09 73.34 209 175.08 242.9 12.8 2.35 17.47-5.56 17.47-12.34 0-6.08-.22-22.18-.35-43.54-71.2 15.49-86.2-34.34-86.2-34.34-11.64-29.57-28.42-37.45-28.42-37.45-23.27-15.84 1.73-15.55 1.73-15.55 25.69 1.81 39.21 26.38 39.21 26.38 22.84 39.12 59.92 27.82 74.5 21.27 2.33-16.54 8.94-27.82 16.25-34.22-56.84-6.43-116.6-28.43-116.6-126.49 0-27.95 10-50.8 26.35-68.69-2.63-6.48-11.42-32.5 2.51-67.75 0 0 21.49-6.88 70.4 26.24a242.65 242.65 0 0 1 128.18 0c48.87-33.13 70.33-26.24 70.33-26.24 14 35.25 5.18 61.27 2.55 67.75 16.41 17.9 26.31 40.75 26.31 68.69 0 98.35-59.85 120-116.88 126.32 9.19 7.9 17.38 23.53 17.38 47.41 0 34.22-.31 61.83-.31 70.23 0 6.85 4.61 14.81 17.6 12.31C438.72 464.97 512 369.08 512 256.02 512 114.62 397.37 0 256 0z"></path> </svg> <span class="visually-hidden">GitHub</span> </a> </li> <li class="nav-item dropdown"> <button class="nav-link nav-icon ods-charts-nav-text dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static"> <span class="d-lg-none" aria-hidden="true">ODS Charts&nbsp;</span> <span class="visually-hidden">ods charts </span>
+v0.5 <span class="visually-hidden">(switch to other versions)</span> </button> <ul class="dropdown-menu dropdown-menu-end mb-2 mb-lg-0" aria-labelledby="bd-theme-text"> <li> <a class="dropdown-item d-flex align-items-center" href="/">Go to latest</a> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/0.5">v0.5</a> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/0.4">v0.4</a> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/0.3">v0.3</a> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/0.2">v0.2</a> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/0.1">v0.1</a> </li> <li> <hr class="dropdown-divider"> </li> <li> <a class="dropdown-item d-flex align-items-center" href="/versions">All versions</a> </li> </ul> </li> <li class="nav-item dropdown"> <button class="nav-link nav-icon dropdown-toggle" id="bd-theme" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle mode (auto)"> <svg class="theme-icon-active"><use href="/0.5/images/ods-charts-icons.svg#ui-auto-mode"></use></svg> <span class="d-sm-none ms-2" id="bd-theme-text">Toggle mode</span> </button> <ul class="dropdown-menu dropdown-menu-end mb-2" aria-labelledby="bd-theme-text"> <li> <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false"> <svg class="me-2"><use href="/0.5/images/ods-charts-icons.svg#ui-light-mode"></use></svg>
+Light
+<svg class="ms-auto d-none"><use href="/0.5/images/ods-charts-icons.svg#check2"></use></svg> </button> </li> <li> <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false"> <svg class="me-2"><use href="/0.5/images/ods-charts-icons.svg#ui-dark-mode"></use></svg>
+Dark
+<svg class="ms-auto d-none"><use href="/0.5/images/ods-charts-icons.svg#check2"></use></svg> </button> </li> <li> <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true"> <svg class="me-2"><use href="/0.5/images/ods-charts-icons.svg#ui-auto-mode"></use></svg>
+Auto
+<svg class="ms-auto d-none"><use href="/0.5/images/ods-charts-icons.svg#check2"></use></svg> </button> </li> </ul> </li> </ul> </div> </div> </nav> </header> <main>  <script src="https://cdn.jsdelivr.net/npm/boosted@5.3.3/dist/js/boosted.bundle.min.js" integrity="sha384-3RoJImQ+Yz4jAyP6xW29kJhqJOE3rdjuu9wkNycjCuDnGAtC/crm79mLcwj1w2o/" crossorigin="anonymous"></script>    <div class="title-bar">
+  <div class="container-xxl">
+    <h1 class="display-1">Specific legend holders</h1>
+  </div>
+</div>
+<div class="container-xxl pt-3">
+  <div class="card w-100">
+    <div class="card-body">
+      <h5 class="card-title">Vertical legend holder example</h5>
+      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right       postItemContent: (legendName, legendIndex, color, colorIndex) => {
+        // Vous pouvez utiliser tous les paramètres pour personnaliser le contenu
+        switch(legendName) {
+          case 'Sales':
+            return `&#x3C;div class="legend-note sales-note" style="color: ${color}">
+                     Legend ${legendIndex + 1} - Including taxes
+                   &#x3C;/div>`;
+          case 'Profit':
+            return `&#x3C;div class="legend-note profit-note">
+                     Using color ${colorIndex + 1} - After adjustments
+                   &#x3C;/div>`;
+          default:
+            return '';
+        }
+      }ph.</p>
+      <p class="card-text pe-5">
+        To do this, you can use the Apache ECharts <code>legend.orient</code> option:
+        <code>
+          </code></p><pre><code>legend: {
+  data: ['label 0', 'label 1', 'label 2'],
+  orient: 'vertical',
+}
+          </code></pre><code>
+        </code>
+      <p></p>
+      <div class="ms-5 mb-2 p-2 pe-5 text-body-secondary border-start border-subtle bg-body-secondary">
+        <p class="card-text text-body-secondary">
+          <small>
+            NB: This orientation could also be provided through
+            <code class="text-body-secondary">externalizeLegends()</code> method providing in place of the CSS selector for the caption container an object including the selector and the orientation <code class="text-body-secondary">{ legendHolderSelector: string; orientation: 'vertical' | 'horizontal';}</code> :
+            <code class="text-body-secondary">
+              </code></small></p><pre><small><code class="text-body-secondary">themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_legend', orientation: 'vertical'});
+              </code></small></pre><small><code class="text-body-secondary">
+            </code>
+          </small>
+        <p></p>
+      </div>
+      <p class="card-text pe-5">In the example below, we prefer the Apache ECharts <code>legend.orient</code> method.</p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">      
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill"></use>
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="vertical_htmlId">
+        <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <div id="barChartSH_holder">
+                <div id="barChartSH_chart" style="width: 100%; height: 50vh"></div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div id="barChartSH_legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('vertical_');
+      </script>
+    </div>
+  </div>
+  <script id="vertical_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+// this is the data to be displayed
+var dataOptions = {
+  yAxis: {
+    type: 'category',
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  xAxis: {},
+  series: [
+    {
+      data: [10, 22, 28.8956454657, 23, 19, 15],
+      type: 'bar',
+      stack: true,
+    },
+    {
+      data: [28.8956454657, 23, 19, 15, 18, 12],
+      type: 'bar',
+      stack: true,
+    },
+    {
+      data: [19, 15, 18, 12, 28.8956454657, 23],
+      type: 'bar',
+      stack: true,
+    },
+  ],
+  legend: {
+    data: ['label 0', 'label 1', 'label 2'],
+    orient: 'vertical',
+  },
+};
+
+///////////////////////////////////////////////////
+// ODSCharts
+///////////////////////////////////////////////////
+// Build the theme
+var themeManager = ODSCharts.getThemeManager();
+
+// register this theme to echarts
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+// get the chart holder and initiate it with the generated theme
+var div = document.getElementById('barChartSH_chart');
+var myChart = echarts.init(div, themeManager.name, {
+  renderer: 'svg',
+});
+
+// Set the data to be displayed.
+themeManager.setDataOptions(dataOptions);
+// Register the externalization of the legend.
+themeManager.externalizeLegends(myChart, '#barChartSH_legend');
+// Manage window size changed
+themeManager.manageChartResize(myChart, 'barChartSH_chart');
+// Register the externalization of the tooltip/popup
+themeManager.externalizePopover();
+// Observe dark / light mode changes
+themeManager.manageThemeObserver(myChart);
+// Display the chart using the configured theme and data.
+myChart.setOption(themeManager.getChartOptions());
+</script>
+  
+  <div class="card w-100">
+    <div class="card-body">
+      <h5 class="card-title">Specific legend labels</h5>
+      <p class="card-text pe-5">It is possible to use something else than the serie name as label in legends generated by ODS Charts.</p>
+      <p class="card-text pe-5">
+        To do this, you must use the Apache ECharts <code>legend.formatter</code> option:
+        <code>
+          </code></p><pre><code>legend: {
+  formatter: (name)=> name + ' zone'
+}
+          </code></pre><code>
+        </code>
+      <p></p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill"></use>
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="format_htmlId">
+        <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <div id="format_barChart_holder">
+                <div id="format_barChart_chart" style="width: 100%; height: 50vh"></div>
+              </div>
+            </div>
+            <div class="col-2">
+              <div id="format_barChart_legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('format_');
+      </script>
+    </div>
+  </div>
+  <script id="format_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+// this is the data to be displayed
+var dataOptions = {
+  yAxis: {
+    type: 'category',
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  xAxis: {},
+  series: [
+    {
+      name: 'Label 1',
+      data: [10, 22, 28.8956454657, 23, 19, 15],
+      type: 'bar',
+      stack: true,
+    },
+    {
+      name: 'Label 2',
+      data: [28.8956454657, 23, 19, 15, 18, 12],
+      type: 'bar',
+      stack: true,
+    },
+    {
+      name: 'Label 3',
+      data: [19, 15, 18, 12, 28.8956454657, 23],
+      type: 'bar',
+      stack: true,
+    },
+  ],
+  legend: {
+    formatter: (name)=> name + ' zone'
+  },
+};
+
+///////////////////////////////////////////////////
+// ODSCharts
+///////////////////////////////////////////////////
+// Build the theme
+var themeManager = ODSCharts.getThemeManager();
+
+// register this theme to echarts
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+// get the chart holder and initiate it with the generated theme
+var div = document.getElementById('format_barChart_chart');
+var myChart = echarts.init(div, themeManager.name, {
+  renderer: 'svg',
+});
+
+// Set the data to be displayed.
+themeManager.setDataOptions(dataOptions);
+// Register the externalization of the legend.
+themeManager.externalizeLegends(myChart, '#format_barChart_legend');
+// Manage window size changed
+themeManager.manageChartResize(myChart, 'format_barChart_chart');
+// Register the externalization of the tooltip/popup
+themeManager.externalizePopover();
+// Observe dark / light mode changes
+themeManager.manageThemeObserver(myChart);
+// Display the chart using the configured theme and data.
+myChart.setOption(themeManager.getChartOptions());
+</script>
+  
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Legends holders for stacked bars example</h5>
+      <p class="card-text pe-5">In the following example, we want to display the legends for a first set of stacked bars separately from those for a second set of stacked bars and the legend for a curve.</p>
+      <p class="card-text pe-5">To do this, we pass as a parameter to the externalizeLegends() method not a CSS selector of the legend container but an array of containers defined by the <code>{legendHolderSelector: string; orientation?: 'vertical' | 'horizontal'; seriesRef?: string[]}</code> object.</p>
+      <ul>
+        <li><code>legendHolderSelector</code> is the CSS selector of the legend holder.</li>
+        <li><code>orientation</code> optionally indicates whether captions are displayed horizontally or vertically. By default, the value of the <code>legend.orient</code> option in Apache Echarts will be used if it exists, otherwise it will be <code>'horizontal'</code>.</li>
+        <li>
+          <code>seriesRef</code> is an array referencing the series whose legends are to be displayed in this legend container. The reference can be the series name, the series label or simply the stack name in the case of stacked bars.<br>
+          If <code>seriesRef</code> is absent, this container will be the default container for non-referenced legends.
+        </li>
+      </ul>
+      <p class="card-text pe-5">
+        We'll then have the following code to externalize our three types of legend into three different containers:
+        <code>
+          </code></p><pre><code>themeManager.externalizeLegends(
+  myChart,
+  [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' },
+    { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' },
+    { legendHolderSelector: '#line_legend'
+  }]
+);
+          </code></pre><code>
+        </code>
+      <p></p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill"></use>
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="stacked_htmlId">
+        <div class="border border-subtle position-relative">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div id="barLine_holder">
+            <div id="barLine_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+          </div>
+          <div class="row mx-2">
+            <div class="col-4">
+              <label class="label">Results</label>
+              <div id="results_stack_legend"></div>
+            </div>
+            <div class="col-4">
+              <label class="label">Goals</label>
+              <div id="goals_stack_legend"></div>
+            </div>
+            <div class="col-4">
+              <label class="label visually-hidden">Average</label>
+              <div id="line_legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('stacked_');
+      </script>
+    </div>
+  </div>
+  <script id="stacked_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+var average = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+
+var results1 = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+var results2 = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+var results3 = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+var goals1 = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+var goals2 = new Array(...new Array(12).keys()).map((i) => {
+  return 50 + Math.random() * 50;
+});
+
+var dates = new Array(...new Array(12).keys()).map((i) => {
+  var d = new Date();
+  d.setMonth(d.getMonth() - i);
+  return d.toLocaleDateString(undefined, {
+    month: 'short',
+    year: 'numeric',
+  });
+});
+
+// Data to be displayed
+var dataOptions = {
+  xAxis: {
+    type: 'category',
+    data: dates,
+  },
+  yAxis: {},
+  series: [
+    {
+      data: results1,
+      type: 'bar',
+      stack: 'result',
+    },
+    {
+      data: results2,
+      type: 'bar',
+      stack: 'result',
+    },
+    {
+      data: results3,
+      type: 'bar',
+      stack: 'result',
+    },
+    {
+      data: goals1,
+      type: 'bar',
+      stack: 'goals',
+    },
+    {
+      data: goals2,
+      type: 'bar',
+      stack: 'goals',
+    },
+    {
+      data: average,
+      type: 'line',
+    },
+  ],
+  legend: {
+    data: ['Results 1', 'Results 2', 'Results 3', 'Goal 1', 'Goal 2', 'Average'],
+  },
+};
+
+///////////////////////////////////////////////////
+// ODS Charts
+///////////////////////////////////////////////////
+// Build the theme
+var themeManager = ODSCharts.getThemeManager();
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+// Get the chart holder and initiate it with the generated theme
+var div = document.getElementById('barLine_chart');
+var myChart = echarts.init(div, themeManager.name, {
+  renderer: 'svg',
+});
+
+// Set the data to be displayed.
+themeManager.setDataOptions(dataOptions);
+// Register the externalization of the legend.
+themeManager.externalizeLegends(myChart, [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' }, { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' }, { legendHolderSelector: '#line_legend' }]);
+// Manage window size changed
+themeManager.manageChartResize(myChart, 'barLine_chart');
+// Register the externalization of the tooltip/popup
+themeManager.externalizePopover();
+// Observe dark / light mode changes
+themeManager.manageThemeObserver(myChart);
+// Display the chart using the configured theme and data.
+myChart.setOption(themeManager.getChartOptions());
+</script>
+  
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Legend holder with custom content example</h5>
+      <p class="card-text pe-5">In this example, we show a very simple example on how to add custom HTML content after the legend items using the <code>postItemContent</code> option.</p>
+      <p class="card-text pe-5">The <code>postItemContent</code> property allows you to inject HTML content in three ways:</p>
+      <ol>
+        <li>As a function: content will be customized for each legend label</li>
+        <li>As an object: content will be mapped directly to series names or legend labels</li>
+        <li>As an array: content will be matched with legends by position (first array element for first legend, etc.)</li>
+      </ol>
+      <p class="card-text pe-5">
+        For full illustration, have a look to the next use case, here will illustrate usage of the object mapping:
+        <code>
+          </code></p><pre><code>themeManager.externalizeLegends(
+  myChart,
+  {
+    legendHolderSelector: '#legend_with_custom_content',
+    postItemContent: {
+      'Label 1': '&#x3C;small>(partial result)&#x3C;/small>'
+    }
+  }
+);
+          </code></pre><code>
+        </code>
+      <p></p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill"></use>          
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="custom_simple_content_htmlId">
+        <div class="border border-subtle" style="display: flex; flex-direction: column; height: 100%">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div class="row">
+            <div class="col-9">
+              <div id="barChartCSC_holder">
+                <div id="barChartCSC_chart" style="width: 100%; height: 50vh"></div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div id="barChartCSC_legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('custom_simple_content_');
+      </script>
+    </div>
+  </div>
+  <script id="custom_simple_content_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+// this is the data to be displayed
+var dataOptions = {
+  yAxis: {
+    type: 'category',
+    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+  },
+  xAxis: {},
+  series: [
+    {
+      data: [10, 22, 28.8956454657, 23, 19, 15],
+      type: 'bar',
+      name: 'Label 1',
+      stack: true,
+    },
+    {
+      data: [28.8956454657, 23, 19, 15, 18, 12],
+      type: 'bar',
+      name: 'Label 2',
+      stack: true,
+    },
+    {
+      data: [19, 15, 18, 12, 28.8956454657, 23],
+      type: 'bar',
+      name: 'Label 3',
+      stack: true,
+    },
+  ],
+  legend: {
+    orient: 'vertical',
+  },
+};
+
+///////////////////////////////////////////////////
+// ODSCharts
+///////////////////////////////////////////////////
+// Build the theme
+var themeManager = ODSCharts.getThemeManager();
+
+// register this theme to echarts
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+// get the chart holder and initiate it with the generated theme
+var div = document.getElementById('barChartCSC_chart');
+var myChart = echarts.init(div, themeManager.name, {
+  renderer: 'svg',
+});
+
+// Set the data to be displayed.
+themeManager.setDataOptions(dataOptions);
+// Register the externalization of the legend.
+themeManager.externalizeLegends(myChart,
+  {
+    legendHolderSelector: '#barChartCSC_legend',
+    postItemContent: {
+      'Label 2': '<small>(partial result)</small>',
+    }
+  }
+);
+// Manage window size changed
+themeManager.manageChartResize(myChart, 'barChartCSC_chart');
+// Register the externalization of the tooltip/popup
+themeManager.externalizePopover();
+// Observe dark / light mode changes
+themeManager.manageThemeObserver(myChart);
+// Display the chart using the configured theme and data.
+myChart.setOption(themeManager.getChartOptions());
+</script>
+  
+<!--
+  Legend holder with custom content complex example
+-->
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Legend holder with custom content complex example</h5>
+      <p class="card-text pe-5">In this example, we demonstrate how to add custom HTML content to your legends using both <code>postItemContent</code> and <code>afterLegendContent</code> options.</p>
+      <p class="card-text pe-5">There are two ways to add custom content to your legends:</p>
+      <ol>
+        <li>Using <code>postItemContent</code> to add content after each individual legend item:
+          <ul>
+            <li>As a function: customize content for each legend label</li>
+            <li>As an object: map series names or legend labels directly to their custom content</li>
+          </ul>
+        </li>
+        <li>Using <code>afterLegendContent</code> to add content that appears after all legend items:
+          <ul>
+            <li>As a string: single piece of content displayed at the bottom of the legend group</li>
+          </ul>
+        </li>
+      </ol>
+      <p class="card-text pe-5">
+        Here's how to use both options:
+        <code>
+          </code></p><pre><code>// Example 1: Function-based postItemContent - Customize content per legend
+themeManager.externalizeLegends(myChart, [
+      {
+        // Example 1: Function-based content - Dynamic content based on legend label
+        legendHolderSelector: '#legend_with_custom_content',
+        orientation: 'horizontal',
+        seriesRef: ['Revenue', 'Costs', 'Net Profit'],
+        postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
+          switch(legendLabel) {
+            case 'Revenue':
+              return `&#x3C;span class="metric-note revenue-note">
+                       Gross revenue including taxes (${legendName} at index ${legendIndex + 1})
+                     &#x3C;/span>`;
+            case 'Costs':
+              return `&#x3C;span class="metric-note profit-note">
+                       Operating expenses only (Using color ${color})
+                     &#x3C;/span>`;
+            case 'Net Profit':
+              return `&#x3C;span class="metric-note conversion-note">
+                       After all deductions (Color palette index ${colorIndex + 1})
+                     &#x3C;/span>`;
+            default:
+              return '';
+          }
+        }
+]);
+          </code></pre><code>
+          <pre>// Example 2: Object-based postItemContent - Map labels to content
+themeManager.externalizeLegends(
+  myChart,
+  {
+     legendHolderSelector: '#legend_with_object_content',
+        orientation: 'horizontal',
+        seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
+        postItemContent: {
+          'Sales 2025': '&#x3C;span class="metric-note revenue-note">Projected data&#x3C;/span>',
+          'Sales 2024': '&#x3C;span class="metric-note profit-note">Historical data&#x3C;/span>',
+          'Growth Rate': '&#x3C;span class="metric-note conversion-note">Year-over-year change&#x3C;/span>'
+        }
+  }
+);
+          </pre>
+          <pre>// Example 3: Array-based postItemContent - Position-based content
+themeManager.externalizeLegends(
+  myChart,
+  {
+    legendHolderSelector: '#legend_with_object_content',
+        orientation: 'horizontal',
+        seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
+        postItemContent: {
+          'Sales 2025': '&#x3C;span class="metric-note revenue-note">Projected data&#x3C;/span>',
+          'Sales 2024': '&#x3C;span class="metric-note profit-note">Historical data&#x3C;/span>',
+          'Growth Rate': '&#x3C;span class="metric-note conversion-note">Year-over-year change&#x3C;/span>'
+        }
+  }
+);
+          </pre>
+          <pre>// Example 4: Using afterLegendContent - Add global content after all legends
+themeManager.externalizeLegends(
+   myChart,
+   {
+     legendHolderSelector: '#legend_with_string_content',
+     orientation: 'horizontal',
+     seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
+     afterLegendContent: '&#x3C;div class="global-note">Data from our analytics platform - Updated daily&#x3C;/div>'
+   }
+);
+          </pre>
+        </code>
+      <p></p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill"></use>  
+        </svg>        
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="custom_content_htmlId">  
+        <div class="border border-subtle">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Monthly Performance</h5>
+          </div>
+          <div id="customContent_holder">
+            <div id="customContent_chart" style="width: 100%; height: 40vh"></div>
+          </div>
+          <div class="mx-3">
+            <h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
+            <div id="legend_with_custom_content"></div>  
+            <h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
+            <div id="legend_with_object_content"></div>
+            <h6 class="mt-4 mb-2">Web Analytics (Array-based legend)</h6>
+            <div id="legend_with_array_content"></div>
+            <h6 class="mt-4 mb-2">Performance Metrics (Global note example)</h6>
+            <div id="legend_with_string_content"></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        addViewCode('custom_content_');
+      </script>
+    </div>
+  </div>
+  <script id="custom_content_codeId">
+    ///////////////////////////////////////////////////
+    // Used data
+    ///////////////////////////////////////////////////
+// Sample data generation for different metrics
+const generateData = () => Array(6).fill(0).map(() => Math.floor(Math.random() * 100));
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+
+// Generate data for 9 different series (3 groups of 3 series each)
+const data = {
+  group1: {
+    revenue: generateData(),
+    costs: generateData(),
+    profits: generateData()
+  },
+  group2: {
+    sales2025: generateData(),
+    sales2024: generateData(),
+    growth: generateData()
+  },
+  group3: {
+    pageviews: generateData(),
+    sessionDuration: generateData(),
+    bounce: generateData()
+  },
+  group4: {
+    visits: generateData(),
+    conversions: generateData(),
+    rate: generateData()
+  }
+};
+
+// Data configuration for the chart
+const legendsDataOptions = {
+  xAxis: {
+    type: 'category',
+    data: months,
+  },
+  yAxis: [{
+    type: 'value',
+    name: 'Main Metrics',
+    position: 'left'
+  }, {
+    type: 'value',
+    name: 'Secondary Metrics',
+    position: 'right'
+  }],
+  series: [
+    // Group 1 - Function-based example
+    {
+      name: 'Revenue',
+      data: data.group1.revenue,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group1'
+    },
+    {
+      name: 'Costs',
+      data: data.group1.costs,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group1'
+    },
+    {
+      name: 'Net Profit',
+      data: data.group1.profits,
+      type: 'line',
+      yAxisIndex: 1,
+      smooth: true,
+      symbol: 'circle',
+      symbolSize: 8
+    },
+    // Group 2 - Object-based example
+    {
+      name: 'Sales 2025',
+      data: data.group2.sales2025,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group2'
+    },
+    {
+      name: 'Sales 2024',
+      data: data.group2.sales2024,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group2'
+    },
+    {
+      name: 'Growth Rate',
+      data: data.group2.growth,
+      type: 'line',
+      yAxisIndex: 1,
+      smooth: true,
+      symbol: 'diamond',
+      symbolSize: 8
+    },
+    // Group 3 - Array-based example
+    {
+      name: 'Pageviews',
+      data: data.group3.pageviews,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group3'
+    },
+    {
+      name: 'Session Duration',
+      data: data.group3.sessionDuration,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group3'
+    },
+    {
+      name: 'Bounce Rate',
+      data: data.group3.bounce,
+      type: 'line',
+      yAxisIndex: 1,
+      smooth: true,
+      symbol: 'triangle',
+      symbolSize: 8
+    },
+    // Group 4 - Global note example
+    {
+      name: 'Site Visits',
+      data: data.group4.visits,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group4'
+    },
+    {
+      name: 'Conversions',
+      data: data.group4.conversions,
+      type: 'bar',
+      yAxisIndex: 0,
+      stack: 'group4'
+    },
+    {
+      name: 'Success Rate',
+      data: data.group4.rate,
+      type: 'line',
+      yAxisIndex: 1,
+      smooth: true,
+      symbol: 'diamond',
+      symbolSize: 8
+    }
+ ]
+};
+
+///////////////////////////////////////////////////
+// ODS Charts
+///////////////////////////////////////////////////
+// Build the theme
+var themeManager = ODSCharts.getThemeManager();
+echarts.registerTheme(themeManager.name, themeManager.theme);
+
+// Get the chart holder and initiate it with the generated theme
+var div = document.getElementById('customContent_chart');
+var myChart = echarts.init(div, themeManager.name, {
+  renderer: 'svg',
+});
+
+// Style classes for legend notes
+var styles = document.createElement('style');
+styles.textContent = `
+  .global-note {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-style: italic;
+  }
+  .metric-note {
+    display: inline-block;
+    font-size: 0.85em;
+    background: #e9ecef;
+    border-radius: 4px;
+    padding: 2px 0px;
+  }
+  .revenue-note { color: #1b6ec2; }
+  .profit-note { color: #2b8a3e; }
+  .conversion-note { color: #e8590c; }
+`;
+document.head.appendChild(styles);
+
+// Set up the chart with all series
+themeManager.setDataOptions(legendsDataOptions);
+
+// Configure the externalized legends with different postItemContent types
+themeManager.externalizeLegends(myChart, [
+  {
+    // Example 1: Function-based content - Dynamic content based on legend label
+    legendHolderSelector: '#legend_with_custom_content',
+    orientation: 'horizontal',
+    seriesRef: ['Revenue', 'Costs', 'Net Profit'],
+    postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
+      switch(legendLabel) {
+        case 'Revenue':
+          return `<span class="metric-note revenue-note">
+                   Gross revenue including taxes (${legendName} at index ${legendIndex + 1})
+                 </span>`;
+        case 'Costs':
+          return `<span class="metric-note profit-note">
+                   Operating expenses only (Using color ${color})
+                 </span>`;
+        case 'Net Profit':
+          return `<span class="metric-note conversion-note">
+                   After all deductions (Color palette index ${colorIndex + 1})
+                 </span>`;
+        default:
+          return '';
+      }
+    }
+  },
+  {
+    // Example 2: Object-based content - Direct mapping between labels and content
+    legendHolderSelector: '#legend_with_object_content',
+    orientation: 'horizontal',
+    seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
+    postItemContent: {
+      'Sales 2025': '<span class="metric-note revenue-note">Projected data</span>',
+      'Sales 2024': '<span class="metric-note profit-note">Historical data</span>',
+      'Growth Rate': '<span class="metric-note conversion-note">Year-over-year change</span>'
+    }
+  },
+  {
+    // Example 3: Array-based content - Position-based content matching
+    legendHolderSelector: '#legend_with_array_content',
+    orientation: 'horizontal',
+    seriesRef: ['Pageviews', 'Session Duration', 'Bounce Rate'],
+    postItemContent: [
+      '<span class="metric-note views-note">Total page impressions</span>',
+      '<span class="metric-note duration-note">Average time spent on site</span>',
+      '<span class="metric-note bounce-note">Session abandonment rate</span>'
+    ]
+  },
+  {
+    // Example 4: Content after all legends using afterLegendContent
+    legendHolderSelector: '#legend_with_string_content',
+    orientation: 'horizontal',
+    seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
+    afterLegendContent: '<div class="global-note">Data from our analytics platform - Updated daily</div>'
+  }
+]);
+
+// Manage window size changed
+themeManager.manageChartResize(myChart, 'customContent_chart');
+// Register the externalization of the tooltip/popup
+themeManager.externalizePopover();
+// Observe dark / light mode changes
+themeManager.manageThemeObserver(myChart);
+// Display the chart using the configured theme and data.
+myChart.setOption(themeManager.getChartOptions());
+</script>
+  
+  <!--
+    Pie chart with percent or value in legend example
+  -->
+  <div class="card w-100 mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Pie chart with percent in legend example</h5>
+      <p class="card-text pe-5">When displaying a donut or a pie, there is only one value in the donut/pie to display per item of the legend. It may then be interesting to display the value of this item directly in the legend itself.</p>
+      <div class="row">
+        <div class="col-6">
+          <div class="card me-1">
+            <div class="card-body">
+              <p class="card-text pe-5">In this example, we will use the <code>postItemContent()</code> method when configuring an externalized legend to display the percentage of the current item in the legend.</p>
+              <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+                <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+                  <use xlink:href="#lightning-charge-fill"></use>
+                </svg>
+                <span class="visually-hidden">Open in playground using StackBlitz</span>
+              </button>
+              <div id="pct_legend_htmlId">
+                <style>
+                  .pct_legend .ods-charts-legend-item {
+                    display: flex;
+                  }
+                  .pct_legend .ods-charts-legend-label:after {
+                    content: ': ';
+                  }
+                  .pct_legend .ods-charts-legend-custom-content {
+                    margin-left: auto !important;
+                    font-weight: bold;
+                  }
+                  .pct_legend .pie-chart-legend {
+                    min-width: 250px;
+                  }
+                </style>
+                <div class="border ods-charts-context graph-holder pct_legend" style="
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    --bs-border-color: var(--bs-border-color-subtle);
+                  ">
+                  <div class="chart_title mx-3">
+                    <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                    <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+                  </div>
+                  <div id="pct_legend_pieChart_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: row">
+                    <div id="pct_legend_pieChart_holder" style="flex-grow: 1; flex-shrink: 1">
+                      <div id="pct_legend_pieChart_chart" style="width: 100%; height: 100%; position: relative"></div>
+                    </div>
+                    <div id="pct_legend_pieChart_legend" class="pie-chart-legend"></div>
+                  </div>
+                </div>
+              </div>              
+              <script>
+                addViewCode('pct_legend_');
+              </script>
+            </div>
+            <script id="pct_legend_codeId">
+              ///////////////////////////////////////////////////
+              // Used data
+              ///////////////////////////////////////////////////
+              // this is the data to be displayed
+              var dataOptions = {
+                series: [
+                  {
+                    type: 'pie',
+                    data: [
+                      {
+                        name: 'Demonstrator',
+                        value: 15,
+                      },
+                      {
+                        name: 'Demonstrator LCD',
+                        value: 3,
+                      },
+                      {
+                        name: 'Microchip RN2483',
+                        value: 2,
+                      },
+                      {
+                        name: 'Demonstrator2',
+                        value: 1,
+                      },
+                      {
+                        name: ' RF Sensors',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 6',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 754',
+                        value: 1,
+                      },
+                    ],
+                    center: ['50%', '50%'],
+                    radius: ['0%', '85%'],
+                  },
+                ],
+                legend: {
+                  orient: 'vertical',
+                },
+              };
+              ///////////////////////////////////////////////////
+              // ODSCharts
+              ///////////////////////////////////////////////////
+              // Build the theme
+              var themeManager = ODSCharts.getThemeManager({
+                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
+                chartConfiguration:
+                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
+                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
+                cssSelector: '#pct_legend_pieChart_chart',
+              });
+              // register this theme to echarts
+              echarts.registerTheme(themeManager.name, themeManager.theme);
+              // get the chart holder and initiate it with the generated theme
+              var div = document.getElementById('pct_legend_pieChart_chart');
+              var myChart = echarts.init(div, themeManager.name, {
+                renderer: 'svg',
+              });
+              // Set the data to be displayed.
+              themeManager.setDataOptions(dataOptions);
+              // Register the externalization of the legend.
+              themeManager.externalizeLegends(myChart, {
+                legendHolderSelector: '#pct_legend_pieChart_legend',
+                postItemContent: (
+                  legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex
+                ) => {
+                  let total = 0;
+                  let value = 0;
+                  dataOptions.series[0].data.forEach((item) => {
+                    total += item.value;
+                    if (item.name === legendName) {
+                      value = item.value;
+                    }
+                  });
+                  let percent = ((value / total) * 100).toFixed(2);
+                  return percent + '%';
+                },
+              });
+              // Manage window size changed
+              themeManager.manageChartResize(myChart, 'pct_legend_pieChart_chart');
+              // Automatically manage data-bs-theme attribute change. Only needed if you want the
+              // chart to automatically react to the global light or dark theme change
+              themeManager.manageThemeObserver(myChart);
+              // Register the externalization of the tooltip/popup
+              themeManager.externalizePopover(
+                {
+                  enabled: true,
+                  shared: false,
+                  tooltip: false,
+                },
+                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
+              );
+              // Display the chart using the configured theme and data.
+              myChart.setOption(themeManager.getChartOptions());
+            </script>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card ms-1">
+            <div class="card-body">
+              <p class="card-text pe-5">In this example, we will use the <code>preItemContent()</code> method when configuring an externalized legend to display the value of the current item before the item in the legend.</p>
+              <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+                <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+                  <use xlink:href="#lightning-charge-fill"></use>  
+                </svg>        
+                <span class="visually-hidden">Open in playground using StackBlitz</span>
+              </button>
+              <div id="value_legend_htmlId">      
+                <style>
+                  .value_legend .ods-charts-legend-pre-label-content {
+                    font-weight: bold;
+                  }
+                </style>
+                <div class="border ods-charts-context graph-holder value_legend" style="
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    --bs-border-color: var(--bs-border-color-subtle);
+                  ">
+                  <div class="chart_title mx-3">
+                    <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+                    <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+                  </div>
+                  <div id="value_legend_pieChart_holder_with_legend" style="flex-grow: 1; flex-shrink: 1; display: flex; flex-direction: row">
+                    <div id="value_legend_pieChart_holder" style="flex-grow: 1; flex-shrink: 1">
+                      <div id="value_legend_pieChart_chart" style="width: 100%; height: 100%; position: relative"></div>
+                    </div>
+                    <div id="value_legend_pieChart_legend" class="pie-chart-legend"></div>
+                  </div>
+                </div>
+              </div>
+              <script>
+                addViewCode('value_legend_');
+              </script>
+            </div>
+            <script id="value_legend_codeId">
+              ///////////////////////////////////////////////////
+              // Used data
+              ///////////////////////////////////////////////////
+              // this is the data to be displayed
+              var dataOptions = {
+                series: [
+                  {
+                    type: 'pie',
+                    data: [
+                      {
+                        name: 'Demonstrator',
+                        value: 15,
+                      },
+                      {
+                        name: 'Demonstrator LCD',
+                        value: 3,
+                      },
+                      {
+                        name: 'Microchip RN2483',
+                        value: 2,
+                      },
+                      {
+                        name: 'Demonstrator2',
+                        value: 1,
+                      },
+                      {
+                        name: ' RF Sensors',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 6',
+                        value: 1,
+                      },
+                      {
+                        name: 'Label 754',
+                        value: 1,
+                      },
+                    ],
+                    center: ['50%', '50%'],
+                    radius: ['0%', '85%'],
+                  },
+                ],
+                legend: {
+                  orient: 'vertical',
+                },
+              };
+              ///////////////////////////////////////////////////
+              // ODSCharts
+              ///////////////////////////////////////////////////
+              // Build the theme
+              var themeManager = ODSCharts.getThemeManager({
+                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
+                chartConfiguration:
+                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
+                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
+                cssSelector: '#value_legend_pieChart_chart',
+              });
+              // register this theme to echarts
+              echarts.registerTheme(themeManager.name, themeManager.theme);
+              // get the chart holder and initiate it with the generated theme
+              var div = document.getElementById('value_legend_pieChart_chart');
+              var myChart = echarts.init(div, themeManager.name, {
+                renderer: 'svg',
+              });
+              // Set the data to be displayed.
+              themeManager.setDataOptions(dataOptions);
+              // Register the externalization of the legend.
+              themeManager.externalizeLegends(myChart, {
+                legendHolderSelector: '#value_legend_pieChart_legend',
+                preItemContent: (
+                  legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex
+                ) => {
+                  console.log(legendLabel,
+                  legendName,
+                  legendIndex,
+                  color,
+                  colorIndex,
+                  dataOptions.series[0].data[legendIndex]?.value)
+                  return dataOptions.series[0].data[legendIndex]?.value?(
+                    Math.round(dataOptions.series[0].data[legendIndex].value * 100)/100 + ''):'';
+                },
+              });
+              // Manage window size changed
+              themeManager.manageChartResize(myChart, 'value_legend_pieChart_chart');
+              // Automatically manage data-bs-theme attribute change. Only needed if you want the
+              // chart to automatically react to the global light or dark theme change
+              themeManager.manageThemeObserver(myChart);
+              // Register the externalization of the tooltip/popup
+              themeManager.externalizePopover(
+                {
+                  enabled: true,
+                  shared: false,
+                  tooltip: false,
+                },
+                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
+              );
+              // Display the chart using the configured theme and data.
+              myChart.setOption(themeManager.getChartOptions());
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>   </main> <footer class="footer navbar mt-5" data-bs-theme="dark"> <h2 class="visually-hidden">Sitemap & information</h2> <div class="container-xxl footer-terms"> <ul class="navbar-nav gap-md-3"> <li class="fw-bold">© Orange 2024</li> <li><a class="nav-link" href="javascript:tarteaucitron.userInterface.openPanel();">Cookies</a></li> <li><a class="nav-link" href="https://github.com/Orange-OpenSource/ods-charts/blob/main/LICENSE" target="blank" rel="license noopener">License</a></li> </ul> </div> </footer>  <script src="https://cdn.jsdelivr.net/npm/tarteaucitronjs@1.17.0/tarteaucitron.min.js" integrity="sha384-g6Xxn1zA15svldHyZ/Ow+wUUeRxHf/v7eOOO2sMafcnMPFD25n80Yz/3bbhJBSoN" crossorigin="anonymous"></script> <script src="/0.5/tarteaucitron-config.js"></script> <script type="module">document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(o=>{new boosted.Tooltip(o)});</script> <script type="module" src="/0.5/assets/Scripts.astro_astro_type_script_index_1_lang.DG_EyIFa.js"></script>  </body></html>
