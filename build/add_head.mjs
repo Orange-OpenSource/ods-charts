@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const version = 0.4;
+const version = 0.5;
 
 function fromDir(startPath, filter, prefix = `/${version}/`) {
   const favicon = `
