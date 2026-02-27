@@ -741,11 +741,17 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
     };
   }
 
-  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
+  public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any, forBubbleMap?: boolean): any {
     if (serie.type !== 'map') {
       return {};
     }
     return {
+      ...(forBubbleMap
+        ? {}
+        : {
+            top: '0',
+            bottom: '60px',
+          }),
       roam: true,
       scaleLimit: {
         min: 0.5,
@@ -800,6 +806,7 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
         textStyle: {
           align: 'left',
         },
+        align: 'left',
         formatter: (value: number, value2: number) => {
           return value + '-' + value2;
         },
@@ -833,7 +840,7 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
 
   public getSerieConfiguration(serie: { type: string }, _themeOptions: any, _dataOptions: any): any {
     if (serie.type === 'map') {
-      return super.getSerieConfiguration(serie, _themeOptions, _dataOptions);
+      return super.getSerieConfiguration(serie, _themeOptions, _dataOptions, true);
     }
     if (serie.type === 'scatter' || serie.type === 'effectScatter') {
       return {
