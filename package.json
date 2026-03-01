@@ -75,7 +75,7 @@
     "husky": "^9.1.7",
     "jasmine": "^6.0.0",
     "jsdom": "^28.1.0",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.3.1",
     "prettier": "^3.7.4",
     "pretty-quick": "^4.2.2",
     "serve": "^14.2.3",
