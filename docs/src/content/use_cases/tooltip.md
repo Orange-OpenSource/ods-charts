@@ -10,7 +10,7 @@ title: Tooltip - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Confine tooltip example</h5>
+      <h5 class="card-title pe-5">Confine tooltip example</h5>
       <p class="card-text pe-5">ODS Charts library uses the tooltip containment feature of the Apache ECharts library to ensure that the tooltip or popover is displayed within the confines of the graph, avoiding overflow beyond the display window.</p>
       <p class="card-text pe-5">
         This function is activated by configuring the graph options as follows:
@@ -111,7 +111,7 @@ tooltip: {
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Specific value tooltip content</h5>
+      <h5 class="card-title pe-5">Specific value tooltip content</h5>
       <p class="card-text pe-5">You may need to specify a specific tooltip content.</p>
       <p class="card-text pe-5">The first use case is to provide a sepcific content for a tooltip/popover value.</p>
       <p class="card-text pe-5">
@@ -232,7 +232,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Other specific content, specific line, with ODS Charts series marker</h5>
+      <h5 class="card-title pe-5">Other specific content, specific line, with ODS Charts series marker</h5>
       <p class="card-text pe-5">if you want to specialize more than the value display, you can use the second parameter of the method <code>externalizePopover</code>.</p>
       <p class="card-text pe-5">
         This parameter must implement the <a href="../api/classes/ODSChartsPopoverDefinition"><code>ODSChartsPopoverDefinition</code></a> interface. Generally this is initialized with <a href="../api/variables/ODSChartsPopoverManagers">one of the tooltip managers provided</a> <code>ODSChartsPopoverManagers.BOOSTED5</code>, <code>ODSChartsPopoverManagers.BOOSTED4</code> or <code>ODSChartsPopoverManagers.NONE</code>.<br />
@@ -334,7 +334,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Using Boosted 5 tooltip</h5>
+      <h5 class="card-title pe-5">Using Boosted 5 tooltip</h5>
       <p class="card-text">
         The same code using the Boosted 5 tooltips:
         <code>
@@ -434,7 +434,7 @@ tooltip: {
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Tooltip with HTML link(s)</h5>
+      <h5 class="card-title pe-5">Tooltip with HTML link(s)</h5>
       <p class="card-text pe-5">You may need to specify a specific tooltip which include a link.</p>
       <p class="card-text pe-5">
         In this case, you must set to <code>true</code> the parameter <code>enterable</code> of the <code>tooltip</code> Apache Echarts option:
@@ -539,7 +539,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Using links in a Boosted 5 tooltip</h5>
+      <h5 class="card-title pe-5">Using links in a Boosted 5 tooltip</h5>
       <p class="card-text pe-5">The same code using the Boosted 5 tooltips:</p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
@@ -642,7 +642,7 @@ tooltip: {
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Custom tooltip template</h5>
+      <h5 class="card-title pe-5">Custom tooltip template</h5>
       <p class="card-text pe-5">If you need to completely customize the tooltip template, you can use the <code>getPopupTemplate</code> method.</p>
       <p class="card-text pe-5">
         This method allows you to replace the entire tooltip HTML structure with your own custom template:

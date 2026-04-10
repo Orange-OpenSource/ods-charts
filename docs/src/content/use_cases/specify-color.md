@@ -11,7 +11,7 @@ title: Specific series color - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Specify the color of a series</h5>
+      <h5 class="card-title pe-5">Specify the color of a series</h5>
       <p class="card-text pe-5">You may want to specify the color of a series in the series itself, regardless of its index. This can happen if the number of series displayed changes but, for a specific type of data, you want to keep the same color regardless of the series' place in the list of series to be displayed. This means that the ordered list of colors to use will change according to the series displayed.</p>
       <p class="card-text pe-5">
         To freeze the color of a series, Apache ECharts provides the
@@ -148,7 +148,7 @@ series: [
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Two colors for one series example</h5>
+      <h5 class="card-title pe-5">Two colors for one series example</h5>
       <p class="card-text pe-5">When representing data on a bar chart, it is possible to want to represent this data with a different color depending on a condition on the value. For example, green for a target achieved, red otherwise.</p>
       <p class="card-text pe-5">You would then need to be able to have:</p>
       <ul>
@@ -314,7 +314,7 @@ themeManager.externalizePopover(undefined, {
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Marker specific color</h5>
+      <h5 class="card-title pe-5">Marker specific color</h5>
       <p class="card-text pe-5">This example illustrates the case where one wishes to change the color of a point, for example, to highlight the fact that it is below a threshold.</p>
       <p class="card-text pe-5">In this example, we provide the line color (<code>lineStyle</code>) and the default color of points (<code>itemStyle</code>) globally for the entire series :
         <code>
@@ -557,7 +557,7 @@ series: [
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Bar specific color</h5>
+      <h5 class="card-title pe-5">Bar specific color</h5>
       <p class="card-text pe-5">This example shows the example of using two colors for a single series. But this time, we actually keep a single series, displayed once in the legend, while modifying the color of the bars that are below the objective.</p>
       <p>To do this, we associate in the list of values the red color with the value below the objectives via the Apache ECharts <code>itemStyle.color</code> parameter:
         <code>

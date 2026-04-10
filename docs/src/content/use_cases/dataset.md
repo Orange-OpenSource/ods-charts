@@ -113,7 +113,7 @@ myChart.setOption(themeManager.getChartOptions());
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Dataset line chart example</h5>
+      <h5 class="card-title pe-5">Dataset line chart example</h5>
       <p class="card-text pe-5">The <code>dataset</code> component works equally well with line charts. The series definitions stay minimal — only the chart type changes.</p>
       <p class="card-text pe-5">
         Use <code>getLineChartConfiguration()</code> and declare series with <code>type: 'line'</code>. A formatter adds the <code>°C</code> unit on both the Y axis and the tooltip:
@@ -222,7 +222,7 @@ myChart.setOption(themeManager.getChartOptions());
 
   <div class="card w-100 mt-3">
     <div class="card-body">
-      <h5 class="card-title">Dataset bar and line chart example</h5>
+      <h5 class="card-title pe-5">Dataset bar and line chart example</h5>
       <p class="card-text pe-5">You can also combine bar and line series from the same <code>dataset</code> source. This is useful to compare measured values (bars) with a trend or target line.</p>
       <p class="card-text pe-5">
         Use <code>getLineAndBarChartConfiguration()</code> and mix series types:
