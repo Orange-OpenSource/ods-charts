@@ -10,7 +10,7 @@ title: Dataset - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Dataset example</h5>
+      <h5 class="card-title pe-5">Dataset example</h5>
       <p class="card-text pe-5">Apache ECharts supports a <code>dataset</code> component to manage data separately from chart configuration. This allows data to be reused across multiple series and simplifies series definitions.</p>
       <p class="card-text pe-5">
         Instead of providing data directly in each series, you define a single dataset source and let the series reference it:
