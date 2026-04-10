@@ -10,7 +10,7 @@ title: Time slider axis - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Time slider axis example</h5>
+      <h5 class="card-title pe-5">Time slider axis example</h5>
       <p class="card-text pe-5">This use case illustrates the use of the timeline slider.</p>
       <p class="card-text pe-5">
         You can add the timeline slider with the <code>dataZoom</code> option:

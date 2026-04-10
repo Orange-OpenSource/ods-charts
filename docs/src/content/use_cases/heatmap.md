@@ -10,7 +10,7 @@ title: Heatmap - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Heatmap example</h5>
+    <h5 class="card-title pe-5">Heatmap example</h5>
       <p class="card-text pe-5">This use case illustrates the use of heat maps to visualize the distribution 
       of message reception per quarter hour over a week.</p>
       <p class="card-text pe-5">
