@@ -45,6 +45,9 @@
     "karma-jasmine-html-reporter": "~2.2.0",
     "prismjs": "^1.30.0",
     "shx": "^0.4.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.0"
+  },
+  "overrides": {
+    "typescript": "~5.9.0"
   }
 }
