@@ -263,11 +263,13 @@ export class ODSChartsPopover {
             const itemColor: string = param.color ?? 'transparent';
             let itemValue: any = undefined;
             if (isVarArray(param.value)) {
-              if (param.dimensionNames && param.dimensionNames.length === param.value.length && param.dimensionNames.indexOf('value') > -1) {
+              if (legendLabel && param.dimensionNames && param.dimensionNames.length === param.value.length && param.dimensionNames.indexOf(legendLabel) > -1) {
+                itemValue = param.value[param.dimensionNames.indexOf(legendLabel)];
+              } else if (param.dimensionNames && param.dimensionNames.length === param.value.length && param.dimensionNames.indexOf('value') > -1) {
                 itemValue = param.value[param.dimensionNames.indexOf('value')];
               } else if (2 == param.value.length && (!param.axisType || param.axisType.endsWith('.time'))) {
                 itemValue = param.value[1];
-              } else if ((param.seriesIndex as number) === param.value.length) {
+              } else if ((param.seriesIndex as number) + 1 < param.value.length) {
                 itemValue = param.value[(param.seriesIndex as number) + 1];
               }
             } else {
