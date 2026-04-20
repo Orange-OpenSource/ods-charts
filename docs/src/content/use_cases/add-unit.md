@@ -10,7 +10,7 @@ title: Add unit - Specific use cases - ODS Charts
 <div class="container-xxl pt-3">
   <div class="card w-100">
     <div class="card-body">
-      <h5 class="card-title">Add unit in both Y axis and tooltip display</h5>
+      <h5 class="card-title pe-5">Add unit in both Y axis and tooltip display</h5>
       <p class="card-text pe-5">Apache ECharts offer the availability to add a unit formatter.</p>
       <p class="card-text pe-5">
         There are two functions to provide. One for Y axis and one for the tooltip:
