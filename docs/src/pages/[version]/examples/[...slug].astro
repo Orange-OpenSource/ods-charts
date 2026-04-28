@@ -1,19 +1,23 @@
 ---
+import type { InferGetStaticPropsType } from 'astro'
+import { render } from 'astro:content';
 import ExamplesLayout from '@layouts/ExamplesLayout.astro';
-import { examplesPages } from '@libs/content'
+import { examplesPages, getDocsPageSlug } from '@libs/content'
 import { getConfig } from '@libs/config'
 
 export async function getStaticPaths() {
   return examplesPages.map((docsPage) => {
     return {
-      params: { slug: docsPage.slug, version: getConfig().docs_version },
+      params: { slug: getDocsPageSlug(docsPage.id), version: getConfig().docs_version },
       props: docsPage
     }
   })
 }
 
-const { data, render } = Astro.props
-const { Content } = await render()
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+const { data } = Astro.props
+const { Content } = await render(Astro.props)
 ---
 
 <ExamplesLayout data={data}>
