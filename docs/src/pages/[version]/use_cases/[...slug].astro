@@ -1,19 +1,23 @@
 ---
+import type { InferGetStaticPropsType } from 'astro'
+import { render } from 'astro:content'
 import UseCasesLayout from '@layouts/UseCasesLayout.astro';
-import { useCasesPages } from '@libs/content'
+import { useCasesPages, getDocsPageSlug } from '@libs/content'
 import { getConfig } from '@libs/config'
 
 export async function getStaticPaths() {
   return useCasesPages.map((docsPage) => {
     return {
-      params: { slug: docsPage.slug, version: getConfig().docs_version },
+      params: { slug: getDocsPageSlug(docsPage.id), version: getConfig().docs_version },
       props: docsPage
     }
   })
 }
 
-const { data, render } = Astro.props
-const { Content } = await render()
+type Props = InferGetStaticPropsType<typeof getStaticPaths>
+
+const { data } = Astro.props
+const { Content } = await render(Astro.props)
 ---
 
 <UseCasesLayout data={data}>
