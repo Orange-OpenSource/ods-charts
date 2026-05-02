@@ -67,7 +67,7 @@
     "@stackblitz/sdk": "^1.11.0",
     "@types/jasmine": "^6.0.0",
     "@types/jsdom": "^28.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.1",
     "@typescript-eslint/parser": "^8.54.0",
     "astro": "^6.1.6",
     "echarts": "^6.0.0",
