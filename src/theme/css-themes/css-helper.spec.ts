@@ -1,4 +1,4 @@
-//
+﻿//
 // Software Name: Orange Design System Charts
 // SPDX-FileCopyrightText: Copyright (c) 2023 - 2026 Orange SA
 // SPDX-License-Identifier: MIT
