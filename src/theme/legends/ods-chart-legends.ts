@@ -1,11 +1,10 @@
 //
 // Software Name: Orange Design System Charts
-// SPDX-FileCopyrightText: Copyright (c) 2023 - 2025 Orange SA
+// SPDX-FileCopyrightText: Copyright (c) 2023 - 2026 Orange SA
 // SPDX-License-Identifier: MIT
 //
 // This software is distributed under the MIT license.
 //
-
 import { type ECharts } from 'echarts';
 import { ODSChartsCSSThemeDefinition, ODSChartsCSSThemesNames, ODSChartsItemCSSDefinition } from '../css-themes/css-themes';
 import { ODSChartsMode } from '../ods-chart-mode';
@@ -17,7 +16,7 @@ const DEFAULT_CSS = `.ods-charts-no-css-lib.ods-charts-legend-holder {
   padding-top: 10px;
   padding-bottom: 20px;
   position: relative;
-}
+} 
 
 .ods-charts-no-css-lib .ods-charts-legend-container {
   display: flex;
@@ -164,7 +163,7 @@ export class ODSChartsLegends {
             dataOptions.legend.data = legendData;
           }
         } catch (error) {
-          throw new Error(`Missing data array of legends in legend chart option`);
+          throw new Error(`Missing data array of legends in legend chart option`, { cause: error });
         }
       } else if (!dataOptions.series) {
         throw new Error(`Missing data array of legends in legend chart option`);
