@@ -101,12 +101,15 @@ tooltip: {
           <pre>
             themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.NONE,
-              getPopupContentLine: ({ seriesName, itemValue, seriesIndex }) => {
-                return `&lt;p>${themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
+              getPopupContentLine: ({ seriesName, itemValue, marker }) => {
+                return `&lt;p>${marker}This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
               },
             });
           </pre>
         </code>
+      </p>
+      <p class="card-text pe-5">
+        Note: as an alternative, you can still use <code>themeManager.getPopoverMarker(seriesIndex)</code> in your custom renderer.
       </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">

@@ -229,7 +229,8 @@ export class ODSChartsPopover {
 
   private getTooltipElements(
     params: InternalODSChartsPopoverItem[],
-    legends: ODSChartsLegendData
+    legends: ODSChartsLegendData,
+    cssTheme: ODSChartsCSSThemeDefinition
   ): {
     categoryLabel: string;
     tooltipElements: ODSChartsPopoverItem[];
@@ -261,6 +262,7 @@ export class ODSChartsPopover {
             const colorIndex: number = undefined === param.seriesIndex ? -1 : param.seriesIndex % this.colors.length;
             const seriesColor: string = (colorIndex > -1 ? this.colors[colorIndex] : param.color) ?? 'transparent';
             const itemColor: string = param.color ?? 'transparent';
+            const markerColor: string = 'line' === param.seriesType ? seriesColor : itemColor;
             let itemValue: any = undefined;
             if (isVarArray(param.value)) {
               if (legendLabel && param.dimensionNames && param.dimensionNames.length === param.value.length && param.dimensionNames.indexOf(legendLabel) > -1) {
@@ -276,7 +278,8 @@ export class ODSChartsPopover {
               itemValue = param.value;
             }
             const element: ODSChartsPopoverItem = mergeObjectsAndReplaceArrays(cloneDeepObject(param), {
-              markerColor: 'line' === param.seriesType ? seriesColor : itemColor,
+              marker: `<span style="display: inline-block">${this.getSeriesMarker(cssTheme, markerColor)}</span>`,
+              markerColor: markerColor,
               itemColor: itemColor,
               seriesColor: seriesColor,
               itemValue: itemValue,
@@ -394,7 +397,7 @@ export class ODSChartsPopover {
               }
               params = params as InternalODSChartsPopoverItem[];
 
-              const elements = this.getTooltipElements(params, legends);
+              const elements = this.getTooltipElements(params, legends, cssTheme);
               return elements && elements.tooltipElements.length > 0
                 ? new DOMParser().parseFromString(
                     this.popoverDefinition.getPopupTemplate
@@ -443,7 +446,7 @@ export class ODSChartsPopover {
               const elements: {
                 categoryLabel: string;
                 tooltipElements: ODSChartsPopoverItem[];
-              } = this.getTooltipElements(params, legends);
+              } = this.getTooltipElements(params, legends, cssTheme);
               if (elements && elements.tooltipElements.length > 0 && window.event) {
                 try {
                   this.displayPopup(window.event as MouseEvent, elements, cssTheme, this.mode);
@@ -514,9 +517,9 @@ export class ODSChartsPopover {
 
   public getSeriesMarker(cssTheme: ODSChartsCSSThemeDefinition, markerColor: string): string {
     return `<span 
-          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme.popover?.odsChartsPopoverColor)}"  style="background-color:${
+          class="ods-charts-popover-color ${ODSChartsItemCSSDefinition.getClasses(cssTheme?.popover?.odsChartsPopoverColor)}"  style="background-color:${
             markerColor
-          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme.popover?.odsChartsPopoverColor)};">
+          };  ${ODSChartsItemCSSDefinition.getStyles(cssTheme?.popover?.odsChartsPopoverColor)};">
         </span> `;
   }
 
