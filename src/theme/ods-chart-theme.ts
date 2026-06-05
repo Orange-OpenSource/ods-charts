@@ -44,7 +44,7 @@ import { DEFAULT_OUDS_COLORS_PINK } from './default/OUDS.colors.pink';
 import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
 import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
 import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
-import { ODSChartsConfiguration } from '../ods-charts';
+import { ODSChartsConfiguration } from './charts-type/charts-type';
 import { mergeObjectsAndArrays, mergeObjectsAndReplaceArrays } from '../tools/merge-objects';
 // import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
 // import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
