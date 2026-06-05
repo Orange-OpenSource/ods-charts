@@ -505,7 +505,10 @@ export class ODSChartsTheme {
 
   private sliceColor(colors: string[], color: string, seriesIndex: number) {
     const previousColorIndex = colors.indexOf(color);
-    if (previousColorIndex > -1) {
+    if (previousColorIndex > -1 && previousColorIndex >= seriesIndex) {
+      // Only remove the existing occurrence when it sits at or after seriesIndex.
+      // If it sits before seriesIndex the color is legitimately owned by an earlier
+      // series and removing it would shift all intermediate colors incorrectly.
       colors.splice(previousColorIndex, 1);
     }
     colors.splice(seriesIndex, 0, color);
