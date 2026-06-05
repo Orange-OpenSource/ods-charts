@@ -44,6 +44,21 @@ updates:
     schedule:
       interval: monthly
     versioning-strategy: increase
+    ignore:
+      - dependency-name: "@angular/animations"
+      - dependency-name: "@angular/common"
+      - dependency-name: "@angular/compiler"
+      - dependency-name: "@angular/core"
+      - dependency-name: "@angular/forms"
+      - dependency-name: "@angular/platform-browser"
+      - dependency-name: "@angular/platform-browser-dynamic"
+      - dependency-name: "@angular/router"
+      - dependency-name: "@angular/build"
+      - dependency-name: "@angular/cli"
+      - dependency-name: "@angular/compiler-cli"
+      - dependency-name: "@angular/localize"
+      - dependency-name: "@popperjs/core"
+      - dependency-name: "rxjs"
     groups:
       angular-ng-boosted-all-deps:
         patterns:
