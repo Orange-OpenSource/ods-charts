@@ -4,7 +4,8 @@
     "module": "CommonJS",
     "outDir": "./dist-test",
     "noEmit": false,
-    "strict": false
+    "strict": false,
+    "types": ["jasmine", "node"]
   },
   "include": ["src/**/*.spec.ts", "spec/**/*.ts"]
 }

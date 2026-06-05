@@ -11,14 +11,14 @@ const { JSDOM } = require('jsdom');
 const dom = new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>');
 
 // Use defineProperty for read-only properties
-Object.defineProperty(global, 'window', { value: dom.window, writable: true });
-Object.defineProperty(global, 'document', { value: dom.window.document, writable: true });
-Object.defineProperty(global, 'navigator', { value: dom.window.navigator, writable: true });
-(global as any).HTMLElement = dom.window.HTMLElement;
-(global as any).Element = dom.window.Element;
+Object.defineProperty(globalThis, 'window', { value: dom.window, writable: true });
+Object.defineProperty(globalThis, 'document', { value: dom.window.document, writable: true });
+Object.defineProperty(globalThis, 'navigator', { value: dom.window.navigator, writable: true });
+(globalThis as any).HTMLElement = dom.window.HTMLElement;
+(globalThis as any).Element = dom.window.Element;
 
 const echartsModule = require('echarts');
-(global as any).echarts = echartsModule;
+(globalThis as any).echarts = echartsModule;
 
 import 'jasmine';
 import { ODSChartsCssHelper } from './css-helper';
