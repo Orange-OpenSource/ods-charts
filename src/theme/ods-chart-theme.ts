@@ -1,6 +1,6 @@
 //
 // Software Name: Orange Design System Charts
-// SPDX-FileCopyrightText: Copyright (c) 2023 - 2025 Orange SA
+// SPDX-FileCopyrightText: Copyright (c) 2023 - 2026 Orange SA
 // SPDX-License-Identifier: MIT
 //
 // This software is distributed under the MIT license.
@@ -421,7 +421,7 @@ export class ODSChartsTheme {
     if (!options) {
       options = {};
     }
-    let mode: ODSChartsMode = ODSChartsMode.DEFAULT;
+    let mode: ODSChartsMode;
     if (!options.colors) {
       options.colors = ODSChartsColorsSet.DEFAULT;
     }
