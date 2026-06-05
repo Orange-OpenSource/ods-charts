@@ -36,6 +36,8 @@ export class ODSChartsPopoverItem {
   seriesName!: string;
   /** label of the series the item belongs to */
   label!: string;
+  /** HTML marker to be displayed in tooltip/popover content */
+  marker!: string;
   /** Color of the marker representing the series */
   markerColor!: string;
   /** Color used to display the series. May differ from itemColor in some cases (like specific item coloring) */
