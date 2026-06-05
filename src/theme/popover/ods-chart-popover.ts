@@ -139,7 +139,6 @@ class InternalODSChartsPopoverItem extends ODSChartsPopoverItem {
   componentIndex?: number;
   componentSubType?: string;
   dataType?: string;
-  marker?: string;
   seriesId?: string;
   componentType!: 'series';
 }
