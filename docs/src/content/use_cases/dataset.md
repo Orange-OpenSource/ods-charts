@@ -184,9 +184,7 @@ var dataOptions = {
   },
   tooltip: {
     trigger: 'axis',
-    formatter: function (params) {
-      return Math.round(params[0].itemValue * 100) / 100 + ' °C';
-    },
+    valueFormatter: (value) => Math.round(value * 100) / 100 + ' °C',
   },
 };
 ///////////////////////////////////////////////////
