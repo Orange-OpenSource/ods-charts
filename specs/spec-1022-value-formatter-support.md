@@ -51,12 +51,26 @@ Affected documentation files:
 - Update all ODS documentation examples that use `tooltip.formatter` for value-only formatting to use `tooltip.valueFormatter` instead, aligning with ECharts best practice.
 - Preserve the existing `tooltip.formatter` bridge for backward compatibility, but no longer recommend it in documentation for value-only formatting.
 
+## ECharts version compatibility decision
+
+Three approaches were considered for managing the transition from `tooltip.formatter` to `tooltip.valueFormatter`:
+
+1. **Runtime version detection** — detect the installed ECharts version and conditionally use `formatter` or `valueFormatter`. **Rejected**: ECharts is not a declared `peerDependency` of ODS Charts (it appears only in `devDependencies` as `"echarts": "^6.0.0"`), so its version is not reliably accessible at runtime from inside the library. Runtime version branching would also introduce a fragile conditional that must be maintained indefinitely.
+
+2. **Require `valueFormatter`, drop `formatter` for value formatting** — support `valueFormatter` as the only documented path for value formatting, while keeping the existing `tooltip.formatter` bridge silently active for backward compatibility. **Selected**: The project already targets `echarts ^6.0.0`, which implies ECharts ≥ 5.3.0 (the version that introduced `valueFormatter`) as a hard minimum. No user in the supported range is on a version that lacks `valueFormatter`.
+
+3. **Add an ODS configuration flag to keep using `formatter`** — add a parameter to `ODSChartsPopoverConfig` to opt into legacy behavior. **Rejected**: this would add permanent complexity to support a version of ECharts (`< 5.3.0`) that is entirely outside the declared compatibility range of ODS Charts.
+
+**Decision: option 2.** The `tooltip.formatter` bridge remains active without any change (backward compatibility for existing user code), but is no longer the recommended or documented approach for value-only formatting. No runtime version detection. No new configuration flag.
+
 ## Out of Scope
 
 - Changing the public API of `ODSChartsPopoverDefinition`.
 - Changing the HTML structure or CSS of ODS popovers.
 - Supporting `valueFormatter` on axis-level tooltip (axis pointers do not display formatted values through ODS).
 - Migrating uses of `tooltip.formatter` that genuinely replace the full tooltip template (not just the value) — those remain valid uses of `formatter`.
+- Runtime ECharts version detection.
+- Any new ODS configuration flag for formatter compatibility mode.
 
 ## Current Architecture (summary)
 
