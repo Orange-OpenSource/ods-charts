@@ -19,7 +19,7 @@ ECharts supports `valueFormatter` at two levels:
 **Signature:**
 
 ```ts
-valueFormatter: (value: number | string, dataIndex: number) => string;
+valueFormatter: (value: number | string, dataIndex: number) => string | undefined;
 ```
 
 ODS Charts intercepts all `tooltip` configuration to render popovers through its own HTML pipeline. As a result, any `valueFormatter` set by the user in their chart options is **silently discarded**: ODS replaces the ECharts native `tooltip.formatter` with its own implementation. The user has no way to customize the displayed value without resorting to `ODSChartsPopoverDefinition.getPopupContentValue`, which is an ODS-specific API and not compatible with standard ECharts usage.
@@ -231,7 +231,7 @@ tooltip: {
 
 ```js
 tooltip: {
-  valueFormatter: (value) => Math.round(value * 100) / 100 + ' °C',
+  valueFormatter: (value, _dataIndex) => Math.round(value * 100) / 100 + ' °C',
 },
 ```
 
@@ -247,7 +247,7 @@ Update the prose description and the live code block (`div6_` script) to use `va
 
 ```js
 tooltip: {
-  valueFormatter: (value) =>
+  valueFormatter: (value, _dataIndex) =>
     `<span style="color: red; font-size:x-large">${Math.round(value * 100) / 100}</span> °C`,
 },
 ```
@@ -260,7 +260,7 @@ Replace the live code's `tooltip.formatter` with `tooltip.valueFormatter`:
 
 ```js
 tooltip: {
-  valueFormatter: (value) => Math.round(value * 100) / 100 + ' °C',
+  valueFormatter: (value, _dataIndex) => Math.round(value * 100) / 100 + ' °C',
 },
 ```
 
@@ -280,7 +280,7 @@ With:
 
 ```js
 tooltip: {
-  valueFormatter: (value) => Math.round(value),
+  valueFormatter: (value, _dataIndex) => Math.round(value),
 },
 ```
 
@@ -300,7 +300,7 @@ With:
 
 ```js
 tooltip: {
-  valueFormatter: (value) => value ? Math.round(value * 100) / 100 + '$' : undefined,
+  valueFormatter: (value, _dataIndex) => value ? Math.round(value * 100) / 100 + '$' : undefined,
 },
 ```
 
@@ -313,7 +313,7 @@ The prose already mentions `valueFormatter` as the correct ECharts 6 form. The l
 ```js
 tooltip: {
   trigger: 'axis',
-  valueFormatter: (value) => Math.round(value * 100) / 100 + ' °C',
+  valueFormatter: (value, _dataIndex) => Math.round(value * 100) / 100 + ' °C',
 },
 ```
 

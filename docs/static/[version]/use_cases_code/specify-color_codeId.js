@@ -29,9 +29,7 @@ var dataOptions = {
     data: dates,
   },
   tooltip: {
-    formatter: function (params) {
-      return Math.round(params[0].value);
-    },
+    valueFormatter: (value, _dataIndex) => Math.round(value),
   },
   series: [
     {
