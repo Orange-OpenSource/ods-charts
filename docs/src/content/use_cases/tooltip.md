@@ -115,13 +115,12 @@ tooltip: {
       <p class="card-text pe-5">You may need to specify a specific tooltip content.</p>
       <p class="card-text pe-5">The first use case is to provide a sepcific content for a tooltip/popover value.</p>
       <p class="card-text pe-5">
-        For that you just have to specify the <code>formatter</code> method of the <code>tooltip</code> Apache Echarts option :
+        For that you just have to specify the <code>valueFormatter</code> method of the <code>tooltip</code> Apache Echarts option :
         <code>
           <pre>
             tooltip: {
-              formatter: function (params) {
-                return `&lt;span style="color: red; font-size:x-large">${Math.round(params[0].value * 100) / 100}&lt;/span> °C\`;
-              },
+              valueFormatter: (value) =>
+                `&lt;span style="color: red; font-size:x-large">${Math.round(value * 100) / 100}&lt;/span> °C`,
             },
           </pre>
         </code>
@@ -179,9 +178,8 @@ tooltip: {
             data: dates,
           },
           tooltip: {
-            formatter: function (params) {
-              return `<span style="color: red; font-size:x-large">${Math.round(params[0].value * 100) / 100}</span> °C`;
-            },
+            valueFormatter: (value) =>
+              `<span style="color: red; font-size:x-large">${Math.round(value * 100) / 100}</span> °C`,
           },
           series: [
             {

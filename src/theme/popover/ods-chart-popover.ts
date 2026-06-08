@@ -497,6 +497,41 @@ export class ODSChartsPopover {
         delete dataOptions.tooltip.formatter;
       }
 
+      // Handle tooltip.valueFormatter (ECharts 5.3.0+)
+      // Collect per-series valueFormatter before handling the global one
+      const perSeriesValueFormatters = new Map<number, (value: any, dataIndex: number) => string>();
+      if (Array.isArray(dataOptions?.series)) {
+        (dataOptions.series as any[]).forEach((series: any, index: number) => {
+          if (series?.tooltip?.valueFormatter) {
+            perSeriesValueFormatters.set(index, series.tooltip.valueFormatter);
+            series.tooltip = cloneDeepObject(series.tooltip);
+            delete series.tooltip.valueFormatter;
+          }
+        });
+      }
+
+      const globalValueFormatter: ((value: any, dataIndex: number) => string) | undefined = dataOptions?.tooltip?.valueFormatter;
+
+      if (globalValueFormatter || perSeriesValueFormatters.size > 0) {
+        if (dataOptions?.tooltip?.valueFormatter) {
+          dataOptions.tooltip = cloneDeepObject(dataOptions.tooltip);
+          delete dataOptions.tooltip.valueFormatter;
+        }
+        if (!this.popoverDefinition.getPopupContentValue) {
+          this.popoverDefinition = cloneDeepObject(this.popoverDefinition);
+          this.popoverDefinition.getPopupContentValue = (tooltipElement: ODSChartsPopoverItem) => {
+            const perSeries = perSeriesValueFormatters.get(tooltipElement.seriesIndex);
+            if (perSeries) {
+              return perSeries(tooltipElement.itemValue, tooltipElement.dataIndex);
+            }
+            if (globalValueFormatter) {
+              return globalValueFormatter(tooltipElement.itemValue, tooltipElement.dataIndex);
+            }
+            return tooltipElement.itemValue;
+          };
+        }
+      }
+
       if (!this.popoverConfig.shared && 'none' === this.popoverConfig.axisPointer) {
         mergeObjectsAndReplaceArrays(popoverOptions, { tooltip: { trigger: 'item' } });
       } else {

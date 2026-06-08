@@ -22,11 +22,7 @@ title: Add unit - Specific use cases - ODS Charts
               }
             },
             tooltip: {
-              formatter: function (params) {
-                return (
-                  Math.round(params[0].value * 100) / 100 + " °C"
-                );
-              }
+              valueFormatter: (value) => Math.round(value * 100) / 100 + " °C",
             },
           </pre>
         </code>
@@ -91,9 +87,7 @@ title: Add unit - Specific use cases - ODS Charts
         },
       },
       tooltip: {
-        formatter: function (params) {
-          return Math.round(params[0].value * 100) / 100 + ' °C';
-        },
+        valueFormatter: (value) => Math.round(value * 100) / 100 + ' °C',
       },
       series: [
         {
