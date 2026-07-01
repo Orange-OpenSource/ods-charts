@@ -72,7 +72,7 @@
     "@types/node": "^24.9.1",
     "@typescript-eslint/eslint-plugin": "^8.60.1",
     "@typescript-eslint/parser": "^8.60.1",
-    "astro": "^6.4.4",
+    "astro": "^7.0.5",
     "echarts": "^6.0.0",
     "eslint": "^10.0.0",
     "husky": "^9.1.7",
