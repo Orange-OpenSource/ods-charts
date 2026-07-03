@@ -108,7 +108,7 @@ describe('ODSChartsTheme.getSeriesColor', () => {
     });
   });
 
-  describe('TC-4 — getSeriesColor consistency with marker helpers', () => {
+  describe('TC-4 — getSeriesColor stability for repeated calls', () => {
     it('should return a stable and correct color for each series index', () => {
       // getLegendMarker/getPopoverMarker both delegate to getSeriesColor internally.
       // Verifying that getSeriesColor is stable ensures that any caller (including
