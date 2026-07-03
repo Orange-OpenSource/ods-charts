@@ -40,72 +40,9 @@ tooltip: {
           <div id="div1_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div1_');
-      </script>
     </div>
   </div>
-  <script id="div1_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-
-    // Data to be displayed
-    var div1_dataOptions = {
-      grid: {
-        left: '0%',
-        right: '0%',
-      },
-      xAxis: {
-        type: 'category',
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      },
-      yAxis: {},
-      series: [
-        {
-          data: [10, 22, 28.8956454657, 23, 19, 15],
-          type: 'bar',
-        },
-        {
-          data: [12, 28.8956454657, 23, 15, 15, 18],
-          type: 'line',
-        },
-      ],
-      legend: {
-        data: ['label 1', 'label 2'],
-      },
-      tooltip: {
-        confine: true,
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODS Charts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var div1_themeManager = ODSCharts.getThemeManager();
-    echarts.registerTheme(div1_themeManager.name, div1_themeManager.theme);
-
-    // Get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('div1_chart');
-    var myChart = echarts.init(div, div1_themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    div1_themeManager.setDataOptions(div1_dataOptions);
-    // Register the externalization of the legend.
-    div1_themeManager.externalizeLegends(myChart, '#div1_legend');
-    // Manage window size changed
-    div1_themeManager.manageChartResize(myChart, 'div1_chart');
-    // Observe dark / light mode changes
-    div1_themeManager.manageThemeObserver(myChart);
-    // Register the externalization of the tooltip/popup
-    div1_themeManager.externalizePopover();
-    // Display the chart using the configured theme and data.
-    myChart.setOption(div1_themeManager.getChartOptions());
-
-  </script>
+  <script src="../../use_cases_code/tooltip_div1_codeId.js" id="div1_codeId" onload="addViewCode('div1_')"></script>
 </div>
 
 <div class="container-xxl pt-3">
@@ -144,88 +81,7 @@ tooltip: {
           <div id="div6_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div6_');
-      </script>
-      <script id="div6_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        var goals = new Array(...new Array(12).keys()).map((i) => {
-          return 50 + Math.random() * 50;
-        });
-
-        var resultsOK = new Array(...new Array(12).keys()).map((i) => {
-          return 50 + Math.random() * 50;
-        });
-
-        var resultsNOK = new Array(...new Array(12).keys()).map((i) => {
-          return 50 + Math.random() * 50;
-        });
-        var dates = new Array(...new Array(12).keys()).map((i) => {
-          var d = new Date();
-          d.setMonth(d.getMonth() - i);
-          return d.toLocaleDateString(undefined, {
-            month: 'short',
-            year: 'numeric',
-          });
-        });
-
-        // Data to be displayed
-        var div6_dataOptions = {
-          xAxis: {
-            type: 'category',
-            data: dates,
-          },
-          tooltip: {
-            formatter: function (params) {
-              return `<span style="color: red; font-size:x-large">${Math.round(params[0].value * 100) / 100}</span> °C`;
-            },
-          },
-          series: [
-            {
-              data: resultsOK,
-              type: 'bar',
-            },
-            {
-              data: resultsNOK,
-              type: 'bar',
-            },
-            {
-              data: goals,
-              type: 'line',
-            },
-          ],
-          legend: {
-            data: ['Results OK', 'Results NOK', 'Goal'],
-          },
-        };
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div6_themeManager = ODSCharts.getThemeManager();
-        echarts.registerTheme(div6_themeManager.name, div6_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div6_chart');
-        var myChart = echarts.init(div, div6_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div6_themeManager.setDataOptions(div6_dataOptions);
-        // Register the externalization of the legend.
-        div6_themeManager.manageChartResize(myChart, 'div6_chart');
-        // Observe dark / light mode changes
-        div6_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup
-        div6_themeManager.externalizePopover();
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div6_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div6_codeId.js" id="div6_codeId" onload="addViewCode('div6_')"></script>
     </div>
 
   </div>
@@ -270,64 +126,7 @@ tooltip: {
           <div id="div2_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div2_');
-      </script>
-      <script id="div2_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        // Data to be displayed
-        var div2_dataOptions = {
-          xAxis: { type: 'category', data: ['24 May', '25 May', '26 May', '27 May', '28 May', '29 May', '30 May'] },
-          yAxis: {},
-          series: [
-            { data: [10, 22, 28.8956454657, 23, 19, 15], type: 'bar', barWidth: 30 },
-            { data: [12, 28.8956454657, 23, 15, 15, 18], type: 'bar', barWidth: 30 },
-          ],
-          legend: { show: false },
-          tooltip: {
-            confine: true,
-          },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 10,
-            bottom: 0,
-            containLabel: true,
-          },
-        };
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div2_themeManager = ODSCharts.getThemeManager({});
-        echarts.registerTheme(div2_themeManager.name, div2_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div2_chart');
-        var myChart = echarts.init(div, div2_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div2_themeManager.setDataOptions(div2_dataOptions);
-        // Register the externalization of the legend.
-        div2_themeManager.manageChartResize(myChart, 'div2_chart');
-        // Observe dark / light mode changes
-        div2_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup
-        div2_themeManager.externalizePopover(undefined, {
-          ...ODSCharts.ODSChartsPopoverManagers.NONE,
-          getPopupContentLine: ({ seriesName, itemValue , seriesIndex }) => {
-            return `<p>${div2_themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
-          },
-        });
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div2_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div2_codeId.js" id="div2_codeId" onload="addViewCode('div2_')"></script>
     </div>
 
   </div>
@@ -366,66 +165,7 @@ tooltip: {
           <div id="div3_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div3_');
-      </script>
-      <script id="div3_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        // Data to be displayed
-        var div3_dataOptions = {
-          xAxis: { type: 'category', data: ['24 May', '25 May', '26 May', '27 May', '28 May', '29 May', '30 May'] },
-          yAxis: {},
-          series: [
-            { data: [10, 22, 28.8956454657, 23, 19, 15], type: 'bar', barWidth: 30 },
-            { data: [12, 28.8956454657, 23, 15, 15, 18], type: 'bar', barWidth: 30 },
-          ],
-          legend: { show: false },
-          tooltip: {
-            confine: true,
-          },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 10,
-            bottom: 0,
-            containLabel: true,
-          },
-        };
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div3_themeManager = ODSCharts.getThemeManager({
-          cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
-        });
-        echarts.registerTheme(div3_themeManager.name, div3_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div3_chart');
-        var myChart = echarts.init(div, div3_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div3_themeManager.setDataOptions(div3_dataOptions);
-        // Register the externalization of the legend.
-        div3_themeManager.manageChartResize(myChart, 'div3_chart');
-        // Observe dark / light mode changes
-        div3_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup
-        div3_themeManager.externalizePopover(undefined, {
-          ...ODSCharts.ODSChartsPopoverManagers.BOOSTED5,
-          getPopupContentLine: ({ seriesName, itemValue }) => {
-            return `<p>This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
-          },
-        });
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div3_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div3_codeId.js" id="div3_codeId" onload="addViewCode('div3_')"></script>
     </div>
 
   </div>
@@ -464,75 +204,7 @@ tooltip: {
           <div id="div4_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div4_');
-      </script>
-      <script id="div4_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        // Data to be displayed
-        var div4_dataOptions = {
-          xAxis: { type: 'category', data: ['24 May', '25 May', '26 May', '27 May', '28 May', '29 May', '30 May'] },
-          yAxis: {},
-          series: [
-            { data: [510, 1414, 1412, 1406, 1400, 1430, 784], type: 'bar', stack: 'true', barWidth: 30 },
-            { data: [5, 0, 10, 20, 0, 0, 0], type: 'bar', stack: 'true', barWidth: 30 },
-          ],
-          legend: { show: false },
-          tooltip: {
-            confine: true,
-            enterable: true,
-          },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 10,
-            bottom: 0,
-            containLabel: true,
-          },
-        };
-
-        var popupContents = [
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >510 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >5 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1414 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1412 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >10 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1406 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >20 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1400 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1430 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >784 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-        ];
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div4_themeManager = ODSCharts.getThemeManager({ colors: [{ colorIndex: 4, colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS }] });
-        echarts.registerTheme(div4_themeManager.name, div4_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div4_chart');
-        var myChart = echarts.init(div, div4_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div4_themeManager.setDataOptions(div4_dataOptions);
-        // Register the externalization of the legend.
-        div4_themeManager.manageChartResize(myChart, 'div4_chart');
-        // Observe dark / light mode changes
-        div4_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup
-        div4_themeManager.externalizePopover(undefined, {
-          ...ODSCharts.ODSChartsPopoverManagers.NONE,
-          getPopupContent: (tooltipElements) => {
-            return tooltipElements.length > 0 && popupContents.length > tooltipElements[0].dataIndex ? popupContents[tooltipElements[0].dataIndex] : '';
-          },
-        });
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div4_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div4_codeId.js" id="div4_codeId" onload="addViewCode('div4_')"></script>
     </div>
 
   </div>
@@ -559,83 +231,7 @@ tooltip: {
           <div id="div5_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div5_');
-      </script>
-      <script id="div5_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        // Data to be displayed
-        var div5_dataOptions = {
-          xAxis: { type: 'category', data: ['24 May', '25 May', '26 May', '27 May', '28 May', '29 May', '30 May'] },
-          yAxis: {},
-          series: [
-            { data: [510, 1414, 1412, 1406, 1400, 1430, 784], type: 'bar', stack: 'true', barWidth: 30 },
-            { data: [5, 0, 10, 20, 0, 0, 0], type: 'bar', stack: 'true', barWidth: 30 },
-          ],
-          legend: { show: false },
-          tooltip: {
-            confine: true,
-            enterable: true,
-          },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 10,
-            bottom: 0,
-            containLabel: true,
-          },
-        };
-
-        var popupContents = [
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >510 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >5 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1414 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1412 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >10 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1406 errors</a>\n</span><br><span class="font-weight-bold">Notification - FIFO: <a href="../"\n                target="_self"\n                class=""\n            >20 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1400 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >1430 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-          '<span class="font-weight-bold">Notification - Http push: <a href="../"\n                target="_self"\n                class=""\n            >784 errors</a>\n</span><br><span class="font-weight-bold"><a data-analytics="show_audit_logs_from_dashboard"\n                href="../"\n                target="_self"\n                class=""\n            >See all errors</a>\n</span>',
-        ];
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div5_themeManager = ODSCharts.getThemeManager({
-          colors: [
-            {
-              colorIndex: 4,
-              colorPalette: ODSCharts.ODSChartsColorsSet.DARKER_TINTS,
-              cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
-            },
-          ],
-        });
-        echarts.registerTheme(div5_themeManager.name, div5_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div5_chart');
-        var myChart = echarts.init(div, div5_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div5_themeManager.setDataOptions(div5_dataOptions);
-        // Register the externalization of the legend.
-        div5_themeManager.manageChartResize(myChart, 'div5_chart');
-        // Observe dark / light mode changes
-        div5_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup
-        div5_themeManager.externalizePopover(undefined, {
-          ...ODSCharts.ODSChartsPopoverManagers.BOOSTED5,
-          getPopupContent: (tooltipElements) => {
-            return tooltipElements.length > 0 && popupContents.length > tooltipElements[0].dataIndex ? popupContents[tooltipElements[0].dataIndex] : '';
-          },
-        });
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div5_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div5_codeId.js" id="div5_codeId" onload="addViewCode('div5_')"></script>
     </div>
 
   </div>
@@ -682,73 +278,7 @@ tooltip: {
           <div id="div7_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('div7_');
-      </script>
-      <script id="div7_codeId">
-        ///////////////////////////////////////////////////
-        // Used data
-        ///////////////////////////////////////////////////
-
-        // Data to be displayed
-        var div7_dataOptions = {
-          xAxis: { type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
-          yAxis: {},
-          series: [
-            { name: 'Sales', data: [120, 200, 150, 80, 70, 110, 130], type: 'bar', barWidth: 30 },
-            { name: 'Revenue', data: [150, 230, 224, 218, 135, 147, 260], type: 'line' },
-          ],
-          legend: { data: ['Sales', 'Revenue'] },
-          tooltip: {
-            confine: true,
-          },
-          grid: {
-            left: 0,
-            right: 0,
-            top: 10,
-            bottom: 0,
-            containLabel: true,
-          },
-        };
-
-        ///////////////////////////////////////////////////
-        // ODS Charts
-        ///////////////////////////////////////////////////
-        // Build the theme
-        var div7_themeManager = ODSCharts.getThemeManager({});
-        echarts.registerTheme(div7_themeManager.name, div7_themeManager.theme);
-
-        // Get the chart holder and initiate it with the generated theme
-        var div = document.getElementById('div7_chart');
-        var myChart = echarts.init(div, div7_themeManager.name, {
-          renderer: 'svg',
-        });
-
-        // Set the data to be displayed.
-        div7_themeManager.setDataOptions(div7_dataOptions);
-        // Register the externalization of the legend.
-        div7_themeManager.externalizeLegends(myChart, '#div7_legend');
-        // Manage window size changed
-        div7_themeManager.manageChartResize(myChart, 'div7_chart');
-        // Observe dark / light mode changes
-        div7_themeManager.manageThemeObserver(myChart);
-        // Register the externalization of the tooltip/popup with custom template
-        div7_themeManager.externalizePopover(undefined, {
-          ...ODSCharts.ODSChartsPopoverManagers.NONE,
-          getPopupTemplate: (categoryLabel, tooltipElements) => {
-            let content = `<div class="custom-tooltip" style="padding: 12px; background-color: #fff; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">`;
-            content += `<h6 class="text-primary mb-2" style="font-weight: bold;">${categoryLabel}</h6>`;
-            content += `<ul class="list-unstyled mb-0">`;
-            tooltipElements.forEach(element => {
-              content += `<li style="margin-bottom: 5px;">${element.marker} <strong>${element.seriesName}:</strong> ${element.itemValue}</li>`;
-            });
-            content += `</ul></div>`;
-            return content;
-          },
-        });
-        // Display the chart using the configured theme and data.
-        myChart.setOption(div7_themeManager.getChartOptions());
-      </script>
+      <script src="../../use_cases_code/tooltip_div7_codeId.js" id="div7_codeId" onload="addViewCode('div7_')"></script>
     </div>
 
   </div>
