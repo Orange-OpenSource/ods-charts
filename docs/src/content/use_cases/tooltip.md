@@ -245,12 +245,20 @@ tooltip: {
           <pre>
             themeManager.externalizePopover(undefined, {
               ...ODSCharts.ODSChartsPopoverManagers.NONE,
-              getPopupContentLine: ({ seriesName, itemValue, seriesIndex }) => {
-                return `&lt;p>${themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
+              getPopupContentLine: ({ seriesName, itemValue, marker }) => {
+                return `&lt;p>${marker}This is my HTML code of one line for ${itemValue} of ${seriesName}&lt;/p>`;
               },
             });
           </pre>
         </code>
+      </p>
+      <p class="card-text pe-5">
+        Note: as an alternative, you can still use <code>themeManager.getPopoverMarker(seriesIndex)</code> in your custom renderer.
+      </p>
+      <p class="card-text pe-5">
+        Prefer using <code>marker</code> from <code>ODSChartsPopoverItem</code> because it is pre-populated with the marker actually used in the tooltip/popover.
+        This is especially useful when item colors override series colors (for example on bar charts). <code>themeManager.getPopoverMarker(seriesIndex)</code>
+        still works, but it is based on the series color.
       </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
@@ -321,8 +329,8 @@ tooltip: {
         // Register the externalization of the tooltip/popup
         div2_themeManager.externalizePopover(undefined, {
           ...ODSCharts.ODSChartsPopoverManagers.NONE,
-          getPopupContentLine: ({ seriesName, itemValue , seriesIndex }) => {
-            return `<p>${div2_themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
+          getPopupContentLine: ({ seriesName, itemValue, marker }) => {
+            return `<p>${marker}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
           },
         });
         // Display the chart using the configured theme and data.
