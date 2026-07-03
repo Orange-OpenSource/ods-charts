@@ -258,5 +258,10 @@ private getTooltipElements(
 - ✅ `ODSChartsPopoverItem.marker` is populated with ODS-formatted HTML marker
 - ✅ Marker color matches the series/item color context
 - ✅ Customer can use the `marker` attribute directly in custom popover templates
+
+## Release Note Entry
+
+- Fixed `ODSChartsPopoverItem.marker` so custom popover/tooltip renderers now receive the ODS-formatted marker HTML (instead of raw Apache ECharts marker).
+- `themeManager.getPopoverMarker(seriesIndex)` remains supported; `tooltipElement.marker` is now the preferred value because it reflects the actual marker used in context, including item-level color overrides.
 - ✅ No changes to public API
 - ✅ All existing tests pass
