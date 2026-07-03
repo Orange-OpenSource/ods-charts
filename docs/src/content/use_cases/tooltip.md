@@ -255,6 +255,11 @@ tooltip: {
       <p class="card-text pe-5">
         Note: as an alternative, you can still use <code>themeManager.getPopoverMarker(seriesIndex)</code> in your custom renderer.
       </p>
+      <p class="card-text pe-5">
+        Prefer using <code>marker</code> from <code>ODSChartsPopoverItem</code> because it is pre-populated with the marker actually used in the tooltip/popover.
+        This is especially useful when item colors override series colors (for example on bar charts). <code>themeManager.getPopoverMarker(seriesIndex)</code>
+        still works, but it is based on the series color.
+      </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
           <use xlink:href="#lightning-charge-fill" />

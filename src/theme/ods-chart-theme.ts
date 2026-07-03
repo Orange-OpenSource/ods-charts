@@ -681,6 +681,10 @@ export class ODSChartsTheme {
 
   /**
    * Get the popover marker HTML code for a specific series.
+   *
+   * The returned marker is series-based (it uses the series color from the current theme context).
+   * In custom popover/tooltip renderers, prefer `ODSChartsPopoverItem.marker` when available,
+   * because it reflects the marker actually used for the rendered line (including item-level color overrides).
    * @param seriesIndex: index of the series
    * @returns the HTML code of the popover marker
    */
