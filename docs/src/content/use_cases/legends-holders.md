@@ -11,21 +11,7 @@ title: Specific legend holders - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title pe-5">Vertical legend holder example</h5>
-      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right       postItemContent: (legendName, legendIndex, color, colorIndex) => {
-        // Vous pouvez utiliser tous les paramètres pour personnaliser le contenu
-        switch(legendName) {
-          case 'Sales':
-            return `&lt;div class="legend-note sales-note" style="color: ${color}"&gt;
-                     Legend ${legendIndex + 1} - Including taxes
-                   &lt;/div&gt;`;
-          case 'Profit':
-            return `&lt;div class="legend-note profit-note"&gt;
-                     Using color ${colorIndex + 1} - After adjustments
-                   &lt;/div&gt;`;
-          default:
-            return '';
-        }
-      }ph.</p>
+      <p class="card-text pe-5">You may wish to display the legends vertically, for example to the right of the graph.</p>
       <p class="card-text pe-5">
         To do this, you can use the Apache ECharts <code>legend.orient</code> option:
         <code>
@@ -51,7 +37,7 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
         </p>
       </div>
       <p class="card-text pe-5">In the example below, we prefer the Apache ECharts <code>legend.orient</code> method.</p>
-      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">      
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
           <use xlink:href="#lightning-charge-fill" />
         </svg>
@@ -75,75 +61,9 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('vertical_');
-      </script>
+      <script src="../../use_cases_code/legends-holders_vertical_codeId.js" id="vertical_codeId" onload="addViewCode('vertical_')"></script>
     </div>
   </div>
-  <script id="vertical_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-
-    // this is the data to be displayed
-    var dataOptions = {
-      yAxis: {
-        type: 'category',
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      },
-      xAxis: {},
-      series: [
-        {
-          data: [10, 22, 28.8956454657, 23, 19, 15],
-          type: 'bar',
-          stack: true,
-        },
-        {
-          data: [28.8956454657, 23, 19, 15, 18, 12],
-          type: 'bar',
-          stack: true,
-        },
-        {
-          data: [19, 15, 18, 12, 28.8956454657, 23],
-          type: 'bar',
-          stack: true,
-        },
-      ],
-      legend: {
-        data: ['label 0', 'label 1', 'label 2'],
-        orient: 'vertical',
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODSCharts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager();
-
-    // register this theme to echarts
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('barChartSH_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    themeManager.setDataOptions(dataOptions);
-    // Register the externalization of the legend.
-    themeManager.externalizeLegends(myChart, '#barChartSH_legend');
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'barChartSH_chart');
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover();
-    // Observe dark / light mode changes
-    themeManager.manageThemeObserver(myChart);
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
 
   <div class="card w-100">
     <div class="card-body">
@@ -183,77 +103,9 @@ legend: {
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('format_');
-      </script>
+      <script src="../../use_cases_code/legends-holders_format_codeId.js" id="format_codeId" onload="addViewCode('format_')"></script>
     </div>
   </div>
-  <script id="format_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-
-    // this is the data to be displayed
-    var dataOptions = {
-      yAxis: {
-        type: 'category',
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      },
-      xAxis: {},
-      series: [
-        {
-          name: 'Label 1',
-          data: [10, 22, 28.8956454657, 23, 19, 15],
-          type: 'bar',
-          stack: true,
-        },
-        {
-          name: 'Label 2',
-          data: [28.8956454657, 23, 19, 15, 18, 12],
-          type: 'bar',
-          stack: true,
-        },
-        {
-          name: 'Label 3',
-          data: [19, 15, 18, 12, 28.8956454657, 23],
-          type: 'bar',
-          stack: true,
-        },
-      ],
-      legend: {
-        formatter: (name)=> name + ' zone'
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODSCharts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager();
-
-    // register this theme to echarts
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('format_barChart_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    themeManager.setDataOptions(dataOptions);
-    // Register the externalization of the legend.
-    themeManager.externalizeLegends(myChart, '#format_barChart_legend');
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'format_barChart_chart');
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover();
-    // Observe dark / light mode changes
-    themeManager.manageThemeObserver(myChart);
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
 
   <div class="card w-100 mt-3">
     <div class="card-body">
@@ -313,116 +165,9 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('stacked_');
-      </script>
+      <script src="../../use_cases_code/legends-holders_stacked_codeId.js" id="stacked_codeId" onload="addViewCode('stacked_')"></script>
     </div>
-
   </div>
-  <script id="stacked_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-
-    var average = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-
-    var results1 = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-    var results2 = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-    var results3 = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-    var goals1 = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-    var goals2 = new Array(...new Array(12).keys()).map((i) => {
-      return 50 + Math.random() * 50;
-    });
-
-    var dates = new Array(...new Array(12).keys()).map((i) => {
-      var d = new Date();
-      d.setMonth(d.getMonth() - i);
-      return d.toLocaleDateString(undefined, {
-        month: 'short',
-        year: 'numeric',
-      });
-    });
-
-    // Data to be displayed
-    var dataOptions = {
-      xAxis: {
-        type: 'category',
-        data: dates,
-      },
-      yAxis: {},
-      series: [
-        {
-          data: results1,
-          type: 'bar',
-          stack: 'result',
-        },
-        {
-          data: results2,
-          type: 'bar',
-          stack: 'result',
-        },
-        {
-          data: results3,
-          type: 'bar',
-          stack: 'result',
-        },
-        {
-          data: goals1,
-          type: 'bar',
-          stack: 'goals',
-        },
-        {
-          data: goals2,
-          type: 'bar',
-          stack: 'goals',
-        },
-        {
-          data: average,
-          type: 'line',
-        },
-      ],
-      legend: {
-        data: ['Results 1', 'Results 2', 'Results 3', 'Goal 1', 'Goal 2', 'Average'],
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODS Charts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager();
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // Get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('barLine_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    themeManager.setDataOptions(dataOptions);
-    // Register the externalization of the legend.
-    themeManager.externalizeLegends(myChart, [{ legendHolderSelector: '#results_stack_legend', seriesRef: ['result'], orientation: 'vertical' }, { legendHolderSelector: '#goals_stack_legend', seriesRef: ['goals'], orientation: 'vertical' }, { legendHolderSelector: '#line_legend' }]);
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'barLine_chart');
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover();
-    // Observe dark / light mode changes
-    themeManager.manageThemeObserver(myChart);
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
 
   <div class="card w-100 mt-3">
     <div class="card-body">
@@ -452,7 +197,7 @@ themeManager.externalizeLegends(
       </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-          <use xlink:href="#lightning-charge-fill" />          
+          <use xlink:href="#lightning-charge-fill" />
         </svg>
         <span class="visually-hidden">Open in playground using StackBlitz</span>
       </button>
@@ -474,89 +219,13 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('custom_simple_content_');
-      </script>
+      <script src="../../use_cases_code/legends-holders_custom_simple_content_codeId.js" id="custom_simple_content_codeId" onload="addViewCode('custom_simple_content_')"></script>
     </div>
-
   </div>
-  <script id="custom_simple_content_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
 
-    // this is the data to be displayed
-    var dataOptions = {
-      yAxis: {
-        type: 'category',
-        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      },
-      xAxis: {},
-      series: [
-        {
-          data: [10, 22, 28.8956454657, 23, 19, 15],
-          type: 'bar',
-          name: 'Label 1',
-          stack: true,
-        },
-        {
-          data: [28.8956454657, 23, 19, 15, 18, 12],
-          type: 'bar',
-          name: 'Label 2',
-          stack: true,
-        },
-        {
-          data: [19, 15, 18, 12, 28.8956454657, 23],
-          type: 'bar',
-          name: 'Label 3',
-          stack: true,
-        },
-      ],
-      legend: {
-        orient: 'vertical',
-      },
-    };
-
-    ///////////////////////////////////////////////////
-    // ODSCharts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager();
-
-    // register this theme to echarts
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('barChartCSC_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Set the data to be displayed.
-    themeManager.setDataOptions(dataOptions);
-    // Register the externalization of the legend.
-    themeManager.externalizeLegends(myChart,
-      {
-        legendHolderSelector: '#barChartCSC_legend',
-        postItemContent: {
-          'Label 2': '<small>(partial result)</small>',
-        }
-      }
-    );
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'barChartCSC_chart');
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover();
-    // Observe dark / light mode changes
-    themeManager.manageThemeObserver(myChart);
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
-
-<!--
-  Legend holder with custom content complex example
--->
+  <!--
+    Legend holder with custom content complex example
+  -->
   <div class="card w-100 mt-3">
     <div class="card-body">
       <h5 class="card-title pe-5">Legend holder with custom content complex example</h5>
@@ -654,11 +323,11 @@ themeManager.externalizeLegends(
       </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-          <use xlink:href="#lightning-charge-fill" />  
-        </svg>        
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
         <span class="visually-hidden">Open in playground using StackBlitz</span>
       </button>
-      <div id="custom_content_htmlId">  
+      <div id="custom_content_htmlId">
         <div class="border border-subtle">
           <div class="chart_title mx-3">
             <h4 class="display-4 mx-3 mb-1 mt-3">Sales Chart</h4>
@@ -669,7 +338,7 @@ themeManager.externalizeLegends(
           </div>
           <div class="mx-3">
             <h6 class="mt-3 mb-2">Financial Performance (Function-based legend)</h6>
-            <div id="legend_with_custom_content"></div>  
+            <div id="legend_with_custom_content"></div>
             <h6 class="mt-4 mb-2">Year-over-Year Sales (Object-based legend)</h6>
             <div id="legend_with_object_content"></div>
             <h6 class="mt-4 mb-2">Web Analytics (Array-based legend)</h6>
@@ -679,264 +348,9 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script>
-        addViewCode('custom_content_');
-      </script>
+      <script src="../../use_cases_code/legends-holders_custom_content_codeId.js" id="custom_content_codeId" onload="addViewCode('custom_content_')"></script>
     </div>
-
   </div>
-  <script id="custom_content_codeId">
-    ///////////////////////////////////////////////////
-    // Used data
-    ///////////////////////////////////////////////////
-
-    // Sample data generation for different metrics
-    const generateData = () => Array(6).fill(0).map(() => Math.floor(Math.random() * 100));
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-
-    // Generate data for 9 different series (3 groups of 3 series each)
-    const data = {
-      group1: {
-        revenue: generateData(),
-        costs: generateData(),
-        profits: generateData()
-      },
-      group2: {
-        sales2025: generateData(),
-        sales2024: generateData(),
-        growth: generateData()
-      },
-      group3: {
-        pageviews: generateData(),
-        sessionDuration: generateData(),
-        bounce: generateData()
-      },
-      group4: {
-        visits: generateData(),
-        conversions: generateData(),
-        rate: generateData()
-      }
-    };
-
-    // Data configuration for the chart
-    const legendsDataOptions = {
-      xAxis: {
-        type: 'category',
-        data: months,
-      },
-      yAxis: [{
-        type: 'value',
-        name: 'Main Metrics',
-        position: 'left'
-      }, {
-        type: 'value',
-        name: 'Secondary Metrics',
-        position: 'right'
-      }],
-      series: [
-        // Group 1 - Function-based example
-        {
-          name: 'Revenue',
-          data: data.group1.revenue,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group1'
-        },
-        {
-          name: 'Costs',
-          data: data.group1.costs,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group1'
-        },
-        {
-          name: 'Net Profit',
-          data: data.group1.profits,
-          type: 'line',
-          yAxisIndex: 1,
-          smooth: true,
-          symbol: 'circle',
-          symbolSize: 8
-        },
-        // Group 2 - Object-based example
-        {
-          name: 'Sales 2025',
-          data: data.group2.sales2025,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group2'
-        },
-        {
-          name: 'Sales 2024',
-          data: data.group2.sales2024,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group2'
-        },
-        {
-          name: 'Growth Rate',
-          data: data.group2.growth,
-          type: 'line',
-          yAxisIndex: 1,
-          smooth: true,
-          symbol: 'diamond',
-          symbolSize: 8
-        },
-        // Group 3 - Array-based example
-        {
-          name: 'Pageviews',
-          data: data.group3.pageviews,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group3'
-        },
-        {
-          name: 'Session Duration',
-          data: data.group3.sessionDuration,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group3'
-        },
-        {
-          name: 'Bounce Rate',
-          data: data.group3.bounce,
-          type: 'line',
-          yAxisIndex: 1,
-          smooth: true,
-          symbol: 'triangle',
-          symbolSize: 8
-        },
-        // Group 4 - Global note example
-        {
-          name: 'Site Visits',
-          data: data.group4.visits,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group4'
-        },
-        {
-          name: 'Conversions',
-          data: data.group4.conversions,
-          type: 'bar',
-          yAxisIndex: 0,
-          stack: 'group4'
-        },
-        {
-          name: 'Success Rate',
-          data: data.group4.rate,
-          type: 'line',
-          yAxisIndex: 1,
-          smooth: true,
-          symbol: 'diamond',
-          symbolSize: 8
-        }
-     ]
-    };
-
-    ///////////////////////////////////////////////////
-    // ODS Charts
-    ///////////////////////////////////////////////////
-    // Build the theme
-    var themeManager = ODSCharts.getThemeManager();
-    echarts.registerTheme(themeManager.name, themeManager.theme);
-
-    // Get the chart holder and initiate it with the generated theme
-    var div = document.getElementById('customContent_chart');
-    var myChart = echarts.init(div, themeManager.name, {
-      renderer: 'svg',
-    });
-
-    // Style classes for legend notes
-    var styles = document.createElement('style');
-    styles.textContent = `
-      .global-note {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        font-style: italic;
-      }
-      .metric-note {
-        display: inline-block;
-        font-size: 0.85em;
-        background: #e9ecef;
-        border-radius: 4px;
-        padding: 2px 0px;
-      }
-      .revenue-note { color: #1b6ec2; }
-      .profit-note { color: #2b8a3e; }
-      .conversion-note { color: #e8590c; }
-    `;
-    document.head.appendChild(styles);
-
-    // Set up the chart with all series
-    themeManager.setDataOptions(legendsDataOptions);
-
-    // Configure the externalized legends with different postItemContent types
-    themeManager.externalizeLegends(myChart, [
-      {
-        // Example 1: Function-based content - Dynamic content based on legend label
-        legendHolderSelector: '#legend_with_custom_content',
-        orientation: 'horizontal',
-        seriesRef: ['Revenue', 'Costs', 'Net Profit'],
-        postItemContent: (legendLabel, legendName, legendIndex, color, colorIndex) => {
-          switch(legendLabel) {
-            case 'Revenue':
-              return `<span class="metric-note revenue-note">
-                       Gross revenue including taxes (${legendName} at index ${legendIndex + 1})
-                     </span>`;
-            case 'Costs':
-              return `<span class="metric-note profit-note">
-                       Operating expenses only (Using color ${color})
-                     </span>`;
-            case 'Net Profit':
-              return `<span class="metric-note conversion-note">
-                       After all deductions (Color palette index ${colorIndex + 1})
-                     </span>`;
-            default:
-              return '';
-          }
-        }
-      },
-      {
-        // Example 2: Object-based content - Direct mapping between labels and content
-        legendHolderSelector: '#legend_with_object_content',
-        orientation: 'horizontal',
-        seriesRef: ['Sales 2025', 'Sales 2024', 'Growth Rate'],
-        postItemContent: {
-          'Sales 2025': '<span class="metric-note revenue-note">Projected data</span>',
-          'Sales 2024': '<span class="metric-note profit-note">Historical data</span>',
-          'Growth Rate': '<span class="metric-note conversion-note">Year-over-year change</span>'
-        }
-      },
-      {
-        // Example 3: Array-based content - Position-based content matching
-        legendHolderSelector: '#legend_with_array_content',
-        orientation: 'horizontal',
-        seriesRef: ['Pageviews', 'Session Duration', 'Bounce Rate'],
-        postItemContent: [
-          '<span class="metric-note views-note">Total page impressions</span>',
-          '<span class="metric-note duration-note">Average time spent on site</span>',
-          '<span class="metric-note bounce-note">Session abandonment rate</span>'
-        ]
-      },
-      {
-        // Example 4: Content after all legends using afterLegendContent
-        legendHolderSelector: '#legend_with_string_content',
-        orientation: 'horizontal',
-        seriesRef: ['Site Visits', 'Conversions', 'Success Rate'],
-        afterLegendContent: '<div class="global-note">Data from our analytics platform - Updated daily</div>'
-      }
-    ]);
-
-    // Manage window size changed
-    themeManager.manageChartResize(myChart, 'customContent_chart');
-    // Register the externalization of the tooltip/popup
-    themeManager.externalizePopover();
-    // Observe dark / light mode changes
-    themeManager.manageThemeObserver(myChart);
-    // Display the chart using the configured theme and data.
-    myChart.setOption(themeManager.getChartOptions());
-
-  </script>
 
   <!--
     Pie chart with percent or value in legend example
@@ -998,117 +412,9 @@ themeManager.externalizeLegends(
                     <div id="pct_legend_pieChart_legend" class="pie-chart-legend"></div>
                   </div>
                 </div>
-              </div>              
-              <script>
-                addViewCode('pct_legend_');
-              </script>
+              </div>
+              <script src="../../use_cases_code/legends-holders_pct_legend_codeId.js" id="pct_legend_codeId" onload="addViewCode('pct_legend_')"></script>
             </div>
-            <script id="pct_legend_codeId">
-              ///////////////////////////////////////////////////
-              // Used data
-              ///////////////////////////////////////////////////
-              // this is the data to be displayed
-              var dataOptions = {
-                series: [
-                  {
-                    type: 'pie',
-                    data: [
-                      {
-                        name: 'Demonstrator',
-                        value: 15,
-                      },
-                      {
-                        name: 'Demonstrator LCD',
-                        value: 3,
-                      },
-                      {
-                        name: 'Microchip RN2483',
-                        value: 2,
-                      },
-                      {
-                        name: 'Demonstrator2',
-                        value: 1,
-                      },
-                      {
-                        name: ' RF Sensors',
-                        value: 1,
-                      },
-                      {
-                        name: 'Label 6',
-                        value: 1,
-                      },
-                      {
-                        name: 'Label 754',
-                        value: 1,
-                      },
-                    ],
-                    center: ['50%', '50%'],
-                    radius: ['0%', '85%'],
-                  },
-                ],
-                legend: {
-                  orient: 'vertical',
-                },
-              };
-              ///////////////////////////////////////////////////
-              // ODSCharts
-              ///////////////////////////////////////////////////
-              // Build the theme
-              var themeManager = ODSCharts.getThemeManager({
-                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
-                chartConfiguration:
-                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
-                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
-                cssSelector: '#pct_legend_pieChart_chart',
-              });
-              // register this theme to echarts
-              echarts.registerTheme(themeManager.name, themeManager.theme);
-              // get the chart holder and initiate it with the generated theme
-              var div = document.getElementById('pct_legend_pieChart_chart');
-              var myChart = echarts.init(div, themeManager.name, {
-                renderer: 'svg',
-              });
-              // Set the data to be displayed.
-              themeManager.setDataOptions(dataOptions);
-              // Register the externalization of the legend.
-              themeManager.externalizeLegends(myChart, {
-                legendHolderSelector: '#pct_legend_pieChart_legend',
-                postItemContent: (
-                  legendLabel,
-                  legendName,
-                  legendIndex,
-                  color,
-                  colorIndex
-                ) => {
-                  let total = 0;
-                  let value = 0;
-                  dataOptions.series[0].data.forEach((item) => {
-                    total += item.value;
-                    if (item.name === legendName) {
-                      value = item.value;
-                    }
-                  });
-                  let percent = ((value / total) * 100).toFixed(2);
-                  return percent + '%';
-                },
-              });
-              // Manage window size changed
-              themeManager.manageChartResize(myChart, 'pct_legend_pieChart_chart');
-              // Automatically manage data-bs-theme attribute change. Only needed if you want the
-              // chart to automatically react to the global light or dark theme change
-              themeManager.manageThemeObserver(myChart);
-              // Register the externalization of the tooltip/popup
-              themeManager.externalizePopover(
-                {
-                  enabled: true,
-                  shared: false,
-                  tooltip: false,
-                },
-                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
-              );
-              // Display the chart using the configured theme and data.
-              myChart.setOption(themeManager.getChartOptions());
-            </script>
           </div>
         </div>
         <div class="col-6">
@@ -1117,11 +423,11 @@ themeManager.externalizeLegends(
               <p class="card-text pe-5">In this example, we will use the <code>preItemContent()</code> method when configuring an externalized legend to display the value of the current item before the item in the legend.</p>
               <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
                 <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
-                  <use xlink:href="#lightning-charge-fill" />  
-                </svg>        
+                  <use xlink:href="#lightning-charge-fill" />
+                </svg>
                 <span class="visually-hidden">Open in playground using StackBlitz</span>
               </button>
-              <div id="value_legend_htmlId">      
+              <div id="value_legend_htmlId">
                 <style>
                   .value_legend .ods-charts-legend-pre-label-content {
                     font-weight: bold;
@@ -1154,114 +460,8 @@ themeManager.externalizeLegends(
                   </div>
                 </div>
               </div>
-              <script>
-                addViewCode('value_legend_');
-              </script>
+              <script src="../../use_cases_code/legends-holders_value_legend_codeId.js" id="value_legend_codeId" onload="addViewCode('value_legend_')"></script>
             </div>
-            <script id="value_legend_codeId">
-              ///////////////////////////////////////////////////
-              // Used data
-              ///////////////////////////////////////////////////
-              // this is the data to be displayed
-              var dataOptions = {
-                series: [
-                  {
-                    type: 'pie',
-                    data: [
-                      {
-                        name: 'Demonstrator',
-                        value: 15,
-                      },
-                      {
-                        name: 'Demonstrator LCD',
-                        value: 3,
-                      },
-                      {
-                        name: 'Microchip RN2483',
-                        value: 2,
-                      },
-                      {
-                        name: 'Demonstrator2',
-                        value: 1,
-                      },
-                      {
-                        name: ' RF Sensors',
-                        value: 1,
-                      },
-                      {
-                        name: 'Label 6',
-                        value: 1,
-                      },
-                      {
-                        name: 'Label 754',
-                        value: 1,
-                      },
-                    ],
-                    center: ['50%', '50%'],
-                    radius: ['0%', '85%'],
-                  },
-                ],
-                legend: {
-                  orient: 'vertical',
-                },
-              };
-              ///////////////////////////////////////////////////
-              // ODSCharts
-              ///////////////////////////////////////////////////
-              // Build the theme
-              var themeManager = ODSCharts.getThemeManager({
-                colors: ODSCharts.ODSChartsColorsSet.DEFAULT,
-                chartConfiguration:
-                  ODSCharts.ODSChartsConfiguration.getPieChartConfiguration(),
-                cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
-                cssSelector: '#value_legend_pieChart_chart',
-              });
-              // register this theme to echarts
-              echarts.registerTheme(themeManager.name, themeManager.theme);
-              // get the chart holder and initiate it with the generated theme
-              var div = document.getElementById('value_legend_pieChart_chart');
-              var myChart = echarts.init(div, themeManager.name, {
-                renderer: 'svg',
-              });
-              // Set the data to be displayed.
-              themeManager.setDataOptions(dataOptions);
-              // Register the externalization of the legend.
-              themeManager.externalizeLegends(myChart, {
-                legendHolderSelector: '#value_legend_pieChart_legend',
-                preItemContent: (
-                  legendLabel,
-                  legendName,
-                  legendIndex,
-                  color,
-                  colorIndex
-                ) => {
-                  console.log(legendLabel,
-                  legendName,
-                  legendIndex,
-                  color,
-                  colorIndex,
-                  dataOptions.series[0].data[legendIndex]?.value)
-                  return dataOptions.series[0].data[legendIndex]?.value?(
-                    Math.round(dataOptions.series[0].data[legendIndex].value * 100)/100 + ''):'';
-                },
-              });
-              // Manage window size changed
-              themeManager.manageChartResize(myChart, 'value_legend_pieChart_chart');
-              // Automatically manage data-bs-theme attribute change. Only needed if you want the
-              // chart to automatically react to the global light or dark theme change
-              themeManager.manageThemeObserver(myChart);
-              // Register the externalization of the tooltip/popup
-              themeManager.externalizePopover(
-                {
-                  enabled: true,
-                  shared: false,
-                  tooltip: false,
-                },
-                ODSCharts.ODSChartsPopoverManagers.BOOSTED5
-              );
-              // Display the chart using the configured theme and data.
-              myChart.setOption(themeManager.getChartOptions());
-            </script>
           </div>
         </div>
       </div>

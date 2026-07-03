@@ -45,71 +45,9 @@ series: [{ type: 'bar' }, { type: 'bar' }, ...]
           <div id="dataset_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('dataset_');
-      </script>
+      <script src="../../use_cases_code/dataset_dataset_codeId.js" id="dataset_codeId" onload="addViewCode('dataset_')"></script>
     </div>
   </div>
-  <script id="dataset_codeId">
-///////////////////////////////////////////////////
-// Used data with dataset
-///////////////////////////////////////////////////
-var dataOptions = {
-  dataset: {
-    source: [
-      ['Product', 'Q1', 'Q2', 'Q3', 'Q4'],
-      ['Apples', 320, 332, 301, 334],
-      ['Oranges', 220, 182, 191, 234],
-      ['Bananas', 150, 232, 201, 154],
-      ['Grapes', 250, 201, 154, 190],
-    ],
-  },
-  xAxis: {
-    type: 'category',
-  },
-  yAxis: {},
-  series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-  legend: {
-    x: 'center',
-    y: 'bottom',
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow',
-    },
-  },
-};
-///////////////////////////////////////////////////
-// ODSCharts
-///////////////////////////////////////////////////
-// Build the theme
-var themeManager = ODSCharts.getThemeManager({
-chartConfiguration:
-ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
-    cssSelector: '#dataset_chart',
-});
-// register this theme to echarts
-echarts.registerTheme(themeManager.name, themeManager.theme);
-// get the chart holder and initiate it with the generated theme
-var div = document.getElementById('dataset_chart');
-var myChart = echarts.init(div, themeManager.name, {
-    renderer: 'svg',
-});
-// Set the data to be displayed.
-themeManager.setDataOptions(dataOptions);
-// Register the externalization of the legend.
-themeManager.externalizeLegends(myChart, '#dataset_legend');
-// Manage window size changed
-themeManager.manageChartResize(myChart, 'dataset_chart');
-// Automatically manage data-bs-theme attribute change. Only needed if you want the
-// chart to automatically react to the global light or dark theme change
-themeManager.manageThemeObserver(myChart);
-// Register the externalization of the tooltip/popup
-themeManager.externalizePopover();
-// Display the chart using the configured theme and data.
-myChart.setOption(themeManager.getChartOptions());
-</script>
 
   <div class="card w-100 mt-3">
     <div class="card-body">
@@ -150,75 +88,9 @@ series: [{ type: 'line' }, { type: 'line' }, ...]
           <div id="dataset_line_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('dataset_line_');
-      </script>
+      <script src="../../use_cases_code/dataset_dataset_line_codeId.js" id="dataset_line_codeId" onload="addViewCode('dataset_line_')"></script>
     </div>
   </div>
-  <script id="dataset_line_codeId">
-///////////////////////////////////////////////////
-// Used data with dataset
-///////////////////////////////////////////////////
-var dataOptions = {
-  dataset: {
-    source: [
-      ['Month', 'Paris', 'London', 'Berlin', 'Madrid'],
-      ['Jan', 3, 5, 1, 9],
-      ['Feb', 5, 6, 3, 11],
-      ['Mar', 9, 9, 7, 14],
-      ['Apr', 13, 12, 12, 18],
-      ['May', 17, 15, 17, 22],
-      ['Jun', 21, 18, 20, 27],
-    ],
-  },
-  xAxis: {
-    type: 'category',
-  },
-  yAxis: {
-    axisLabel: { formatter: '{value} °C' },
-  },
-  series: [{ type: 'line' }, { type: 'line' }, { type: 'line' }, { type: 'line' }],
-  legend: {
-    x: 'center',
-    y: 'bottom',
-  },
-  tooltip: {
-    trigger: 'axis',
-    formatter: function (params) {
-      return Math.round(params[0].itemValue * 100) / 100 + ' °C';
-    },
-  },
-};
-///////////////////////////////////////////////////
-// ODSCharts
-///////////////////////////////////////////////////
-// Build the theme
-var themeManager = ODSCharts.getThemeManager({
-  chartConfiguration:
-    ODSCharts.ODSChartsConfiguration.getLineChartConfiguration(),
-  cssSelector: '#dataset_line_chart',
-});
-// register this theme to echarts
-echarts.registerTheme(themeManager.name, themeManager.theme);
-// get the chart holder and initiate it with the generated theme
-var div = document.getElementById('dataset_line_chart');
-var myChart = echarts.init(div, themeManager.name, {
-  renderer: 'svg',
-});
-// Set the data to be displayed.
-themeManager.setDataOptions(dataOptions);
-// Register the externalization of the legend.
-themeManager.externalizeLegends(myChart, '#dataset_line_legend');
-// Manage window size changed
-themeManager.manageChartResize(myChart, 'dataset_line_chart');
-// Automatically manage data-bs-theme attribute change. Only needed if you want the
-// chart to automatically react to the global light or dark theme change
-themeManager.manageThemeObserver(myChart);
-// Register the externalization of the tooltip/popup
-themeManager.externalizePopover();
-// Display the chart using the configured theme and data.
-myChart.setOption(themeManager.getChartOptions());
-  </script>
 
   <div class="card w-100 mt-3">
     <div class="card-body">
@@ -252,69 +124,8 @@ series: [{ type: 'bar' }, { type: 'bar' }, { type: 'line' }]
           <div id="dataset_mix_legend"></div>
         </div>
       </div>
-      <script>
-        addViewCode('dataset_mix_');
-      </script>
+      <script src="../../use_cases_code/dataset_dataset_mix_codeId.js" id="dataset_mix_codeId" onload="addViewCode('dataset_mix_')"></script>
     </div>
   </div>
-  <script id="dataset_mix_codeId">
-///////////////////////////////////////////////////
-// Used data with mixed bar and line series
-///////////////////////////////////////////////////
-var dataOptions = {
-  dataset: {
-    source: [
-      ['Month', 'Sales', 'Costs', 'Target'],
-      ['Jan', 120, 90, 110],
-      ['Feb', 132, 101, 115],
-      ['Mar', 101, 85, 112],
-      ['Apr', 134, 105, 120],
-      ['May', 190, 140, 150],
-      ['Jun', 230, 180, 170],
-    ],
-  },
-  xAxis: {
-    type: 'category',
-  },
-  yAxis: {},
-  series: [{ type: 'bar' }, { type: 'bar' }, { type: 'line' }],
-  legend: {
-    x: 'center',
-    y: 'bottom',
-  },
-  tooltip: {
-    trigger: 'axis',
-  },
-};
-///////////////////////////////////////////////////
-// ODSCharts
-///////////////////////////////////////////////////
-// Build the theme
-var themeManager = ODSCharts.getThemeManager({
-  chartConfiguration:
-    ODSCharts.ODSChartsConfiguration.getLineAndBarChartConfiguration(),
-  cssSelector: '#dataset_mix_chart',
-});
-// register this theme to echarts
-echarts.registerTheme(themeManager.name, themeManager.theme);
-// get the chart holder and initiate it with the generated theme
-var div = document.getElementById('dataset_mix_chart');
-var myChart = echarts.init(div, themeManager.name, {
-  renderer: 'svg',
-});
-// Set the data to be displayed.
-themeManager.setDataOptions(dataOptions);
-// Register the externalization of the legend.
-themeManager.externalizeLegends(myChart, '#dataset_mix_legend');
-// Manage window size changed
-themeManager.manageChartResize(myChart, 'dataset_mix_chart');
-// Automatically manage data-bs-theme attribute change. Only needed if you want the
-// chart to automatically react to the global light or dark theme change
-themeManager.manageThemeObserver(myChart);
-// Register the externalization of the tooltip/popup
-themeManager.externalizePopover();
-// Display the chart using the configured theme and data.
-myChart.setOption(themeManager.getChartOptions());
-  </script>
 
 </div>
