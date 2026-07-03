@@ -1,7 +1,7 @@
 # spec-1062 — Wrong marker color
 
 **Issue:** [#1062 Wrong marker color](https://github.com/Orange-OpenSource/ods-charts/issues/1062)  
-**Component:** `ODSChartTheme` — `sliceColor()` / `getDisplayedColors()`  
+**Component:** `ODSChartsTheme` — `sliceColor()` / `getDisplayedColors()`  
 **Status:** Open
 
 ---
