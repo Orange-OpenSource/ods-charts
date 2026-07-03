@@ -80,7 +80,7 @@ themeManager.externalizePopover(undefined, {
 });
 ```
 
-**Note**: Both approaches produce identical results. The first approach is recommended for new code as it eliminates the need for additional method calls and provides better encapsulation of the marker data within the `ODSChartsPopoverItem` object. Existing code using `themeManager.getPopoverMarker()` does not require any changes and will continue to work correctly.
+**Note**: Both approaches remain valid and functional. However, `marker` reflects the marker actually used in the tooltip/popover (including item-level coloring), while `themeManager.getPopoverMarker(seriesIndex)` uses the series color and may differ when items override the series color.
 
 ## Documentation Updates
 
