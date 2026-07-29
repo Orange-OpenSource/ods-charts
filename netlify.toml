@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "https://ods-charts.netlify.app/*"
+  to = "https://charts.unified-design-system.orange.com/:splat"
+  status = 301
+  force = true
