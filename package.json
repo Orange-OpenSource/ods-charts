@@ -77,7 +77,7 @@
     "eslint": "^10.6.0",
     "husky": "^9.1.7",
     "jasmine": "^6.0.0",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "lint-staged": "^17.0.8",
     "prettier": "^3.7.4",
     "pretty-quick": "^4.2.2",
