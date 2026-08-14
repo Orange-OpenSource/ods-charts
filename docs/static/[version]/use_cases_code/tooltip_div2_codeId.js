@@ -45,8 +45,8 @@ div2_themeManager.manageThemeObserver(myChart);
 // Register the externalization of the tooltip/popup
 div2_themeManager.externalizePopover(undefined, {
   ...ODSCharts.ODSChartsPopoverManagers.NONE,
-  getPopupContentLine: ({ seriesName, itemValue, seriesIndex }) => {
-    return `<p>${div2_themeManager.getPopoverMarker(seriesIndex)}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
+  getPopupContentLine: ({ seriesName, itemValue, marker }) => {
+    return `<p>${marker}This is my HTML code of one line for ${itemValue} of ${seriesName}</p>`;
   },
 });
 // Display the chart using the configured theme and data.
