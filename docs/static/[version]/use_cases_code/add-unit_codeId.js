@@ -34,9 +34,7 @@ var dataOptions = {
     },
   },
   tooltip: {
-    formatter: function (params) {
-      return Math.round(params[0].value * 100) / 100 + ' °C';
-    },
+    valueFormatter: (value, _dataIndex) => Math.round(value * 100) / 100 + ' °C',
   },
   series: [
     {
