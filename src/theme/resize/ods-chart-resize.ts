@@ -10,6 +10,7 @@ import { type EChartsOption, type ECharts, type ResizeOpts } from 'echarts';
 export class ODSChartsResize {
   private static sizeListeners: any = {};
   private observer: ResizeObserver | undefined = undefined;
+  private resizeTimeout: number | undefined = undefined;
   private constructor(
     private echart: ECharts,
     private chartId: string
@@ -44,6 +45,14 @@ export class ODSChartsResize {
     }
   }
 
+  public removeResizeManagement() {
+    this.removeListener();
+    if (this.resizeTimeout) {
+      window.clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = undefined;
+    }
+  }
+
   private removeListener() {
     try {
       const div = this.divElement;
@@ -60,19 +69,25 @@ export class ODSChartsResize {
   }
 
   private resizeChart() {
-    try {
-      const chartOptions: EChartsOption = this.echart.getOption() as EChartsOption;
-      const opts: ResizeOpts = {};
-      if (chartOptions.animation) {
-        opts.animation = {
-          duration: 'number' === typeof chartOptions.animationDuration ? chartOptions.animationDuration : 1000,
-          easing: chartOptions.animationEasing ? chartOptions.animationEasing : 'cubicInOut',
-        };
-      }
-
-      this.echart.resize(opts);
-    } catch (error) {
-      this.removeListener();
+    if (this.resizeTimeout) {
+      window.clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = undefined;
     }
+    this.resizeTimeout = window.setTimeout(() => {
+      try {
+        const chartOptions: EChartsOption = this.echart.getOption() as EChartsOption;
+        const opts: ResizeOpts = {};
+        if (chartOptions.animation) {
+          opts.animation = {
+            duration: 'number' === typeof chartOptions.animationDuration ? chartOptions.animationDuration : 1000,
+            easing: chartOptions.animationEasing ? chartOptions.animationEasing : 'cubicInOut',
+          };
+        }
+
+        this.echart.resize(opts);
+      } catch (error) {
+        this.removeListener();
+      }
+    }, 16);
   }
 }
