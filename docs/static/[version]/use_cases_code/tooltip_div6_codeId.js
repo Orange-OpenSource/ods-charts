@@ -29,7 +29,7 @@ var div6_dataOptions = {
     data: dates,
   },
   tooltip: {
-    valueFormatter: (value, _dataIndex) => `<span style="color: red; font-size:x-large">${Math.round(value * 100) / 100}</span> °C`,
+    valueFormatter: (value, _dataIndex) => `<span style="color: var(--ods-functional-5); font-size:x-large">${Math.round(value * 100) / 100}</span> °C`,
   },
   series: [
     {

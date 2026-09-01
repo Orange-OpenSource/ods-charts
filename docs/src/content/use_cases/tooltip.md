@@ -57,7 +57,7 @@ tooltip: {
           <pre>
             tooltip: {
               valueFormatter: (value, _dataIndex) =>
-                `&lt;span style="color: red; font-size:x-large">${Math.round(value * 100) / 100}&lt;/span> °C`,
+                `&lt;span style="color: var(--ods-functional-5); font-size:x-large">${Math.round(value * 100) / 100}&lt;/span> °C`,
             },
           </pre>
         </code>
