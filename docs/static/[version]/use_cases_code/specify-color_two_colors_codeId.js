@@ -57,9 +57,7 @@ var dataOptions = {
     data: ['Results OK', 'Results NOK', 'Goal'],
   },
   tooltip: {
-    formatter: function (params) {
-      return params[0].value ? Math.round(params[0].value * 100) / 100 + '$' : undefined;
-    },
+    valueFormatter: (value, _dataIndex) => (value ? Math.round(value * 100) / 100 + '$' : undefined),
   },
 };
 

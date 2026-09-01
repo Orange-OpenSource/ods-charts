@@ -70,11 +70,7 @@ series: [
         <code>
           <pre>
 tooltip: {
-  formatter: function (params) {
-    return (
-      params[0].value ? Math.round(params[0].value * 100) / 100 + '$' : undefined
-    );
-  }
+  valueFormatter: (value, _dataIndex) => value ? Math.round(value * 100) / 100 + '$' : undefined,
 }
           </pre>
         </code>
@@ -98,7 +94,7 @@ themeManager.externalizePopover(undefined, {
       </div>
       <p>
         In the example below, we prefer the Apache ECharts
-        <code>tooltip.formatter</code> method.
+        <code>tooltip.valueFormatter</code> method.
       </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">

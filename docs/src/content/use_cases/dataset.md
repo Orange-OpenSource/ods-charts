@@ -64,7 +64,7 @@ yAxis: {
 },
 tooltip: {
   trigger: 'axis',
-  valueFormatter: (value) => value + ' °C',
+  valueFormatter: (value, _dataIndex) => value + ' °C',
 },
 series: [{ type: 'line' }, { type: 'line' }, ...]
           </pre>
