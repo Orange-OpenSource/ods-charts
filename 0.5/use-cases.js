@@ -44,6 +44,11 @@ var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
 
   window.setTimeout(() => {
     document.getElementById(prefixId + htmlId + '_html').innerText = innitHtmlDoc;
-    document.getElementById(prefixId + htmlId + '_code').innerText = document.getElementById(prefixId + codeId).text;
+
+    fetch(document.getElementById(prefixId + codeId).src)
+      .then((response) => response.text())
+      .then((text) => {
+        document.getElementById(prefixId + htmlId + '_code').innerText = text;
+      });
   });
 };
