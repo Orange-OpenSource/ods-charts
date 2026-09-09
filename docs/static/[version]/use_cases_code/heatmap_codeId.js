@@ -153,43 +153,13 @@ var dataOptions = {
     pieces: [
       {
         min: 3,
-        max: 3.5,
-        label: '3',
-      },
-      {
-        min: 3.5,
-        max: 4.5,
-        label: '4',
-      },
-      {
-        min: 4.5,
         max: 5.5,
-        label: '5',
+        label: 'entre 3 et 5',
       },
       {
         min: 5.5,
-        max: 7.5,
-        label: '7',
-      },
-      {
-        min: 7.5,
-        max: 9.5,
-        label: '9',
-      },
-      {
-        min: 9.5,
-        max: 10.5,
-        label: '10',
-      },
-      {
-        min: 10.5,
-        max: 11.5,
-        label: '11',
-      },
-      {
-        min: 11.5,
         max: 12.5,
-        label: '12',
+        label: 'entre 5 et 12',
       },
       {
         min: 12.5,

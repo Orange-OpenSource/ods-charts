@@ -813,6 +813,9 @@ export class ODSChartsTheme {
 
       const splitNumber = this.dataOptions.visualMap?.pieces?.length || this.dataOptions.visualMap?.splitNumber;
       if (splitNumber && this.theme.visualMap.inRange?.color?.length >= splitNumber) {
+        if (!themeOptions.visualMap) {
+          themeOptions.visualMap = {};
+        }
         themeOptions.visualMap.inRange = { color: this.theme.visualMap.inRange.color.slice(0, splitNumber) };
       }
 
