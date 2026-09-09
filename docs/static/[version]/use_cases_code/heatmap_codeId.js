@@ -128,28 +128,7 @@ var dataOptions = {
     trigger: 'item',
     enterable: true,
   },
-  grid: {
-    top: '5px',
-    left: '50px',
-    right: '20px',
-    bottom: '100px',
-  },
   visualMap: {
-    textStyle: {
-      fontWeight: '400',
-      fontSize: 14,
-      color: 'var(--bs-body-color)',
-      padding: [0, 0, 0, 5],
-    },
-    icon: 'rect',
-    itemWidth: 12,
-    itemHeight: 12,
-    orient: 'horizontal',
-    bottom: 20,
-    left: 'center',
-    padding: [0, 40, 10, 40],
-    type: 'piecewise',
-    itemSymbol: 'rect',
     pieces: [
       {
         min: 3,
@@ -301,12 +280,6 @@ var dataOptions = {
         [11, 41, 15],
         [11, 40, 10],
       ],
-      label: {
-        show: false,
-      },
-      emphasis: {
-        itemStyle: {},
-      },
     },
   ],
 };
@@ -317,7 +290,7 @@ var dataOptions = {
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
   colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
-  chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
+  chartConfiguration: ODSCharts.ODSChartsConfiguration.getHeatmapChartConfiguration(),
   cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
   cssSelector: '#heatmap_chart',
 });

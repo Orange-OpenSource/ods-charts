@@ -17,7 +17,41 @@ Object.defineProperty(globalThis, 'navigator', { value: dom.window.navigator, wr
 (globalThis as any).Element = dom.window.Element;
 
 import 'jasmine';
+import { ODSChartsConfiguration, ODSChartsTypes } from './charts-type/charts-type';
 import { ODSChartsTheme } from './ods-chart-theme';
+
+describe('ODSChartsConfiguration.getHeatmapChartConfiguration', () => {
+  it('should provide heatmap visualMap defaults', () => {
+    const config = ODSChartsConfiguration.getHeatmapChartConfiguration();
+
+    expect(config.type).toBe(ODSChartsTypes.HEATMAP);
+    expect(config.getDefaultConfiguration()).toEqual({
+      grid: {
+        top: '5px',
+        left: '50px',
+        right: '20px',
+        bottom: '100px',
+      },
+      visualMap: {
+        textStyle: {
+          fontWeight: '400',
+          fontSize: 14,
+          color: 'var(--bs-body-color)',
+          padding: [0, 0, 0, 5],
+        },
+        icon: 'rect',
+        itemWidth: 12,
+        itemHeight: 12,
+        orient: 'horizontal',
+        bottom: 20,
+        left: 'center',
+        padding: [0, 40, 10, 40],
+        type: 'piecewise',
+        itemSymbol: 'rect',
+      },
+    });
+  });
+});
 
 describe('ODSChartsTheme.getSeriesColor', () => {
   // Baseline palette colors captured once with no dataOptions.

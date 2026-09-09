@@ -23,12 +23,10 @@ title: Heatmap - Specific use cases - ODS Charts
       data: [
         ...
       ],
-      label: { show: false },
-      emphasis: { itemStyle: {} },
     }, 
 </pre>
 </code>
-where each data is an array of <code>[xAxisIndex, yAxisIndex, value]</code>
+where each data is an array of <code>[xAxisIndex, yAxisIndex, value]</code>. Use <code>ODSChartsConfiguration.getHeatmapChartConfiguration()</code> to apply the ODS heatmap defaults.
 </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">

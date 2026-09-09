@@ -24,6 +24,7 @@ export enum ODSChartsTypes {
   DIAL_GAUGE = 'DIAL_GAUGE',
   CHOROPLETH_MAP = 'CHOROPLETH_MAP',
   BUBBLE_MAP = 'BUBBLE_MAP',
+  HEATMAP = 'HEATMAP',
 }
 
 /**
@@ -80,6 +81,7 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
  * - {@link getDialGaugeChartConfiguration} : to build a configuration of a dial gauge
  * - {@link getChoroplethMapChartConfiguration} : to build a configuration of a choropleth map
  * - {@link getBubbleMapChartConfiguration} : to build a configuration of a bubble map
+ * - {@link getHeatmapChartConfiguration} : to build a configuration of a heatmap
  */
 export class ODSChartsConfiguration {
   protected constructor(public type: ODSChartsTypes = ODSChartsTypes.DEFAULT) {}
@@ -232,6 +234,14 @@ export class ODSChartsConfiguration {
    */
   public static getBubbleMapChartConfiguration(): ODSChartsConfiguration {
     return new ODSChartsBubbleMap();
+  }
+
+  /**
+   * Get the configuration of a heatmap chart.
+   * @returns Configuration of the heatmap chart.
+   */
+  public static getHeatmapChartConfiguration(): ODSChartsConfiguration {
+    return new ODSChartsHeatmap();
   }
 }
 
@@ -867,5 +877,43 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
       };
     }
     return {};
+  }
+}
+
+/**
+ * Configuration of a chart of type {@link ODSChartsTypes.HEATMAP}
+ * A heatmap displays values through colors at the intersection of two category axes.
+ */
+class ODSChartsHeatmap extends ODSChartsConfiguration {
+  constructor() {
+    super(ODSChartsTypes.HEATMAP);
+  }
+
+  public getDefaultConfiguration(): any {
+    return {
+      grid: {
+        top: '5px',
+        left: '50px',
+        right: '20px',
+        bottom: '100px',
+      },
+      visualMap: {
+        textStyle: {
+          fontWeight: '400',
+          fontSize: 14,
+          color: 'var(--bs-body-color)',
+          padding: [0, 0, 0, 5],
+        },
+        icon: 'rect',
+        itemWidth: 12,
+        itemHeight: 12,
+        orient: 'horizontal',
+        bottom: 20,
+        left: 'center',
+        padding: [0, 40, 10, 40],
+        type: 'piecewise',
+        itemSymbol: 'rect',
+      },
+    };
   }
 }
