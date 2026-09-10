@@ -14,8 +14,7 @@ title: Heatmap - Specific use cases - ODS Charts
       <p class="card-text pe-5">This use case illustrates the use of heat maps to visualize the distribution 
       of message reception per quarter hour over a week.</p>
       <p class="card-text pe-5">
-      Heatmap series is describe with a series 
-        You can add the timeline slider with the <code>dataZoom</code> option:
+      Heatmap series is described with a series:
         <code>
           <pre>          
     {
@@ -27,6 +26,19 @@ title: Heatmap - Specific use cases - ODS Charts
 </pre>
 </code>
 where each data is an array of <code>[xAxisIndex, yAxisIndex, value]</code>. Use <code>ODSChartsConfiguration.getHeatmapChartConfiguration()</code> to apply the ODS heatmap defaults.
+</p>
+      <p class="card-text pe-5">
+      Heatmap uses a <code>visualMap</code>. By default, <code>ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET</code> keeps colors strictly within the provided color set. Use <code>ODSChartsVisualMapColorRangeMode.GENERATE_COLOR_RANGE</code> if you want Apache ECharts to generate a continuous range from the first to the last color.
+        <code>
+          <pre>
+var themeManager = ODSCharts.getThemeManager({
+  colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
+  chartConfiguration: ODSCharts.ODSChartsConfiguration.getHeatmapChartConfiguration({
+    visualMapColorRangeMode: ODSCharts.ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
+  })
+});
+</pre>
+</code>
 </p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">

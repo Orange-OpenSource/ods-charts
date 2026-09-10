@@ -290,7 +290,9 @@ var dataOptions = {
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
   colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
-  chartConfiguration: ODSCharts.ODSChartsConfiguration.getHeatmapChartConfiguration(),
+  chartConfiguration: ODSCharts.ODSChartsConfiguration.getHeatmapChartConfiguration({
+    visualMapColorRangeMode: ODSCharts.ODSChartsVisualMapColorRangeMode.GENERATE_COLOR_RANGE,
+  }),
   cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
   cssSelector: '#heatmap_chart',
 });

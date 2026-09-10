@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-import { ODSChartsLineStyle } from '../ods-chart-theme';
+import { ODSChartsLineStyle, ODSChartsVisualMapColorRangeMode } from '../ods-chart-theme';
 
 /**
  * Charts type
@@ -64,6 +64,17 @@ export class ODSChartsDialGaugeConfiguration extends ODSChartsGaugeConfiguration
     label?: number;
     beforeColor?: string;
   }[];
+}
+
+/**
+ * Configuration of a chart using a visualMap.
+ */
+export class ODSChartsVisualMapConfiguration {
+  /**
+   * Defines if visualMap colors must stay strictly in the provided color set
+   * or if a new color range can be generated from the first and last provided colors.
+   */
+  visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode;
 }
 
 /**
@@ -137,7 +148,7 @@ export class ODSChartsConfiguration {
    * @returns Configuration of a line chart.
    */
   public static getLineChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
-    return new ODSChartsLine(config.lineStyle);
+    return new ODSChartsLine(config?.lineStyle);
   }
 
   /**
@@ -160,7 +171,7 @@ export class ODSChartsConfiguration {
    * @returns Configuration of a line and bar chart.
    */
   public static getLineAndBarChartConfiguration(config: ODSChartsLineConfiguration = { lineStyle: ODSChartsLineStyle.SMOOTH }): ODSChartsConfiguration {
-    return new ODSChartsLineAndBar(config.lineStyle);
+    return new ODSChartsLineAndBar(config?.lineStyle);
   }
 
   /**
@@ -187,8 +198,8 @@ export class ODSChartsConfiguration {
    *               The chart will display a bar that fills the space between these two values.
    * @returns Configuration of the horizontal gauge chart.
    */
-  public static getHorizontalGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
-    return new ODSChartsHorizontalGauge(config.minValue, config.maxValue);
+  public static getHorizontalGaugeChartConfiguration(config?: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
+    return new ODSChartsHorizontalGauge(config?.minValue, config?.maxValue);
   }
 
   /**
@@ -196,8 +207,8 @@ export class ODSChartsConfiguration {
    * @param config Configuration of the semi-circular gauge chart, must be used to specify the minimum and maximum values.
    * @returns Configuration of the semi-circular gauge chart.
    */
-  public static getSemiCircularGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
-    return new ODSChartsSemiCircularGauge(config.minValue, config.maxValue);
+  public static getSemiCircularGaugeChartConfiguration(config?: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
+    return new ODSChartsSemiCircularGauge(config?.minValue, config?.maxValue);
   }
 
   /**
@@ -205,8 +216,8 @@ export class ODSChartsConfiguration {
    * @param config Configuration of the circular gauge chart, must be used to specify the minimum and maximum values.
    * @returns Configuration of the circular gauge chart.
    */
-  public static getCircularGaugeChartConfiguration(config: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
-    return new ODSChartsCircularGauge(config.minValue, config.maxValue);
+  public static getCircularGaugeChartConfiguration(config?: ODSChartsGaugeConfiguration): ODSChartsConfiguration {
+    return new ODSChartsCircularGauge(config?.minValue, config?.maxValue);
   }
 
   /**
@@ -214,8 +225,8 @@ export class ODSChartsConfiguration {
    * @param config Configuration of the dial gauge chart, must be used to specify the minimum and maximum values and the dial parts.
    * @returns Configuration of the dial gauge chart.
    */
-  public static getDialGaugeChartConfiguration(config: ODSChartsDialGaugeConfiguration): ODSChartsConfiguration {
-    return new ODSChartsDialGauge(config.minValue, config.maxValue, config.dialPoints);
+  public static getDialGaugeChartConfiguration(config?: ODSChartsDialGaugeConfiguration): ODSChartsConfiguration {
+    return new ODSChartsDialGauge(config?.minValue, config?.maxValue, config?.dialPoints);
   }
 
   /**
@@ -223,8 +234,8 @@ export class ODSChartsConfiguration {
    * A choropleth map is a thematic map where areas are shaded or patterned based on a data variable.
    * @returns Configuration of the choropleth map chart.
    */
-  public static getChoroplethMapChartConfiguration(): ODSChartsConfiguration {
-    return new ODSChartsChoroplethMap();
+  public static getChoroplethMapChartConfiguration(config: ODSChartsVisualMapConfiguration = {}): ODSChartsConfiguration {
+    return new ODSChartsChoroplethMap(config?.visualMapColorRangeMode);
   }
 
   /**
@@ -232,16 +243,16 @@ export class ODSChartsConfiguration {
    * A bubble map displays data as circles (bubbles) on a geographic map, where bubble size represents a value.
    * @returns Configuration of the bubble map chart.
    */
-  public static getBubbleMapChartConfiguration(): ODSChartsConfiguration {
-    return new ODSChartsBubbleMap();
+  public static getBubbleMapChartConfiguration(config: ODSChartsVisualMapConfiguration = {}): ODSChartsConfiguration {
+    return new ODSChartsBubbleMap(config?.visualMapColorRangeMode);
   }
 
   /**
    * Get the configuration of a heatmap chart.
    * @returns Configuration of the heatmap chart.
    */
-  public static getHeatmapChartConfiguration(): ODSChartsConfiguration {
-    return new ODSChartsHeatmap();
+  public static getHeatmapChartConfiguration(config: ODSChartsVisualMapConfiguration = {}): ODSChartsConfiguration {
+    return new ODSChartsHeatmap(config?.visualMapColorRangeMode);
   }
 }
 
@@ -701,7 +712,10 @@ class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
  * A choropleth map is a thematic map where areas are shaded or patterned in proportion to a statistical variable.
  */
 class ODSChartsChoroplethMap extends ODSChartsConfiguration {
-  constructor(type = ODSChartsTypes.CHOROPLETH_MAP) {
+  constructor(
+    public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
+    type = ODSChartsTypes.CHOROPLETH_MAP
+  ) {
     super(type);
   }
 
@@ -794,8 +808,8 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
  * A bubble map displays data as circles (bubbles) on a geographic map.
  */
 class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
-  constructor() {
-    super(ODSChartsTypes.BUBBLE_MAP);
+  constructor(visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode) {
+    super(visualMapColorRangeMode, ODSChartsTypes.BUBBLE_MAP);
   }
 
   public getDefaultConfiguration(): any {
@@ -885,7 +899,7 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
  * A heatmap displays values through colors at the intersection of two category axes.
  */
 class ODSChartsHeatmap extends ODSChartsConfiguration {
-  constructor() {
+  constructor(public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET) {
     super(ODSChartsTypes.HEATMAP);
   }
 

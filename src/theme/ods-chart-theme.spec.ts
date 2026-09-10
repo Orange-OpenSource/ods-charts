@@ -18,7 +18,7 @@ Object.defineProperty(globalThis, 'navigator', { value: dom.window.navigator, wr
 
 import 'jasmine';
 import { ODSChartsConfiguration, ODSChartsTypes } from './charts-type/charts-type';
-import { ODSChartsTheme } from './ods-chart-theme';
+import { ODSChartsColorsSet, ODSChartsTheme, ODSChartsVisualMapColorRangeMode } from './ods-chart-theme';
 
 describe('ODSChartsConfiguration.getHeatmapChartConfiguration', () => {
   it('should provide heatmap visualMap defaults', () => {
@@ -50,6 +50,40 @@ describe('ODSChartsConfiguration.getHeatmapChartConfiguration', () => {
         itemSymbol: 'rect',
       },
     });
+  });
+});
+
+describe('ODSChartsTheme visualMapColorRangeMode', () => {
+  const getVisualMap = (visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode): any => {
+    const themeManager = ODSChartsTheme.getThemeManager({
+      colors: ODSChartsColorsSet.SEQUENTIAL_BLUE,
+      chartConfiguration: ODSChartsConfiguration.getHeatmapChartConfiguration({
+        ...(visualMapColorRangeMode ? { visualMapColorRangeMode } : {}),
+      }),
+    });
+
+    themeManager.setDataOptions({
+      xAxis: { type: 'category' },
+      yAxis: { type: 'category' },
+      visualMap: {
+        pieces: [
+          { min: 0, max: 1 },
+          { min: 1, max: 2 },
+          { min: 2, max: 3 },
+        ],
+      },
+      series: [{ type: 'heatmap', data: [] }],
+    });
+
+    return themeManager.getChartOptions().visualMap;
+  };
+
+  it('should force colors to stay in the provided color set by default', () => {
+    expect(getVisualMap().inRange.color.map((color: string) => color.toLowerCase())).toEqual(['#085ebd', '#237eca', '#3e9dd6']);
+  });
+
+  it('should not force visualMap inRange colors when color range generation is requested', () => {
+    expect(getVisualMap(ODSChartsVisualMapColorRangeMode.GENERATE_COLOR_RANGE).inRange).toBeUndefined();
   });
 });
 
