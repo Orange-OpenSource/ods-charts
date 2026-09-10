@@ -48,7 +48,10 @@ themeManager.manageChartResize(myChart, 'barLine_chart');
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/size-management_codeId.js" id="codeId" onload="addViewCode()"></script>
+      <script>
+        var htmlCode = getHtmlCode();
+      </script>
+      <script src="../../use_cases_code/size-management_codeId.js" id="codeId" onload="addViewCode(htmlCode)"></script>
     </div>
   </div>
 </div>

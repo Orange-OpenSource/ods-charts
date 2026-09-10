@@ -45,7 +45,10 @@ series: [{ type: 'bar' }, { type: 'bar' }, ...]
           <div id="dataset_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/dataset_dataset_codeId.js" id="dataset_codeId" onload="addViewCode('dataset_')"></script>
+      <script>
+        var dataset_htmlCode = getHtmlCode('dataset_');
+      </script>
+      <script src="../../use_cases_code/dataset_dataset_codeId.js" id="dataset_codeId" onload="addViewCode(dataset_htmlCode, 'dataset_')"></script>
     </div>
   </div>
 
@@ -88,7 +91,10 @@ series: [{ type: 'line' }, { type: 'line' }, ...]
           <div id="dataset_line_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/dataset_dataset_line_codeId.js" id="dataset_line_codeId" onload="addViewCode('dataset_line_')"></script>
+      <script>
+        var dataset_line_htmlCode = getHtmlCode('dataset_line_');
+      </script>
+      <script src="../../use_cases_code/dataset_dataset_line_codeId.js" id="dataset_line_codeId" onload="addViewCode(dataset_line_htmlCode, 'dataset_line_')"></script>
     </div>
   </div>
 
@@ -124,7 +130,10 @@ series: [{ type: 'bar' }, { type: 'bar' }, { type: 'line' }]
           <div id="dataset_mix_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/dataset_dataset_mix_codeId.js" id="dataset_mix_codeId" onload="addViewCode('dataset_mix_')"></script>
+      <script>
+        var dataset_mix_htmlCode = getHtmlCode('dataset_mix_');
+      </script>
+      <script src="../../use_cases_code/dataset_dataset_mix_codeId.js" id="dataset_mix_codeId" onload="addViewCode(dataset_mix_htmlCode, 'dataset_mix_')"></script>
     </div>
   </div>
 

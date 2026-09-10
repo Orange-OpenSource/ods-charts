@@ -42,7 +42,10 @@ tooltip: {
       </div>
     </div>
   </div>
-  <script src="../../use_cases_code/tooltip_div1_codeId.js" id="div1_codeId" onload="addViewCode('div1_')"></script>
+  <script>
+    var div1_htmlCode = getHtmlCode('div1_');
+  </script>
+  <script src="../../use_cases_code/tooltip_div1_codeId.js" id="div1_codeId" onload="addViewCode(div1_htmlCode,'div1_')"></script>
 </div>
 
 <div class="container-xxl pt-3">
@@ -80,7 +83,10 @@ tooltip: {
           <div id="div6_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div6_codeId.js" id="div6_codeId" onload="addViewCode('div6_')"></script>
+      <script>
+        var div6_htmlCode = getHtmlCode('div6_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div6_codeId.js" id="div6_codeId" onload="addViewCode(div6_htmlCode,'div6_')"></script>
     </div>
 
   </div>
@@ -133,7 +139,10 @@ tooltip: {
           <div id="div2_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div2_codeId.js" id="div2_codeId" onload="addViewCode('div2_')"></script>
+      <script>
+        var div2_htmlCode = getHtmlCode('div2_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div2_codeId.js" id="div2_codeId" onload="addViewCode(div2_htmlCode,'div2_')"></script>
     </div>
 
   </div>
@@ -172,7 +181,10 @@ tooltip: {
           <div id="div3_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div3_codeId.js" id="div3_codeId" onload="addViewCode('div3_')"></script>
+      <script>
+        var div3_htmlCode = getHtmlCode('div3_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div3_codeId.js" id="div3_codeId" onload="addViewCode(div3_htmlCode,'div3_')"></script>
     </div>
 
   </div>
@@ -211,7 +223,10 @@ tooltip: {
           <div id="div4_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div4_codeId.js" id="div4_codeId" onload="addViewCode('div4_')"></script>
+      <script>
+        var div4_htmlCode = getHtmlCode('div4_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div4_codeId.js" id="div4_codeId" onload="addViewCode(div4_htmlCode,'div4_')"></script>
     </div>
 
   </div>
@@ -238,7 +253,10 @@ tooltip: {
           <div id="div5_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div5_codeId.js" id="div5_codeId" onload="addViewCode('div5_')"></script>
+      <script>
+        var div5_htmlCode = getHtmlCode('div5_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div5_codeId.js" id="div5_codeId" onload="addViewCode(div5_htmlCode,'div5_')"></script>
     </div>
 
   </div>
@@ -285,7 +303,10 @@ tooltip: {
           <div id="div7_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/tooltip_div7_codeId.js" id="div7_codeId" onload="addViewCode('div7_')"></script>
+      <script>
+        var div7_htmlCode = getHtmlCode('div7_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div7_codeId.js" id="div7_codeId" onload="addViewCode(div7_htmlCode, 'div7_')"></script>
     </div>
 
   </div>

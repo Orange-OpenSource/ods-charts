@@ -66,7 +66,10 @@ configurations
           <div id="barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/time-slider_codeId.js" id="codeId" onload="addViewCode()"></script>
+      <script>
+        var htmlCode = getHtmlCode();
+      </script>
+      <script src="../../use_cases_code/time-slider_codeId.js" id="codeId" onload="addViewCode(htmlCode)"></script>
     </div>
 
   </div>

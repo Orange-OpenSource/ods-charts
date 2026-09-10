@@ -48,7 +48,10 @@ where each data is an array of <code>[xAxisIndex, yAxisIndex, value]</code>
           <div id="heatmap_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/heatmap_codeId.js" id="codeId" onload="addViewCode()"></script>
+      <script>
+        var htmlCode = getHtmlCode();
+      </script>
+      <script src="../../use_cases_code/heatmap_codeId.js" id="codeId" onload="addViewCode(htmlCode)"></script>
     </div>
   </div>
 
