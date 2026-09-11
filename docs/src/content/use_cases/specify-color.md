@@ -189,7 +189,7 @@ series: [
       <script>
         var threshold_htmlCode = getHtmlCode('threshold_');
       </script>
-      <script src="../../use_cases_code/specify-color_threshold_codeId.js" id="threshold_codeId" onload="addViewCode('threshold_')"></script>
+      <script src="../../use_cases_code/specify-color_threshold_codeId.js" id="threshold_codeId" onload="addViewCode(threshold_htmlCode, 'threshold_')"></script>
     </div>
 
   </div>
