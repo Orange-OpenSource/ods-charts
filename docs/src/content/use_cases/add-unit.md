@@ -45,7 +45,10 @@ title: Add unit - Specific use cases - ODS Charts
           <div id="barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/add-unit_codeId.js" id="codeId" onload="addViewCode()"></script>
+      <script>
+        var htmlCode = getHtmlCode();
+      </script>
+      <script src="../../use_cases_code/add-unit_codeId.js" id="codeId" onload="addViewCode(htmlCode)"></script>
     </div>
   </div>
 </div>

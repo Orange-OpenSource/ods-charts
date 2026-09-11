@@ -47,7 +47,10 @@ series: [
           <div id="barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/specify-color_codeId.js" id="codeId" onload="addViewCode()"></script>
+      <script>
+        var htmlCode = getHtmlCode();
+      </script>
+      <script src="../../use_cases_code/specify-color_codeId.js" id="codeId" onload="addViewCode(htmlCode)"></script>
     </div>
   </div>
 </div>
@@ -114,7 +117,10 @@ themeManager.externalizePopover(undefined, {
           <div id="two_colors_barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/specify-color_two_colors_codeId.js" id="two_colors_codeId" onload="addViewCode('two_colors_')"></script>
+      <script>
+        var two_colors_htmlCode = getHtmlCode('two_colors_');
+      </script>
+      <script src="../../use_cases_code/specify-color_two_colors_codeId.js" id="two_colors_codeId" onload="addViewCode(two_colors_htmlCode,'two_colors_')"></script>
     </div>
   </div>
 </div>
@@ -180,7 +186,10 @@ series: [
           <div id="threshold_barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/specify-color_threshold_codeId.js" id="threshold_codeId" onload="addViewCode('threshold_')"></script>
+      <script>
+        var threshold_htmlCode = getHtmlCode('threshold_');
+      </script>
+      <script src="../../use_cases_code/specify-color_threshold_codeId.js" id="threshold_codeId" onload="addViewCode(threshold_htmlCode, 'threshold_')"></script>
     </div>
 
   </div>
@@ -229,7 +238,10 @@ series: [
           <div id="two_colors_in_one_barLine_legend"></div>
         </div>
       </div>
-      <script src="../../use_cases_code/specify-color_two_colors_in_one_codeId.js" id="two_colors_in_one_codeId" onload="addViewCode('two_colors_in_one_')"></script>
+      <script>
+        var two_colors_in_one_htmlCode = getHtmlCode('two_colors_in_one_');
+      </script>
+      <script src="../../use_cases_code/specify-color_two_colors_in_one_codeId.js" id="two_colors_in_one_codeId" onload="addViewCode(two_colors_in_one_htmlCode,'two_colors_in_one_')"></script>
     </div>
   </div>
 </div>

@@ -72,7 +72,10 @@ themeManager.manageThemeObserver(myChart);
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/theme_t1-codeId.js" id="t1-codeId" onload="addViewCode('t1-')"></script>
+      <script>
+        var t1_htmlCode = getHtmlCode('t1-');
+      </script>
+      <script src="../../use_cases_code/theme_t1-codeId.js" id="t1-codeId" onload="addViewCode(t1_htmlCode, 't1-')"></script>
     </div>
 
   </div>
@@ -114,7 +117,10 @@ themeManager.manageThemeObserver(myChart);
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/theme_t2-codeId.js" id="t2-codeId" onload="addViewCode('t2-')"></script>
+      <script>
+        var t2_htmlCode = getHtmlCode('t2-');
+      </script>
+      <script src="../../use_cases_code/theme_t2-codeId.js" id="t2-codeId" onload="addViewCode(t2_htmlCode,'t2-')"></script>
     </div>
 
   </div>
@@ -164,7 +170,10 @@ cssTheme: ODSCharts.ODSChartsCSSThemes.NONE,
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/theme_t3-codeId.js" id="t3-codeId" onload="addViewCode('t3-')"></script>
+      <script>
+        var t3_htmlCode = getHtmlCode('t3-');
+      </script>
+      <script src="../../use_cases_code/theme_t3-codeId.js" id="t3-codeId" onload="addViewCode(t3_htmlCode,'t3-')"></script>
     </div>
 
   </div>

@@ -61,7 +61,10 @@ themeManager.externalizeLegends(myChart, {legendHolderSelector: '#barChartSH_leg
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/legends-holders_vertical_codeId.js" id="vertical_codeId" onload="addViewCode('vertical_')"></script>
+      <script>
+        var vertical_htmlCode = getHtmlCode('vertical_');
+      </script>
+      <script src="../../use_cases_code/legends-holders_vertical_codeId.js" id="vertical_codeId" onload="addViewCode(vertical_htmlCode,'vertical_')"></script>
     </div>
   </div>
 
@@ -103,7 +106,10 @@ legend: {
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/legends-holders_format_codeId.js" id="format_codeId" onload="addViewCode('format_')"></script>
+      <script>
+        var format_htmlCode = getHtmlCode('format_');
+      </script>
+      <script src="../../use_cases_code/legends-holders_format_codeId.js" id="format_codeId" onload="addViewCode(format_htmlCode,'format_')"></script>
     </div>
   </div>
 
@@ -165,7 +171,10 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/legends-holders_stacked_codeId.js" id="stacked_codeId" onload="addViewCode('stacked_')"></script>
+      <script>
+        var stacked_htmlCode = getHtmlCode('stacked_');
+      </script>
+      <script src="../../use_cases_code/legends-holders_stacked_codeId.js" id="stacked_codeId" onload="addViewCode(stacked_htmlCode,'stacked_')"></script>
     </div>
   </div>
 
@@ -219,7 +228,10 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/legends-holders_custom_simple_content_codeId.js" id="custom_simple_content_codeId" onload="addViewCode('custom_simple_content_')"></script>
+      <script>
+        var custom_simple_content_htmlCode = getHtmlCode('custom_simple_content_');
+      </script>
+      <script src="../../use_cases_code/legends-holders_custom_simple_content_codeId.js" id="custom_simple_content_codeId" onload="addViewCode(custom_simple_content_htmlCode,'custom_simple_content_')"></script>
     </div>
   </div>
 
@@ -348,7 +360,10 @@ themeManager.externalizeLegends(
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/legends-holders_custom_content_codeId.js" id="custom_content_codeId" onload="addViewCode('custom_content_')"></script>
+      <script>
+        var custom_content_htmlCode = getHtmlCode('custom_content_');
+      </script>
+      <script src="../../use_cases_code/legends-holders_custom_content_codeId.js" id="custom_content_codeId" onload="addViewCode(custom_content_htmlCode, 'custom_content_')"></script>
     </div>
   </div>
 
@@ -413,7 +428,10 @@ themeManager.externalizeLegends(
                   </div>
                 </div>
               </div>
-              <script src="../../use_cases_code/legends-holders_pct_legend_codeId.js" id="pct_legend_codeId" onload="addViewCode('pct_legend_')"></script>
+              <script>
+                var pct_legend_htmlCode = getHtmlCode('pct_legend_');
+              </script>
+              <script src="../../use_cases_code/legends-holders_pct_legend_codeId.js" id="pct_legend_codeId" onload="addViewCode(pct_legend_htmlCode,'pct_legend_')"></script>
             </div>
           </div>
         </div>
@@ -460,7 +478,10 @@ themeManager.externalizeLegends(
                   </div>
                 </div>
               </div>
-              <script src="../../use_cases_code/legends-holders_value_legend_codeId.js" id="value_legend_codeId" onload="addViewCode('value_legend_')"></script>
+              <script>
+                var value_legend_htmlCode = getHtmlCode('value_legend_');
+              </script>
+              <script src="../../use_cases_code/legends-holders_value_legend_codeId.js" id="value_legend_codeId" onload="addViewCode(value_legend_htmlCode,'value_legend_')"></script>
             </div>
           </div>
         </div>
