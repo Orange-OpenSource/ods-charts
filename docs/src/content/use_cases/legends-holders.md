@@ -363,7 +363,7 @@ themeManager.externalizeLegends(
       <script>
         var custom_content_htmlCode = getHtmlCode('custom_content_');
       </script>
-      <script src="../../use_cases_code/legends-holders_custom_content_codeId.js" id="custom_content_codeId" onload="addViewCode('custom_content_')"></script>
+      <script src="../../use_cases_code/legends-holders_custom_content_codeId.js" id="custom_content_codeId" onload="addViewCode(custom_content_htmlCode, 'custom_content_')"></script>
     </div>
   </div>
 
