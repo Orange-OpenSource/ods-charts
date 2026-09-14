@@ -128,68 +128,17 @@ var dataOptions = {
     trigger: 'item',
     enterable: true,
   },
-  grid: {
-    top: '5px',
-    left: '50px',
-    right: '20px',
-    bottom: '100px',
-  },
   visualMap: {
-    textStyle: {
-      fontWeight: '400',
-      fontSize: 14,
-      color: 'var(--bs-body-color)',
-      padding: [0, 0, 0, 5],
-    },
-    icon: 'rect',
-    itemWidth: 12,
-    itemHeight: 12,
-    orient: 'horizontal',
-    bottom: 20,
-    left: 'center',
-    padding: [0, 40, 10, 40],
-    type: 'piecewise',
-    itemSymbol: 'rect',
     pieces: [
       {
         min: 3,
-        max: 3.5,
-        label: '3',
-      },
-      {
-        min: 3.5,
-        max: 4.5,
-        label: '4',
-      },
-      {
-        min: 4.5,
         max: 5.5,
-        label: '5',
+        label: 'entre 3 et 5',
       },
       {
         min: 5.5,
-        max: 7.5,
-        label: '7',
-      },
-      {
-        min: 7.5,
-        max: 9.5,
-        label: '9',
-      },
-      {
-        min: 9.5,
-        max: 10.5,
-        label: '10',
-      },
-      {
-        min: 10.5,
-        max: 11.5,
-        label: '11',
-      },
-      {
-        min: 11.5,
         max: 12.5,
-        label: '12',
+        label: 'entre 5 et 12',
       },
       {
         min: 12.5,
@@ -331,12 +280,6 @@ var dataOptions = {
         [11, 41, 15],
         [11, 40, 10],
       ],
-      label: {
-        show: false,
-      },
-      emphasis: {
-        itemStyle: {},
-      },
     },
   ],
 };
@@ -347,7 +290,9 @@ var dataOptions = {
 // Build the theme
 var themeManager = ODSCharts.getThemeManager({
   colors: ODSCharts.ODSChartsColorsSet.SEQUENTIAL_BLUE,
-  chartConfiguration: ODSCharts.ODSChartsConfiguration.getBarChartConfiguration(),
+  chartConfiguration: ODSCharts.ODSChartsConfiguration.getHeatmapChartConfiguration({
+    visualMapColorRangeMode: ODSCharts.ODSChartsVisualMapColorRangeMode.GENERATE_COLOR_RANGE,
+  }),
   cssTheme: ODSCharts.ODSChartsCSSThemes.BOOSTED5,
   cssSelector: '#heatmap_chart',
 });

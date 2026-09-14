@@ -44,7 +44,7 @@ import { DEFAULT_OUDS_COLORS_PINK } from './default/OUDS.colors.pink';
 import { DEFAULT_OUDS_COLORS_PURPLE } from './default/OUDS.colors.purple';
 import { DEFAULT_OUDS_COLORS_SINGLE } from './default/OUDS.colors.single';
 import { DEFAULT_OUDS_COLORS_YELLOW } from './default/OUDS.colors.yellow';
-import { ODSChartsConfiguration } from './charts-type/charts-type';
+import { ODSChartsConfiguration, ODSChartsVisualMapConfiguration } from './charts-type/charts-type';
 import { mergeObjectsAndArrays, mergeObjectsAndReplaceArrays } from '../tools/merge-objects';
 // import { DEFAULT_OUDS_COMMON } from './default/OUDS.common'; // TODO: use when we can switch between ODS and OUDS
 // import { DEFAULT_OUDS_LINES_AXIS } from './default/OUDS.lines.axis';
@@ -163,6 +163,20 @@ export enum ODSChartsLineStyle {
    * @deprecated Use new value option {@link ODSChartsLineStyle.BROKEN_WITH_POINTS}.
    */
   WITH_POINTS = 'withPoints',
+}
+
+/**
+ * ODSChartsVisualMapColorRangeMode defines how colors are applied to visualMap ranges.
+ */
+export enum ODSChartsVisualMapColorRangeMode {
+  /**
+   * Use only colors from the provided color set.
+   */
+  FORCE_COLOR_SET = 'forceColorSet',
+  /**
+   * Let the chart build a color range from the first to the last color of the provided color set.
+   */
+  GENERATE_COLOR_RANGE = 'generateColorRange',
 }
 
 // Re-export ODSChartsMode from the separate file to avoid circular dependencies
@@ -811,9 +825,17 @@ export class ODSChartsTheme {
 
       let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
 
-      const splitNumber = this.dataOptions.visualMap?.pieces?.length || this.dataOptions.visualMap?.splitNumber;
-      if (splitNumber && this.theme.visualMap.inRange?.color?.length >= splitNumber) {
-        themeOptions.visualMap.inRange = { color: this.theme.visualMap.inRange.color.slice(0, splitNumber) };
+      const visualMapColorRangeMode =
+        (this.options.chartConfiguration as ODSChartsVisualMapConfiguration)?.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET;
+      if (ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET === visualMapColorRangeMode) {
+        const splitNumber = this.dataOptions.visualMap?.pieces?.length || this.dataOptions.visualMap?.splitNumber;
+        const visualMapColors = this.theme.visualMap.inRange?.color || this.theme.color;
+        if (splitNumber && visualMapColors?.length >= splitNumber) {
+          if (!themeOptions.visualMap) {
+            themeOptions.visualMap = {};
+          }
+          themeOptions.visualMap.inRange = { color: visualMapColors.slice(0, splitNumber) };
+        }
       }
 
       for (const axis of ['xAxis', 'yAxis']) {
