@@ -1,6 +1,10 @@
-var addViewCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
+var getHtmlCode = (prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
   var htmlElt = document.getElementById(prefixId + htmlId);
   var innitHtmlDoc = htmlElt.innerHTML;
+  return innitHtmlDoc;
+};
+
+var addViewCode = (innitHtmlDoc, prefixId = '', htmlId = 'htmlId', codeId = 'codeId') => {
   document.write(`
 
     <div class="accordion py-3" id="${prefixId}viewCodeAcc">
