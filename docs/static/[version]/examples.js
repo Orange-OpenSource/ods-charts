@@ -1268,9 +1268,20 @@ const franceRegions = async () => {
 };
 
 const loadMaps = async (echarts) => {
-  let worldMapGeoJson = await worldMap();
+  let worldMapGeoJson;
   // let franceDepsGeoJson = await franceDeps();
-  let franceRegionsGeoJson = await franceRegions();
+  let franceRegionsGeoJson;
+
+  try {
+    worldMapGeoJson = await worldMap();
+  } catch (error) {
+    console.error('Error loading world map:', error);
+  }
+  try {
+    franceRegionsGeoJson = await franceRegions();
+  } catch (error) {
+    console.error('Error loading France regions map:', error);
+  }
 
   // Register the map with ECharts if loaded
   if (worldMapGeoJson && typeof echarts !== 'undefined') {
