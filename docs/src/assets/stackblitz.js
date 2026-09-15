@@ -13,7 +13,10 @@ document.querySelectorAll('.btn-edit').forEach((btn) => {
     document.getElementById(`${id}_viewCode`)?.classList.remove('d-block');
 
     const libVersion = document.querySelector('[data-ods-charts-version]').getAttribute('data-ods-charts-version');
+    const docsVersion = document.documentElement.dataset.odsChartsDocsVersion;
     const echartsVersion = document.querySelector('[data-echarts-version]').getAttribute('data-echarts-version');
+
+    codeText = codeText.replaceAll('{docsVersion}', docsVersion);
 
     openChartsSnippet(htmlText, codeText, libVersion, echartsVersion);
   });

@@ -1226,51 +1226,33 @@ window.generateHorizontalGaugeChart = async (id) => {
   displayChart('getHorizontalGaugeChartConfiguration', id, option, undefined, [{ colorPalette: ODSCharts.ODSChartsColorsSet.OUDS_CATEGORICAL, colorIndex: 4 }]);
 };
 
-// const worldMap = async () => {
-//   // TODO: License
-// 1Mo
-// License: https://mapsvg.com/maps/world
-//   return await fetch(`/0.4/images/maps/world.svg`).then((response) => response.text());
-// };
-
-// 1Mo
-// No License so far
 const worldMap = async () => {
-  return await fetch('https://raw.githubusercontent.com/apache/echarts-website/refs/heads/asf-site/examples/data/asset/geo/world.json').then((response) =>
-    response.json()
-  );
+  return await fetch('../../maps/world.geojson').then((response) => response.json());
 };
 
-// 250Ko
-// License: Unlicense
-// const worldMap = async () => {
-//   return await fetch('https://raw.githubusercontent.com/johan/world.geo.json/refs/heads/master/countries.geo.json').then((response) => response.json());
-// };
-
-// 14Mo
-// License: https://opendatacommons.org/licenses/pddl/1-0/
-// const worldMap = async () => {
-//   return await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then((response) => response.json());
-// };
-
-// License to ask for the 2 following
 const franceDeps = async () => {
-  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/departements-version-simplifiee.geojson')
-    .then((response) => response.json())
-    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
+  return await fetch('../../maps/departements.geojson').then((response) => response.json());
 };
 
 const franceRegions = async () => {
-  // https://adresse.data.gouv.fr/data/contours-administratifs/latest/geojson/regions-1000m.geojson
-  return await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/refs/heads/master/regions-version-simplifiee.geojson')
-    .then((response) => response.json())
-    .then((json) => JSON.parse(JSON.stringify(json).replaceAll('nom', 'name')));
+  return await fetch('../../maps/regions.geojson').then((response) => response.json());
 };
 
 const loadMaps = async (echarts) => {
-  let worldMapGeoJson = await worldMap();
+  let worldMapGeoJson;
   // let franceDepsGeoJson = await franceDeps();
-  let franceRegionsGeoJson = await franceRegions();
+  let franceRegionsGeoJson;
+
+  try {
+    worldMapGeoJson = await worldMap();
+  } catch (error) {
+    console.error('Error loading world map:', error);
+  }
+  try {
+    franceRegionsGeoJson = await franceRegions();
+  } catch (error) {
+    console.error('Error loading France regions map:', error);
+  }
 
   // Register the map with ECharts if loaded
   if (worldMapGeoJson && typeof echarts !== 'undefined') {
