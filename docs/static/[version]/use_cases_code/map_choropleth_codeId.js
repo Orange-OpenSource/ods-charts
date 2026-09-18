@@ -21,12 +21,12 @@ var choroplethMapCountryAdoption = [
 var choroplethMapDataOptions = {
   tooltip: {
     trigger: 'item',
-    formatter: function (params) {
-      if (Number.isNaN(params.value)) {
-        return params.name + '<br/>No data';
+    valueFormatter: function (value) {
+      if (typeof value !== 'number' || !Number.isFinite(value)) {
+        return 'No data';
       }
 
-      return '<strong>' + params.name + '</strong><br/>Adoption rate: ' + params.value + '%';
+      return value + '%';
     },
   },
   visualMap: {
