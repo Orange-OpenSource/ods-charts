@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.16.1",
-    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/node18": "^18.2.7",
     "@types/node": "^25.9.1",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vitejs/plugin-vue-jsx": "^5.1.6",
@@ -26,11 +26,11 @@
     "@vue/eslint-config-typescript": "^14.9.0",
     "@vue/tsconfig": "^0.9.1",
     "eslint": "^9.37.0",
-    "eslint-plugin-vue": "^10.9.2",
+    "eslint-plugin-vue": "^10.11.0",
     "npm-run-all2": "^9.0.2",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "vite": "^8.1.2",
-    "vue-tsc": "^3.3.6"
+    "vite": "^8.3.0",
+    "vue-tsc": "^3.3.11"
   }
 }
