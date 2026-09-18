@@ -49,7 +49,7 @@ var choroplethMapDataOptions = {
 // ODS Charts
 ///////////////////////////////////////////////////
 
-fetch('../../images/maps/world.svg')
+fetch('../../maps/world.svg')
   .then(function (response) {
     return response.text();
   })
