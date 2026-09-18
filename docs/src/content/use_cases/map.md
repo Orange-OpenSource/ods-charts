@@ -29,7 +29,10 @@ title: SVG map - Specific use cases - ODS Charts
           </div>
         </div>
       </div>
-      <script src="../../use_cases_code/map_choropleth_codeId.js" id="choropleth_codeId" onload="addViewCode('choropleth_')"></script>
+      <script>
+        var choropleth_htmlCode = getHtmlCode('choropleth_');
+      </script>
+      <script src="../../use_cases_code/map_choropleth_codeId.js" id="choropleth_codeId" onload="addViewCode(choropleth_htmlCode, 'choropleth_')"></script>
     </div>
   </div>
 </div>
