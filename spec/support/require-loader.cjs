@@ -6,4 +6,4 @@
 // This software is distributed under the MIT license.
 //
 
-module.exports = modulePath => Promise.resolve(require(modulePath));
+module.exports = (modulePath) => Promise.resolve(require(modulePath));
