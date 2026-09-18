@@ -52,6 +52,9 @@ var addViewCode = (innitHtmlDoc, prefixId = '', htmlId = 'htmlId', codeId = 'cod
     fetch(document.getElementById(prefixId + codeId).src)
       .then((response) => response.text())
       .then((text) => {
+        let locationHref = window.location.href;
+        locationHref = locationHref + (locationHref.endsWith('/') ? '' : '/');
+        text = text.replace("fetch('", "fetch('" + locationHref);
         document.getElementById(prefixId + htmlId + '_code').innerText = text;
       });
   });
