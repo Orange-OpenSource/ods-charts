@@ -131,7 +131,7 @@ const BOOSTED4_THEME_SPECIFIC_VARIABLES = `
 }
 
 .ods-charts-context .popover .arrow {
-  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
+  display: var(--ods-popover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
 }
 
 .ods-charts-context .popover-header::before {
@@ -177,7 +177,7 @@ export const BOOSTED5_THEME_SPECIFIC_VARIABLES = `
   --bs-popover-header-line-height: var(--ods-popover-header-line-height, 1.11);
 }
 .ods-charts-context .popover .popover-arrow {
-  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
+  display: var(--ods-popover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
 }  
 `;
 
@@ -484,7 +484,7 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
   --ods-popover-body-line-height: 1.1;
   --ods-popover-body-font-weight: 400;
 
-  --ods-poppover-arrow-display: ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'};
+  --ods-popover-arrow-display: ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'};
 }
 `;
 

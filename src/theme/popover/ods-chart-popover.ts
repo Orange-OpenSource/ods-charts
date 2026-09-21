@@ -55,7 +55,7 @@ const DEFAULT_TEMPLATE_CSS = `
 }
 
 .ods-charts-popover .ods-charts-popover-arrow  {
-  display: var(--ods-poppover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
+  display: var(--ods-popover-arrow-display, ${0 == DEFAULT_ARROW_SIZE ? 'none' : 'inherit'});
   position: absolute;
   bottom: -8px;
   width: 20px;
