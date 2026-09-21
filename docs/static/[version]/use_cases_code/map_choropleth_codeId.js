@@ -23,7 +23,7 @@ var choroplethMapDataOptions = {
     trigger: 'item',
     valueFormatter: function (value) {
       if (typeof value !== 'number' || !Number.isFinite(value)) {
-        return 'No data';
+        return undefined; //'No data';
       }
 
       return value + '%';
@@ -72,12 +72,7 @@ fetch('../../maps/world.svg')
     choroplethMapThemeManager.setDataOptions(choroplethMapDataOptions);
     choroplethMapThemeManager.manageChartResize(choroplethMapChart, 'choropleth_map_chart');
     choroplethMapThemeManager.manageThemeObserver(choroplethMapChart);
-    choroplethMapThemeManager.externalizePopover({
-      enabled: true,
-      shared: false,
-      tooltip: true,
-      axisPointer: ODSCharts.ODSChartsPopoverAxisPointer.none,
-    });
+    choroplethMapThemeManager.externalizePopover();
 
     choroplethMapChart.setOption(choroplethMapThemeManager.getChartOptions());
   });
