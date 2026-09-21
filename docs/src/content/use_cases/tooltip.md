@@ -311,3 +311,44 @@ tooltip: {
 
   </div>
 </div>
+
+<div class="container-xxl pt-3">
+  <div class="card w-100">
+    <div class="card-body">
+      <h5 class="card-title pe-5">Default Apache ECharts tooltip</h5>
+      <div class="ms-5 mb-2 p-2 pe-5 text-body-secondary border-start border-warning bg-body-secondary">
+        <p class="card-text text-body-secondary mb-0">
+          This is not the recommended tooltip implementation. When <code>externalizePopover()</code> is not used, the tooltip is rendered by Apache ECharts and only partially follows the Orange Unified Design System. Use <code>externalizePopover()</code> when full OUDS tooltip/popover compliance is required.
+        </p>
+      </div>
+      <p class="card-text pe-5">
+        ODS Charts can still generate chart options without using <code>externalizePopover()</code>. In this case, Apache ECharts displays its native tooltip using the default tooltip styling provided by the ODS Charts theme.
+      </p>
+      <p class="card-text pe-5">
+        This use case only calls <code>setDataOptions()</code> and <code>getChartOptions()</code>. No external tooltip or popover manager is registered.
+      </p>
+      <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
+        <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
+          <use xlink:href="#lightning-charge-fill" />
+        </svg>
+        <span class="visually-hidden">Open in playground using StackBlitz</span>
+      </button>
+      <div id="div8_htmlId">
+        <div class="border border-subtle position-relative">
+          <div class="chart_title mx-3">
+            <h4 class="display-4 mx-3 mb-1 mt-3">Title</h4>
+            <h5 class="display-5 mx-3 mb-1 mt-0">Sub-Title</h5>
+          </div>
+          <div id="div8_holder">
+            <div id="div8_chart" style="width: 100%; height: 50vh" class="position-relative"></div>
+          </div>
+          <div id="div8_legend"></div>
+        </div>
+      </div>
+      <script>
+        var div8_htmlCode = getHtmlCode('div8_');
+      </script>
+      <script src="../../use_cases_code/tooltip_div8_codeId.js" id="div8_codeId" onload="addViewCode(div8_htmlCode,'div8_')"></script>
+    </div>
+  </div>
+</div>
