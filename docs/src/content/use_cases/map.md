@@ -11,7 +11,7 @@ title: SVG map - Specific use cases - ODS Charts
   <div class="card w-100">
     <div class="card-body">
       <h5 class="card-title pe-5">Choropleth map</h5>
-      <p class="card-text pe-5">This example uses the same SVG map as a choropleth map, where each country area is colored from a data value.</p>
+      <p class="card-text pe-5">Apache ECharts accepts either GeoJSON or SVG as input for a map. This example illustrates the use of an SVG map, reused here as a choropleth map, where each country area is colored from a data value.</p>
       <button class="btn btn-icon btn-outline-secondary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Open in playground">
         <svg width="1.25rem" height="1.25rem" fill="currentColor" aria-hidden="true">
           <use xlink:href="#lightning-charge-fill" />
