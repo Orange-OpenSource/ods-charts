@@ -179,6 +179,21 @@ export enum ODSChartsVisualMapColorRangeMode {
   GENERATE_COLOR_RANGE = 'generateColorRange',
 }
 
+export enum ODSChartsAllowSelction {
+  /**
+   * No selection of areas in the chart.
+   */
+  DISABLED = 'disabled',
+  /**
+   * Allow single selection of areas in the chart.
+   */
+  SINGLE = 'single',
+  /**
+   * Allow multiple selection of areas in the chart.
+   */
+  MULTIPLE = 'multiple',
+}
+
 // Re-export ODSChartsMode from the separate file to avoid circular dependencies
 import { ODSChartsMode } from './ods-chart-mode';
 import { COMMON_LINE_STYLE_NONE } from './common/ODS.line-style.none';
