@@ -297,7 +297,17 @@ export interface EChartsProject {
     };
   };
   tooltip: {
+    backgroundColor: string;
+    borderColor: string;
+    borderWidth: number;
+    padding: number[];
+    textStyle: {
+      color: string;
+      fontSize: number | string;
+    };
+    extraCssText: string;
     axisPointer: {
+      type: string;
       lineStyle: {
         color: string;
         width: number;
@@ -693,7 +703,17 @@ export const ODS_PROJECT: EChartsProject = {
     },
   },
   tooltip: {
+    backgroundColor: 'var(--ods-tooltip-background, var(--bs-body-bg, #ffffff))',
+    borderColor: 'var(--ods-tooltip-border-color, var(--bs-body-color, #000000))',
+    borderWidth: 1,
+    padding: [8, 8],
+    textStyle: {
+      color: 'var(--ods-tooltip-text-color, var(--bs-body-color, #000000))',
+      fontSize: 'var(--ods-tooltip-font-size, 14px)',
+    },
+    extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
     axisPointer: {
+      type: 'line',
       lineStyle: {
         color: 'var(--bs-border-color-subtle, #cccccc)',
         width: 1,
