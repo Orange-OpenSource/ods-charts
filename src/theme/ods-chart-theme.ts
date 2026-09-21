@@ -577,6 +577,7 @@ export class ODSChartsTheme {
         backgroundColor: newTheme.backgroundColor,
         title: newTheme.title,
         grid: { tooltip: newTheme.tooltip },
+        ...(!this.chartPopoverManager ? { tooltip: newTheme.tooltip } : {}),
       },
       this.options.chartConfiguration?.getDefaultConfiguration()
     );
@@ -823,7 +824,7 @@ export class ODSChartsTheme {
         grid: cloneDeepObject(grid),
       };
 
-      let usedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
+      let calculatedTheme = this.calculateNewThemeAndAddItInThemeOptions(themeOptions, updatedDataOptionsForTheme);
 
       const visualMapColorRangeMode =
         (this.options.chartConfiguration as ODSChartsVisualMapConfiguration)?.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET;
@@ -857,7 +858,7 @@ export class ODSChartsTheme {
         }
       }
 
-      this._displayedColors = this.getDisplayedColors(usedTheme.color, updatedDataOptionsForTheme);
+      this._displayedColors = this.getDisplayedColors(calculatedTheme.color, updatedDataOptionsForTheme);
 
       themeOptions = this.cssHelper.replaceAllCssVars(themeOptions);
 
