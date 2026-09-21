@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-import { ODSChartsLineStyle, ODSChartsVisualMapColorRangeMode } from '../ods-chart-theme';
+import { ODSChartsAllowSelction, ODSChartsLineStyle, ODSChartsVisualMapColorRangeMode } from '../ods-chart-theme';
 
 /**
  * Charts type
@@ -75,6 +75,10 @@ export class ODSChartsVisualMapConfiguration {
    * or if a new color range can be generated from the first and last provided colors.
    */
   visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode;
+}
+
+export class ODSChartsChoroplethMapConfiguration extends ODSChartsVisualMapConfiguration {
+  allowSelection?: ODSChartsAllowSelction;
 }
 
 /**
@@ -234,8 +238,11 @@ export class ODSChartsConfiguration {
    * A choropleth map is a thematic map where areas are shaded or patterned based on a data variable.
    * @returns Configuration of the choropleth map chart.
    */
-  public static getChoroplethMapChartConfiguration(config: ODSChartsVisualMapConfiguration = {}): ODSChartsConfiguration {
-    return new ODSChartsChoroplethMap(config?.visualMapColorRangeMode);
+  public static getChoroplethMapChartConfiguration(config: ODSChartsChoroplethMapConfiguration = {}): ODSChartsConfiguration {
+    return new ODSChartsChoroplethMap(
+      config?.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
+      config?.allowSelection ?? ODSChartsAllowSelction.DISABLED
+    );
   }
 
   /**
@@ -714,6 +721,7 @@ class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
 class ODSChartsChoroplethMap extends ODSChartsConfiguration {
   constructor(
     public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
+    public readonly allowSelection: ODSChartsAllowSelction = ODSChartsAllowSelction.DISABLED,
     type = ODSChartsTypes.CHOROPLETH_MAP
   ) {
     super(type);
@@ -791,16 +799,21 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
       },
       emphasis: {
         label: {
-          show: false,
+          show: this.allowSelection !== ODSChartsAllowSelction.DISABLED,
           color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
         },
         itemStyle: {
-          areaColor: 'var(--ouds-charts-color-highlight)',
+          areaColor: ODSChartsAllowSelction.DISABLED === this.allowSelection ? 'var(--ouds-charts-color-highlight)' : 'var(--ouds-charts-color-neutral)',
           borderColor: 'var(--ouds-charts-color-border)',
         },
       },
+      selectedMode:
+        ODSChartsAllowSelction.DISABLED === this.allowSelection ? false : ODSChartsAllowSelction.SINGLE === this.allowSelection ? 'single' : 'multiple',
       select: {
-        disabled: true,
+        disabled: this.allowSelection === ODSChartsAllowSelction.DISABLED,
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-highlight)',
+        },
       },
     };
   }
@@ -812,7 +825,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
  */
 class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
   constructor(visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode) {
-    super(visualMapColorRangeMode, ODSChartsTypes.BUBBLE_MAP);
+    super(visualMapColorRangeMode, ODSChartsAllowSelction.DISABLED, ODSChartsTypes.BUBBLE_MAP);
   }
 
   public getDefaultConfiguration(): any {
