@@ -6,7 +6,8 @@
   "contributors": [],
   "license": "MIT",
   "files": [
-    "./dist/**/*"
+    "./dist/**/*",
+    "./bin/**/*"
   ],
   "main": "dist/ods-charts.cjs.js",
   "module": "dist/ods-charts.js",
@@ -27,6 +28,8 @@
     "install:react": "npm i && npm run build && cd test/react && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:react",
     "install:vue": "npm i && npm run build && cd test/vue && rm -rf node_modules package-lock.json && npm i && npm run build && cd ../.. && npm run serve:vue",
     "build": "webpack && node build/finalize-dist-bundles.mjs && cp ./dist/ods-charts.js ./docs/static/[version]/ods-charts.js && cp ./dist/ods-charts.js.map ./docs/static/[version]/ods-charts.js.map",
+    "geojson:simplify": "node ./bin/simplify-geojson.mjs",
+    "geojson:simplify:help": "node ./bin/simplify-geojson.mjs --help",
     "headers:source": "node build/sync-source-headers.mjs",
     "headers:check": "node build/check-source-headers.mjs",
     "copyright-year": "node build/bump-copyright-year.mjs",
