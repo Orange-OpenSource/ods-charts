@@ -71,7 +71,7 @@
     "@types/jsdom": "^30.0.0",
     "@types/node": "^26.4.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
-    "@typescript-eslint/parser": "^8.67.0",
+    "@typescript-eslint/parser": "^8.71.0",
     "astro": "^7.2.2",
     "echarts": "^6.0.0",
     "eslint": "^10.6.0",
