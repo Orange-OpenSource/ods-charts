@@ -87,6 +87,42 @@ describe('ODSChartsTheme visualMapColorRangeMode', () => {
   });
 });
 
+describe('ODSChartsTheme native tooltip', () => {
+  function getChartOptions(tooltip?: any) {
+    const themeManager = ODSChartsTheme.getThemeManager();
+    themeManager.setDataOptions({
+      ...(tooltip ? { tooltip } : {}),
+      xAxis: { type: 'category', data: ['Jan'] },
+      yAxis: { type: 'value' },
+      series: [{ type: 'bar', data: [10] }],
+    });
+    return themeManager.getChartOptions();
+  }
+
+  it('should expose the ODS native tooltip at the root of chart options', () => {
+    const tooltip = getChartOptions().tooltip;
+
+    expect(tooltip.backgroundColor).toBe('#fff');
+    expect(tooltip.borderColor).toBe('#000');
+    expect(tooltip.borderWidth).toBe(1);
+    expect(tooltip.padding).toEqual([8, 8]);
+    expect(tooltip.textStyle.color).toBe('#000');
+    expect(tooltip.textStyle.fontSize).toBe('14px');
+    expect(tooltip.axisPointer.type).toBe('line');
+  });
+
+  it('should let data options override the native tooltip defaults', () => {
+    const tooltip = getChartOptions({
+      backgroundColor: 'red',
+      borderWidth: 2,
+    }).tooltip;
+
+    expect(tooltip.backgroundColor).toBe('red');
+    expect(tooltip.borderWidth).toBe(2);
+    expect(tooltip.axisPointer.type).toBe('line');
+  });
+});
+
 describe('ODSChartsTheme.getSeriesColor', () => {
   // Baseline palette colors captured once with no dataOptions.
   let paletteColors: string[];

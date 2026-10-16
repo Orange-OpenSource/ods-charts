@@ -7,5 +7,6 @@
     "strict": false,
     "types": ["jasmine", "node"]
   },
-  "include": ["src/**/*.spec.ts", "spec/**/*.ts"]
+  "include": ["src/**/*.spec.ts", "spec/**/*.ts"],
+  "exclude": []
 }
