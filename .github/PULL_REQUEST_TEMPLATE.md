@@ -30,7 +30,6 @@ Please check that the following tests projects are still working:
 - [ ] `test/angular-ngx-echarts`
 - [ ] `test/angular-ng-boosted`
 - [ ] `test/angular-echarts`
-- [ ] `test/angular-14`
 - [ ] `test/html`
 - [ ] `test/react`
 - [ ] `test/vue`
