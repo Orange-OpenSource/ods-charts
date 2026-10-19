@@ -6,7 +6,8 @@
   "contributors": [],
   "license": "MIT",
   "files": [
-    "./dist/**/*"
+    "./dist/**/*",
+    "./bin/**/*"
   ],
   "main": "dist/ods-charts.cjs.js",
   "module": "dist/ods-charts.js",

@@ -6,7 +6,7 @@
 // This software is distributed under the MIT license.
 //
 
-import { ODSChartsLineStyle, ODSChartsVisualMapColorRangeMode } from '../ods-chart-theme';
+import { ODSChartsAllowSelection, ODSChartsLineStyle, ODSChartsVisualMapColorRangeMode } from '../ods-chart-theme';
 
 /**
  * Charts type
@@ -75,6 +75,10 @@ export class ODSChartsVisualMapConfiguration {
    * or if a new color range can be generated from the first and last provided colors.
    */
   visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode;
+}
+
+export class ODSChartsChoroplethMapConfiguration extends ODSChartsVisualMapConfiguration {
+  allowSelection?: ODSChartsAllowSelection;
 }
 
 /**
@@ -234,8 +238,8 @@ export class ODSChartsConfiguration {
    * A choropleth map is a thematic map where areas are shaded or patterned based on a data variable.
    * @returns Configuration of the choropleth map chart.
    */
-  public static getChoroplethMapChartConfiguration(config: ODSChartsVisualMapConfiguration = {}): ODSChartsConfiguration {
-    return new ODSChartsChoroplethMap(config?.visualMapColorRangeMode);
+  public static getChoroplethMapChartConfiguration(config: ODSChartsChoroplethMapConfiguration = {}): ODSChartsConfiguration {
+    return new ODSChartsChoroplethMap(config?.visualMapColorRangeMode, config?.allowSelection);
   }
 
   /**
@@ -713,10 +717,13 @@ class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
  */
 class ODSChartsChoroplethMap extends ODSChartsConfiguration {
   constructor(
-    public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
+    public readonly visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode,
+    public readonly allowSelection?: ODSChartsAllowSelection,
     type = ODSChartsTypes.CHOROPLETH_MAP
   ) {
     super(type);
+    this.allowSelection = this.allowSelection ?? ODSChartsAllowSelection.DISABLED;
+    this.visualMapColorRangeMode = this.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET;
   }
 
   public getDefaultConfiguration(): any {
@@ -728,6 +735,9 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         itemSymbol: 'rect',
         show: true,
         left: 'center',
+        outOfRange: {
+          color: ['var(--bs-border-color-subtle, #cccccc)'], // Grey color by default for deselected zones
+        },
         backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
         itemWidth: 48,
         itemHeight: 16,
@@ -788,16 +798,21 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
       },
       emphasis: {
         label: {
-          show: false,
+          show: this.allowSelection !== ODSChartsAllowSelection.DISABLED,
           color: 'var(--bs-body-color)', // TODO: Replace once OUDS is developed by `--bs-color-content-default`
         },
         itemStyle: {
-          areaColor: 'var(--ouds-charts-color-highlight)',
+          areaColor: ODSChartsAllowSelection.DISABLED === this.allowSelection ? 'var(--ouds-charts-color-highlight)' : 'var(--ouds-charts-color-neutral)',
           borderColor: 'var(--ouds-charts-color-border)',
         },
       },
+      selectedMode:
+        ODSChartsAllowSelection.DISABLED === this.allowSelection ? false : ODSChartsAllowSelection.SINGLE === this.allowSelection ? 'single' : 'multiple',
       select: {
-        disabled: true,
+        disabled: this.allowSelection === ODSChartsAllowSelection.DISABLED,
+        itemStyle: {
+          areaColor: 'var(--ouds-charts-color-highlight)',
+        },
       },
     };
   }
@@ -809,7 +824,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
  */
 class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
   constructor(visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode) {
-    super(visualMapColorRangeMode, ODSChartsTypes.BUBBLE_MAP);
+    super(visualMapColorRangeMode, ODSChartsAllowSelection.DISABLED, ODSChartsTypes.BUBBLE_MAP);
   }
 
   public getDefaultConfiguration(): any {
@@ -899,7 +914,7 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
  * A heatmap displays values through colors at the intersection of two category axes.
  */
 class ODSChartsHeatmap extends ODSChartsConfiguration {
-  constructor(public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET) {
+  constructor(public readonly visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode) {
     super(ODSChartsTypes.HEATMAP);
   }
 

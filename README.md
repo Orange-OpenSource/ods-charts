@@ -14,6 +14,7 @@
 ## Table of contents
 
 - [Quick start](#quick-start)
+- [GeoJSON simplification](#geojson-simplification)
 - [Status](#status)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
@@ -76,6 +77,34 @@ The `themeManager` returned by `getThemeManager()` can be used to add other feat
 Read the [API documentation](https://charts.unified-design-system.orange.com/0.5/api/) for details on this legends, popover, tooltip... features.
 
 Read the [documentation](https://charts.unified-design-system.orange.com/) for information on the library content and examples.
+
+## GeoJSON simplification
+
+The package includes a command-line tool to reduce the size of GeoJSON files by rounding coordinates and decimating geometry points. Features and their properties are preserved, except for features explicitly excluded.
+
+```sh
+node ./bin/simplify-geojson.mjs input.geojson output.geojson
+```
+
+When ODS Charts is installed as a dependency, invoke the packaged script from the consuming project:
+
+```sh
+node ./node_modules/ods-charts/bin/simplify-geojson.mjs input.geojson output.geojson
+```
+
+Options can be added when needed, for example:
+
+```sh
+node ./bin/simplify-geojson.mjs input.geojson output.geojson --precision 2 --decimation 4 --exclude CONTINENT=Antarctica
+```
+
+Use `--exclude <property>=<value>` to filter on any feature property. For example, to exclude French department `75` and `13` when its property is named `code`:
+
+```sh
+node ./bin/simplify-geojson.mjs france.geojson france-simplified.geojson --exclude code=75 --exclude code=13
+```
+
+Use `node ./bin/simplify-geojson.mjs --help` to see all available options.
 
 ## Status
 
