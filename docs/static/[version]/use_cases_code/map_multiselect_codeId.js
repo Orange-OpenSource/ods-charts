@@ -16,6 +16,7 @@ var multiselectMapDataOptions = {
       name: 'Distribution areas',
       type: 'map',
       map: 'world-continents-multiselect',
+      roam: false,
       nameProperty: 'CONTINENT',
       label: {
         show: true,

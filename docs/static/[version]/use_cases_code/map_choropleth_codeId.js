@@ -40,6 +40,7 @@ var choroplethMapDataOptions = {
       name: 'Adoption rate',
       type: 'map',
       map: 'world-svg-choropleth',
+      roam: false,
       data: choroplethMapCountryAdoption,
     },
   ],
