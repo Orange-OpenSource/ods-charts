@@ -18,7 +18,7 @@ Object.defineProperty(globalThis, 'navigator', { value: dom.window.navigator, wr
 
 import 'jasmine';
 import { ODSChartsConfiguration, ODSChartsTypes } from './charts-type/charts-type';
-import { ODSChartsColorsSet, ODSChartsTheme, ODSChartsVisualMapColorRangeMode } from './ods-chart-theme';
+import { ODSChartsAllowSelection, ODSChartsColorsSet, ODSChartsTheme, ODSChartsVisualMapColorRangeMode } from './ods-chart-theme';
 
 describe('ODSChartsConfiguration.getHeatmapChartConfiguration', () => {
   it('should provide heatmap visualMap defaults', () => {
@@ -85,6 +85,52 @@ describe('ODSChartsTheme visualMapColorRangeMode', () => {
   it('should not force visualMap inRange colors when color range generation is requested', () => {
     expect(getVisualMap(ODSChartsVisualMapColorRangeMode.GENERATE_COLOR_RANGE).inRange).toBeUndefined();
   });
+});
+
+describe('ODSChartsTheme choropleth map selection', () => {
+  const getMapSeries = (allowSelection?: ODSChartsAllowSelection): any => {
+    const themeManager = ODSChartsTheme.getThemeManager({
+      chartConfiguration: ODSChartsConfiguration.getChoroplethMapChartConfiguration({
+        ...(allowSelection ? { allowSelection } : {}),
+      }),
+    });
+
+    themeManager.setDataOptions({
+      series: [{ type: 'map', map: 'test-map', data: [{ name: 'Region', value: 10 }] }],
+    });
+
+    return themeManager.getChartOptions().series[0];
+  };
+
+  const cases = [
+    { name: 'default', allowSelection: undefined, selectedMode: false, disabled: true },
+    { name: 'disabled', allowSelection: ODSChartsAllowSelection.DISABLED, selectedMode: false, disabled: true },
+    { name: 'single', allowSelection: ODSChartsAllowSelection.SINGLE, selectedMode: 'single', disabled: false },
+    { name: 'multiple', allowSelection: ODSChartsAllowSelection.MULTIPLE, selectedMode: 'multiple', disabled: false },
+  ];
+
+  for (const { name, allowSelection, selectedMode, disabled } of cases) {
+    describe(`${name} mode`, () => {
+      it('should expose the expected ECharts selection mode and disabled flag', () => {
+        const series = getMapSeries(allowSelection);
+
+        expect(series.selectedMode).toBe(selectedMode);
+        expect(series.select.disabled).toBe(disabled);
+      });
+
+      it('should preserve the map selection and hover styles', () => {
+        const series = getMapSeries(allowSelection);
+
+        // getChartOptions() resolves the CSS variables using the light theme.
+        expect(series.select.itemStyle.areaColor).toBe('#f15e00');
+        expect(series.emphasis.itemStyle).toEqual({
+          areaColor: disabled ? '#f15e00' : '#8f8f8f',
+          borderColor: '#ffffff',
+        });
+        expect(series.emphasis.label.show).toBe(!disabled);
+      });
+    });
+  }
 });
 
 describe('ODSChartsTheme native tooltip', () => {
