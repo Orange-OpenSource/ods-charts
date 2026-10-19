@@ -83,28 +83,28 @@ Read the [documentation](https://charts.unified-design-system.orange.com/) for i
 The package includes a command-line tool to reduce the size of GeoJSON files by rounding coordinates and decimating geometry points. Features and their properties are preserved, except for features explicitly excluded.
 
 ```sh
-npm run geojson:simplify -- input.geojson output.geojson
+node ./bin/simplify-geojson.mjs input.geojson output.geojson
 ```
 
-When ODS Charts is installed as a dependency, run the same npm script from the consuming project:
+When ODS Charts is installed as a dependency, invoke the packaged script from the consuming project:
 
 ```sh
-npm --prefix node_modules/ods-charts run geojson:simplify -- input.geojson output.geojson
+node ./node_modules/ods-charts/bin/simplify-geojson.mjs input.geojson output.geojson
 ```
 
 Options can be added when needed, for example:
 
 ```sh
-npm run geojson:simplify -- input.geojson output.geojson --precision 2 --decimation 4 --exclude CONTINENT=Antarctica
+node ./bin/simplify-geojson.mjs input.geojson output.geojson --precision 2 --decimation 4 --exclude CONTINENT=Antarctica
 ```
 
 Use `--exclude <property>=<value>` to filter on any feature property. For example, to exclude French department `75` and `13` when its property is named `code`:
 
 ```sh
-npm run geojson:simplify -- france.geojson france-simplified.geojson --exclude code=75 --exclude code=13
+node ./bin/simplify-geojson.mjs france.geojson france-simplified.geojson --exclude code=75 --exclude code=13
 ```
 
-Use `npm run geojson:simplify:help` to see all available options.
+Use `node ./bin/simplify-geojson.mjs --help` to see all available options.
 
 ## Status
 

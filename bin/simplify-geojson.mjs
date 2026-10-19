@@ -16,9 +16,9 @@ Options:
                           Exclude features whose property equals this value (repeatable)
   -h, --help              Show this help
 
-Examples:
-  npm run geojson:simplify -- world.geojson world-small.geojson --exclude CONTINENT=Antarctica
-  npm run geojson:simplify -- france.geojson france-small.geojson --precision 2 --decimation 4 --exclude code=75 --exclude code=13
+Examples (from a project where ods-charts is installed):
+  node ./node_modules/ods-charts/bin/simplify-geojson.mjs world.geojson world-small.geojson --exclude CONTINENT=Antarctica
+  node ./node_modules/ods-charts/bin/simplify-geojson.mjs france.geojson france-small.geojson --precision 2 --decimation 4 --exclude code=75 --exclude code=13
 `);
 }
 
