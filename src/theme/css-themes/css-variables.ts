@@ -467,6 +467,12 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
 }
 
 .ods-charts-context {
+  --ods-tooltip-background: var(--bs-body-bg, #ffffff);
+  --ods-tooltip-border-color: var(--bs-body-color, #000000);
+  --ods-tooltip-text-color: var(--bs-body-color, #000000);
+  --ods-tooltip-border-radius: 0;
+  --ods-tooltip-shadow: none;
+
   --ods-popover-header-padding-y: initial;
   --ods-popover-header-padding-top: 5px;
   --ods-popover-header-padding-x: 9px;
