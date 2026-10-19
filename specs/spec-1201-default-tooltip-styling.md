@@ -89,7 +89,7 @@ The target tooltip appearance is:
 
 The tooltip content and formatter remain Apache ECharts native behavior. The reference image defines the expected visual presentation; it does not require a new formatter or a change to tooltip content generation.
 
-All tooltip visual tokens must be exposed as CSS custom properties. This keeps the tooltip styling consistent with the existing ODS Charts theme mechanism and allows applications or themes to override the values without changing chart options.
+Tooltip visual tokens must be exposed as CSS custom properties where Apache ECharts accepts CSS values. Numeric options such as `borderWidth`, `padding`, and `textStyle.fontSize` use numeric defaults and can be customized through native Apache ECharts tooltip options.
 
 ### 2) Tooltip Properties to Configure
 
@@ -102,7 +102,7 @@ The following Apache ECharts tooltip properties should be customized:
 | `borderWidth`        | `1`                                                                                                | Border width; Apache ECharts requires a number    |
 | `padding`            | `[8, 8]`                                                                                           | Internal padding; Apache ECharts requires numbers |
 | `textStyle.color`    | `var(--ods-tooltip-text-color, var(--bs-body-color, #000000))`                                     | Text color                                        |
-| `textStyle.fontSize` | `var(--ods-tooltip-font-size, 14px)`                                                               | Font size                                         |
+| `textStyle.fontSize` | `14`                                                                                               | Font size; Apache ECharts requires a number       |
 | `extraCssText`       | `border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);` | Additional CSS                                    |
 
 The following CSS custom properties must be defined by ODS Charts with the displayed fallback values:
@@ -112,7 +112,6 @@ The following CSS custom properties must be defined by ODS Charts with the displ
 | `--ods-tooltip-background`    | `var(--bs-body-bg, #ffffff)`    | Tooltip background    |
 | `--ods-tooltip-border-color`  | `var(--bs-body-color, #000000)` | Tooltip border color  |
 | `--ods-tooltip-text-color`    | `var(--bs-body-color, #000000)` | Tooltip text color    |
-| `--ods-tooltip-font-size`     | `14px`                          | Tooltip font size     |
 | `--ods-tooltip-border-radius` | `0`                             | Tooltip corner radius |
 | `--ods-tooltip-shadow`        | `none`                          | Tooltip shadow        |
 
@@ -150,7 +149,7 @@ tooltip: {
   padding: [8, 8],
   textStyle: {
     color: 'var(--ods-tooltip-text-color, var(--bs-body-color, #000000))',
-    fontSize: 'var(--ods-tooltip-font-size, 14px)',
+    fontSize: 14,
   },
   extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
   axisPointer: {

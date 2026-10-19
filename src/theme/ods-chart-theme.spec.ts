@@ -107,7 +107,7 @@ describe('ODSChartsTheme native tooltip', () => {
     expect(tooltip.borderWidth).toBe(1);
     expect(tooltip.padding).toEqual([8, 8]);
     expect(tooltip.textStyle.color).toBe('#000');
-    expect(tooltip.textStyle.fontSize).toBe('14px');
+    expect(tooltip.textStyle.fontSize).toBe(14);
     expect(tooltip.axisPointer.type).toBe('line');
   });
 
@@ -115,10 +115,12 @@ describe('ODSChartsTheme native tooltip', () => {
     const tooltip = getChartOptions({
       backgroundColor: 'red',
       borderWidth: 2,
+      textStyle: { fontSize: 18 },
     }).tooltip;
 
     expect(tooltip.backgroundColor).toBe('red');
     expect(tooltip.borderWidth).toBe(2);
+    expect(tooltip.textStyle.fontSize).toBe(18);
     expect(tooltip.axisPointer.type).toBe('line');
   });
 });

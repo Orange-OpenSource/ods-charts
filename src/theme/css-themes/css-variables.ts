@@ -470,7 +470,6 @@ const ALL_THEMES_SPECIFIC_VARIABLES = `
   --ods-tooltip-background: var(--bs-body-bg, #ffffff);
   --ods-tooltip-border-color: var(--bs-body-color, #000000);
   --ods-tooltip-text-color: var(--bs-body-color, #000000);
-  --ods-tooltip-font-size: 14px;
   --ods-tooltip-border-radius: 0;
   --ods-tooltip-shadow: none;
 

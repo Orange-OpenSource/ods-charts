@@ -303,7 +303,7 @@ export interface EChartsProject {
     padding: number[];
     textStyle: {
       color: string;
-      fontSize: number | string;
+      fontSize: number;
     };
     extraCssText: string;
     axisPointer: {
@@ -709,7 +709,7 @@ export const ODS_PROJECT: EChartsProject = {
     padding: [8, 8],
     textStyle: {
       color: 'var(--ods-tooltip-text-color, var(--bs-body-color, #000000))',
-      fontSize: 'var(--ods-tooltip-font-size, 14px)',
+      fontSize: 14,
     },
     extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
     axisPointer: {
