@@ -40,7 +40,7 @@ describe('ODSChartsCssHelper', () => {
     const style = document.createElement('style');
     style.id = 'test-css-vars';
     style.textContent = `
-      .ods-charts-context {
+      .test-chart-container .ods-charts-context {
         --test-color: #ff0000;
         --test-size: 14px;
         --test-nested: var(--test-color);
@@ -75,7 +75,7 @@ describe('ODSChartsCssHelper', () => {
         extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
       });
 
-      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);');
+      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);');
     });
 
     it('should resolve multiple variables with nested and functional fallbacks', () => {
@@ -235,7 +235,7 @@ describe('ODSChartsCssHelper', () => {
       };
       const result = cssHelper.cloneAndReplaceAllCssVars(original);
 
-      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);');
+      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);');
       expect(original.extraCssText).toBe('border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);');
     });
 
