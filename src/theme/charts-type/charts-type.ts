@@ -239,10 +239,7 @@ export class ODSChartsConfiguration {
    * @returns Configuration of the choropleth map chart.
    */
   public static getChoroplethMapChartConfiguration(config: ODSChartsChoroplethMapConfiguration = {}): ODSChartsConfiguration {
-    return new ODSChartsChoroplethMap(
-      config?.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
-      config?.allowSelection ?? ODSChartsAllowSelection.DISABLED
-    );
+    return new ODSChartsChoroplethMap(config?.visualMapColorRangeMode, config?.allowSelection);
   }
 
   /**
@@ -720,11 +717,13 @@ class ODSChartsCircularGauge extends ODSChartsCircularGaugeType {
  */
 class ODSChartsChoroplethMap extends ODSChartsConfiguration {
   constructor(
-    public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET,
-    public readonly allowSelection: ODSChartsAllowSelection = ODSChartsAllowSelection.DISABLED,
+    public readonly visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode,
+    public readonly allowSelection?: ODSChartsAllowSelection,
     type = ODSChartsTypes.CHOROPLETH_MAP
   ) {
     super(type);
+    this.allowSelection = this.allowSelection ?? ODSChartsAllowSelection.DISABLED;
+    this.visualMapColorRangeMode = this.visualMapColorRangeMode ?? ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET;
   }
 
   public getDefaultConfiguration(): any {
@@ -915,7 +914,7 @@ class ODSChartsBubbleMap extends ODSChartsChoroplethMap {
  * A heatmap displays values through colors at the intersection of two category axes.
  */
 class ODSChartsHeatmap extends ODSChartsConfiguration {
-  constructor(public readonly visualMapColorRangeMode: ODSChartsVisualMapColorRangeMode = ODSChartsVisualMapColorRangeMode.FORCE_COLOR_SET) {
+  constructor(public readonly visualMapColorRangeMode?: ODSChartsVisualMapColorRangeMode) {
     super(ODSChartsTypes.HEATMAP);
   }
 
