@@ -179,7 +179,7 @@ export enum ODSChartsVisualMapColorRangeMode {
   GENERATE_COLOR_RANGE = 'generateColorRange',
 }
 
-export enum ODSChartsAllowSelction {
+export enum ODSChartsAllowSelection {
   /**
    * No selection of areas in the chart.
    */

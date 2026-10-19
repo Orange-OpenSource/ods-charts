@@ -39,7 +39,7 @@ fetch('../../maps/world-continents.geojson')
     echarts.registerMap('world-continents-multiselect', geoJson);
 
     var multiselectMapThemeManager = ODSCharts.getThemeManager({
-      chartConfiguration: ODSCharts.ODSChartsConfiguration.getChoroplethMapChartConfiguration({ allowSelection: ODSCharts.ODSChartsAllowSelction.MULTIPLE }),
+      chartConfiguration: ODSCharts.ODSChartsConfiguration.getChoroplethMapChartConfiguration({ allowSelection: ODSCharts.ODSChartsAllowSelection.MULTIPLE }),
       cssSelector: '#multiselect_map_chart',
     });
 
