@@ -736,7 +736,7 @@ class ODSChartsChoroplethMap extends ODSChartsConfiguration {
         show: true,
         left: 'center',
         outOfRange: {
-          color: ['var(--bs-border-color-subtle, #cccccc)'], // Grey color by default for delected zones
+          color: ['var(--bs-border-color-subtle, #cccccc)'], // Grey color by default for deselected zones
         },
         backgroundColor: 'var(--bs-body-bg)', // TODO: Replace once OUDS is developed by `--bs-color-bg-default`
         itemWidth: 48,
