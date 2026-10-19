@@ -80,7 +80,7 @@ Read the [documentation](https://charts.unified-design-system.orange.com/) for i
 
 ## GeoJSON simplification
 
-The package includes a command-line tool to reduce the size of GeoJSON files by rounding coordinates, decimating polygon points, and grouping features by continent. From an ODS Charts checkout, run:
+The package includes a command-line tool to reduce the size of GeoJSON files by rounding coordinates and decimating geometry points. Features and their properties are preserved, except for features explicitly excluded.
 
 ```sh
 npm run geojson:simplify -- input.geojson output.geojson
@@ -95,7 +95,13 @@ npm --prefix node_modules/ods-charts run geojson:simplify -- input.geojson outpu
 Options can be added when needed, for example:
 
 ```sh
-npm run geojson:simplify -- input.geojson output.geojson --precision 2 --decimation 4 --exclude Antarctica
+npm run geojson:simplify -- input.geojson output.geojson --precision 2 --decimation 4 --exclude CONTINENT=Antarctica
+```
+
+Use `--exclude <property>=<value>` to filter on any feature property. For example, to exclude French department `75` and `13` when its property is named `code`:
+
+```sh
+npm run geojson:simplify -- france.geojson france-simplified.geojson --exclude code=75 --exclude code=13
 ```
 
 Use `npm run geojson:simplify:help` to see all available options.
