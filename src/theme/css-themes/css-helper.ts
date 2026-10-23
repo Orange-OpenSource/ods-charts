@@ -115,7 +115,7 @@ export class ODSChartsCssHelper {
         if (matches) {
           for (const foundVar of matches) {
             if (!(foundVar in this.cssVarsMapping)) {
-              const varPartsRex = /var\( ?([^, ]+) ?, ?([^\)]+\)?) ?\)/;
+              const varPartsRex = /^var\(\s*(--[^,\s()]+)\s*,\s*([\s\S]*)\)$/;
               const varParts = foundVar.match(varPartsRex);
               if (varParts) {
                 const varValue = this.getPropertyValue(varParts[1]);
@@ -124,7 +124,7 @@ export class ODSChartsCssHelper {
                 }
                 this.cssVarsMapping[foundVar] = varValue ? varValue : this.replaceOneCssVar(varParts[2]);
               } else {
-                const varNameRex = /var\( ?(.+) ?\)/;
+                const varNameRex = /^var\(\s*(--[^,\s()]+)\s*\)$/;
                 const varName = foundVar.match(varNameRex);
                 if (varName) {
                   const varValue = this.getPropertyValue(varName[1]);
@@ -179,13 +179,30 @@ export class ODSChartsCssHelper {
   }
 
   /**
-   * Return matches of a css var in the given string
-   * @param value : string in whic looking for in css var
-   * @returns : the regular expresion matches
+   * Return separate CSS var expressions, preserving balanced nested fallbacks.
+   * @param value : string in which to look for CSS vars
+   * @returns the complete top-level var expressions, or null if none are found
    */
-  private getCssVarMatch(value: string): RegExpMatchArray | null {
-    const regex = /var\(([^,]*),?(.*)\)/g;
-    return value.match(regex);
+  private getCssVarMatch(value: string): string[] | null {
+    const matches: string[] = [];
+    let start = value.indexOf('var(');
+    while (start !== -1) {
+      let depth = 1;
+      let end = start + 4;
+      for (; end < value.length && depth > 0; end++) {
+        if (value[end] === '(') {
+          depth++;
+        } else if (value[end] === ')') {
+          depth--;
+        }
+      }
+      if (depth !== 0) {
+        break;
+      }
+      matches.push(value.slice(start, end));
+      start = value.indexOf('var(', end);
+    }
+    return matches.length ? matches : null;
   }
 
   public changeThemeMode(mode: ODSChartsMode) {

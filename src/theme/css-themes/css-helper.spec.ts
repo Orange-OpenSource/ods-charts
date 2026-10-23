@@ -40,10 +40,12 @@ describe('ODSChartsCssHelper', () => {
     const style = document.createElement('style');
     style.id = 'test-css-vars';
     style.textContent = `
-      .ods-charts-context {
+      .test-chart-container .ods-charts-context {
         --test-color: #ff0000;
         --test-size: 14px;
         --test-nested: var(--test-color);
+        --ods-tooltip-border-radius: 4px;
+        --ods-tooltip-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
       .ods-charts-context[data-bs-theme="dark"] {
         --test-color: #00ff00;
@@ -68,6 +70,28 @@ describe('ODSChartsCssHelper', () => {
   });
 
   describe('replaceAllCssVars', () => {
+    it('should preserve both tooltip CSS declarations and resolve their overrides', () => {
+      const result = cssHelper.replaceAllCssVars({
+        extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
+      });
+
+      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);');
+    });
+
+    it('should resolve multiple variables with nested and functional fallbacks', () => {
+      const result = cssHelper.replaceAllCssVars({
+        extraCssText: 'border-color: var(--missing-color, var(--test-color)); box-shadow: var(--missing-shadow, 0 2px 8px rgba(0, 0, 0, 0.3));',
+      });
+
+      expect(result.extraCssText).toBe('border-color: #ff0000; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);');
+    });
+
+    it('should replace repeated variables in the same string', () => {
+      const result = cssHelper.replaceAllCssVars({ padding: 'var(--test-size) var(--test-size)' });
+
+      expect(result.padding).toBe('14px 14px');
+    });
+
     it('should replace simple CSS variables in strings', () => {
       const config = {
         color: 'var(--test-color)',
@@ -205,6 +229,16 @@ describe('ODSChartsCssHelper', () => {
   });
 
   describe('cloneAndReplaceAllCssVars', () => {
+    it('should clone and resolve both tooltip CSS declarations without changing the original', () => {
+      const original = {
+        extraCssText: 'border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);',
+      };
+      const result = cssHelper.cloneAndReplaceAllCssVars(original);
+
+      expect(result.extraCssText).toBe('border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);');
+      expect(original.extraCssText).toBe('border-radius: var(--ods-tooltip-border-radius, 0); box-shadow: var(--ods-tooltip-shadow, none);');
+    });
+
     it('should clone and replace CSS variables', () => {
       const original = {
         color: 'var(--test-color)',
