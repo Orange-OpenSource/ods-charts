@@ -61,7 +61,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@astrojs/prism": "^4.0.2",
+    "@astrojs/prism": "^4.1.2",
     "@eslint/js": "^10.0.1",
     "@stackblitz/sdk": "^1.11.0",
     "@types/jasmine": "^6.0.0",
